@@ -1,7 +1,7 @@
 #include "SelfDirectedWeapon.h"
 
-SelfDirectedWeapon::SelfDirectedWeapon(int radius, int damage):
-	Weapon(false, false, false, true, radius, damage){}
+SelfDirectedWeapon::SelfDirectedWeapon(int munitions, int radius, int damage, int quantity): 
+	Weapon(munitions, radius, damage), quantity(quantity){}
 		
 SelfDirectedWeapon::~SelfDirectedWeapon(){}
 
@@ -10,5 +10,23 @@ Position SelfDirectedWeapon::getEpicenter(const Position& origin, const dir_ptr&
 }
 
 void SelfDirectedWeapon::shoot(const Position& pos){
-	this->radius.attack(pos, 0);
+	for (int i = 0; i < this->quantity; i++){
+		this->radius.attack(pos, 0);
+	}
+}
+
+bool SelfDirectedWeapon::hasScope(){
+	return false;
+}
+
+bool SelfDirectedWeapon::hasVariablePower(){
+	return false;
+}
+
+bool SelfDirectedWeapon::isTimed(){
+	return false;
+}
+
+bool SelfDirectedWeapon::isSelfDirected(){
+	return true;
 }

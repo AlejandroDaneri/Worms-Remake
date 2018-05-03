@@ -8,9 +8,12 @@ class DistanceWeapon: public Weapon{
 		Position getEpicenter(const Position& origin, const dir_ptr& dir, int angle, int power);
 
 	public:
-		DistanceWeapon(bool timed, int radius, int damage);
+		DistanceWeapon(int munitions, int radius, int damage);
 		~DistanceWeapon();
 
+		bool hasScope();
+		bool hasVariablePower();
+		bool isSelfDirected();
 
 };
 

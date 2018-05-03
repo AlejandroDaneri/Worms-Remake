@@ -1,7 +1,7 @@
 #include "FragmentableWeapon.h"
 
-FragmentableWeapon::FragmentableWeapon(int fragments, bool timed, int radius, int damage):
-	DistanceWeapon(timed, radius, damage), fragments(fragments){}
+FragmentableWeapon::FragmentableWeapon(int fragments, int munitions, int radius, int damage):
+	DistanceWeapon(munitions, radius, damage), fragments(fragments){}
 
 FragmentableWeapon::~FragmentableWeapon(){}
 

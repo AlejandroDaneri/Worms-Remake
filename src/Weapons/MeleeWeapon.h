@@ -8,10 +8,11 @@ class MeleeWeapon: public Weapon{
 		Position getEpicenter(const Position& origin, const dir_ptr& dir, int angle, int power);
 
 	public:
-		MeleeWeapon(bool scope, bool timed, int radius, int damage);
+		MeleeWeapon(int munitions, int radius, int damage);
 		~MeleeWeapon();
 
-
+		bool hasVariablePower();
+		bool isSelfDirected();
 };
 
 #endif

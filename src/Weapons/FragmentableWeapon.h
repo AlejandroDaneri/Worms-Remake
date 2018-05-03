@@ -11,7 +11,7 @@ class FragmentableWeapon: public DistanceWeapon{
 		virtual weapon_ptr getFragment() = 0;
 
 	public:
-		FragmentableWeapon(int fragments, bool timed, int radius, int damage);
+		FragmentableWeapon(int fragments, int munitions, int radius, int damage);
 		~FragmentableWeapon();
 
 		virtual void shoot(const Position& origin, const dir_ptr& dir, int angle, int power, int time);

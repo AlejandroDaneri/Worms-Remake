@@ -1,7 +1,6 @@
 #include "DistanceWeapon.h"
 
-DistanceWeapon::DistanceWeapon(bool timed, int radius, int damage):
-	Weapon(true, true, timed, false, radius, damage){}
+DistanceWeapon::DistanceWeapon(int munitions, int radius, int damage): Weapon(munitions, radius, damage){}
 		
 DistanceWeapon::~DistanceWeapon(){}
 
@@ -12,4 +11,16 @@ Position DistanceWeapon::getEpicenter(const Position& origin, const dir_ptr& dir
 
 
 	return Position(1,1);/////////////////////////////////////////////////////////////////////////
+}
+
+bool DistanceWeapon::hasScope(){
+	return true;
+}
+
+bool DistanceWeapon::hasVariablePower(){
+	return true;
+}
+
+bool DistanceWeapon::isSelfDirected(){
+	return false;
 }
