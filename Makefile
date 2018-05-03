@@ -58,7 +58,6 @@ CXXSTD = c++11
 # Si se quiere compilar estaticamente, descomentar la siguiente linea
 #static = si
 
-
 # VARIABLES CALCULADAS A PARTIR DE LA CONFIGURACION
 ####################################################
 
@@ -112,7 +111,7 @@ endif
 
 # Si no especifica archivos, tomo todos.
 fuentes ?= $(wildcard *.$(extension))
-directorios = $(shell find . -type d -regex '.*\w+')
+directorios = $(shell find . -type d -regex './src/*\w+')
 
 occ := $(CC)
 ocxx := $(CXX)
@@ -127,6 +126,10 @@ RM =  @echo "  CLEAN"; $(orm)
 LD =  @echo "  LD  $@"; $(old)
 endif
 
+IQUOTE := $(foreach dir,$(directorios),-iquote $(dir))
+CXXFLAGS += $(IQUOTE)
+
+SRC := $(shell find $(SOURCEDIR) -name '*.cpp')
 
 # REGLAS
 #########
@@ -135,7 +138,7 @@ endif
 
 all: $(target)
 
-o_files = $(patsubst %.$(extension),%.o,$(fuentes))
+o_files = $(SRC:%.cpp=%.o)
 
 $(target): $(o_files)
 	@if [ -z "$(o_files)" ]; \
