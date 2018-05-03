@@ -9,21 +9,12 @@ bool Position::operator==(const Position& other){
 	return this->x == other.x && this->y == other.y;
 }
 
-void Position::move(dir_t direction, speed_t speed){
-	switch (direction){
-		case DIR_UP:
-			this->y += speed;
-			break;
-		case DIR_DOWN:
-			this->y -= speed;
-			break;
-		case DIR_LEFT:
-			this->x += speed;
-			break;
-		case DIR_RIGHT:
-			this->x -= speed;
-			break;
-	}
+void Position::moveHorizontal(int speed){
+	this->x += speed;
+}
+
+void Position::moveVertical(int speed){
+	this->y += speed;
 }
 
 int Position::distanceTo(const Position& other){
