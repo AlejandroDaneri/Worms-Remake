@@ -12,7 +12,7 @@ class AtackRadius{
 		AtackRadius(int radius, int damage);
 		~AtackRadius();
 
-		void atack(const Position& epicenter);////////////////////lista_gusanos
+		void attack(const Position& epicenter, int time);////////////////////lista_gusanos
 
 };
 

@@ -4,6 +4,6 @@ AtackRadius::AtackRadius(int radius, int damage): radius(radius), damage(damage)
 		
 AtackRadius::~AtackRadius(){}
 
-void AtackRadius::atack(const Position& epicenter){
+void AtackRadius::attack(const Position& epicenter, int time){
 	//TODO something/////////////////////////////////////////////////////////////////////////////////
 }

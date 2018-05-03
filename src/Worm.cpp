@@ -31,7 +31,7 @@ void Worm::roll_back(){
 }
 
 void Worm::shoot(int angle, int power, int time){
-	this->weapon->shoot(angle, power, time);
+	this->weapon->shoot(this->position, this->dir, angle, power, time);
 }
 
 void Worm::shoot(const Position& pos){

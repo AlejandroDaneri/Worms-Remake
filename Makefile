@@ -111,7 +111,7 @@ endif
 
 # Si no especifica archivos, tomo todos.
 fuentes ?= $(wildcard *.$(extension))
-directorios = $(shell find . -type d -regex './src/*\w+')
+directorios = $(shell find ./src -type d)
 
 occ := $(CC)
 ocxx := $(CXX)
