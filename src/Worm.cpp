@@ -37,3 +37,7 @@ void Worm::shoot(int angle, int power, int time){
 void Worm::shoot(const Position& pos){
 	this->weapon->shoot(pos);
 }
+
+Position Worm::getPosition(){
+	return this->position;
+}

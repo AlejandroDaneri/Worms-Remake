@@ -16,7 +16,7 @@ class Direction{
 
 		virtual dir_ptr opposite() = 0;
 
-		virtual void move(Position& pos, int speed) = 0;
+		virtual void move(Position& pos, float speed) = 0;
 };
 
 #endif

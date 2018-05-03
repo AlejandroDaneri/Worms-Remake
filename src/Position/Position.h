@@ -3,20 +3,20 @@
 
 class Position{
 	private:
-		int x;
-		int y;
+		float x;
+		float y;
 
 	public:
-		Position(int x, int y);
+		Position(float x, float y);
 		~Position();
 
 		bool operator==(const Position& other);
 
-		void moveHorizontal(int speed);
+		void moveHorizontal(float speed);
 
-		void moveVertical(int speed);
+		void moveVertical(float speed);
 
-		int distanceTo(const Position& other);
+		float distanceTo(const Position& other);
 
 };
 

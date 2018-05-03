@@ -9,6 +9,6 @@ dir_ptr DirectionUp::opposite(){
 	return dir_ptr(new DirectionDown());
 }
 
-void DirectionUp::move(Position& pos, int speed){
+void DirectionUp::move(Position& pos, float speed){
 	pos.moveVertical(speed);
 }

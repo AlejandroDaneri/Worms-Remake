@@ -9,6 +9,6 @@ dir_ptr DirectionLeft::opposite(){
 	return dir_ptr(new DirectionRight());
 }
 
-void DirectionLeft::move(Position& pos, int speed){
+void DirectionLeft::move(Position& pos, float speed){
 	pos.moveHorizontal(speed * -1);
 }

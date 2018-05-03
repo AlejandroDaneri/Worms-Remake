@@ -32,6 +32,7 @@ class Worm{
 
 		void shoot(const Position& pos);
 
+		Position getPosition();
 
 };
 

@@ -12,7 +12,7 @@ class DirectionDown: public Direction{
 
 		dir_ptr opposite();
 
-		void move(Position& pos, int speed);
+		void move(Position& pos, float speed);
 };
 
 #endif
