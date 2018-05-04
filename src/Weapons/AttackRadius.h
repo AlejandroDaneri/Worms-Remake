@@ -1,16 +1,16 @@
-#ifndef __ATACKRADIUS_H__
-#define __ATACKRADIUS_H__
+#ifndef __ATTACKRADIUS_H__
+#define __ATTACKRADIUS_H__
 
 #include "Position.h"
 
-class AtackRadius{
+class AttackRadius{
 	private:
 		int radius;
 		int damage;
 
 	public:
-		AtackRadius(int radius, int damage);
-		~AtackRadius();
+		AttackRadius(int radius, int damage);
+		~AttackRadius();
 
 		void attack(const Position& epicenter, int time);////////////////////lista_gusanos
 

@@ -2,7 +2,7 @@
 #define __WEAPON_H__
 
 #include <memory>
-#include "AtackRadius.h"
+#include "AttackRadius.h"
 #include "Position.h"
 #include "Direction.h"
 
@@ -13,7 +13,7 @@ class Weapon{
 
 	protected:
 		int munitions;
-		AtackRadius radius;
+		AttackRadius radius;
 
 		virtual Position getEpicenter(const Position& origin, const dir_ptr& dir, int angle, int power) = 0;
 
