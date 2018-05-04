@@ -1,0 +1,5 @@
+# ignora los .o y los ejecutables 
+#para que no haga commit de ellos
+*.o
+client
+server
