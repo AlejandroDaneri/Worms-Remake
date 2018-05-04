@@ -24,10 +24,10 @@ math = si
 threads = si
 
 # Si es un programa GTK+, descomentar (quitar el '#' a) la siguiente línea.
-#gtk = si
+gtk = si
 
 # Si es un programa gtkmm, descomentar (quitar el '#' a) la siguiente línea.
-#gtkmm = si
+gtkmm = si
 
 # Descomentar si se quiere ver como se invoca al compilador
 #verbose = si
@@ -40,7 +40,7 @@ threads = si
 CFLAGS = -Wall -Werror -pedantic -pedantic-errors
 
 # Para optimizar el binario resultante lo mejor posible
-CFLAGS += -O3
+CFLAGS += -O1
 
 # Para valgrind o debug
 CFLAGS += -ggdb -DDEBUG -fno-inline
@@ -64,7 +64,7 @@ CXXSTD = c++11
 # Agrega flags y libs de GTK+ de ser necesario.
 ifdef gtk
 CFLAGS += $(shell pkg-config --cflags gtk+-3.0) \
-	-DG_DISABLE_DEPRECATED 	 	\
+	#-DG_DISABLE_DEPRECATED 	 	\
 	-DGDK_DISABLE_DEPRECATED 	\
 	-DGDK_PIXBUF_DISABLE_DEPRECATED \
 	-DGTK_DISABLE_DEPRECATED
@@ -74,7 +74,7 @@ endif
 # Agrega flags y libs de GTK+ de ser necesario.
 ifdef gtkmm
 CFLAGS += $(shell pkg-config --cflags gtkmm-3.0) \
-	-DG_DISABLE_DEPRECATED 	 	\
+	#-DG_DISABLE_DEPRECATED 	 	\
 	-DGDK_DISABLE_DEPRECATED 	\
 	-DGDK_PIXBUF_DISABLE_DEPRECATED \
 	-DGTK_DISABLE_DEPRECATED	\
