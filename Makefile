@@ -1,13 +1,10 @@
-# Makefile de ejemplo para C/C++
-# Creado: 15/04/2004 - Leandro Lucarella
+# Makefile de ejemplo para programa cliente-servidor en C/C++. Genera los ejecutables 'client' y 'server' basados en archivos con el patrón 'client*.(c|cpp)' y 'server*.(c|cpp)' respectivamente. En ambos ejecutables, incluye elementos encontrados en 'common*.(c|cpp)'.
+# Creado: 27/04/2007 - Leandro Lucarella
 # Modificado: 01/09/2016 - Pablo Roca
 # Copyleft 2004 - Leandro Lucarella, Bajo licencia GPL [http://www.gnu.org/]
 
 # CONFIGURACION
 ################
-
-# Nombre del ejecutable.
-target = tp
 
 # Extensión de los archivos a compilar (c para C, cpp o cc o cxx para C++).
 extension = cpp
@@ -16,7 +13,9 @@ extension = cpp
 # toma todos los archivos con la extensión mencionada. Para especificar hay que
 # descomentar la línea (quitarle el '#' del principio).
 # NOTA: No poner cabeceras (.h).
-#fuentes = entrada.cpp
+#fuentes_client = entrada.cpp
+#fuentes_server = entrada.cpp
+#fuentes_common = entrada.cpp
 
 # Si usa funciones de math.h, descomentar (quitar el '#' a) la siguiente línea.
 math = si
@@ -57,6 +56,7 @@ CXXSTD = c++11
 
 # Si se quiere compilar estaticamente, descomentar la siguiente linea
 #static = si
+
 
 # VARIABLES CALCULADAS A PARTIR DE LA CONFIGURACION
 ####################################################
@@ -100,7 +100,7 @@ endif
 # Se reutilizan los flags de C para C++ también
 CXXFLAGS += $(CFLAGS)
 
-# Se usa enlazador de c++ si es código no C.
+# Se usa enlazador de C++ si es código no C.
 ifeq ($(extension), c)
 CFLAGS += -std=$(CSTD)
 LD = $(CC)
@@ -110,8 +110,9 @@ LD = $(CXX)
 endif
 
 # Si no especifica archivos, tomo todos.
-fuentes ?= $(wildcard *.$(extension))
-directorios = $(shell find ./src -type d)
+fuentes_client ?= $(wildcard client*.$(extension))
+fuentes_server ?= $(wildcard server*.$(extension))
+fuentes_common ?= $(wildcard common*.$(extension))
 
 occ := $(CC)
 ocxx := $(CXX)
@@ -126,29 +127,43 @@ RM =  @echo "  CLEAN"; $(orm)
 LD =  @echo "  LD  $@"; $(old)
 endif
 
+directorios = $(shell find ./src -type d)
 IQUOTE := $(foreach dir,$(directorios),-iquote $(dir))
 CXXFLAGS += $(IQUOTE)
 
-SRC := $(shell find $(SOURCEDIR) -name '*.cpp')
+SRC_COMMON := $(shell find $(SOURCEDIR) -name 'common*.cpp')
+SRC_CLIENT := $(shell find $(SOURCEDIR) -name 'client*.cpp')
+SRC_SERVER := $(shell find $(SOURCEDIR) -name 'server*.cpp')
 
 # REGLAS
 #########
 
 .PHONY: all clean
 
-all: $(target)
+all: client server
 
-o_files = $(SRC:%.cpp=%.o)
+o_common_files = $(SRC_COMMON:%.cpp=%.o)
+o_client_files = $(SRC_CLIENT:%.cpp=%.o)
+o_server_files = $(SRC_SERVER:%.cpp=%.o)
 
-$(target): $(o_files)
-	@if [ -z "$(o_files)" ]; \
+client: $(o_common_files) $(o_client_files)
+	@if [ -z "$(o_client_files)" ]; \
 	then \
-		echo "No hay archivos de entrada en el directorio actual. Recuerde que la extensión debe ser '.$(extension)' y que no se aceptan directorios anidados."; \
+		echo "No hay archivos de entrada en el directorio actual para el cliente. Recuerde que los archivos deben respetar la forma 'client*.$(extension)' y que no se aceptan directorios anidados."; \
 		if [ -n "$(directorios)" ]; then echo "Directorios encontrados: $(directorios)"; fi; \
 		false; \
 	fi >&2
-	$(LD) $(o_files) -o $(target) $(LDFLAGS)
+	$(LD) $(o_common_files) $(o_client_files) -o client $(LDFLAGS)
+
+server: $(o_common_files) $(o_server_files)
+	@if [ -z "$(o_server_files)" ]; \
+	then \
+		echo "No hay archivos de entrada en el directorio actual para el servidor. Recuerde que los archivos deben respetar la forma 'server*.$(extension)' y que no se aceptan directorios anidados."; \
+		if [ -n "$(directorios)" ]; then echo "Directorios encontrados: $(directorios)"; fi; \
+		false; \
+	fi >&2
+	$(LD) $(o_common_files) $(o_server_files) -o server $(LDFLAGS)
 
 clean:
-	$(RM) $(o_files) $(target)
+	$(RM) -f $(o_common_files) $(o_client_files) $(o_server_files) client server
 
