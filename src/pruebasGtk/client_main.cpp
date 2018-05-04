@@ -24,8 +24,8 @@ int main(int argc, char** argv) {
     ventana.set_default_size(200, 200);
 	Gtk::Image image;
 	Gtk::Image bomba;
-	image.set("gtk.png");
-	bomba.set("bomba.png");
+	image.set("resources/images/gtk.png");
+	bomba.set("resources/images/bomba.png");
 	mainGrid.attach(image,0,0,1,1);
 	mainGrid.attach(bomba,10000,10000,1,1);
 	
