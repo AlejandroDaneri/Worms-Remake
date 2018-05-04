@@ -41,3 +41,11 @@ void Worm::shoot(const Position& pos){
 Position Worm::getPosition(){
 	return this->position;
 }
+
+weapon_ptr Worm::getWeapon(){
+	return std::move(this->weapon);
+}
+
+Worm::Worm(Worm&& other): 
+	position(other.position), life(other.life), 
+	weapon(std::move(other.weapon)), dir(std::move(other.dir)){}

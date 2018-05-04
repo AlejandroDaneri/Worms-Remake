@@ -34,6 +34,10 @@ class Worm{
 
 		Position getPosition();
 
+		weapon_ptr getWeapon();
+
+		Worm(Worm&& other);
+
 };
 
 #endif
