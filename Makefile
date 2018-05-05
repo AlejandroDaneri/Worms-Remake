@@ -24,7 +24,7 @@ math = si
 threads = si
 
 # Si es un programa GTK+, descomentar (quitar el '#' a) la siguiente línea.
-gtk = si
+#gtk = si
 
 # Si es un programa gtkmm, descomentar (quitar el '#' a) la siguiente línea.
 gtkmm = si
@@ -60,6 +60,10 @@ CXXSTD = c++11
 
 # VARIABLES CALCULADAS A PARTIR DE LA CONFIGURACION
 ####################################################
+
+directorios = $(shell find ./src -type d)
+IQUOTE := $(foreach dir,$(directorios),-iquote $(dir))
+CXXFLAGS += $(IQUOTE)
 
 # Agrega flags y libs de GTK+ de ser necesario.
 ifdef gtk
@@ -127,13 +131,11 @@ RM =  @echo "  CLEAN"; $(orm)
 LD =  @echo "  LD  $@"; $(old)
 endif
 
-directorios = $(shell find ./src -type d)
-IQUOTE := $(foreach dir,$(directorios),-iquote $(dir))
-CXXFLAGS += $(IQUOTE)
 
 SRC_COMMON := $(shell find $(SOURCEDIR) -name 'common*.cpp')
 SRC_CLIENT := $(shell find $(SOURCEDIR) -name 'client*.cpp')
 SRC_SERVER := $(shell find $(SOURCEDIR) -name 'server*.cpp')
+SRC_BOX2D := $(shell find $(SOURCEDIR) -name 'b2*.cpp')
 
 # REGLAS
 #########
@@ -145,8 +147,9 @@ all: client server
 o_common_files = $(SRC_COMMON:%.cpp=%.o)
 o_client_files = $(SRC_CLIENT:%.cpp=%.o)
 o_server_files = $(SRC_SERVER:%.cpp=%.o)
+o_box2d_files = $(SRC_BOX2D:%.cpp=%.o)
 
-client: $(o_common_files) $(o_client_files)
+client: $(o_box2d_files) $(o_common_files) $(o_client_files)
 	@if [ -z "$(o_client_files)" ]; \
 	then \
 		echo "No hay archivos de entrada en el directorio actual para el cliente. Recuerde que los archivos deben respetar la forma 'client*.$(extension)' y que no se aceptan directorios anidados."; \
@@ -166,4 +169,7 @@ server: $(o_common_files) $(o_server_files)
 
 clean:
 	$(RM) -f $(o_common_files) $(o_client_files) $(o_server_files) client server
+
+clean_libs: clean
+	$(RM) -f $(o_box2d_files)
 
