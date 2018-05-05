@@ -12,20 +12,15 @@
 #include "Box2D.h"
 
 #include "Thread.h"
-#include <mutex>
 
 class Imagen: public Thread{
 public:
 	Gtk::Image& image;
 	Gtk::Fixed& map;
 	b2Body* body;
-	int pos;
-	std::mutex& mutex;
 
-	Imagen(Gtk::Image& i, Gtk::Fixed& f, int pos, bool signal, std::mutex& mutex):image(i), map(f), pos(pos), mutex(mutex){
-		if (signal){
-			this->map.signal_key_press_event().connect(sigc::mem_fun(*this, &Imagen::on_my_key_press_event));
-		}
+	Imagen(Gtk::Image& i, Gtk::Fixed& f):image(i), map(f){
+		this->map.signal_key_press_event().connect(sigc::mem_fun(*this, &Imagen::on_my_key_press_event));
 	}
 
 	~Imagen(){}
@@ -33,7 +28,7 @@ public:
 	void addToWorld(b2World* world){
 		b2BodyDef bodyDef;
 		bodyDef.type = b2_dynamicBody;
-		bodyDef.position.Set(this->pos,500);
+		bodyDef.position.Set(300,500);
 		bodyDef.userData = this;
 		bodyDef.fixedRotation = true;
 		this->body = world->CreateBody(&bodyDef);
@@ -60,7 +55,6 @@ public:
 			b2Vec2 pos = this->getPosition();
 			std::cout << "Pos x: " << pos.x << "  y: " << pos.y << "  isAwake: " << this->body->IsAwake() << std::endl;
 			std::this_thread::sleep_for (std::chrono::milliseconds(15));
-			std::lock_guard<std::mutex> lock(this->mutex);
 			map.move(image, pos.x, pos.y);
 		}
 	}
@@ -138,7 +132,6 @@ void on_salir_clicked(Glib::RefPtr<Gtk::Application> app){
 }
 
 int main(int argc, char** argv) {
-	std::mutex mutex;
     auto app = Gtk::Application::create(argc, argv);
     Gtk::Window ventana;
     Gtk::Fixed world_map;
@@ -149,11 +142,7 @@ int main(int argc, char** argv) {
     ventana.resize(1000, 1000);
 	Gtk::Image bomba;
 	bomba.set("resources/images/bomba.png");
-	world_map.put(bomba,300, 500);
-
-	Gtk::Image bomba2;
-	bomba2.set("resources/images/bomba2.png");
-	world_map.put(bomba2,600, 500);
+	world_map.put(bomba,500, 500);
 	
 	buttonQuit.add_label("Quit");
 	buttonQuit.signal_clicked().connect(sigc::bind(sigc::ptr_fun(on_salir_clicked), app));
@@ -162,19 +151,14 @@ int main(int argc, char** argv) {
 	ventana.add(map);
     ventana.show_all();
 
-    Imagen imagen(bomba, world_map, 300, true, mutex);
-    Imagen imagen2(bomba2, world_map, 600, false, mutex);
+    Imagen imagen(bomba, world_map);
     MyWorld w;
     w.add_imagen(imagen);
-    w.add_imagen(imagen2);
     w.start();
     imagen.start();
-    imagen2.start();
     app->run(ventana);
     imagen.stop();
     imagen.join();
-    imagen2.stop();
-    imagen2.join();
     w.stop();
     w.join();
 	return 0;
