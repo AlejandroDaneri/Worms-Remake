@@ -36,6 +36,29 @@ class Functor{
 					//this->window.move(this->image,1300, 500);
 					
 					this->window.move(this->image,x, y);
+					// Muevo la imagen horizontalmente
+					for (; x <= 1000; x++){
+						std::this_thread::sleep_for (std::chrono::milliseconds(10));
+						this->window.move(this->image,x , y);
+					}
+					// Muevo la imagen en diagonal
+					for (; x >= 750; x--){
+						std::this_thread::sleep_for (std::chrono::milliseconds(10));
+						double aux = 0.4*x + 100;
+						this->window.move(this->image,x, (int) aux);
+					}
+					// Muevo la imagen en diagonal hasta el inicio
+					for (; x >= 500; x--){
+						std::this_thread::sleep_for (std::chrono::milliseconds(10));
+						double aux = -0.4*x + 700;
+						this->window.move(this->image,x, (int) aux);
+					}
+					// Muevo la imagen en una parabola.
+					for (; x <= 1000; x++){
+						std::this_thread::sleep_for (std::chrono::milliseconds(10));
+						double aux = 4.0/625*x*x - 48.0/5*x +3700;
+						this->window.move(this->image,x, (int) aux);
+					}
 			}
 };
 
@@ -51,7 +74,6 @@ int main(int argc, char** argv) {
     Gtk::Fixed world_map;
     Gtk::ScrolledWindow map;
     map.add(world_map);
-    //map.set_policy(Gtk::POLICY_ALWAYS, Gtk::POLICY_ALWAYS);
 	Gtk::Button buttonQuit;
     ventana.resize(1000, 1000);
 	Gtk::Image image;
