@@ -53,14 +53,18 @@ public:
 	void run(){
 		while (this->running){
 			b2Vec2 pos = this->getPosition();
-			std::cout << "Pos x: " << pos.x << "  y: " << pos.y << std::endl;
+			std::cout << "Pos x: " << pos.x << "  y: " << pos.y << "  isAwake: " << this->body->IsAwake() << std::endl;
 			std::this_thread::sleep_for (std::chrono::milliseconds(15));
 			map.move(image, pos.x, pos.y);
 		}
 	}
 
 	bool on_my_key_press_event(GdkEventKey* key_event){
+
 		if (key_event->keyval == ' '){
+			if (this->body->IsAwake()){
+				return true;
+			}
 			std::cout << "key event = " << key_event->string << std::endl;
 			this->body->SetLinearVelocity(b2Vec2(10, -30));
 			return true;
