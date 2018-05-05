@@ -173,3 +173,5 @@ clean:
 clean_libs: clean
 	$(RM) -f $(o_box2d_files)
 
+run_client: client
+	./client
