@@ -19,14 +19,16 @@ public:
 	Gtk::Fixed& map;
 	b2Body* body;
 
-	Imagen(Gtk::Image& i, Gtk::Fixed& f):image(i), map(f){}
+	Imagen(Gtk::Image& i, Gtk::Fixed& f):image(i), map(f){
+		this->map.signal_key_press_event().connect(sigc::mem_fun(*this, &Imagen::on_my_key_press_event));
+	}
 
 	~Imagen(){}
 
 	void addToWorld(b2World* world){
 		b2BodyDef bodyDef;
 		bodyDef.type = b2_dynamicBody;
-		bodyDef.position.Set(5,500);
+		bodyDef.position.Set(300,500);
 		bodyDef.userData = this;
 		bodyDef.fixedRotation = true;
 		this->body = world->CreateBody(&bodyDef);
@@ -49,13 +51,19 @@ public:
 	}
 
 	void run(){
-		body->SetLinearVelocity(b2Vec2(100.0f, -100.0));
 		while (this->running){
 			b2Vec2 pos = this->getPosition();
 			std::cout << "Pos x: " << pos.x << "  y: " << pos.y << std::endl;
-			std::this_thread::sleep_for (std::chrono::milliseconds(10));
+			std::this_thread::sleep_for (std::chrono::milliseconds(15));
 			map.move(image, pos.x, pos.y);
 		}
+	}
+
+	bool on_my_key_press_event(GdkEventKey* key_event){
+		std::cout << "key event = " << key_event->string << std::endl;
+		this->body->SetLinearVelocity(b2Vec2(10, 0));
+		return true;
+
 	}
 };
 
@@ -98,7 +106,7 @@ public:
 			float32 timeStep = 1/20.0;      //the length of time passed to simulate (seconds)
 			  int32 velocityIterations = 8;   //how strongly to correct velocity
 			  int32 positionIterations = 3;   //how strongly to correct position
-			  std::this_thread::sleep_for (std::chrono::milliseconds(10));
+			  std::this_thread::sleep_for (std::chrono::milliseconds(15));
 			  this->world->Step( timeStep, velocityIterations, positionIterations);
 		}
 	}
