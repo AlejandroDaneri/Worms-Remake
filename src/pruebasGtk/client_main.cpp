@@ -40,6 +40,21 @@ class Functor{
 						std::this_thread::sleep_for (std::chrono::milliseconds(10));
 						this->window.move(this->image,x , y);
 					}
+					for (; x >= 750; x--){
+						std::this_thread::sleep_for (std::chrono::milliseconds(10));
+						double aux = 0.4*x + 100;
+						this->window.move(this->image,x, (int) aux);
+					}
+					for (; x >= 500; x--){
+						std::this_thread::sleep_for (std::chrono::milliseconds(10));
+						double aux = -0.4*x + 700;
+						this->window.move(this->image,x, (int) aux);
+					}
+					for (; x <= 1000; x++){
+						std::this_thread::sleep_for (std::chrono::milliseconds(10));
+						double aux = 4.0/625*x*x - 48.0/5*x +3700;
+						this->window.move(this->image,x, (int) aux);
+					}
 
 					/*sleep(2);
 					std::cout << "move" << std::endl;
