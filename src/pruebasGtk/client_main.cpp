@@ -60,8 +60,13 @@ public:
 	}
 
 	bool on_my_key_press_event(GdkEventKey* key_event){
+		if (key_event->keyval == ' '){
+			std::cout << "key event = " << key_event->string << std::endl;
+			this->body->SetLinearVelocity(b2Vec2(10, -30));
+			return true;
+		}
 		std::cout << "key event = " << key_event->string << std::endl;
-		this->body->SetLinearVelocity(b2Vec2(10, 0));
+		this->body->SetLinearVelocity(b2Vec2(10, 10));
 		return true;
 
 	}
