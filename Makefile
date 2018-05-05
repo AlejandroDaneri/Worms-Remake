@@ -156,7 +156,7 @@ client: $(o_box2d_files) $(o_common_files) $(o_client_files)
 		if [ -n "$(directorios)" ]; then echo "Directorios encontrados: $(directorios)"; fi; \
 		false; \
 	fi >&2
-	$(LD) $(o_common_files) $(o_client_files) -o client $(LDFLAGS)
+	$(LD) $(o_box2d_files) $(o_common_files) $(o_client_files) -o client $(LDFLAGS)
 
 server: $(o_common_files) $(o_server_files)
 	@if [ -z "$(o_server_files)" ]; \
