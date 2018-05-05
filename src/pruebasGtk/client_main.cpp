@@ -14,6 +14,41 @@
 #include "Thread.h"
 #include <mutex>
 
+class UserData{
+public:
+	std::string type;
+	b2Body* body;
+
+	UserData(){}
+	void setDatos(std::string type, b2Body* body){
+		this->type = type;
+		this->body = body;
+	}
+	~UserData(){}
+
+};
+
+class CollisionListener: public b2ContactListener{
+public:
+	CollisionListener(){}
+	~CollisionListener(){}
+
+	void BeginContact(b2Contact* contact){
+		UserData* dataA = (UserData*)contact->GetFixtureA()->GetBody()->GetUserData();
+		UserData* dataB = (UserData*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+		if (dataA->type == "Imagen" && dataB->type == "Imagen"){
+			std::cout << "Colision" << std::endl;
+			b2Vec2 pos = dataA->body->GetPosition();
+			std::cout << "Pos x: " << pos.x << "  y: " << pos.y << "  isAwake: " << dataA->body->IsAwake() << std::endl;
+			dataA->body->ApplyLinearImpulse(b2Vec2(-500, -500), dataA->body->GetWorldCenter(), true);
+			std::cout << "ColisionA" << std::endl;
+			dataB->body->ApplyLinearImpulse(b2Vec2(500, -500), dataB->body->GetWorldCenter(), true);
+			std::cout << "ColisionB" << std::endl;
+		}
+	}
+};
+
 class Imagen: public Thread{
 public:
 	Gtk::Image& image;
@@ -21,6 +56,7 @@ public:
 	b2Body* body;
 	int pos;
 	std::mutex& mutex;
+	UserData data;
 
 	Imagen(Gtk::Image& i, Gtk::Fixed& f, int pos, bool signal, std::mutex& mutex):image(i), map(f), pos(pos), mutex(mutex){
 		if (signal){
@@ -34,16 +70,18 @@ public:
 		b2BodyDef bodyDef;
 		bodyDef.type = b2_dynamicBody;
 		bodyDef.position.Set(this->pos,500);
-		bodyDef.userData = this;
+
 		bodyDef.fixedRotation = true;
 		this->body = world->CreateBody(&bodyDef);
+		data.setDatos("Imagen", this->body);
+		this->body->SetUserData(&data);
 
 		b2PolygonShape boxShape;
 		boxShape.SetAsBox(1,1);
 		  
 		b2FixtureDef boxFixtureDef;
 		boxFixtureDef.shape = &boxShape;
-		boxFixtureDef.density = 1;
+		boxFixtureDef.density = 4;
 		this->body->CreateFixture(&boxFixtureDef);
 	}
 
@@ -58,25 +96,28 @@ public:
 	void run(){
 		while (this->running){
 			b2Vec2 pos = this->getPosition();
-			std::cout << "Pos x: " << pos.x << "  y: " << pos.y << "  isAwake: " << this->body->IsAwake() << std::endl;
+			//////////////////////std::cout << "Pos x: " << pos.x << "  y: " << pos.y << "  isAwake: " << this->body->IsAwake() << std::endl;
 			std::this_thread::sleep_for (std::chrono::milliseconds(15));
-			std::lock_guard<std::mutex> lock(this->mutex);
+			//std::lock_guard<std::mutex> lock(this->mutex);
 			map.move(image, pos.x, pos.y);
 		}
 	}
 
 	bool on_my_key_press_event(GdkEventKey* key_event){
-
+		std::cout << "key event = " << key_event->string << std::endl;
 		if (key_event->keyval == ' '){
 			if (this->body->IsAwake()){
 				return true;
 			}
-			std::cout << "key event = " << key_event->string << std::endl;
+			
 			this->body->SetLinearVelocity(b2Vec2(10, -30));
 			return true;
 		}
-		std::cout << "key event = " << key_event->string << std::endl;
-		this->body->SetLinearVelocity(b2Vec2(10, 10));
+		if (key_event->keyval == 'a'){
+			this->body->SetLinearVelocity(b2Vec2(-10, 0));
+			return true;
+		}
+		this->body->SetLinearVelocity(b2Vec2(10, 0));
 		return true;
 
 	}
@@ -85,18 +126,27 @@ public:
 class MyWorld: public Thread{
 public:
 	b2World* world;
+	b2Body* staticBody;
+	UserData data;
+	CollisionListener colission;
 
 	MyWorld(){
+	
+
 		world = new b2World(b2Vec2(0.0f, 10.0));
 		world->SetAllowSleeping(true);
 		world->SetContinuousPhysics(true);
-		//world->SetContactListener(this);
+		world->SetContactListener(&colission);
 
 		//Viga en el piso
+		
 		b2BodyDef myBodyDef;
 		myBodyDef.type = b2_staticBody; //this will be a static body
 		myBodyDef.position.Set(0, 900); //slightly lower position
-		b2Body* staticBody = this->world->CreateBody(&myBodyDef); //add body to world
+		staticBody = this->world->CreateBody(&myBodyDef); //add body to world
+
+		data.setDatos("Viga", this->staticBody);
+		staticBody->SetUserData(&data);
 
 
 		b2PolygonShape boxShape;
@@ -163,7 +213,7 @@ int main(int argc, char** argv) {
     ventana.show_all();
 
     Imagen imagen(bomba, world_map, 300, true, mutex);
-    Imagen imagen2(bomba2, world_map, 600, false, mutex);
+    Imagen imagen2(bomba2, world_map, 400, false, mutex);
     MyWorld w;
     w.add_imagen(imagen);
     w.add_imagen(imagen2);
