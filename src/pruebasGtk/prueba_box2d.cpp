@@ -68,6 +68,21 @@ public:
 		world->SetAllowSleeping(true);
 		world->SetContinuousPhysics(true);
 		//world->SetContactListener(this);
+
+		//Viga en el piso
+		b2BodyDef myBodyDef;
+		myBodyDef.type = b2_staticBody; //this will be a static body
+		myBodyDef.position.Set(0, 900); //slightly lower position
+		b2Body* staticBody = this->world->CreateBody(&myBodyDef); //add body to world
+
+
+		b2PolygonShape boxShape;
+		boxShape.SetAsBox(100000,1);
+
+		b2FixtureDef boxFixtureDef;
+		boxFixtureDef.shape = &boxShape;
+		boxFixtureDef.density = 1;
+		staticBody->CreateFixture(&boxFixtureDef); //add fixture to body
 	}
 
 	~MyWorld(){
