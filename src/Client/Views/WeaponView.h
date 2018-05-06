@@ -22,6 +22,8 @@ class WeaponView: public Viewable{
 
 		void explode();
 
+		WeaponView(WeaponView&& other);
+
 };
 
 

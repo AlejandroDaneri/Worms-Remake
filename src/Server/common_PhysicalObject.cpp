@@ -1,6 +1,6 @@
 #include "PhysicalObject.h"
 
-PhysicalObject::PhysicalObject(World& world): world(world), is_dead(false){}
+PhysicalObject::PhysicalObject(World& world, int id): world(world), is_dead(false), id(id){}
 
 PhysicalObject::~PhysicalObject(){}
 
@@ -24,4 +24,8 @@ bool PhysicalObject::isMoving(){
 
 bool PhysicalObject::isDead(){
 	return this->is_dead;
+}
+
+int PhysicalObject::getId(){
+	return this->id;
 }

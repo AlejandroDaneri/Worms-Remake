@@ -14,11 +14,12 @@ class PhysicalObject{
 	protected:
 		b2Body* body;
 		bool is_dead;
+		int id;
 
 		virtual void createFixtures() = 0;
 
 	public:
-		PhysicalObject(World& world);
+		PhysicalObject(World& world, int id);
 		virtual ~PhysicalObject();
 
 		void initializeBody(b2Body* body);
@@ -26,6 +27,7 @@ class PhysicalObject{
 		b2Body* getBody();
 		bool isMoving();
 		bool isDead();
+		int getId();
 
 		virtual void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) = 0;
 

@@ -43,3 +43,7 @@ void World::initialize(){
 	physical_object_ptr bottom_border(new BottomBorder(*this));
 	this->addObject(bottom_border, b2Vec2(0, 900));///////////////////////////////////////////////////////////ver
 }
+
+std::list<physical_object_ptr>& World::getObjectsList(){
+	return this->objects;
+}

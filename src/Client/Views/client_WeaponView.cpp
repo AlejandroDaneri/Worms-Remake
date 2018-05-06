@@ -24,3 +24,6 @@ Gtk::Widget& WeaponView::getWidget(){
 	this->image.set(path);
 	return this->image;
 }
+
+WeaponView::WeaponView(WeaponView&& other): Viewable(std::move(other)),
+	image(std::move(other.image)), weapon_name(std::move(other.weapon_name)){}

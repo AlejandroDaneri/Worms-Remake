@@ -25,7 +25,9 @@ class WormView: public Viewable{
 
 		void updateData(int new_life, dir_t new_dir, const Position& new_pos);
 
-		void remove();
+		void kill();
+
+		WormView(WormView&& other);
 
 };
 

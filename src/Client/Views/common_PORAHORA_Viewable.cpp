@@ -15,3 +15,5 @@ void Viewable::removeFromWorld(){
 void Viewable::addToWorld(const Position& pos){
 	this->worldView.addElement(this->getWidget(), pos);
 }
+
+Viewable::Viewable(Viewable&& other): worldView(other.worldView){}

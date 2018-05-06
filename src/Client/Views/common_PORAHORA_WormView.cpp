@@ -16,7 +16,7 @@ void WormView::updateData(int new_life, dir_t new_dir, const Position& new_pos){
 	this->move(new_pos);
 }
 
-void WormView::remove(){
+void WormView::kill(){
 	this->removeFromWorld();
 	////////////////////////////////////////Hacer sonido de gusano muerto
 }
@@ -37,3 +37,6 @@ Gtk::Widget& WormView::getWidget(){
 
 	return this->image;
 }
+
+WormView::WormView(WormView&& other): Viewable(std::move(other)),
+	life(other.life), dir(other.dir), image(std::move(other.image)){}

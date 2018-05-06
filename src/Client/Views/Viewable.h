@@ -23,6 +23,8 @@ class Viewable{
 	public:
 		Viewable(WorldView& worldView);
 		virtual ~Viewable();
+
+		Viewable(Viewable&& other);
 };
 
 

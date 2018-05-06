@@ -29,6 +29,8 @@ class World: public Thread{
 
 		void removeObject(PhysicalObject& object);
 
+		std::list<physical_object_ptr>& getObjectsList();
+
 };
 
 
