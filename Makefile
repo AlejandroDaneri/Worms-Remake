@@ -175,3 +175,6 @@ clean_libs: clean
 
 run_client: client
 	./client
+
+run_server: server
+	valgrind --leak-check=full --show-reachable=yes --suppressions=valgrind_iostream.supp ./server
