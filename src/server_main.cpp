@@ -9,7 +9,7 @@
 
 
 int main(int argc, char* argv[]){
-	Position pos(2,2);
+	/*Position pos(2,2);
 
 	Worm worm (pos, 124);
 	worm.move();
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]){
 		player.begin_turn();
 	}
 
-	player.getCurrentWorm().getWeapon();
+	player.getCurrentWorm().getWeapon();*/
 
 
 	return 0;

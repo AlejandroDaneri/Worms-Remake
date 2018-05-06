@@ -206,9 +206,11 @@ int main(int argc, char** argv) {
 	std::mutex mutex;
     auto app = Gtk::Application::create(argc, argv);
     Gtk::Window ventana;
+
     Gtk::Fixed world_map;
     Gtk::ScrolledWindow map;
     map.add(world_map);
+    
     //map.set_policy(Gtk::POLICY_ALWAYS, Gtk::POLICY_ALWAYS);
 	Gtk::Button buttonQuit;
     ventana.resize(1000, 1000);
