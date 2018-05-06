@@ -14,6 +14,8 @@ class World: public Thread{
 		b2World world;
 		std::mutex mutex;
 
+		void initialize();
+
 	public:
 		World(const b2Vec2& gravity);
 		~World();

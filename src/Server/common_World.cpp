@@ -1,9 +1,11 @@
 #include "World.h"
+#include "BottomBorder.h"
 
 World::World(const b2Vec2& gravity): world(gravity){
 	this->world.SetAllowSleeping(true);
 	this->world.SetContinuousPhysics(true);
 	/////////////////this->world->SetContactListener(&colission);
+	this->initialize();
 }
 		
 World::~World(){}
@@ -29,4 +31,9 @@ b2Body* World::addObject(const b2BodyDef* def){
 void World::removeObject(PhysicalObject& object){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	this->world.DestroyBody(object.getBody());
+}
+
+void World::initialize(){
+	BottomBorder bottom_border(*this);
+	bottom_border.addToWorld(b2Vec2(0, 900));///////////////////////////////////////////////////////////ver
 }

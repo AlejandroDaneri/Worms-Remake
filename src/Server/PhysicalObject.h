@@ -15,7 +15,7 @@ class PhysicalObject{
 		b2Body* body;
 		bool is_dead;
 
-		virtual b2BodyDef* getBodyDef(const b2Vec2& pos) = 0;
+		virtual void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) = 0;
 		virtual void createFixtures() = 0;
 
 	public:

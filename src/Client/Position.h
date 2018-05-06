@@ -3,18 +3,18 @@
 
 class Position{
 	private:
-		float x;
-		float y;
+		int x;
+		int y;
 
 	public:
-		Position(float x, float y);
+		Position(int x, int y);
 		~Position();
 
 		bool operator==(const Position& other);
 
-		float getX() const;
+		int getX() const;
 
-        float getY() const;
+        int getY() const;
 
 };
 
