@@ -2,6 +2,7 @@
 #include <gtkmm/window.h>
 #include "WorldView.h"
 #include "WormView.h"
+#include "WeaponView.h"
 
 int main(int argc, char* argv[]){
 	auto app = Gtk::Application::create(argc, argv);
@@ -13,6 +14,8 @@ int main(int argc, char* argv[]){
     WormView worm(world, 100, Position(50, 50));
     WormView worm2(world, 100, Position(500, 500));
     worm2.updateData(100, DIR_LEFT, Position(500, 500));
+
+    WeaponView weapon(world, "missile", Position(700,150));
 
     window.add(world.getWindow());
     window.show_all();

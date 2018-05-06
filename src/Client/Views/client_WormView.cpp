@@ -16,6 +16,11 @@ void WormView::updateData(int new_life, dir_t new_dir, const Position& new_pos){
 	this->move(new_pos);
 }
 
+void WormView::remove(){
+	this->removeFromWorld();
+	////////////////////////////////////////Hacer sonido de gusano muerto
+}
+
 
 Gtk::Widget& WormView::getWidget(){
 	////////////////////////////////Por ahora no uso la vida,         hacer un vbox con la bida y la imagen
