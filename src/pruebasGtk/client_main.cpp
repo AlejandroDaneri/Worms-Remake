@@ -105,14 +105,6 @@ public:
 
 	bool on_my_key_press_event(GdkEventKey* key_event){
 		std::cout << "key event = " << key_event->string << std::endl;
-		if (key_event->keyval == ' '){
-			if (this->body->IsAwake()){
-				return true;
-			}
-			
-			this->body->SetLinearVelocity(b2Vec2(10, -30));
-			return true;
-		}
 		if (key_event->keyval == 'a'){
 			this->body->SetLinearVelocity(b2Vec2(-100, 0));
 			std::this_thread::sleep_for (std::chrono::milliseconds(15));
@@ -137,7 +129,7 @@ public:
 			this->body->SetLinearVelocity(b2Vec2(0, 0));
 			return true;
 		}
-		this->body->SetLinearVelocity(b2Vec2(10, 0));
+		//this->body->SetLinearVelocity(b2Vec2(10, 0));
 		return true;
 
 	}
