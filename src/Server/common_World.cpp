@@ -9,11 +9,12 @@ World::World(const b2Vec2& gravity): world(gravity){
 World::~World(){}
 
 void World::run(){
+	float32 timeStep = 1/20.0;      //the length of time passed to simulate (seconds)
+	int32 velocityIterations = 8;   //how strongly to correct velocity
+	int32 positionIterations = 3;   //how strongly to correct position
+
 	while(this->running){
-		float32 timeStep = 1/20.0;      //the length of time passed to simulate (seconds)
-		int32 velocityIterations = 8;   //how strongly to correct velocity
-		int32 positionIterations = 3;   //how strongly to correct position
-		std::this_thread::sleep_for (std::chrono::milliseconds(15));
+		std::this_thread::sleep_for(std::chrono::milliseconds(15));
 
 		std::lock_guard<std::mutex> lock(this->mutex);
 		this->world.Step(timeStep, velocityIterations, positionIterations);

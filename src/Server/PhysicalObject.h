@@ -3,6 +3,7 @@
 
 #include "World.h"
 #include "b2Body.h"
+#include <memory>
 
 class World;
 
@@ -12,6 +13,7 @@ class PhysicalObject{
 
 	protected:
 		b2Body* body;
+		bool is_dead;
 
 		virtual b2BodyDef* getBodyDef(const b2Vec2& pos) = 0;
 		virtual void createFixtures() = 0;
@@ -23,8 +25,13 @@ class PhysicalObject{
 		void addToWorld(const b2Vec2& pos);
 		b2Vec2 getPosition();
 		b2Body* getBody();
+		bool isMoving();
+		bool isDead();
+
+		//virtual void collide_with_something(CollisionData other) = 0;
 
 };
 
+typedef std::unique_ptr<PhysicalObject> physical_object_ptr;
 
 #endif

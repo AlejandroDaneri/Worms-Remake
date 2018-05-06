@@ -1,6 +1,6 @@
 #include "PhysicalObject.h"
 
-PhysicalObject::PhysicalObject(World& world): world(world){}
+PhysicalObject::PhysicalObject(World& world): world(world), is_dead(false){}
 
 PhysicalObject::~PhysicalObject(){}
 
@@ -16,4 +16,12 @@ b2Vec2 PhysicalObject::getPosition(){
 
 b2Body* PhysicalObject::getBody(){
 	return this->body;
+}
+
+bool PhysicalObject::isMoving(){
+	return this->body->IsAwake();
+}
+
+bool PhysicalObject::isDead(){
+	return this->is_dead;
 }
