@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
 	Gtk::Button Action;
     ventana.set_default_size(200, 200);
     bool is_static = true;
-	Glib::RefPtr<Gdk::PixbufAnimation> rot =  Gdk::PixbufAnimation::create_from_file("gtk1.gif");
+	Glib::RefPtr<Gdk::PixbufAnimation> rot =  Gdk::PixbufAnimation::create_from_file("resources/images/gtk1.gif");
 	Gtk::Image bomba(rot->get_static_image());
 
 	mainGrid.attach(bomba,0,0,1,1);
