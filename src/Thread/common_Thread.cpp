@@ -17,3 +17,7 @@ void Thread::join(){
 bool Thread::isRunning() const{
 	return this->running;
 }
+
+void Thread::stop(){
+	this->running = false;
+}

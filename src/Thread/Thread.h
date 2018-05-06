@@ -28,7 +28,7 @@ class Thread{
 		virtual void run() = 0;
 
 		//Termina abruptamente la ejecucion del thread
-		virtual void stop() = 0;
+		virtual void stop();
 
 
 		Thread(const Thread&) = delete;

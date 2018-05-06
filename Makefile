@@ -158,14 +158,14 @@ client: $(o_box2d_files) $(o_common_files) $(o_client_files)
 	fi >&2
 	$(LD) $(o_box2d_files) $(o_common_files) $(o_client_files) -o client $(LDFLAGS)
 
-server: $(o_common_files) $(o_server_files)
+server: $(o_box2d_files) $(o_common_files) $(o_server_files)
 	@if [ -z "$(o_server_files)" ]; \
 	then \
 		echo "No hay archivos de entrada en el directorio actual para el servidor. Recuerde que los archivos deben respetar la forma 'server*.$(extension)' y que no se aceptan directorios anidados."; \
 		if [ -n "$(directorios)" ]; then echo "Directorios encontrados: $(directorios)"; fi; \
 		false; \
 	fi >&2
-	$(LD) $(o_common_files) $(o_server_files) -o server $(LDFLAGS)
+	$(LD) $(o_box2d_files) $(o_common_files) $(o_server_files) -o server $(LDFLAGS)
 
 clean:
 	$(RM) -f $(o_common_files) $(o_client_files) $(o_server_files) client server
