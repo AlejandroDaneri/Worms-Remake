@@ -4,7 +4,7 @@
 #define WORM_IMAGE "_worm.png"
 
 WormView::WormView(WorldView& worldView, int life, Position pos):
-	Viewable(worldView), life(life){
+	Viewable(worldView), life(life), dir(DIR_RIGHT){
 		this->addToWorld(pos);
 }
 
