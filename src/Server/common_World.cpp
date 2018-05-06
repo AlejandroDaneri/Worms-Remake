@@ -23,9 +23,15 @@ void World::run(){
 	}
 }
 
-b2Body* World::addObject(const b2BodyDef* def){
+void World::addObject(physical_object_ptr& object, const b2Vec2& pos){
+	b2BodyDef body_def;
+	object -> getBodyDef(body_def, pos);
+
 	std::lock_guard<std::mutex> lock(this->mutex);
-	return this->world.CreateBody(def);
+	object->initializeBody(this->world.CreateBody(&body_def));
+	if (body_def.type != b2_staticBody){
+		this->objects.push_back(std::move(object));
+	}
 }
 
 void World::removeObject(PhysicalObject& object){
@@ -34,6 +40,6 @@ void World::removeObject(PhysicalObject& object){
 }
 
 void World::initialize(){
-	BottomBorder bottom_border(*this);
-	bottom_border.addToWorld(b2Vec2(0, 900));///////////////////////////////////////////////////////////ver
+	physical_object_ptr bottom_border(new BottomBorder(*this));
+	this->addObject(bottom_border, b2Vec2(0, 900));///////////////////////////////////////////////////////////ver
 }

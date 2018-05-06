@@ -6,13 +6,16 @@
 #include "b2Body.h"
 #include "PhysicalObject.h"
 #include <mutex>
+#include <list>
 
 class PhysicalObject;
+typedef std::unique_ptr<PhysicalObject> physical_object_ptr;
 
 class World: public Thread{
 	private:
 		b2World world;
 		std::mutex mutex;
+		std::list<physical_object_ptr> objects;
 
 		void initialize();
 
@@ -22,7 +25,7 @@ class World: public Thread{
 
 		void run() override;
 
-		b2Body* addObject(const b2BodyDef* def);
+		void addObject(physical_object_ptr& object, const b2Vec2& pos);
 
 		void removeObject(PhysicalObject& object);
 

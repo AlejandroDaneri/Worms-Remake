@@ -4,10 +4,8 @@ PhysicalObject::PhysicalObject(World& world): world(world), is_dead(false){}
 
 PhysicalObject::~PhysicalObject(){}
 
-void PhysicalObject::addToWorld(const b2Vec2& pos){
-	b2BodyDef body_def;
-	this->getBodyDef(body_def, pos);
-	this->body = this->world.addObject(&body_def);
+void PhysicalObject::initializeBody(b2Body* body){
+	this->body = body;
 	/////////////this->body->SetUserData(this->getData());
 	this->createFixtures();
 }

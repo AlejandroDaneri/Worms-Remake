@@ -5,11 +5,16 @@ int main(int argc, char* argv[]){
 
 	World world(b2Vec2(0.0f, 10.0));
 
-	Worm worm(world);
-	worm.addToWorld(b2Vec2(500, 500));
+	physical_object_ptr worm(new Worm(world));
+	world.addObject(worm, b2Vec2(500, 500));
 
-	Worm worm2(world);
-	worm2.addToWorld(b2Vec2(600, 500));
+	physical_object_ptr worm2(new Worm(world));
+	world.addObject(worm2, b2Vec2(600, 500));
+
+	world.start();
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	world.stop();
+	world.join();
 
 	return 0;
 }
