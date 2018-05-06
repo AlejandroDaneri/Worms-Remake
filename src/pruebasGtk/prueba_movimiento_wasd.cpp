@@ -11,8 +11,14 @@
 #include <cairo.h>
 #include "Box2D.h"
 
+#include <string>
+#include <queue>
+
 #include "Thread.h"
 #include <mutex>
+
+
+std::queue<std::string> cola;
 
 class UserData{
 public:
@@ -107,6 +113,10 @@ public:
 		std::cout << "key event = " << key_event->string << std::endl;
 		if (key_event->keyval == 'a'){
 			this->body->SetLinearVelocity(b2Vec2(-100, 0));
+			std::string& path = cola.front();
+			this->image.set(path);
+			cola.push(path);
+			cola.pop();
 			std::this_thread::sleep_for (std::chrono::milliseconds(15));
 			this->body->SetLinearVelocity(b2Vec2(0, 0));
 			return true;
@@ -210,8 +220,11 @@ int main(int argc, char** argv) {
 	Gtk::Button buttonQuit;
     ventana.resize(1000, 1000);
 	Gtk::Image bomba;
-	bomba.set("resources/images/bomba.png");
+	bomba.set("resources/images/1.png");
 	world_map.put(bomba,300, 500);
+	
+	for (int i = 1; i <= 15; i++) 
+		cola.push("resources/images/" + std::to_string(i) + ".png");
 
 	Gtk::Image bomba2;
 	bomba2.set("resources/images/bomba2.png");
