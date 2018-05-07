@@ -16,7 +16,7 @@ void World::run(){
 	int32 positionIterations = 3;   //how strongly to correct position
 
 	while(this->running){
-		std::this_thread::sleep_for(std::chrono::milliseconds(15));
+		std::this_thread::sleep_for(std::chrono::milliseconds(30));
 
 		std::lock_guard<std::mutex> lock(this->mutex);
 		this->world.Step(timeStep, velocityIterations, positionIterations);

@@ -14,6 +14,7 @@ class WormView: public Viewable{
 	private:
 		int life;
 		dir_t dir;
+		bool dir_changed;
 		Gtk::Image image; ////////////////////////////////////Cambiar por vbox para agegar barra de vida
 
 	protected:

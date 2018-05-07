@@ -16,6 +16,7 @@ void WorldView::removeElement(Gtk::Widget& element){
 
 void WorldView::addElement(Gtk::Widget& element, const Position& position){
 	this->world.put(element, position.getX(), position.getY());
+	element.show();
 }
 
 Gtk::ScrolledWindow& WorldView::getWindow(){
