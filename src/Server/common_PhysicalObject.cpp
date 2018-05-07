@@ -8,6 +8,7 @@ void PhysicalObject::initializeBody(b2Body* body){
 	this->body = body;
 	/////////////this->body->SetUserData(this->getData());
 	this->createFixtures();
+	this->setInitialVelocity();
 }
 
 b2Vec2 PhysicalObject::getPosition(){
@@ -29,3 +30,5 @@ bool PhysicalObject::isDead(){
 int PhysicalObject::getId(){
 	return this->id;
 }
+
+void PhysicalObject::setInitialVelocity(){}

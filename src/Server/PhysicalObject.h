@@ -8,15 +8,14 @@
 class World;
 
 class PhysicalObject{
-	private:
-		World& world;
-
 	protected:
+		World& world;
 		b2Body* body;
 		bool is_dead;
 		int id;
 
 		virtual void createFixtures() = 0;
+		virtual void setInitialVelocity();
 
 	public:
 		PhysicalObject(World& world, int id);
@@ -25,7 +24,7 @@ class PhysicalObject{
 		void initializeBody(b2Body* body);
 		b2Vec2 getPosition();
 		b2Body* getBody();
-		bool isMoving();
+		virtual bool isMoving();
 		bool isDead();
 		int getId();
 
