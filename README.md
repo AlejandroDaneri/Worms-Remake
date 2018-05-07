@@ -1,5 +1,8 @@
 # tp-final-taller
 
+### Lista de clases gtk
+https://developer.gnome.org/gnome-devel-demos/stable/c.html.es
+
 
 valgrind::  (es incorrible igual)
 
