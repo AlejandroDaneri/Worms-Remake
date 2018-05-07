@@ -6,17 +6,19 @@
 
 class WormsList{
 	private:
-		std::vector<Worm> list;
+		std::vector<physical_object_ptr> list;
 		size_t current;
 
 	public:
-		WormsList(std::vector<Worm>&& worms);
+		WormsList();
 
 		~WormsList();
 
-		Worm& getCurrentWorm();
+		worm_ptr getCurrentWorm();
 
-		void changeWorm();
+		void begin_turn();
+
+		void add(physical_object_ptr worm);
 
 		WormsList(WormsList&& other);
 

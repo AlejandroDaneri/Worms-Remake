@@ -9,7 +9,7 @@
 #include <list>
 
 class PhysicalObject;
-typedef std::unique_ptr<PhysicalObject> physical_object_ptr;
+typedef std::shared_ptr<PhysicalObject> physical_object_ptr;
 
 class World: public Thread{
 	private:
@@ -25,7 +25,7 @@ class World: public Thread{
 
 		void run() override;
 
-		void addObject(physical_object_ptr& object, const b2Vec2& pos);
+		void addObject(physical_object_ptr object, const b2Vec2& pos);
 
 		void removeObject(PhysicalObject& object);
 

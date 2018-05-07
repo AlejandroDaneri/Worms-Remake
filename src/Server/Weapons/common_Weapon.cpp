@@ -4,7 +4,7 @@
 #include "b2CircleShape.h"
 
 Weapon::Weapon(World& world, int id, int radius, int damage, int default_velocity): 
-	PhysicalObject(world, id), explosion(radius, damage), default_velocity(default_velocity), waiting_to_explode(false){}
+	PhysicalObject(world, id, "Weapon"), explosion(radius, damage), default_velocity(default_velocity), waiting_to_explode(false){}
 
 Weapon::~Weapon(){}
 
@@ -32,10 +32,10 @@ void Weapon::createFixtures(){
 	circleShape.m_p.Set(0, 0); //position, relative to body position
 	circleShape.m_radius = 1; //radius
 		  
-	b2FixtureDef boxFixtureDef;
-	boxFixtureDef.shape = &circleShape;
-	boxFixtureDef.density = 4;
-	this->body->CreateFixture(&boxFixtureDef);
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &circleShape;
+	fixtureDef.density = 4;
+	this->body->CreateFixture(&fixtureDef);
 }
 
 void Weapon::setInitialVelocity(){

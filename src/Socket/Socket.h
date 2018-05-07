@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <unistd.h>
-#include "common_SocketException.h"
+#include "SocketException.h"
 
 class Socket{
 	private:

@@ -4,6 +4,9 @@
 #include "PhysicalObject.h"
 
 class BottomBorder: public PhysicalObject{
+	private:
+		std::string type;
+
 	protected:
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
 		void createFixtures() override;

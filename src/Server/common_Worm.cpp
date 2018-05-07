@@ -2,7 +2,7 @@
 #include "b2PolygonShape.h"
 #include "b2Fixture.h"
 
-Worm::Worm(World& world, int id): PhysicalObject(world, id){}
+Worm::Worm(World& world, int id): PhysicalObject(world, id, "Worm"){}
 
 Worm::~Worm(){}
 
@@ -20,4 +20,28 @@ void Worm::createFixtures(){
 	boxFixtureDef.shape = &boxShape;
 	boxFixtureDef.density = 4;
 	this->body->CreateFixture(&boxFixtureDef);
+}
+
+int Worm::getLife(){
+	return this->life;
+}
+
+char Worm::getDir(){
+	return this->dir;
+}
+
+void Worm::move(char action){
+	////////////////////////////////////////
+}
+
+void Worm::changeWeapon(const std::string& weapon){
+	///////////////////////////////////////////////////////////
+}
+
+void Worm::shoot(int angle, int power, int time){
+	////////////////////////////////////////////////////////
+}
+
+void Worm::shoot(b2Vec2 pos){
+	///////////////////////////////////////////////////
 }

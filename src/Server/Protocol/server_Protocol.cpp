@@ -1,8 +1,11 @@
 #include "server_Protocol.h"
+#include "Game.h"
 #include <string>
-#include <stringstream>
+#include <sstream>
 
 Protocol::Protocol(Socket&& socket): socket(std::move(socket)){}
+
+Protocol::Protocol(Protocol&& other): socket(std::move(other.socket)){}
 
 Protocol::~Protocol(){}
 
@@ -24,9 +27,9 @@ void Protocol::sendDeadObject(physical_object_ptr& object){
 
 	std::string& type = object->getType();
 	if (type == "Worm"){
-		stream << = WORM_TYPE;
+		stream << WORM_TYPE;
 	} else if (type == "Weapon"){
-		stream << = WEAPON_TYPE;
+		stream << WEAPON_TYPE;
 	}
 
 	uint32_t id = object->getId();
@@ -38,7 +41,7 @@ void Protocol::sendDeadObject(physical_object_ptr& object){
 }
 
 void Protocol::send_worm(physical_object_ptr& object, std::stringstream& stream){
-	std::unique_ptr<Worm> worm(std::move(object));
+	Worm* worm = (Worm*)object.get();
 
 	stream << WORM_TYPE;
 	uint32_t id = htonl((uint32_t)worm->getId());
@@ -47,7 +50,7 @@ void Protocol::send_worm(physical_object_ptr& object, std::stringstream& stream)
 	uint32_t pos_x = htonl((uint32_t)position.x);
 	uint32_t pos_y = htonl((uint32_t)position.y);
 	uint32_t life = htonl((uint32_t)worm->getLife());
-	dir_t dir = worm->getDir();
+	char dir = worm->getDir();
 
 	stream << id << pos_x << pos_y << life << dir;
 	std::string string = stream.str();
@@ -72,10 +75,60 @@ void Protocol::send_string(const std::string& string){
 	uint32_t len_converted = htonl(len);
 
 	std::lock_guard<std::mutex> lock(this->mutex_send);
-	this->socket.send_data(len_converted, sizeof len_converted);
+	this->socket.send_data(&len_converted, sizeof len_converted);
 	this->socket.send_data(string.c_str(), len);
 }
 
-void Protocol::receive(Game& game);
+void Protocol::send_start_turn(uint32_t current_worm_id){
+	std::stringstream stream;
+	stream << START_TURN;
 
-void Protocol::send_init_turn(int id);
+	uint32_t id = htonl(current_worm_id);
+	stream << id;
+
+	std::string string = stream.str();
+	this->send_string(string);
+}
+
+void Protocol::receive(Game& game){
+	uint32_t len;
+	this->socket.receive(&len, sizeof (uint32_t));
+	len = ntohl(len);
+
+	char buffer[MAX_BUF_LEN];
+	this->socket.receive(buffer, len);
+	buffer[len] = '\0';
+
+	std::string received(buffer);
+	std::stringstream stream(received);
+
+	char action = stream.get();
+
+	if (action == END_TURN){
+		game.endTurn();
+	} else if (action == MOVE_ACTION){
+		char move = stream.get();
+		game.getCurrentWorm()->move(move);
+	} else if (action == CHANGE_WEAPON_ACTION){
+		std::string weapon;
+		char c;
+		while ((c = stream.get() != '\0')){
+			weapon += c;
+		}
+		game.getCurrentWorm()->changeWeapon(weapon);
+	} else if (action == SHOOT_WEAPON){
+		uint32_t angle, power, time;
+		stream >> angle >> power >> time;
+		angle = ntohl(angle);
+		power = ntohl(power);
+		time = ntohl(time);
+		game.getCurrentWorm()->shoot(angle, power, time);
+	} else if(action == SHOOT_SELF_DIRECTED){
+		uint32_t pos_x, pos_y;
+		stream >> pos_x >> pos_y;
+		pos_x = ntohl(pos_x);
+		pos_y = ntohl(pos_y);
+		game.getCurrentWorm()->shoot(b2Vec2(pos_x, pos_y));
+
+	}
+}

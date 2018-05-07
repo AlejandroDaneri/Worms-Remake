@@ -7,6 +7,7 @@ class GameParameters{
 	private:
 		int bazooka_radius;
 		int bazooka_damage;
+		size_t max_players;
 
 	public:
 		GameParameters(const std::string& config_file);
@@ -14,6 +15,8 @@ class GameParameters{
 
 		int get_bazooka_radius();
 		int get_bazooka_damage();
+
+		size_t get_max_players();
 
 };
 

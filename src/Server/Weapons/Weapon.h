@@ -29,6 +29,9 @@ class Weapon: public PhysicalObject{
 
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
 
+
+		//Collide With something()
+
 };
 
 #endif

@@ -23,14 +23,14 @@ void World::run(){
 	}
 }
 
-void World::addObject(physical_object_ptr& object, const b2Vec2& pos){
+void World::addObject(physical_object_ptr object, const b2Vec2& pos){
 	b2BodyDef body_def;
-	object -> getBodyDef(body_def, pos);
+	object->getBodyDef(body_def, pos);
 
 	std::lock_guard<std::mutex> lock(this->mutex);
 	object->initializeBody(this->world.CreateBody(&body_def));
 	if (body_def.type != b2_staticBody){
-		this->objects.push_back(std::move(object));
+		this->objects.push_back(object);
 	}
 }
 

@@ -3,6 +3,7 @@
 
 #include "World.h"
 #include "b2Body.h"
+#include <string>
 #include <memory>
 
 class World;
@@ -13,12 +14,13 @@ class PhysicalObject{
 		b2Body* body;
 		bool is_dead;
 		int id;
+		std::string type;
 
 		virtual void createFixtures() = 0;
 		virtual void setInitialVelocity();
 
 	public:
-		PhysicalObject(World& world, int id);
+		PhysicalObject(World& world, int id, std::string type);
 		virtual ~PhysicalObject();
 
 		void initializeBody(b2Body* body);
@@ -27,6 +29,7 @@ class PhysicalObject{
 		virtual bool isMoving();
 		bool isDead();
 		int getId();
+		std::string& getType();
 
 		virtual void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) = 0;
 

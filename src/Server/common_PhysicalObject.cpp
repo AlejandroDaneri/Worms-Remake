@@ -1,6 +1,7 @@
 #include "PhysicalObject.h"
 
-PhysicalObject::PhysicalObject(World& world, int id): world(world), is_dead(false), id(id){}
+PhysicalObject::PhysicalObject(World& world, int id, std::string type):
+	world(world), is_dead(false), id(id), type(type){}
 
 PhysicalObject::~PhysicalObject(){}
 
@@ -29,6 +30,10 @@ bool PhysicalObject::isDead(){
 
 int PhysicalObject::getId(){
 	return this->id;
+}
+
+std::string& PhysicalObject::getType(){
+	return this->type;
 }
 
 void PhysicalObject::setInitialVelocity(){}
