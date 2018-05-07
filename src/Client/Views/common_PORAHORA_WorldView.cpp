@@ -1,4 +1,5 @@
 #include "WorldView.h"
+#include <thread>
 
 WorldView::WorldView(){
 	this->window.add(this->world);
@@ -7,6 +8,7 @@ WorldView::WorldView(){
 WorldView::~WorldView(){}
 
 void WorldView::moveElement(Gtk::Widget& element, const Position& position){
+	std::this_thread::sleep_for (std::chrono::milliseconds(15));
 	this->world.move(element, position.getX(), position.getY());
 }
 
