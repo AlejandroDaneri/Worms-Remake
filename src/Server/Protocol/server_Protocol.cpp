@@ -1,5 +1,6 @@
 #include "server_Protocol.h"
 #include "Game.h"
+#include "Weapon.h"
 #include <string>
 #include <sstream>
 
@@ -57,15 +58,18 @@ void Protocol::send_worm(physical_object_ptr& object, std::stringstream& stream)
 	this->send_string(string);
 }
 
-void Protocol::send_weapon(physical_object_ptr& weapon, std::stringstream& stream){
+void Protocol::send_weapon(physical_object_ptr& object, std::stringstream& stream){
 	stream << WEAPON_TYPE;
-	uint32_t id = htonl((uint32_t)weapon->getId());
+	uint32_t id = htonl((uint32_t)object->getId());
 
-	b2Vec2 position = weapon->getPosition();
+	b2Vec2 position = object->getPosition();
+
+	Weapon* weapon = (Weapon*)object.get();
+	std::string& name = weapon->getName();
 	uint32_t pos_x = htonl((uint32_t)position.x);
 	uint32_t pos_y = htonl((uint32_t)position.y);
 
-	stream << id << pos_x << pos_y;
+	stream << id << name << '\0' << pos_x << pos_y;
 	std::string string = stream.str();
 	this->send_string(string);
 }

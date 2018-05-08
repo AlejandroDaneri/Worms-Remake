@@ -21,7 +21,7 @@ class WormView: public Viewable{
 		Gtk::Widget& getWidget() override;
 
 	public:
-		WormView(WorldView& worldView, int life, Position pos);
+		WormView(WorldView& worldView, int life, char dir, Position pos);
 		~WormView();
 
 		void updateData(int new_life, dir_t new_dir, const Position& new_pos);

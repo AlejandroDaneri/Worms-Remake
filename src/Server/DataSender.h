@@ -4,19 +4,16 @@
 #include "Thread.h"
 #include "World.h"
 #include "PhysicalObject.h"
+#include "server_Protocol.h"
 #include <list>
-
-
-#include "ViewsList.h"////////////////////////////////////////////////////////////
 
 class DataSender: public Thread{
 	private:
 		std::list<physical_object_ptr>& objects;
-		//Socket socket/////////////////////////////////////////////////////////////// o protocolo esta clase es despues la que va a enviar datos pos socket
-		ViewsList& views;/////////////////////////////////////////////////
+		Protocol& protocol;
 
 	public:
-		DataSender(World& world, ViewsList& views);//////////////////////////////Eliminar ViewsList& views
+		DataSender(World& world, Protocol& protocol);
 		~DataSender();
 
 		void run() override;

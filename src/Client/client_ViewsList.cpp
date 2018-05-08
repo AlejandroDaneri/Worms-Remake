@@ -1,16 +1,8 @@
 #include "ViewsList.h"
 
-ViewsList::ViewsList(){}
+ViewsList::ViewsList(WorldView& world): world(world){}
 
 ViewsList::~ViewsList(){}
-
-void ViewsList::addWorm(WormView&& worm, int id){
-	this->worms.insert(std::make_pair(id, std::move(worm)));
-}
-
-void ViewsList::addWeapon(WeaponView&& weapon, int id){
-	this->weapons.insert(std::make_pair(id, std::move(weapon)));
-}
 
 void ViewsList::removeWorm(int id){
 	auto it = this->worms.find(id);
@@ -22,4 +14,30 @@ void ViewsList::removeWeapon(int id){
 	auto it = this->weapons.find(id);
 	it->second.explode();
 	this->weapons.erase(it);
+}
+
+void ViewsList::updateWormData(int id, int pos_x, int pos_y, int life, char dir){
+	auto it = this->worms.find(id);
+	Position pos(pos_x, pos_y);
+	if (it != this->worms.end()){
+		//Worm no existe
+		WormView worm(this->world, life, dir, pos);
+		this->worms.insert(std::make_pair(id, std::move(worm)));
+	} else {
+		//Worm existe
+		it->second.updateData(life, dir, pos);
+	}
+}
+
+void ViewsList::updateWeaponData(int id, const std::string& weapon_name, int pos_x, int pos_y){
+	auto it = this->weapons.find(id);
+	Position pos(pos_x, pos_y);
+	if (it != this->weapons.end()){
+		//Weapon no existe
+		WeaponView weapon(this->world, weapon_name, pos);
+		this->weapons.insert(std::make_pair(id, std::move(weapon)));
+	} else {
+		//Weapon existe
+		it->second.updateData(pos);
+	}
 }

@@ -96,11 +96,17 @@ void Protocol::receive(Player& player, ViewsList& viewsList){
 			life = ntohl(life);
 			viewsList.updateWormData(id, pos_x, pos_y, life, dir);
 		} else if (type == WEAPON_TYPE){
+			std::string weapon;
+			char c;
+			while ((c = stream.get() != '\0')){
+				weapon += c;
+			}
+
 			uint32_t pos_x, pos_y;
 			stream >> pos_x >> pos_y;
 			pos_x = ntohl(pos_x);
 			pos_y = ntohl(pos_y);
-			viewsList.updateWeaponData(id, pos_x, pos_y);
+			viewsList.updateWeaponData(id, weapon, pos_x, pos_y);
 		}
 	} else if (action == DEAD_OBJECT){
 		char type = stream.get();

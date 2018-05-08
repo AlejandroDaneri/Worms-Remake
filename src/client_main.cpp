@@ -21,19 +21,17 @@ int main(int argc, char* argv[]){
     //WormView worm2(world, 100, Position(500, 500));
     //worm2.updateData(100, DIR_LEFT, Position(500, 500));
 
-    WeaponView weapon(world, "missile", Position(700,150));
 
-    ViewsList list;
+    ViewsList list(world);
     //list.addWorm(std::move(worm), 1);
     //list.addWorm(std::move(worm2), 2);
-    list.addWeapon(std::move(weapon), 1);
 
     window.add(world.getWindow());
     window.show_all();
 
     ///Cosas del server para probar
 
-    World world_server(b2Vec2(0.0f, 10.0));
+    //World world_server(b2Vec2(0.0f, 10.0));
 
     //physical_object_ptr worm_server(new Worm(world_server, 1));
     //world_server.addObject(worm_server, b2Vec2(500, 500));
@@ -41,26 +39,26 @@ int main(int argc, char* argv[]){
     //physical_object_ptr worm2_server(new Worm(world_server, 2));
     //world_server.addObject(worm2_server, b2Vec2(600, 500));
 
-    for (int i = 0; i < 5; i++){
+    /*for (int i = 0; i < 5; i++){
         WormView worm(world, 100, Position(50, 50));
         list.addWorm(std::move(worm), i);
 
         physical_object_ptr worm_server(new Worm(world_server, i));
         world_server.addObject(worm_server, b2Vec2(100 * (i + 1), 500));
-    }
+    }*/
 
-    DataSender sender(world_server, list);
+   // DataSender sender(world_server, list);
 
-    world_server.start();
-    sender.start();
+    //world_server.start();
+    //sender.start();
 
     ///////////
     app->run(window);
 
-    world_server.stop();
-    world_server.join();
-    sender.stop();
-    sender.join();
+    //world_server.stop();
+    //world_server.join();
+    //sender.stop();
+    //sender.join();
 
 	return 0;
 }

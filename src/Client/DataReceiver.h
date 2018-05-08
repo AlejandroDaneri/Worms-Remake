@@ -2,24 +2,22 @@
 #define __DATARECEIVER_H__
 
 #include "Thread.h"
+#include "client_Player.h"
 #include "ViewsList.h"
+#include "client_Protocol.h"
 
 
 class DataReceiver: public Thread{
 	private:
 		ViewsList& views;
-		//Socket socket/////////////////////////////////////////////////////////////// o protocolo esta clase es despues la que va a recibir datos del socket
+		Player& player;
+		Protocol& protocol;
 
 	public:
-		DataReceiver(ViewsList& views);
+		DataReceiver(ViewsList& views, Player& player, Protocol& protocol);
 		~DataReceiver();
 
 		void run() override;
-
-
-		ViewsList& getViewsList(){
-			return this->views;///////////////////////////////////////////////////Este metodo lo hago solo para probar, cuando haya sockets se va
-		}
 
 };
 

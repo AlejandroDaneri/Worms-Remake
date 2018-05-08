@@ -4,6 +4,7 @@
 #include "Worm.h"
 #include "PhysicalObject.h"
 #include "Explosion.h"
+#include <string>
 
 class Weapon: public PhysicalObject{
 	protected:
@@ -28,6 +29,8 @@ class Weapon: public PhysicalObject{
 		bool isMoving() override;
 
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
+
+		virtual std::string& getName() = 0;
 
 
 		//Collide With something()
