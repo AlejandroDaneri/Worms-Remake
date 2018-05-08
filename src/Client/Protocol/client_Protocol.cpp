@@ -1,6 +1,6 @@
 #include "client_Protocol.h"
 #include <string>
-#include <sstream>
+#include <cstring>
 
 Protocol::Protocol(Socket&& socket): socket(std::move(socket)){}
 
@@ -9,60 +9,69 @@ Protocol::Protocol(Protocol&& other): socket(std::move(other.socket)){}
 Protocol::~Protocol(){}
 
 void Protocol::send_move_action(char action){
-	std::stringstream stream;
-	stream << ACTION << MOVE_ACTION << action;
+	char buffer[MAX_BUF_LEN];
+	buffer[0] = ACTION;
+	buffer[1] = MOVE_ACTION;
+	buffer[2] = action;
 
-	std::string string = stream.str();
-	this->send_string(string);
+	this->send_string(buffer, 3);
 }
 
 void Protocol::send_change_weapon(const std::string& weapon){
-	std::stringstream stream;
-	stream << ACTION << CHANGE_WEAPON_ACTION << weapon << '\0';
+	char buffer[MAX_BUF_LEN];
+	buffer[0] = ACTION;
+	buffer[1] = CHANGE_WEAPON_ACTION;
+	size_t i = 2;
+	const char* string = weapon.c_str();
+	for (size_t j = 0; j <= weapon.size(); i++, j++){
+		buffer[i] = string[j];
+	}
 
-	std::string string = stream.str();
-	this->send_string(string);
+	this->send_string(buffer, i);
 }
 
 void Protocol::send_weapon_shoot(uint32_t angle, uint32_t power, uint32_t time){
-	std::stringstream stream;
+	char buffer[MAX_BUF_LEN];
+	buffer[0] = ACTION;
+	buffer[1] = SHOOT_WEAPON;
 
 	angle = htonl(angle);
 	power = htonl(power);
 	time = htonl(time);
 
-	stream << ACTION << SHOOT_WEAPON << angle << power << time;
+	std::memcpy(buffer + 2, &angle, sizeof(angle));
+	std::memcpy(buffer + 6, &power, sizeof(power));
+	std::memcpy(buffer + 10, &time, sizeof(time));
 
-	std::string string = stream.str();
-	this->send_string(string);
+	this->send_string(buffer, 14);
 }
 
 void Protocol::send_weapon_self_directed_shoot(const Position& pos){
-	std::stringstream stream;
+	char buffer[MAX_BUF_LEN];
+	buffer[0] = ACTION;
+	buffer[1] = SHOOT_SELF_DIRECTED;
 
 	uint32_t pos_x = htonl((uint32_t)pos.getX());
 	uint32_t pos_y = htonl((uint32_t)pos.getY());
 
-	stream << ACTION << SHOOT_SELF_DIRECTED << pos_x << pos_y;
+	std::memcpy(buffer + 2, &pos_x, sizeof(pos_x));
+	std::memcpy(buffer + 6, &pos_y, sizeof(pos_y));
 
-	std::string string = stream.str();
-	this->send_string(string);
+	this->send_string(buffer, 10);
 }
 
 void Protocol::send_end_turn(){
-	std::stringstream stream;
-	stream << END_TURN;
+	char buffer[MAX_BUF_LEN];
+	buffer[0] = END_TURN;
 
-	std::string string = stream.str();
-	this->send_string(string);
+	this->send_string(buffer, 1);
 }
 
-void Protocol::send_string(const std::string& string){
-	uint32_t len = string.size();
-	uint32_t len_converted = htonl(len);
+void Protocol::send_string(const char* buffer, size_t size){
+	uint32_t len_converted = htonl(size);
 
 	this->socket.send_data(&len_converted, sizeof len_converted);
-	this->socket.send_data(string.c_str(), len);
+	this->socket.send_data(buffer, size);
 }
 
 void Protocol::receive(Player& player, ViewsList& viewsList){
@@ -72,46 +81,47 @@ void Protocol::receive(Player& player, ViewsList& viewsList){
 
 	char buffer[MAX_BUF_LEN];
 	this->socket.receive(buffer, len);
-	buffer[len] = '\0';
 
-	std::string received(buffer);
-	std::stringstream stream(received);
-
-	char action = stream.get();
+	char action = buffer[0];
 
 	if (action == START_TURN){
 		player.startTurn();
 	} else if (action == MOVING_OBJECT){
-		char type = stream.get();
+		char type = buffer[1];
 		uint32_t id;
-		stream >> id;
+		std::memcpy(&id, buffer + 2, sizeof(id));
 		id = ntohl(id);
 
 		if (type == WORM_TYPE){
 			uint32_t pos_x, pos_y, life;
-			char dir;
-			stream >> pos_x >> pos_y >> life >> dir;
+			std::memcpy(&pos_x, buffer + 6, sizeof(pos_x));
+			std::memcpy(&pos_y, buffer + 10, sizeof(pos_y));
+			std::memcpy(&life, buffer + 14, sizeof(life));
+			char dir = buffer[18];
 			pos_x = ntohl(pos_x);
 			pos_y = ntohl(pos_y);
 			life = ntohl(life);
 			viewsList.updateWormData(id, pos_x, pos_y, life, dir);
 		} else if (type == WEAPON_TYPE){
 			std::string weapon;
-			char c;
-			while ((c = stream.get() != '\0')){
-				weapon += c;
+			size_t i = 2;
+			char* buf = buffer + 2;
+			while (*buf != '\0'){
+				weapon += *buf;
+				i++;
 			}
 
 			uint32_t pos_x, pos_y;
-			stream >> pos_x >> pos_y;
+			std::memcpy(&pos_x, buffer + i + 1, sizeof(pos_x));
+			std::memcpy(&pos_y, buffer + i + 5, sizeof(pos_y));
 			pos_x = ntohl(pos_x);
 			pos_y = ntohl(pos_y);
 			viewsList.updateWeaponData(id, weapon, pos_x, pos_y);
 		}
 	} else if (action == DEAD_OBJECT){
-		char type = stream.get();
+		char type = buffer[1];
 		uint32_t id;
-		stream >> id;
+		std::memcpy(&id, buffer + 2, sizeof(id));
 		id = ntohl(id);
 		if (type == WORM_TYPE){
 			viewsList.removeWorm(id);

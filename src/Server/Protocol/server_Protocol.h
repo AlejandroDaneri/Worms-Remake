@@ -13,9 +13,9 @@ class Protocol{
 		Socket socket;
 		std::mutex mutex_send;
 
-		void send_worm(physical_object_ptr& object, std::stringstream& stream);
-		void send_weapon(physical_object_ptr& weapon, std::stringstream& stream);
-		void send_string(const std::string& string);
+		void send_worm(physical_object_ptr& object, char* buffer);
+		void send_weapon(physical_object_ptr& weapon, char* buffer);
+		void send_string(const char* buffer, size_t size);
 
 	public:
 		Protocol(Socket&& socket);

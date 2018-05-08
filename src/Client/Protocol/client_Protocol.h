@@ -11,7 +11,7 @@ class Protocol{
 	private:
 		Socket socket;
 
-		void send_string(const std::string& string);
+		void send_string(const char* buffer, size_t size);
 
 	public:
 		Protocol(Socket&& socket);

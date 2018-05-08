@@ -6,6 +6,7 @@ Turn::~Turn(){}
 
 void Turn::addPlayer(Player&& player){
 	this->players.push_back(std::move(player));
+	this->current++;
 }
 
 size_t Turn::get_players_size(){
