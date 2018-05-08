@@ -1,6 +1,6 @@
 # tp-final-taller
 
-### archivos Yaml parsee
+### archivos Yaml parser
 https://github.com/jbeder/yaml-cpp
 
 ### Lista de clases gtk
