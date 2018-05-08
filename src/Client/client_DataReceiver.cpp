@@ -6,7 +6,9 @@ DataReceiver::DataReceiver(ViewsList& views, Player& player, Protocol& protocol)
 DataReceiver::~DataReceiver(){}
 
 void DataReceiver::run(){
-	this->protocol.receive(this->player, this->views);
+	while(this->running){
+		this->protocol.receive(this->player, this->views);
+	}
 }
 
 void DataReceiver::stop(){

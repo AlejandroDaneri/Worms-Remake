@@ -15,6 +15,7 @@ class PhysicalObject{
 		bool is_dead;
 		int id;
 		std::string type;
+		b2Vec2 last_position;
 
 		virtual void createFixtures() = 0;
 		virtual void setInitialVelocity();

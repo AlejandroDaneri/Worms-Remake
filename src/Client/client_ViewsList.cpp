@@ -19,7 +19,7 @@ void ViewsList::removeWeapon(int id){
 void ViewsList::updateWormData(int id, int pos_x, int pos_y, int life, char dir){
 	auto it = this->worms.find(id);
 	Position pos(pos_x, pos_y);
-	if (it != this->worms.end()){
+	if (it == this->worms.end()){
 		//Worm no existe
 		WormView worm(this->world, life, dir, pos);
 		this->worms.insert(std::make_pair(id, std::move(worm)));
@@ -32,7 +32,7 @@ void ViewsList::updateWormData(int id, int pos_x, int pos_y, int life, char dir)
 void ViewsList::updateWeaponData(int id, const std::string& weapon_name, int pos_x, int pos_y){
 	auto it = this->weapons.find(id);
 	Position pos(pos_x, pos_y);
-	if (it != this->weapons.end()){
+	if (it == this->weapons.end()){
 		//Weapon no existe
 		WeaponView weapon(this->world, weapon_name, pos);
 		this->weapons.insert(std::make_pair(id, std::move(weapon)));

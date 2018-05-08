@@ -8,12 +8,11 @@
 #define DIR_RIGHT 0
 #define DIR_LEFT 1
 
-typedef char dir_t;
 
 class WormView: public Viewable{
 	private:
 		int life;
-		dir_t dir;
+		char dir;
 		bool dir_changed;
 		Gtk::Image image; ////////////////////////////////////Cambiar por vbox para agegar barra de vida
 
@@ -24,7 +23,7 @@ class WormView: public Viewable{
 		WormView(WorldView& worldView, int life, char dir, Position pos);
 		~WormView();
 
-		void updateData(int new_life, dir_t new_dir, const Position& new_pos);
+		void updateData(int new_life, char new_dir, const Position& new_pos);
 
 		void kill();
 

@@ -1,5 +1,7 @@
 #include "Viewable.h"
 
+#include <iostream>
+
 Viewable::Viewable(WorldView& worldView): worldView(worldView){}
 
 Viewable::~Viewable(){}

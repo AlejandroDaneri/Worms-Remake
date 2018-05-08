@@ -4,8 +4,6 @@
 #include <string>
 #include <cstring>
 
-#include <iostream>//////////////////////////////////////////////////////////////////
-
 Protocol::Protocol(Socket&& socket): socket(std::move(socket)){}
 
 Protocol::Protocol(Protocol&& other): socket(std::move(other.socket)){}
@@ -49,6 +47,7 @@ void Protocol::send_worm(physical_object_ptr& object, char* buffer){
 	uint32_t id = htonl((uint32_t)worm->getId());
 
 	b2Vec2 position = worm->getPosition();
+
 	uint32_t pos_x = htonl((uint32_t)position.x);
 	uint32_t pos_y = htonl((uint32_t)position.y);
 	uint32_t life = htonl((uint32_t)worm->getLife());

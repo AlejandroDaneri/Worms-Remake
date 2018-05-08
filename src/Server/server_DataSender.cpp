@@ -1,7 +1,5 @@
 #include "DataSender.h"
 
-#include "Position.h"
-
 DataSender::DataSender(World& world, Protocol& protocol): 
 	objects(world.getObjectsList()), protocol(protocol){}
 
@@ -21,7 +19,6 @@ void DataSender::run(){
 			if ((*it)->isMoving()){
 				this->protocol.sendObject(*it);
 			}
-
 			++it;
 		}
 	}

@@ -10,7 +10,7 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos):
 
 WormView::~WormView(){}
 
-void WormView::updateData(int new_life, dir_t new_dir, const Position& new_pos){
+void WormView::updateData(int new_life, char new_dir, const Position& new_pos){
 	this->life = new_life;
 	this->dir_changed = this->dir != new_dir;
 	this->dir = new_dir;

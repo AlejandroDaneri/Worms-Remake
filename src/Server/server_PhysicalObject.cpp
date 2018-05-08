@@ -1,7 +1,9 @@
 #include "PhysicalObject.h"
 
+#include <iostream>//////////////////////////////////////////////////////////////
+
 PhysicalObject::PhysicalObject(World& world, int id, std::string type):
-	world(world), is_dead(false), id(id), type(type){}
+	world(world), is_dead(false), id(id), type(type), last_position(-1, -1){}
 
 PhysicalObject::~PhysicalObject(){}
 
@@ -21,7 +23,10 @@ b2Body* PhysicalObject::getBody(){
 }
 
 bool PhysicalObject::isMoving(){
-	return this->body->IsAwake();
+	b2Vec2 pos = this->body->GetPosition();
+	bool moved = pos != this->last_position;
+	this->last_position = pos;
+	return moved && this->body->IsAwake();
 }
 
 bool PhysicalObject::isDead(){

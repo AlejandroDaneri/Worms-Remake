@@ -2,7 +2,7 @@
 #include "b2PolygonShape.h"
 #include "b2Fixture.h"
 
-Worm::Worm(World& world, int id): PhysicalObject(world, id, "Worm"){}
+Worm::Worm(World& world, int id): PhysicalObject(world, id, "Worm"), life(125), dir(0){}
 
 Worm::~Worm(){}
 

@@ -11,7 +11,6 @@ int main(int argc, char* argv[]){
 	Game game("config");
 
 	game.addPlayer(std::move(player));
-
 	game.start();
 	std::this_thread::sleep_for(std::chrono::milliseconds(100000));
 	game.stop();
