@@ -4,61 +4,39 @@
 #include "WormView.h"
 #include "WeaponView.h"
 #include "ViewsList.h"
-
-#include "World.h"
-#include "Worm.h"
-#include "DataSender.h"
-#include <iostream>
+#include "Socket.h"
+#include "client_Protocol.h"
+#include "client_Player.h"
+#include "DataReceiver.h"
 
 int main(int argc, char* argv[]){
+
 	auto app = Gtk::Application::create(argc, argv);
     Gtk::Window window;
     window.resize(1000, 1000);
 
-    WorldView world;
+    Socket socket(Socket::Client("127.0.0.1", "7777"));
+    Protocol protocol(std::move(socket));
+    
+    Player player;  ////////////////////////////////////El player despues recibe el protocol
+    WorldView world;////////////////////////////////////Estos se crean en player despues
+    ViewsList list(world);////////////////////////////////////Estos se crean en player despues
 
-    //WormView worm(world, 100, Position(50, 50));
-    //WormView worm2(world, 100, Position(500, 500));
-    //worm2.updateData(100, DIR_LEFT, Position(500, 500));
-
-
-    ViewsList list(world);
-    //list.addWorm(std::move(worm), 1);
-    //list.addWorm(std::move(worm2), 2);
+    DataReceiver receiver(list, player, protocol);  ////////////////////////////////////Estos se crean en player despues
 
     window.add(world.getWindow());
     window.show_all();
 
-    ///Cosas del server para probar
 
-    //World world_server(b2Vec2(0.0f, 10.0));
-
-    //physical_object_ptr worm_server(new Worm(world_server, 1));
-    //world_server.addObject(worm_server, b2Vec2(500, 500));
-
-    //physical_object_ptr worm2_server(new Worm(world_server, 2));
-    //world_server.addObject(worm2_server, b2Vec2(600, 500));
-
-    /*for (int i = 0; i < 5; i++){
-        WormView worm(world, 100, Position(50, 50));
-        list.addWorm(std::move(worm), i);
-
-        physical_object_ptr worm_server(new Worm(world_server, i));
-        world_server.addObject(worm_server, b2Vec2(100 * (i + 1), 500));
-    }*/
-
-   // DataSender sender(world_server, list);
-
-    //world_server.start();
-    //sender.start();
-
-    ///////////
+    receiver.start();
     app->run(window);
 
-    //world_server.stop();
-    //world_server.join();
-    //sender.stop();
-    //sender.join();
+    try{
+        receiver.stop();
+    } catch (const std::exception& e){}
+
+    receiver.join();
+
 
 	return 0;
 }

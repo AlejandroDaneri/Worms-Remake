@@ -1,6 +1,7 @@
 #include "Game.h"
+#include "DataSender.h"
 
-Game::Game(const std::string& config_file): parameters(config_file){}
+Game::Game(const std::string& config_file): parameters(config_file), world(b2Vec2(0.0f, 10.0)){}
 
 Game::~Game(){}
 
@@ -10,6 +11,9 @@ bool Game::addPlayer(Player&& player){
 	if (this->isFull()){
 		return false;
 	}
+
+	std::unique_ptr<Thread> sender(new DataSender(this->world, player.getProtocol()));
+	this->threads.push_back(std::move(sender));
 
 	this->turn.addPlayer(std::move(player));
 	return true;

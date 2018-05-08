@@ -18,6 +18,8 @@ class DataSender: public Thread{
 
 		void run() override;
 
+		void stop() override;
+
 };
 
 

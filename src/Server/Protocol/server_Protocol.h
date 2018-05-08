@@ -30,6 +30,8 @@ class Protocol{
 
 		void send_start_turn(uint32_t current_worm_id);
 
+		void stop();
+
 };
 
 #endif

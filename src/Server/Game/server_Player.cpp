@@ -20,3 +20,7 @@ void Player::add_worm(World& world, int id, const b2Vec2& position){
 	this->worms.add(worm);
 	world.addObject(worm, position);
 }
+
+Protocol& Player::getProtocol(){
+	return this->protocol;
+}

@@ -7,14 +7,19 @@
 #include "server_Player.h"
 #include "Worm.h"
 #include <mutex>
+#include <vector>
+#include <memory>
+#include "World.h"
 
 class Player;
 
 class Game: public Thread{
 	private:
 		GameParameters parameters;
+		World world;
 		Turn turn;
 		std::mutex mutex;
+		std::vector<std::unique_ptr<Thread>> threads;
 
 		void configure();
 

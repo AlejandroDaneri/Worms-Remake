@@ -19,6 +19,8 @@ class DataReceiver: public Thread{
 
 		void run() override;
 
+		void stop() override;
+
 };
 
 

@@ -25,5 +25,9 @@ void DataSender::run(){
 			++it;
 		}
 	}
+}
 
+void DataSender::stop(){
+	this->protocol.stop();
+	Thread::stop();
 }

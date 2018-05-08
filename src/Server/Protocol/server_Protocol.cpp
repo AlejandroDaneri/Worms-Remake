@@ -138,3 +138,7 @@ void Protocol::receive(Game& game){
 		}
 	}
 }
+
+void Protocol::stop(){
+	this->socket.stop();
+}

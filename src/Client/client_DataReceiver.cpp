@@ -8,3 +8,8 @@ DataReceiver::~DataReceiver(){}
 void DataReceiver::run(){
 	this->protocol.receive(this->player, this->views);
 }
+
+void DataReceiver::stop(){
+	this->protocol.stop();
+	Thread::stop();
+}

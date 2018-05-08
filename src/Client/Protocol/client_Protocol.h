@@ -29,6 +29,8 @@ class Protocol{
 		void send_end_turn();
 
 		void receive(Player& player, ViewsList& viewsList);
+
+		void stop();
 };
 
 #endif

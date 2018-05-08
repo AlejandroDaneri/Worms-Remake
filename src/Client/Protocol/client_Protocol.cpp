@@ -120,3 +120,7 @@ void Protocol::receive(Player& player, ViewsList& viewsList){
 		}
 	}
 }
+
+void Protocol::stop(){
+	this->socket.stop();
+}
