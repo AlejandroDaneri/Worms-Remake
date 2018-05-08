@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Socket.h"
+#include <iostream>
 
 int main(int argc, char* argv[]){
 
@@ -10,10 +11,18 @@ int main(int argc, char* argv[]){
 
 	Game game("config");
 
-	game.addPlayer(std::move(player));
-	game.start();
-	std::this_thread::sleep_for(std::chrono::milliseconds(100000));
-	game.stop();
+	try{
+
+		game.addPlayer(std::move(player));
+		game.start();
+		while (std::cin.get() != 'q'){}
+			std::cout << "recibio q" << std::endl;
+	}catch (const std::exception& e){}
+
+	try{
+		game.stop();
+	}catch (const std::exception& e){}
+
 	game.join();
 
 	return 0;
