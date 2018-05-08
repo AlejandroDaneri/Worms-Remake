@@ -106,29 +106,31 @@ void Protocol::receive(Game& game){
 
 	if (action == END_TURN){
 		game.endTurn();
-	} else if (action == MOVE_ACTION){
-		char move = stream.get();
-		game.getCurrentWorm()->move(move);
-	} else if (action == CHANGE_WEAPON_ACTION){
-		std::string weapon;
-		char c;
-		while ((c = stream.get() != '\0')){
-			weapon += c;
+	} else if (action == ACTION){
+		char worm_action = stream.get();
+		if (worm_action == MOVE_ACTION){
+			char move = stream.get();
+			game.getCurrentWorm()->move(move);
+		} else if (worm_action == CHANGE_WEAPON_ACTION){
+			std::string weapon;
+			char c;
+			while ((c = stream.get() != '\0')){
+				weapon += c;
+			}
+			game.getCurrentWorm()->changeWeapon(weapon);
+		} else if (worm_action == SHOOT_WEAPON){
+			uint32_t angle, power, time;
+			stream >> angle >> power >> time;
+			angle = ntohl(angle);
+			power = ntohl(power);
+			time = ntohl(time);
+			game.getCurrentWorm()->shoot(angle, power, time);
+		} else if(worm_action == SHOOT_SELF_DIRECTED){
+			uint32_t pos_x, pos_y;
+			stream >> pos_x >> pos_y;
+			pos_x = ntohl(pos_x);
+			pos_y = ntohl(pos_y);
+			game.getCurrentWorm()->shoot(b2Vec2(pos_x, pos_y));
 		}
-		game.getCurrentWorm()->changeWeapon(weapon);
-	} else if (action == SHOOT_WEAPON){
-		uint32_t angle, power, time;
-		stream >> angle >> power >> time;
-		angle = ntohl(angle);
-		power = ntohl(power);
-		time = ntohl(time);
-		game.getCurrentWorm()->shoot(angle, power, time);
-	} else if(action == SHOOT_SELF_DIRECTED){
-		uint32_t pos_x, pos_y;
-		stream >> pos_x >> pos_y;
-		pos_x = ntohl(pos_x);
-		pos_y = ntohl(pos_y);
-		game.getCurrentWorm()->shoot(b2Vec2(pos_x, pos_y));
-
 	}
 }

@@ -4,6 +4,8 @@
 #include "Socket.h"
 #include "Protocol.h"
 #include "Position.h"
+#include "client_Player.h"
+#include "ViewsList.h"
 
 class Protocol{
 	private:
@@ -24,10 +26,9 @@ class Protocol{
 
 		void send_weapon_self_directed_shoot(const Position& pos);
 
-		void receive();
-
 		void send_end_turn();
 
+		void receive(Player& player, ViewsList& viewsList);
 };
 
 #endif

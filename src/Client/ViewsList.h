@@ -20,6 +20,10 @@ class ViewsList{
 		void removeWorm(int id);
 		void removeWeapon(int id);
 
+		void updateWormData(int id, int pos_x, int pos_y, int life, char dir){}////////////////////////////implementar
+
+		void updateWeaponData(int id, int pos_x, int pos_y){}/////////////////////////////////////////////implementar
+
 		WormView& getWorm(int id){
 			return this->worms.at(id);///////////////////////////////////////////////Metodo solo para probar, cuando haya sockets agregar updateWormData y updateWeaponData
 		}
