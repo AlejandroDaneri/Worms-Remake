@@ -30,7 +30,7 @@ void Protocol::send_change_weapon(const std::string& weapon){
 	this->send_string(buffer, i);
 }
 
-void Protocol::send_weapon_shoot(uint32_t angle, uint32_t power, uint32_t time){
+void Protocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t time){
 	char buffer[MAX_BUF_LEN];
 	buffer[0] = ACTION;
 	buffer[1] = SHOOT_WEAPON;
@@ -51,8 +51,8 @@ void Protocol::send_weapon_self_directed_shoot(const Position& pos){
 	buffer[0] = ACTION;
 	buffer[1] = SHOOT_SELF_DIRECTED;
 
-	uint32_t pos_x = htonl((uint32_t)pos.getX());
-	uint32_t pos_y = htonl((uint32_t)pos.getY());
+	int32_t pos_x = htonl((int32_t)pos.getX());
+	int32_t pos_y = htonl((int32_t)pos.getY());
 
 	std::memcpy(buffer + 2, &pos_x, sizeof(pos_x));
 	std::memcpy(buffer + 6, &pos_y, sizeof(pos_y));
@@ -85,7 +85,10 @@ void Protocol::receive(Player& player, ViewsList& viewsList){
 	char action = buffer[0];
 
 	if (action == START_TURN){
-		player.startTurn();
+		uint32_t id;
+		std::memcpy(&id, buffer + 1, sizeof(id));
+		id = ntohl(id);
+		player.startTurn(id);
 	} else if (action == MOVING_OBJECT){
 		char type = buffer[1];
 		uint32_t id;
@@ -93,7 +96,7 @@ void Protocol::receive(Player& player, ViewsList& viewsList){
 		id = ntohl(id);
 
 		if (type == WORM_TYPE){
-			uint32_t pos_x, pos_y, life;
+			int32_t pos_x, pos_y, life;
 			std::memcpy(&pos_x, buffer + 6, sizeof(pos_x));
 			std::memcpy(&pos_y, buffer + 10, sizeof(pos_y));
 			std::memcpy(&life, buffer + 14, sizeof(life));
@@ -111,7 +114,7 @@ void Protocol::receive(Player& player, ViewsList& viewsList){
 				i++;
 			}
 
-			uint32_t pos_x, pos_y;
+			int32_t pos_x, pos_y;
 			std::memcpy(&pos_x, buffer + i + 1, sizeof(pos_x));
 			std::memcpy(&pos_y, buffer + i + 5, sizeof(pos_y));
 			pos_x = ntohl(pos_x);

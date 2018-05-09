@@ -48,9 +48,9 @@ void Protocol::send_worm(physical_object_ptr& object, char* buffer){
 
 	b2Vec2 position = worm->getPosition();
 
-	uint32_t pos_x = htonl((uint32_t)position.x);
-	uint32_t pos_y = htonl((uint32_t)position.y);
-	uint32_t life = htonl((uint32_t)worm->getLife());
+	int32_t pos_x = htonl((int32_t)position.x);
+	int32_t pos_y = htonl((int32_t)position.y);
+	int32_t life = htonl((int32_t)worm->getLife());
 	char dir = worm->getDir();
 
 	std::memcpy(buffer + 2, &id, sizeof(id));
@@ -71,8 +71,8 @@ void Protocol::send_weapon(physical_object_ptr& object, char* buffer){
 
 	Weapon* weapon = (Weapon*)object.get();
 	std::string& name = weapon->getName();
-	uint32_t pos_x = htonl((uint32_t)position.x);
-	uint32_t pos_y = htonl((uint32_t)position.y);
+	int32_t pos_x = htonl((int32_t)position.x);
+	int32_t pos_y = htonl((int32_t)position.y);
 
 	size_t i = 6;
 	const char* string = name.c_str();
@@ -127,7 +127,7 @@ void Protocol::receive(Game& game){
 			}
 			game.getCurrentWorm()->changeWeapon(weapon);
 		} else if (worm_action == SHOOT_WEAPON){
-			uint32_t angle, power, time;
+			int32_t angle, power, time;
 			std::memcpy(&angle, buffer + 2, sizeof(angle));
 			std::memcpy(&power, buffer + 6, sizeof(power));
 			std::memcpy(&time, buffer + 10, sizeof(time));
@@ -136,7 +136,7 @@ void Protocol::receive(Game& game){
 			time = ntohl(time);
 			game.getCurrentWorm()->shoot(angle, power, time);
 		} else if(worm_action == SHOOT_SELF_DIRECTED){
-			uint32_t pos_x, pos_y;
+			int32_t pos_x, pos_y;
 			std::memcpy(&pos_x, buffer + 2, sizeof(pos_x));
 			std::memcpy(&pos_y, buffer + 6, sizeof(pos_y));
 			pos_x = ntohl(pos_x);

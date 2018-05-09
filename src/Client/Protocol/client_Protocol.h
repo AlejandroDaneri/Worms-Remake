@@ -22,7 +22,7 @@ class Protocol{
 
 		void send_change_weapon(const std::string& weapon);
 
-		void send_weapon_shoot(uint32_t angle, uint32_t power, uint32_t time);
+		void send_weapon_shoot(int32_t angle, int32_t power, int32_t time);
 
 		void send_weapon_self_directed_shoot(const Position& pos);
 
