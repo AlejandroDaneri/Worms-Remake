@@ -8,7 +8,8 @@ WorldView::WorldView(){
 WorldView::~WorldView(){}
 
 void WorldView::moveElement(Gtk::Widget& element, const Position& position){
-	this->world.move(element, position.getX(), position.getY());
+	Position newPosition = ViewTransformer().transformToScreen(position);
+	this->world.move(element, newPosition.getX(), newPosition.getY());
 }
 
 void WorldView::removeElement(Gtk::Widget& element){
@@ -16,7 +17,8 @@ void WorldView::removeElement(Gtk::Widget& element){
 }
 
 void WorldView::addElement(Gtk::Widget& element, const Position& position){
-	this->world.put(element, position.getX(), position.getY());
+	Position newPosition = ViewTransformer().transformToScreen(position);
+	this->world.put(element, newPosition.getX(), newPosition.getY());
 	element.show();
 }
 
