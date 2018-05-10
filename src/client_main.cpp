@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
 
 	auto app = Gtk::Application::create(argc, argv);
     Gtk::Window window;
-    window.resize(1000, 1000);
+    window.resize(1280, 720);
 
     Socket socket(Socket::Client("127.0.0.1", "7777"));
     Protocol protocol(std::move(socket));

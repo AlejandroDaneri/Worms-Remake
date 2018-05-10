@@ -1,6 +1,6 @@
 #include "ViewTransformer.h"
 
-#define SCALE_FACTOR 15
+#define SCALE_FACTOR 25
 
 ViewTransformer::ViewTransformer() {
 	this->screen = Gdk::Screen::get_default();

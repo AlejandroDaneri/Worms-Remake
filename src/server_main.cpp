@@ -9,11 +9,15 @@ int main(int argc, char* argv[]){
 	Socket client = socket.accept_client();
 	Player player(std::move(client));
 
+	//Socket client2 = socket.accept_client();
+	//Player player2(std::move(client2));
+
 	Game game("config");
 
 	try{
 
 		game.addPlayer(std::move(player));
+		//game.addPlayer(std::move(player2));
 		game.start();
 		while (std::cin.get() != 'q'){}
 			std::cout << "recibio q" << std::endl;
