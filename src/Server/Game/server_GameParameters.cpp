@@ -40,6 +40,10 @@ float GameParameters::getWormRollbackHeight(){
 	return this->worm_rollback_height;
 }
 
+float GameParameters::getWeaponsVelocity(){
+	return this->weapons_velocity;
+}
+
 int GameParameters::get_bazooka_radius(){
 	return this->bazooka_radius;
 }

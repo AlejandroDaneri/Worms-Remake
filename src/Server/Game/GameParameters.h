@@ -11,6 +11,9 @@ class GameParameters{
 		float worm_jump_height;
 		float worm_rollback_height;
 		float worm_rollback_velocity;
+
+		float weapons_velocity;
+
 		int bazooka_radius;
 		int bazooka_damage;
 		size_t max_players;
@@ -25,6 +28,9 @@ class GameParameters{
 		float getWormRollbackVelocity();
 		float getWormJumpHeight();
 		float getWormRollbackHeight();
+
+		float getWeaponsVelocity();
+
 		int get_bazooka_radius();
 		int get_bazooka_damage();
 
