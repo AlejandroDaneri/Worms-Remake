@@ -6,6 +6,6 @@ Player::Player(){
 
 Player::~Player(){}
 
-void Player::startTurn(){
+void Player::startTurn(uint32_t& id){
 	//////////////////////////////////////
 }
