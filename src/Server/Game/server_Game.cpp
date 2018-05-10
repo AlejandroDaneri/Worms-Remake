@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "DataSender.h"
+#include "Girder.h"
 
 Game::Game(const std::string& config_file): parameters(config_file){}
 
@@ -42,6 +43,9 @@ void Game::configure(){
 		//recibir los worms del gameparameters
 		//antes enviar a todos los jugadores vigas, municiones, etc
 	}
+
+	physical_object_ptr girder(new Girder(this->world, 6));
+	this->world.addObject(girder, b2Vec2(28, 20));
 }
 
 worm_ptr Game::getCurrentWorm(){
