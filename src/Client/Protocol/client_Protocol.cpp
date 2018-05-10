@@ -2,6 +2,7 @@
 #include <string>
 #include <cstring>
 
+
 Protocol::Protocol(Socket&& socket): socket(std::move(socket)){}
 
 Protocol::Protocol(Protocol&& other): socket(std::move(other.socket)){}
@@ -22,12 +23,12 @@ void Protocol::send_change_weapon(const std::string& weapon){
 	buffer[0] = ACTION;
 	buffer[1] = CHANGE_WEAPON_ACTION;
 	size_t i = 2;
-	const char* string = weapon.c_str();
-	for (size_t j = 0; j <= weapon.size(); i++, j++){
-		buffer[i] = string[j];
+	for (size_t j = 0; j < weapon.size(); i++, j++){
+		buffer[i] = weapon[j];
 	}
+	buffer[i] = '\0';
 
-	this->send_string(buffer, i);
+	this->send_string(buffer, i + 1);
 }
 
 void Protocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t time){
@@ -107,10 +108,9 @@ void Protocol::receive(Player& player, ViewsList& viewsList){
 			viewsList.updateWormData(id, pos_x, pos_y, life, dir);
 		} else if (type == WEAPON_TYPE){
 			std::string weapon;
-			size_t i = 2;
-			char* buf = buffer + 2;
-			while (*buf != '\0'){
-				weapon += *buf;
+			size_t i = 6;
+			while (buffer[i] != '\0'){
+				weapon += buffer[i];
 				i++;
 			}
 

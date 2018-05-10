@@ -70,18 +70,19 @@ void Protocol::send_weapon(physical_object_ptr& object, char* buffer){
 	b2Vec2 position = object->getPosition();
 
 	Weapon* weapon = (Weapon*)object.get();
-	std::string& name = weapon->getName();
+	std::string name = weapon->getName();
 	int32_t pos_x = htonl((int32_t)position.x);
 	int32_t pos_y = htonl((int32_t)position.y);
 
 	size_t i = 6;
-	const char* string = name.c_str();
-	for (size_t j = 0; j <= name.size(); i++, j++){
-		buffer[i] = string[j];
+	for (size_t j = 0; j < name.size(); i++, j++){
+		buffer[i] = name[j];
 	}
-	std::memcpy(buffer + i, &pos_x, sizeof(pos_x));
-	std::memcpy(buffer + i + 4, &pos_y, sizeof(pos_y));
-	this->send_string(buffer, i + 8);
+	buffer[i] = '\0';
+	std::memcpy(buffer + i + 1, &pos_x, sizeof(pos_x));
+	std::memcpy(buffer + i + 5, &pos_y, sizeof(pos_y));
+
+	this->send_string(buffer, i + 9);
 }
 
 void Protocol::send_string(const char* buffer, size_t size){
@@ -121,9 +122,10 @@ void Protocol::receive(Game& game){
 			game.getCurrentWorm()->move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION){
 			std::string weapon;
-			char* buf = buffer + 2;
-			while (*buf != '\0'){
-				weapon += *buf;
+			size_t i = 2;
+			while (buffer[i] != '\0'){
+				weapon += buffer[i];
+				i++;
 			}
 			game.getCurrentWorm()->changeWeapon(weapon);
 		} else if (worm_action == SHOOT_WEAPON){
