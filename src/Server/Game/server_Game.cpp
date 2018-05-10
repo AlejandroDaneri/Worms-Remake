@@ -1,15 +1,14 @@
 #include "Game.h"
 #include "DataSender.h"
 
-Game::Game(const std::string& config_file): parameters(config_file), world(b2Vec2(0.0f, -10.0)){}
+Game::Game(const std::string& config_file): parameters(config_file){}
 
 Game::~Game(){
 	this->world.stop();
 	this->world.join();
-	for (size_t i = 0; i < this->threads.size(); i++){
-		this->threads[i]->stop();
-		this->threads[i]->join();
-	}
+	this->data_sender->stop();
+	this->data_sender->join();
+	
 }
 
 bool Game::addPlayer(Player&& player){
@@ -20,8 +19,6 @@ bool Game::addPlayer(Player&& player){
 	}
 
 	this->turn.addPlayer(std::move(player));
-	std::unique_ptr<Thread> sender(new DataSender(this->world, this->turn.getCurrentPlayer().getProtocol()));
-	this->threads.push_back(std::move(sender));
 	return true;
 }
 
@@ -32,15 +29,15 @@ bool Game::isFull(){
 void Game::run(){
 	this->configure();
 	this->world.start();
-	for (size_t i = 0; i < this->threads.size(); i++){
-		this->threads[i]->start();
-	}
+	this->data_sender->start();
 }
 
 void Game::configure(){
+	this->data_sender.reset(new DataSender(this->world, this->turn.getPlayers()));
+
 	for (int i = 0; i < 5; i++){
 		physical_object_ptr worm(new Worm(this->world, i));
-		this->world.addObject(worm, b2Vec2(10 * (i+1), 45));
+		this->world.addObject(worm, b2Vec2(10 * (i+1), 75));
 		//agegar worm al jugador etc
 		//recibir los worms del gameparameters
 		//antes enviar a todos los jugadores vigas, municiones, etc

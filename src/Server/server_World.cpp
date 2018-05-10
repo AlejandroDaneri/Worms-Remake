@@ -16,7 +16,7 @@ void World::run(){
 	int32 positionIterations = 3;   //how strongly to correct position
 
 	while(this->running){
-		std::this_thread::sleep_for(std::chrono::milliseconds(30));
+		std::this_thread::sleep_for(std::chrono::milliseconds(60));
 
 		std::lock_guard<std::mutex> lock(this->mutex);
 		this->world.Step(timeStep, velocityIterations, positionIterations);
@@ -44,6 +44,20 @@ void World::initialize(){
 	this->addObject(bottom_border, b2Vec2(0, 4));///////////////////////////////////////////////////////////ver
 }
 
+b2Vec2 World::getObjectPosition(PhysicalObject& object){
+	std::lock_guard<std::mutex> lock(this->mutex);
+	return object.getBody()->GetPosition();
+}
+
+void World::setLinearVelocity(PhysicalObject& object, b2Vec2& velocity){
+	std::lock_guard<std::mutex> lock(this->mutex);
+	object.getBody()->SetLinearVelocity(velocity);
+}
+
 std::list<physical_object_ptr>& World::getObjectsList(){
 	return this->objects;
+}
+
+std::mutex& World::getMutex(){
+	return this->mutex;
 }

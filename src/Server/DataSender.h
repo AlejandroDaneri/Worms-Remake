@@ -4,21 +4,21 @@
 #include "Thread.h"
 #include "World.h"
 #include "PhysicalObject.h"
+#include "server_Player.h"
 #include "server_Protocol.h"
 #include <list>
 
 class DataSender: public Thread{
 	private:
 		std::list<physical_object_ptr>& objects;
-		Protocol& protocol;
+		std::vector<Player>& players;
+		std::mutex& mutex;
 
 	public:
-		DataSender(World& world, Protocol& protocol);
+		DataSender(World& world, std::vector<Player>& players);
 		~DataSender();
 
 		void run() override;
-
-		void stop() override;
 
 };
 

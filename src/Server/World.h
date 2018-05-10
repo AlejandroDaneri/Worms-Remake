@@ -20,7 +20,7 @@ class World: public Thread{
 		void initialize();
 
 	public:
-		World(const b2Vec2& gravity);
+		World(const b2Vec2& gravity = b2Vec2(0.0f, -10.0));
 		~World();
 
 		void run() override;
@@ -29,7 +29,13 @@ class World: public Thread{
 
 		void removeObject(PhysicalObject& object);
 
+		b2Vec2 getObjectPosition(PhysicalObject& object);
+
+		void setLinearVelocity(PhysicalObject& object, b2Vec2& velocity);
+
 		std::list<physical_object_ptr>& getObjectsList();
+
+		std::mutex& getMutex();
 
 };
 

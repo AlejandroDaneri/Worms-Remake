@@ -19,7 +19,7 @@ class Game: public Thread{
 		World world;
 		Turn turn;
 		std::mutex mutex;
-		std::vector<std::unique_ptr<Thread>> threads;
+		std::unique_ptr<Thread> data_sender;
 
 		void configure();
 

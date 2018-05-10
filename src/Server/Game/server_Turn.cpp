@@ -9,7 +9,7 @@ void Turn::addPlayer(Player&& player){
 	this->current++;
 }
 
-size_t Turn::get_players_size(){
+size_t Turn::get_players_size() const{
 	return this->players.size();
 }
 
@@ -23,4 +23,8 @@ void Turn::begin_turn(){
 		this->current = 0;
 	}
 	this->getCurrentPlayer().begin_turn();
+}
+
+std::vector<Player>& Turn::getPlayers(){
+	return this->players;
 }

@@ -15,7 +15,9 @@ class Turn{
 
 		void addPlayer(Player&& player);
 
-		size_t get_players_size();
+		size_t get_players_size() const;
+
+		std::vector<Player>& getPlayers();
 
 		Player& getCurrentPlayer();
 
