@@ -12,6 +12,7 @@ GameParameters::GameParameters(const std::string& config_file){
 	this->bazooka_radius = 2;
 	this->bazooka_damage = 50;
 	this->max_players = 1;
+	this->weapons_velocity = 13;
 }
 		
 GameParameters::~GameParameters(){}

@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "DataSender.h"
 #include "Girder.h"
+#include "server_WeaponFactory.h"
 
 
 Game::Game(const std::string& config_file): parameters(config_file){}
@@ -39,7 +40,14 @@ void Game::run(){
 	this->world.addObject(girder, b2Vec2(7, 20));
 
 	sleep(5);
-	worm->move(2);
+	WeaponFactory factory(this->world, this->parameters);
+	physical_object_ptr weapon = factory.getWeapon(std::string("Bazooka"));
+	((Weapon*)weapon.get())->shoot(45, -1, -1);
+	b2Vec2 pos = worm->getPosition();
+	pos.x += 1;
+	pos.y += 1;
+	world.addObject(weapon, pos);
+	//worm->move(2);
 }
 
 void Game::configure(){
