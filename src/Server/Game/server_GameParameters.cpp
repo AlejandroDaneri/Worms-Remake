@@ -4,7 +4,7 @@ GameParameters::GameParameters(const std::string& config_file){
 	//leer el archivo  YAML y cargar las variables
 
 	this->worm_life = 125;
-	this->worm_velocity = 10.2;
+	this->worm_velocity = 3.2;
 	this->worm_jump_velocity = 7;
 	this->worm_rollback_velocity = 7;
 	this->worm_jump_height = 7;

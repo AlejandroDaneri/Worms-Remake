@@ -30,6 +30,7 @@ class PhysicalObject{
 		b2Vec2 getPosition();
 		b2Body* getBody();
 		virtual bool isMoving();
+		virtual bool isActive();
 		bool isDead();
 		int getId();
 		std::string& getType();

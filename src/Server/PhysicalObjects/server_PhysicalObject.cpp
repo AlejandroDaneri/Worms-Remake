@@ -27,7 +27,11 @@ bool PhysicalObject::isMoving(){
 	b2Vec2 pos = this->body->GetPosition();
 	bool moved = pos != this->last_position;
 	this->last_position = pos;
-	return moved && this->body->IsAwake();
+	return moved;
+}
+
+bool PhysicalObject::isActive(){
+	return this->body->IsAwake();
 }
 
 bool PhysicalObject::isDead(){

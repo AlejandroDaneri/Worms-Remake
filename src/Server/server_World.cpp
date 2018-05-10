@@ -1,7 +1,7 @@
 #include "World.h"
 #include "BottomBorder.h"
 
-World::World(const b2Vec2& gravity): world(gravity){
+World::World(const b2Vec2& gravity): world(gravity), is_active(false){
 	this->world.SetAllowSleeping(true);
 	this->world.SetContinuousPhysics(true);
 	this->world.SetContactListener(&this->collision_listener);
@@ -21,12 +21,20 @@ void World::run(){
 		std::lock_guard<std::mutex> lock(this->mutex);
 		this->world.Step(timeStep, velocityIterations, positionIterations);
 
+		this->is_active = false;
 		for (auto it = this->objects.begin(); it != this->objects.end(); it++){
 			if ((*it)->isDead()){
 				this->removeObject(*it);
+			} else if ((*it)->isActive()){
+				this->is_active = true;
 			}
 		}
 	}
+}
+
+bool World::isActive(){
+	std::lock_guard<std::mutex> lock(this->mutex);
+	return this->is_active;
 }
 
 void World::addObject(physical_object_ptr object, const b2Vec2& pos){

@@ -21,7 +21,7 @@ void Worm::createFixtures(){
 		  
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
-	boxFixtureDef.density = 4;
+	boxFixtureDef.density = 1;
 	this->body->CreateFixture(&boxFixtureDef);
 }
 
@@ -75,4 +75,5 @@ void Worm::collide_with_something(CollisionData* other){
 		this->life = 0;
 		this->is_dead = true;
 	}
+	///////////////////////////falta para las vigas
 }

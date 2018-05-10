@@ -47,7 +47,7 @@ void Game::run(){
 	pos.x += 4;
 	pos.y += 4;
 	world.addObject(weapon, pos);
-	//worm->move(2);
+	worm->move(0);
 }
 
 void Game::configure(){

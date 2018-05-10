@@ -15,6 +15,10 @@ Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius,
 
 Weapon::~Weapon(){}
 
+bool Weapon::isActive(){
+	return this->waiting_to_explode || PhysicalObject::isActive();
+}
+
 void Weapon::shoot(int angle, int power, int time){
 	this->time_to_explode = time;
 	this->angle = angle;

@@ -19,6 +19,7 @@ class World: public Thread{
 		std::list<physical_object_ptr> objects;
 		CollisionListener collision_listener;
 		std::list<physical_object_ptr> girders;
+		bool is_active;
 
 		void initialize();
 		void removeObject(physical_object_ptr object);
@@ -34,6 +35,8 @@ class World: public Thread{
 		b2Vec2 getObjectPosition(PhysicalObject& object);
 
 		void setLinearVelocity(PhysicalObject& object, b2Vec2& velocity);
+
+		bool isActive();
 
 		std::list<physical_object_ptr>& getObjectsList();
 

@@ -28,6 +28,8 @@ class Weapon: public PhysicalObject{
 		Weapon(World& world, GameParameters& parameters, int damage, int radius = 0, int ricochets = 0);
 		~Weapon();
 
+		bool isActive() override;
+
 		virtual void shoot(int angle, int power, int time);
 
 		virtual void shoot(Worm& shooter, b2Vec2 pos);
