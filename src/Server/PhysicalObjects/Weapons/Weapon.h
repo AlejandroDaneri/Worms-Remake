@@ -36,8 +36,6 @@ class Weapon: public PhysicalObject{
 
 		virtual void collide_with_something(CollisionData* other) override;
 
-		bool isMoving() override;
-
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
 
 		virtual std::string getName() = 0;

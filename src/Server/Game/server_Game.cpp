@@ -42,10 +42,10 @@ void Game::run(){
 	sleep(5);
 	WeaponFactory factory(this->world, this->parameters);
 	physical_object_ptr weapon = factory.getWeapon(std::string("Bazooka"));
-	((Weapon*)weapon.get())->shoot(45, -1, -1);
+	((Weapon*)weapon.get())->shoot(60, -1, -1);
 	b2Vec2 pos = worm->getPosition();
-	pos.x += 1;
-	pos.y += 1;
+	pos.x += 4;
+	pos.y += 4;
 	world.addObject(weapon, pos);
 	//worm->move(2);
 }
