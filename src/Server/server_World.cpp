@@ -58,7 +58,9 @@ b2Vec2 World::getObjectPosition(PhysicalObject& object){
 
 void World::setLinearVelocity(PhysicalObject& object, b2Vec2& velocity){
 	std::lock_guard<std::mutex> lock(this->mutex);
-	object.getBody()->SetLinearVelocity(velocity);
+	b2Body* body = object.getBody();
+	//body->ApplyLinearImpulse(velocity, body->GetWorldCenter(), true);
+	body->SetLinearVelocity(velocity);
 }
 
 std::list<physical_object_ptr>& World::getObjectsList(){

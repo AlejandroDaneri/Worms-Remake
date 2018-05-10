@@ -6,6 +6,7 @@
 #include "server_Protocol.h"
 #include "Worm.h"
 #include "World.h"
+#include "GameParameters.h"
 
 class Player{
 	private:
@@ -23,7 +24,7 @@ class Player{
 
 		void begin_turn();
 
-		void add_worm(World& world, int id, const b2Vec2& position);
+		void add_worm(World& world, int id, const b2Vec2& position, GameParameters& parameters);
 
 		Protocol& getProtocol();
 

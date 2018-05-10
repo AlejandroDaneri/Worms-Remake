@@ -15,8 +15,8 @@ void Player::begin_turn(){
 	this->worms.begin_turn();
 }
 
-void Player::add_worm(World& world, int id, const b2Vec2& position){
-	physical_object_ptr worm(new Worm(world, id));
+void Player::add_worm(World& world, int id, const b2Vec2& position, GameParameters& parameters){
+	physical_object_ptr worm(new Worm(world, id, parameters));
 	this->worms.add(worm);
 	world.addObject(worm, position);
 }
