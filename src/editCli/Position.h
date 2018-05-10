@@ -9,8 +9,6 @@ class Position{
 	public:
 		Position(int x, int y);
 		~Position();
-		Position(const Position&);
-		Position& operator=(const Position&);
 
 		bool operator==(const Position& other);
 
