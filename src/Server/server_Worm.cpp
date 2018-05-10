@@ -45,3 +45,10 @@ void Worm::shoot(int angle, int power, int time){
 void Worm::shoot(b2Vec2 pos){
 	///////////////////////////////////////////////////
 }
+
+void Worm::collide_with_something(CollisionData* other){
+	if (other->getType() == "Border"){
+		this->life = 0;
+		this->is_dead = true;
+	}
+}

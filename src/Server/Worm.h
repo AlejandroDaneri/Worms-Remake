@@ -28,7 +28,7 @@ class Worm: public PhysicalObject{
 
 		void shoot(b2Vec2 pos);
 
-		//virtual void collide_with_something(CollisionData other) = 0;
+		void collide_with_something(CollisionData* other) override;
 
 };
 

@@ -4,7 +4,7 @@
 World::World(const b2Vec2& gravity): world(gravity){
 	this->world.SetAllowSleeping(true);
 	this->world.SetContinuousPhysics(true);
-	/////////////////this->world->SetContactListener(&colission);
+	this->world.SetContactListener(&this->collision_listener);
 	this->initialize();
 }
 		
@@ -20,6 +20,12 @@ void World::run(){
 
 		std::lock_guard<std::mutex> lock(this->mutex);
 		this->world.Step(timeStep, velocityIterations, positionIterations);
+
+		for (auto it = this->objects.begin(); it != this->objects.end(); it++){
+			if ((*it)->isDead()){
+				this->removeObject(*it);
+			}
+		}
 	}
 }
 
@@ -31,17 +37,18 @@ void World::addObject(physical_object_ptr object, const b2Vec2& pos){
 	object->initializeBody(this->world.CreateBody(&body_def));
 	if (body_def.type != b2_staticBody){
 		this->objects.push_back(object);
+	} else {
+		this->girders.push_back(object);
 	}
 }
 
-void World::removeObject(PhysicalObject& object){
-	std::lock_guard<std::mutex> lock(this->mutex);
-	this->world.DestroyBody(object.getBody());
+void World::removeObject(physical_object_ptr object){
+	this->world.DestroyBody(object->getBody());
 }
 
 void World::initialize(){
 	physical_object_ptr bottom_border(new BottomBorder(*this));
-	this->addObject(bottom_border, b2Vec2(0, 4));///////////////////////////////////////////////////////////ver
+	this->addObject(bottom_border, b2Vec2(-50000, 4));///////////////////////////////////////////////////////////ver
 }
 
 b2Vec2 World::getObjectPosition(PhysicalObject& object){

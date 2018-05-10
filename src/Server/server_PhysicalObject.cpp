@@ -3,13 +3,14 @@
 #include <iostream>//////////////////////////////////////////////////////////////
 
 PhysicalObject::PhysicalObject(World& world, int id, std::string type):
-	world(world), is_dead(false), id(id), type(type), last_position(-1, -1){}
+	world(world), is_dead(false), id(id), type(type), last_position(-1, -1),
+	collision_data(type, this){}
 
 PhysicalObject::~PhysicalObject(){}
 
 void PhysicalObject::initializeBody(b2Body* body){
 	this->body = body;
-	/////////////this->body->SetUserData(this->getData());
+	this->body->SetUserData(&this->collision_data);
 	this->createFixtures();
 	this->setInitialVelocity();
 }
@@ -42,3 +43,5 @@ std::string& PhysicalObject::getType(){
 }
 
 void PhysicalObject::setInitialVelocity(){}
+
+void PhysicalObject::collide_with_something(CollisionData* other){}

@@ -5,6 +5,7 @@
 #include "b2World.h"
 #include "b2Body.h"
 #include "PhysicalObject.h"
+#include "CollisionListener.h"
 #include <mutex>
 #include <list>
 
@@ -16,8 +17,11 @@ class World: public Thread{
 		b2World world;
 		std::mutex mutex;
 		std::list<physical_object_ptr> objects;
+		CollisionListener collision_listener;
+		std::list<physical_object_ptr> girders;
 
 		void initialize();
+		void removeObject(physical_object_ptr object);
 
 	public:
 		World(const b2Vec2& gravity = b2Vec2(0.0f, -10.0));
@@ -26,8 +30,6 @@ class World: public Thread{
 		void run() override;
 
 		void addObject(physical_object_ptr object, const b2Vec2& pos);
-
-		void removeObject(PhysicalObject& object);
 
 		b2Vec2 getObjectPosition(PhysicalObject& object);
 

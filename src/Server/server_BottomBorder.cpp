@@ -2,7 +2,7 @@
 #include "b2PolygonShape.h"
 #include "b2Fixture.h"
 
-BottomBorder::BottomBorder(World& world): PhysicalObject(world, 0, "BottomBorder"){}
+BottomBorder::BottomBorder(World& world): PhysicalObject(world, 0, "Border"){}
 
 BottomBorder::~BottomBorder(){}
 

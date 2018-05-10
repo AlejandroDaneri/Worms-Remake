@@ -3,6 +3,7 @@
 
 #include "World.h"
 #include "b2Body.h"
+#include "CollisionData.h"
 #include <string>
 #include <memory>
 
@@ -16,6 +17,7 @@ class PhysicalObject{
 		int id;
 		std::string type;
 		b2Vec2 last_position;
+		CollisionData collision_data;
 
 		virtual void createFixtures() = 0;
 		virtual void setInitialVelocity();
@@ -34,7 +36,7 @@ class PhysicalObject{
 
 		virtual void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) = 0;
 
-		//virtual void collide_with_something(CollisionData other) = 0;
+		virtual void collide_with_something(CollisionData* other);
 
 };
 
