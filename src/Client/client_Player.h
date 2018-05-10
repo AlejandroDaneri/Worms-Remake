@@ -12,6 +12,7 @@ class Player{
 		~Player();
 
 		void startTurn(int id);
+		void endTurn();
 };
 
 #endif

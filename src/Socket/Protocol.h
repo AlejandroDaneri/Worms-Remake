@@ -19,6 +19,8 @@
 #define MOVE_LEFT 1
 #define JUMP 2
 #define ROLLBACK 3
+#define EXTEND_ANGLE 4
+#define REDUCE_ANGLE 5
 
 #define WORM_TYPE 0
 #define WEAPON_TYPE 1
