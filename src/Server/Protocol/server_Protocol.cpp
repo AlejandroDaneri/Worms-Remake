@@ -62,15 +62,12 @@ void Protocol::send_worm(physical_object_ptr& object, char* buffer){
 	this->send_string(buffer, 19);
 }
 
-
-#include <iostream>/////////////////////////////////////////////////////////////////////////
 void Protocol::send_weapon(physical_object_ptr& object, char* buffer){
 	buffer[1] = WEAPON_TYPE;
 	uint32_t id = htonl((uint32_t)object->getId());
 	std::memcpy(buffer + 2, &id, sizeof(id));
 
 	b2Vec2 position = object->getPosition();
-std::cout<<"sending weapon: pos: "<<position.x<<" - "<<position.y<<std::endl;
 	Weapon* weapon = (Weapon*)object.get();
 	std::string name = weapon->getName();
 	int32_t pos_x = htonl((int32_t)position.x);
