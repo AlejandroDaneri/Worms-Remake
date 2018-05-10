@@ -4,8 +4,9 @@
 #include "Socket.h"
 #include "Protocol.h"
 #include "Position.h"
-#include "client_Player.h"
 #include "ViewsList.h"
+
+class Player;
 
 class Protocol{
 	private:

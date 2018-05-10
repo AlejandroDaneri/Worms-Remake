@@ -6,10 +6,13 @@
 #include <gtkmm/scrolledwindow.h>
 #include "Position.h"
 
+class Player;
+
 class WorldView{
 	private:
 		Gtk::Fixed world;
 		Gtk::ScrolledWindow window;
+		bool inactive_handler(GdkEventKey* key_event);
 
 
 	public:
@@ -24,6 +27,8 @@ class WorldView{
 
 		Gtk::ScrolledWindow& getWindow();
 
+		void enable_handlers(Player& player);
+		void disable_handlers();
 };
 
 

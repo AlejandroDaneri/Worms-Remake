@@ -1,11 +1,12 @@
-#ifndef __TURNO_H__
-#define __TURNO_H__
+#ifndef __CLIENTTURN_H__
+#define __CLIENTTURN_H__
 
 #include "Thread.h"
 #include <unistd.h>
-#include "client_Player.h"
 
-class Turno : Thread{
+class Player;
+
+class Turn : public Thread {
 	private:
 		bool running;
 		int actual_time;
@@ -13,8 +14,9 @@ class Turno : Thread{
 		Player& player;
 
 	public:
-		Turno(int max_time, Player& player);
-		~Turno();
+		Turn(Player& player);
+		~Turn();
+		Turn(Turn&& other);
 
 		void run();
 		void stopRun();
