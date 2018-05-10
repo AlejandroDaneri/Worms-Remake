@@ -1,5 +1,5 @@
 #include "WorldView.h"
-#include <thread>
+#include "ViewTransformer.h"
 
 WorldView::WorldView(){
 	this->window.add(this->world);
