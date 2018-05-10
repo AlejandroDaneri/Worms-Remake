@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "DataSender.h"
 
-Game::Game(const std::string& config_file): parameters(config_file), world(b2Vec2(0.0f, 10.0)){}
+Game::Game(const std::string& config_file): parameters(config_file), world(b2Vec2(0.0f, -10.0)){}
 
 Game::~Game(){
 	this->world.stop();
@@ -40,7 +40,7 @@ void Game::run(){
 void Game::configure(){
 	for (int i = 0; i < 5; i++){
 		physical_object_ptr worm(new Worm(this->world, i));
-		this->world.addObject(worm, b2Vec2(100 * (i+1), 50));
+		this->world.addObject(worm, b2Vec2(10 * (i+1), 45));
 		//agegar worm al jugador etc
 		//recibir los worms del gameparameters
 		//antes enviar a todos los jugadores vigas, municiones, etc
