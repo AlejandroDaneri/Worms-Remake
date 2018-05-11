@@ -3,12 +3,14 @@
 
 #include "PhysicalObject.h"
 #include "GameParameters.h"
+#include "Weapon.h"
 
 class Worm: public PhysicalObject{	
 	private:
 		int life;
 		char dir;
 		GameParameters& parameters;
+		physical_object_ptr weapon;
 
 
 	protected:

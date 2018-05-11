@@ -1,10 +1,11 @@
 #ifndef __WEAPON_H__
 #define __WEAPON_H__
 
-#include "Worm.h"
 #include "PhysicalObject.h"
 #include "GameParameters.h"
 #include <string>
+
+class Worm;
 
 class Weapon: public PhysicalObject{
 	protected:

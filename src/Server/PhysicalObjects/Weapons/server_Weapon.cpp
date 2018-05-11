@@ -1,6 +1,7 @@
 #include "Weapon.h"
 #include "b2Fixture.h"
 #include "b2CircleShape.h"
+#include "Worm.h"
 #include <cmath>
 
 #define PI 3.14159265

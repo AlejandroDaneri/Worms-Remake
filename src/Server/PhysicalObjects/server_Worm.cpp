@@ -2,6 +2,7 @@
 #include "b2PolygonShape.h"
 #include "b2Fixture.h"
 #include "Protocol.h"
+#include "server_WeaponFactory.h"
 
 Worm::Worm(World& world, int id, GameParameters& parameters):
 	PhysicalObject(world, id, "Worm"), life(parameters.getWormLife()), 
@@ -55,15 +56,16 @@ void Worm::move(char action){
 }
 
 void Worm::changeWeapon(const std::string& weapon){
-	///////////////////////////////////////////////////////////
+	WeaponFactory factory(this->world, this->parameters);
+	this->weapon = factory.getWeapon(weapon);
 }
 
 void Worm::shoot(int angle, int power, int time){
-	////////////////////////////////////////////////////////
+	((Weapon*)this->weapon.get())->shoot(angle, power, time);
 }
 
 void Worm::shoot(b2Vec2 pos){
-	///////////////////////////////////////////////////
+	((Weapon*)this->weapon.get())->shoot(*this, pos);
 }
 
 void Worm::collide_with_something(CollisionData* other){
