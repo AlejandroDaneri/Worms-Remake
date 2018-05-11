@@ -2,7 +2,6 @@
 #include "Game.h"
 #include "Weapon.h"
 #include <string>
-#include <cstring>
 
 ServerProtocol::ServerProtocol(Socket&& socket): Protocol(std::move(socket)){}
 

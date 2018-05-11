@@ -21,6 +21,6 @@ void Player::add_worm(World& world, int id, const b2Vec2& position, GameParamete
 	world.addObject(worm, position);
 }
 
-Protocol& Player::getProtocol(){
+ServerProtocol& Player::getProtocol(){
 	return this->protocol;
 }

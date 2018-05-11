@@ -11,10 +11,10 @@ class DataReceiver: public Thread{
 	private:
 		ViewsList& views;
 		Player& player;
-		Protocol& protocol;
+		ClientProtocol& protocol;
 
 	public:
-		DataReceiver(ViewsList& views, Player& player, Protocol& protocol);
+		DataReceiver(ViewsList& views, Player& player, ClientProtocol& protocol);
 		~DataReceiver();
 
 		void run() override;

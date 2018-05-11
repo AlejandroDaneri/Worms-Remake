@@ -1,4 +1,5 @@
 #include "Protocol.h"
+#include <cstring>
 
 Protocol::Protocol(Socket&& socket) : socket(std::move(socket)){}
 
@@ -19,7 +20,6 @@ size_t Protocol::receive_buffer(char* buffer) {
 	this->socket.receive(&len, sizeof (uint32_t));
 	len = ntohl(len);
 
-	char buffer[MAX_BUF_LEN];
 	this->socket.receive(buffer, len);
 	return len;
 }

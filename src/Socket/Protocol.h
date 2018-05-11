@@ -32,7 +32,7 @@
 class Protocol {
 	private:
 		Socket socket;
-		std::mutex mutex;
+		std::mutex mutex_send;
 	public:
 		Protocol(Socket&& socket);
 		Protocol(Protocol&& other);

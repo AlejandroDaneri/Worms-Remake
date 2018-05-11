@@ -1,6 +1,6 @@
 #include "DataReceiver.h"
 
-DataReceiver::DataReceiver(ViewsList& views, Player& player, Protocol& protocol): 
+DataReceiver::DataReceiver(ViewsList& views, Player& player, ClientProtocol& protocol): 
 	views(views), player(player), protocol(protocol){}
 
 DataReceiver::~DataReceiver(){}

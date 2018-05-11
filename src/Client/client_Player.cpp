@@ -7,7 +7,7 @@
 #define ENTER '\n'
 #define BACK 0xff54
 
-Player::Player(Protocol& protocol, WorldView& world) : 
+Player::Player(ClientProtocol& protocol, WorldView& world) : 
 	protocol(protocol), world(world) {
 	this->turn = new Turn(*this);
 }

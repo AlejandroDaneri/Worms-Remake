@@ -10,7 +10,7 @@
 
 class Player{
 	private:
-		Protocol protocol;
+		ServerProtocol protocol;
 		WormsList worms;
 
 	public:
@@ -26,7 +26,7 @@ class Player{
 
 		void add_worm(World& world, int id, const b2Vec2& position, GameParameters& parameters);
 
-		Protocol& getProtocol();
+		ServerProtocol& getProtocol();
 
 };
 

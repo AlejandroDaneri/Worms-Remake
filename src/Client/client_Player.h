@@ -8,12 +8,12 @@
 
 class Player{
 	private:
-		Protocol& protocol;
+		ClientProtocol& protocol;
 		WorldView& world;
 		Turn* turn;
 
 	public:
-		Player(Protocol& protocol, WorldView& world);
+		Player(ClientProtocol& protocol, WorldView& world);
 		~Player();
 
 		void startTurn(int id);

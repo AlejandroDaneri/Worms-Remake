@@ -16,7 +16,7 @@ int main(int argc, char* argv[]){
     window.resize(1280, 720);
 
     Socket socket(Socket::Client("127.0.0.1", "7777"));
-    Protocol protocol(std::move(socket));
+    ClientProtocol protocol(std::move(socket));
     
     WorldView world;////////////////////////////////////Estos se crean en player despues
     Player player(protocol, world);  ////////////////////////////////////El player despues recibe el protocol

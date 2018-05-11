@@ -1,6 +1,5 @@
 #include "client_Protocol.h"
 #include <string>
-#include <cstring>
 #include "client_Player.h"
 
 ClientProtocol::ClientProtocol(Socket&& socket): Protocol(std::move(socket)) {}
