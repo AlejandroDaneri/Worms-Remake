@@ -2,7 +2,7 @@
 #define __CLIENTMORTAR_H__
 
 #include "client_FragmentableWeapon.h"
-#include "client_Weapons_defs.h"
+
 
 class Mortar: public FragmentableWeapon{
 	private:
@@ -12,7 +12,7 @@ class Mortar: public FragmentableWeapon{
 		//weapon_ptr getFragment(); AGREGARLO
 
 	public:
-		Mortar(int ammo = MORTAR_AMMO);
+		Mortar(int ammo);
 		~Mortar();
 };
 

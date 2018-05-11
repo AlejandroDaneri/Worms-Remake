@@ -1,7 +1,7 @@
 #include "client_DistanceWeapon.h"
 
-DistanceWeapon::DistanceWeapon(std::string name, int ammo, int damage,
-	int radius, int time) : Weapon(name, ammo, damage, radius) {
+DistanceWeapon::DistanceWeapon(std::string name, int ammo, int time) :
+	Weapon(name, ammo) {
 	this->has_Scope = true;
 	this->is_Timed = time > 0;
 	this->time = time;	

@@ -7,7 +7,7 @@ class MeleeWeapon : public Weapon {
 	private:
 		int time;
 	public:
-		MeleeWeapon(std::string name, int ammo, int damage, int radius, bool scope, int time = -1);
+		MeleeWeapon(std::string name, int ammo, bool scope, int time = -1);
 		~MeleeWeapon() {}
 		
 		void changeTime(int time) override;

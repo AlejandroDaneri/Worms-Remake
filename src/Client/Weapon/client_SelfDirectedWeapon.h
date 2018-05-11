@@ -11,7 +11,7 @@ class SelfDirectedWeapon: public Weapon{
 		//Position getEpicenter(const Position& origin, const dir_ptr& dir, int angle, int power);
 
 	public:
-		SelfDirectedWeapon(std::string name, int ammo, int damage, int radius, int quantity);
+		SelfDirectedWeapon(std::string name, int ammo, int quantity);
 		~SelfDirectedWeapon();
 
 		//void shoot(const Position& pos);

@@ -8,7 +8,7 @@ class DistanceWeapon: public Weapon{
 		int time;
 
 	public:
-		DistanceWeapon(std::string name, int ammo, int damage, int radius, int time = -1);
+		DistanceWeapon(std::string name, int ammo, int time = -1);
 		~DistanceWeapon() {}
 		
 		bool hasVariablePower() override;

@@ -1,7 +1,8 @@
 #include "client_Mortar.h"
+#include "client_Weapons_defs.h"
 
-Mortar::Mortar(int ammo): FragmentableWeapon(MORTAR_NAME, ammo,	MORTAR_RADIUS,
-	MORTAR_DAMAGE, MORTAR_FRAGMENTS) {}
+Mortar::Mortar(int ammo): FragmentableWeapon(MORTAR_NAME, ammo,
+	MORTAR_FRAGMENTS) {}
 
 Mortar::~Mortar() {}
 
@@ -9,8 +10,7 @@ Mortar::~Mortar() {}
 	return weapon_ptr(new Mortar::Fragment());
 }*/
 
-Mortar::Fragment::Fragment(): DistanceWeapon(FRAGMENTS_NAME, FRAGMENTS_AMMO,
-	FRAGMENTS_DAMAGE, FRAGMENTS_RADIUS) {}
+Mortar::Fragment::Fragment(): DistanceWeapon(FRAGMENTS_NAME, FRAGMENTS_AMMO) {}
 
 Mortar::Fragment::~Fragment(){}
 

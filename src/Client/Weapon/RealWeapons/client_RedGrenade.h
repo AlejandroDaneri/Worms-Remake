@@ -2,7 +2,6 @@
 #define __CLIENTREDGRENADE_H__
 
 #include "client_FragmentableWeapon.h"
-#include "client_Weapons_defs.h"
 
 class RedGrenade: public FragmentableWeapon{
 	private:
@@ -12,7 +11,7 @@ class RedGrenade: public FragmentableWeapon{
 		//weapon_ptr getFragment(); AGREGARLO
 
 	public:
-		RedGrenade(int ammo = RED_GRENADE_AMMO);
+		RedGrenade(int ammo);
 		~RedGrenade();
 };
 

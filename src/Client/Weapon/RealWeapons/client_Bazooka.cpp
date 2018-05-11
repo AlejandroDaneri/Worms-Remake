@@ -1,7 +1,7 @@
 #include "client_Bazooka.h"
+#include "client_Weapons_defs.h"
 
-Bazooka::Bazooka(int ammo) : DistanceWeapon(BAZOOKA_NAME, ammo, BAZOOKA_DAMAGE, 
-	BAZOOKA_RADIUS) {}
+Bazooka::Bazooka(int ammo) : DistanceWeapon(BAZOOKA_NAME, ammo) {}
 
 Bazooka::~Bazooka(){}
 

@@ -1,8 +1,8 @@
 #include "client_Weapon.h"
 
-Weapon::Weapon(std::string name, int ammo, int damage, int radius) :
-	name(name), ammo(ammo), damage(damage), radius(radius), 
-	has_Scope(false), is_Timed(false), is_Fragmentable(false) {}
+Weapon::Weapon(std::string name, int ammo) :
+	name(name), ammo(ammo), has_Scope(false), is_Timed(false),
+	is_Fragmentable(false) {}
 
 bool Weapon::hasScope() {
 	return this->has_Scope;
@@ -22,14 +22,6 @@ bool Weapon::isTimed() {
 
 bool Weapon::hasVariablePower() {
 	return false;
-}
-
-int Weapon::getRadius(){
-	return this->radius;
-}
-
-int Weapon::getDamage(){
-	return this->damage;
 }
 
 int Weapon::getTime() {

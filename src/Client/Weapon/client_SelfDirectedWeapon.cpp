@@ -1,7 +1,6 @@
 #include "client_SelfDirectedWeapon.h"
 
-SelfDirectedWeapon::SelfDirectedWeapon(std::string name, int ammo, int damage,
-	int radius, int quantity) : Weapon(name, ammo, damage, radius),
+SelfDirectedWeapon::SelfDirectedWeapon(std::string name, int ammo, int quantity) : Weapon(name, ammo),
 	quantity(quantity) {}
 		
 SelfDirectedWeapon::~SelfDirectedWeapon(){}
