@@ -1,6 +1,10 @@
 #ifndef __PROTOCOL_H__
 #define __PROTOCOL_H__
 
+#include <string>
+#include <mutex>
+#include "Socket.h"
+
 #define MAX_BUF_LEN 1024
 
 #define MOVING_OBJECT 0
@@ -24,5 +28,23 @@
 
 #define WORM_TYPE 0
 #define WEAPON_TYPE 1
+
+class Protocol {
+	private:
+		Socket socket;
+		std::mutex mutex;
+	public:
+		Protocol(Socket&& socket);
+		~Protocol();
+		
+		void send_buffer(const char* buffer, size_t size);
+		size_t receive_buffer(char* buffer);
+		
+		void send_int(char* buffer, size_t& offset, int32_t value);
+		int receive_int(char* buffer, size_t& offset);
+		
+		void send_string(char* buffer, size_t& offset, const std::string& string);
+		std::string receive_string(char* buffer, size_t& offset); 
+};
 
 #endif
