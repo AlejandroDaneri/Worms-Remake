@@ -13,21 +13,24 @@ Player::Player(Protocol& protocol, WorldView& world) :
 }
 	////////////////////////////////////
 
-Player::~Player() {delete this->turn;}
+Player::~Player() {
+	printf("Se destruyo\n");
+	delete this->turn;
+}
 
 void Player::startTurn(int id){
 	//////////////////////////////////////
 	//setear handlers
-	//this->world.enable_handlers(*this);
+	this->world.enable_handlers(*this);
 	// mandar arma
 	this->turn->run();
 }
 
 void Player::endTurn() {
 	///////Sacar los handlers
-	//this->world.disable_handlers();
-	//this->protocol.send_end_turn();
-	//this->turn->join();
+	this->world.disable_handlers();
+	this->protocol.send_end_turn();
+	this->turn->join();
 }
 
 bool Player::complete_handler(GdkEventKey* key_event) {
