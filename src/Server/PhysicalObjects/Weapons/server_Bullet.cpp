@@ -5,6 +5,7 @@
 
 #define PI 3.14159265
 #define RADIANS PI / 180
+#define FLOAT_ERROR 0.1
 
 #include <iostream>//////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -21,8 +22,9 @@ void Bullet::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 
 bool Bullet::isDead(){
 	float distance = b2Distance(this->body->GetPosition(), this->epicenter);
-	std::cout<<"Bullet is dead? distance= "<<distance<<std::endl;
-	return PhysicalObject::isDead() || distance >= this->radius;
+	bool result = fabs(distance - this->radius) < FLOAT_ERROR;
+	std::cout<<"Bullet is dead? distance= "<<distance<<"  pos:"<<this->body->GetPosition().x<<"   "<<this->body->GetPosition().y<<std::endl;
+	return PhysicalObject::isDead() || result;
 }
 
 void Bullet::createFixtures(){

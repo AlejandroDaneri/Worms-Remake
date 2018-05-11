@@ -28,8 +28,10 @@ int main(int argc, char* argv[]){
     window.show_all();
 
 
-    receiver.start();
-    app->run(window);
+    try{
+        receiver.start();
+        app->run(window);
+    } catch (const std::exception& e){}
 
     try{
         receiver.stop();

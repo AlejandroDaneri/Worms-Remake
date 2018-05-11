@@ -29,14 +29,11 @@ void ViewsList::updateWormData(int id, int pos_x, int pos_y, int life, char dir)
 	}
 }
 
-#include <iostream>///////////////////////////////////////////////////////////////////////////////////////
-
 void ViewsList::updateWeaponData(int id, const std::string& weapon_name, int pos_x, int pos_y){
 	auto it = this->weapons.find(id);
 	Position pos(pos_x, pos_y);
 	if (it == this->weapons.end()){
 		//Weapon no existe
-		std::cout <<"Weapon no existe "<<weapon_name<<std::endl;
 		WeaponView weapon(this->world, weapon_name, pos);
 		this->weapons.insert(std::make_pair(id, std::move(weapon)));
 	} else {
