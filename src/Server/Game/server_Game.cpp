@@ -44,8 +44,8 @@ void Game::run(){
 	physical_object_ptr weapon = factory.getWeapon(std::string("Bazooka"));
 	((Weapon*)weapon.get())->shoot(60, -1, -1);
 	b2Vec2 pos = worm->getPosition();
-	pos.x += 4;
-	pos.y += 4;
+	pos.x += 2 * worm->getDir();
+	//pos.y += 4;
 	world.addObject(weapon, pos);
 	worm->move(0);
 }

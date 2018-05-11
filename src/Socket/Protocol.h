@@ -15,8 +15,8 @@
 #define SHOOT_WEAPON 7
 #define SHOOT_SELF_DIRECTED 8
 
-#define MOVE_RIGHT 0
-#define MOVE_LEFT 1
+#define MOVE_RIGHT 1
+#define MOVE_LEFT -1
 #define JUMP 2
 #define ROLLBACK 3
 #define EXTEND_ANGLE 4

@@ -5,7 +5,7 @@
 
 Worm::Worm(World& world, int id, GameParameters& parameters):
 	PhysicalObject(world, id, "Worm"), life(parameters.getWormLife()), 
-	dir(0), parameters(parameters){}
+	dir(1), parameters(parameters){}
 
 Worm::~Worm(){}
 
@@ -45,15 +45,11 @@ void Worm::move(char action){
 		this->world.setLinearVelocity(*this, velocity);
 	} else if (action == JUMP){
 		b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
-		if (this->dir == MOVE_LEFT){
-			velocity.x *= -1;
-		}
+		velocity.x *= this->dir;
 		this->world.setLinearVelocity(*this, velocity);
 	} else if (action == ROLLBACK){
 		b2Vec2 velocity(parameters.getWormRollbackVelocity(), parameters.getWormRollbackHeight());
-		if (this->dir == MOVE_RIGHT){
-			velocity.x *= -1;
-		}
+		velocity.x *= -1 * this->dir;
 		this->world.setLinearVelocity(*this, velocity);
 	}
 }
