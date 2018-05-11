@@ -2,6 +2,11 @@
 
 WeaponView::WeaponView(WorldView& worldView, std::string weapon, Position pos):
 	Viewable(worldView), weapon_name(std::move(weapon)){
+
+	std::string path(IMAGES_PATH);///////////////por ahora es mas eficiente porque es solo una imagen
+	path += this->weapon_name;
+	path += ".png";
+	this->image.set(path);
 	this->addToWorld(pos);
 }
 
@@ -18,10 +23,10 @@ void WeaponView::explode(){
 
 Gtk::Widget& WeaponView::getWidget(){
 	////////////////////////////////////////////Ver que hacer con la rotacion, por ahora lo dejo asi
-	std::string path(IMAGES_PATH);
+	/*std::string path(IMAGES_PATH);
 	path += this->weapon_name;
 	path += ".png";
-	this->image.set(path);
+	this->image.set(path);*/
 	return this->image;
 }
 

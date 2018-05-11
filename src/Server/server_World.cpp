@@ -10,8 +10,6 @@ World::World(const b2Vec2& gravity): world(gravity), is_active(false){
 		
 World::~World(){}
 
-
-#include <iostream>//////////////////////////////////////////////////////////////////////////////
 void World::run(){
 	float32 timeStep = 1/20.0;      //the length of time passed to simulate (seconds)
 	int32 velocityIterations = 8;   //how strongly to correct velocity
@@ -30,7 +28,6 @@ void World::run(){
 			bullet->getBodyDef(body_def, bullet->getEpicenter());
 			bullet->initializeBody(this->world.CreateBody(&body_def));
 			this->bullets.push_back(*it);
-			std::cout<<"Bullet added"<<std::endl;
 		}
 		this->bullets_to_add.clear();
 
@@ -41,7 +38,6 @@ void World::run(){
 			if ((*it)->isDead()){
 				this->removeObject(*it);
 				it = this->bullets.erase(it);
-				std::cout<<"Bullet removed"<<std::endl;
 			} else {
 				this->is_active = true;
 				++it;

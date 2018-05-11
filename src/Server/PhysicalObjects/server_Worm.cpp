@@ -71,7 +71,7 @@ void Worm::shoot(b2Vec2 pos){
 #include <iostream>/////////////////////////////////////
 void Worm::reduce_life(int damage){
 	this->life -= damage;
-	std::cout <<"Danio worm id: "<<this->getId()<<" life: "<<this->life<<std::endl;
+	std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
 	if (this->life <= 0){
 		this->is_dead = true;
 	}

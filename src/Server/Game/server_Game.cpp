@@ -55,9 +55,9 @@ void Game::configure(){
 
 	for (int i = 1; i < 5; i++){
 		physical_object_ptr worm(new Worm(this->world, i, this->parameters));
-		this->world.addObject(worm, b2Vec2(10 * (i+1), 75));
+		this->world.addObject(worm, b2Vec2(7 * (i+1), 75));
 		physical_object_ptr girder(new Girder(this->world, 6));
-		this->world.addObject(girder, b2Vec2(10 * (i+1) - 3, 20));
+		this->world.addObject(girder, b2Vec2(7 * (i+1) - 3, 20));
 		//agegar worm al jugador etc
 		//recibir los worms del gameparameters
 		//antes enviar a todos los jugadores vigas, municiones, etc
