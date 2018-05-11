@@ -19,3 +19,5 @@ void SelfDirectedWeapon::shoot(const Position& pos){
 bool SelfDirectedWeapon::isSelfDirected(){
 	return true;
 }
+
+void SelfDirectedWeapon::changeTime(int time) {}

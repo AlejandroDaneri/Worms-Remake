@@ -32,6 +32,10 @@ int Weapon::getDamage(){
 	return this->damage;
 }
 
+int Weapon::getTime() {
+	return -1;
+}
+
 std::string Weapon::getName() {
 	return this->name;
 }

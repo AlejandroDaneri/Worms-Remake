@@ -1,0 +1,71 @@
+#ifndef __WEAPONSDEFS_H__
+#define __WEAPONSDEFS_H__
+
+#include <climits>
+
+#ifndef INFINITE
+#define INFINITE INT_MAX
+#endif
+
+#define DEFAULT_TIME 5
+
+#define AIR_ATTACK_NAME "Air Attack"
+#define AIR_ATTACK_AMMO 2
+#define AIR_ATTACK_RADIUS 2
+#define AIR_ATTACK_DAMAGE 40
+#define AIR_ATTACK_MISSIL 6
+
+#define BANANA_NAME "Banana"
+#define BANANA_AMMO 5
+#define BANANA_RADIUS 4
+#define BANANA_DAMAGE 70
+
+#define BAT_NAME "Bat"
+#define BAT_RADIUS 0 //////////// VER QUE VALOR PONERLE (NO DICE NADA EL PDF)
+#define BAT_DAMAGE 10
+
+#define BAZOOKA_NAME "Bazooka"
+#define BAZOOKA_RADIUS 2
+#define BAZOOKA_DAMAGE 50
+
+#define DYNAMITE_NAME "Dynamite"
+#define DYNAMITE_AMMO 5
+#define DYNAMITE_RADIUS 4
+#define DYNAMITE_DAMAGE 50
+
+#define GREEN_GRENADE_NAME "Green grenade"
+#define GREEN_GRENADE_RADIUS 2
+#define GREEN_GRENADE_DAMAGE 30
+
+#define HOLY_GRENADE_NAME "Holy grenade"
+#define HOLY_GRENADE_AMMO 2
+#define HOLY_GRENADE_RADIUS 8
+#define HOLY_GRENADE_DAMAGE 110
+
+#define MORTAR_NAME "Mortar"
+#define MORTAR_AMMO 10
+#define MORTAR_RADIUS 2
+#define MORTAR_DAMAGE 50
+#define MORTAR_FRAGMENTS 6
+#define FRAGMENTS_NAME "Fragment"
+#define FRAGMENTS_AMMO 1
+#define FRAGMENTS_RADIUS 2
+#define FRAGMENTS_DAMAGE 10
+
+#define RED_GRENADE_NAME "Red grenade"
+#define RED_GRENADE_AMMO 10
+#define RED_GRENADE_RADIUS 2
+#define RED_GRENADE_DAMAGE 30
+#define RED_GRENADE_FRAGMENTS 6
+#define GRENADE_FRAGMENTS_NAME "Fragment"
+#define GRENADE_FRAGMENTS_AMMO 1
+#define GRENADE_FRAGMENTS_RADIUS 2
+#define GRENADE_FRAGMENTS_DAMAGE 10
+
+#define TELEPORT_NAME "Teleportation"
+#define TELEPORT_RADIUS 0
+#define TELEPORT_DAMAGE 0
+#define TELEPORT_QUANTITY 1
+
+
+#endif

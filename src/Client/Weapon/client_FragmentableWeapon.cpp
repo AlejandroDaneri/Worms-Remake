@@ -1,8 +1,8 @@
 #include "client_FragmentableWeapon.h"
 
 FragmentableWeapon::FragmentableWeapon(std::string name, int ammo,
-	int damage, int radius, int fragments) : 
-	DistanceWeapon(name, ammo, damage,radius), fragments(fragments) {}
+	int damage, int radius, int fragments, int time) : 
+	DistanceWeapon(name, ammo, damage, radius, time), fragments(fragments) {}
 
 FragmentableWeapon::~FragmentableWeapon(){}
 

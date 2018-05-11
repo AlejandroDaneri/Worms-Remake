@@ -17,7 +17,7 @@ class SelfDirectedWeapon: public Weapon{
 		//void shoot(const Position& pos);
 
 		bool isSelfDirected() override;
-
+		void changeTime(int time) override;
 };
 
 #endif

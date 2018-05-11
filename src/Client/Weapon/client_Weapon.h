@@ -25,6 +25,7 @@ class Weapon {
 		virtual void changeTime(int time) = 0;
 		virtual int getRadius();
 		virtual int getDamage();
+		virtual int getTime();
 		virtual std::string getName();
 };
 #endif
