@@ -4,13 +4,13 @@
 #include <string>
 #include <cstring>
 
-Protocol::Protocol(Socket&& socket): socket(std::move(socket)){}
+ServerProtocol::ServerProtocol(Socket&& socket): Protocol(std::move(socket)){}
 
-Protocol::Protocol(Protocol&& other): socket(std::move(other.socket)){}
+ServerProtocol::ServerProtocol(ServerProtocol&& other): Protocol(std::move(other)) {}
 
-Protocol::~Protocol(){}
+ServerProtocol::~ServerProtocol(){}
 
-void Protocol::sendObject(physical_object_ptr& object){
+void ServerProtocol::sendObject(physical_object_ptr& object){
 	char buffer[MAX_BUF_LEN];
 	buffer[0] = MOVING_OBJECT;
 
@@ -22,131 +22,99 @@ void Protocol::sendObject(physical_object_ptr& object){
 	}
 }
 
-void Protocol::sendDeadObject(physical_object_ptr& object){
+void ServerProtocol::sendDeadObject(physical_object_ptr& object){
 	char buffer[MAX_BUF_LEN];
-	buffer[0] = DEAD_OBJECT;
+	size_t offset = 0;
+	buffer[offset++] = DEAD_OBJECT;
 
 	std::string& type = object->getType();
 	if (type == "Worm"){
-		buffer[1] = WORM_TYPE;
+		buffer[offset++] = WORM_TYPE;
 	} else if (type == "Weapon"){
-		buffer[1] = WEAPON_TYPE;
+		buffer[offset++] = WEAPON_TYPE;
 	}
 
 	uint32_t id = object->getId();
-	uint32_t converted = htonl(id);
-	std::memcpy(buffer + 2, &converted, sizeof(converted));
+	this->send_int(buffer, offset, id);
 
-	this->send_string(buffer, 6);
+	this->send_buffer(buffer, offset);
 }
 
-void Protocol::send_worm(physical_object_ptr& object, char* buffer){
+void ServerProtocol::send_worm(physical_object_ptr& object, char* buffer){
 	Worm* worm = (Worm*)object.get();
-
-	buffer[1] = WORM_TYPE;
-	uint32_t id = htonl((uint32_t)worm->getId());
+	size_t offset = 1;
+	buffer[offset++] = WORM_TYPE;
+	int32_t id = worm->getId();
 
 	b2Vec2 position = worm->getPosition();
 
-	int32_t pos_x = htonl((int32_t)position.x);
-	int32_t pos_y = htonl((int32_t)position.y);
-	int32_t life = htonl((int32_t)worm->getLife());
 	char dir = worm->getDir();
 
-	std::memcpy(buffer + 2, &id, sizeof(id));
-	std::memcpy(buffer + 6, &pos_x, sizeof(pos_x));
-	std::memcpy(buffer + 10, &pos_y, sizeof(pos_y));
-	std::memcpy(buffer + 14, &life, sizeof(life));
-	buffer[18] = dir;
+	this->send_int(buffer, offset, id);
+	this->send_int(buffer, offset, position.x);
+	this->send_int(buffer, offset, position.y);
+	this->send_int(buffer, offset, worm->getLife());
+	buffer[offset++] = dir;
 	
-	this->send_string(buffer, 19);
+	this->send_buffer(buffer, offset);
 }
 
-void Protocol::send_weapon(physical_object_ptr& object, char* buffer){
-	buffer[1] = WEAPON_TYPE;
-	uint32_t id = htonl((uint32_t)object->getId());
-	std::memcpy(buffer + 2, &id, sizeof(id));
+void ServerProtocol::send_weapon(physical_object_ptr& object, char* buffer){
+	size_t offset = 1;
+	buffer[offset++] = WEAPON_TYPE;
+	this->send_int(buffer, offset, object->getId());
 
 	b2Vec2 position = object->getPosition();
 	Weapon* weapon = (Weapon*)object.get();
 	std::string name = weapon->getName();
-	int32_t pos_x = htonl((int32_t)position.x);
-	int32_t pos_y = htonl((int32_t)position.y);
 
-	size_t i = 6;
-	for (size_t j = 0; j < name.size(); i++, j++){
-		buffer[i] = name[j];
-	}
-	buffer[i] = '\0';
-	std::memcpy(buffer + i + 1, &pos_x, sizeof(pos_x));
-	std::memcpy(buffer + i + 5, &pos_y, sizeof(pos_y));
+	this->send_string(buffer, offset, name);
+	
+	this->send_int(buffer, offset, position.x);
+	this->send_int(buffer, offset, position.y);
 
-	this->send_string(buffer, i + 9);
+	this->send_buffer(buffer, offset);
 }
 
-void Protocol::send_string(const char* buffer, size_t size){
-	uint32_t len_converted = htonl(size);
-
-	std::lock_guard<std::mutex> lock(this->mutex_send);
-	this->socket.send_data(&len_converted, sizeof len_converted);
-	this->socket.send_data(buffer, size);
-}
-
-void Protocol::send_start_turn(uint32_t current_worm_id){
+void ServerProtocol::send_start_turn(uint32_t current_worm_id){
 	char buffer[MAX_BUF_LEN];
-	buffer[0] = START_TURN;
+	size_t offset = 0;
+	buffer[offset++] = START_TURN;
 
-	uint32_t id = htonl(current_worm_id);
-	std::memcpy(buffer + 1, &id, sizeof(id));
+	this->send_int(buffer, offset, current_worm_id);
 
-	this->send_string(buffer, 5);
+	this->send_buffer(buffer, offset);
 }
 
-void Protocol::receive(Game& game){
-	uint32_t len;
-	this->socket.receive(&len, sizeof (uint32_t));
-	len = ntohl(len);
+void ServerProtocol::receive(Game& game){
 
 	char buffer[MAX_BUF_LEN];
-	this->socket.receive(buffer, len);
+	
+	this->receive_buffer(buffer);
 
-	char action = buffer[0];
+	size_t offset = 0;
+	char action = buffer[offset++];
 
 	if (action == END_TURN){
 		game.endTurn();
 	} else if (action == ACTION){
-		char worm_action = buffer[1];
+		char worm_action = buffer[offset++];
 		if (worm_action == MOVE_ACTION){
-			char move = buffer[2];
+			char move = buffer[offset++];
 			game.getCurrentWorm()->move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION){
-			std::string weapon;
-			size_t i = 2;
-			while (buffer[i] != '\0'){
-				weapon += buffer[i];
-				i++;
-			}
+			std::string weapon(this->receive_string(buffer, offset));
 			game.getCurrentWorm()->changeWeapon(weapon);
 		} else if (worm_action == SHOOT_WEAPON){
-			int32_t angle, power, time;
-			std::memcpy(&angle, buffer + 2, sizeof(angle));
-			std::memcpy(&power, buffer + 6, sizeof(power));
-			std::memcpy(&time, buffer + 10, sizeof(time));
-			angle = ntohl(angle);
-			power = ntohl(power);
-			time = ntohl(time);
+			int angle = this->receive_int(buffer, offset);
+			int power = this->receive_int(buffer, offset);
+			int time = this->receive_int(buffer, offset);
+			
 			game.getCurrentWorm()->shoot(angle, power, time);
 		} else if(worm_action == SHOOT_SELF_DIRECTED){
-			int32_t pos_x, pos_y;
-			std::memcpy(&pos_x, buffer + 2, sizeof(pos_x));
-			std::memcpy(&pos_y, buffer + 6, sizeof(pos_y));
-			pos_x = ntohl(pos_x);
-			pos_y = ntohl(pos_y);
+			int pos_x = this->receive_int(buffer, offset);
+			int pos_y = this->receive_int(buffer, offset);
 			game.getCurrentWorm()->shoot(b2Vec2(pos_x, pos_y));
 		}
 	}
-}
-
-void Protocol::stop(){
-	this->socket.stop();
 }

@@ -35,6 +35,7 @@ class Protocol {
 		std::mutex mutex;
 	public:
 		Protocol(Socket&& socket);
+		Protocol(Protocol&& other);
 		~Protocol();
 		
 		void send_buffer(const char* buffer, size_t size);
@@ -45,6 +46,8 @@ class Protocol {
 		
 		void send_string(char* buffer, size_t& offset, const std::string& string);
 		std::string receive_string(char* buffer, size_t& offset); 
+		
+		void stop();
 };
 
 #endif

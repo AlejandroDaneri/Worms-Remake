@@ -8,19 +8,16 @@
 
 class Game;
 
-class Protocol{
+class ServerProtocol : public Protocol{
 	private:
-		Socket socket;
-		std::mutex mutex_send;
 
 		void send_worm(physical_object_ptr& object, char* buffer);
 		void send_weapon(physical_object_ptr& weapon, char* buffer);
-		void send_string(const char* buffer, size_t size);
 
 	public:
-		Protocol(Socket&& socket);
-		Protocol(Protocol&& other);
-		~Protocol();
+		ServerProtocol(Socket&& socket);
+		ServerProtocol(ServerProtocol&& other);
+		~ServerProtocol();
 
 		void sendObject(physical_object_ptr& object);
 
@@ -29,9 +26,6 @@ class Protocol{
 		void receive(Game& game);
 
 		void send_start_turn(uint32_t current_worm_id);
-
-		void stop();
-
 };
 
 #endif

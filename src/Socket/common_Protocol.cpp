@@ -2,6 +2,8 @@
 
 Protocol::Protocol(Socket&& socket) : socket(std::move(socket)){}
 
+Protocol::Protocol(Protocol&& other) : socket(std::move(other.socket)) {}
+
 Protocol::~Protocol() {}
 
 void Protocol::send_buffer(const char* buffer, size_t size) {
@@ -53,6 +55,8 @@ std::string Protocol::receive_string(char* buffer, size_t& offset) {
 	return string;
 }
 
-
+void Protocol::stop(){
+	this->socket.stop();
+}
 
 

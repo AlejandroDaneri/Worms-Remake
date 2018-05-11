@@ -8,16 +8,11 @@
 
 class Player;
 
-class Protocol{
-	private:
-		Socket socket;
-
-		void send_string(const char* buffer, size_t size);
-
+class ClientProtocol: public Protocol {
 	public:
-		Protocol(Socket&& socket);
-		Protocol(Protocol&& other);
-		~Protocol();
+		ClientProtocol(Socket&& socket);
+		ClientProtocol(ClientProtocol&& other);
+		~ClientProtocol();
 
 		void send_move_action(char action);
 
@@ -30,8 +25,6 @@ class Protocol{
 		void send_end_turn();
 
 		void receive(Player& player, ViewsList& viewsList);
-
-		void stop();
 };
 
 #endif
