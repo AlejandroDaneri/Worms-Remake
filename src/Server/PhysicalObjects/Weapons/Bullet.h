@@ -6,6 +6,7 @@
 
 class Bullet: public PhysicalObject{
 	private:
+		int angle;
 		int damage;
 		int radius;
 		b2Vec2 epicenter;
@@ -16,10 +17,16 @@ class Bullet: public PhysicalObject{
 
 	public:
 
-		Bullet(int damage, int radius = 0, b2Vec2 epicenter);
+		Bullet(World& world, int angle, int damage, int radius, b2Vec2 epicenter);
 		~Bullet();
 
+		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
+
+		bool isDead() override;
+
 		void collide_with_something(CollisionData* other) override;
+
+		b2Vec2 getEpicenter();
 };
 
 #endif

@@ -5,20 +5,20 @@
 #include "b2World.h"
 #include "b2Body.h"
 #include "PhysicalObject.h"
+#include "Bullet.h"
 #include "CollisionListener.h"
 #include <mutex>
 #include <list>
-
-class PhysicalObject;
-typedef std::shared_ptr<PhysicalObject> physical_object_ptr;
 
 class World: public Thread{
 	private:
 		b2World world;
 		std::mutex mutex;
-		std::list<physical_object_ptr> objects;
 		CollisionListener collision_listener;
+		std::list<physical_object_ptr> objects;
 		std::list<physical_object_ptr> girders;
+		std::list<physical_object_ptr> bullets;
+		std::list<physical_object_ptr> bullets_to_add;
 		bool is_active;
 
 		void initialize();
@@ -31,6 +31,8 @@ class World: public Thread{
 		void run() override;
 
 		void addObject(physical_object_ptr object, const b2Vec2& pos);
+
+		void addBullet(physical_object_ptr bullet);
 
 		b2Vec2 getObjectPosition(PhysicalObject& object);
 

@@ -14,9 +14,9 @@ void CollisionListener::BeginContact(b2Contact* contact){
 	} else if (dataB->getType() == "Weapon"){
 		dataB->getObject()->collide_with_something(dataA);
 	} else if (dataA->getType() == "Bullet"){
-		////////////////////////////////////////////////////
+		dataA->getObject()->collide_with_something(dataB);
 	} else if (dataB->getType() == "Bullet"){
-		///////////////////////////////////////////////////
+		dataB->getObject()->collide_with_something(dataA);
 	} else if (dataA->getType() == "Worm"){
 		dataA->getObject()->collide_with_something(dataB);
 	} else if (dataB->getType() == "Worm"){

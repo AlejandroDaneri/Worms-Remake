@@ -9,6 +9,8 @@
 
 int Weapon::id = 1;
 
+#include <iostream>////////////////////////////////////////////////////////////////////////////////////////
+
 Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius, int ricochets): 
 	PhysicalObject(world, Weapon::id, "Weapon"), parameters(parameters), 
 	damage(damage), radius(radius), 
@@ -24,6 +26,7 @@ void Weapon::shoot(int angle, int power, int time){
 	this->time_to_explode = time;
 	this->angle = angle;
 	this->power = power;
+	std::cout<<"weapon shoot"<<std::endl;
 }
 
 void Weapon::shoot(Worm& shooter, b2Vec2 pos){}
@@ -59,9 +62,12 @@ void Weapon::setInitialVelocity(){
 	///Thread time
 }
 
+
 void Weapon::explode(){
-	for (int i = 0; i < 360; i+= 20){
-		///////////////////////////////////////////
+	std::cout<<"weapon explode"<<std::endl;
+	for (int bullet_angle = 0; bullet_angle < 360; bullet_angle+= 60){
+		physical_object_ptr bullet(new Bullet(this->world, bullet_angle, this->damage, this->radius, this->getPosition()));
+		this->world.addBullet(bullet);
 	}
 	//stop thread time
 	this->waiting_to_explode = false;
@@ -69,6 +75,7 @@ void Weapon::explode(){
 }
 
 void Weapon::collide_with_something(CollisionData* other){
+	std::cout<<"weapon collision"<<std::endl;
 	if (this->time_to_explode == -1){
 		this->explode();
 	}

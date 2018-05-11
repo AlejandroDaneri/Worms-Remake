@@ -3,6 +3,7 @@
 
 #include "PhysicalObject.h"
 #include "GameParameters.h"
+#include "World.h"
 #include <string>
 
 class Worm;
@@ -27,7 +28,7 @@ class Weapon: public PhysicalObject{
 		static int id;
 
 		Weapon(World& world, GameParameters& parameters, int damage, int radius = 0, int ricochets = 0);
-		~Weapon();
+		virtual ~Weapon();
 
 		bool isActive() override;
 

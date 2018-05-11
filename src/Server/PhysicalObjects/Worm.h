@@ -33,6 +33,8 @@ class Worm: public PhysicalObject{
 		void shoot(b2Vec2 pos);
 
 		void collide_with_something(CollisionData* other) override;
+
+		void reduce_life(int damage);
 };
 
 typedef std::shared_ptr<Worm> worm_ptr;

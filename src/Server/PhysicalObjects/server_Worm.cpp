@@ -18,7 +18,7 @@ void Worm::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 
 void Worm::createFixtures(){
 	b2PolygonShape boxShape;
-	boxShape.SetAsBox(1,1);
+	boxShape.SetAsBox(0.5, 0.5);
 		  
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
@@ -66,6 +66,15 @@ void Worm::shoot(int angle, int power, int time){
 
 void Worm::shoot(b2Vec2 pos){
 	((Weapon*)this->weapon.get())->shoot(*this, pos);
+}
+
+#include <iostream>/////////////////////////////////////
+void Worm::reduce_life(int damage){
+	this->life -= damage;
+	std::cout <<"Danio worm id: "<<this->getId()<<" life: "<<this->life<<std::endl;
+	if (this->life <= 0){
+		this->is_dead = true;
+	}
 }
 
 void Worm::collide_with_something(CollisionData* other){

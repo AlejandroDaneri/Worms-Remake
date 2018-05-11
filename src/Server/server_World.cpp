@@ -10,6 +10,8 @@ World::World(const b2Vec2& gravity): world(gravity), is_active(false){
 		
 World::~World(){}
 
+
+#include <iostream>//////////////////////////////////////////////////////////////////////////////
 void World::run(){
 	float32 timeStep = 1/20.0;      //the length of time passed to simulate (seconds)
 	int32 velocityIterations = 8;   //how strongly to correct velocity
@@ -21,7 +23,30 @@ void World::run(){
 		std::lock_guard<std::mutex> lock(this->mutex);
 		this->world.Step(timeStep, velocityIterations, positionIterations);
 
+		for (auto it = this->bullets_to_add.begin(); it != this->bullets_to_add.end(); it++){
+			Bullet* bullet = (Bullet*)it->get();
+
+			b2BodyDef body_def;
+			bullet->getBodyDef(body_def, bullet->getEpicenter());
+			bullet->initializeBody(this->world.CreateBody(&body_def));
+			this->bullets.push_back(*it);
+			std::cout<<"Bullet added"<<std::endl;
+		}
+		this->bullets_to_add.clear();
+
 		this->is_active = false;
+
+		auto it = this->bullets.begin();
+		while(it != this->bullets.end()){
+			if ((*it)->isDead()){
+				this->removeObject(*it);
+				it = this->bullets.erase(it);
+				std::cout<<"Bullet removed"<<std::endl;
+			} else {
+				this->is_active = true;
+				++it;
+			}
+		}
 		for (auto it = this->objects.begin(); it != this->objects.end(); it++){
 			if ((*it)->isDead()){
 				this->removeObject(*it);
@@ -35,6 +60,10 @@ void World::run(){
 bool World::isActive(){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	return this->is_active;
+}
+
+void World::addBullet(physical_object_ptr bullet){
+	this->bullets_to_add.push_back(bullet);
 }
 
 void World::addObject(physical_object_ptr object, const b2Vec2& pos){

@@ -1,7 +1,6 @@
 #ifndef __PHYSICALOBJECT_H__
 #define __PHYSICALOBJECT_H__
 
-#include "World.h"
 #include "b2Body.h"
 #include "CollisionData.h"
 #include <string>
@@ -31,7 +30,7 @@ class PhysicalObject{
 		b2Body* getBody();
 		virtual bool isMoving();
 		virtual bool isActive();
-		bool isDead();
+		virtual bool isDead();
 		int getId();
 		std::string& getType();
 
@@ -40,5 +39,7 @@ class PhysicalObject{
 		virtual void collide_with_something(CollisionData* other);
 
 };
+
+typedef std::shared_ptr<PhysicalObject> physical_object_ptr;
 
 #endif

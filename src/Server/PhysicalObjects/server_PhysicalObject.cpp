@@ -1,6 +1,5 @@
 #include "PhysicalObject.h"
-
-#include <iostream>//////////////////////////////////////////////////////////////
+#include "World.h"
 
 PhysicalObject::PhysicalObject(World& world, int id, std::string type):
 	world(world), is_dead(false), id(id), type(type), last_position(-1, -1),
