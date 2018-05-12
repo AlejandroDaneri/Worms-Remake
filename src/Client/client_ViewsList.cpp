@@ -50,7 +50,7 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, int pos
 	}
 }
 
-void updateGirderData(int id, const std::string& girder_name, int pos_x, int pos_y) {
+void ViewsList::updateGirderData(int id, const std::string& girder_name, int pos_x, int pos_y) {////////////////////Agregar el angulo
 	auto it = this->girders.find(id);
 	Position pos(pos_x, pos_y);
 	if (it == this->girders.end()){
