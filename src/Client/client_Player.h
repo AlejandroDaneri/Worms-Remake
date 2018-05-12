@@ -7,8 +7,9 @@
 #include "client_Turn.h"
 #include "client_Timer.h"
 #include "client_Weapon.h"
+#include "Position.h"
 
-class Player{
+class Player {
 	private:
 		ClientProtocol& protocol;
 		WorldView& world;
@@ -18,6 +19,8 @@ class Player{
 		Weapon actual_weapon;
 		std::unique_ptr<Turn> turn;
 		std::unique_ptr<Timer> timer;
+		
+		void disable_attack_handlers();
 
 	public:
 		Player(ClientProtocol& protocol, WorldView& world);
@@ -27,10 +30,15 @@ class Player{
 		void endTurn();
 		
 		void shoot(int32_t power);
+		void shoot(Position position);
 		
 		bool complete_key_press_handler(GdkEventKey* key_event);
 		
+		bool movement_key_press_handler(GdkEventKey* key_event);
+		
 		bool complete_key_release_handler(GdkEventKey* key_event);
+		
+		bool on_button_press_event(GdkEventButton *event);
 		
 		Gtk::ScrolledWindow& getWindow();
 };
