@@ -1,23 +1,23 @@
-#ifndef __WEAPONVIEW_H__
-#define __WEAPONVIEW_H__
+#ifndef __GIRDERVIEW_H__
+#define __GIRDERVIEW_H__
 
 #include "Viewable.h"
 #include <gtkmm/widget.h>
 #include <gtkmm/image.h>
 #include <string>
 
-class WeaponView: public Viewable{
+class GirderView: public Viewable{
 	private:
 		Gtk::Image image;
-		std::string weapon_name;
+		std::string girder_name;
 
 	protected:
 		Gtk::Widget& getWidget() override;
 
 	public:
-		WeaponView(WorldView& worldView, std::string weapon, Position pos);
-		~WeaponView();
-		WeaponView(WeaponView&& other);
+		GirderView(WorldView& worldView, std::string girder, Position pos);
+		~GirderView();
+		GirderView(GirderView&& other);
 
 		void updateData(const Position& new_pos);
 

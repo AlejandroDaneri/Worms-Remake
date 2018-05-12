@@ -22,13 +22,11 @@ class WormView: public Viewable{
 	public:
 		WormView(WorldView& worldView, int life, char dir, Position pos);
 		~WormView();
+		WormView(WormView&& other);
 
 		void updateData(int new_life, char new_dir, const Position& new_pos);
 
 		void kill();
-
-		WormView(WormView&& other);
-
 };
 
 
