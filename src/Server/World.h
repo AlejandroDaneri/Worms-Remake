@@ -9,6 +9,8 @@
 #include <mutex>
 #include <list>
 
+class Weapon;
+
 class World: public Thread{
 	private:
 		b2World world;
@@ -31,6 +33,8 @@ class World: public Thread{
 		void addObject(physical_object_ptr object, const b2Vec2& pos);
 
 		void addWeaponFragment(physical_object_ptr fragment);
+
+		void removeTimedWeapon(Weapon& weapon);
 
 		b2Vec2 getObjectPosition(PhysicalObject& object);
 

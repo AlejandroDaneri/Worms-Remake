@@ -4,6 +4,7 @@
 #include "PhysicalObject.h"
 #include "GameParameters.h"
 #include "World.h"
+#include "WeaponExplodeTime.h"
 #include <string>
 
 class Worm;
@@ -17,6 +18,7 @@ class Weapon: public PhysicalObject{
 		int time_to_explode;
 		int angle;
 		int power;
+		WeaponExplodeTime explode_time;
 
 		void createFixtures() override;
 		void setInitialVelocity() override;
