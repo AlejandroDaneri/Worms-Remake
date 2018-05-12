@@ -4,6 +4,7 @@
 https://github.com/jbeder/yaml-cpp
 
 ### Lista de clases gtk
+https://www.gtk.org/tutorial1.2/gtk_tut.html#toc10
 https://developer.gnome.org/gnome-devel-demos/stable/c.html.es
 
 
