@@ -3,7 +3,7 @@
 
 #include "client_SelfDirectedWeapon.h"
 
-class AirAttack: public SelfDirectedWeapon{
+class AirAttack: public SelfDirectedWeapon {
 	public:
 		AirAttack(int ammo);
 		~AirAttack();

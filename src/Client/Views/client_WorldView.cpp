@@ -32,7 +32,7 @@ bool WorldView::inactive_handler(GdkEventKey* key_event) {
 }
 
 void WorldView::enable_handlers(Player& player) {
-	this->world.signal_key_press_event().connect(sigc::mem_fun(player, &Player::complete_handler));
+	this->world.signal_key_press_event().connect(sigc::mem_fun(player, &Player::complete_key_press_handler));
 }
 
 void WorldView::disable_handlers() {

@@ -3,7 +3,7 @@
 
 #include "client_DistanceWeapon.h"
 
-class HolyGrenade: public DistanceWeapon{
+class HolyGrenade: public DistanceWeapon {
 	public:
 		HolyGrenade(int ammo);
 		~HolyGrenade();

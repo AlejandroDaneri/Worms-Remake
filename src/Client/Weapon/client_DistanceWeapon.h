@@ -4,16 +4,12 @@
 #include "client_Weapon.h"
 
 class DistanceWeapon: public Weapon{
-	protected:
-		int time;
-
 	public:
-		DistanceWeapon(std::string name, int ammo, int time = -1);
-		~DistanceWeapon() {}
+		DistanceWeapon(std::string name, int ammo, bool time = false,
+											bool fragmentable = false);
+		~DistanceWeapon();
 		
 		bool hasVariablePower() override;
-		void changeTime(int time) override;
-		int getTime() override;
 };
 
 #endif

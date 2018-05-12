@@ -8,7 +8,6 @@ class Player;
 
 class Turn : public Thread {
 	private:
-		bool running;
 		int actual_time;
 		int max_time;
 		Player& player;
@@ -16,11 +15,9 @@ class Turn : public Thread {
 	public:
 		Turn(Player& player);
 		~Turn();
-		Turn(Turn&& other);
 
 		void run();
-		void stopRun();
-		void reduceTime(int timeReduction);
+		void reduceTime();
 };
 
 #endif

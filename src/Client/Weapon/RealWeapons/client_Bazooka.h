@@ -3,7 +3,7 @@
 
 #include "client_DistanceWeapon.h"
 
-class Bazooka: public DistanceWeapon{
+class Bazooka: public DistanceWeapon {
 	public:
 		Bazooka(int ammo);
 		~Bazooka();

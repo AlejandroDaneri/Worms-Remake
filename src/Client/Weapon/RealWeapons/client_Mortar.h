@@ -1,25 +1,13 @@
 #ifndef __CLIENTMORTAR_H__
 #define __CLIENTMORTAR_H__
 
-#include "client_FragmentableWeapon.h"
+#include "client_DistanceWeapon.h"
 
 
-class Mortar: public FragmentableWeapon{
-	private:
-		class Fragment;
-
-	protected:
-		//weapon_ptr getFragment(); AGREGARLO
-
+class Mortar: public DistanceWeapon {
 	public:
 		Mortar(int ammo);
 		~Mortar();
-};
-
-class Mortar::Fragment: public DistanceWeapon {
-	public:
-		Fragment();
-		~Fragment();
 };
 
 #endif

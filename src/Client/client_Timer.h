@@ -4,17 +4,20 @@
 #include "Thread.h"
 #include <unistd.h>
 
+class Player;
+
 class Timer : public Thread {
 	private:
-		bool running;
-		int max_time;
+		int32_t actual_time;
+		int32_t max_time;
+		Player& player;
 
 	public:
-		Timer(int time);
+		Timer(Player& player, int time);
 		~Timer();
 
-		void run(); // recibe el arma
-		void stopRun();
+		void run();
+		int32_t getTime();
 };
 
 #endif

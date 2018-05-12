@@ -4,5 +4,4 @@
 Bat::Bat(int ammo): MeleeWeapon(BAT_NAME, ammo, true) {}
 
 Bat::~Bat() {}
-		
 

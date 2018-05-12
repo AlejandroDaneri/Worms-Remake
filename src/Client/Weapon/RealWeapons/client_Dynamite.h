@@ -3,7 +3,7 @@
 
 #include "client_MeleeWeapon.h"
 
-class Dynamite: public MeleeWeapon{
+class Dynamite: public MeleeWeapon {
 	public:
 		Dynamite(int ammo);
 		~Dynamite();

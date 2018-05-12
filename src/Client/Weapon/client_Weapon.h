@@ -13,15 +13,15 @@ class Weapon {
 
 	public:
 		Weapon(std::string name, int ammo);
-		~Weapon() {}
+		~Weapon();
 		
 		virtual bool hasScope();
 		virtual bool isSelfDirected();
 		virtual bool isFragmentable();
 		virtual bool isTimed();
 		virtual bool hasVariablePower();
-		virtual void changeTime(int time) = 0;
-		virtual int getTime();
 		virtual std::string getName();
+		virtual void shoot();
+		virtual bool hasAmmo();
 };
 #endif

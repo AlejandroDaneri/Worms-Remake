@@ -7,8 +7,6 @@ class Banana: public DistanceWeapon {
 	public:
 		Banana(int ammo);
 		~Banana();
-
-		//virtual void shoot(const Position& origin, const dir_ptr& dir, int angle, int power, int time);
 };
 
 #endif

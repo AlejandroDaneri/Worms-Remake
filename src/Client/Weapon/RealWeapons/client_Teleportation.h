@@ -3,7 +3,7 @@
 
 #include "client_SelfDirectedWeapon.h"
 
-class Teleportation: public SelfDirectedWeapon{
+class Teleportation: public SelfDirectedWeapon {
 	public:
 		Teleportation(int ammo);
 		~Teleportation();

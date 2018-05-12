@@ -4,14 +4,9 @@
 #include "client_Weapon.h"
 
 class MeleeWeapon : public Weapon {
-	private:
-		int time;
 	public:
-		MeleeWeapon(std::string name, int ammo, bool scope, int time = -1);
+		MeleeWeapon(std::string name, int ammo, bool scope, bool time = false);
 		~MeleeWeapon() {}
-		
-		void changeTime(int time) override;
-		int getTime() override;
 };
 
 #endif

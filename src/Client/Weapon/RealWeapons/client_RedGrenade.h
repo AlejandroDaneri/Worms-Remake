@@ -1,24 +1,12 @@
 #ifndef __CLIENTREDGRENADE_H__
 #define __CLIENTREDGRENADE_H__
 
-#include "client_FragmentableWeapon.h"
+#include "client_DistanceWeapon.h"
 
-class RedGrenade: public FragmentableWeapon{
-	private:
-		class Fragment;
-
-	protected:
-		//weapon_ptr getFragment(); AGREGARLO
-
+class RedGrenade: public DistanceWeapon {
 	public:
 		RedGrenade(int ammo);
 		~RedGrenade();
-};
-
-class RedGrenade::Fragment: public DistanceWeapon{
-	public:
-		Fragment();
-		~Fragment();
 };
 
 #endif

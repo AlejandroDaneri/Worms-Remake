@@ -3,6 +3,8 @@
 Weapon::Weapon(std::string name, int ammo) :
 	name(name), ammo(ammo), has_Scope(false), is_Timed(false),
 	is_Fragmentable(false) {}
+	
+Weapon::~Weapon() {}
 
 bool Weapon::hasScope() {
 	return this->has_Scope;
@@ -24,10 +26,15 @@ bool Weapon::hasVariablePower() {
 	return false;
 }
 
-int Weapon::getTime() {
-	return -1;
-}
-
 std::string Weapon::getName() {
 	return this->name;
 }
+
+void Weapon::shoot() {
+	this->ammo--;
+}
+
+bool Weapon::hasAmmo() {
+	return this->ammo > 0;
+}
+
