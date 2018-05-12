@@ -41,15 +41,13 @@ void Protocol::send_string(char* buffer, size_t& offset, const std::string& stri
 	for (size_t j = 0; j < string.size(); offset++, j++){
 		buffer[offset] = string[j];
 	}
-	buffer[offset] = '\0';
-	offset++;
+	buffer[offset++] = '\0';
 }
 
 std::string Protocol::receive_string(char* buffer, size_t& offset) {
 	std::string string;
 	while (buffer[offset] != '\0'){
-		string += buffer[offset];
-		offset++;
+		string += buffer[offset++];
 	}
 	offset++;
 	return string;
