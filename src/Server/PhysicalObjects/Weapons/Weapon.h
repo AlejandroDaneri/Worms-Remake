@@ -25,14 +25,14 @@ class Weapon: public PhysicalObject{
 		int ricochets;
 
 	public:
-		static int id;
+		static int weapon_id;
 
 		Weapon(World& world, GameParameters& parameters, int damage, int radius = 0, int ricochets = 0);
 		virtual ~Weapon();
 
 		bool isActive() override;
 
-		virtual void shoot(int angle, int power, int time);
+		virtual void shoot(char dir, int angle, int power, int time);
 
 		virtual void shoot(Worm& shooter, b2Vec2 pos);
 

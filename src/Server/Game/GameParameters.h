@@ -16,6 +16,14 @@ class GameParameters{
 
 		int bazooka_radius;
 		int bazooka_damage;
+
+		int redGrenade_radius;
+		int redGrenade_damage;
+		int redGrenade_fragments;
+
+		int redGrenadeFragment_radius;
+		int redGrenadeFragment_damage;
+
 		size_t max_players;
 
 	public:
@@ -33,6 +41,13 @@ class GameParameters{
 
 		int get_bazooka_radius();
 		int get_bazooka_damage();
+
+		int get_redGrenade_damage();
+		int get_redGrenade_radius();
+		int get_redGrenade_fragments();
+
+		int get_redGrenadeFragment_damage();
+		int get_redGrenadeFragment_radius();
 
 		size_t get_max_players();
 
