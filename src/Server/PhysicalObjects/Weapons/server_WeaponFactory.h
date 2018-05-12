@@ -3,7 +3,6 @@
 
 #include "World.h"
 #include "GameParameters.h"
-#include "server_Bazooka.h"
 
 class WeaponFactory{
 	private:

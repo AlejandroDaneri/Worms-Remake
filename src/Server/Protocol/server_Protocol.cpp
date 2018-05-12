@@ -63,6 +63,7 @@ void ServerProtocol::send_weapon(physical_object_ptr& object, char* buffer){
 	buffer[offset++] = WEAPON_TYPE;
 	this->send_int(buffer, offset, object->getId());
 
+
 	b2Vec2 position = object->getPosition();
 	Weapon* weapon = (Weapon*)object.get();
 	std::string name = weapon->getName();

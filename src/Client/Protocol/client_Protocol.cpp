@@ -39,7 +39,7 @@ void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t tim
 	this->send_buffer(buffer, offset);
 }
 
-void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos){
+void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
@@ -83,6 +83,13 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 			int pos_x = this->receive_int(buffer, offset);
 			int pos_y = this->receive_int(buffer, offset);
 			viewsList.updateWeaponData(id, weapon, pos_x, pos_y);
+		} else if (type == GIRDER_TYPE){
+			std::string girder(this->receive_string(buffer, offset));
+
+			int pos_x = this->receive_int(buffer, offset);
+			int pos_y = this->receive_int(buffer, offset);
+			//////////////////////////////////////////////////////////// Agregar el angulo
+			viewsList.updateGirderData(id, girder, pos_x, pos_y);
 		}
 	} else if (action == DEAD_OBJECT){
 		char type = buffer[offset++];

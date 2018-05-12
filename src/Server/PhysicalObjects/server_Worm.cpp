@@ -61,11 +61,15 @@ void Worm::changeWeapon(const std::string& weapon){
 }
 
 void Worm::shoot(int angle, int power, int time){
-	((Weapon*)this->weapon.get())->shoot(angle, power, time);
+	((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time);
+	b2Vec2 pos = this->getPosition();
+	pos.x += 2 * this->dir;
+	this->world.addObject(this->weapon, pos);
 }
 
 void Worm::shoot(b2Vec2 pos){
 	((Weapon*)this->weapon.get())->shoot(*this, pos);
+	this->world.addObject(this->weapon, this->getPosition());
 }
 
 #include <iostream>/////////////////////////////////////

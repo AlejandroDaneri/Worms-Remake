@@ -16,6 +16,7 @@ class World: public Thread{
 		CollisionListener collision_listener;
 		std::list<physical_object_ptr> objects;
 		std::list<physical_object_ptr> girders;
+		std::list<physical_object_ptr> fragments_to_add;
 		bool is_active;
 
 		void initialize();
@@ -28,6 +29,8 @@ class World: public Thread{
 		void run() override;
 
 		void addObject(physical_object_ptr object, const b2Vec2& pos);
+
+		void addWeaponFragment(physical_object_ptr fragment);
 
 		b2Vec2 getObjectPosition(PhysicalObject& object);
 

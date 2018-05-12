@@ -8,12 +8,12 @@
 #define PI 3.14159265
 #define RADIANS PI / 180
 
-int Weapon::id = 1;
+int Weapon::weapon_id = 1;
 
 #include <iostream>////////////////////////////////////////////////////////////////////////////////////////
 
 Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius, int ricochets): 
-	PhysicalObject(world, Weapon::id, "Weapon"), parameters(parameters), 
+	PhysicalObject(world, Weapon::weapon_id++, "Weapon"), parameters(parameters), 
 	damage(damage), radius(radius), 
 	waiting_to_explode(false), ricochets(ricochets){}
 
@@ -23,7 +23,10 @@ bool Weapon::isActive(){
 	return this->waiting_to_explode || PhysicalObject::isActive();
 }
 
-void Weapon::shoot(int angle, int power, int time){
+void Weapon::shoot(char dir, int angle, int power, int time){
+	if (dir == -1){
+		angle = 180 - angle;
+	}
 	this->time_to_explode = time;
 	this->angle = angle;
 	this->power = power;
@@ -65,7 +68,7 @@ void Weapon::setInitialVelocity(){
 
 
 void Weapon::explode(){
-	std::cout<<"weapon explode"<<std::endl;
+	std::cout<<"weapon explode: "<<this->getId()<<std::endl;
 	b2Vec2 center = this->body->GetPosition();
 	for (int bullet_angle = 0; bullet_angle < 360; bullet_angle+= 5){
 		b2Vec2 end = center + this->radius * b2Vec2(cos(bullet_angle * RADIANS), sin(bullet_angle * RADIANS));

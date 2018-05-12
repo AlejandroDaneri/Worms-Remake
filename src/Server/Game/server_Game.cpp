@@ -40,13 +40,8 @@ void Game::run(){
 	this->world.addObject(girder, b2Vec2(7, 20));
 
 	sleep(5);
-	WeaponFactory factory(this->world, this->parameters);
-	physical_object_ptr weapon = factory.getWeapon(std::string("Bazooka"));
-	((Weapon*)weapon.get())->shoot(60, -1, -1);
-	b2Vec2 pos = worm->getPosition();
-	pos.x += 2 * worm->getDir();
-	//pos.y += 4;
-	world.addObject(weapon, pos);
+	worm->changeWeapon("RedGrenade");
+	worm->shoot(60, -1, -1);
 	worm->move(0);
 }
 
@@ -55,7 +50,7 @@ void Game::configure(){
 
 	for (int i = 1; i < 5; i++){
 		physical_object_ptr worm(new Worm(this->world, i, this->parameters));
-		this->world.addObject(worm, b2Vec2(9.5 * (i+1), 75));
+		this->world.addObject(worm, b2Vec2(10 * (i+1), 75));
 		physical_object_ptr girder(new Girder(this->world, 6));
 		this->world.addObject(girder, b2Vec2(10 * (i+1) - 3, 20));
 		//agegar worm al jugador etc

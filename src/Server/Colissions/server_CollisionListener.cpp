@@ -9,6 +9,10 @@ void CollisionListener::BeginContact(b2Contact* contact){
 	CollisionData* dataA = (CollisionData*)contact->GetFixtureA()->GetBody()->GetUserData();
 	CollisionData* dataB = (CollisionData*)contact->GetFixtureB()->GetBody()->GetUserData();
 
+	if (dataA->getObject()->isDead() || dataB->getObject()->isDead()){
+		return;
+	}
+
 	if (dataA->getType() == "Weapon"){
 		dataA->getObject()->collide_with_something(dataB);
 	} else if (dataB->getType() == "Weapon"){

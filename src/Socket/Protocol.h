@@ -28,6 +28,7 @@
 
 #define WORM_TYPE 0
 #define WEAPON_TYPE 1
+#define GIRDER_TYPE 2
 
 class Protocol {
 	private:
