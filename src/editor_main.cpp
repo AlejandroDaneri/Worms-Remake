@@ -7,7 +7,7 @@
 #include <gtkmm/aspectframe.h>
 #include <gtkmm/window.h>
 
-#include "Editor/ToolBox.h"
+#include "Editor/editor_ToolBox.h"
 
 int main (int argc, char *argv[])
 {
@@ -26,11 +26,7 @@ int main (int argc, char *argv[])
     Gtk::ScrolledWindow mapwin;
 
     window.maximize();
-
-    char cwd[1024];
-    if (getcwd(cwd, sizeof(cwd)) != NULL)
-        fprintf(stdout, "Current working dir: %s\n", cwd);
-
+    
     map.set("resources/images/map.png");
     mapwin.add(map);
     map.show();

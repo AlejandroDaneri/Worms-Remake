@@ -1,5 +1,5 @@
 #include <iostream>
-#include "ToolBox.h"
+#include "editor_ToolBox.h"
 
 ToolBox::ToolBox() {
     worm.add_pixlabel("resources/images/right_worm.png","");
