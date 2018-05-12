@@ -36,12 +36,12 @@ void Game::run(){
 
 	worm_ptr worm(new Worm(this->world, 38, this->parameters));
 	this->world.addObject(worm, b2Vec2(10, 25));
-	physical_object_ptr girder(new Girder(this->world, 876));
+	physical_object_ptr girder(new Girder(this->world, 6));
 	this->world.addObject(girder, b2Vec2(7, 20));
 
 	sleep(5);
-	worm->changeWeapon("Bazooka");
-	worm->shoot(60, -1, -1);
+	worm->changeWeapon("Banana");
+	worm->shoot(60, -1, 15);
 	worm->move(0);
 }
 

@@ -88,14 +88,15 @@ void Weapon::explode(){
 			}
 		}
 	}
-	//stop thread time
+	
+	this->explode_time.stop();
 	this->waiting_to_explode = false;
 	this->is_dead = true;
 }
 
 void Weapon::collide_with_something(CollisionData* other){
 	std::cout<<"weapon collision"<<std::endl;
-	if (this->time_to_explode == -1){
+	if (this->time_to_explode == -1 || other->getType() == "Border"){
 		this->explode();
 	}
 }

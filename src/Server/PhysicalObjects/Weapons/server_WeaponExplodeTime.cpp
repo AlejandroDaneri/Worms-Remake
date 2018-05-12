@@ -13,10 +13,16 @@ void WeaponExplodeTime::setTime(int time){
 
 void WeaponExplodeTime::run(){
 	if (this->time > 0){
-		std::this_thread::sleep_for(std::chrono::seconds(this->time));
-		std::lock_guard<std::mutex> lock(this->world.getMutex());
-		this->weapon.explode();
-		this->world.removeTimedWeapon(this->weapon);
+		int passed = 0;
+		while (this->running && passed < this->time){
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+			passed++;
+		}
+		if (this->running){
+			std::lock_guard<std::mutex> lock(this->world.getMutex());
+			this->weapon.explode();
+			this->world.removeTimedWeapon(this->weapon);
+		}
 	}
 
 }

@@ -9,10 +9,14 @@ GameParameters::GameParameters(const std::string& config_file){
 	this->worm_rollback_velocity = 7;
 	this->worm_jump_height = 7;
 	this->worm_rollback_height = 7;
-	this->bazooka_radius = 2;
-	this->bazooka_damage = 50;
 	this->max_players = 1;
 	this->weapons_velocity = 13;
+
+	this->bazooka_radius = 2;
+	this->bazooka_damage = 50;
+
+	this->banana_radius = 4;
+	this->banana_damage = 70;
 
 	this->redGrenade_radius = 2;
 	this->redGrenade_damage = 30;
@@ -58,6 +62,14 @@ int GameParameters::get_bazooka_radius(){
 
 int GameParameters::get_bazooka_damage(){
 	return this->bazooka_damage;
+}
+
+int GameParameters::get_banana_radius(){
+	return this->banana_radius;
+}
+
+int GameParameters::get_banana_damage(){
+	return this->banana_damage;
 }
 
 int GameParameters::get_redGrenade_radius(){

@@ -17,6 +17,9 @@ class GameParameters{
 		int bazooka_radius;
 		int bazooka_damage;
 
+		int banana_radius;
+		int banana_damage;
+
 		int redGrenade_radius;
 		int redGrenade_damage;
 		int redGrenade_fragments;
@@ -41,6 +44,9 @@ class GameParameters{
 
 		int get_bazooka_radius();
 		int get_bazooka_damage();
+
+		int get_banana_radius();
+		int get_banana_damage();
 
 		int get_redGrenade_damage();
 		int get_redGrenade_radius();

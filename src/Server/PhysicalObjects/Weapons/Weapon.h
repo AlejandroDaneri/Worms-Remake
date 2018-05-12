@@ -20,7 +20,7 @@ class Weapon: public PhysicalObject{
 		int power;
 		WeaponExplodeTime explode_time;
 
-		void createFixtures() override;
+		virtual void createFixtures() override;
 		void setInitialVelocity() override;
 
 	private:
