@@ -1,5 +1,6 @@
 #include "client_Player.h"
 #include "client_Bazooka.h"
+#include "ViewTransformer.h"
 
 #define LEFT_ARROW 0xff51
 #define UP_ARROW 0xff52
@@ -50,7 +51,8 @@ void Player::disable_attack_handlers() {
 
 void Player::shoot(Position position) {
 	this->disable_attack_handlers();
-	this->protocol.send_weapon_self_directed_shoot(position);
+	Position newPosition = ViewTransformer().transformToPosition(position);
+	this->protocol.send_weapon_self_directed_shoot(newPosition);
 }
 
 void Player::shoot(int32_t power) {

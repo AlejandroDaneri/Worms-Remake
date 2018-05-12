@@ -39,7 +39,7 @@ void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t tim
 	this->send_buffer(buffer, offset);
 }
 
-void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos){
+void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
