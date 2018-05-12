@@ -1,6 +1,7 @@
 #include "Weapon.h"
 #include "b2Fixture.h"
 #include "b2CircleShape.h"
+#include "CollisionData.h"
 #include "Worm.h"
 #include <cmath>
 
@@ -65,9 +66,20 @@ void Weapon::setInitialVelocity(){
 
 void Weapon::explode(){
 	std::cout<<"weapon explode"<<std::endl;
-	for (int bullet_angle = 0; bullet_angle < 360; bullet_angle+= 60){
-		physical_object_ptr bullet(new Bullet(this->world, bullet_angle, this->damage, this->radius, this->getPosition()));
-		this->world.addBullet(bullet);
+	b2Vec2 center = this->body->GetPosition();
+	for (int bullet_angle = 0; bullet_angle < 360; bullet_angle+= 5){
+		b2Vec2 end = center + this->radius * b2Vec2(cos(bullet_angle * RADIANS), sin(bullet_angle * RADIANS));
+		b2Body* closest_body = this->world.getClosestObject(center, end);
+		if (closest_body){
+			CollisionData* data = (CollisionData*)closest_body->GetUserData();
+			if (data->getType() == "Worm"){
+				Worm* worm = ((Worm*)data->getObject());
+				float distance = b2Distance(center, worm->getPosition());
+
+				int worm_damage = this->damage * (1 - distance / (2 * this->radius)); //Justo en el borde hace la mitad de danio
+				worm->receive_weapon_damage(worm_damage, this->id);
+			}
+		}
 	}
 	//stop thread time
 	this->waiting_to_explode = false;

@@ -5,7 +5,6 @@
 #include "b2World.h"
 #include "b2Body.h"
 #include "PhysicalObject.h"
-#include "Bullet.h"
 #include "CollisionListener.h"
 #include <mutex>
 #include <list>
@@ -17,8 +16,6 @@ class World: public Thread{
 		CollisionListener collision_listener;
 		std::list<physical_object_ptr> objects;
 		std::list<physical_object_ptr> girders;
-		std::list<physical_object_ptr> bullets;
-		std::list<physical_object_ptr> bullets_to_add;
 		bool is_active;
 
 		void initialize();
@@ -32,13 +29,13 @@ class World: public Thread{
 
 		void addObject(physical_object_ptr object, const b2Vec2& pos);
 
-		void addBullet(physical_object_ptr bullet);
-
 		b2Vec2 getObjectPosition(PhysicalObject& object);
 
 		void setLinearVelocity(PhysicalObject& object, b2Vec2& velocity);
 
 		bool isActive();
+
+		b2Body* getClosestObject(b2Vec2 center, b2Vec2 end);
 
 		std::list<physical_object_ptr>& getObjectsList();
 

@@ -6,7 +6,7 @@
 
 Worm::Worm(World& world, int id, GameParameters& parameters):
 	PhysicalObject(world, id, "Worm"), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters){}
+	dir(1), parameters(parameters), last_weapon_exploded(-1){}
 
 Worm::~Worm(){}
 
@@ -69,11 +69,14 @@ void Worm::shoot(b2Vec2 pos){
 }
 
 #include <iostream>/////////////////////////////////////
-void Worm::reduce_life(int damage){
-	this->life -= damage;
-	std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
-	if (this->life <= 0){
-		this->is_dead = true;
+void Worm::receive_weapon_damage(int damage, int weapon_id){
+	if (weapon_id != this->last_weapon_exploded){
+		this->life -= damage;
+		std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
+		this->last_weapon_exploded = weapon_id;
+		if (this->life <= 0){
+			this->is_dead = true;
+		}
 	}
 }
 

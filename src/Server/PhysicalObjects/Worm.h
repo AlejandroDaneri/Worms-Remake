@@ -11,6 +11,7 @@ class Worm: public PhysicalObject{
 		char dir;
 		GameParameters& parameters;
 		physical_object_ptr weapon;
+		int last_weapon_exploded;
 
 
 	protected:
@@ -34,7 +35,7 @@ class Worm: public PhysicalObject{
 
 		void collide_with_something(CollisionData* other) override;
 
-		void reduce_life(int damage);
+		void receive_weapon_damage(int damage, int weapon_id);
 };
 
 typedef std::shared_ptr<Worm> worm_ptr;
