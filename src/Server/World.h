@@ -35,7 +35,7 @@ class World: public Thread{
 
 		bool isActive();
 
-		b2Body* getClosestObject(b2Vec2 center, b2Vec2 end);
+		b2Body* getClosestObject(b2Vec2 center, b2Vec2 end, b2Vec2& normal);
 
 		std::list<physical_object_ptr>& getObjectsList();
 

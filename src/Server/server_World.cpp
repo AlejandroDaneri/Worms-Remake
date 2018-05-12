@@ -73,9 +73,10 @@ void World::setLinearVelocity(PhysicalObject& object, b2Vec2& velocity){
 	body->SetLinearVelocity(velocity);
 }
 
-b2Body* World::getClosestObject(b2Vec2 center, b2Vec2 end){
+b2Body* World::getClosestObject(b2Vec2 center, b2Vec2 end, b2Vec2& normal){
 	RayCastClosestCallback callback;
 	this->world.RayCast(&callback, center, end);
+	normal = callback.getClosestNormal();
 	return callback.getClosestBody();
 }
 

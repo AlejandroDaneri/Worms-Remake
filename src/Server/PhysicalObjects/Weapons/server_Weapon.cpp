@@ -69,15 +69,15 @@ void Weapon::explode(){
 	b2Vec2 center = this->body->GetPosition();
 	for (int bullet_angle = 0; bullet_angle < 360; bullet_angle+= 5){
 		b2Vec2 end = center + this->radius * b2Vec2(cos(bullet_angle * RADIANS), sin(bullet_angle * RADIANS));
-		b2Body* closest_body = this->world.getClosestObject(center, end);
+		b2Vec2 normal;
+		b2Body* closest_body = this->world.getClosestObject(center, end, normal);
 		if (closest_body){
 			CollisionData* data = (CollisionData*)closest_body->GetUserData();
 			if (data->getType() == "Worm"){
 				Worm* worm = ((Worm*)data->getObject());
 				float distance = b2Distance(center, worm->getPosition());
-
 				int worm_damage = this->damage * (1 - distance / (2 * this->radius)); //Justo en el borde hace la mitad de danio
-				worm->receive_weapon_damage(worm_damage, this->id);
+				worm->receive_weapon_damage(worm_damage, normal, this->id);
 			}
 		}
 	}
