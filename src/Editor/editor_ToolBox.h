@@ -2,21 +2,23 @@
 #define WORMS_TOOLBOX_H
 
 
-#include <gtkmm/hvbox.h>
 #include <gtkmm/image.h>
 #include <gtkmm/button.h>
+#include <gtkmm/grid.h>
+#include <gtkmm/togglebutton.h>
 
 
-class ToolBox : public Gtk::HBox{
+class ToolBox : public Gtk::Grid{
 private:
     //Child widgets
-    Gtk::Button worm, girder;
-
+    Gtk::Button turn;
+    Gtk::ToggleButton worm, girder;
 
 public:
     ToolBox();
 
     void on_button_clicked();
+
 };
 
 

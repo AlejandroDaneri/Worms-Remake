@@ -8,6 +8,7 @@
 #include <gtkmm/window.h>
 
 #include "Editor/editor_ToolBox.h"
+#include "Editor/editor_MapArea.h"
 
 int main (int argc, char *argv[])
 {
@@ -15,7 +16,7 @@ int main (int argc, char *argv[])
 
     Gtk::Window window;
     Gtk::HBox general;
-    Gtk::Image map;
+    MapArea mapArea;
     Gtk::AspectFrame aspectFrame("", /* label */
                                  Gtk::ALIGN_CENTER, /* center x */
                                  Gtk::ALIGN_CENTER, /* center y */
@@ -23,21 +24,12 @@ int main (int argc, char *argv[])
                                  false /* ignore child's aspect */);
     ToolBox toolBox;
 
-    Gtk::ScrolledWindow mapwin;
-
     window.maximize();
-    
-    map.set("resources/images/map.png");
-    mapwin.add(map);
-    map.show();
-/*/
-    aspectFrame.add(toolBox);
-    aspectFrame.set(0,0,0);
-    aspectFrame.set_shadow_type(Gtk::SHADOW_NONE);
-/*/
+
     toolBox.show();
     general.pack_start(toolBox,Gtk::PACK_SHRINK);
-    general.pack_end(mapwin);
+
+    general.pack_end(mapArea);
 
     window.add(general);
 
