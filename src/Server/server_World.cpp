@@ -1,4 +1,5 @@
 #include "World.h"
+#include "Weapon.h"
 #include "BottomBorder.h"
 #include "b2WorldCallbacks.h"
 #include "RayCastClosestCallback.h"
@@ -13,8 +14,6 @@ World::World(const b2Vec2& gravity): world(gravity), is_active(false){
 		
 World::~World(){}
 
-
-#include <iostream>//////////////////////
 void World::run(){
 	float32 timeStep = 1/20.0;      //the length of time passed to simulate (seconds)
 	int32 velocityIterations = 8;   //how strongly to correct velocity
@@ -24,7 +23,6 @@ void World::run(){
 		for (auto it = this->fragments_to_add.begin(); it != this->fragments_to_add.end(); it++){
 			Fragment* fragment = (Fragment*)it->get();
 			this->addObject(*it, fragment->get_shoot_position());
-			std::cout <<"fragment added"<<std::endl;
 		}
 		this->fragments_to_add.clear();
 
@@ -66,8 +64,15 @@ void World::addWeaponFragment(physical_object_ptr fragment){
 	this->fragments_to_add.push_back(fragment);
 }
 
+void World::removeTimedWeapon(Weapon& weapon){
+	this->world.DestroyBody(weapon.getBody());
+}
+
 void World::removeObject(physical_object_ptr object){
-	this->world.DestroyBody(object->getBody());
+	b2Body* body = object->getBody();
+	if (body){
+		this->world.DestroyBody(object->getBody());
+	}
 }
 
 void World::initialize(){

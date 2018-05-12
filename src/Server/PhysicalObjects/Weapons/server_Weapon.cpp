@@ -15,9 +15,12 @@ int Weapon::weapon_id = 1;
 Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius, int ricochets): 
 	PhysicalObject(world, Weapon::weapon_id++, "Weapon"), parameters(parameters), 
 	damage(damage), radius(radius), 
-	waiting_to_explode(false), ricochets(ricochets){}
+	waiting_to_explode(false), 
+	explode_time(world, *this), ricochets(ricochets){}
 
-Weapon::~Weapon(){}
+Weapon::~Weapon(){
+	this->explode_time.join();
+}
 
 bool Weapon::isActive(){
 	return this->waiting_to_explode || PhysicalObject::isActive();
@@ -63,7 +66,8 @@ void Weapon::setInitialVelocity(){
 		this->body->SetLinearVelocity(linear_velocity);
 	}
 	this->waiting_to_explode = true;
-	///Thread time
+	this->explode_time.setTime(this->time_to_explode);
+	this->explode_time.start();
 }
 
 
