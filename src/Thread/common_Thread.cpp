@@ -11,7 +11,9 @@ void Thread::start(){
 }
 		
 void Thread::join(){
-	this->thread.join();
+	if(this->thread.joinable()){
+		this->thread.join();
+	}
 }
 		
 bool Thread::isRunning() const{

@@ -3,6 +3,7 @@
 #include "server_RedGrenade.h"
 #include "server_RedGrenadeFragment.h"
 #include "server_Banana.h"
+#include "server_Teleportation.h"
 
 WeaponFactory::WeaponFactory(World& world, GameParameters& parameters):
 	world(world), parameters(parameters){}
@@ -18,7 +19,9 @@ physical_object_ptr WeaponFactory::getWeapon(const std::string& name){
 		return physical_object_ptr(new RedGrenadeFragment(this->world, this->parameters));
 	} else if (name == "Banana"){
 		return physical_object_ptr(new Banana(this->world, this->parameters));
+	} else if (name == "Teleportation"){
+		return physical_object_ptr(new Teleportation(this->world, this->parameters));
 	}
 
-	return physical_object_ptr();
+	throw std::runtime_error(name + ": El arma no existe.");
 }

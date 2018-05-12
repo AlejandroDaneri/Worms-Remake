@@ -23,13 +23,10 @@ class Weapon: public PhysicalObject{
 		virtual void createFixtures() override;
 		void setInitialVelocity() override;
 
-	private:
-		int ricochets;
-
 	public:
 		static int weapon_id;
 
-		Weapon(World& world, GameParameters& parameters, int damage, int radius = 0, int ricochets = 0);
+		Weapon(World& world, GameParameters& parameters, int damage, int radius = 0);
 		virtual ~Weapon();
 
 		bool isActive() override;

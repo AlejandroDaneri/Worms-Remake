@@ -9,7 +9,7 @@ class FragmentableWeapon: public Weapon{
 
 	public:
 
-		FragmentableWeapon(World& world, GameParameters& parameters, int damage, int fragments, int radius = 0, int ricochets = 0);
+		FragmentableWeapon(World& world, GameParameters& parameters, int damage, int fragments, int radius);
 		virtual ~FragmentableWeapon();
 
 		void explode();

@@ -42,7 +42,8 @@ void Game::run(){
 	sleep(5);
 	worm->changeWeapon("Banana");
 	worm->shoot(60, -1, 15);
-	worm->move(0);
+	//worm->changeWeapon("Teleportation");
+	//worm->shoot(b2Vec2(20, 50));
 }
 
 void Game::configure(){

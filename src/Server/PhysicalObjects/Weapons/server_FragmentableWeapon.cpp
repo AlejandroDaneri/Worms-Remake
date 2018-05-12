@@ -6,8 +6,8 @@
 #define PI 3.14159265
 #define RADIANS PI / 180
 
-FragmentableWeapon::FragmentableWeapon(World& world, GameParameters& parameters, int damage, int fragments, int radius, int ricochets):
-	Weapon(world, parameters, damage, radius, ricochets), fragments(fragments){}
+FragmentableWeapon::FragmentableWeapon(World& world, GameParameters& parameters, int damage, int fragments, int radius):
+	Weapon(world, parameters, damage, radius), fragments(fragments){}
 
 FragmentableWeapon::~FragmentableWeapon(){}
 

@@ -69,7 +69,6 @@ void Worm::shoot(int angle, int power, int time){
 
 void Worm::shoot(b2Vec2 pos){
 	((Weapon*)this->weapon.get())->shoot(*this, pos);
-	this->world.addObject(this->weapon, this->getPosition());
 }
 
 #include <iostream>/////////////////////////////////////

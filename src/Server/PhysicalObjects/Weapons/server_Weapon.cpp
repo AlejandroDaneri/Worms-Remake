@@ -12,11 +12,10 @@ int Weapon::weapon_id = 1;
 
 #include <iostream>////////////////////////////////////////////////////////////////////////////////////////
 
-Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius, int ricochets): 
+Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius): 
 	PhysicalObject(world, Weapon::weapon_id++, "Weapon"), parameters(parameters), 
 	damage(damage), radius(radius), 
-	waiting_to_explode(false), 
-	explode_time(world, *this), ricochets(ricochets){}
+	waiting_to_explode(false), explode_time(world, *this){}
 
 Weapon::~Weapon(){
 	this->explode_time.join();
