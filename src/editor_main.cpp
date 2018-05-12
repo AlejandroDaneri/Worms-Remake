@@ -7,7 +7,7 @@
 #include <gtkmm/aspectframe.h>
 #include <gtkmm/window.h>
 
-#include "Editor/editor_ToolBox.h"
+#include "Editor/ToolBox.h"
 
 int main (int argc, char *argv[])
 {
@@ -21,11 +21,15 @@ int main (int argc, char *argv[])
                                  Gtk::ALIGN_CENTER, /* center y */
                                  0.8, /* xsize/ysize */
                                  false /* ignore child's aspect */);
-    editor_ToolBox toolBox;
+    ToolBox toolBox;
 
     Gtk::ScrolledWindow mapwin;
 
     window.maximize();
+
+    char cwd[1024];
+    if (getcwd(cwd, sizeof(cwd)) != NULL)
+        fprintf(stdout, "Current working dir: %s\n", cwd);
 
     map.set("resources/images/map.png");
     mapwin.add(map);

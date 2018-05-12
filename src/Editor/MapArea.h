@@ -4,7 +4,7 @@
 
 #include <gtkmm/image.h>
 
-class editor_MapArea {
+class MapArea {
     Gtk::Image background;
 };
 

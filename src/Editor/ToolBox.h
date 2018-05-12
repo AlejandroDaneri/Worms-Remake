@@ -7,14 +7,14 @@
 #include <gtkmm/button.h>
 
 
-class editor_ToolBox : public Gtk::HBox{
+class ToolBox : public Gtk::HBox{
 private:
     //Child widgets
     Gtk::Button worm, girder;
 
 
 public:
-    editor_ToolBox();
+    ToolBox();
 
     void on_button_clicked();
 };
