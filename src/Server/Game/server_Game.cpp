@@ -28,8 +28,6 @@ bool Game::isFull(){
 	return this->parameters.get_max_players() == this->turn.get_players_size();
 }
 
-
-#include <iostream>////////////////////////////
 void Game::run(){
 	this->configure();
 	this->world.start();
