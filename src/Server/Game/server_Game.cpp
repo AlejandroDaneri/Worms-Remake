@@ -28,6 +28,8 @@ bool Game::isFull(){
 	return this->parameters.get_max_players() == this->turn.get_players_size();
 }
 
+
+#include <iostream>////////////////////////////
 void Game::run(){
 	this->configure();
 	this->world.start();
@@ -41,14 +43,13 @@ void Game::run(){
 		this->turn.begin_turn();
 		int worm_id = this->turn.getCurrentPlayer().getCurrentWorm().getId();
 		this->turn.getCurrentPlayer().getProtocol().send_start_turn(worm_id);
-
 		while (this->player_turn_active){
 			this->turn.getCurrentPlayer().getProtocol().receive(*this);
 		}
 
 		this->wait_to_world();
 	}
-	*/
+*/
 
 
 	//PARA PROBAR COSAS

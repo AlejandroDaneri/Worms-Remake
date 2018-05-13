@@ -20,7 +20,7 @@ Player& Turn::getCurrentPlayer(){
 void Turn::begin_turn(){
 	do {
 		this->advanceCurrent();
-	} while (! this->getCurrentPlayer().isDead());
+	} while (this->getCurrentPlayer().isDead());
 	this->getCurrentPlayer().begin_turn();
 }
 
@@ -54,5 +54,6 @@ bool Turn::gameEnded(){
 			players_alive++;
 		}
 	}
-	return players_alive <= 1;
+	///////////////////////////////////////////////return players_alive <= 1;
+	return players_alive == 0;////por ahora con un solo jugador
 }

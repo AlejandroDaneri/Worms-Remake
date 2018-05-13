@@ -14,7 +14,6 @@ void Protocol::send_buffer(const char* buffer, size_t size) {
 	this->socket.send_data(buffer, size);
 }
 
-
 size_t Protocol::receive_buffer(char* buffer) {
 	uint32_t len;
 	this->socket.receive(&len, sizeof (uint32_t));

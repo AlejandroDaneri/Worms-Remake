@@ -15,7 +15,7 @@ void WormsList::begin_turn(){
 		if (this->current >= this->list.size()){
 			this->current = 0;
 		}
-	} while (!this->getCurrentWorm().isDead());
+	} while (this->getCurrentWorm().isDead());
 }
 
 void WormsList::add(physical_object_ptr worm){
