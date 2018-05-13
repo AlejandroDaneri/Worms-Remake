@@ -17,24 +17,24 @@ WeaponsFactory::WeaponsFactory() {}
 
 WeaponsFactory::~WeaponsFactory() {}
 		
-Weapon&& WeaponsFactory::create_weapon(std::string weapon, int ammo) {
+weapon_ptr WeaponsFactory::create_weapon(std::string weapon, int ammo) {
 	if (weapon == AIR_ATTACK_NAME)	
-		return std::move(AirAttack(ammo));
+		return weapon_ptr(new AirAttack(ammo));
 	else if (weapon == BANANA_NAME)
-		return std::move(Banana(ammo));
+		return weapon_ptr(new Banana(ammo));
 	else if (weapon == BAT_NAME)
-		return std::move(Bat(ammo));
+		return weapon_ptr(new Bat(ammo));
 	else if (weapon == BAZOOKA_NAME)
-		return std::move(Bazooka(ammo));
+		return weapon_ptr(new Bazooka(ammo));
 	else if (weapon == DYNAMITE_NAME)
-		return std::move(Dynamite(ammo));
+		return weapon_ptr(new Dynamite(ammo));
 	else if (weapon == GREEN_GRENADE_NAME)
-		return std::move(GreenGrenade(ammo));
+		return weapon_ptr(new GreenGrenade(ammo));
 	else if (weapon == HOLY_GRENADE_NAME)
-		return std::move(HolyGrenade(ammo));
+		return weapon_ptr(new HolyGrenade(ammo));
 	else if (weapon == MORTAR_NAME)
-		return std::move(Mortar(ammo));
+		return weapon_ptr(new Mortar(ammo));
 	else if (weapon == RED_GRENADE_NAME)
-		return std::move(RedGrenade(ammo));
-	return std::move(Teleportation(ammo));
+		return weapon_ptr(new RedGrenade(ammo));
+	return weapon_ptr(new Teleportation(ammo));
 }

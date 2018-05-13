@@ -3,13 +3,14 @@
 WeaponList::WeaponList() {}
 
 WeaponList::~WeaponList() {}
-		
-void WeaponList::add(Weapon&& weapon) {
-	this->weapons.insert(std::pair<std::string, Weapon>(weapon.getName(), std::move(weapon)));
+
+void WeaponList::add(std::string weapon, int ammo) {
+	WeaponsFactory factory;
+	this->weapons.insert(std::pair<std::string, weapon_ptr>(weapon, std::move(factory.create_weapon(weapon, ammo))));
 }
 
 Weapon& WeaponList::get(std::string weapon) {
-	return this->weapons.at(weapon);
+	return *this->weapons.at(weapon);
 }
 
 WeaponList::iterator WeaponList::begin() {

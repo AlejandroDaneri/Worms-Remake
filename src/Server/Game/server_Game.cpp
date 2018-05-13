@@ -61,6 +61,9 @@ void Game::configure(){
 	}
 	this->data_sender->sendGirders();
 
+	//Municion de las armas
+	this->data_sender->sendWeaponsAmmo(this->parameters.getWeaponsAmmo());
+
 }
 
 Worm& Game::getCurrentWorm(){

@@ -16,6 +16,7 @@ class GameParameters{
 
 		std::vector<b2Vec2> worms_list;
 		std::vector<GirderParams> girders_list;
+		std::map<std::string, int> weapons_ammo;
 
 
 		float worm_velocity;
@@ -54,6 +55,7 @@ class GameParameters{
 
 		std::vector<b2Vec2>& getWorms();
 		std::vector<GirderParams>& getGirders();
+		std::map<std::string, int>& getWeaponsAmmo();
 
 
 		float getWormVelocity();

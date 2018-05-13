@@ -3,17 +3,18 @@
 
 #include <map>
 #include "client_Weapon.h"
+#include "client_WeaponsFactory.h"
 
 class WeaponList {
 	private:
-	    typedef std::map<std::string, Weapon> WeaponsList;
+	    typedef std::map<std::string, weapon_ptr> WeaponsList;
 		WeaponsList weapons;
 
 	public:
 		WeaponList();
 		~WeaponList();
 		
-		void add(Weapon&& weapon);
+		void add(std::string weapon, int ammo);
 		
 		Weapon& get(std::string weapon);
 		

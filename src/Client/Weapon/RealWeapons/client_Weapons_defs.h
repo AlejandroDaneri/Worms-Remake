@@ -9,7 +9,7 @@
 
 #define DEFAULT_TIME 5
 
-#define AIR_ATTACK_NAME "Air Attack"
+#define AIR_ATTACK_NAME "AirAttack"
 
 #define BANANA_NAME "Banana"
 
@@ -19,18 +19,18 @@
 
 #define DYNAMITE_NAME "Dynamite"
 
-#define GREEN_GRENADE_NAME "Green grenade"
+#define GREEN_GRENADE_NAME "GreenGrenade"
 
-#define HOLY_GRENADE_NAME "Holy grenade"
+#define HOLY_GRENADE_NAME "HolyGrenade"
 
 #define MORTAR_NAME "Mortar"
 
-#define FRAGMENTS_NAME "Mortar fragment"
+#define FRAGMENTS_NAME "MortarFragment"
 
 
-#define RED_GRENADE_NAME "Red grenade"
+#define RED_GRENADE_NAME "RedGrenade"
 
-#define GRENADE_FRAGMENTS_NAME "Red grenade fragment"
+#define GRENADE_FRAGMENTS_NAME "RedGrenadeFragment"
 
 
 #define TELEPORT_NAME "Teleportation"

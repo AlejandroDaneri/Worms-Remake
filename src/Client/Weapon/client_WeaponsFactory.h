@@ -2,13 +2,16 @@
 #define __CLIENTWEAPONSFACTORY_H__
 
 #include "client_Weapon.h"
+#include <memory>
+
+typedef std::unique_ptr<Weapon> weapon_ptr;
 
 class WeaponsFactory {
 	public:
 		WeaponsFactory();
 		~WeaponsFactory();
 		
-		Weapon&& create_weapon(std::string, int ammo);
+		weapon_ptr create_weapon(std::string, int ammo);
 };
 
 

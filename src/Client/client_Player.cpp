@@ -22,12 +22,10 @@ Player::Player(ClientProtocol& protocol) :
 	actual_weapon("Bazooka"),	weapons_view(this->weapons, *this),
 	screen(this->world, this->weapons_view), view_list(this->world),
 	data_receiver(this->view_list, *this, protocol) {
-	this->weapons.add(std::move(Bazooka(10)));
-	this->weapons_view.update();
-	// Por ahora solo tiene esta hasta que agreguemos la parte de inicializar
-	// las armas al empezar el juego
 
 	this->protocol.receiveGirders(this->view_list);
+	this->protocol.receiveWeaponsAmmo(this->weapons);
+	this->weapons_view.update();
 	this->data_receiver.start();
 }
 

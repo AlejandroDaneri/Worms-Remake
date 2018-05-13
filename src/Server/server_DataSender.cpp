@@ -38,3 +38,12 @@ void DataSender::sendGirders(){
 		}
 	}
 }
+
+void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
+	for (auto player = this->players.begin(); player != this->players.end(); ++player){
+		player->getProtocol().send_length(weapons.size());
+		for (auto it = weapons.begin(); it != weapons.end(); ++it){
+			player->getProtocol().sendWeaponAmmo(it->first, it->second);
+		}
+	}
+}

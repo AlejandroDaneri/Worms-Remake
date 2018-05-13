@@ -1,6 +1,7 @@
 #include "client_Protocol.h"
 #include <string>
 #include "client_Player.h"
+#include "client_WeaponList.h"
 
 ClientProtocol::ClientProtocol(Socket&& socket): Protocol(std::move(socket)) {}
 
@@ -108,5 +109,19 @@ void ClientProtocol::receiveGirders(ViewsList& viewsList){
 		int pos_y = this->receive_int(buffer, offset);
 		int rotation = this->receive_int(buffer, offset);
 		viewsList.addGirder(size, pos_x, pos_y, rotation);
+	}
+}
+
+void ClientProtocol::receiveWeaponsAmmo(WeaponList& weapon_list){
+	int quantity = this->receive_length();
+
+	for (int i = 0; i < quantity; i++){
+		char buffer[MAX_BUF_LEN];
+		this->receive_buffer(buffer);
+		size_t offset = 0;
+
+		std::string name = this->receive_string(buffer, offset);
+		int ammo = this->receive_int(buffer, offset);
+		weapon_list.add(name, ammo);
 	}
 }

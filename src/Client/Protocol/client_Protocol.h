@@ -7,6 +7,7 @@
 #include "ViewsList.h"
 
 class Player;
+class WeaponList;
 
 class ClientProtocol: public Protocol {
 	public:
@@ -27,6 +28,8 @@ class ClientProtocol: public Protocol {
 		void receive(Player& player, ViewsList& viewsList);
 
 		void receiveGirders(ViewsList& viewsList);
+
+		void receiveWeaponsAmmo(WeaponList& weapon_list);
 };
 
 #endif

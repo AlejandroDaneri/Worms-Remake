@@ -135,3 +135,12 @@ void ServerProtocol::sendGirder(physical_object_ptr& object){
 	this->send_buffer(buffer, offset);
 }
 
+void ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
+	char buffer[MAX_BUF_LEN];
+	size_t offset = 0;
+
+	this->send_string(buffer, offset, weapon_name);
+	this->send_int(buffer, offset, ammo);
+
+	this->send_buffer(buffer, offset);
+}

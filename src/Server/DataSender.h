@@ -22,6 +22,7 @@ class DataSender: public Thread{
 		void run() override;
 
 		void sendGirders();
+		void sendWeaponsAmmo(std::map<std::string, int>& weapons);
 
 };
 

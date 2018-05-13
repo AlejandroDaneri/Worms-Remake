@@ -20,8 +20,8 @@ void WeaponView::update() {
 	WeaponList::iterator iter;
 	int row = 1, column = 1;
 	for (iter = this->weapons.begin(); iter != this->weapons.end(); iter++) {
-		this->buttons.insert(std::pair<std::string, WeaponButton*>(iter->second.getName(), new WeaponButton(iter->second.getName(), this->player)));
-		this->window.attach(this->buttons.at(iter->second.getName())->getButton(), row, column, 10, 10);
+		this->buttons.insert(std::pair<std::string, WeaponButton*>(iter->second->getName(), new WeaponButton(iter->second->getName(), this->player)));
+		this->window.attach(this->buttons.at(iter->second->getName())->getButton(), row, column, 10, 10);
 		column++;
 		if (column == 3) {
 			column = 1;
