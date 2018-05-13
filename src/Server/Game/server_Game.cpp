@@ -40,10 +40,10 @@ void Game::run(){
 	this->world.addObject(girder, b2Vec2(7, 20));
 
 	sleep(5);
-	worm->changeWeapon("Banana");
-	worm->shoot(60, -1, 15);
-	//worm->changeWeapon("Teleportation");
-	//worm->shoot(b2Vec2(20, 50));
+	//worm->changeWeapon("Banana");
+	//worm->shoot(60, -1, 15);
+	worm->changeWeapon("AirAttack");
+	worm->shoot(b2Vec2(20, 50));
 }
 
 void Game::configure(){

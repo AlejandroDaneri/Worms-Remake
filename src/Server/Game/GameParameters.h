@@ -27,6 +27,10 @@ class GameParameters{
 		int redGrenadeFragment_radius;
 		int redGrenadeFragment_damage;
 
+		int airAttack_missiles;
+		int airAttack_radius;
+		int airAttack_damage;
+
 		size_t max_players;
 
 	public:
@@ -54,6 +58,10 @@ class GameParameters{
 
 		int get_redGrenadeFragment_damage();
 		int get_redGrenadeFragment_radius();
+
+		int get_airAttack_missiles();
+		int get_airAttack_radius();
+		int get_airAttack_damage();
 
 		size_t get_max_players();
 

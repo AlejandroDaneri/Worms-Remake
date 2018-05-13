@@ -15,7 +15,7 @@ int Weapon::weapon_id = 1;
 Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius): 
 	PhysicalObject(world, Weapon::weapon_id++, "Weapon"), parameters(parameters), 
 	damage(damage), radius(radius), 
-	waiting_to_explode(false), explode_time(world, *this){}
+	waiting_to_explode(false), time_to_explode(-1), explode_time(world, *this){}
 
 Weapon::~Weapon(){
 	this->explode_time.join();

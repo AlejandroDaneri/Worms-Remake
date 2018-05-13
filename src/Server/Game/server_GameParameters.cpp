@@ -24,6 +24,10 @@ GameParameters::GameParameters(const std::string& config_file){
 
 	this->redGrenadeFragment_radius = 2;
 	this->redGrenadeFragment_damage = 10;
+
+	this->airAttack_missiles = 6;
+	this->airAttack_radius = 2;
+	this->airAttack_damage = 40;
 }
 		
 GameParameters::~GameParameters(){}
@@ -90,6 +94,18 @@ int GameParameters::get_redGrenadeFragment_damage(){
 
 int GameParameters::get_redGrenade_fragments(){
 	return this->redGrenade_fragments;
+}
+
+int GameParameters::get_airAttack_missiles(){
+	return this->airAttack_missiles;
+}
+
+int GameParameters::get_airAttack_damage(){
+	return this->airAttack_damage;
+}
+
+int GameParameters::get_airAttack_radius(){
+	return this->airAttack_radius;
 }
 
 size_t GameParameters::get_max_players(){
