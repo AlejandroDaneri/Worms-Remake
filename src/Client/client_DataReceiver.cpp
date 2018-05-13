@@ -8,11 +8,17 @@ DataReceiver::~DataReceiver(){}
 
 void DataReceiver::run(){
 	while(this->running){
-		this->protocol.receive(this->player, this->views);
+		try{
+			this->protocol.receive(this->player, this->views);
+		} catch (const std::exception& e){
+			if (this->running){
+				throw e;
+			}
+		}
 	}
 }
 
 void DataReceiver::stop(){
-	this->protocol.stop();
 	Thread::stop();
+	this->protocol.stop();
 }

@@ -17,30 +17,16 @@ int main(int argc, char* argv[]){
 
     Socket socket(Socket::Client("127.0.0.1", "7777"));
     ClientProtocol protocol(std::move(socket));
-    
-    //WorldView world;////////////////////////////////////Estos se crean en player despues
-    Player player(protocol);  ////////////////////////////////////El player despues recibe el protocol
-    //ViewsList list(world);////////////////////////////////////Estos se crean en player despues
 
-    //DataReceiver receiver(list, player, protocol);  ////////////////////////////////////Estos se crean en player despues
-
-	//DataReceiver receiver(player.getViewList(), player, protocol);
+    Player player(protocol);
 
     window.add(player.getWindow());
     window.show_all();
 
 
     try{
-        //receiver.start();
         app->run(window);
     } catch (const std::exception& e){}
-
-    try{
-        //receiver.stop();
-    } catch (const std::exception& e){}
-
-    //receiver.join();
-
 
 	return 0;
 }
