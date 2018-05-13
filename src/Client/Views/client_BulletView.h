@@ -1,12 +1,12 @@
-#ifndef __WEAPONVIEW_H__
-#define __WEAPONVIEW_H__
+#ifndef __CLIENTBULLETVIEW_H__
+#define __CLIENTBULLETVIEW_H__
 
 #include "Viewable.h"
 #include <gtkmm/widget.h>
 #include <gtkmm/image.h>
 #include <string>
 
-class WeaponView: public Viewable{
+class BulletView: public Viewable{
 	private:
 		Gtk::Image image;
 		std::string weapon_name;
@@ -15,9 +15,9 @@ class WeaponView: public Viewable{
 		Gtk::Widget& getWidget() override;
 
 	public:
-		WeaponView(WorldView& worldView, std::string weapon, Position pos);
-		~WeaponView();
-		WeaponView(WeaponView&& other);
+		BulletView(WorldView& worldView, std::string weapon, Position pos);
+		~BulletView();
+		BulletView(BulletView&& other);
 
 		void updateData(const Position& new_pos);
 

@@ -2,7 +2,7 @@
 #include <gtkmm/window.h>
 #include "WorldView.h"
 #include "WormView.h"
-#include "WeaponView.h"
+#include "client_BulletView.h"
 #include "ViewsList.h"
 #include "Socket.h"
 #include "client_Protocol.h"

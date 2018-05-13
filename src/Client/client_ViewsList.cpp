@@ -42,7 +42,7 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, int pos
 	Position pos(pos_x, pos_y);
 	if (it == this->weapons.end()){
 		//Weapon no existe
-		WeaponView weapon(this->world, weapon_name, pos);
+		BulletView weapon(this->world, weapon_name, pos);
 		this->weapons.insert(std::make_pair(id, std::move(weapon)));
 	} else {
 		//Weapon existe

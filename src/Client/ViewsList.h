@@ -5,14 +5,14 @@
 #include <string>
 #include "WorldView.h"
 #include "WormView.h"
-#include "WeaponView.h"
+#include "client_BulletView.h"
 #include "GirderView.h"
 
 class ViewsList{
 	private:
 		WorldView& world;
 		std::unordered_map<int, WormView> worms;
-		std::unordered_map<int, WeaponView> weapons;
+		std::unordered_map<int, BulletView> weapons;
 		std::unordered_map<int, GirderView> girders;
 
 	public:
