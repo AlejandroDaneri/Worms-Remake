@@ -9,19 +9,16 @@
 class GirderView: public Viewable{
 	private:
 		Gtk::Image image;
-		std::string girder_name;
+		int size;
+		int rotation;
 
 	protected:
 		Gtk::Widget& getWidget() override;
 
 	public:
-		GirderView(WorldView& worldView, std::string girder, Position pos);
+		GirderView(WorldView& worldView, size_t size, Position pos, int rotation);
 		~GirderView();
 		GirderView(GirderView&& other);
-
-		void updateData(const Position& new_pos);
-
-		void explode();
 };
 
 

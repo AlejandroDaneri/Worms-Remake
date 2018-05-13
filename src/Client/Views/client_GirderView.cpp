@@ -2,11 +2,11 @@
 
 #define GIRDER_PATH "resources/images/Girder"
 
-GirderView::GirderView(WorldView& worldView, std::string girder, Position pos):
-	Viewable(worldView), girder_name(std::move(girder)){
+GirderView::GirderView(WorldView& worldView, size_t size, Position pos, int rotation):
+	Viewable(worldView), size(size), rotation(rotation){
 
-	std::string path(GIRDER_PATH);///////////////por ahora es mas eficiente porque es solo una imagen
-	path += this->girder_name;
+	std::string path(GIRDER_PATH);
+	path += std::to_string(size);
 	path += ".png";
 	this->image.set(path);
 	this->addToWorld(pos);
@@ -15,22 +15,9 @@ GirderView::GirderView(WorldView& worldView, std::string girder, Position pos):
 GirderView::~GirderView(){}
 
 GirderView::GirderView(GirderView&& other): Viewable(std::move(other)),
-	image(std::move(other.image)), girder_name(std::move(other.girder_name)){}
-
-void GirderView::updateData(const Position& new_pos){
-	this->move(new_pos);
-}
-
-void GirderView::explode(){
-	this->removeFromWorld();
-}
+	image(std::move(other.image)), size(other.size), rotation(other.rotation){}
 
 Gtk::Widget& GirderView::getWidget(){
-	////////////////////////////////////////////Ver que hacer con la rotacion, por ahora lo dejo asi
-	/*std::string path(IMAGES_PATH);
-	path += this->weapon_name;
-	path += ".png";
-	this->image.set(path);*/
 	return this->image;
 }
 
