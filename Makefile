@@ -153,23 +153,23 @@ o_editor_files = $(SRC_EDITOR:%.cpp=%.o)
 o_editcli_files = $(SRC_EDITCLI:%.cpp=%.o)
 o_box2d_files = $(SRC_BOX2D:%.cpp=%.o)
 
-client: $(o_box2d_files) $(o_editcli_files) $(o_common_files) $(o_client_files)
+client: $(o_editcli_files) $(o_common_files) $(o_client_files)
 	@if [ -z "$(o_client_files)" ]; \
 	then \
 		echo "No hay archivos de entrada en el directorio actual para el cliente. Recuerde que los archivos deben respetar la forma 'client*.$(extension)' y que no se aceptan directorios anidados."; \
 		if [ -n "$(directorios)" ]; then echo "Directorios encontrados: $(directorios)"; fi; \
 		false; \
 	fi >&2
-	$(LD) $(o_box2d_files) $(o_editcli_files) $(o_common_files) $(o_client_files) -o client $(LDFLAGS)
+	$(LD) $(o_editcli_files) $(o_common_files) $(o_client_files) -o client $(LDFLAGS)
 	
-editor: $(o_box2d_files) $(o_editcli_files) $(o_common_files) $(o_editor_files)
+editor: $(o_editcli_files) $(o_common_files) $(o_editor_files)
 	@if [ -z "$(o_editor_files)" ]; \
 	then \
 		echo "No hay archivos de entrada en el directorio actual para el editor. Recuerde que los archivos deben respetar la forma 'client*.$(extension)' y que no se aceptan directorios anidados."; \
 		if [ -n "$(directorios)" ]; then echo "Directorios encontrados: $(directorios)"; fi; \
 		false; \
 	fi >&2
-	$(LD) $(o_box2d_files) $(o_editcli_files) $(o_common_files) $(o_editor_files) -o editor $(LDFLAGS)
+	$(LD) $(o_editcli_files) $(o_common_files) $(o_editor_files) -o editor $(LDFLAGS)
 
 server: $(o_box2d_files) $(o_common_files) $(o_server_files)
 	@if [ -z "$(o_server_files)" ]; \
