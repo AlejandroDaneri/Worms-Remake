@@ -22,7 +22,7 @@ class Player {
 		int32_t actual_angle;
 		int actual_dir;
 		WeaponList weapons;
-		Weapon actual_weapon;
+		std::string actual_weapon;
 		std::unique_ptr<Turn> turn;
 		std::unique_ptr<Timer> timer;
 		WorldView world;

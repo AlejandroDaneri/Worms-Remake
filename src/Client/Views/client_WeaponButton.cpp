@@ -15,6 +15,7 @@ WeaponButton::WeaponButton(const std::string& weapon_name, Player& player) :
 WeaponButton::~WeaponButton() {}
 
 void WeaponButton::on_clicked_button() {
+	this->button.set_active(false);	
 	this->player.change_weapon(weapon_name);
 }
 
