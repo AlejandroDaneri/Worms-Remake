@@ -1,9 +1,13 @@
 #include "GameParameters.h"
+#include <algorithm>
+#include <random>
 
 GameParameters::GameParameters(const std::string& config_file){
 	//leer el archivo  YAML y cargar las variables
 
 	this->worm_life = 125;
+	this->worm_life_to_add = 25;
+
 	this->worm_velocity = 3.2;
 	this->worm_jump_velocity = 7;
 	this->worm_rollback_velocity = 7;
@@ -28,12 +32,28 @@ GameParameters::GameParameters(const std::string& config_file){
 	this->airAttack_missiles = 6;
 	this->airAttack_radius = 2;
 	this->airAttack_damage = 40;
+
+	for (int i = 0; i < 5; i++){
+		this->worms_list.push_back(b2Vec2(10 * (i+1), 60));
+	}
 }
 		
 GameParameters::~GameParameters(){}
 
 int GameParameters::getWormLife(){
 	return this->worm_life;
+}
+
+int GameParameters::get_worms_life_to_add(){
+	return this->worm_life_to_add;
+}
+
+std::vector<b2Vec2>& GameParameters::getWorms(){
+	std::random_device rd;
+    std::mt19937 g(rd());
+ 
+    std::shuffle(this->worms_list.begin(), this->worms_list.end(), g);
+	return this->worms_list;
 }
 
 float GameParameters::getWormVelocity(){

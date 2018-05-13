@@ -34,22 +34,30 @@ void Game::run(){
 	this->world.start();
 	this->data_sender->start();
 
-	worm_ptr worm(new Worm(this->world, 38, this->parameters));
-	this->world.addObject(worm, b2Vec2(10, 25));
-	physical_object_ptr girder(new Girder(this->world, 6));
-	this->world.addObject(girder, b2Vec2(7, 20));
+	//worm_ptr worm(new Worm(this->world, 38, this->parameters));
+	//this->world.addObject(worm, b2Vec2(10, 25));
+	//physical_object_ptr girder(new Girder(this->world, 6));
+	//this->world.addObject(girder, b2Vec2(7, 20));
 
-	sleep(5);
+	//sleep(5);
 	//worm->changeWeapon("Banana");
 	//worm->shoot(60, -1, 15);
-	worm->changeWeapon("AirAttack");
-	worm->shoot(b2Vec2(20, 50));
+	//worm->changeWeapon("AirAttack");
+	//worm->shoot(b2Vec2(20, 50));
 }
 
 void Game::configure(){
 	this->data_sender.reset(new DataSender(this->world, this->turn.getPlayers()));
 
-	for (int i = 1; i < 5; i++){
+	//Asignacion de gusanos
+	std::vector<b2Vec2> worms_list = this->parameters.getWorms();
+	size_t size = worms_list.size();
+	for (size_t i = 0; i < size; i++){
+		this->turn.addWorm(this->world, this->parameters, worms_list[i], i);
+	}
+	this->turn.distributeWorms(size, this->parameters.get_worms_life_to_add());
+
+	/*for (int i = 1; i < 5; i++){
 		physical_object_ptr worm(new Worm(this->world, i, this->parameters));
 		this->world.addObject(worm, b2Vec2(10 * (i+1), 75));
 		physical_object_ptr girder(new Girder(this->world, 6));
@@ -57,11 +65,11 @@ void Game::configure(){
 		//agegar worm al jugador etc
 		//recibir los worms del gameparameters
 		//antes enviar a todos los jugadores vigas, municiones, etc
-	}
+	}*/
 
 }
 
-worm_ptr Game::getCurrentWorm(){
+Worm& Game::getCurrentWorm(){
 	return this->turn.getCurrentPlayer().getCurrentWorm();
 }
 

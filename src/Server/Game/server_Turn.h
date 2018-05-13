@@ -9,6 +9,8 @@ class Turn{
 		std::vector<Player> players;
 		size_t current;
 
+		void advanceCurrent();
+
 	public:
 		Turn();
 		~Turn();
@@ -22,6 +24,10 @@ class Turn{
 		Player& getCurrentPlayer();
 
 		void begin_turn();
+
+		void addWorm(World& world, GameParameters& parameters, b2Vec2 position, int id);
+
+		void distributeWorms(size_t size, int life_to_add);
 
 };
 

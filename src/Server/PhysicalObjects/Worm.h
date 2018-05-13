@@ -7,6 +7,7 @@
 
 class Worm: public PhysicalObject{	
 	private:
+		int player_id;
 		int life;
 		char dir;
 		GameParameters& parameters;
@@ -19,11 +20,13 @@ class Worm: public PhysicalObject{
 		void createFixtures() override;
 
 	public:
-		Worm(World& world, int id, GameParameters& parameters);
+		Worm(World& world, GameParameters& parameters, int id, int player_id);
 		~Worm();
 
 		int getLife();
 		char getDir();
+
+		void addLife(int life);
 
 		void move(char action);
 

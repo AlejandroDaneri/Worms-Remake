@@ -4,8 +4,8 @@
 #include "Protocol.h"
 #include "server_WeaponFactory.h"
 
-Worm::Worm(World& world, int id, GameParameters& parameters):
-	PhysicalObject(world, id, "Worm"), life(parameters.getWormLife()), 
+Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
+	PhysicalObject(world, id, "Worm"), player_id(player_id), life(parameters.getWormLife()), 
 	dir(1), parameters(parameters), last_weapon_exploded(-1){}
 
 Worm::~Worm(){}
@@ -32,6 +32,10 @@ int Worm::getLife(){
 
 char Worm::getDir(){
 	return this->dir;
+}
+
+void Worm::addLife(int life){
+	this->life += life;
 }
 
 void Worm::move(char action){

@@ -46,7 +46,7 @@ void Weapon::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 void Weapon::createFixtures(){
 	b2CircleShape circleShape;
 	circleShape.m_p.Set(0, 0); //position, relative to body position
-	circleShape.m_radius = 0.5; //radius
+	circleShape.m_radius = 0.25; //radius
 		  
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &circleShape;

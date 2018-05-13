@@ -101,20 +101,20 @@ void ServerProtocol::receive(Game& game){
 		char worm_action = buffer[offset++];
 		if (worm_action == MOVE_ACTION){
 			char move = buffer[offset++];
-			game.getCurrentWorm()->move(move);
+			game.getCurrentWorm().move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION){
 			std::string weapon(this->receive_string(buffer, offset));
-			game.getCurrentWorm()->changeWeapon(weapon);
+			game.getCurrentWorm().changeWeapon(weapon);
 		} else if (worm_action == SHOOT_WEAPON){
 			int angle = this->receive_int(buffer, offset);
 			int power = this->receive_int(buffer, offset);
 			int time = this->receive_int(buffer, offset);
 			
-			game.getCurrentWorm()->shoot(angle, power, time);
+			game.getCurrentWorm().shoot(angle, power, time);
 		} else if(worm_action == SHOOT_SELF_DIRECTED){
 			int pos_x = this->receive_int(buffer, offset);
 			int pos_y = this->receive_int(buffer, offset);
-			game.getCurrentWorm()->shoot(b2Vec2(pos_x, pos_y));
+			game.getCurrentWorm().shoot(b2Vec2(pos_x, pos_y));
 		}
 	}
 }

@@ -2,10 +2,19 @@
 #define __GAMEPARAMETERS_H__
 
 #include <string>
+#include <vector>
+#include <map>
+#include "b2Math.h"
 
 class GameParameters{
 	private:
 		int worm_life;
+		int worm_life_to_add;
+
+		std::vector<b2Vec2> worms_list;
+		//std::vector<GirderParams> girders_list;
+
+
 		float worm_velocity;
 		float worm_jump_velocity;
 		float worm_jump_height;
@@ -38,6 +47,11 @@ class GameParameters{
 		~GameParameters();
 
 		int getWormLife();
+		int get_worms_life_to_add();
+
+		std::vector<b2Vec2>& getWorms();
+
+
 		float getWormVelocity();
 		float getWormJumpVelocity();
 		float getWormRollbackVelocity();

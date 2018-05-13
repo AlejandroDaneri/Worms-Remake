@@ -14,13 +14,15 @@ class WormsList{
 
 		~WormsList();
 
-		worm_ptr getCurrentWorm();
+		Worm& getCurrentWorm();
 
 		void begin_turn();
 
 		void add(physical_object_ptr worm);
 
 		WormsList(WormsList&& other);
+
+		void distribute(size_t max, int life_to_add);
 
 };
 

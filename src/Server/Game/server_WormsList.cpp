@@ -4,10 +4,9 @@ WormsList::WormsList(): current(0){}
 
 WormsList::~WormsList(){}
 
-worm_ptr WormsList::getCurrentWorm(){
+Worm& WormsList::getCurrentWorm(){
 	Worm* worm = (Worm*)this->list.at(this->current).get();
-	std::shared_ptr<Worm> ptr(worm);
-	return ptr;
+	return *worm;
 }
 
 void WormsList::begin_turn(){
@@ -22,3 +21,12 @@ void WormsList::add(physical_object_ptr worm){
 }
 
 WormsList::WormsList(WormsList&& other): list(std::move(other.list)), current(other.current){}
+
+void WormsList::distribute(size_t max, int life_to_add){
+	if (this->list.size() < max){
+		for (auto it = this->list.begin(); it != this->list.end(); ++it){
+			Worm* worm = (Worm*)it->get();
+			worm->addLife(life_to_add);
+		}
+	}
+}

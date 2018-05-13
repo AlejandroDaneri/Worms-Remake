@@ -3,7 +3,7 @@
 #include "Worm.h"
 
 #define SKY 60
-#define SEPARATION 2
+#define SEPARATION 1.2
 
 AirAttack::AirAttack(World& world, GameParameters& parameters):
 	Weapon(world, parameters, 0){}

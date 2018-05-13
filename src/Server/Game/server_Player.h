@@ -12,6 +12,7 @@ class Player{
 	private:
 		ServerProtocol protocol;
 		WormsList worms;
+		int id;
 
 	public:
 		Player(Socket&& socket);
@@ -20,11 +21,15 @@ class Player{
 
 		~Player();
 
-		worm_ptr getCurrentWorm();
+		void setId(int id);
+
+		Worm& getCurrentWorm();
 
 		void begin_turn();
 
-		void add_worm(World& world, int id, const b2Vec2& position, GameParameters& parameters);
+		void addWorm(World& world, GameParameters& parameters, const b2Vec2& position, int id);
+
+		void distributeWorms(size_t max, int life_to_add);
 
 		ServerProtocol& getProtocol();
 

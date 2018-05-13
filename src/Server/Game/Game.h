@@ -33,7 +33,7 @@ class Game: public Thread{
 
 		void run() override;
 
-		worm_ptr getCurrentWorm();
+		Worm& getCurrentWorm();
 
 		void endTurn();
 };
