@@ -39,6 +39,7 @@ std::string ToolBox::getActualItemImagePath() {
             return "resources/images/grdl.png";
 
     }
+    return "a";
 
 }
 
