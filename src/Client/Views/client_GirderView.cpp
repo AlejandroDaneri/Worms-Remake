@@ -1,6 +1,6 @@
 #include "GirderView.h"
 
-#define GIRDER_PATH "resources/images/Girder"
+#define GIRDER_PATH "resources/images/Girder/girder_"
 
 GirderView::GirderView(WorldView& worldView, size_t size, Position pos, int rotation):
 	Viewable(worldView), size(size), rotation(rotation){

@@ -13,6 +13,7 @@
 #include "client_ScreenView.h"
 #include "ViewsList.h"
 #include "Position.h"
+#include "DataReceiver.h"
 
 class Player {
 	private:
@@ -28,7 +29,7 @@ class Player {
 		WeaponView weapons_view;
 		ScreenView screen;
 		ViewsList view_list;
-		//DataReceiver data_receiver;
+		DataReceiver data_receiver;
 		
 		void disable_attack_handlers();
 

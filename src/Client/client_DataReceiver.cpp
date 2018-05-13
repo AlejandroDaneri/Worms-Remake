@@ -1,4 +1,5 @@
 #include "DataReceiver.h"
+#include "client_Player.h"
 
 DataReceiver::DataReceiver(ViewsList& views, Player& player, ClientProtocol& protocol): 
 	views(views), player(player), protocol(protocol){}

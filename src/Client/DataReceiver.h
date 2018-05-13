@@ -2,10 +2,10 @@
 #define __DATARECEIVER_H__
 
 #include "Thread.h"
-#include "client_Player.h"
 #include "ViewsList.h"
 #include "client_Protocol.h"
 
+class Player;
 
 class DataReceiver: public Thread{
 	private:

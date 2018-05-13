@@ -24,22 +24,22 @@ int main(int argc, char* argv[]){
 
     //DataReceiver receiver(list, player, protocol);  ////////////////////////////////////Estos se crean en player despues
 
-	DataReceiver receiver(player.getViewList(), player, protocol);
+	//DataReceiver receiver(player.getViewList(), player, protocol);
 
     window.add(player.getWindow());
     window.show_all();
 
 
     try{
-        receiver.start();
+        //receiver.start();
         app->run(window);
     } catch (const std::exception& e){}
 
     try{
-        receiver.stop();
+        //receiver.stop();
     } catch (const std::exception& e){}
 
-    receiver.join();
+    //receiver.join();
 
 
 	return 0;

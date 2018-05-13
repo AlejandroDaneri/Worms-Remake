@@ -35,7 +35,7 @@ GameParameters::GameParameters(const std::string& config_file){
 
 	for (int i = 0; i < 5; i++){
 		this->worms_list.push_back(b2Vec2(10 * (i+1), 60));
-		this->girders_list.push_back(GirderParams(8, 10 * (i+1) - 3, 20, 0));
+		this->girders_list.push_back(GirderParams(6, 10 * (i+1) - 3, 20, 0));
 	}
 }
 		
