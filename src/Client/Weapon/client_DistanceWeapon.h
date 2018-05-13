@@ -8,6 +8,7 @@ class DistanceWeapon: public Weapon{
 		DistanceWeapon(std::string name, int ammo, bool time = false,
 											bool fragmentable = false);
 		~DistanceWeapon();
+		DistanceWeapon(DistanceWeapon&& other);
 		
 		bool hasVariablePower() override;
 };

@@ -7,6 +7,7 @@ class HolyGrenade: public DistanceWeapon {
 	public:
 		HolyGrenade(int ammo);
 		~HolyGrenade();
+		HolyGrenade(HolyGrenade&& other);
 };
 
 #endif

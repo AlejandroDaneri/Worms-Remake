@@ -6,6 +6,23 @@ Weapon::Weapon(std::string name, int ammo) :
 	
 Weapon::~Weapon() {}
 
+Weapon::Weapon(Weapon&& other) {
+	this->name = std::move(other.name);
+	this->ammo = std::move(other.ammo);
+	this->has_Scope = std::move(other.has_Scope);
+	this->is_Timed = std::move(other.is_Timed);
+	this->is_Fragmentable = std::move(other.is_Fragmentable);
+}
+
+Weapon& Weapon::operator=(Weapon&& other) {
+	this->name = std::move(other.name);
+	this->ammo = std::move(other.ammo);
+	this->has_Scope = std::move(other.has_Scope);
+	this->is_Timed = std::move(other.is_Timed);
+	this->is_Fragmentable = std::move(other.is_Fragmentable);
+	return *this;
+}
+
 bool Weapon::hasScope() {
 	return this->has_Scope;
 }

@@ -7,6 +7,7 @@ class Dynamite: public MeleeWeapon {
 	public:
 		Dynamite(int ammo);
 		~Dynamite();
+		Dynamite(Dynamite&& other);
 };
 
 #endif

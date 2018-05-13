@@ -27,5 +27,4 @@ class Viewable{
 		Viewable(Viewable&& other);
 };
 
-
 #endif

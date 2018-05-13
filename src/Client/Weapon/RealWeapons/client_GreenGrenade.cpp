@@ -6,3 +6,5 @@ GreenGrenade::GreenGrenade(int ammo): DistanceWeapon(GREEN_GRENADE_NAME, ammo,
 
 GreenGrenade::~GreenGrenade(){}
 
+GreenGrenade::GreenGrenade(GreenGrenade&& other) : DistanceWeapon(std::move(other)) {}
+

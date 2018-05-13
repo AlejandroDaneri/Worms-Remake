@@ -9,6 +9,8 @@ DistanceWeapon::DistanceWeapon(std::string name, int ammo, bool time, bool fragm
 
 DistanceWeapon::~DistanceWeapon() {}
 
+DistanceWeapon::DistanceWeapon(DistanceWeapon&& other) : Weapon(std::move(other)){}
+
 bool DistanceWeapon::hasVariablePower(){
 	return true;
 }

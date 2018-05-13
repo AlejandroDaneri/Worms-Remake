@@ -7,6 +7,7 @@ class SelfDirectedWeapon: public Weapon{
 	public:
 		SelfDirectedWeapon(std::string name, int ammo);
 		~SelfDirectedWeapon();
+		SelfDirectedWeapon(SelfDirectedWeapon&& other);
 
 		bool isSelfDirected() override;
 };

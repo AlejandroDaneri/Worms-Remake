@@ -7,6 +7,7 @@ class Teleportation: public SelfDirectedWeapon {
 	public:
 		Teleportation(int ammo);
 		~Teleportation();
+		Teleportation(Teleportation&& other);
 };
 
 #endif

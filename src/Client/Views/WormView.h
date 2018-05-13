@@ -4,6 +4,7 @@
 #include "Viewable.h"
 #include <gtkmm/widget.h>
 #include <gtkmm/image.h>
+#include <gtkmm/hvbox.h>
 
 #define DIR_RIGHT 1
 #define DIR_LEFT -1
@@ -14,6 +15,7 @@ class WormView: public Viewable{
 		int life;
 		char dir;
 		bool dir_changed;
+		//Gtk::VBox worm;
 		Gtk::Image image; ////////////////////////////////////Cambiar por vbox para agegar barra de vida
 
 	protected:

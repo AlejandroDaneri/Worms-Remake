@@ -4,6 +4,8 @@ SelfDirectedWeapon::SelfDirectedWeapon(std::string name, int ammo) : Weapon(name
 		
 SelfDirectedWeapon::~SelfDirectedWeapon() {}
 
+SelfDirectedWeapon::SelfDirectedWeapon(SelfDirectedWeapon&& other) : Weapon(std::move(other)) {}
+
 bool SelfDirectedWeapon::isSelfDirected(){
 	return true;
 }

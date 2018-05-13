@@ -7,6 +7,7 @@ class MeleeWeapon : public Weapon {
 	public:
 		MeleeWeapon(std::string name, int ammo, bool scope, bool time = false);
 		~MeleeWeapon() {}
+		MeleeWeapon(MeleeWeapon&& other);
 };
 
 #endif

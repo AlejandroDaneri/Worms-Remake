@@ -10,6 +10,9 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos):
 
 WormView::~WormView(){}
 
+WormView::WormView(WormView&& other): Viewable(std::move(other)),
+	life(other.life), dir(other.dir), image(std::move(other.image)){}
+
 void WormView::updateData(int new_life, char new_dir, const Position& new_pos){
 	this->life = new_life;
 	this->dir_changed = this->dir != new_dir;
@@ -37,9 +40,9 @@ Gtk::Widget& WormView::getWidget(){
 
 		this->image.set(path);
 	}
-
+	//this->worm.add(this->image);
+	//this->worm.show();
+	//return this->worm;
 	return this->image;
 }
 
-WormView::WormView(WormView&& other): Viewable(std::move(other)),
-	life(other.life), dir(other.dir), image(std::move(other.image)){}

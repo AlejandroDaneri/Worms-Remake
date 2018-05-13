@@ -5,6 +5,7 @@
 WorldView::WorldView(){
 	this->world.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
+	this->window.override_background_color(Gdk::RGBA("lightgreen"));////////////// Reemplazar por fondo de pantalla
 }
 
 WorldView::~WorldView(){}

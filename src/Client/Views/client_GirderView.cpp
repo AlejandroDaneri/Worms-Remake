@@ -1,9 +1,11 @@
 #include "GirderView.h"
 
+#define GIRDER_PATH "resources/images/Girder"
+
 GirderView::GirderView(WorldView& worldView, std::string girder, Position pos):
 	Viewable(worldView), girder_name(std::move(girder)){
 
-	std::string path(IMAGES_PATH);///////////////por ahora es mas eficiente porque es solo una imagen
+	std::string path(GIRDER_PATH);///////////////por ahora es mas eficiente porque es solo una imagen
 	path += this->girder_name;
 	path += ".png";
 	this->image.set(path);

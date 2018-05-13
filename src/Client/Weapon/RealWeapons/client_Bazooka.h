@@ -7,6 +7,7 @@ class Bazooka: public DistanceWeapon {
 	public:
 		Bazooka(int ammo);
 		~Bazooka();
+		Bazooka(Bazooka&& other);
 };
 
 #endif

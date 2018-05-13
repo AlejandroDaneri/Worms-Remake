@@ -8,6 +8,7 @@ class Mortar: public DistanceWeapon {
 	public:
 		Mortar(int ammo);
 		~Mortar();
+		Mortar(Mortar&& other);
 };
 
 #endif

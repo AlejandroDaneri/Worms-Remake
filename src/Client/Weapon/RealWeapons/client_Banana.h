@@ -7,6 +7,7 @@ class Banana: public DistanceWeapon {
 	public:
 		Banana(int ammo);
 		~Banana();
+		Banana(Banana&& other);
 };
 
 #endif

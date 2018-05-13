@@ -7,6 +7,7 @@ class GreenGrenade: public DistanceWeapon {
 	public:
 		GreenGrenade(int ammo);
 		~GreenGrenade();
+		GreenGrenade(GreenGrenade&& other);
 };
 
 #endif

@@ -14,6 +14,8 @@ class Weapon {
 	public:
 		Weapon(std::string name, int ammo);
 		~Weapon();
+		Weapon(Weapon&& other);
+		Weapon& operator=(Weapon&& other);
 		
 		virtual bool hasScope();
 		virtual bool isSelfDirected();

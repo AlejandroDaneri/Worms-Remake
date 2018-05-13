@@ -6,3 +6,5 @@ HolyGrenade::HolyGrenade(int ammo) : DistanceWeapon(HOLY_GRENADE_NAME, ammo,
 
 HolyGrenade::~HolyGrenade(){}
 
+HolyGrenade::HolyGrenade(HolyGrenade&& other) : DistanceWeapon(std::move(other)) {}
+

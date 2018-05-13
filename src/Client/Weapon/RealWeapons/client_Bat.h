@@ -3,10 +3,11 @@
 
 #include "client_MeleeWeapon.h"
 
-class Bat: public MeleeWeapon{
+class Bat: public MeleeWeapon {
 	public:
 		Bat(int ammo);
 		~Bat();
+		Bat(Bat&& other);
 };
 
 #endif

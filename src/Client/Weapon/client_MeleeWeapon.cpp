@@ -7,3 +7,5 @@ MeleeWeapon::MeleeWeapon(std::string name, int ammo, bool scope, bool time) :
 	this->is_Timed = time;
 }
 
+MeleeWeapon::MeleeWeapon(MeleeWeapon&& other) : Weapon(std::move(other)) {}
+

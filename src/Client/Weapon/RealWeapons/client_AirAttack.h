@@ -7,6 +7,7 @@ class AirAttack: public SelfDirectedWeapon {
 	public:
 		AirAttack(int ammo);
 		~AirAttack();
+		AirAttack(AirAttack&& other);
 };
 
 #endif
