@@ -33,12 +33,32 @@ void Game::run(){
 	this->world.start();
 	this->data_sender->start();
 
+	this->wait_to_world();
+
+/* PARA CUANDO ESTE IMPLEMENTADO EN EL CLIENTE LOS SEND
+	while (!this->turn.gameEnded()){
+		this->player_turn_active = true;
+		this->turn.begin_turn();
+		int worm_id = this->turn.getCurrentPlayer().getCurrentWorm().getId();
+		this->turn.getCurrentPlayer().getProtocol().send_start_turn(worm_id);
+
+		while (this->player_turn_active){
+			this->turn.getCurrentPlayer().getProtocol().receive(*this);
+		}
+
+		this->wait_to_world();
+	}
+	*/
+
+
+	//PARA PROBAR COSAS
 	/////////////////////////////////////////////////////////
-	sleep(5);
+	//sleep(5);
 	//this->getCurrentWorm().changeWeapon("Banana");
 	//this->getCurrentWorm().shoot(60, -1, 15);
-	this->getCurrentWorm().changeWeapon("AirAttack");
-	this->getCurrentWorm().shoot(b2Vec2(20, 50));
+	//this->getCurrentWorm().changeWeapon("AirAttack");
+	//this->getCurrentWorm().shoot(b2Vec2(20, 50));
+	////////////////////////////////////////////////////////
 }
 
 void Game::configure(){
@@ -63,7 +83,6 @@ void Game::configure(){
 
 	//Municion de las armas
 	this->data_sender->sendWeaponsAmmo(this->parameters.getWeaponsAmmo());
-
 }
 
 Worm& Game::getCurrentWorm(){
@@ -71,5 +90,11 @@ Worm& Game::getCurrentWorm(){
 }
 
 void Game::endTurn(){
-	///////////////////////////////
+	this->player_turn_active = false;
+}
+
+void Game::wait_to_world(){
+	while (this->world.isActive()){
+		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	}
 }

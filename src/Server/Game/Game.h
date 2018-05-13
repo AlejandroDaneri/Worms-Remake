@@ -21,8 +21,10 @@ class Game: public Thread{
 		Turn turn;
 		std::mutex mutex;
 		std::unique_ptr<DataSender> data_sender;
+		bool player_turn_active;
 
 		void configure();
+		void wait_to_world();
 
 	public:
 		Game(const std::string& config_file);
