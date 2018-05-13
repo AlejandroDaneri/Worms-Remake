@@ -16,9 +16,11 @@
 #define ASCII_5 53 
 #define MAX_TIME 5000 
 
-Player::Player(ClientProtocol& protocol, WorldView& world) : 
-	protocol(protocol), world(world), weapons_time(WEAPONS_TIME),
-	actual_angle(0), actual_dir(1), actual_weapon(Bazooka(10)) {
+Player::Player(ClientProtocol& protocol) : 
+	protocol(protocol), weapons_time(WEAPONS_TIME),
+	actual_angle(0), actual_dir(1), actual_weapon(Bazooka(10)),
+	weapons_view(this->weapons, *this),
+	screen(this->world, this->weapons_view), view_list(this->world) {
 	this->weapons.add(std::move(Bazooka(10)));
 	// Por ahora solo tiene esta hasta que agreguemos la parte de inicializar
 	// las armas al empezar el juego
@@ -137,5 +139,14 @@ bool Player::on_button_press_event(GdkEventButton *event) {
 }
 
 Gtk::HBox& Player::getWindow() {
-	return this->world.getWindow();
+	return this->screen.getWindow();
 }
+
+WorldView& Player::getWorld() {
+	return this->world;
+}
+
+ViewsList& Player::getViewList() {
+	return this->view_list;
+}
+

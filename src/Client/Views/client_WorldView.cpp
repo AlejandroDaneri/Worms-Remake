@@ -6,8 +6,6 @@ WorldView::WorldView(){
 	this->world.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
 	this->window.override_background_color(Gdk::RGBA("lightgreen"));////////////// Reemplazar por fondo de pantalla
-	this->screen.add(this->window);
-	//this->screen.add(this->window);
 }
 
 WorldView::~WorldView(){}
@@ -27,8 +25,8 @@ void WorldView::addElement(Gtk::Widget& element, const Position& position){
 	element.show();
 }
 
-Gtk::HBox& WorldView::getWindow(){
-	return this->screen;
+Gtk::ScrolledWindow& WorldView::getWindow(){
+	return this->window;
 }
 
 bool WorldView::inactive_key_handler(GdkEventKey* key_event) {

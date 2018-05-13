@@ -8,12 +8,15 @@
 #include "client_Timer.h"
 #include "client_Weapon.h"
 #include "client_WeaponList.h"
+#include "WorldView.h"
+#include "client_WeaponView.h"
+#include "client_ScreenView.h"
+#include "ViewsList.h"
 #include "Position.h"
 
 class Player {
 	private:
 		ClientProtocol& protocol;
-		WorldView& world;
 		int32_t weapons_time;
 		int32_t actual_angle;
 		int actual_dir;
@@ -21,11 +24,16 @@ class Player {
 		Weapon actual_weapon;
 		std::unique_ptr<Turn> turn;
 		std::unique_ptr<Timer> timer;
+		WorldView world;
+		WeaponView weapons_view;
+		ScreenView screen;
+		ViewsList view_list;
+		//DataReceiver data_receiver;
 		
 		void disable_attack_handlers();
 
 	public:
-		Player(ClientProtocol& protocol, WorldView& world);
+		Player(ClientProtocol& protocol);
 		~Player();
 
 		void startTurn(int id);
@@ -45,6 +53,10 @@ class Player {
 		bool on_button_press_event(GdkEventButton *event);
 		
 		Gtk::HBox& getWindow();
+		
+		WorldView& getWorld();
+		
+		ViewsList& getViewList();
 };
 
 #endif

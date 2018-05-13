@@ -18,11 +18,13 @@ int main(int argc, char* argv[]){
     Socket socket(Socket::Client("127.0.0.1", "7777"));
     ClientProtocol protocol(std::move(socket));
     
-    WorldView world;////////////////////////////////////Estos se crean en player despues
-    Player player(protocol, world);  ////////////////////////////////////El player despues recibe el protocol
-    ViewsList list(world);////////////////////////////////////Estos se crean en player despues
+    //WorldView world;////////////////////////////////////Estos se crean en player despues
+    Player player(protocol);  ////////////////////////////////////El player despues recibe el protocol
+    //ViewsList list(world);////////////////////////////////////Estos se crean en player despues
 
-    DataReceiver receiver(list, player, protocol);  ////////////////////////////////////Estos se crean en player despues
+    //DataReceiver receiver(list, player, protocol);  ////////////////////////////////////Estos se crean en player despues
+
+	DataReceiver receiver(player.getViewList(), player, protocol);
 
     window.add(player.getWindow());
     window.show_all();
