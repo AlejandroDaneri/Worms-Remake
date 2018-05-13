@@ -53,11 +53,17 @@ std::string Protocol::receive_string(char* buffer, size_t& offset) {
 	return string;
 }
 
-void Protocol::stop(){
-	this->socket.stop();
-}
-
 void Protocol::send_length(uint32_t length){
 	uint32_t converted = htonl(length);
 	this->socket.send_data(&converted, sizeof(uint32_t));
+}
+
+size_t Protocol::receive_length(){
+	int32_t length;
+	this->socket.receive(&length, sizeof(int32_t));
+	return ntohl(length);
+}
+
+void Protocol::stop(){
+	this->socket.stop();
 }

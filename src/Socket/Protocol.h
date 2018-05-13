@@ -49,6 +49,7 @@ class Protocol {
 		std::string receive_string(char* buffer, size_t& offset); 
 
 		void send_length(uint32_t length);
+		size_t receive_length();
 		
 		void stop();
 };

@@ -94,3 +94,19 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 		}
 	}
 }
+
+void ClientProtocol::receiveGirders(ViewsList& viewsList){
+	int quantity = this->receive_length();
+
+	for (int i = 0; i < quantity; i++){
+		char buffer[MAX_BUF_LEN];
+		this->receive_buffer(buffer);
+		size_t offset = 0;
+
+		int size = this->receive_int(buffer, offset);
+		int pos_x = this->receive_int(buffer, offset);
+		int pos_y = this->receive_int(buffer, offset);
+		int rotation = this->receive_int(buffer, offset);
+		viewsList.addGirder(size, pos_x, pos_y, rotation);
+	}
+}

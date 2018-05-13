@@ -25,6 +25,8 @@ class ClientProtocol: public Protocol {
 		void send_end_turn();
 
 		void receive(Player& player, ViewsList& viewsList);
+
+		void receiveGirders(ViewsList& viewsList);
 };
 
 #endif
