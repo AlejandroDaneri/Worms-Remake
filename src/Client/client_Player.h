@@ -7,6 +7,7 @@
 #include "client_Turn.h"
 #include "client_Timer.h"
 #include "client_Weapon.h"
+#include "client_WeaponList.h"
 #include "Position.h"
 
 class Player {
@@ -16,6 +17,7 @@ class Player {
 		int32_t weapons_time;
 		int32_t actual_angle;
 		int actual_dir;
+		WeaponList weapons;
 		Weapon actual_weapon;
 		std::unique_ptr<Turn> turn;
 		std::unique_ptr<Timer> timer;
@@ -28,6 +30,8 @@ class Player {
 
 		void startTurn(int id);
 		void endTurn();
+
+		void change_weapon(std::string weapon);
 		
 		void shoot(int32_t power);
 		void shoot(Position position);
@@ -40,7 +44,7 @@ class Player {
 		
 		bool on_button_press_event(GdkEventButton *event);
 		
-		Gtk::ScrolledWindow& getWindow();
+		Gtk::HBox& getWindow();
 };
 
 #endif

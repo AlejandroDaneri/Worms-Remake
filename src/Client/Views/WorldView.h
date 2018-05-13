@@ -3,8 +3,10 @@
 
 #include <gtkmm/widget.h>
 #include <gtkmm/fixed.h>
+#include <gtkmm/hvbox.h>
 #include <gtkmm/scrolledwindow.h>
 #include "Position.h"
+#include "client_WeaponView.h"
 
 class Player;
 
@@ -12,6 +14,8 @@ class WorldView{
 	private:
 		Gtk::Fixed world;
 		Gtk::ScrolledWindow window;
+		Gtk::HBox screen;
+		//WeaponView weapons_buttons;
 		bool inactive_key_handler(GdkEventKey* key_event);
 		bool inactive_button_handler(GdkEventButton *event);
 
@@ -26,7 +30,7 @@ class WorldView{
 
 		void addElement(Gtk::Widget& element, const Position& position);
 
-		Gtk::ScrolledWindow& getWindow();
+		Gtk::HBox& getWindow();
 
 		void enable_all_handlers(Player& player);
 		void enable_movement_handlers(Player& player);

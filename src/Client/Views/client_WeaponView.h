@@ -4,14 +4,18 @@
 #include <gtkmm/grid.h>
 #include "client_WeaponList.h"
 
+class Player;
+
 class WeaponView {
 	private:
 		WeaponList& weapons;
 		Gtk::Grid window;
 
 	public:
-		WeaponView(WeaponList& weapons);
+		WeaponView(WeaponList& weapons, Player& player);
 		~WeaponView();
+		
+		Gtk::Grid& getWindow();
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "client_Player.h"
 #include "client_Bazooka.h"
 #include "ViewTransformer.h"
+#include <iostream>
 
 #define LEFT_ARROW 0xff51
 #define UP_ARROW 0xff52
@@ -18,6 +19,7 @@
 Player::Player(ClientProtocol& protocol, WorldView& world) : 
 	protocol(protocol), world(world), weapons_time(WEAPONS_TIME),
 	actual_angle(0), actual_dir(1), actual_weapon(Bazooka(10)) {
+	this->weapons.add(std::move(Bazooka(10)));
 	// Por ahora solo tiene esta hasta que agreguemos la parte de inicializar
 	// las armas al empezar el juego
 }
@@ -47,6 +49,10 @@ void Player::disable_attack_handlers() {
 	this->world.enable_movement_handlers(*this);
 	this->turn->reduceTime();
 	this->actual_weapon.shoot();
+}
+
+void Player::change_weapon(std::string weapon) {
+	//this->actual_weapon = this->weapons.get(weapon);
 }
 
 void Player::shoot(Position position) {
@@ -85,6 +91,7 @@ bool Player::movement_key_press_handler(GdkEventKey* key_event) {
 
 bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 	// Por ahora lo dejo asi.
+	//std::cout << "key event = " << key_event->keyval << std::endl;
 	this->movement_key_press_handler(key_event);
 	if (key_event->keyval == UP_ARROW) {
 		if (this->actual_angle < 90)
@@ -111,6 +118,7 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 }
 
 bool Player::complete_key_release_handler(GdkEventKey* key_event) {
+	//std::cout << "Se solto la barra.  key event = " << key_event->keyval << std::endl;
 	if (key_event->keyval == SPACE) {
 		this->timer->stop();
 		this->shoot(this->timer->getTime());
@@ -128,6 +136,6 @@ bool Player::on_button_press_event(GdkEventButton *event) {
 	return true;
 }
 
-Gtk::ScrolledWindow& Player::getWindow() {
+Gtk::HBox& Player::getWindow() {
 	return this->world.getWindow();
 }
