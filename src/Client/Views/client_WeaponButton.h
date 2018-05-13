@@ -4,14 +4,15 @@
 #include <gtkmm/togglebutton.h>
 #include <gtkmm/image.h>
 #include <string>
-#include "client_Player.h"
+
+class Player;
 
 class WeaponButton {
 	private:
-		Gtk::ToggleButton button;
-		Gtk::Image image;
 		std::string weapon_name;
 		Player& player;
+		Gtk::ToggleButton button;
+		Gtk::Image image;
 		
 		void on_clicked_button();
 

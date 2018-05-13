@@ -19,3 +19,4 @@ WeaponList::iterator WeaponList::begin() {
 WeaponList::iterator WeaponList::end() {
 	return this->weapons.end();
 }
+

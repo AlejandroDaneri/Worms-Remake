@@ -1,15 +1,12 @@
 #ifndef __CLIENTSCREENVIEW_H__
 #define __CLIENTSCREENVIEW_H__
 
-#include <gtkmm/widget.h>
-#include <gtkmm/fixed.h>
 #include <gtkmm/hvbox.h>
-#include <gtkmm/scrolledwindow.h>
-#include "Position.h"
 #include "WorldView.h"
 #include "client_WeaponView.h"
 
-class Player;
+//class WeaponView;
+//class WorldView;
 
 class ScreenView {
 	private:

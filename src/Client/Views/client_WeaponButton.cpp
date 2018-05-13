@@ -1,6 +1,7 @@
 #include "client_WeaponButton.h"
+#include "client_Player.h"
 
-#define IMAGE_PATH ""
+#define IMAGE_PATH "resources/images/"
 
 WeaponButton::WeaponButton(const std::string& weapon_name, Player& player) :
 	weapon_name(weapon_name), player(player) {
@@ -11,6 +12,8 @@ WeaponButton::WeaponButton(const std::string& weapon_name, Player& player) :
 	this->button.signal_clicked().connect(sigc::mem_fun(*this, &WeaponButton::on_clicked_button));
 }
 
+WeaponButton::~WeaponButton() {}
+
 void WeaponButton::on_clicked_button() {
 	this->player.change_weapon(weapon_name);
 }
@@ -18,6 +21,4 @@ void WeaponButton::on_clicked_button() {
 Gtk::Widget& WeaponButton::getButton() {
 	return this->button;
 }
-
-WeaponButton::~WeaponButton() {}
 

@@ -18,10 +18,11 @@
 
 Player::Player(ClientProtocol& protocol) : 
 	protocol(protocol), weapons_time(WEAPONS_TIME),
-	actual_angle(0), actual_dir(1), actual_weapon(Bazooka(10)),
-	weapons_view(this->weapons, *this),
+	actual_angle(0), actual_dir(1), 
+	actual_weapon(Bazooka(10)),	weapons_view(this->weapons, *this),
 	screen(this->world, this->weapons_view), view_list(this->world) {
 	this->weapons.add(std::move(Bazooka(10)));
+	this->weapons_view.update();
 	// Por ahora solo tiene esta hasta que agreguemos la parte de inicializar
 	// las armas al empezar el juego
 }
