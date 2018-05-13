@@ -5,11 +5,11 @@
 #include <gtkmm/drawingarea.h>
 #include <gtkmm/image.h>
 #include "editor_ToolBox.h"
+#include "editor_Item.h"
 
 class MapArea : public Gtk::DrawingArea{
 private:
-    int x,y;
-    Glib::RefPtr<Gdk::Pixbuf> new_image;
+    std::vector<Item> items;
     bool ok;
     ToolBox *toolBox;
 
