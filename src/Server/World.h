@@ -45,6 +45,7 @@ class World: public Thread{
 		b2Body* getClosestObject(b2Vec2 center, b2Vec2 end, b2Vec2& normal);
 
 		std::list<physical_object_ptr>& getObjectsList();
+		std::list<physical_object_ptr>& getGirdersList();
 
 		std::mutex& getMutex();
 

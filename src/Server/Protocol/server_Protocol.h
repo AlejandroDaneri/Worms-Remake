@@ -26,6 +26,8 @@ class ServerProtocol : public Protocol{
 		void receive(Game& game);
 
 		void send_start_turn(uint32_t current_worm_id);
+
+		void sendGirder(physical_object_ptr& girder);
 };
 
 #endif

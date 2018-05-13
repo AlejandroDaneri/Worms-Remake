@@ -16,6 +16,9 @@ class Girder: public PhysicalObject{
 		Girder(World& world, size_t size, int rotation);
 		~Girder();
 
+		size_t getSize();
+		int getRotation();
+
 };
 
 #endif

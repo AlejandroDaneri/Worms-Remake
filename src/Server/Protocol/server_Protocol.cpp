@@ -1,6 +1,7 @@
 #include "server_Protocol.h"
 #include "Game.h"
 #include "Weapon.h"
+#include "Girder.h"
 #include <string>
 
 ServerProtocol::ServerProtocol(Socket&& socket): Protocol(std::move(socket)){}
@@ -118,3 +119,19 @@ void ServerProtocol::receive(Game& game){
 		}
 	}
 }
+
+void ServerProtocol::sendGirder(physical_object_ptr& object){
+	Girder* girder = (Girder*)object.get();
+
+	char buffer[MAX_BUF_LEN];
+	size_t offset = 0;
+	this->send_int(buffer, offset, girder->getSize());
+
+	b2Vec2 position = object->getPosition();
+	this->send_int(buffer, offset, position.x);
+	this->send_int(buffer, offset, position.y);
+	this->send_int(buffer, offset, girder->getRotation());
+
+	this->send_buffer(buffer, offset);
+}
+

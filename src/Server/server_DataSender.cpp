@@ -1,7 +1,8 @@
 #include "DataSender.h"
 
 DataSender::DataSender(World& world, std::vector<Player>& players): 
-	objects(world.getObjectsList()), players(players), mutex(world.getMutex()){}
+	objects(world.getObjectsList()), girders(world.getGirdersList()), 
+	players(players), mutex(world.getMutex()){}
 
 DataSender::~DataSender(){}
 
@@ -25,6 +26,15 @@ void DataSender::run(){
 				}
 			}
 			++it;
+		}
+	}
+}
+
+void DataSender::sendGirders(){
+	for (auto player = this->players.begin(); player != this->players.end(); ++player){
+		player->getProtocol().send_length(this->girders.size());
+		for (auto it = this->girders.begin(); it != this->girders.end(); ++it){
+			player->getProtocol().sendGirder(*it);
 		}
 	}
 }

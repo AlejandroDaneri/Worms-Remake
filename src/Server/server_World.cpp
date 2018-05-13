@@ -77,7 +77,7 @@ void World::removeObject(physical_object_ptr object){
 
 void World::initialize(){
 	physical_object_ptr bottom_border(new BottomBorder(*this));
-	this->addObject(bottom_border, b2Vec2(-50000, 4));///////////////////////////////////////////////////////////ver
+	this->addObject(bottom_border, b2Vec2(-50000, 4));
 }
 
 b2Vec2 World::getObjectPosition(PhysicalObject& object){
@@ -101,6 +101,10 @@ b2Body* World::getClosestObject(b2Vec2 center, b2Vec2 end, b2Vec2& normal){
 
 std::list<physical_object_ptr>& World::getObjectsList(){
 	return this->objects;
+}
+
+std::list<physical_object_ptr>& World::getGirdersList(){
+	return this->girders;
 }
 
 std::mutex& World::getMutex(){

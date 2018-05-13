@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "DataSender.h"
 #include "Girder.h"
 #include "server_WeaponFactory.h"
 
@@ -34,9 +33,10 @@ void Game::run(){
 	this->world.start();
 	this->data_sender->start();
 
+	/////////////////////////////////////////////////////////
 	sleep(5);
-	//worm->changeWeapon("Banana");
-	//worm->shoot(60, -1, 15);
+	//this->getCurrentWorm().changeWeapon("Banana");
+	//this->getCurrentWorm().shoot(60, -1, 15);
 	this->getCurrentWorm().changeWeapon("AirAttack");
 	this->getCurrentWorm().shoot(b2Vec2(20, 50));
 }
@@ -59,16 +59,7 @@ void Game::configure(){
 		physical_object_ptr girder(new Girder(this->world, girders_list[i].len, girders_list[i].rotation));
 		this->world.addObject(girder, b2Vec2(girders_list[i].pos_x, girders_list[i].pos_y));
 	}
-
-	/*for (int i = 1; i < 5; i++){
-		physical_object_ptr worm(new Worm(this->world, i, this->parameters));
-		this->world.addObject(worm, b2Vec2(10 * (i+1), 75));
-		physical_object_ptr girder(new Girder(this->world, 6));
-		this->world.addObject(girder, b2Vec2(10 * (i+1) - 3, 20));
-		//agegar worm al jugador etc
-		//recibir los worms del gameparameters
-		//antes enviar a todos los jugadores vigas, municiones, etc
-	}*/
+	this->data_sender->sendGirders();
 
 }
 

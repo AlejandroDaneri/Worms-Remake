@@ -57,4 +57,7 @@ void Protocol::stop(){
 	this->socket.stop();
 }
 
-
+void Protocol::send_length(uint32_t length){
+	uint32_t converted = htonl(length);
+	this->socket.send_data(&converted, sizeof(uint32_t));
+}

@@ -23,8 +23,8 @@
 #define MOVE_LEFT -1
 #define JUMP 2
 #define ROLLBACK 3
-#define EXTEND_ANGLE 4
-#define REDUCE_ANGLE 5
+#define EXTEND_ANGLE 4/////////////////////////
+#define REDUCE_ANGLE 5/////////////////////////
 
 #define WORM_TYPE 0
 #define WEAPON_TYPE 1
@@ -47,6 +47,8 @@ class Protocol {
 		
 		void send_string(char* buffer, size_t& offset, const std::string& string);
 		std::string receive_string(char* buffer, size_t& offset); 
+
+		void send_length(uint32_t length);
 		
 		void stop();
 };

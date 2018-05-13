@@ -5,7 +5,7 @@ WormsList::WormsList(): current(0){}
 WormsList::~WormsList(){}
 
 Worm& WormsList::getCurrentWorm(){
-	Worm* worm = (Worm*)this->list.at(this->current).get();
+	Worm* worm = (Worm*)this->list[this->current].get();
 	return *worm;
 }
 

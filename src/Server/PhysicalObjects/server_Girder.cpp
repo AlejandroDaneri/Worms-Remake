@@ -22,4 +22,12 @@ void Girder::createFixtures(){
 	this->body->CreateFixture(&boxFixtureDef);
 }
 
+size_t Girder::getSize(){
+	return this->size;
+}
+
+int Girder::getRotation(){
+	return this->rotation;
+}
+
 /////////////////////////////////////////////////////////////////////////////rotation

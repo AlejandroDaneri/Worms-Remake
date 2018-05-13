@@ -11,6 +11,7 @@
 class DataSender: public Thread{
 	private:
 		std::list<physical_object_ptr>& objects;
+		std::list<physical_object_ptr>& girders;
 		std::vector<Player>& players;
 		std::mutex& mutex;
 
@@ -19,6 +20,8 @@ class DataSender: public Thread{
 		~DataSender();
 
 		void run() override;
+
+		void sendGirders();
 
 };
 

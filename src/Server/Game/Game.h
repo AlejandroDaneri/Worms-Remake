@@ -10,6 +10,7 @@
 #include <vector>
 #include <memory>
 #include "World.h"
+#include "DataSender.h"
 
 class Player;
 
@@ -19,7 +20,7 @@ class Game: public Thread{
 		World world;
 		Turn turn;
 		std::mutex mutex;
-		std::unique_ptr<Thread> data_sender;
+		std::unique_ptr<DataSender> data_sender;
 
 		void configure();
 
