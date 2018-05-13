@@ -29,6 +29,10 @@ void Player::distributeWorms(size_t max, int life_to_add){
 	this->worms.distribute(max, life_to_add);
 }
 
+bool Player::isDead(){
+	return this->worms.isEmpty();
+}
+
 ServerProtocol& Player::getProtocol(){
 	return this->protocol;
 }

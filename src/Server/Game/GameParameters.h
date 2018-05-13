@@ -7,12 +7,15 @@
 #include "b2Math.h"
 
 class GameParameters{
+	public:
+		class GirderParams;
+
 	private:
 		int worm_life;
 		int worm_life_to_add;
 
 		std::vector<b2Vec2> worms_list;
-		//std::vector<GirderParams> girders_list;
+		std::vector<GirderParams> girders_list;
 
 
 		float worm_velocity;
@@ -50,6 +53,7 @@ class GameParameters{
 		int get_worms_life_to_add();
 
 		std::vector<b2Vec2>& getWorms();
+		std::vector<GirderParams>& getGirders();
 
 
 		float getWormVelocity();
@@ -80,5 +84,17 @@ class GameParameters{
 		size_t get_max_players();
 
 };
+
+class GameParameters::GirderParams{
+	public:
+		size_t len;
+		int pos_x;
+		int pos_y;
+		int rotation;
+
+		GirderParams(size_t len, int pos_x, int pos_y, int rotation);
+};
+
+typedef GameParameters::GirderParams GirderParams;
 
 #endif

@@ -35,6 +35,7 @@ GameParameters::GameParameters(const std::string& config_file){
 
 	for (int i = 0; i < 5; i++){
 		this->worms_list.push_back(b2Vec2(10 * (i+1), 60));
+		this->girders_list.push_back(GirderParams(8, 10 * (i+1) - 3, 20, 0));
 	}
 }
 		
@@ -54,6 +55,10 @@ std::vector<b2Vec2>& GameParameters::getWorms(){
  
     std::shuffle(this->worms_list.begin(), this->worms_list.end(), g);
 	return this->worms_list;
+}
+
+std::vector<GirderParams>& GameParameters::getGirders(){
+	return this->girders_list;
 }
 
 float GameParameters::getWormVelocity(){
@@ -131,3 +136,6 @@ int GameParameters::get_airAttack_radius(){
 size_t GameParameters::get_max_players(){
 	return this->max_players;
 }
+
+GameParameters::GirderParams::GirderParams(size_t len, int pos_x, int pos_y, int rotation):
+	len(len), pos_x(pos_x), pos_y(pos_y), rotation(rotation){}

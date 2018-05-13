@@ -2,7 +2,8 @@
 #include "b2PolygonShape.h"
 #include "b2Fixture.h"
 
-Girder::Girder(World& world, size_t size): PhysicalObject(world, 0, "Girder"), size(size){}
+Girder::Girder(World& world, size_t size, int rotation):
+	PhysicalObject(world, 0, "Girder"), size(size), rotation(rotation){}
 
 Girder::~Girder(){}
 
@@ -20,3 +21,5 @@ void Girder::createFixtures(){
 	boxFixtureDef.density = 1;
 	this->body->CreateFixture(&boxFixtureDef);
 }
+
+/////////////////////////////////////////////////////////////////////////////rotation

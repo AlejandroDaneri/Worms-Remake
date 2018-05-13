@@ -10,10 +10,12 @@ Worm& WormsList::getCurrentWorm(){
 }
 
 void WormsList::begin_turn(){
-	++ this->current;
-	if (this->current >= this->list.size()){
-		this->current = 0;
-	}
+	do {
+		this->current++;
+		if (this->current >= this->list.size()){
+			this->current = 0;
+		}
+	} while (!this->getCurrentWorm().isDead());
 }
 
 void WormsList::add(physical_object_ptr worm){
@@ -29,4 +31,13 @@ void WormsList::distribute(size_t max, int life_to_add){
 			worm->addLife(life_to_add);
 		}
 	}
+}
+
+bool WormsList::isEmpty(){
+	for (auto it = this->list.begin(); it != this->list.end(); ++it){
+		if (!(*it)->isDead()){
+			return false;
+		}
+	}
+	return true;
 }

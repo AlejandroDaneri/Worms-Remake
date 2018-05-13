@@ -41,6 +41,4 @@ class Worm: public PhysicalObject{
 		void receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id);
 };
 
-typedef std::shared_ptr<Worm> worm_ptr;
-
 #endif

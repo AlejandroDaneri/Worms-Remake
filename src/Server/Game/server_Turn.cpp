@@ -18,10 +18,9 @@ Player& Turn::getCurrentPlayer(){
 }
 
 void Turn::begin_turn(){
-	++ this->current;////////////////////////////////////////
-	if (this->current >= this->players.size()){
-		this->current = 0;
-	}
+	do {
+		this->advanceCurrent();
+	} while (! this->getCurrentPlayer().isDead());
 	this->getCurrentPlayer().begin_turn();
 }
 
@@ -46,4 +45,14 @@ void Turn::distributeWorms(size_t size, int life_to_add){
 	for (auto it = this->players.begin(); it != this->players.end(); ++it){
 		it->distributeWorms(size, life_to_add);
 	}
+}
+
+bool Turn::gameEnded(){
+	size_t players_alive = 0;
+	for (auto it = this->players.begin(); it != this->players.end(); ++it){
+		if (!it->isDead()){
+			players_alive++;
+		}
+	}
+	return players_alive <= 1;
 }

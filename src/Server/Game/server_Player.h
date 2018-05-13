@@ -31,6 +31,8 @@ class Player{
 
 		void distributeWorms(size_t max, int life_to_add);
 
+		bool isDead();
+
 		ServerProtocol& getProtocol();
 
 };

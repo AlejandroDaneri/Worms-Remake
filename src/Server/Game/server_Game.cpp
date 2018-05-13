@@ -34,16 +34,11 @@ void Game::run(){
 	this->world.start();
 	this->data_sender->start();
 
-	//worm_ptr worm(new Worm(this->world, 38, this->parameters));
-	//this->world.addObject(worm, b2Vec2(10, 25));
-	//physical_object_ptr girder(new Girder(this->world, 6));
-	//this->world.addObject(girder, b2Vec2(7, 20));
-
-	//sleep(5);
+	sleep(5);
 	//worm->changeWeapon("Banana");
 	//worm->shoot(60, -1, 15);
-	//worm->changeWeapon("AirAttack");
-	//worm->shoot(b2Vec2(20, 50));
+	this->getCurrentWorm().changeWeapon("AirAttack");
+	this->getCurrentWorm().shoot(b2Vec2(20, 50));
 }
 
 void Game::configure(){
@@ -56,6 +51,14 @@ void Game::configure(){
 		this->turn.addWorm(this->world, this->parameters, worms_list[i], i);
 	}
 	this->turn.distributeWorms(size, this->parameters.get_worms_life_to_add());
+
+	//Creacion de vigas
+	std::vector<GirderParams> girders_list = this->parameters.getGirders();
+	size = girders_list.size();
+	for (size_t i = 0; i < size; i++){
+		physical_object_ptr girder(new Girder(this->world, girders_list[i].len, girders_list[i].rotation));
+		this->world.addObject(girder, b2Vec2(girders_list[i].pos_x, girders_list[i].pos_y));
+	}
 
 	/*for (int i = 1; i < 5; i++){
 		physical_object_ptr worm(new Worm(this->world, i, this->parameters));

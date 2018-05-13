@@ -24,6 +24,8 @@ class WormsList{
 
 		void distribute(size_t max, int life_to_add);
 
+		bool isEmpty();
+
 };
 
 #endif
