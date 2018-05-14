@@ -27,7 +27,7 @@ threads = si
 #gtk = si
 
 # Si es un programa gtkmm, descomentar (quitar el '#' a) la siguiente línea.
-gtkmm = si
+#gtkmm = si
 
 # Descomentar si se quiere ver como se invoca al compilador
 #verbose = si
@@ -138,6 +138,7 @@ SRC_SERVER := $(shell find $(SOURCEDIR) -name 'server*.cpp')
 SRC_EDITOR := $(shell find $(SOURCEDIR) -name 'editor*.cpp')
 SRC_EDITCLI := $(shell find $(SOURCEDIR) -name 'editcli*.cpp')
 SRC_BOX2D := $(shell find $(SOURCEDIR) -name 'b2*.cpp')
+SRC_YAML := $(shell find $(SOURCEDIR) -name 'yaml*.cpp')
 
 # REGLAS
 #########
@@ -152,6 +153,7 @@ o_server_files = $(SRC_SERVER:%.cpp=%.o)
 o_editor_files = $(SRC_EDITOR:%.cpp=%.o)
 o_editcli_files = $(SRC_EDITCLI:%.cpp=%.o)
 o_box2d_files = $(SRC_BOX2D:%.cpp=%.o)
+o_yaml_files = $(SRC_YAML:%.cpp=%.o)
 
 client: $(o_editcli_files) $(o_common_files) $(o_client_files)
 	@if [ -z "$(o_client_files)" ]; \
@@ -162,29 +164,29 @@ client: $(o_editcli_files) $(o_common_files) $(o_client_files)
 	fi >&2
 	$(LD) $(o_editcli_files) $(o_common_files) $(o_client_files) -o client $(LDFLAGS)
 	
-editor: $(o_editcli_files) $(o_common_files) $(o_editor_files)
+editor: $(o_yaml_files) $(o_editcli_files) $(o_common_files) $(o_editor_files)
 	@if [ -z "$(o_editor_files)" ]; \
 	then \
 		echo "No hay archivos de entrada en el directorio actual para el editor. Recuerde que los archivos deben respetar la forma 'client*.$(extension)' y que no se aceptan directorios anidados."; \
 		if [ -n "$(directorios)" ]; then echo "Directorios encontrados: $(directorios)"; fi; \
 		false; \
 	fi >&2
-	$(LD) $(o_editcli_files) $(o_common_files) $(o_editor_files) -o editor $(LDFLAGS)
+	$(LD) $(o_yaml_files) $(o_editcli_files) $(o_common_files) $(o_editor_files) -o editor $(LDFLAGS)
 
-server: $(o_box2d_files) $(o_common_files) $(o_server_files)
+server: $(o_yaml_files) $(o_box2d_files) $(o_common_files) $(o_server_files)
 	@if [ -z "$(o_server_files)" ]; \
 	then \
 		echo "No hay archivos de entrada en el directorio actual para el servidor. Recuerde que los archivos deben respetar la forma 'server*.$(extension)' y que no se aceptan directorios anidados."; \
 		if [ -n "$(directorios)" ]; then echo "Directorios encontrados: $(directorios)"; fi; \
 		false; \
 	fi >&2
-	$(LD) $(o_box2d_files) $(o_common_files) $(o_server_files) -o server $(LDFLAGS)
+	$(LD) $(o_yaml_files) $(o_box2d_files) $(o_common_files) $(o_server_files) -o server $(LDFLAGS)
 
 clean:
 	$(RM) -f $(o_common_files) $(o_client_files) $(o_server_files) $(o_editcli_files) $(o_editor_files) client server editor
 
 clean_libs: clean
-	$(RM) -f $(o_box2d_files)
+	$(RM) -f $(o_box2d_files) $(o_yaml_files)
 
 run_client: client
 	./client
