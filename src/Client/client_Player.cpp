@@ -74,6 +74,8 @@ void Player::play_tick_time() {
 void Player::shoot(int32_t power) {
 	//Handler verifica si tiene balas y todo eso
 	this->disable_attack_handlers();
+	if (this->weapons.get(this->actual_weapon).hasVariablePower())
+		this->timer->join();
 	int32_t angle = this->actual_angle; 
 	if (!this->weapons.get(this->actual_weapon).isTimed())
 		this->weapons_time = -1;
@@ -118,7 +120,7 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 			//printf("se apreto la barra\n");
 		if (!this->weapons.get(this->actual_weapon).hasAmmo())
 			///////////////////////// Hacer sonido u otra cosa
-			return true; 
+			return true;
 		if (!this->weapons.get(this->actual_weapon).hasVariablePower())
 			this->shoot(0);
 		else {
@@ -139,7 +141,6 @@ bool Player::complete_key_release_handler(GdkEventKey* key_event) {
 		//printf("se solto la barra\n");
 		this->timer->stop();
 		int32_t time = this->timer->getTime();
-		this->timer->join();
 		this->shoot(time);
 	} else if (key_event->keyval == LEFT_ARROW) {}
 		///////////////////////// ANIMACION DE SACAR EL ARMA

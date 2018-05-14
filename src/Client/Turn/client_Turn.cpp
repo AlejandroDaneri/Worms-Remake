@@ -17,16 +17,16 @@ void Turn::run() {
 	}
 	// Inicio la cuenta regresiva
 	while (this->running && this->actual_time < this->max_time) {
-		for (int i = 0; i < 20 && this->running; i++) {
+		this->player.play_tick_time();
+		for (int i = 0; i < 20 && this->running && this->actual_time < this->max_time; i++) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(TIME_STEP));
 			this->actual_time += TIME_STEP;
 		}
-		this->player.play_tick_time();
 	}
 	this->player.endTurn();
 	this->running = false;
 }
 
 void Turn::reduceTime() {
-	this->actual_time =  this->max_time - REDUCTION_TIME;
+	this->max_time = this->actual_time + REDUCTION_TIME;
 }
