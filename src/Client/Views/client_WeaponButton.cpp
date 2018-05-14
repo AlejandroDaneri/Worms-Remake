@@ -1,7 +1,7 @@
 #include "client_WeaponButton.h"
 #include "client_Player.h"
 
-#define IMAGE_PATH "resources/images/"
+#define IMAGE_PATH "resources/images/Weapons_icons/"
 
 WeaponButton::WeaponButton(const std::string& weapon_name, Player& player) :
 	weapon_name(weapon_name), player(player) {
@@ -15,6 +15,7 @@ WeaponButton::WeaponButton(const std::string& weapon_name, Player& player) :
 WeaponButton::~WeaponButton() {}
 
 void WeaponButton::on_clicked_button() {
+	//printf("Se ejecuto el handler del boton\n");
 	this->button.set_active(false);	
 	this->player.change_weapon(weapon_name);
 }

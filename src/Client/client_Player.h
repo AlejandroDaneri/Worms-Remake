@@ -45,6 +45,8 @@ class Player {
 		void shoot(int32_t power);
 		void shoot(Position position);
 		
+		void update_weapons_view();
+		
 		bool complete_key_press_handler(GdkEventKey* key_event);
 		
 		bool movement_key_press_handler(GdkEventKey* key_event);
@@ -53,7 +55,7 @@ class Player {
 		
 		bool on_button_press_event(GdkEventButton *event);
 		
-		Gtk::HBox& getWindow();
+		Gtk::VBox& getWindow();
 		
 		WorldView& getWorld();
 		

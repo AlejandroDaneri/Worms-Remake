@@ -10,14 +10,14 @@
 
 class ScreenView {
 	private:
-		Gtk::HBox screen;
+		Gtk::VBox screen;
 		//WeaponView weapons_buttons;
 
 	public:
 		ScreenView(WorldView& world, WeaponView& weapons);
 		~ScreenView();
 		
-		Gtk::HBox& getWindow();
+		Gtk::VBox& getWindow();
 };
 
 

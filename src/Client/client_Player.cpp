@@ -98,18 +98,22 @@ bool Player::movement_key_press_handler(GdkEventKey* key_event) {
 bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 	// Por ahora lo dejo asi.
 	//std::cout << "key event = " << key_event->keyval << std::endl;
+	//printf("handler de movimiento\n");
 	this->movement_key_press_handler(key_event);
 	if (key_event->keyval == UP_ARROW) {
+		//printf("Arriba\n");
 		if (this->actual_angle < 90)
 			this->actual_angle++; /////////////////////////////////// ACTUALIZAR LINEA DE TIRO
 		this->protocol.send_move_action(EXTEND_ANGLE);
 	} else if (key_event->keyval == DOWN_ARROW) {
+		//printf("Abajo\n");
 		if (this->actual_angle > -90)
 			this->actual_angle--;
 		this->protocol.send_move_action(REDUCE_ANGLE);
 	} else if (key_event->keyval >= ASCII_1 && key_event->keyval <= ASCII_5) {
 		this->weapons_time = key_event->keyval - ASCII_OFFSET;
 	} else if (key_event->keyval == SPACE) {
+			//printf("se apreto la barra\n");
 		if (!this->weapons.get(this->actual_weapon).hasAmmo())
 			///////////////////////// Hacer sonido u otra cosa
 			return true; 
@@ -126,13 +130,18 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 bool Player::complete_key_release_handler(GdkEventKey* key_event) {
 	//std::cout << "Se solto la barra.  key event = " << key_event->keyval << std::endl;
 	if (key_event->keyval == SPACE) {
+		//printf("se solto la barra\n");
 		this->timer->stop();
 		this->shoot(this->timer->getTime());
-	}
+	} else if (key_event->keyval == LEFT_ARROW) {}
+		///////////////////////// ANIMACION DE SACAR EL ARMA
+	else if (key_event->keyval == RIGHT_ARROW) {}
+		///////////////////////// ANIMACION DE SACAR EL ARMA
 	return true;
 }
 
 bool Player::on_button_press_event(GdkEventButton *event) {
+	//printf("se apretó el mouse\n");
 	if (!this->weapons.get(this->actual_weapon).isSelfDirected())
 		return true;
 	if ((event->type == GDK_BUTTON_PRESS) && (event->button == 1)) {
@@ -142,7 +151,7 @@ bool Player::on_button_press_event(GdkEventButton *event) {
 	return true;
 }
 
-Gtk::HBox& Player::getWindow() {
+Gtk::VBox& Player::getWindow() {
 	return this->screen.getWindow();
 }
 

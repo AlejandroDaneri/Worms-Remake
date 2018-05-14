@@ -3,7 +3,7 @@
 
 #include <gtkmm/grid.h>
 #include <unordered_map>
-
+#include <memory>
 
 class Player;
 class WeaponList;
@@ -14,7 +14,7 @@ class WeaponView {
 		WeaponList& weapons;
 		Gtk::Grid window;
 		Player& player;
-		std::unordered_map<std::string, WeaponButton*> buttons;
+		std::unordered_map<std::string, std::unique_ptr<WeaponButton>> buttons;
 
 	public:
 		WeaponView(WeaponList& weapons, Player& player);
