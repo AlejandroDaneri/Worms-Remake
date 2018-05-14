@@ -14,7 +14,7 @@ FragmentableWeapon::~FragmentableWeapon(){}
 void FragmentableWeapon::explode(){
 	for (int fragment_angle = 0; fragment_angle < 360; fragment_angle+= (360 / this->fragments)){
 		WeaponFactory factory(this->world, this->parameters);
-		physical_object_ptr fragment = factory.getWeapon(this->getName() + "Fragment");
+		physical_object_ptr fragment = factory.getWeapon(this->getName() + FRAGMENT);
 
 		b2Vec2 center = this->body->GetPosition() + 2 * b2Vec2(cos(fragment_angle * RADIANS), sin(fragment_angle * RADIANS));
 		((Fragment*)fragment.get())->set_shoot_position(center);

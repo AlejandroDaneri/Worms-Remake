@@ -8,7 +8,7 @@ Teleportation::Teleportation(World& world, GameParameters& parameters):
 Teleportation::~Teleportation(){}
 
 std::string Teleportation::getName(){
-	return "Teleportation";
+	return TELEPORT_NAME;
 }
 
 void Teleportation::shoot(char dir, int angle, int power, int time){}

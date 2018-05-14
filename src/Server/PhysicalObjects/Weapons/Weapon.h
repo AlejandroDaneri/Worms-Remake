@@ -6,6 +6,7 @@
 #include "World.h"
 #include "WeaponExplodeTime.h"
 #include <string>
+#include "WeaponNames.h"
 
 class Worm;
 

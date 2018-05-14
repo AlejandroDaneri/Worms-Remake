@@ -11,7 +11,7 @@ AirAttack::AirAttack(World& world, GameParameters& parameters):
 AirAttack::~AirAttack(){}
 
 std::string AirAttack::getName(){
-	return "AirAttack";
+	return AIR_ATTACK_NAME;
 }
 
 void AirAttack::shoot(char dir, int angle, int power, int time){}
@@ -21,7 +21,7 @@ void AirAttack::shoot(Worm& shooter, b2Vec2 pos){
 	int pos_x = pos.x - missiles * SEPARATION / 2;
 	WeaponFactory factory(this->world, this->parameters);
 	for (int i = 0; i < missiles; i++, pos_x += SEPARATION){
-		physical_object_ptr missile = factory.getWeapon("AirAttackMissile");
+		physical_object_ptr missile = factory.getWeapon(AIR_ATTACK_MISSILE_NAME);
 		this->world.addObject(missile, b2Vec2(pos_x, SKY));
 	};
 }

@@ -11,6 +11,8 @@
 
 #define AIR_ATTACK_NAME "AirAttack"
 
+#define AIR_ATTACK_MISSILE_NAME "AirAttackMissile"
+
 #define BANANA_NAME "Banana"
 
 #define BAT_NAME "Bat"
@@ -30,9 +32,11 @@
 
 #define RED_GRENADE_NAME "RedGrenade"
 
-#define GRENADE_FRAGMENTS_NAME "RedGrenadeFragment"
+#define RED_GRENADE_FRAGMENTS_NAME "RedGrenadeFragment"
 
 
 #define TELEPORT_NAME "Teleportation"
+
+#define FRAGMENT "Fragment"
 
 #endif

@@ -8,7 +8,7 @@ Banana::Banana(World& world, GameParameters& parameters):
 Banana::~Banana(){}
 
 std::string Banana::getName(){
-	return "Banana";
+	return BANANA_NAME;
 }
 
 void Banana::createFixtures(){

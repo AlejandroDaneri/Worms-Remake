@@ -6,5 +6,5 @@ RedGrenade::RedGrenade(World& world, GameParameters& parameters):
 RedGrenade::~RedGrenade(){}
 
 std::string RedGrenade::getName(){
-        return "RedGrenade";
+        return RED_GRENADE_NAME;
 }
