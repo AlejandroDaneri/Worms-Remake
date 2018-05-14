@@ -7,7 +7,7 @@
 #include <gtkmm/hvbox.h>
 #include "editor_MapArea.h"
 #include "editor_ToolBox.h"
-#include "WeaponsArea.h"
+#include "editor_WeaponsArea.h"
 
 class MapEditor : public Gtk::Window {
 private:

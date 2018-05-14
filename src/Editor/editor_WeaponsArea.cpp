@@ -1,5 +1,5 @@
 
-#include "WeaponsArea.h"
+#include "editor_WeaponsArea.h"
 
 WeaponsArea::WeaponsArea() {
     back.set_label("VOLVER");
