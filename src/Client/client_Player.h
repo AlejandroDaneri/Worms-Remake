@@ -55,6 +55,8 @@ class Player {
 		
 		bool on_button_press_event(GdkEventButton *event);
 		
+		void play_tick_time();
+		
 		Gtk::VBox& getWindow();
 		
 		WorldView& getWorld();
