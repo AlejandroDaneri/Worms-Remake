@@ -3,7 +3,7 @@
 #include "b2CircleShape.h"
 
 Banana::Banana(World& world, GameParameters& parameters):
-	Weapon(world, parameters, parameters.get_banana_damage(), parameters.get_banana_radius()){}
+	Weapon(world, parameters, parameters.getWeaponDamage(BANANA_NAME), parameters.getWeaponRadius(BANANA_NAME)){}
 		
 Banana::~Banana(){}
 

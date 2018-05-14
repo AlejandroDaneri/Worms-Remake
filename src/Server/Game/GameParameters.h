@@ -5,44 +5,21 @@
 #include <vector>
 #include <map>
 #include "b2Math.h"
+#include "yaml.h"
 
 class GameParameters{
 	public:
 		class GirderParams;
 
 	private:
+		YAML::Node config;
+
+		/////////////parametros que despues vienen del editor
 		int worm_life;
-		int worm_life_to_add;
 
 		std::vector<b2Vec2> worms_list;
 		std::vector<GirderParams> girders_list;
 		std::map<std::string, int> weapons_ammo;
-
-
-		float worm_velocity;
-		float worm_jump_velocity;
-		float worm_jump_height;
-		float worm_rollback_height;
-		float worm_rollback_velocity;
-
-		float weapons_velocity;
-
-		int bazooka_radius;
-		int bazooka_damage;
-
-		int banana_radius;
-		int banana_damage;
-
-		int redGrenade_radius;
-		int redGrenade_damage;
-		int redGrenade_fragments;
-
-		int redGrenadeFragment_radius;
-		int redGrenadeFragment_damage;
-
-		int airAttack_missiles;
-		int airAttack_radius;
-		int airAttack_damage;
 
 		size_t max_players;
 
@@ -66,22 +43,9 @@ class GameParameters{
 
 		float getWeaponsVelocity();
 
-		int get_bazooka_radius();
-		int get_bazooka_damage();
-
-		int get_banana_radius();
-		int get_banana_damage();
-
-		int get_redGrenade_damage();
-		int get_redGrenade_radius();
-		int get_redGrenade_fragments();
-
-		int get_redGrenadeFragment_damage();
-		int get_redGrenadeFragment_radius();
-
-		int get_airAttack_missiles();
-		int get_airAttack_radius();
-		int get_airAttack_damage();
+		int getWeaponDamage(std::string weapon);
+		int getWeaponRadius(std::string weapon);
+		int getWeaponFragments(std::string weapon);
 
 		size_t get_max_players();
 

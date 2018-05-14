@@ -1,7 +1,7 @@
 #include "server_RedGrenade.h"
 
 RedGrenade::RedGrenade(World& world, GameParameters& parameters):
-        FragmentableWeapon(world, parameters, parameters.get_redGrenade_damage(), parameters.get_redGrenade_fragments(), parameters.get_redGrenade_radius()){}
+        FragmentableWeapon(world, parameters, parameters.getWeaponDamage(RED_GRENADE_NAME), parameters.getWeaponFragments(RED_GRENADE_NAME), parameters.getWeaponRadius(RED_GRENADE_NAME)){}
 
 RedGrenade::~RedGrenade(){}
 

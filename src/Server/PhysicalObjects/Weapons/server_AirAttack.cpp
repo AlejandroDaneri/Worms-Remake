@@ -17,7 +17,7 @@ std::string AirAttack::getName(){
 void AirAttack::shoot(char dir, int angle, int power, int time){}
 
 void AirAttack::shoot(Worm& shooter, b2Vec2 pos){
-	int missiles = this->parameters.get_airAttack_missiles();
+	int missiles = this->parameters.getWeaponFragments(AIR_ATTACK_NAME);
 	int pos_x = pos.x - missiles * SEPARATION / 2;
 	WeaponFactory factory(this->world, this->parameters);
 	for (int i = 0; i < missiles; i++, pos_x += SEPARATION){

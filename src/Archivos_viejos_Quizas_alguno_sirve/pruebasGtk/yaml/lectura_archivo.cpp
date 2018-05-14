@@ -8,9 +8,10 @@
 //LECTURA DE ARCHIVO YAML
 int main(int argc, char* argv[]){
 
-	YAML::Node config = YAML::LoadFile("./src/Archivos_viejos_Quizas_alguno_sirve/pruebasGtk/yaml/yaml.txt");
+	YAML::Node config = YAML::LoadFile("./src/Archivos_viejos_Quizas_alguno_sirve/pruebasGtk/yaml/server_config.yaml");
 
-	int worms_life = config["worms_life"].as<int>();
+	int worms_life = config["worms_life_to_add"].as<int>();
+	std::cout << "worms_life_to_add: " << worms_life << std::endl;
 
 	std::string bazooka = "Bazooka";
 	std::string dynamite = "Dynamite";
@@ -21,7 +22,6 @@ int main(int argc, char* argv[]){
 	//convierto directamente a map
 	std::map<std::string, int> radius = config["weapon_radius"].as<std::map<std::string, int>>();
 
-	std::cout <<  worms_life << std::endl;
 	std::cout <<  bazooka_radius << std::endl;
 	std::cout <<  dynamite_radius << std::endl;
 

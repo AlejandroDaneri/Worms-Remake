@@ -13,7 +13,7 @@ weapon_radius:
   Banana: 4
   HolyGrenade: 8
   Dynamite: 4
-  Bat: 2
+  Bat: 2 #largo del bate
   AirAttackMissile: 2
   MortarFragment: 2
   RedGrenadeFragment: 2

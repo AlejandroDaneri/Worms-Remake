@@ -52,11 +52,11 @@ void Game::run(){
 
 	//PARA PROBAR COSAS
 	/////////////////////////////////////////////////////////
-	//sleep(5);
+	sleep(5);
 	//this->getCurrentWorm().changeWeapon("Banana");
 	//this->getCurrentWorm().shoot(60, -1, 15);
-	//this->getCurrentWorm().changeWeapon("AirAttack");
-	//this->getCurrentWorm().shoot(b2Vec2(20, 50));
+	this->getCurrentWorm().changeWeapon("AirAttack");
+	this->getCurrentWorm().shoot(b2Vec2(20, 50));
 	////////////////////////////////////////////////////////
 }
 
