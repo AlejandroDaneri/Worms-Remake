@@ -47,7 +47,7 @@ void Game::run(){
 
 		this->wait_to_world();
 	}
-*/
+//*/
 
 
 	//PARA PROBAR COSAS

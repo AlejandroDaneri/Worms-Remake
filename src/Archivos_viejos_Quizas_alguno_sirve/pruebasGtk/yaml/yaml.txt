@@ -1,0 +1,8 @@
+worms_life: 200
+worms_life_to_add: 25
+weapon_radius:
+  Bazooka: 2
+  Dynamite: 5
+weapon_damage:
+  Bazooka: 50
+  Dynamite: 45
