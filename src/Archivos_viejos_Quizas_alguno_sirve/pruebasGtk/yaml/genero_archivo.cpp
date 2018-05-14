@@ -2,6 +2,8 @@
 #include <iostream>
 #include <fstream>
 
+
+//GENERACION DE ARCHIVO YAML
 int main(int argc, char* argv[]){
 
 	YAML::Emitter out;
