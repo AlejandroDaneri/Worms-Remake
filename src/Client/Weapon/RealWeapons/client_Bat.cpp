@@ -1,5 +1,5 @@
 #include "client_Bat.h"
-#include "client_Weapons_defs.h"
+#include "WeaponNames.h"
 
 Bat::Bat(int ammo): MeleeWeapon(BAT_NAME, ammo, true) {}
 

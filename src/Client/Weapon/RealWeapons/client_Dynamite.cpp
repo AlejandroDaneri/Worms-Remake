@@ -1,5 +1,5 @@
 #include "client_Dynamite.h"
-#include "client_Weapons_defs.h"
+#include "WeaponNames.h"
 
 Dynamite::Dynamite(int ammo): MeleeWeapon(DYNAMITE_NAME, ammo, false, true) {}
 

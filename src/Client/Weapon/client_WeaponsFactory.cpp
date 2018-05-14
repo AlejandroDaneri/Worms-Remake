@@ -1,5 +1,5 @@
 #include "client_WeaponsFactory.h"
-#include "client_Weapons_defs.h"
+#include "WeaponNames.h"
 
 #include "client_AirAttack.h"
 #include "client_Banana.h"

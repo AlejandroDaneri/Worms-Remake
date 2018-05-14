@@ -25,7 +25,7 @@
 
 #define MORTAR_NAME "Mortar"
 
-#define FRAGMENTS_NAME "MortarFragment"
+#define MORTAR_FRAGMENTS_NAME "MortarFragment"
 
 
 #define RED_GRENADE_NAME "RedGrenade"

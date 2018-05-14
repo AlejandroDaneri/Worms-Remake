@@ -1,8 +1,8 @@
 #include "client_GreenGrenade.h"
-#include "client_Weapons_defs.h"
+#include "WeaponNames.h"
 
-GreenGrenade::GreenGrenade(int ammo): DistanceWeapon(GREEN_GRENADE_NAME, ammo,
-																	true) {}
+GreenGrenade::GreenGrenade(int ammo): 
+	DistanceWeapon(GREEN_GRENADE_NAME, ammo, true) {}
 
 GreenGrenade::~GreenGrenade(){}
 
