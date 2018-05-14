@@ -10,7 +10,6 @@
 class MapArea : public Gtk::DrawingArea{
 private:
     std::vector<Item> items;
-    bool ok;
     ToolBox *toolBox;
 
     bool on_button_press_event(GdkEventButton *button_event) override;

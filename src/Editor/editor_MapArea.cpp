@@ -8,8 +8,6 @@
 MapArea::MapArea(ToolBox *toolBox) {
     add_events(Gdk::BUTTON_PRESS_MASK);
     this->toolBox =toolBox;
-    ok=false;
-    
 }
 
 bool MapArea::on_draw(const ::Cairo::RefPtr<::Cairo::Context> &cr) {
