@@ -4,45 +4,40 @@
 
 GameParameters::GameParameters(const std::string& config_file, const std::string& config_editor):
 	config(YAML::LoadFile(config_file)), config_editor(YAML::LoadFile(config_editor)){
-	//leer el archivo  YAML y cargar las variables
-
-	this->worm_life = 125;
 
 	this->max_players = 1;
 
 	for (int i = 0; i < 5; i++){
-		this->worms_list.push_back(b2Vec2(10 * (i+1), 60));
+		//this->worms_list.push_back(b2Vec2(10 * (i+1), 60));
 		this->girders_list.push_back(GirderParams(6, 10 * (i+1) - 3, 20, 0));
 	}
-
-	this->weapons_ammo["Bazooka"] =  99999;
-	this->weapons_ammo["Mortar"] =  10;
-	this->weapons_ammo["GreenGrenade"] =  99999;
-	this->weapons_ammo["RedGrenade"] =  10;
-	this->weapons_ammo["Banana"] =  5;
-	this->weapons_ammo["HolyGrenade"] =  2;
-	this->weapons_ammo["Dynamite"] =  5;
-	this->weapons_ammo["Bat"] =  99999;
-	this->weapons_ammo["AirAttack"] =  2;
-	this->weapons_ammo["Teleportation"] =  99999;
 }
 	
 GameParameters::~GameParameters(){}
 
 int GameParameters::getWormLife(){
-	return this->worm_life;////////////////////////////////////////////////
+	return this->config_editor["worms_life"].as<int>();
 }
 
 int GameParameters::get_worms_life_to_add(){
 	return this->config["worms_life_to_add"].as<int>();
 }
 
-std::vector<b2Vec2>& GameParameters::getWorms(){
+#include <iostream>/////////////////
+std::vector<b2Vec2> GameParameters::getWorms(){
+	std::vector<b2Vec2> worms;
+	std::vector<std::vector<int>> worms_file = config_editor["worms"].as<std::vector<std::vector<int>>>();
+
+	for (auto it = worms_file.begin(); it != worms_file.end(); ++it){
+		worms.push_back(b2Vec2((*it)[0], (*it)[1]));
+	}
+
+
 	std::random_device rd;
     std::mt19937 random(rd());
  
-    //std::shuffle(this->worms_list.begin(), this->worms_list.end(), random);////////////////////////////////////////para probar cosas saco el random
-	return this->worms_list;
+    //std::shuffle(worms.begin(), worms.end(), random);////////////////////////////////////////para probar cosas saco el random
+	return worms;
 }
 
 std::vector<GirderParams>& GameParameters::getGirders(){
@@ -79,7 +74,7 @@ float GameParameters::getWeaponsVelocity(){
 }
 
 size_t GameParameters::get_max_players(){
-	return this->max_players;/////////////////////////////////////////////////////////////////////////
+	return this->max_players;////////////////////////////////////////////////////////////////////////////////////
 }
 
 int GameParameters::getWeaponDamage(std::string weapon){
