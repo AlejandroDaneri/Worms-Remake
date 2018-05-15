@@ -31,7 +31,7 @@ void Weapon::shoot(char dir, int angle, int power, int time){
 	}
 	this->time_to_explode = time;
 	this->angle = angle;
-	this->power = power;
+	this->power = power;//////////// Podemos hacer que sea float y entonces dividimos por 1000.0 Obteniendo un mayor rango de valores posibles
 	std::cout<<"weapon shoot"<<std::endl;
 }
 
