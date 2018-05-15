@@ -20,8 +20,10 @@ void WeaponExplodeTime::run(){
 		}
 		if (this->running){
 			std::lock_guard<std::mutex> lock(this->world.getMutex());
-			this->weapon.explode();
-			this->world.removeTimedWeapon(this->weapon);
+			if (!this->weapon.isDead()){
+				this->weapon.explode();
+				this->world.removeTimedWeapon(this->weapon);
+			}
 		}
 	}
 

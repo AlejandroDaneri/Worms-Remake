@@ -40,7 +40,7 @@ std::vector<b2Vec2>& GameParameters::getWorms(){
 	std::random_device rd;
     std::mt19937 random(rd());
  
-    std::shuffle(this->worms_list.begin(), this->worms_list.end(), random);////////////////////////////////////////
+    //std::shuffle(this->worms_list.begin(), this->worms_list.end(), random);////////////////////////////////////////para probar cosas saco el random
 	return this->worms_list;
 }
 

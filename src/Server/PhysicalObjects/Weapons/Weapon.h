@@ -18,7 +18,7 @@ class Weapon: public PhysicalObject{
 		bool waiting_to_explode;
 		int time_to_explode;
 		int angle;
-		int power;
+		float power;
 		WeaponExplodeTime explode_time;
 
 		virtual void createFixtures() override;

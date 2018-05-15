@@ -31,7 +31,7 @@ void Weapon::shoot(char dir, int angle, int power, int time){
 	}
 	this->time_to_explode = time;
 	this->angle = angle;
-	this->power = power;//////////// Podemos hacer que sea float y entonces dividimos por 1000.0 Obteniendo un mayor rango de valores posibles
+	this->power = power / 1000;
 	std::cout<<"weapon shoot"<<std::endl;
 }
 
@@ -71,7 +71,7 @@ void Weapon::setInitialVelocity(){
 
 
 void Weapon::explode(){
-	std::cout<<"weapon explode: "<<this->getId()<<std::endl;
+	std::cout<<"weapon explode: "<<this->getId();
 	b2Vec2 center = this->body->GetPosition();
 	for (int bullet_angle = 0; bullet_angle < 360; bullet_angle+= 5){
 		b2Vec2 end = center + this->radius * b2Vec2(cos(bullet_angle * RADIANS), sin(bullet_angle * RADIANS));
@@ -96,6 +96,7 @@ void Weapon::explode(){
 void Weapon::collide_with_something(CollisionData* other){
 	std::cout<<"weapon collision"<<std::endl;
 	if (this->time_to_explode == -1 || other->getType() == "Border"){
+		this->explode_time.stop();
 		this->explode();
 	}
 }
