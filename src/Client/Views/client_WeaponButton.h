@@ -11,7 +11,7 @@ class WeaponButton {
 	private:
 		std::string weapon_name;
 		Player& player;
-		Gtk::ToggleButton button;
+		Gtk::Button button;
 		Gtk::Image image;
 
 	public:
@@ -22,6 +22,7 @@ class WeaponButton {
 		Gtk::Widget& getButton();
 		
 		void on_clicked_button();
+		void on_released_button();
 };
 
 

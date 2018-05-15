@@ -2,8 +2,8 @@
 #include "ViewTransformer.h"
 #include "client_Player.h"
 
-WorldView::WorldView(){
-	this->world.add_events(Gdk::BUTTON_PRESS_MASK);
+WorldView::WorldView(Player& player): player(player) {
+	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
 	this->window.override_background_color(Gdk::RGBA("lightgreen"));////////////// Reemplazar por fondo de pantalla
 }
@@ -37,21 +37,21 @@ bool WorldView::inactive_button_handler(GdkEventButton *event) {
 	return true;
 }
 
-void WorldView::enable_all_handlers(Player& player) {
-	this->world.signal_key_press_event().connect(sigc::mem_fun(player, &Player::complete_key_press_handler));
-	this->world.signal_key_release_event().connect(sigc::mem_fun(player, &Player::complete_key_release_handler));
-	this->world.signal_button_press_event().connect(sigc::mem_fun(player, &Player::on_button_press_event));
+void WorldView::enable_all_handlers() {
+	this->window.signal_key_press_event().connect(sigc::mem_fun(player, &Player::complete_key_press_handler));
+	this->window.signal_key_release_event().connect(sigc::mem_fun(player, &Player::complete_key_release_handler));
+	this->window.signal_button_press_event().connect(sigc::mem_fun(player, &Player::on_button_press_event));
 }
 
-void WorldView::enable_movement_handlers(Player& player) {
-	this->world.signal_key_press_event().connect(sigc::mem_fun(player, &Player::movement_key_press_handler));
-	this->world.signal_key_release_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
-	this->world.signal_button_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_button_handler));
+void WorldView::enable_movement_handlers() {
+	this->window.signal_key_press_event().connect(sigc::mem_fun(player, &Player::movement_key_press_handler));
+	this->window.signal_key_release_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
+	this->window.signal_button_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_button_handler));
 }
 
 void WorldView::disable_handlers() {
-	this->world.signal_key_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
-	this->world.signal_key_release_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
-	this->world.signal_button_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_button_handler));
+	this->window.signal_key_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
+	this->window.signal_key_release_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
+	this->window.signal_button_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_button_handler));
 }
 

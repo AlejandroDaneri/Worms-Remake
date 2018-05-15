@@ -15,7 +15,6 @@ void ClientProtocol::send_move_action(char action){
 	buffer[offset++] = ACTION;
 	buffer[offset++] = MOVE_ACTION;
 	buffer[offset++] = action;
-
 	this->send_buffer(buffer, offset);
 }
 
@@ -33,7 +32,6 @@ void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t tim
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
 	buffer[offset++] = SHOOT_WEAPON;
-
 	this->send_int(buffer, offset, angle);
 	this->send_int(buffer, offset, power);
 	this->send_int(buffer, offset, time);
@@ -55,7 +53,6 @@ void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
 void ClientProtocol::send_end_turn(){
 	char buffer[MAX_BUF_LEN];
 	buffer[0] = END_TURN;
-
 	this->send_buffer(buffer, 1);
 }
 

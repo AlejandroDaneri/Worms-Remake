@@ -4,15 +4,9 @@
 #include "client_WeaponButton.h"
 
 WeaponView::WeaponView(WeaponList& weapons, Player& player) : 
-					weapons(weapons), player(player) {
-}
+					weapons(weapons), player(player) {}
 
-WeaponView::~WeaponView() {
-	/*std::unordered_map<std::string, WeaponButton*>::iterator iter;
-	for (iter = this->buttons.begin(); iter != this->buttons.end(); iter++) {
-		delete iter->second;
-	}*/
-}
+WeaponView::~WeaponView() {}
 
 void WeaponView::update() {
 	WeaponList::iterator iter;
@@ -21,7 +15,7 @@ void WeaponView::update() {
 		std::unique_ptr<WeaponButton> p(new WeaponButton(iter->second->getName(), this->player));
 		this->buttons.insert(std::pair<std::string, std::unique_ptr<WeaponButton>>(iter->second->getName(), std::move(p)));
 		this->window.attach(this->buttons.at(iter->second->getName())->getButton(), column, row, 1, 1);
-		column++;
+		row++;
 	}
 }
 

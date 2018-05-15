@@ -18,7 +18,3 @@ void Timer::run() { // recibe el arma
 	this->running = false;
 }
 
-int32_t Timer::getTime() {
-	return this->actual_time;
-}
-

@@ -2,7 +2,6 @@
 #define __CLIENTTIMER_H__
 
 #include "Thread.h"
-#include <unistd.h>
 
 class Player;
 
@@ -17,7 +16,6 @@ class Timer : public Thread {
 		~Timer();
 
 		void run();
-		int32_t getTime();
 };
 
 #endif

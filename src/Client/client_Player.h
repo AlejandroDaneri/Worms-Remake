@@ -22,7 +22,6 @@ class Player {
 		int32_t actual_angle;
 		int actual_dir;
 		WeaponList weapons;
-		std::string actual_weapon;
 		std::unique_ptr<Turn> turn;
 		std::unique_ptr<Timer> timer;
 		WorldView world;
@@ -57,7 +56,7 @@ class Player {
 		
 		void play_tick_time();
 		
-		Gtk::VBox& getWindow();
+		Gtk::HBox& getWindow();
 		
 		WorldView& getWorld();
 		

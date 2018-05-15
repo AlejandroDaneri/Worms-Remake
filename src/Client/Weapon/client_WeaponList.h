@@ -9,6 +9,7 @@ class WeaponList {
 	private:
 	    typedef std::map<std::string, weapon_ptr> WeaponsList;
 		WeaponsList weapons;
+		std::string actual_weapon;
 
 	public:
 		WeaponList();
@@ -16,7 +17,9 @@ class WeaponList {
 		
 		void add(std::string weapon, int ammo);
 		
-		Weapon& get(std::string weapon);
+		Weapon& get_actual_weapon();
+		
+		void change_weapon(std::string weapon);
 		
 		typedef WeaponsList::iterator iterator;
 		typedef WeaponsList::const_iterator const_iterator;
