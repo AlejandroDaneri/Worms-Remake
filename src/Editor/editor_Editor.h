@@ -9,9 +9,9 @@
 #include "editor_ToolBox.h"
 #include "editor_WeaponsArea.h"
 
-class MapEditor : public Gtk::Window {
+class Editor : public Gtk::Window {
 private:
-    Gtk::Notebook grandpa;
+    Gtk::Notebook generalContainer;
     Gtk::HBox mapTab,wepTab;
     MapArea mapArea;
     WeaponsArea wepArea;
@@ -22,7 +22,7 @@ protected:
     bool on_button_release_event(GdkEventButton *release_event) override;
 
 public:
-    MapEditor();
+    Editor();
 };
 
 

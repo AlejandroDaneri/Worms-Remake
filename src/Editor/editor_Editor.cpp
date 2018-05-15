@@ -1,26 +1,26 @@
 
-#include "editor_MapEditor.h"
+#include "editor_Editor.h"
 
 
-MapEditor::MapEditor() :mapArea(&toolBox){
-    grandpa.append_page(mapTab,"first");
+Editor::Editor() :mapArea(&toolBox){
+    generalContainer.append_page(mapTab,"");
     mapTab.pack_start(toolBox,Gtk::PACK_SHRINK);
     mapTab.pack_end(mapArea);
 
-    grandpa.append_page(wepTab,"page2");
+    generalContainer.append_page(wepTab,"");
     wepTab.pack_start(wepArea);
-    grandpa.set_show_tabs(false);
-    add(grandpa);
+    generalContainer.set_show_tabs(false);
+    add(generalContainer);
 
     show_all_children();
     maximize();
 }
 
-bool MapEditor::on_button_release_event(GdkEventButton *release_event) {
-    if(release_event->y_root<250){ //probando, cambiar
-        grandpa.prev_page();
+bool Editor::on_button_release_event(GdkEventButton *release_event) {
+    if(release_event->y_root<37){ //probando, cambiar
+        generalContainer.prev_page();
         return true;
     }
-    grandpa.next_page();
+    generalContainer.next_page();
     return true;
 }

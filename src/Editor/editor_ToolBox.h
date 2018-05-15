@@ -20,7 +20,7 @@ private:
 
     //Child widgets
     Gtk::Button turn,armory;
-    Gtk::ToggleButton worm, girder;// deberia ser toggle
+    Gtk::ToggleButton worm, girder;
     bool change_win;
 
 

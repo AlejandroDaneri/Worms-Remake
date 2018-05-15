@@ -51,7 +51,7 @@ std::string ToolBox::getActualItemImagePath() {
         case GIRDER_BUTTON_ID:
             return "resources/images/grdl.png";
     }
-    return "a";
+    return "string de prueba";
 
 }
 
