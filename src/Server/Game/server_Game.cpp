@@ -97,7 +97,7 @@ void Game::endTurn(){
 }
 
 void Game::wait_to_world(){
-	while (this->world.isActive()){
+	while (this->world.isActive() || this->data_sender->isActive()){
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	}
 }

@@ -14,6 +14,7 @@ class DataSender: public Thread{
 		std::list<physical_object_ptr>& girders;
 		std::vector<Player>& players;
 		std::mutex& mutex;
+		bool active;
 
 	public:
 		DataSender(World& world, std::vector<Player>& players);
@@ -23,6 +24,8 @@ class DataSender: public Thread{
 
 		void sendGirders();
 		void sendWeaponsAmmo(std::map<std::string, int>& weapons);
+
+		bool isActive();
 
 };
 

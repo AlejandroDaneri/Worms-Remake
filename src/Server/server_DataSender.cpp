@@ -9,6 +9,7 @@ DataSender::~DataSender(){}
 void DataSender::run(){
 	while(this->running){
 		std::lock_guard<std::mutex> lock(this->mutex);///////////////////////////////ver poner ahi o adentro del otro while
+		this->active = false;
 		auto it = this->objects.begin();
 
 		while(it != this->objects.end()){
@@ -23,6 +24,7 @@ void DataSender::run(){
 			if ((*it)->isMoving()){
 				for (size_t i = 0; i < this->players.size(); i++){
 					this->players[i].getProtocol().sendObject(*it);
+					this->active = true;
 				}
 			}
 			++it;
@@ -46,4 +48,9 @@ void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
 			player->getProtocol().sendWeaponAmmo(it->first, it->second);
 		}
 	}
+}
+
+bool DataSender::isActive(){
+	std::lock_guard<std::mutex> lock(this->mutex);
+	return this->active;
 }
