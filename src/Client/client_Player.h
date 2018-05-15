@@ -29,6 +29,7 @@ class Player {
 		ScreenView screen;
 		ViewsList view_list;
 		DataReceiver data_receiver;
+		bool has_shoot;
 		
 		void disable_attack_handlers();
 

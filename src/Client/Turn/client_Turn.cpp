@@ -23,6 +23,7 @@ void Turn::run() {
 			this->actual_time += TIME_STEP;
 		}
 	}
+	printf("Turno avisa que termino\n");
 	this->player.endTurn();
 	this->running = false;
 }
