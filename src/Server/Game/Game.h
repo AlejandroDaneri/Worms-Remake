@@ -27,7 +27,7 @@ class Game: public Thread{
 		void wait_to_world();
 
 	public:
-		Game(const std::string& config_file);
+		Game(const std::string& config_file, const std::string& config_editor);
 		~Game();
 
 		bool addPlayer(Player&& player);

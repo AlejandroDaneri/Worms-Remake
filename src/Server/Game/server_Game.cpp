@@ -3,7 +3,8 @@
 #include "server_WeaponFactory.h"
 
 
-Game::Game(const std::string& config_file): parameters(config_file){}
+Game::Game(const std::string& config_file, const std::string& config_editor):
+	parameters(config_file, config_editor){}
 
 Game::~Game(){
 	this->world.stop();
@@ -85,7 +86,8 @@ void Game::configure(){
 	this->data_sender->sendGirders();
 
 	//Municion de las armas
-	this->data_sender->sendWeaponsAmmo(this->parameters.getWeaponsAmmo());
+	std::map<std::string, int> ammo = this->parameters.getWeaponsAmmo();
+	this->data_sender->sendWeaponsAmmo(ammo);
 }
 
 Worm& Game::getCurrentWorm(){

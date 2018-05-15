@@ -2,7 +2,8 @@
 #include <algorithm>
 #include <random>
 
-GameParameters::GameParameters(const std::string& config_file): config(YAML::LoadFile(config_file)){
+GameParameters::GameParameters(const std::string& config_file, const std::string& config_editor):
+	config(YAML::LoadFile(config_file)), config_editor(YAML::LoadFile(config_editor)){
 	//leer el archivo  YAML y cargar las variables
 
 	this->worm_life = 125;
@@ -48,8 +49,9 @@ std::vector<GirderParams>& GameParameters::getGirders(){
 	return this->girders_list;//////////////////////////////////////////////////////
 }
 
-std::map<std::string, int>& GameParameters::getWeaponsAmmo(){
-	return this->weapons_ammo;////////////////////////////////////////////////
+std::map<std::string, int> GameParameters::getWeaponsAmmo(){
+	std::map<std::string, int> ammo = config_editor["weapon_ammo"].as<std::map<std::string, int>>();
+	return ammo;
 }
 
 float GameParameters::getWormVelocity(){

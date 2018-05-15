@@ -12,7 +12,7 @@ int main(int argc, char* argv[]){
 	//Socket client2 = socket.accept_client();
 	//Player player2(std::move(client2));
 
-	Game game("./config/server_config.yaml");
+	Game game("./config/server_config.yaml", "./config/config_editor.yaml");
 
 	try{
 

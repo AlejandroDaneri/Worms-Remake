@@ -13,6 +13,7 @@ class GameParameters{
 
 	private:
 		YAML::Node config;
+		YAML::Node config_editor;
 
 		/////////////parametros que despues vienen del editor
 		int worm_life;
@@ -24,7 +25,7 @@ class GameParameters{
 		size_t max_players;
 
 	public:
-		GameParameters(const std::string& config_file);
+		GameParameters(const std::string& config_file, const std::string& config_editor);
 		~GameParameters();
 
 		int getWormLife();
@@ -32,7 +33,7 @@ class GameParameters{
 
 		std::vector<b2Vec2>& getWorms();
 		std::vector<GirderParams>& getGirders();
-		std::map<std::string, int>& getWeaponsAmmo();
+		std::map<std::string, int> getWeaponsAmmo();
 
 
 		float getWormVelocity();
