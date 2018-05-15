@@ -41,7 +41,7 @@ void Player::startTurn(int id){
 	this->turn = std::move(std::unique_ptr<Turn>(new Turn(*this)));
 	this->world.enable_all_handlers();
 	// mandar arma
-	this->turn->run();
+	this->turn->start();
 }
 
 void Player::endTurn() {
@@ -121,7 +121,7 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 			this->shoot(0);
 		else {
 			this->timer = std::move(std::unique_ptr<Timer>(new Timer(*this, MAX_TIME)));
-			this->timer->run();
+			this->timer->start();
 		}
 	}
 	return true;

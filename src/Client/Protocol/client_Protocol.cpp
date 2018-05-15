@@ -10,6 +10,7 @@ ClientProtocol::ClientProtocol(ClientProtocol&& other): Protocol(std::move(other
 ClientProtocol::~ClientProtocol(){}
 
 void ClientProtocol::send_move_action(char action){
+	printf("Move_action\n");
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
@@ -19,6 +20,7 @@ void ClientProtocol::send_move_action(char action){
 }
 
 void ClientProtocol::send_change_weapon(const std::string& weapon){
+	printf("Weapon\n");
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
@@ -28,6 +30,7 @@ void ClientProtocol::send_change_weapon(const std::string& weapon){
 }
 
 void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t time){
+	printf("shoot\n");
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
@@ -39,6 +42,7 @@ void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t tim
 }
 
 void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
+	printf("dirigido\n");
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
@@ -51,6 +55,7 @@ void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
 }
 
 void ClientProtocol::send_end_turn(){
+	printf("fin turno\n");
 	char buffer[MAX_BUF_LEN];
 	buffer[0] = END_TURN;
 	this->send_buffer(buffer, 1);
