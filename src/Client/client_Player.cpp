@@ -41,9 +41,12 @@ void Player::startTurn(int id){
 	this->turn = std::move(std::unique_ptr<Turn>(new Turn(*this)));
 	this->world.enable_all_handlers();
 	// mandar arma
+	this->has_shoot = false;
 
-	this->protocol.send_change_weapon("Bazooka");///////////////////////////////////////////////////////////////////////////
-
+	//this->protocol.send_change_weapon("Bazooka");///////////////////////////////////////////////////////////////////////////
+	//this->weapons.change_weapon("Bazooka"); ///////////////////////////////////////////////////////////////////////////////////
+	this->change_weapon("Bazooka");
+	std::cout << "key event = " << this->weapons.get_actual_weapon().getName() << std::endl;
 	this->turn->start();
 }
 
@@ -51,8 +54,10 @@ void Player::endTurn() {
 	std::cout << "end turn " << std::endl;
 	///////Sacar los handlers
 	this->world.disable_handlers();
+	std::cout << "primer_handler " << std::endl;
 	this->protocol.send_end_turn();
-	this->turn->join();
+	std::cout << "envio del mensaje " << std::endl;
+	this->turn->join();////////////////////////////////////////////Rompe en este join
 }
 
 void Player::disable_attack_handlers() {
@@ -63,6 +68,7 @@ void Player::disable_attack_handlers() {
 
 void Player::change_weapon(std::string weapon) {
 	this->weapons.change_weapon(weapon);
+	this->protocol.send_change_weapon(weapon);
 }
 
 void Player::shoot(Position position) {
@@ -79,8 +85,8 @@ void Player::shoot(int32_t power) { ///////////////////////////////////// Creo q
 	// Elimino los handlers de disparo
 	this->disable_attack_handlers();
 	int32_t angle = this->actual_angle;
-	if (this->weapons.get_actual_weapon().hasVariablePower())
-		this->timer->join();
+	//if (this->weapons.get_actual_weapon().hasVariablePower())
+		//this->timer->join();
 	if (!this->weapons.get_actual_weapon().isTimed())
 		this->weapons_time = -1;
 	if (!this->weapons.get_actual_weapon().hasScope())
@@ -106,7 +112,7 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 	//printf("handler de movimiento\n");
 	this->movement_key_press_handler(key_event);
 	if (key_event->keyval == UP_ARROW) {
-		//printf("Arriba\n");
+		printf("Arriba\n");
 		if (this->actual_angle < 90)
 			this->actual_angle++; /////////////////////////////////// ACTUALIZAR LINEA DE TIRO
 	} else if (key_event->keyval == DOWN_ARROW) {
@@ -115,16 +121,23 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 			this->actual_angle--;
 	} else if (key_event->keyval >= ASCII_1 && key_event->keyval <= ASCII_5) {
 		this->weapons_time = key_event->keyval - ASCII_OFFSET;
-	} else if (key_event->keyval == SPACE) {
-			//printf("se apreto la barra\n");
+	} else if (key_event->keyval == SPACE && key_event->type == GDK_KEY_PRESS) {
+		if (this->weapons.get_actual_weapon().isSelfDirected())
+			return true;
 		if (!this->weapons.get_actual_weapon().hasAmmo())
 			///////////////////////// Hacer sonido u otra cosa
 			return true;
+		if (this->has_shoot)
+			return true;
+		this->has_shoot = true;
+		printf("se apreto la barra\n");
 		if (!this->weapons.get_actual_weapon().hasVariablePower())
 			this->shoot(0);
 		else {
-			this->timer = std::move(std::unique_ptr<Timer>(new Timer(*this, MAX_TIME)));
-			this->timer->start();
+			//this->timer = std::move(std::unique_ptr<Timer>(new Timer(*this, MAX_TIME)));
+			//this->timer->start();
+			this->shoot(5000);
+			printf("Salio\n");
 		}
 	}
 	return true;
@@ -132,13 +145,18 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 
 bool Player::complete_key_release_handler(GdkEventKey* key_event) {
 	//std::cout << "Se solto la barra.  key event = " << key_event->keyval << std::endl;
-	if (key_event->keyval == SPACE) {
+	if (key_event->keyval == SPACE && key_event->type == GDK_KEY_RELEASE) {
+		printf("se solto la barra\n");
+		if (!this->weapons.get_actual_weapon().isSelfDirected())
+			return true;
 		if (!this->weapons.get_actual_weapon().hasVariablePower())
 			return true;
 		if (!this->weapons.get_actual_weapon().hasAmmo())
 			return true;
 		//printf("se solto la barra\n");
-		this->timer->stop();
+		//if (key_event->type == GDK_KEY_PRESS)
+			//return true;
+		//this->timer->stop();
 	} else if (key_event->keyval == LEFT_ARROW) {}
 		///////////////////////// ANIMACION DE SACAR EL ARMA
 	else if (key_event->keyval == RIGHT_ARROW) {}
@@ -150,7 +168,12 @@ bool Player::on_button_press_event(GdkEventButton *event) {
 	//printf("se apretó el mouse\n");
 	if (!this->weapons.get_actual_weapon().isSelfDirected())
 		return true;
+	if (!this->weapons.get_actual_weapon().hasAmmo())
+		return true;
+	if (this->has_shoot)
+		return true;
 	if ((event->type == GDK_BUTTON_PRESS) && (event->button == 1)) {
+		this->has_shoot = true;
 		Position position((int)event->x, (int)event->y);
 		this->shoot(position);
 	}
