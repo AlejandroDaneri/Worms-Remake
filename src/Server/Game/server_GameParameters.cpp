@@ -7,10 +7,6 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 
 	this->max_players = 1;
 
-	for (int i = 0; i < 5; i++){
-		//this->worms_list.push_back(b2Vec2(10 * (i+1), 60));
-		this->girders_list.push_back(GirderParams(6, 10 * (i+1) - 3, 20, 0));
-	}
 }
 	
 GameParameters::~GameParameters(){}
@@ -23,7 +19,6 @@ int GameParameters::get_worms_life_to_add(){
 	return this->config["worms_life_to_add"].as<int>();
 }
 
-#include <iostream>/////////////////
 std::vector<b2Vec2> GameParameters::getWorms(){
 	std::vector<b2Vec2> worms;
 	std::vector<std::vector<int>> worms_file = config_editor["worms"].as<std::vector<std::vector<int>>>();
@@ -32,7 +27,6 @@ std::vector<b2Vec2> GameParameters::getWorms(){
 		worms.push_back(b2Vec2((*it)[0], (*it)[1]));
 	}
 
-
 	std::random_device rd;
     std::mt19937 random(rd());
  
@@ -40,8 +34,14 @@ std::vector<b2Vec2> GameParameters::getWorms(){
 	return worms;
 }
 
-std::vector<GirderParams>& GameParameters::getGirders(){
-	return this->girders_list;//////////////////////////////////////////////////////
+std::vector<GirderParams> GameParameters::getGirders(){
+	std::vector<GirderParams> girders;
+	std::vector<std::vector<int>> girders_file = config_editor["girders"].as<std::vector<std::vector<int>>>();
+
+	for (auto it = girders_file.begin(); it != girders_file.end(); ++it){
+		girders.push_back(GirderParams((*it)[0], (*it)[1], (*it)[2], (*it)[3]));
+	}
+	return girders;
 }
 
 std::map<std::string, int> GameParameters::getWeaponsAmmo(){

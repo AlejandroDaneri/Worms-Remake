@@ -15,11 +15,7 @@ class GameParameters{
 		YAML::Node config;
 		YAML::Node config_editor;
 
-		/////////////parametros que despues vienen del editor
-
-		std::vector<GirderParams> girders_list;
-
-		size_t max_players;
+		size_t max_players;/////////////////////////////////////
 
 	public:
 		GameParameters(const std::string& config_file, const std::string& config_editor);
@@ -29,7 +25,7 @@ class GameParameters{
 		int get_worms_life_to_add();
 
 		std::vector<b2Vec2> getWorms();
-		std::vector<GirderParams>& getGirders();
+		std::vector<GirderParams> getGirders();
 		std::map<std::string, int> getWeaponsAmmo();
 
 
