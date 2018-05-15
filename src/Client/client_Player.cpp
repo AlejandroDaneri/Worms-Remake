@@ -26,10 +26,16 @@ Player::Player(ClientProtocol& protocol) :
 	this->protocol.receiveWeaponsAmmo(this->weapons);
 	this->weapons_view.update();
 	this->data_receiver.start();
+	this->turn = std::move(std::unique_ptr<Turn>(new Turn(*this)));
+	this->timer = std::move(std::unique_ptr<Timer>(new Timer(*this, MAX_TIME)));
 }
 
 Player::~Player() {
 	std::cout << "destruyo" << std::endl;
+	this->turn->stop();
+	this->turn->join();
+	this->timer->stop();
+	this->timer->join();
 	this->data_receiver.stop();
 	this->data_receiver.join();
 }
@@ -38,6 +44,7 @@ void Player::startTurn(int id){
 	//setear handlers
 	this->weapons_time = WEAPONS_TIME;
 	this->actual_angle = 0;
+	this->turn->join();
 	this->turn = std::move(std::unique_ptr<Turn>(new Turn(*this)));
 	this->world.enable_all_handlers();
 	// mandar arma
@@ -51,13 +58,10 @@ void Player::startTurn(int id){
 }
 
 void Player::endTurn() {
-	std::cout << "end turn " << std::endl;
 	///////Sacar los handlers
 	this->world.disable_handlers();
-	std::cout << "primer_handler " << std::endl;
 	this->protocol.send_end_turn();
-	std::cout << "envio del mensaje " << std::endl;
-	this->turn->join();////////////////////////////////////////////Rompe en este join
+	//this->turn->join();////////////////////////////////////////////Rompe en este join
 }
 
 void Player::disable_attack_handlers() {
@@ -83,6 +87,7 @@ void Player::play_tick_time() {
 
 void Player::shoot(int32_t power) { ///////////////////////////////////// Creo que hay que poner un mutex
 	// Elimino los handlers de disparo
+	printf("shoot\n");
 	this->disable_attack_handlers();
 	int32_t angle = this->actual_angle;
 	//if (this->weapons.get_actual_weapon().hasVariablePower())
@@ -134,9 +139,10 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 		if (!this->weapons.get_actual_weapon().hasVariablePower())
 			this->shoot(0);
 		else {
-			//this->timer = std::move(std::unique_ptr<Timer>(new Timer(*this, MAX_TIME)));
-			//this->timer->start();
-			this->shoot(5000);
+			this->timer->join();
+			this->timer = std::move(std::unique_ptr<Timer>(new Timer(*this, MAX_TIME)));
+			this->timer->start();
+			//this->shoot(5000);
 			printf("Salio\n");
 		}
 	}
@@ -154,9 +160,10 @@ bool Player::complete_key_release_handler(GdkEventKey* key_event) {
 		if (!this->weapons.get_actual_weapon().hasAmmo())
 			return true;
 		//printf("se solto la barra\n");
-		//if (key_event->type == GDK_KEY_PRESS)
-			//return true;
-		//this->timer->stop();
+		if (key_event->type == GDK_KEY_PRESS)
+			return true;
+		printf("Timer stop\n");
+		this->timer->stop();
 	} else if (key_event->keyval == LEFT_ARROW) {}
 		///////////////////////// ANIMACION DE SACAR EL ARMA
 	else if (key_event->keyval == RIGHT_ARROW) {}
