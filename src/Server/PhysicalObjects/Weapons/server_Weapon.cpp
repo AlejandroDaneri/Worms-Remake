@@ -71,7 +71,7 @@ void Weapon::setInitialVelocity(){
 
 
 void Weapon::explode(){
-	std::cout<<"weapon explode: "<<this->getId();
+	std::cout<<"weapon explode: "<<this->getId()<<std::endl;
 	b2Vec2 center = this->body->GetPosition();
 	for (int bullet_angle = 0; bullet_angle < 360; bullet_angle+= 5){
 		b2Vec2 end = center + this->radius * b2Vec2(cos(bullet_angle * RADIANS), sin(bullet_angle * RADIANS));
