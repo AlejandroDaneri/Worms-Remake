@@ -28,6 +28,8 @@ bool Game::isFull(){
 	return this->parameters.get_max_players() == this->turn.get_players_size();
 }
 
+
+#include <iostream>/////////////////////////////////
 void Game::run(){
 	this->configure();
 	this->world.start();
@@ -35,8 +37,9 @@ void Game::run(){
 
 	this->wait_to_world();
 
-/* PARA CUANDO ESTE IMPLEMENTADO EN EL CLIENTE LOS SEND
+/* PARA CUANDO ESTE IMPLEMENTADO EN EL CLIENTE LOS SEND*/
 	while (!this->turn.gameEnded()){
+		std::cout <<"empezo el juego\n";
 		this->player_turn_active = true;
 		this->turn.begin_turn();
 		int worm_id = this->turn.getCurrentPlayer().getCurrentWorm().getId();
@@ -46,6 +49,7 @@ void Game::run(){
 		}
 
 		this->wait_to_world();
+
 	}
 //*/
 
@@ -55,8 +59,8 @@ void Game::run(){
 	sleep(5);
 	//this->getCurrentWorm().changeWeapon("RedGrenade");
 	//this->getCurrentWorm().shoot(60, 1000, -1);
-	this->getCurrentWorm().changeWeapon("AirAttack");
-	this->getCurrentWorm().shoot(b2Vec2(20, 50));
+	//this->getCurrentWorm().changeWeapon("AirAttack");
+	//this->getCurrentWorm().shoot(b2Vec2(20, 50));
 	////////////////////////////////////////////////////////
 }
 

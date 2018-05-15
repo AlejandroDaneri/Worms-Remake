@@ -41,6 +41,9 @@ void Player::startTurn(int id){
 	this->turn = std::move(std::unique_ptr<Turn>(new Turn(*this)));
 	this->world.enable_all_handlers();
 	// mandar arma
+
+	this->protocol.send_change_weapon("Bazooka");///////////////////////////////////////////////////////////////////////////
+
 	this->turn->start();
 }
 
