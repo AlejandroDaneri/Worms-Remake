@@ -18,7 +18,7 @@
 #include <mutex>
 
 
-std::queue<std::string> cola;
+std::queue<Glib::RefPtr<Gdk::Pixbuf>> cola;
 
 class UserData{
 public:
@@ -40,7 +40,7 @@ public:
 	~CollisionListener(){}
 
 	void BeginContact(b2Contact* contact){
-		UserData* dataA = (UserData*)contact->GetFixtureA()->GetBody()->GetUserData();
+		/*UserData* dataA = (UserData*)contact->GetFixtureA()->GetBody()->GetUserData();
 		UserData* dataB = (UserData*)contact->GetFixtureB()->GetBody()->GetUserData();
 
 		if (dataA->type == "Imagen" && dataB->type == "Imagen"){
@@ -51,7 +51,7 @@ public:
 			std::cout << "ColisionA" << std::endl;
 			dataB->body->ApplyLinearImpulse(b2Vec2(500, -500), dataB->body->GetWorldCenter(), true);
 			std::cout << "ColisionB" << std::endl;
-		}
+		}*/
 	}
 };
 
@@ -113,10 +113,10 @@ public:
 		std::cout << "key event = " << key_event->string << std::endl;
 		if (key_event->keyval == 'a'){
 			this->body->SetLinearVelocity(b2Vec2(-100, 0));
-			std::string& path = cola.front();
-			this->image.set(path);
-			cola.push(path);
+			//Glib::RefPtr<Pixbuf> path = cola.front();
+			cola.push(cola.front());
 			cola.pop();
+			this->image.set(cola.back());
 			std::this_thread::sleep_for (std::chrono::milliseconds(15));
 			this->body->SetLinearVelocity(b2Vec2(0, 0));
 			return true;
@@ -219,16 +219,36 @@ int main(int argc, char** argv) {
     //map.set_policy(Gtk::POLICY_ALWAYS, Gtk::POLICY_ALWAYS);
 	Gtk::Button buttonQuit;
     ventana.resize(1000, 1000);
+    Glib::RefPtr<Gdk::Pixbuf> imagen_completa = Gdk::Pixbuf::create_from_file("resources/images/animaciones a implementar/wwalk_left.png");
+    int ancho = imagen_completa->get_width();
+    int alto = imagen_completa->get_height();
 	Gtk::Image bomba;
-	bomba.set("resources/images/1.png");
+	
+	for (int i = 0; i < alto/ancho -1; i++) {
+		printf("%i\n",i);
+		cola.push(Gdk::Pixbuf::create_subpixbuf(imagen_completa, 0, i*ancho, ancho, ancho));
+	}
+
+	printf("Cola size = %lu\n", cola.size());
+
+	bomba.set(cola.front());
 	world_map.put(bomba,300, 500);
 	
-	for (int i = 1; i <= 15; i++) 
-		cola.push("resources/images/" + std::to_string(i) + ".png");
 
 	Gtk::Image bomba2;
 	bomba2.set("resources/images/bomba2.png");
 	world_map.put(bomba2,600, 500);
+	
+	
+	Gtk::Image prueba1;
+	prueba1.set(Gdk::Pixbuf::create_subpixbuf(imagen_completa, 0, 0, ancho, ancho));
+	Gtk::Image prueba2;
+	prueba2.set(Gdk::Pixbuf::create_subpixbuf(imagen_completa, 0, 60, ancho, ancho));
+	
+	world_map.put(prueba1,200, 200);
+	world_map.put(prueba2,100, 100);
+	
+	
 	
 	buttonQuit.add_label("Quit");
 	buttonQuit.signal_clicked().connect(sigc::bind(sigc::ptr_fun(on_salir_clicked), app));

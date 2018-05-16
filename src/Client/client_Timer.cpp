@@ -2,6 +2,7 @@
 #include "client_Player.h"
 
 #define TIME_STEP 50
+#define MINIMUM_TIME 750
 
 Timer::Timer(Player& player, int32_t time) : actual_time(0), max_time(time),
 														player(player) {}
@@ -19,7 +20,7 @@ void Timer::run() { // recibe el arma
 	else {
 		printf("Shoot por cargar al maximo\n");
 	}
-	player.shoot(this->actual_time);
+	player.shoot(this->actual_time + MINIMUM_TIME);
 	this->running = false;
 }
 
