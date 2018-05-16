@@ -2,9 +2,13 @@
 
 ## cmake    uso:
 mkdir build
+
 cd build
+
 cmake ..
+
 (no me borren mi makefile)
+
 
 ### archivos Yaml parser
 https://github.com/jbeder/yaml-cpp
