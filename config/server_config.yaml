@@ -1,10 +1,10 @@
 worms_life_to_add: 25
-worm_velocity: 2.2
-worm_jump_velocity: 7
-worm_rollback_velocity: 7
-worm_jump_height: 7
-worm_rollback_height: 7
-weapons_velocity: 13
+worm_velocity: 1.2
+worm_jump_velocity: 1.6
+worm_rollback_velocity: 1.4
+worm_jump_height: 5
+worm_rollback_height: 3
+weapons_velocity: 7
 weapon_radius:
   Bazooka: 2
   Mortar: 2
