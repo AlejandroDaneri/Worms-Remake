@@ -6,7 +6,7 @@
 class Weapon {
 	protected:
 		std::string name;
-		int ammo;
+		unsigned int ammo;
 		bool has_Scope;
 		bool is_Timed;
 		bool is_Fragmentable;

@@ -1,7 +1,8 @@
 #include "client_Player.h"
 #include "client_Bazooka.h"
 #include "ViewTransformer.h"
-#include <iostream>
+#include <gtkmm/adjustment.h>
+#include <iostream> ///////////////////////////////////////////////////////////////////
 
 #define LEFT_ARROW 0xff51
 #define UP_ARROW 0xff52
@@ -18,7 +19,7 @@
 
 Player::Player(ClientProtocol& protocol) : 
 	protocol(protocol), weapons_time(WEAPONS_TIME),
-	actual_angle(0), actual_dir(1), world(*this), weapons_view(this->weapons, *this),
+	actual_angle(45), actual_dir(1), world(*this), weapons_view(this->weapons, *this),
 	screen(this->world, this->weapons_view), view_list(this->world),
 	data_receiver(this->view_list, *this, protocol) {
 
@@ -43,7 +44,7 @@ Player::~Player() {
 void Player::startTurn(int id){
 	//setear handlers
 	this->weapons_time = WEAPONS_TIME;
-	this->actual_angle = 0;
+	this->actual_angle = 45;
 	this->turn->join();
 	this->turn = std::move(std::unique_ptr<Turn>(new Turn(*this)));
 	this->world.enable_all_handlers();
@@ -52,7 +53,7 @@ void Player::startTurn(int id){
 
 	//this->protocol.send_change_weapon("Bazooka");///////////////////////////////////////////////////////////////////////////
 	//this->weapons.change_weapon("Bazooka"); ///////////////////////////////////////////////////////////////////////////////////
-	this->change_weapon("Bazooka");
+	this->change_weapon(this->weapons.get_actual_weapon().getName());
 	std::cout << "key event = " << this->weapons.get_actual_weapon().getName() << std::endl;
 	this->turn->start();
 }
@@ -96,6 +97,7 @@ void Player::shoot(int32_t power) { ///////////////////////////////////// Creo q
 		this->weapons_time = -1;
 	if (!this->weapons.get_actual_weapon().hasScope())
 		angle = 500;
+	printf("angle = %i\n",this->actual_angle);
 	this->protocol.send_weapon_shoot(angle, power, this->weapons_time);
 }
 
@@ -137,11 +139,11 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 		this->has_shoot = true;
 		printf("se apreto la barra\n");
 		if (!this->weapons.get_actual_weapon().hasVariablePower())
-			this->shoot(0);
+			this->shoot(-1); /////////////////////////////////////////////////////Ver que onda
 		else {
 			this->timer->join();
 			this->timer = std::move(std::unique_ptr<Timer>(new Timer(*this, MAX_TIME)));
-			this->timer->start();
+			this->timer->start(); //////////////////////////////////////////////////////// Shoot minimo de 1000
 			//this->shoot(5000);
 			printf("Salio\n");
 		}
@@ -153,7 +155,7 @@ bool Player::complete_key_release_handler(GdkEventKey* key_event) {
 	//std::cout << "Se solto la barra.  key event = " << key_event->keyval << std::endl;
 	if (key_event->keyval == SPACE && key_event->type == GDK_KEY_RELEASE) {
 		printf("se solto la barra\n");
-		if (!this->weapons.get_actual_weapon().isSelfDirected())
+		if (this->weapons.get_actual_weapon().isSelfDirected())
 			return true;
 		if (!this->weapons.get_actual_weapon().hasVariablePower())
 			return true;
@@ -180,8 +182,13 @@ bool Player::on_button_press_event(GdkEventButton *event) {
 	if (this->has_shoot)
 		return true;
 	if ((event->type == GDK_BUTTON_PRESS) && (event->button == 1)) {
+		int x = (int)event->x;
+		int y = (int)event->y;
+		x += this->world.getWindow().get_hadjustment()->get_value();
+		y += this->world.getWindow().get_vadjustment()->get_value();
+		printf("x = %i   y=%i\n", x,y);
 		this->has_shoot = true;
-		Position position((int)event->x, (int)event->y);
+		Position position(x, y);
 		this->shoot(position);
 	}
 	return true;

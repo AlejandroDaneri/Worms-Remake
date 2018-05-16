@@ -17,7 +17,7 @@ class Weapon: public PhysicalObject{
 		int radius;
 		bool waiting_to_explode;
 		int time_to_explode;
-		int angle;
+		float angle;
 		float power;
 		WeaponExplodeTime explode_time;
 

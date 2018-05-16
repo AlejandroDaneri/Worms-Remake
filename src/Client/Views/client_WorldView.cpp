@@ -38,20 +38,20 @@ bool WorldView::inactive_button_handler(GdkEventButton *event) {
 }
 
 void WorldView::enable_all_handlers() {
-	this->window.signal_key_press_event().connect(sigc::mem_fun(player, &Player::complete_key_press_handler));
-	this->window.signal_key_release_event().connect(sigc::mem_fun(player, &Player::complete_key_release_handler));
+	this->window.get_parent()->signal_key_press_event().connect(sigc::mem_fun(player, &Player::complete_key_press_handler));
+	this->window.get_parent()->signal_key_release_event().connect(sigc::mem_fun(player, &Player::complete_key_release_handler));
 	this->window.signal_button_press_event().connect(sigc::mem_fun(player, &Player::on_button_press_event));
 }
 
 void WorldView::enable_movement_handlers() {
-	this->window.signal_key_press_event().connect(sigc::mem_fun(player, &Player::movement_key_press_handler));
-	this->window.signal_key_release_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
+	this->window.get_parent()->signal_key_press_event().connect(sigc::mem_fun(player, &Player::movement_key_press_handler));
+	this->window.get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
 	this->window.signal_button_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_button_handler));
 }
 
 void WorldView::disable_handlers() {
-	this->window.signal_key_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
-	this->window.signal_key_release_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
+	this->window.get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
+	this->window.get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &WorldView::inactive_key_handler));
 	this->window.signal_button_press_event().connect(sigc::mem_fun(*this, &WorldView::inactive_button_handler));
 }
 

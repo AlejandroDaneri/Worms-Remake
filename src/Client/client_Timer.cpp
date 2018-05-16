@@ -14,6 +14,11 @@ void Timer::run() { // recibe el arma
 		this->actual_time += TIME_STEP;
 	}
 	// Hace explotar el arma
+	if (!this->running)
+		printf("Shoot por el stop\n");
+	else {
+		printf("Shoot por cargar al maximo\n");
+	}
 	player.shoot(this->actual_time);
 	this->running = false;
 }

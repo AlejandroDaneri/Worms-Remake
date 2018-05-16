@@ -12,7 +12,7 @@ FragmentableWeapon::FragmentableWeapon(World& world, GameParameters& parameters,
 FragmentableWeapon::~FragmentableWeapon(){}
 
 void FragmentableWeapon::explode(){
-	for (int fragment_angle = 0; fragment_angle < 360; fragment_angle+= (360 / this->fragments)){
+	for (float fragment_angle = 0; fragment_angle < 360; fragment_angle+= (360 / this->fragments)){
 		WeaponFactory factory(this->world, this->parameters);
 		physical_object_ptr fragment = factory.getWeapon(this->getName() + FRAGMENT);
 

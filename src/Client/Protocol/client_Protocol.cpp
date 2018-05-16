@@ -30,7 +30,7 @@ void ClientProtocol::send_change_weapon(const std::string& weapon){
 }
 
 void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t time){
-	printf("shoot\n");
+	printf("shoot protocol\n");
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;

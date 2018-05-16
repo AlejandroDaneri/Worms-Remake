@@ -61,7 +61,7 @@ void Weapon::setInitialVelocity(){
 			 velocity *= this->power;
 		}
 		this->angle *= RADIANS;
-		b2Vec2 linear_velocity(velocity * cos(angle), velocity * sin(angle));
+		b2Vec2 linear_velocity(velocity * cos(this->angle), velocity * sin(this->angle));
 		this->body->SetLinearVelocity(linear_velocity);
 	}
 	this->waiting_to_explode = true;
@@ -73,7 +73,7 @@ void Weapon::setInitialVelocity(){
 void Weapon::explode(){
 	std::cout<<"weapon explode: "<<this->getId()<<std::endl;
 	b2Vec2 center = this->body->GetPosition();
-	for (int bullet_angle = 0; bullet_angle < 360; bullet_angle+= 5){
+	for (float bullet_angle = 0; bullet_angle < 360; bullet_angle+= 5){
 		b2Vec2 end = center + this->radius * b2Vec2(cos(bullet_angle * RADIANS), sin(bullet_angle * RADIANS));
 		b2Vec2 normal;
 		b2Body* closest_body = this->world.getClosestObject(center, end, normal);
