@@ -1,4 +1,5 @@
 #include "WormView.h"
+#include "ObjectSizes.h"
 #include <string>
 
 #define WORM_IMAGE "_worm.png"
@@ -17,7 +18,8 @@ void WormView::updateData(int new_life, char new_dir, const Position& new_pos){
 	this->life = new_life;
 	this->dir_changed = this->dir != new_dir;
 	this->dir = new_dir;
-	this->move(new_pos);
+	Position position_new(new_pos.getX() + worm_size / 2, new_pos.getY() + worm_size / 2);
+	this->move(position_new);
 }
 
 void WormView::kill(){

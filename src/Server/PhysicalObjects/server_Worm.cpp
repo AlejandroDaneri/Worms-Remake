@@ -18,7 +18,7 @@ void Worm::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 
 void Worm::createFixtures(){
 	b2PolygonShape boxShape;
-	boxShape.SetAsBox(0.5, 0.5);
+	boxShape.SetAsBox(worm_size / 2, worm_size / 2);
 		  
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;

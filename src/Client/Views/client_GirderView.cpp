@@ -1,4 +1,5 @@
 #include "GirderView.h"
+#include "ObjectSizes.h"
 
 #define GIRDER_PATH "resources/images/Girder/girder_"
 
@@ -9,7 +10,8 @@ GirderView::GirderView(WorldView& worldView, size_t size, Position pos, int rota
 	path += std::to_string(size);
 	path += ".png";
 	this->image.set(path);
-	this->addToWorld(pos);
+	Position position(pos.getX() - size / 2, pos.getY() - girder_height / 2);
+	this->addToWorld(position);
 }
 
 GirderView::~GirderView(){}
@@ -20,4 +22,3 @@ GirderView::GirderView(GirderView&& other): Viewable(std::move(other)),
 Gtk::Widget& GirderView::getWidget(){
 	return this->image;
 }
-

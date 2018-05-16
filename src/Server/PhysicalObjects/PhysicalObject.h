@@ -3,6 +3,7 @@
 
 #include "b2Body.h"
 #include "CollisionData.h"
+#include "ObjectSizes.h"
 #include <string>
 #include <memory>
 

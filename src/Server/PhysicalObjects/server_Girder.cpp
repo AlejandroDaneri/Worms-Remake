@@ -14,7 +14,7 @@ void Girder::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 
 void Girder::createFixtures(){
 	b2PolygonShape boxShape;
-	boxShape.SetAsBox(this->size / 2.0, 0.4);
+	boxShape.SetAsBox(this->size / 2.0, girder_height / 2);
 
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
