@@ -9,6 +9,8 @@ cmake ..
 
 (no me borren mi makefile)
 
+### Lista de tareas
+https://trello.com/b/77GBgtcb/worms
 
 ### archivos Yaml parser
 https://github.com/jbeder/yaml-cpp
