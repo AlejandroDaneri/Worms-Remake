@@ -24,9 +24,10 @@ b2Body* PhysicalObject::getBody(){
 
 bool PhysicalObject::isMoving(){
 	b2Vec2 pos = this->body->GetPosition();
-	bool moved = pos != this->last_position;
+	bool moved_x = (int)(pos.x * UNIT_TO_SEND) != (int)(this->last_position.x * UNIT_TO_SEND);
+	bool moved_y = (int)(pos.y * UNIT_TO_SEND) != (int)(this->last_position.y * UNIT_TO_SEND);
 	this->last_position = pos;
-	return moved;
+	return moved_x || moved_y;
 }
 
 bool PhysicalObject::isActive(){
