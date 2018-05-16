@@ -1,4 +1,5 @@
 #include "GameParameters.h"
+#include "ConfigFields.h"
 #include <algorithm>
 #include <random>
 
@@ -8,16 +9,16 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 GameParameters::~GameParameters(){}
 
 int GameParameters::getWormLife(){
-	return this->config_editor["worms_life"].as<int>();
+	return this->config_editor[WORMS_LIFE].as<int>();
 }
 
 int GameParameters::get_worms_life_to_add(){
-	return this->config["worms_life_to_add"].as<int>();
+	return this->config[WORMS_LIFE_TO_ADD].as<int>();
 }
 
 std::vector<b2Vec2> GameParameters::getWorms(){
 	std::vector<b2Vec2> worms;
-	std::vector<std::vector<int>> worms_file = config_editor["worms"].as<std::vector<std::vector<int>>>();
+	std::vector<std::vector<int>> worms_file = config_editor[WORMS_DATA].as<std::vector<std::vector<int>>>();
 
 	for (auto it = worms_file.begin(); it != worms_file.end(); ++it){
 		worms.push_back(b2Vec2((*it)[0], (*it)[1]));
@@ -32,7 +33,7 @@ std::vector<b2Vec2> GameParameters::getWorms(){
 
 std::vector<GirderParams> GameParameters::getGirders(){
 	std::vector<GirderParams> girders;
-	std::vector<std::vector<int>> girders_file = config_editor["girders"].as<std::vector<std::vector<int>>>();
+	std::vector<std::vector<int>> girders_file = config_editor[GIRDERS_DATA].as<std::vector<std::vector<int>>>();
 
 	for (auto it = girders_file.begin(); it != girders_file.end(); ++it){
 		girders.push_back(GirderParams((*it)[0], (*it)[1], (*it)[2], (*it)[3]));
@@ -41,44 +42,44 @@ std::vector<GirderParams> GameParameters::getGirders(){
 }
 
 std::map<std::string, int> GameParameters::getWeaponsAmmo(){
-	std::map<std::string, int> ammo = config_editor["weapon_ammo"].as<std::map<std::string, int>>();
+	std::map<std::string, int> ammo = config_editor[WEAPON_AMMO].as<std::map<std::string, int>>();
 	return ammo;
 }
 
 float GameParameters::getWormVelocity(){
-	return this->config["worm_velocity"].as<float>();
+	return this->config[WORM_VELOCITY].as<float>();
 }
 
 float GameParameters::getWormJumpVelocity(){
-	return this->config["worm_jump_velocity"].as<float>();
+	return this->config[WORM_JUMP_VELOCITY].as<float>();
 }
 
 float GameParameters::getWormRollbackVelocity(){
-	return this->config["worm_rollback_velocity"].as<float>();
+	return this->config[WORM_ROLLBACK_VELOCITY].as<float>();
 }
 
 float GameParameters::getWormJumpHeight(){
-	return this->config["worm_jump_height"].as<float>();
+	return this->config[WORM_JUMP_HEIGHT].as<float>();
 }
 
 float GameParameters::getWormRollbackHeight(){
-	return this->config["worm_rollback_height"].as<float>();
+	return this->config[WORM_ROLLBACK_HEIGHT].as<float>();
 }
 
 float GameParameters::getWeaponsVelocity(){
-	return this->config["weapons_velocity"].as<float>();
+	return this->config[WEAPONS_VELOCITY].as<float>();
 }
 
 int GameParameters::getWeaponDamage(const std::string& weapon){
-	return this->config["weapon_damage"][weapon].as<int>();
+	return this->config[WEAPON_DAMAGE][weapon].as<int>();
 }
 
 int GameParameters::getWeaponRadius(const std::string& weapon){
-	return this->config["weapon_radius"][weapon].as<int>();
+	return this->config[WEAPON_RADIUS][weapon].as<int>();
 }
 
 int GameParameters::getWeaponFragments(const std::string& weapon){
-	return this->config["weapon_fragments"][weapon].as<int>();
+	return this->config[WEAPON_FRAGMENTS][weapon].as<int>();
 }
 
 GameParameters::GirderParams::GirderParams(size_t len, int pos_x, int pos_y, int rotation):
