@@ -3,6 +3,8 @@
 
 const int SCALE_FACTOR = 60; //1 meter --- x pixels
 
+const float UNIT_TO_SEND = 100.0; //1 cm
+
 //in meters
 
 const float worm_size = 0.5;

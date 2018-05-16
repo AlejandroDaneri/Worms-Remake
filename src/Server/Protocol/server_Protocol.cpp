@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Weapon.h"
 #include "Girder.h"
+#include "ObjectSizes.h"
 #include <string>
 
 ServerProtocol::ServerProtocol(Socket&& socket): Protocol(std::move(socket)){}
@@ -51,8 +52,8 @@ void ServerProtocol::send_worm(physical_object_ptr& object, char* buffer){
 	char dir = worm->getDir();
 
 	this->send_int(buffer, offset, id);
-	this->send_int(buffer, offset, position.x);
-	this->send_int(buffer, offset, position.y);
+	this->send_int(buffer, offset, position.x * UNIT_TO_SEND);
+	this->send_int(buffer, offset, position.y * UNIT_TO_SEND);
 	this->send_int(buffer, offset, worm->getLife());
 	buffer[offset++] = dir;
 	
@@ -71,8 +72,8 @@ void ServerProtocol::send_weapon(physical_object_ptr& object, char* buffer){
 
 	this->send_string(buffer, offset, name);
 	
-	this->send_int(buffer, offset, position.x);
-	this->send_int(buffer, offset, position.y);
+	this->send_int(buffer, offset, position.x * UNIT_TO_SEND);
+	this->send_int(buffer, offset, position.y * UNIT_TO_SEND);
 
 	this->send_buffer(buffer, offset);
 }

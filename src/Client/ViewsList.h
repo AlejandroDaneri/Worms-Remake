@@ -23,9 +23,9 @@ class ViewsList{
 		void removeWorm(int id);
 		void removeWeapon(int id);
 
-		void updateWormData(int id, int pos_x, int pos_y, int life, char dir);
+		void updateWormData(int id, float pos_x, float pos_y, int life, char dir);
 
-		void updateWeaponData(int id, const std::string& weapon_name, int pos_x, int pos_y);
+		void updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y);
 		
 		void addGirder(size_t size, int pos_x, int pos_y, int rotation);
 

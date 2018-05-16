@@ -1,4 +1,5 @@
 #include "ViewsList.h"
+#include "ObjectSizes.h"
 
 ViewsList::ViewsList(WorldView& world): world(world){}
 
@@ -18,9 +19,9 @@ void ViewsList::removeWeapon(int id){
 	} catch (const std::exception& e){}
 }
 
-void ViewsList::updateWormData(int id, int pos_x, int pos_y, int life, char dir){
+void ViewsList::updateWormData(int id, float pos_x, float pos_y, int life, char dir){
 	auto it = this->worms.find(id);
-	Position pos(pos_x, pos_y);
+	Position pos(pos_x / UNIT_TO_SEND, pos_y / UNIT_TO_SEND);
 	if (it == this->worms.end()){
 		//Worm no existe
 		WormView worm(this->world, life, dir, pos);
@@ -31,9 +32,9 @@ void ViewsList::updateWormData(int id, int pos_x, int pos_y, int life, char dir)
 	}
 }
 
-void ViewsList::updateWeaponData(int id, const std::string& weapon_name, int pos_x, int pos_y){
+void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y){
 	auto it = this->weapons.find(id);
-	Position pos(pos_x, pos_y);
+	Position pos(pos_x / UNIT_TO_SEND, pos_y / UNIT_TO_SEND);
 	if (it == this->weapons.end()){
 		//Weapon no existe
 		BulletView weapon(this->world, weapon_name, pos);

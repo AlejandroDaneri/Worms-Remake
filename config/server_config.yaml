@@ -1,5 +1,5 @@
 worms_life_to_add: 25
-worm_velocity: 3.2
+worm_velocity: 2.2
 worm_jump_velocity: 7
 worm_rollback_velocity: 7
 worm_jump_height: 7
