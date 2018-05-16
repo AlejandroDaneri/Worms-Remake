@@ -1,5 +1,5 @@
-#ifndef __WEAPONSDEFS_H__
-#define __WEAPONSDEFS_H__
+#ifndef __WEAPONNAMES_H__
+#define __WEAPONNAMES_H__
 
 #include <string>
 

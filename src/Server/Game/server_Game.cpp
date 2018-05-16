@@ -3,8 +3,8 @@
 #include "server_WeaponFactory.h"
 
 
-Game::Game(const std::string& config_file, const std::string& config_editor):
-	parameters(config_file, config_editor){}
+Game::Game(size_t players, const std::string& config_file, const std::string& config_editor):
+	players(players), parameters(config_file, config_editor){}
 
 Game::~Game(){
 	this->world.stop();
@@ -26,7 +26,7 @@ bool Game::addPlayer(Player&& player){
 }
 
 bool Game::isFull(){
-	return this->parameters.get_max_players() == this->turn.get_players_size();
+	return this->players <= this->turn.get_players_size();
 }
 
 
@@ -57,7 +57,7 @@ void Game::run(){
 
 	//PARA PROBAR COSAS
 	/////////////////////////////////////////////////////////
-	sleep(5);
+	//sleep(5);
 	//this->getCurrentWorm().changeWeapon("RedGrenade");
 	//this->getCurrentWorm().shoot(60, 1000, -1);
 	//this->getCurrentWorm().changeWeapon("AirAttack");

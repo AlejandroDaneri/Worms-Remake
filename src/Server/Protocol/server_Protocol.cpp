@@ -15,10 +15,10 @@ void ServerProtocol::sendObject(physical_object_ptr& object){
 	char buffer[MAX_BUF_LEN];
 	buffer[0] = MOVING_OBJECT;
 
-	std::string& type = object->getType();
-	if (type == "Worm"){
+	const std::string& type = object->getType();
+	if (type == TYPE_WORM){
 		this->send_worm(object, buffer);
-	} else if (type == "Weapon"){
+	} else if (type == TYPE_WEAPON){
 		this->send_weapon(object, buffer);
 	}
 }
@@ -28,10 +28,10 @@ void ServerProtocol::sendDeadObject(physical_object_ptr& object){
 	size_t offset = 0;
 	buffer[offset++] = DEAD_OBJECT;
 
-	std::string& type = object->getType();
-	if (type == "Worm"){
+	const std::string& type = object->getType();
+	if (type == TYPE_WORM){
 		buffer[offset++] = WORM_TYPE;
-	} else if (type == "Weapon"){
+	} else if (type == TYPE_WEAPON){
 		buffer[offset++] = WEAPON_TYPE;
 	}
 

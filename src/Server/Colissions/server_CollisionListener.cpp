@@ -13,13 +13,13 @@ void CollisionListener::BeginContact(b2Contact* contact){
 		return;
 	}
 
-	if (dataA->getType() == "Weapon"){
+	if (dataA->getType() == TYPE_WEAPON){
 		dataA->getObject()->collide_with_something(dataB);
-	} else if (dataB->getType() == "Weapon"){
+	} else if (dataB->getType() == TYPE_WEAPON){
 		dataB->getObject()->collide_with_something(dataA);
-	} else if (dataA->getType() == "Worm"){
+	} else if (dataA->getType() == TYPE_WORM){
 		dataA->getObject()->collide_with_something(dataB);
-	} else if (dataB->getType() == "Worm"){
+	} else if (dataB->getType() == TYPE_WORM){
 		dataB->getObject()->collide_with_something(dataA);
 	}
 }

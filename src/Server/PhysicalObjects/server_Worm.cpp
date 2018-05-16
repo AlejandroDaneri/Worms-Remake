@@ -5,7 +5,7 @@
 #include "server_WeaponFactory.h"
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
-	PhysicalObject(world, id, "Worm"), player_id(player_id), life(parameters.getWormLife()), 
+	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
 	dir(1), parameters(parameters), last_weapon_exploded(-1){}
 
 Worm::~Worm(){}
@@ -90,7 +90,7 @@ void Worm::receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id
 }
 
 void Worm::collide_with_something(CollisionData* other){
-	if (other->getType() == "Border"){
+	if (other->getType() == TYPE_BORDER){
 		this->life = 0;
 		this->is_dead = true;
 	}

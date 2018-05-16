@@ -16,6 +16,7 @@ class Player;
 
 class Game: public Thread{
 	private:
+		size_t players;
 		GameParameters parameters;
 		World world;
 		Turn turn;
@@ -27,7 +28,7 @@ class Game: public Thread{
 		void wait_to_world();
 
 	public:
-		Game(const std::string& config_file, const std::string& config_editor);
+		Game(size_t players, const std::string& config_file, const std::string& config_editor);
 		~Game();
 
 		bool addPlayer(Player&& player);

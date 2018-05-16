@@ -15,8 +15,6 @@ class GameParameters{
 		YAML::Node config;
 		YAML::Node config_editor;
 
-		size_t max_players;/////////////////////////////////////
-
 	public:
 		GameParameters(const std::string& config_file, const std::string& config_editor);
 		~GameParameters();
@@ -40,9 +38,6 @@ class GameParameters{
 		int getWeaponDamage(const std::string& weapon);
 		int getWeaponRadius(const std::string& weapon);
 		int getWeaponFragments(const std::string& weapon);
-
-		size_t get_max_players();
-
 };
 
 class GameParameters::GirderParams{

@@ -1,7 +1,7 @@
 #include "PhysicalObject.h"
 #include "World.h"
 
-PhysicalObject::PhysicalObject(World& world, int id, std::string type):
+PhysicalObject::PhysicalObject(World& world, int id, const std::string& type):
 	world(world), is_dead(false), id(id), type(type), last_position(-1, -1),
 	collision_data(type, this){}
 
@@ -41,7 +41,7 @@ int PhysicalObject::getId(){
 	return this->id;
 }
 
-std::string& PhysicalObject::getType(){
+const std::string& PhysicalObject::getType(){
 	return this->type;
 }
 

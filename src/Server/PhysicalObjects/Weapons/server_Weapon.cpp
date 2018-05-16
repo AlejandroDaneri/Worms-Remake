@@ -10,7 +10,7 @@ int Weapon::weapon_id = 1;
 #include <iostream>////////////////////////////////////////////////////////////////////////////////////////
 
 Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius): 
-	PhysicalObject(world, Weapon::weapon_id++, "Weapon"), parameters(parameters), 
+	PhysicalObject(world, Weapon::weapon_id++, TYPE_WEAPON), parameters(parameters), 
 	damage(damage), radius(radius), 
 	waiting_to_explode(false), time_to_explode(-1), explode_time(world, *this){}
 
@@ -75,7 +75,7 @@ void Weapon::explode(){
 		b2Body* closest_body = this->world.getClosestObject(center, end, normal);
 		if (closest_body){
 			CollisionData* data = (CollisionData*)closest_body->GetUserData();
-			if (data->getType() == "Worm"){
+			if (data->getType() == TYPE_WORM){
 				Worm* worm = ((Worm*)data->getObject());
 				float distance = b2Distance(center, worm->getPosition());
 				int worm_damage = this->damage * (1 - distance / (2 * this->radius)); //Justo en el borde hace la mitad de danio
@@ -91,7 +91,7 @@ void Weapon::explode(){
 
 void Weapon::collide_with_something(CollisionData* other){
 	std::cout<<"weapon collision"<<std::endl;
-	if (this->time_to_explode == -1 || other->getType() == "Border"){
+	if (this->time_to_explode == -1 || other->getType() == TYPE_BORDER){
 		this->explode_time.stop();
 		this->explode();
 	}

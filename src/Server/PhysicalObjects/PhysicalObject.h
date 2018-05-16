@@ -4,6 +4,7 @@
 #include "b2Body.h"
 #include "CollisionData.h"
 #include "ObjectSizes.h"
+#include "ObjectTypes.h"
 #include <string>
 #include <memory>
 
@@ -15,7 +16,7 @@ class PhysicalObject{
 		b2Body* body;
 		bool is_dead;
 		int id;
-		std::string type;
+		const std::string& type;
 		b2Vec2 last_position;
 		CollisionData collision_data;
 
@@ -23,7 +24,7 @@ class PhysicalObject{
 		virtual void setInitialVelocity();
 
 	public:
-		PhysicalObject(World& world, int id, std::string type);
+		PhysicalObject(World& world, int id, const std::string& type);
 		virtual ~PhysicalObject();
 
 		void initializeBody(b2Body* body);
@@ -33,7 +34,7 @@ class PhysicalObject{
 		virtual bool isActive();
 		virtual bool isDead();
 		int getId();
-		std::string& getType();
+		const std::string& getType();
 
 		virtual void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) = 0;
 

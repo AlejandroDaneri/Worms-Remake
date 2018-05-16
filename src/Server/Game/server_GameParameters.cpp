@@ -3,11 +3,7 @@
 #include <random>
 
 GameParameters::GameParameters(const std::string& config_file, const std::string& config_editor):
-	config(YAML::LoadFile(config_file)), config_editor(YAML::LoadFile(config_editor)){
-
-	this->max_players = 1;
-
-}
+	config(YAML::LoadFile(config_file)), config_editor(YAML::LoadFile(config_editor)){}
 	
 GameParameters::~GameParameters(){}
 
@@ -71,10 +67,6 @@ float GameParameters::getWormRollbackHeight(){
 
 float GameParameters::getWeaponsVelocity(){
 	return this->config["weapons_velocity"].as<float>();
-}
-
-size_t GameParameters::get_max_players(){
-	return this->max_players;////////////////////////////////////////////////////////////////////////////////////
 }
 
 int GameParameters::getWeaponDamage(const std::string& weapon){

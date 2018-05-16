@@ -3,7 +3,7 @@
 #include "b2Fixture.h"
 
 Girder::Girder(World& world, size_t size, int rotation):
-	PhysicalObject(world, 0, "Girder"), size(size), rotation(rotation){}
+	PhysicalObject(world, 0, TYPE_GIRDER), size(size), rotation(rotation){}
 
 Girder::~Girder(){}
 
