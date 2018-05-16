@@ -9,7 +9,7 @@ class AirAttackMissile: public Weapon{
 		AirAttackMissile(World& world, GameParameters& parameters);
 		~AirAttackMissile();
 
-		std::string getName() override;
+		const std::string& getName() override;
 
 };
 

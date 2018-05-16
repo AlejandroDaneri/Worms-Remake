@@ -9,7 +9,7 @@ class Teleportation: public Weapon{
 		Teleportation(World& world, GameParameters& parameters);
 		~Teleportation();
 
-		std::string getName() override;
+		const std::string& getName() override;
 
 		void shoot(char dir, int angle, int power, int time) override;
 

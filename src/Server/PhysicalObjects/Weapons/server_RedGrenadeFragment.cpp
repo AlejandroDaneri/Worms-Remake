@@ -5,6 +5,6 @@ RedGrenadeFragment::RedGrenadeFragment(World& world, GameParameters& parameters)
 		
 RedGrenadeFragment::~RedGrenadeFragment(){}
 
-std::string RedGrenadeFragment::getName(){
+const std::string& RedGrenadeFragment::getName(){
 	return RED_GRENADE_FRAGMENTS_NAME;
 }

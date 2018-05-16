@@ -7,7 +7,7 @@ Teleportation::Teleportation(World& world, GameParameters& parameters):
 		
 Teleportation::~Teleportation(){}
 
-std::string Teleportation::getName(){
+const std::string& Teleportation::getName(){
 	return TELEPORT_NAME;
 }
 

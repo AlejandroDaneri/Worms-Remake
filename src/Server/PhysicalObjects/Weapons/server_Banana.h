@@ -12,7 +12,7 @@ class Banana: public Weapon{
 		Banana(World& world, GameParameters& parameters);
 		~Banana();
 
-		std::string getName() override;
+		const std::string& getName() override;
 
 };
 

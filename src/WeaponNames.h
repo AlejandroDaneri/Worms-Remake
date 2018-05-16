@@ -1,42 +1,34 @@
 #ifndef __WEAPONSDEFS_H__
 #define __WEAPONSDEFS_H__
 
-#include <climits>
+#include <string>
 
-#ifndef INFINITE
-#define INFINITE INT_MAX
-#endif
+const std::string AIR_ATTACK_NAME("AirAttack");
 
-#define DEFAULT_TIME 5
+const std::string AIR_ATTACK_MISSILE_NAME("AirAttackMissile");
 
-#define AIR_ATTACK_NAME "AirAttack"
+const std::string BANANA_NAME("Banana");
 
-#define AIR_ATTACK_MISSILE_NAME "AirAttackMissile"
+const std::string BAT_NAME("Bat");
 
-#define BANANA_NAME "Banana"
+const std::string BAZOOKA_NAME("Bazooka");
 
-#define BAT_NAME "Bat"
+const std::string DYNAMITE_NAME("Dynamite");
 
-#define BAZOOKA_NAME "Bazooka"
+const std::string GREEN_GRENADE_NAME("GreenGrenade");
 
-#define DYNAMITE_NAME "Dynamite"
+const std::string HOLY_GRENADE_NAME("HolyGrenade");
 
-#define GREEN_GRENADE_NAME "GreenGrenade"
+const std::string MORTAR_NAME("Mortar");
 
-#define HOLY_GRENADE_NAME "HolyGrenade"
+const std::string MORTAR_FRAGMENTS_NAME("MortarFragment");
 
-#define MORTAR_NAME "Mortar"
+const std::string RED_GRENADE_NAME("RedGrenade");
 
-#define MORTAR_FRAGMENTS_NAME "MortarFragment"
+const std::string RED_GRENADE_FRAGMENTS_NAME("RedGrenadeFragment");
 
+const std::string TELEPORT_NAME("Teleportation");
 
-#define RED_GRENADE_NAME "RedGrenade"
-
-#define RED_GRENADE_FRAGMENTS_NAME "RedGrenadeFragment"
-
-
-#define TELEPORT_NAME "Teleportation"
-
-#define FRAGMENT "Fragment"
+const std::string FRAGMENT("Fragment");
 
 #endif

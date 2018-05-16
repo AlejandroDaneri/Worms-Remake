@@ -5,6 +5,6 @@ AirAttackMissile::AirAttackMissile(World& world, GameParameters& parameters):
 		
 AirAttackMissile::~AirAttackMissile(){}
 
-std::string AirAttackMissile::getName(){
+const std::string& AirAttackMissile::getName(){
 	return AIR_ATTACK_MISSILE_NAME;
 }

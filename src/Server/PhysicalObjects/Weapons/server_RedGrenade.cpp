@@ -5,6 +5,6 @@ RedGrenade::RedGrenade(World& world, GameParameters& parameters):
 
 RedGrenade::~RedGrenade(){}
 
-std::string RedGrenade::getName(){
+const std::string& RedGrenade::getName(){
         return RED_GRENADE_NAME;
 }

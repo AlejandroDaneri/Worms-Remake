@@ -37,9 +37,9 @@ class GameParameters{
 
 		float getWeaponsVelocity();
 
-		int getWeaponDamage(std::string weapon);
-		int getWeaponRadius(std::string weapon);
-		int getWeaponFragments(std::string weapon);
+		int getWeaponDamage(const std::string& weapon);
+		int getWeaponRadius(const std::string& weapon);
+		int getWeaponFragments(const std::string& weapon);
 
 		size_t get_max_players();
 

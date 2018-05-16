@@ -7,7 +7,7 @@ Banana::Banana(World& world, GameParameters& parameters):
 		
 Banana::~Banana(){}
 
-std::string Banana::getName(){
+const std::string& Banana::getName(){
 	return BANANA_NAME;
 }
 

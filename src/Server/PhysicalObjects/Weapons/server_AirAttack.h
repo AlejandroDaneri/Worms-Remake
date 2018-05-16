@@ -9,7 +9,7 @@ class AirAttack: public Weapon{
 		AirAttack(World& world, GameParameters& parameters);
 		~AirAttack();
 
-		std::string getName() override;
+		const std::string& getName() override;
 
 		void shoot(char dir, int angle, int power, int time) override;
 

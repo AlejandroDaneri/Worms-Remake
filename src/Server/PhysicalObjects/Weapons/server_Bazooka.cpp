@@ -5,6 +5,6 @@ Bazooka::Bazooka(World& world, GameParameters& parameters):
 		
 Bazooka::~Bazooka(){}
 
-std::string Bazooka::getName(){
+const std::string& Bazooka::getName(){
 	return BAZOOKA_NAME;
 }

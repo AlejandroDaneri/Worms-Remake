@@ -9,7 +9,7 @@ class Bazooka: public Weapon{
 		Bazooka(World& world, GameParameters& parameters);
 		~Bazooka();
 
-		std::string getName() override;
+		const std::string& getName() override;
 
 };
 

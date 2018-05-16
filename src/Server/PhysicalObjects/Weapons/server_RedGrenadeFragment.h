@@ -9,7 +9,7 @@ class RedGrenadeFragment: public Fragment{
 		RedGrenadeFragment(World& world, GameParameters& parameters);
 		~RedGrenadeFragment();
 
-		std::string getName() override;
+		const std::string& getName() override;
 
 };
 

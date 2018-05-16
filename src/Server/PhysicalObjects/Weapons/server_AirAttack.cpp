@@ -10,7 +10,7 @@ AirAttack::AirAttack(World& world, GameParameters& parameters):
 		
 AirAttack::~AirAttack(){}
 
-std::string AirAttack::getName(){
+const std::string& AirAttack::getName(){
 	return AIR_ATTACK_NAME;
 }
 

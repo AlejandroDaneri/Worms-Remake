@@ -9,7 +9,7 @@ class RedGrenade: public FragmentableWeapon{
 		RedGrenade(World& world, GameParameters& parameters);
 		~RedGrenade();
 
-		std::string getName() override;
+		const std::string& getName() override;
 };
 
 #endif

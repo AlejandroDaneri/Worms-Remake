@@ -42,7 +42,7 @@ class Weapon: public PhysicalObject{
 
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
 
-		virtual std::string getName() = 0;
+		virtual const std::string& getName() = 0;
 
 };
 

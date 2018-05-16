@@ -77,15 +77,15 @@ size_t GameParameters::get_max_players(){
 	return this->max_players;////////////////////////////////////////////////////////////////////////////////////
 }
 
-int GameParameters::getWeaponDamage(std::string weapon){
+int GameParameters::getWeaponDamage(const std::string& weapon){
 	return this->config["weapon_damage"][weapon].as<int>();
 }
 
-int GameParameters::getWeaponRadius(std::string weapon){
+int GameParameters::getWeaponRadius(const std::string& weapon){
 	return this->config["weapon_radius"][weapon].as<int>();
 }
 
-int GameParameters::getWeaponFragments(std::string weapon){
+int GameParameters::getWeaponFragments(const std::string& weapon){
 	return this->config["weapon_fragments"][weapon].as<int>();
 }
 
