@@ -3,10 +3,7 @@
 #include "b2CircleShape.h"
 #include "CollisionData.h"
 #include "Worm.h"
-#include <cmath>
-
-#define PI 3.14159265
-#define RADIANS PI / 180
+#include "math_utils.h"
 
 int Weapon::weapon_id = 1;
 
@@ -31,7 +28,7 @@ void Weapon::shoot(char dir, int angle, int power, int time){
 	}
 	this->time_to_explode = time;
 	this->angle = angle;
-	this->power = power / 1000;
+	this->power = power;
 	std::cout<<"weapon shoot"<<std::endl;
 }
 
@@ -58,10 +55,9 @@ void Weapon::setInitialVelocity(){
 	if (this->angle < 500){
 		int velocity = this->parameters.getWeaponsVelocity();
 		if (this->power != -1){
-			 velocity *= this->power;
+			 velocity *= this->power / 1000;
 		}
-		this->angle *= RADIANS;
-		b2Vec2 linear_velocity(velocity * cos(this->angle), velocity * sin(this->angle));
+		b2Vec2 linear_velocity(velocity * Math::cos_degrees(this->angle), velocity * Math::sin_degrees(this->angle));
 		this->body->SetLinearVelocity(linear_velocity);
 	}
 	this->waiting_to_explode = true;
@@ -74,7 +70,7 @@ void Weapon::explode(){
 	std::cout<<"weapon explode: "<<this->getId()<<std::endl;
 	b2Vec2 center = this->body->GetPosition();
 	for (float bullet_angle = 0; bullet_angle < 360; bullet_angle+= 5){
-		b2Vec2 end = center + this->radius * b2Vec2(cos(bullet_angle * RADIANS), sin(bullet_angle * RADIANS));
+		b2Vec2 end = center + this->radius * b2Vec2(Math::cos_degrees(bullet_angle), Math::sin_degrees(bullet_angle));
 		b2Vec2 normal;
 		b2Body* closest_body = this->world.getClosestObject(center, end, normal);
 		if (closest_body){
