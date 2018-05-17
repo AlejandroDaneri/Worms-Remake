@@ -28,5 +28,11 @@ bool CollisionListener::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB){
 	CollisionData* dataA = (CollisionData*)fixtureA->GetBody()->GetUserData();
 	CollisionData* dataB = (CollisionData*)fixtureB->GetBody()->GetUserData();
 
-	return dataA->getType() != TYPE_WORM || dataB->getType() != TYPE_WORM;
+	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_WORM){
+		return false;
+	}
+	if (dataA->getType() == TYPE_WEAPON && dataB->getType() == TYPE_WEAPON){
+		return false;
+	}
+	return true;
 }

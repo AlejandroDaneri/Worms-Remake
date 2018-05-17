@@ -91,7 +91,7 @@ void Worm::receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id
 		this->life -= damage;
 		std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
 		std::cout <<"normal: "<<normal.x<<"  "<<normal.y<<std::endl;
-		this->body->SetLinearVelocity(-1 * damage * normal);
+		this->body->SetLinearVelocity(-1 * (damage / 2) * normal);
 		this->last_weapon_exploded = weapon_id;
 		if (this->life <= 0){
 			this->is_dead = true;
