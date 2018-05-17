@@ -7,21 +7,25 @@
 #include "Worm.h"
 #include "World.h"
 #include "GameParameters.h"
+#include <string>
 
 class Player{
 	private:
 		ServerProtocol protocol;
+		std::string name;
 		WormsList worms;
 		int id;
 
 	public:
-		Player(Socket&& socket);
+		Player(Socket&& socket, const std::string& name);
 
 		Player(Player&& other);
 
 		~Player();
 
 		void setId(int id);
+
+		int getId() const;
 
 		Worm& getCurrentWorm();
 
@@ -32,6 +36,8 @@ class Player{
 		void distributeWorms(size_t max, int life_to_add);
 
 		bool isDead();
+
+		const std::string& getName() const;
 
 		ServerProtocol& getProtocol();
 

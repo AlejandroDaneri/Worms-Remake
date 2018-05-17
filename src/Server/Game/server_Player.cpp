@@ -1,14 +1,18 @@
 #include "server_Player.h"
 
-Player::Player(Socket&& socket): protocol(std::move(socket)), id(-1){}
+Player::Player(Socket&& socket, const std::string& name): protocol(std::move(socket)), name(name), id(-1){}
 
 Player::Player(Player&& other): 
-	protocol(std::move(other.protocol)), worms(std::move(other.worms)), id(other.id){}
+	protocol(std::move(other.protocol)), name(std::move(other.name)), worms(std::move(other.worms)), id(other.id){}
 
 Player::~Player(){}
 
 void Player::setId(int id){
 	this->id = id;
+}
+
+int Player::getId() const{
+	return this->id;
 }
 
 Worm& Player::getCurrentWorm(){
@@ -35,4 +39,8 @@ bool Player::isDead(){
 
 ServerProtocol& Player::getProtocol(){
 	return this->protocol;
+}
+
+const std::string& Player::getName() const{
+	return this->name;
 }

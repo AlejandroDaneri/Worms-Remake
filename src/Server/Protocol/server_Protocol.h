@@ -7,6 +7,7 @@
 #include <mutex>
 
 class Game;
+class Player;
 
 class ServerProtocol : public Protocol{
 	private:
@@ -25,7 +26,9 @@ class ServerProtocol : public Protocol{
 
 		void receive(Game& game);
 
-		void send_start_turn(uint32_t current_worm_id);
+		void send_start_turn(int32_t current_worm_id, int32_t current_player_id);
+
+		void sendPlayerId(const Player& player);
 
 		void sendGirder(physical_object_ptr& girder);
 

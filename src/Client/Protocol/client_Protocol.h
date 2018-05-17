@@ -27,6 +27,8 @@ class ClientProtocol: public Protocol {
 
 		void receive(Player& player, ViewsList& viewsList);
 
+		void receivePlayers(); ///////////////////////////////////////////////ver parametros que recibe
+
 		void receiveGirders(ViewsList& viewsList);
 
 		void receiveWeaponsAmmo(WeaponList& weapon_list);

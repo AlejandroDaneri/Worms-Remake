@@ -37,7 +37,7 @@ class Player {
 		Player(ClientProtocol& protocol);
 		~Player();
 
-		void startTurn(int id);
+		void startTurn(int worm_id, int player_id);
 		void endTurn();
 
 		void change_weapon(std::string weapon);

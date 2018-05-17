@@ -7,7 +7,7 @@ int main(int argc, char* argv[]){
 	Socket socket(Socket::Server("7777", 10));
 
 	Socket client = socket.accept_client();
-	Player player(std::move(client));
+	Player player(std::move(client), "Pepe");
 
 	//Socket client2 = socket.accept_client();
 	//Player player2(std::move(client2));

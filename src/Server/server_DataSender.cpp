@@ -33,6 +33,21 @@ void DataSender::run(){
 	}
 }
 
+void DataSender::send_start_turn(int worm_id, int player_id){
+	for (auto player = this->players.begin(); player != this->players.end(); ++player){
+		player->getProtocol().send_start_turn(worm_id, player_id);
+	}
+}
+
+void DataSender::send_players_id(){
+	for (auto player = this->players.begin(); player != this->players.end(); ++player){
+		player->getProtocol().send_length(this->players.size());
+		for (auto it = this->players.begin(); it != this->players.end(); ++it){
+			player->getProtocol().sendPlayerId(*it);
+		}
+	}
+}
+
 void DataSender::sendGirders(){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
 		player->getProtocol().send_length(this->girders.size());

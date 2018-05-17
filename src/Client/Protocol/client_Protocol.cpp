@@ -69,8 +69,9 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 	char action = buffer[offset++];
 
 	if (action == START_TURN){
-		int id = this->receive_int(buffer, offset);
-		player.startTurn(id);
+		int worm_id = this->receive_int(buffer, offset);
+		int player_id = this->receive_int(buffer, offset);
+		player.startTurn(worm_id, player_id);
 	} else if (action == MOVING_OBJECT){
 		char type = buffer[offset++];
 		int id = this->receive_int(buffer, offset);
@@ -96,6 +97,22 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 		} else if (type == WEAPON_TYPE){
 			viewsList.removeWeapon(id);
 		}
+	}
+}
+
+void ClientProtocol::receivePlayers(){ /////////////////////ver parametros que recibe
+	int quantity = this->receive_length();
+
+	for (int i = 0; i < quantity; i++){
+		char buffer[MAX_BUF_LEN];
+		this->receive_buffer(buffer);
+		size_t offset = 0;
+
+		int id = this->receive_int(buffer, offset);
+		std::string name = this->receive_string(buffer, offset);
+		
+		///////////////hacer algo con los players
+		id ++;///para que no me tire error de compilacion
 	}
 }
 

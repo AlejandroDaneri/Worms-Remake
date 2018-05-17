@@ -28,6 +28,7 @@ Player::Player(ClientProtocol& protocol) :
 	screen(this->world, this->weapons_view), view_list(this->world),
 	data_receiver(this->view_list, *this, protocol) {
 
+	this->protocol.receivePlayers(); ///////////////////////////////////////////////ver parametros que recibe y que hace
 	this->protocol.receiveGirders(this->view_list);
 	this->protocol.receiveWeaponsAmmo(this->weapons);
 	this->weapons_view.update();
@@ -46,7 +47,8 @@ Player::~Player() {
 	this->data_receiver.join();
 }
 
-void Player::startTurn(int id){
+void Player::startTurn(int worm_id, int player_id){
+	////////////////////////////////////////////////////////////hacer algo con los id
 	//setear handlers
 	this->weapons_time = WEAPONS_TIME;
 	this->actual_angle = DEFAULT_ANGLE;

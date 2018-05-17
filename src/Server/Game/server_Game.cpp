@@ -36,6 +36,7 @@ void Game::run(){
 	this->world.start();
 	this->data_sender->start();
 
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	this->wait_to_world();
 
 /* PARA CUANDO ESTE IMPLEMENTADO EN EL CLIENTE LOS SEND*/
@@ -44,7 +45,9 @@ void Game::run(){
 		this->player_turn_active = true;
 		this->turn.begin_turn();
 		int worm_id = this->turn.getCurrentPlayer().getCurrentWorm().getId();
-		this->turn.getCurrentPlayer().getProtocol().send_start_turn(worm_id);
+		int player_id = this->turn.getCurrentPlayer().getId();
+		this->data_sender->send_start_turn(worm_id, player_id);
+
 		while (this->player_turn_active){
 			this->turn.getCurrentPlayer().getProtocol().receive(*this);
 		}
@@ -67,6 +70,8 @@ void Game::run(){
 
 void Game::configure(){
 	this->data_sender.reset(new DataSender(this->world, this->turn.getPlayers()));
+
+	this->data_sender->send_players_id();
 
 	//Asignacion de gusanos
 	std::vector<b2Vec2> worms_list = this->parameters.getWorms();

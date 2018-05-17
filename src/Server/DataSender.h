@@ -22,8 +22,11 @@ class DataSender: public Thread{
 
 		void run() override;
 
+		void send_players_id();
 		void sendGirders();
 		void sendWeaponsAmmo(std::map<std::string, int>& weapons);
+
+		void send_start_turn(int worm_id, int player_id);
 
 		bool isActive();
 
