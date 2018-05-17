@@ -28,6 +28,7 @@ class GameParameters{
 
 
 		float getWormVelocity();
+		float getWormExplosionVelocity();
 		float getWormJumpVelocity();
 		float getWormRollbackVelocity();
 		float getWormJumpHeight();

@@ -50,6 +50,10 @@ float GameParameters::getWormVelocity(){
 	return this->config[WORM_VELOCITY].as<float>();
 }
 
+float GameParameters::getWormExplosionVelocity(){
+	return this->config[WORM_EXPLOSION_VELOCITY].as<float>();
+}
+
 float GameParameters::getWormJumpVelocity(){
 	return this->config[WORM_JUMP_VELOCITY].as<float>();
 }

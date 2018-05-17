@@ -1,5 +1,6 @@
 worms_life_to_add: 25
 worm_velocity: 1.2
+worm_explosion_velocity: 0.4  #proportion of damage received
 worm_jump_velocity: 1.6
 worm_rollback_velocity: 1.4
 worm_jump_height: 5
@@ -16,7 +17,7 @@ weapon_radius:
   Banana: 4
   HolyGrenade: 8
   Dynamite: 4
-  Bat: 2
+  Bat: 1  #size of the bat
   AirAttackMissile: 2
   MortarFragment: 2
   RedGrenadeFragment: 2

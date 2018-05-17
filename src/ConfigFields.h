@@ -9,6 +9,8 @@ const std::string WORMS_LIFE_TO_ADD("worms_life_to_add");
 
 const std::string WORM_VELOCITY("worm_velocity");
 
+const std::string WORM_EXPLOSION_VELOCITY("worm_explosion_velocity");
+
 const std::string WORM_JUMP_VELOCITY("worm_jump_velocity");
 
 const std::string WORM_ROLLBACK_VELOCITY("worm_rollback_velocity");
