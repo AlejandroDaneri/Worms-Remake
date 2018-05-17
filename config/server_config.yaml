@@ -17,7 +17,7 @@ weapon_radius:
   Banana: 4
   HolyGrenade: 8
   Dynamite: 4
-  Bat: 1  #size of the bat
+  Bat: 2  #size of the bat
   AirAttackMissile: 2
   MortarFragment: 2
   RedGrenadeFragment: 2
