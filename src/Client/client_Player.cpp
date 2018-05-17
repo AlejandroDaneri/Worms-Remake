@@ -50,6 +50,7 @@ Player::~Player() {
 void Player::startTurn(int worm_id, int player_id){
 	////////////////////////////////////////////////////////////hacer algo con los id
 	//setear handlers
+	this->actual_worm = worm_id;
 	this->weapons_time = WEAPONS_TIME;
 	this->actual_angle = DEFAULT_ANGLE;
 	this->turn->join();
@@ -65,6 +66,7 @@ void Player::startTurn(int worm_id, int player_id){
 void Player::endTurn() {
 	///////Sacar los handlers
 	this->world.disable_handlers();
+	this->view_list.removeScopeVisibility();
 	this->protocol.send_end_turn();
 	//this->turn->join();////////////////////////////////////////////Rompe en este join
 }
@@ -110,12 +112,16 @@ void Player::shoot(int32_t power) { ///////////////////////////////////// Creo q
 bool Player::movement_key_press_handler(GdkEventKey* key_event) {
 	if (key_event->keyval == LEFT_ARROW) {
 		this->protocol.send_move_action(MOVE_LEFT);
+		this->view_list.removeScopeVisibility();
 	} else if (key_event->keyval == RIGHT_ARROW) {
 		this->protocol.send_move_action(MOVE_RIGHT);
+		this->view_list.removeScopeVisibility();
 	} else if (key_event->keyval == ENTER) {
 		this->protocol.send_move_action(JUMP);
+		this->view_list.removeScopeVisibility();
 	} else if (key_event->keyval == BACK) {
 		this->protocol.send_move_action(ROLLBACK);
+		this->view_list.removeScopeVisibility();
 	}
 	return true;
 }
@@ -130,11 +136,13 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 		if (this->actual_angle < MAX_ANGLE) {
 			this->actual_angle++; /////////////////////////////////// ACTUALIZAR LINEA DE TIRO
 		}
+		this->view_list.updateScope(this->actual_worm, this->actual_angle);
 	} else if (key_event->keyval == DOWN_ARROW) {
 		//printf("Abajo\n");
 		if (this->actual_angle > MIN_ANGLE) {
 			this->actual_angle--;
 		}
+		this->view_list.updateScope(this->actual_worm, this->actual_angle);
 	} else if (key_event->keyval >= ASCII_1 && key_event->keyval <= ASCII_5) {
 		this->weapons_time = key_event->keyval - ASCII_OFFSET;
 	} else if (key_event->keyval == SPACE && key_event->type == GDK_KEY_PRESS) {

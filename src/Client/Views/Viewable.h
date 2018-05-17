@@ -12,8 +12,6 @@ class Viewable{
 		WorldView& worldView;
 
 	protected:
-		virtual Gtk::Widget& getWidget() = 0;
-
 		void addToWorld(const Position& pos);
 
 		void removeFromWorld();
@@ -25,6 +23,8 @@ class Viewable{
 		virtual ~Viewable();
 
 		Viewable(Viewable&& other);
+		
+		virtual Gtk::Widget& getWidget() = 0;
 };
 
 #endif

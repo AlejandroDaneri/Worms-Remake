@@ -1,6 +1,7 @@
 #include "WorldView.h"
 #include "ViewTransformer.h"
 #include "client_Player.h"
+#include "math_utils.h"
 
 WorldView::WorldView(Player& player): player(player) {
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
@@ -13,6 +14,15 @@ WorldView::~WorldView(){}
 void WorldView::moveElement(Gtk::Widget& element, const Position& position){
 	Position newPosition = ViewTransformer().transformToScreen(position);
 	this->world.move(element, newPosition.getX(), newPosition.getY());
+}
+
+void WorldView::moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle) {
+	float pos_x = this->world.child_property_x(worm).get_value();
+	float pos_y = this->world.child_property_y(worm).get_value();
+	pos_x += 50 * Math::cos_degrees(angle);
+	pos_y -= 50 * Math::sin_degrees(angle);
+	pos_x -= worm.get_width() / 2; ///////////////////// Para que quede referenciado a la mitad de la imagen
+	this->moveElement(scope, ViewTransformer().transformToPosition(Position(pos_x, pos_y)));
 }
 
 void WorldView::removeElement(Gtk::Widget& element){

@@ -12,7 +12,7 @@ class BulletView: public Viewable{
 		std::string weapon_name;
 
 	protected:
-		Gtk::Widget& getWidget() override;
+
 
 	public:
 		BulletView(WorldView& worldView, std::string weapon, Position pos);
@@ -22,6 +22,8 @@ class BulletView: public Viewable{
 		void updateData(const Position& new_pos);
 
 		void explode();
+		
+		Gtk::Widget& getWidget() override;
 };
 
 

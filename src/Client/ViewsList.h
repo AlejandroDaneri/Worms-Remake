@@ -15,6 +15,8 @@ class ViewsList{
 		std::unordered_map<int, WormView> worms;
 		std::unordered_map<int, BulletView> weapons;
 		std::vector<GirderView> girders;
+		Gtk::Image scope;
+		bool draw_scope;
 
 	public:
 		ViewsList(WorldView& world);
@@ -26,6 +28,10 @@ class ViewsList{
 		void updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name);
 
 		void updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y);
+		
+		void updateScope(int worm_id, int angle);
+		
+		void removeScopeVisibility();
 		
 		void addGirder(size_t size, int pos_x, int pos_y, int rotation);
 
