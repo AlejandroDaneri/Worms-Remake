@@ -4,8 +4,8 @@
 
 #define WORM_IMAGE "_worm.png"
 
-WormView::WormView(WorldView& worldView, int life, char dir, Position pos):
-	Viewable(worldView), life(life), dir(dir), dir_changed(true){
+WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon):
+	Viewable(worldView), player_id(player_id), life(life), dir(dir), dir_changed(true), weapon(weapon){
 		this->addToWorld(pos);
 }
 
@@ -14,10 +14,11 @@ WormView::~WormView(){}
 WormView::WormView(WormView&& other): Viewable(std::move(other)),
 	life(other.life), dir(other.dir), image(std::move(other.image)){}
 
-void WormView::updateData(int new_life, char new_dir, const Position& new_pos){
+void WormView::updateData(int new_life, char new_dir, const Position& new_pos, const std::string& weapon){
 	this->life = new_life;
 	this->dir_changed = this->dir != new_dir;
 	this->dir = new_dir;
+	this->weapon = weapon;
 	Position position_new(new_pos.getX() + worm_size / 2, new_pos.getY() - worm_size / 2);
 	this->move(position_new);
 }
@@ -30,6 +31,8 @@ void WormView::kill(){
 
 Gtk::Widget& WormView::getWidget(){
 	////////////////////////////////Por ahora no uso la vida,         hacer un vbox con la vida y la imagen
+
+	//////////////////////////hacer algo con el arma actual
 
 	if (this->dir_changed){
 		std::string path(IMAGES_PATH);

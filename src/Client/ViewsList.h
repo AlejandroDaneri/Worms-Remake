@@ -23,7 +23,7 @@ class ViewsList{
 		void removeWorm(int id);
 		void removeWeapon(int id);
 
-		void updateWormData(int id, float pos_x, float pos_y, int life, char dir);
+		void updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name);
 
 		void updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y);
 		

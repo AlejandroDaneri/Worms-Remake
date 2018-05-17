@@ -19,16 +19,16 @@ void ViewsList::removeWeapon(int id){
 	} catch (const std::exception& e){}
 }
 
-void ViewsList::updateWormData(int id, float pos_x, float pos_y, int life, char dir){
+void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name){
 	auto it = this->worms.find(id);
 	Position pos(pos_x / UNIT_TO_SEND, pos_y / UNIT_TO_SEND);
 	if (it == this->worms.end()){
 		//Worm no existe
-		WormView worm(this->world, life, dir, pos);
+		WormView worm(this->world, life, dir, pos, player_id, weapon_name);
 		this->worms.insert(std::make_pair(id, std::move(worm)));
 	} else {
 		//Worm existe
-		it->second.updateData(life, dir, pos);
+		it->second.updateData(life, dir, pos, weapon_name);
 	}
 }
 

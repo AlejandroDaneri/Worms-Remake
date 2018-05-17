@@ -23,8 +23,10 @@ class Worm: public PhysicalObject{
 		Worm(World& world, GameParameters& parameters, int id, int player_id);
 		~Worm();
 
-		int getLife();
-		char getDir();
+		int getPlayerId() const;
+		int getLife() const;
+		char getDir() const;
+		const std::string& getWeapon() const;
 
 		void addLife(int life);
 

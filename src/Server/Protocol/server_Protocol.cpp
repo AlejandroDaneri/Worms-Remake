@@ -53,10 +53,12 @@ void ServerProtocol::send_worm(physical_object_ptr& object, char* buffer){
 	char dir = worm->getDir();
 
 	this->send_int(buffer, offset, id);
+	this->send_int(buffer, offset, worm->getPlayerId());
 	this->send_int(buffer, offset, position.x * UNIT_TO_SEND);
 	this->send_int(buffer, offset, position.y * UNIT_TO_SEND);
 	this->send_int(buffer, offset, worm->getLife());
 	buffer[offset++] = dir;
+	this->send_string(buffer, offset, worm->getWeapon());
 	
 	this->send_buffer(buffer, offset);
 }

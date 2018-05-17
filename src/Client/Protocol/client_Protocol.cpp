@@ -77,11 +77,13 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 		int id = this->receive_int(buffer, offset);
 
 		if (type == WORM_TYPE){
+			int player_id = this->receive_int(buffer, offset);
 			int pos_x = this->receive_int(buffer, offset);
 			int pos_y = this->receive_int(buffer, offset);
 			int life = this->receive_int(buffer, offset);
 			char dir = buffer[offset++];
-			viewsList.updateWormData(id, pos_x, pos_y, life, dir);
+			std::string weapon(this->receive_string(buffer, offset));
+			viewsList.updateWormData(id, player_id, pos_x, pos_y, life, dir, weapon);
 		} else if (type == WEAPON_TYPE){
 			std::string weapon(this->receive_string(buffer, offset));
 

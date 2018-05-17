@@ -6,7 +6,9 @@
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), last_weapon_exploded(-1){}
+	dir(1), parameters(parameters), last_weapon_exploded(-1){
+		this->changeWeapon(BAZOOKA_NAME);
+	}
 
 Worm::~Worm(){}
 
@@ -26,12 +28,20 @@ void Worm::createFixtures(){
 	this->body->CreateFixture(&boxFixtureDef);
 }
 
-int Worm::getLife(){
+int Worm::getPlayerId() const{
+	return this->player_id;
+}
+
+int Worm::getLife() const{
 	return this->life;
 }
 
-char Worm::getDir(){
+char Worm::getDir() const{
 	return this->dir;
+}
+
+const std::string& Worm::getWeapon() const{
+	return ((Weapon*)this->weapon.get())->getName();
 }
 
 void Worm::addLife(int life){
