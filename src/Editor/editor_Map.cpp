@@ -9,12 +9,15 @@ Map::Map(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder)
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
             sigc::mem_fun(*this,&Map::on_button_clicked));
+    button_id=1;
+    pallete.insert(std::make_pair(1,"resources/images/right_worm.png"));
+    pallete.insert(std::make_pair(2,"resources/images/Girder/girder_3.png"));
 }
 
 
 bool Map::on_button_clicked(GdkEventButton *button_event) {
     if(this) {
-        Gtk::Image new_image("resources/images/Weapons_icons/Bazooka.png");
+        Gtk::Image new_image(pallete.find(button_id)->second);
         put(new_image, button_event->x, button_event->y);
         new_image.show();
         objects.push_back(std::move(new_image));
@@ -28,4 +31,8 @@ void Map::undo() {
 
 void Map::clean(){
     objects.clear();
+}
+
+void Map::clicked_signal(unsigned int id) {
+    button_id=id;
 }

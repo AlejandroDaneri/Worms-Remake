@@ -7,12 +7,21 @@ Toolbox::Toolbox(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& buil
         : Gtk::Grid(cobject),
           m_builder(builder),
           btn_clean(nullptr),
-          undo(nullptr)
+          undo(nullptr),
+          worm(nullptr),
+          girder(nullptr)
 
 {
     builder->get_widget("btn_undo",undo);
     builder->get_widget("btn_clean",btn_clean);
-
+    builder->get_widget("tbtn_worm",worm);
+    worm->set_active(true);
+    builder->get_widget("tbtn_grd",girder);
+    worm->signal_clicked().connect( sigc::bind<int>
+                                           (sigc::mem_fun(*this,&Toolbox::on_button_clicked),WORM_BUTTON_ID));
+    girder->signal_clicked().connect( sigc::bind<int>
+                                             (sigc::mem_fun(*this, &Toolbox::on_button_clicked),
+                                              GIRDER_BUTTON_ID ));
 }
 
 void Toolbox::link_map(Map *pMap) {
@@ -21,4 +30,18 @@ void Toolbox::link_map(Map *pMap) {
     btn_clean->signal_clicked().connect( sigc::mem_fun(*map, &Map::clean));
 }
 
-
+void Toolbox::on_button_clicked(int id) {
+    if(id ==WORM_BUTTON_ID) {
+        if (worm->get_active()) {
+            item_pressed = WORM_BUTTON_ID;
+            girder->set_active(false);
+            map->clicked_signal(WORM_BUTTON_ID);
+        }
+    } else {
+        if (girder->get_active()) {
+            item_pressed = GIRDER_BUTTON_ID;
+            worm->set_active(false);
+            map->clicked_signal(GIRDER_BUTTON_ID);
+        }
+    }
+}

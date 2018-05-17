@@ -9,6 +9,8 @@ class Map : public Gtk::Layout {
 private:
     Glib::RefPtr<Gtk::Builder> m_builder;
     std::vector<Gtk::Image> objects;
+    unsigned int button_id;
+    std::map<unsigned int,std::string> pallete;
 
 public:
     Map(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
@@ -17,6 +19,8 @@ public:
     void undo();
 
     void clean();
+
+    void clicked_signal(unsigned int id);
 };
 
 
