@@ -2,7 +2,10 @@
 #include <gtkmm/builder.h>
 #include <giomm.h>
 #include <iostream>
-#include "Editor/editor_Editor.h"
+#include <gtkmm/scrolledwindow.h>
+#include <gtkmm/window.h>
+#include "editor_Toolbox.h"
+#include "editor_Map.h"
 
 int main (int argc, char *argv[])
 {
@@ -32,10 +35,22 @@ int main (int argc, char *argv[])
     if(pMainWindow)
     {
         pMainWindow->maximize();
-        //Editor editor(&refBuilder);
+
+        Gtk::ScrolledWindow* mapw= nullptr;
+        refBuilder->get_widget("mapw",mapw);
+
+        Map* map= nullptr;
+        refBuilder->get_widget_derived("map",map);
+
+        Toolbox* toolbox = nullptr;
+        refBuilder->get_widget_derived("toolbox",toolbox);
+        toolbox->link_map(map);
+
+        mapw->override_background_color(Gdk::RGBA("lightgreen"));
+
+        pMainWindow->show_all_children();
         app->run(*pMainWindow);
     }
 
-    delete pMainWindow;
     return 0;
 }

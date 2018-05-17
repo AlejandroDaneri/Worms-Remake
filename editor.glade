@@ -2,6 +2,11 @@
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
+  <object class="GtkImage" id="imagen">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/Girder/girder_3.png</property>
+  </object>
   <object class="GtkImage" id="img_grd">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -65,7 +70,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
+                <property name="top_attach">4</property>
               </packing>
             </child>
             <child>
@@ -75,7 +80,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">5</property>
+                <property name="top_attach">6</property>
               </packing>
             </child>
             <child>
@@ -91,7 +96,7 @@
                     <property name="orientation">vertical</property>
                     <property name="spacing">10</property>
                     <child>
-                      <object class="GtkButton" id="button2">
+                      <object class="GtkButton" id="btn_reset_wep">
                         <property name="label" translatable="yes">PREDETERMINADO</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -113,11 +118,11 @@
                         <property name="shadow_type">in</property>
                         <property name="min_content_height">100</property>
                         <child>
-                          <object class="GtkViewport" id="viewport1">
+                          <object class="GtkViewport" id="weps_list">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkBox" id="box12">
+                              <object class="GtkBox" id="weps_box">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="orientation">vertical</property>
@@ -739,7 +744,7 @@
                   </object>
                 </child>
                 <child type="label">
-                  <object class="GtkLabel" id="label1">
+                  <object class="GtkLabel" id="label_weps">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="margin_top">6</property>
@@ -768,7 +773,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button1">
+              <object class="GtkButton" id="btn_clean">
                 <property name="label" translatable="yes">LIMPIAR</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -776,7 +781,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
+                <property name="top_attach">5</property>
               </packing>
             </child>
             <child>
@@ -790,7 +795,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button3">
+              <object class="GtkButton" id="btn_save">
                 <property name="label" translatable="yes">GUARDAR</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -802,7 +807,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button4">
+              <object class="GtkButton" id="btn_load">
                 <property name="label" translatable="yes">CARGAR</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -813,6 +818,18 @@
                 <property name="top_attach">9</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkButton" id="btn_move">
+                <property name="label" translatable="yes">MOVER</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="resize">False</property>
@@ -820,10 +837,18 @@
           </packing>
         </child>
         <child>
-          <object class="GtkLayout" id="layout1">
+          <object class="GtkScrolledWindow" id="mapw">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="resize_mode">immediate</property>
+            <property name="can_focus">True</property>
+            <property name="hscrollbar_policy">always</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkLayout" id="map">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">5</property>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="resize">True</property>

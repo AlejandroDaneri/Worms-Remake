@@ -15,7 +15,6 @@ ToolBox::ToolBox():change_win(false) {
 
     //armory.signal_clicked().connect(sigc::mem_fun(handler, &Handler::change_win));
 
-
     worm.signal_clicked().connect( sigc::bind<int>
             (sigc::mem_fun(*this,&ToolBox::on_button_clicked),WORM_BUTTON_ID));
     girder.signal_clicked().connect( sigc::bind<int>
