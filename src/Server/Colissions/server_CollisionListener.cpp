@@ -23,3 +23,10 @@ void CollisionListener::BeginContact(b2Contact* contact){
 		dataB->getObject()->collide_with_something(dataA);
 	}
 }
+
+bool CollisionListener::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB){
+	CollisionData* dataA = (CollisionData*)fixtureA->GetBody()->GetUserData();
+	CollisionData* dataB = (CollisionData*)fixtureB->GetBody()->GetUserData();
+
+	return dataA->getType() != TYPE_WORM || dataB->getType() != TYPE_WORM;
+}

@@ -9,6 +9,7 @@ World::World(const b2Vec2& gravity): world(gravity), is_active(false){
 	this->world.SetAllowSleeping(true);
 	this->world.SetContinuousPhysics(true);
 	this->world.SetContactListener(&this->collision_listener);
+	this->world.SetContactFilter(&this->collision_listener);
 	this->initialize();
 }
 		
