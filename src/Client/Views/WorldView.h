@@ -23,6 +23,8 @@ class WorldView{
 		~WorldView();
 
 		void moveElement(Gtk::Widget& element, const Position& position);
+		
+		void moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle);
 
 		void removeElement(Gtk::Widget& element);
 

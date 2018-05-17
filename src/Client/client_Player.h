@@ -21,6 +21,7 @@ class Player {
 		int32_t weapons_time;
 		int32_t actual_angle;
 		int actual_dir;
+		int actual_worm;
 		WeaponList weapons;
 		std::unique_ptr<Turn> turn;
 		std::unique_ptr<Timer> timer;

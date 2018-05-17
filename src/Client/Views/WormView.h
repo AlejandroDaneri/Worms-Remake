@@ -20,9 +20,6 @@ class WormView: public Viewable{
 		//Gtk::VBox worm;
 		Gtk::Image image; ////////////////////////////////////Cambiar por vbox para agegar barra de vida
 
-	protected:
-		Gtk::Widget& getWidget() override;
-
 	public:
 		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon);
 		~WormView();
@@ -30,7 +27,11 @@ class WormView: public Viewable{
 
 		void updateData(int new_life, char new_dir, const Position& new_pos, const std::string& weapon);
 
+		const char getDir() const;
+
 		void kill();
+		
+		Gtk::Widget& getWidget() override;
 };
 
 

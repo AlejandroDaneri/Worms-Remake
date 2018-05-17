@@ -13,12 +13,14 @@ class GirderView: public Viewable{
 		int rotation;
 
 	protected:
-		Gtk::Widget& getWidget() override;
+
 
 	public:
 		GirderView(WorldView& worldView, size_t size, Position pos, int rotation);
 		~GirderView();
 		GirderView(GirderView&& other);
+		
+		Gtk::Widget& getWidget() override;
 };
 
 

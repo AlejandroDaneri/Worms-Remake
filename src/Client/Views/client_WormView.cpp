@@ -51,3 +51,7 @@ Gtk::Widget& WormView::getWidget(){
 	return this->image;
 }
 
+const char WormView::getDir() const {
+	return this->dir;
+}
+

@@ -1,7 +1,12 @@
 #include "ViewsList.h"
 #include "ObjectSizes.h"
 
-ViewsList::ViewsList(WorldView& world): world(world){}
+ViewsList::ViewsList(WorldView& world): world(world) {
+	this->scope.set("resources/images/scope/scope.png");
+	this->draw_scope = false;
+	this->world.addElement(this->scope, Position(-10,-10));
+	this->scope.hide();
+}
 
 ViewsList::~ViewsList(){}
 
@@ -43,6 +48,22 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float p
 		//Weapon existe
 		it->second.updateData(pos);
 	}
+}
+
+void ViewsList::updateScope(int worm_id, int angle) {
+	if (this->worms.find(worm_id) == this->worms.end()){
+		return;
+	}
+	WormView& worm = this->worms.at(worm_id);
+	const char dir = worm.getDir();
+	if (dir == -1)
+		angle = 180 - angle;
+	this->world.moveScope(this->scope, worm.getWidget(), angle);
+	this->scope.show();
+}
+
+void ViewsList::removeScopeVisibility() {
+	this->scope.hide();
 }
 
 void ViewsList::addGirder(size_t size, int pos_x, int pos_y, int rotation){
