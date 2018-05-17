@@ -132,13 +132,11 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 	//printf("handler de movimiento\n");
 	this->movement_key_press_handler(key_event);
 	if (key_event->keyval == UP_ARROW) {
-		printf("Arriba\n");
 		if (this->actual_angle < MAX_ANGLE) {
 			this->actual_angle++; /////////////////////////////////// ACTUALIZAR LINEA DE TIRO
 		}
 		this->view_list.updateScope(this->actual_worm, this->actual_angle);
 	} else if (key_event->keyval == DOWN_ARROW) {
-		//printf("Abajo\n");
 		if (this->actual_angle > MIN_ANGLE) {
 			this->actual_angle--;
 		}

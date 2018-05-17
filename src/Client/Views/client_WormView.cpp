@@ -6,11 +6,21 @@
 
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon):
 	Viewable(worldView), player_id(player_id), life(life), dir(dir), dir_changed(true), weapon(weapon){
+	    /*this->full_image = Gdk::Pixbuf::create_from_file("resources/images/walk.png");
+	    int ancho = full_image->get_width();
+	    int alto = full_image->get_height();
+	    for (int i = 0; i < alto/60 -1; i++) {
+			queue.push(Gdk::Pixbuf::create_subpixbuf(full_image, 0, i*60, ancho, ancho));
+		}*/
 		this->addToWorld(pos);
 }
 
 WormView::~WormView(){}
 
+/*WormView::WormView(WormView&& other): Viewable(std::move(other)),
+	life(other.life), dir(other.dir), queue(std::move(other.queue)),
+	full_image(std::move(other.full_image)), image(std::move(other.image)){}*/
+	
 WormView::WormView(WormView&& other): Viewable(std::move(other)),
 	life(other.life), dir(other.dir), image(std::move(other.image)){}
 
@@ -33,7 +43,6 @@ Gtk::Widget& WormView::getWidget(){
 	////////////////////////////////Por ahora no uso la vida,         hacer un vbox con la vida y la imagen
 
 	//////////////////////////hacer algo con el arma actual
-
 	if (this->dir_changed){
 		std::string path(IMAGES_PATH);
 		if (this->dir == DIR_RIGHT){
@@ -44,7 +53,14 @@ Gtk::Widget& WormView::getWidget(){
 		path += WORM_IMAGE;
 
 		this->image.set(path);
+		//this->queue.push(std::move(this->queue.front()));
+		//this->queue.pop();
 	}
+	/*if (this->dir == DIR_RIGHT) {
+		this->image.set(Gdk::Pixbuf::create_subpixbuf(this->queue.back(), 0, 0, 60, 60));
+	} else {
+		this->image.set(Gdk::Pixbuf::create_subpixbuf(this->queue.back(), 60, 0, 60, 60));
+	}*/
 	//this->worm.add(this->image);
 	//this->worm.show();
 	//return this->worm;
