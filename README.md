@@ -12,6 +12,10 @@ cmake ..
 ### Lista de tareas
 https://trello.com/b/77GBgtcb/worms
 
+### Pagina parar rotar imagenes
+http://pinetools.com/rotate-image
+
+
 ### archivos Yaml parser
 https://github.com/jbeder/yaml-cpp
 
