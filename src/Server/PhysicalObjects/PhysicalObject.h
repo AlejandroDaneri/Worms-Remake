@@ -33,6 +33,7 @@ class PhysicalObject{
 		virtual bool isMoving();
 		virtual bool isActive();
 		virtual bool isDead();
+		virtual bool isWindAffected();
 		int getId();
 		const std::string& getType();
 

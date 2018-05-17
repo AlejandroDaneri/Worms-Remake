@@ -39,6 +39,9 @@ void World::run(){
 				this->removeObject(*it);
 			} else if ((*it)->isActive()){
 				this->is_active = true;
+				if ((*it)->isWindAffected()){
+					(*it)->getBody()->ApplyForceToCenter(b2Vec2(this->wind.getVelocity(), 0), false);
+				}
 			}
 		}
 	}
@@ -47,6 +50,11 @@ void World::run(){
 bool World::isActive(){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	return this->is_active;
+}
+
+void World::update(){
+	std::lock_guard<std::mutex> lock(this->mutex);
+	this->wind.update();
 }
 
 void World::addObject(physical_object_ptr object, const b2Vec2& pos){

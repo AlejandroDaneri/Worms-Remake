@@ -38,6 +38,10 @@ bool PhysicalObject::isDead(){
 	return this->is_dead;
 }
 
+bool PhysicalObject::isWindAffected(){
+	return false;
+}
+
 int PhysicalObject::getId(){
 	return this->id;
 }

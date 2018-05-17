@@ -6,7 +6,7 @@ worm_jump_height: 5
 worm_rollback_height: 3
 weapons_velocity: 7
 wind_min_velocity: 0.2
-wind_max_velocity: 10
+wind_max_velocity: 10.0
 gravity: -10
 weapon_radius:
   Bazooka: 2
