@@ -1,6 +1,6 @@
 
+#include <gtkmm/builder.h>
 #include "editor_Editor.h"
-
 
 Editor::Editor() :mapArea(&toolBox){
     generalContainer.append_page(mapTab,"");
@@ -24,3 +24,4 @@ bool Editor::on_button_release_event(GdkEventButton *release_event) {
     generalContainer.next_page();
     return true;
 }
+

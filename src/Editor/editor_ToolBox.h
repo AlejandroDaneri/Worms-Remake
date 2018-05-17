@@ -10,6 +10,7 @@
 #include <gtkmm/notebook.h>
 #include <gtkmm/hvbox.h>
 
+
 #define WORM_BUTTON_ID 1
 #define GIRDER_BUTTON_ID 2
 
@@ -17,7 +18,6 @@
 class ToolBox : public Gtk::Grid{
 private:
     unsigned short item_pressed;
-
     //Child widgets
     Gtk::Button turn,armory;
     Gtk::ToggleButton worm, girder;
@@ -32,8 +32,9 @@ public:
     std::string getActualItemImagePath();
 
 protected:
-    bool on_button_release_event(GdkEventButton *release_event) override;
+   // bool on_button_release_event(GdkEventButton *release_event) override;
 
+    bool new_fun(GdkEventButton *release_event);
 };
 
 

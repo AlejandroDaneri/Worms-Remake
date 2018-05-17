@@ -17,6 +17,7 @@ private:
     WeaponsArea wepArea;
     ToolBox toolBox;
 public:
+
 protected:
 
     bool on_button_release_event(GdkEventButton *release_event) override;

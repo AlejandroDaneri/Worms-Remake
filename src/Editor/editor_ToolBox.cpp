@@ -13,8 +13,7 @@ ToolBox::ToolBox():change_win(false) {
     armory.set_label("Armas");
     attach_next_to(armory,turn, Gtk::POS_BOTTOM, 2, 1);
 
-    armory.signal_clicked().connect( sigc::bind<int>
-                                           (sigc::mem_fun(*this,&ToolBox::on_button_clicked),3));
+    //armory.signal_clicked().connect(sigc::mem_fun(handler, &Handler::change_win));
 
 
     worm.signal_clicked().connect( sigc::bind<int>
@@ -54,9 +53,13 @@ std::string ToolBox::getActualItemImagePath() {
     return "string de prueba";
 
 }
-
+/*/
 bool ToolBox::on_button_release_event(GdkEventButton *release_event) {
     return !change_win;
+}
+/*/
+bool ToolBox::new_fun(GdkEventButton *release_event){
+    return true;
 }
 
 
