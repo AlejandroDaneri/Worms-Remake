@@ -10,6 +10,7 @@ class Bazooka: public Weapon{
 		~Bazooka();
 
 		const std::string& getName() override;
+		bool isWindAffected() override;
 
 };
 

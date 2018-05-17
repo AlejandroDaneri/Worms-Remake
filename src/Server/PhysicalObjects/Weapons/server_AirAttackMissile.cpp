@@ -8,3 +8,7 @@ AirAttackMissile::~AirAttackMissile(){}
 const std::string& AirAttackMissile::getName(){
 	return AIR_ATTACK_MISSILE_NAME;
 }
+
+bool AirAttackMissile::isWindAffected(){
+	return true;
+}

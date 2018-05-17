@@ -11,6 +11,8 @@ class AirAttackMissile: public Weapon{
 
 		const std::string& getName() override;
 
+		bool isWindAffected() override;
+
 };
 
 #endif

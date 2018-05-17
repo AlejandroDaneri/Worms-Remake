@@ -8,3 +8,7 @@ Bazooka::~Bazooka(){}
 const std::string& Bazooka::getName(){
 	return BAZOOKA_NAME;
 }
+
+bool Bazooka::isWindAffected(){
+	return true;
+}
