@@ -1,14 +1,14 @@
 #include "client_WeaponList.h"
 
+const std::string initial_weapon("Bazooka");
+
 WeaponList::WeaponList() {
-	this->actual_weapon = "";///////////////////////////////////////////////
+	this->actual_weapon = initial_weapon;
 }
 
 WeaponList::~WeaponList() {}
 
 void WeaponList::add(std::string weapon, int ammo) {
-	if (this->actual_weapon == "")
-		this->actual_weapon = weapon;
 	WeaponsFactory factory;
 	this->weapons.insert(std::pair<std::string, weapon_ptr>(weapon, std::move(factory.create_weapon(weapon, ammo))));
 }
