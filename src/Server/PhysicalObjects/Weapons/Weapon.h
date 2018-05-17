@@ -22,7 +22,7 @@ class Weapon: public PhysicalObject{
 		WeaponExplodeTime explode_time;
 
 		virtual void createFixtures() override;
-		void setInitialVelocity() override;
+		virtual void setInitialVelocity() override;
 
 	public:
 		static int weapon_id;

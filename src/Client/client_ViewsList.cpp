@@ -13,10 +13,10 @@ void ViewsList::removeWorm(int id){
 
 void ViewsList::removeWeapon(int id){
 	auto it = this->weapons.find(id);
-	try{
+	if (it != this->weapons.end()){
 		it->second.explode();
 		this->weapons.erase(it);
-	} catch (const std::exception& e){}
+	}
 }
 
 void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name){
