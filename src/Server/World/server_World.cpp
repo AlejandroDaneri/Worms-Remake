@@ -40,7 +40,7 @@ void World::run(){
 			} else if ((*it)->isActive()){
 				this->is_active = true;
 				if ((*it)->isWindAffected()){
-					(*it)->getBody()->ApplyForceToCenter(b2Vec2(this->wind.getVelocity(), 0), false);
+					////(*it)->getBody()->ApplyForceToCenter(b2Vec2(this->wind.getVelocity(), 0), false);  ////////////elimino el viento por ahora
 				}
 			}
 		}
