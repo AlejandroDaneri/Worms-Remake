@@ -70,6 +70,14 @@ float GameParameters::getWormRollbackHeight(){
 	return this->config[WORM_ROLLBACK_HEIGHT].as<float>();
 }
 
+int GameParameters::getWormHeightToDamage(){
+	return this->config[WORM_HEIGHT_TO_DAMAGE].as<int>();
+}
+
+int GameParameters::getWormMaxHeightDamage(){
+	return this->config[WORM_MAX_HEIGHT_DAMAGE].as<int>();
+}
+
 float GameParameters::getWeaponsVelocity(){
 	return this->config[WEAPONS_VELOCITY].as<float>();
 }

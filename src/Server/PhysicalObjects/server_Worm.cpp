@@ -3,10 +3,11 @@
 #include "b2Fixture.h"
 #include "Protocol.h"
 #include "server_WeaponFactory.h"
+#include <algorithm>
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), last_weapon_exploded(-1){
+	dir(1), parameters(parameters), last_weapon_exploded(-1), max_height(0), colliding_with_girder(false){
 		this->changeWeapon(BAZOOKA_NAME);
 	}
 
@@ -46,6 +47,13 @@ const std::string& Worm::getWeapon() const{
 
 void Worm::addLife(int life){
 	this->life += life;
+}
+
+void Worm::reduce_life(int damage){
+	this->life -= damage;
+	if (this->life <= 0){
+		this->is_dead = true;
+	}
 }
 
 void Worm::move(char action){
@@ -88,21 +96,39 @@ void Worm::shoot(b2Vec2 pos){
 #include <iostream>/////////////////////////////////////
 void Worm::receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id){
 	if (weapon_id != this->last_weapon_exploded){
-		this->life -= damage;
+		this->reduce_life(damage);
 		std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
 		std::cout <<"normal: "<<normal.x<<"  "<<normal.y<<std::endl;
 		this->body->SetLinearVelocity(-1 * damage * parameters.getWormExplosionVelocity() * normal);
 		this->last_weapon_exploded = weapon_id;
-		if (this->life <= 0){
-			this->is_dead = true;
-		}
 	}
 }
 
 void Worm::collide_with_something(CollisionData* other){
 	if (other->getType() == TYPE_BORDER){
-		this->life = 0;
-		this->is_dead = true;
+		this->reduce_life(this->life * 2);
+	} else if(other->getType() == TYPE_GIRDER){
+		int min_height = parameters.getWormHeightToDamage();
+		float current_height = this->body->GetPosition().y;
+		this->max_height -= current_height;
+		if (this->max_height >= min_height){
+			std::cout <<"Danio por caida worm id: "<<this->getId()<<"  height: "<<this->max_height<<"  life anterior: "<<this->life;
+			this->reduce_life(std::min((int)this->max_height - min_height, parameters.getWormMaxHeightDamage()));
+			std::cout <<"  life actual: "<<this->life<<std::endl;
+			this->colliding_with_girder = true;
+			this->max_height = 0;
+		}
 	}
-	///////////////////////////falta para las vigas
+}
+
+void Worm::end_collission_girder(){
+	this->colliding_with_girder = false;
+}
+
+bool Worm::isActive(){
+	if (!this->colliding_with_girder){
+		float height = this->body->GetPosition().y;
+		this->max_height = std::max(this->max_height, height);
+	}
+	return PhysicalObject::isActive();
 }

@@ -13,6 +13,10 @@ class Worm: public PhysicalObject{
 		GameParameters& parameters;
 		physical_object_ptr weapon;
 		int last_weapon_exploded;
+		float max_height;
+		bool colliding_with_girder;
+
+		void reduce_life(int damage);
 
 
 	protected:
@@ -40,7 +44,11 @@ class Worm: public PhysicalObject{
 
 		void collide_with_something(CollisionData* other) override;
 
+		void end_collission_girder();
+
 		void receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id);
+
+		bool isActive() override;
 };
 
 #endif

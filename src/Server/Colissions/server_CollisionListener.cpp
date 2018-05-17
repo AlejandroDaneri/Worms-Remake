@@ -1,5 +1,6 @@
 #include "CollisionListener.h"
 #include "PhysicalObject.h"
+#include "Worm.h"
 
 CollisionListener::CollisionListener(){}
 
@@ -21,6 +22,18 @@ void CollisionListener::BeginContact(b2Contact* contact){
 		dataA->getObject()->collide_with_something(dataB);
 	} else if (dataB->getType() == TYPE_WORM){
 		dataB->getObject()->collide_with_something(dataA);
+	}
+}
+
+#include <iostream>///////////
+void CollisionListener::EndContact(b2Contact* contact){
+	CollisionData* dataA = (CollisionData*)contact->GetFixtureA()->GetBody()->GetUserData();
+	CollisionData* dataB = (CollisionData*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_GIRDER){
+		((Worm*)dataA->getObject())->end_collission_girder();
+	} else if (dataB->getType() == TYPE_WORM && dataA->getType() == TYPE_GIRDER){
+		((Worm*)dataB->getObject())->end_collission_girder();
 	}
 }
 

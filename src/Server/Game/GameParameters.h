@@ -34,6 +34,9 @@ class GameParameters{
 		float getWormJumpHeight();
 		float getWormRollbackHeight();
 
+		int getWormHeightToDamage();
+		int getWormMaxHeightDamage();
+
 		float getWeaponsVelocity();
 
 		int getWeaponDamage(const std::string& weapon);

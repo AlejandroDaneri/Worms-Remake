@@ -41,9 +41,13 @@ void Turn::addWorm(World& world, GameParameters& parameters, b2Vec2 position, in
 }
 
 void Turn::distributeWorms(size_t size, int life_to_add){
-	size = (size / this->players.size()) + 1;
+	int quantity = (size / this->players.size());
+	if (size % this->players.size() != 0){
+		quantity += 1;
+	}
+
 	for (auto it = this->players.begin(); it != this->players.end(); ++it){
-		it->distributeWorms(size, life_to_add);
+		it->distributeWorms(quantity, life_to_add);
 	}
 }
 

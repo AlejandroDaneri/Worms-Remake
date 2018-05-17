@@ -9,6 +9,8 @@ weapons_velocity: 7
 wind_min_velocity: 0.2
 wind_max_velocity: 4.0
 gravity: -10
+worm_height_to_damage: 2
+worm_max_height_damage: 25
 weapon_radius:
   Bazooka: 2
   Mortar: 2
