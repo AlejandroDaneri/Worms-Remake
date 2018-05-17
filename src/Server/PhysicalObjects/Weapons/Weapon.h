@@ -24,6 +24,8 @@ class Weapon: public PhysicalObject{
 		virtual void createFixtures() override;
 		virtual void setInitialVelocity() override;
 
+		void attackWormExplosion(const b2Vec2& center, int angle);
+
 	public:
 		static int weapon_id;
 
