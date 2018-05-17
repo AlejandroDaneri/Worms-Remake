@@ -25,7 +25,11 @@ const std::string WEAPON_RADIUS("weapon_radius");
 
 const std::string WEAPON_FRAGMENTS("weapon_fragments");
 
+const std::string WIND_MIN_VELOCITY("wind_min_velocity");
 
+const std::string WIND_MAX_VELOCITY("wind_max_velocity");
+
+const std::string GRAVITY("gravity");
 
 //config del editor
 

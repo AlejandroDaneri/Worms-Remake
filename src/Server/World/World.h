@@ -6,6 +6,7 @@
 #include "b2Body.h"
 #include "PhysicalObject.h"
 #include "CollisionListener.h"
+#include "Wind.h"
 #include <mutex>
 #include <list>
 
@@ -14,6 +15,7 @@ class Weapon;
 class World: public Thread{
 	private:
 		b2World world;
+		Wind wind;
 		std::mutex mutex;
 		CollisionListener collision_listener;
 		std::list<physical_object_ptr> objects;
@@ -25,7 +27,7 @@ class World: public Thread{
 		void removeObject(physical_object_ptr object);
 
 	public:
-		World(const b2Vec2& gravity = b2Vec2(0.0f, -10.0));
+		World(GameParameters& parameters);
 		~World();
 
 		void run() override;

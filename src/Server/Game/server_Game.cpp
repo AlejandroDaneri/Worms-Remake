@@ -4,7 +4,7 @@
 
 
 Game::Game(size_t players, const std::string& config_file, const std::string& config_editor):
-	players(players), parameters(config_file, config_editor){}
+	players(players), parameters(config_file, config_editor), world(this->parameters){}
 
 Game::~Game(){
 	this->world.stop();

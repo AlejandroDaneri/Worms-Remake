@@ -38,6 +38,10 @@ class GameParameters{
 		int getWeaponDamage(const std::string& weapon);
 		int getWeaponRadius(const std::string& weapon);
 		int getWeaponFragments(const std::string& weapon);
+
+		float getWindMinVelocity();
+		float getWindMaxVelocity();
+		float getGravity();
 };
 
 class GameParameters::GirderParams{

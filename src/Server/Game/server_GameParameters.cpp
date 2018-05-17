@@ -82,5 +82,17 @@ int GameParameters::getWeaponFragments(const std::string& weapon){
 	return this->config[WEAPON_FRAGMENTS][weapon].as<int>();
 }
 
+float GameParameters::getWindMinVelocity(){
+	return this->config[WIND_MIN_VELOCITY].as<float>();
+}
+
+float GameParameters::getWindMaxVelocity(){
+	return this->config[WIND_MAX_VELOCITY].as<float>();
+}
+
+float GameParameters::getGravity(){
+	return this->config[GRAVITY].as<float>();
+}
+
 GameParameters::GirderParams::GirderParams(size_t len, int pos_x, int pos_y, int rotation):
 	len(len), pos_x(pos_x), pos_y(pos_y), rotation(rotation){}

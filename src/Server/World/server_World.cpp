@@ -5,7 +5,8 @@
 #include "RayCastClosestCallback.h"
 #include "server_Fragment.h"
 
-World::World(const b2Vec2& gravity): world(gravity), is_active(false){
+World::World(GameParameters& parameters): world(b2Vec2(0, parameters.getGravity())),
+	wind(parameters), is_active(false){
 	this->world.SetAllowSleeping(true);
 	this->world.SetContinuousPhysics(true);
 	this->world.SetContactListener(&this->collision_listener);
