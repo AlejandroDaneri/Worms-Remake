@@ -5,6 +5,8 @@
 #include <gtkmm/widget.h>
 #include <gtkmm/image.h>
 #include <gtkmm/hvbox.h>
+#include <gdkmm/pixbuf.h>
+#include <queue>
 
 #define DIR_RIGHT 1
 #define DIR_LEFT -1
@@ -17,6 +19,8 @@ class WormView: public Viewable{
 		char dir;
 		bool dir_changed;
 		std::string weapon;
+		//std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
+		//Glib::RefPtr<Gdk::Pixbuf> full_image;
 		//Gtk::VBox worm;
 		Gtk::Image image; ////////////////////////////////////Cambiar por vbox para agegar barra de vida
 
