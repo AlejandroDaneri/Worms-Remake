@@ -2,6 +2,24 @@
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
+  <object class="GtkAdjustment" id="adjustment10">
+    <property name="upper">50</property>
+    <property name="value">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment2">
+    <property name="upper">50</property>
+    <property name="value">2</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment5">
+    <property name="upper">50</property>
+    <property name="value">5</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
   <object class="GtkImage" id="imagen">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -32,7 +50,6 @@
           <object class="GtkGrid" id="toolbox">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="opacity">0.92000000000000004</property>
             <property name="resize_mode">immediate</property>
             <property name="orientation">vertical</property>
             <property name="row_spacing">9</property>
@@ -63,7 +80,7 @@
             </child>
             <child>
               <object class="GtkButton" id="btn_undo">
-                <property name="label" translatable="yes">DESHACER</property>
+                <property name="label" translatable="yes">BORRAR ULTIMO</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -80,7 +97,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">6</property>
+                <property name="top_attach">7</property>
               </packing>
             </child>
             <child>
@@ -135,12 +152,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms3">
+                                      <object class="GtkImage" id="img_wep1">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/Bazooka.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -149,17 +166,18 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale3">
+                                      <object class="GtkScale" id="sc_wep1">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment5</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -169,7 +187,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton3">
+                                      <object class="GtkCheckButton" id="cb_wep1">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -195,12 +213,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms4">
+                                      <object class="GtkImage" id="img_wep2">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/Mortar.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -209,17 +227,18 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale4">
+                                      <object class="GtkScale" id="sc_wep2">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment10</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -229,7 +248,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton4">
+                                      <object class="GtkCheckButton" id="cb_wep2">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -255,12 +274,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms5">
+                                      <object class="GtkImage" id="img_wep3">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/GreenGrenade.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -269,7 +288,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale5">
+                                      <object class="GtkScale" id="sc_wep3">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
@@ -277,9 +296,9 @@
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -289,12 +308,13 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton5">
+                                      <object class="GtkCheckButton" id="cb_wep3">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="xalign">0</property>
+                                        <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
                                       <packing>
@@ -315,12 +335,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms6">
+                                      <object class="GtkImage" id="img_wep4">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/RedGrenade.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -329,17 +349,18 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale6">
+                                      <object class="GtkScale" id="sc_wep4">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment10</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -349,7 +370,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton6">
+                                      <object class="GtkCheckButton" id="cb_wep4">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -375,12 +396,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms7">
+                                      <object class="GtkImage" id="img_wep5">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/Banana.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -389,17 +410,18 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale7">
+                                      <object class="GtkScale" id="sc_wep5">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment5</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -409,7 +431,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton7">
+                                      <object class="GtkCheckButton" id="cb_wep5">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -435,12 +457,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms8">
+                                      <object class="GtkImage" id="img_wep6">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/AirAttack.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -449,17 +471,18 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale8">
+                                      <object class="GtkScale" id="sc_wep6">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment2</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -469,7 +492,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton8">
+                                      <object class="GtkCheckButton" id="cb_wep6">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -495,12 +518,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms9">
+                                      <object class="GtkImage" id="img_wep7">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/Bat.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -509,7 +532,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale9">
+                                      <object class="GtkScale" id="sc_wep7">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
@@ -517,9 +540,9 @@
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -529,12 +552,13 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton9">
+                                      <object class="GtkCheckButton" id="cb_wep7">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="xalign">0</property>
+                                        <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
                                       <packing>
@@ -555,12 +579,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms10">
+                                      <object class="GtkImage" id="img_wep8">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/Teleportation.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -569,7 +593,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale10">
+                                      <object class="GtkScale" id="sc_wep8">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
@@ -577,9 +601,9 @@
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -589,12 +613,13 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton10">
+                                      <object class="GtkCheckButton" id="cb_wep8">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="xalign">0</property>
+                                        <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
                                       <packing>
@@ -615,12 +640,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms11">
+                                      <object class="GtkImage" id="img_wep9">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/Dynamite.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -629,17 +654,18 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale11">
+                                      <object class="GtkScale" id="sc_wep9">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment5</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -649,7 +675,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton11">
+                                      <object class="GtkCheckButton" id="cb_wep9">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -675,12 +701,12 @@
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
-                                      <object class="GtkImage" id="img_worms12">
+                                      <object class="GtkImage" id="img_wep10">
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
                                         <property name="halign">center</property>
                                         <property name="valign">baseline</property>
-                                        <property name="pixbuf">resources/images/right_worm.png</property>
+                                        <property name="pixbuf">resources/images/Weapons_icons/HolyGrenade.png</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -689,17 +715,18 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkScale" id="scale12">
+                                      <object class="GtkScale" id="sc_wep10">
                                         <property name="width_request">100</property>
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment2</property>
                                         <property name="fill_level">100</property>
-                                        <property name="round_digits">2</property>
-                                        <property name="digits">2</property>
-                                        <property name="value_pos">right</property>
+                                        <property name="round_digits">0</property>
+                                        <property name="digits">0</property>
+                                        <property name="value_pos">bottom</property>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -709,7 +736,7 @@
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkCheckButton" id="checkbutton12">
+                                      <object class="GtkCheckButton" id="cb_wep10">
                                         <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
@@ -756,7 +783,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">6</property>
+                <property name="top_attach">8</property>
               </packing>
             </child>
             <child>
@@ -803,7 +830,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">8</property>
+                <property name="top_attach">9</property>
               </packing>
             </child>
             <child>
@@ -815,7 +842,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">9</property>
+                <property name="top_attach">10</property>
               </packing>
             </child>
             <child>
@@ -830,6 +857,19 @@
                 <property name="top_attach">3</property>
               </packing>
             </child>
+            <child>
+              <object class="GtkButton" id="button1">
+                <property name="label" translatable="yes">ELEGIR FONDO</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="xalign">0.50999999046325684</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="resize">False</property>
@@ -840,19 +880,22 @@
           <object class="GtkScrolledWindow" id="mapw">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
+            <property name="hexpand">True</property>
             <property name="hscrollbar_policy">always</property>
-            <property name="shadow_type">in</property>
+            <property name="overlay_scrolling">False</property>
             <child>
               <object class="GtkLayout" id="map">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="margin_top">5</property>
+                <property name="hexpand">True</property>
+                <property name="width">20000</property>
               </object>
             </child>
           </object>
           <packing>
             <property name="resize">True</property>
-            <property name="shrink">True</property>
+            <property name="shrink">False</property>
           </packing>
         </child>
       </object>

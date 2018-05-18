@@ -9,7 +9,7 @@ class Map : public Gtk::Layout {
 private:
     Glib::RefPtr<Gtk::Builder> m_builder;
     std::vector<Gtk::Image> objects;
-    unsigned int button_id;
+    unsigned int button_id,action;
     std::map<unsigned int,std::string> pallete;
 
 public:
@@ -21,6 +21,8 @@ public:
     void clean();
 
     void clicked_signal(unsigned int id);
+
+    void move_signal();
 };
 
 

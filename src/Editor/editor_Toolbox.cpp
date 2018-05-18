@@ -9,7 +9,8 @@ Toolbox::Toolbox(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& buil
           btn_clean(nullptr),
           undo(nullptr),
           worm(nullptr),
-          girder(nullptr)
+          girder(nullptr),
+          move(nullptr)
 
 {
     builder->get_widget("btn_undo",undo);
@@ -17,17 +18,22 @@ Toolbox::Toolbox(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& buil
     builder->get_widget("tbtn_worm",worm);
     worm->set_active(true);
     builder->get_widget("tbtn_grd",girder);
+    builder->get_widget("btn_move",move);
     worm->signal_clicked().connect( sigc::bind<int>
                                            (sigc::mem_fun(*this,&Toolbox::on_button_clicked),WORM_BUTTON_ID));
     girder->signal_clicked().connect( sigc::bind<int>
                                              (sigc::mem_fun(*this, &Toolbox::on_button_clicked),
                                               GIRDER_BUTTON_ID ));
+
+
 }
 
 void Toolbox::link_map(Map *pMap) {
     map=pMap;
     undo->signal_clicked().connect( sigc::mem_fun(*map, &Map::undo) );
     btn_clean->signal_clicked().connect( sigc::mem_fun(*map, &Map::clean));
+    move->signal_clicked().connect(
+            sigc::mem_fun(*map, &Map::move_signal),WORM_BUTTON_ID);
 }
 
 void Toolbox::on_button_clicked(int id) {
