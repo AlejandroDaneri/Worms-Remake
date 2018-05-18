@@ -26,7 +26,8 @@ bool Map::on_button_clicked(GdkEventButton *button_event) {
         Gtk::ScrolledWindow* map= nullptr;
         m_builder->get_widget("mapw",map);
     } else if(action==1){
-        move(objects.front(),button_event->x,button_event->y);
+        move(objects.back(),button_event->x,button_event->y);
+        action=0;
     }
     return true;
 }
