@@ -29,12 +29,20 @@ bool Map::on_button_clicked(GdkEventButton *button_event) {
         put(new_image, pos.getPrintableWidth(img->get_width()),
             pos.getPrintableHeigth(img->get_height()));
         new_image.show();
-        objects.push_back(std::move(new_image));
+        objects.emplace_back(std::move(new_image),pos);
         Gtk::ScrolledWindow* map= nullptr;
         m_builder->get_widget("mapw",map);
 
     } else if(action==1){
-        move(objects.back(),button_event->x,button_event->y);
+
+        std::pair<Gtk::Image, Pos> &image = objects.back();
+        const Glib::RefPtr<Gdk::Pixbuf> &img = image.first.get_pixbuf();
+
+        image.second.updatePos(button_event->x,button_event->y);
+
+        move(image.first,image.second.getPrintableWidth(img->get_width()),
+             image.second.getPrintableHeigth(img->get_height()));
+
         action=0;
     }
     return true;

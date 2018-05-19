@@ -1,14 +1,20 @@
 #include "editor_Pos.h"
 
-Pos::Pos(const int x, const int y):x(x),y(y){
+Pos::Pos(const double x, const double y):x(x),y(y){
 }
 
-int Pos::getPrintableWidth(int size) {
+double Pos::getPrintableWidth(double size) {
     return calculatePos(x,size);
 }
-int Pos::getPrintableHeigth(int size) {
+double Pos::getPrintableHeigth(double size) {
     return calculatePos(y,size);
 }
-int Pos::calculatePos(int x, int size) {
+double Pos::calculatePos(double x, double size) {
     return x-size/2;
+}
+
+void Pos::updatePos(double x, double y) {
+    this->x=x;
+    this->y=y;
+
 }

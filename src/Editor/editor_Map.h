@@ -4,11 +4,12 @@
 
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
+#include "editor_Pos.h"
 
 class Map : public Gtk::Layout {
 private:
     Glib::RefPtr<Gtk::Builder> m_builder;
-    std::vector<Gtk::Image> objects;
+    std::vector<std::pair<Gtk::Image,Pos>> objects;
     unsigned int button_id,action;
     std::map<unsigned int,std::string> pallete;
 

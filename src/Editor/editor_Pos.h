@@ -4,14 +4,16 @@
 
 class Pos {
 private:
-    int x,y;
+    double x,y;
 
-    int calculatePos(int x, int size);
+    double calculatePos(double x, double size);
 public:
-    Pos(int x,int y);
+    Pos(double x,double y);
 
-    int getPrintableWidth(int size);
+    double getPrintableWidth(double size);
 
-    int getPrintableHeigth(int size);
+    double getPrintableHeigth(double size);
+
+    void updatePos(double x, double y);
 };
 #endif //WORMS_POSITION_H
