@@ -2,6 +2,8 @@
 #include "ObjectSizes.h"
 #include <string>
 
+#include <iostream>/////////////////////////////////////////////////////
+
 #define WORM_IMAGE "_worm.png"
 
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon):
@@ -12,19 +14,31 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 	    for (int i = 0; i < alto/60 -1; i++) {
 			queue.push(Gdk::Pixbuf::create_subpixbuf(full_image, 0, i*60, ancho, ancho));
 		}*/
+		//this->label.set_text(std::to_string(10));
+		//this->image.set("resources/images/left_worm.png");
+		//his->worm.add(this->label);
+		this->worm.add(this->image);
 		this->addToWorld(pos, worm_size, worm_size);
 }
 
 WormView::~WormView(){}
+
+//label(std::move(other.label)),
 
 /*WormView::WormView(WormView&& other): Viewable(std::move(other)),
 	life(other.life), dir(other.dir), queue(std::move(other.queue)),
 	full_image(std::move(other.full_image)), image(std::move(other.image)){}*/
 	
 WormView::WormView(WormView&& other): Viewable(std::move(other)),
-	life(other.life), dir(other.dir), image(std::move(other.image)){}
+	life(other.life), dir(other.dir),
+	image(std::move(other.image)), worm(std::move(other.worm)) {
+	//std::cout << this->label.get_text() << std::endl;
+	//this->image.show();
+}
 
 void WormView::updateData(int new_life, char new_dir, const Position& new_pos, const std::string& weapon){
+	//if (new_life != this->life)
+		//this->label.set_text(std::to_string(this->life));
 	this->life = new_life;
 	this->dir_changed = this->dir != new_dir;
 	this->dir = new_dir;
@@ -62,8 +76,9 @@ Gtk::Widget& WormView::getWidget(){
 	}*/
 	//this->worm.add(this->image);
 	//this->worm.show();
-	//return this->worm;
-	return this->image;
+	return this->worm;
+	
+	//return this->image;
 }
 
 const char WormView::getDir() const {

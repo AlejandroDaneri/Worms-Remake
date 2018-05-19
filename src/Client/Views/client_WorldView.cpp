@@ -32,7 +32,7 @@ void WorldView::removeElement(Gtk::Widget& element){
 void WorldView::addElement(Gtk::Widget& element, const Position& position, float width, float height){
 	Position newPosition = ViewTransformer().transformToScreenAndMove(position, width, height);
 	this->world.put(element, newPosition.getX(), newPosition.getY());
-	element.show();
+	element.show_all();
 }
 
 Gtk::ScrolledWindow& WorldView::getWindow(){
