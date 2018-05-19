@@ -105,6 +105,8 @@ void Worm::receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id
 		this->reduce_life(damage);
 		std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
 		std::cout <<"normal: "<<normal.x<<"  "<<normal.y<<std::endl;
+		this->body->SetGravityScale(1);
+		this->friction = false;
 		this->body->SetLinearVelocity(-1 * damage * parameters.getWormExplosionVelocity() * normal);
 		this->last_weapon_exploded = weapon_id;
 	}
