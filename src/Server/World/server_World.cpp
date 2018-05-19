@@ -81,7 +81,8 @@ void World::removeTimedWeapon(Weapon& weapon){
 void World::removeObject(physical_object_ptr object){
 	b2Body* body = object->getBody();
 	if (body){
-		this->world.DestroyBody(object->getBody());
+		this->world.DestroyBody(body);
+		object->destroyBody();
 	}
 }
 

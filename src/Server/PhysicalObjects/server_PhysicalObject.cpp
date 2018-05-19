@@ -2,7 +2,7 @@
 #include "World.h"
 
 PhysicalObject::PhysicalObject(World& world, int id, const std::string& type):
-	world(world), is_dead(false), id(id), type(type), last_position(-1, -1),
+	world(world), body(NULL), is_dead(false), id(id), type(type), last_position(-1, -1),
 	collision_data(type, this){}
 
 PhysicalObject::~PhysicalObject(){}
@@ -12,6 +12,10 @@ void PhysicalObject::initializeBody(b2Body* body){
 	this->body->SetUserData(&this->collision_data);
 	this->createFixtures();
 	this->setInitialVelocity();
+}
+
+void PhysicalObject::destroyBody(){
+	this->body = NULL;
 }
 
 b2Vec2 PhysicalObject::getPosition(){

@@ -84,6 +84,7 @@ void Worm::move(char action){
 }
 
 void Worm::changeWeapon(const std::string& weapon){
+	this->weapon.reset();
 	WeaponFactory factory(this->world, this->parameters);
 	this->weapon = factory.getWeapon(weapon);
 }

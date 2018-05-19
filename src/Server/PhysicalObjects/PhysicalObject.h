@@ -28,6 +28,7 @@ class PhysicalObject{
 		virtual ~PhysicalObject();
 
 		void initializeBody(b2Body* body);
+		void destroyBody();
 		b2Vec2 getPosition();
 		b2Body* getBody();
 		virtual bool isMoving();
