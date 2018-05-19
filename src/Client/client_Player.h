@@ -17,7 +17,7 @@
 
 class Player {
 	private:
-		ClientProtocol& protocol;
+		ClientProtocol protocol;
 		int32_t weapons_time;
 		int32_t actual_angle;
 		int actual_dir;
@@ -35,7 +35,7 @@ class Player {
 		void disable_attack_handlers();
 
 	public:
-		Player(ClientProtocol& protocol);
+		Player(ClientProtocol protocol);
 		~Player();
 
 		void startTurn(int worm_id, int player_id);

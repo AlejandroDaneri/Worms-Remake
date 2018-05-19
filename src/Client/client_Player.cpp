@@ -21,12 +21,12 @@ const int MAX_ANGLE = 90;
 const int MIN_ANGLE = -90;
 const int NO_ANGLE = 500;
 
-Player::Player(ClientProtocol& protocol) : 
-	protocol(protocol), weapons_time(WEAPONS_TIME),
+Player::Player(ClientProtocol protocol) : 
+	protocol(std::move(protocol)), weapons_time(WEAPONS_TIME),
 	actual_angle(DEFAULT_ANGLE), actual_dir(1),
 	world(*this), weapons_view(this->weapons, *this),
 	screen(this->world, this->weapons_view), view_list(this->world),
-	data_receiver(this->view_list, *this, protocol) {
+	data_receiver(this->view_list, *this, this->protocol) {
 
 	this->protocol.receivePlayers(); ///////////////////////////////////////////////ver parametros que recibe y que hace
 	this->protocol.receiveGirders(this->view_list);
@@ -80,6 +80,11 @@ void Player::disable_attack_handlers() {
 void Player::change_weapon(std::string weapon) {
 	this->weapons.change_weapon(weapon);
 	this->protocol.send_change_weapon(weapon);
+	if (this->weapons.get_actual_weapon().hasScope()) {
+		this->view_list.updateScope(this->actual_worm, this->actual_angle);
+	} else {
+		this->view_list.removeScopeVisibility();
+	}
 }
 
 void Player::shoot(Position position) {
@@ -107,6 +112,7 @@ void Player::shoot(int32_t power) { ///////////////////////////////////// Creo q
 		angle = NO_ANGLE;
 	}
 	this->protocol.send_weapon_shoot(angle, power, this->weapons_time);
+	this->view_list.removeScopeVisibility();
 }
 
 bool Player::movement_key_press_handler(GdkEventKey* key_event) {
@@ -135,12 +141,16 @@ bool Player::complete_key_press_handler(GdkEventKey* key_event) {
 		if (this->actual_angle < MAX_ANGLE) {
 			this->actual_angle++; /////////////////////////////////// ACTUALIZAR LINEA DE TIRO
 		}
-		this->view_list.updateScope(this->actual_worm, this->actual_angle);
+		if (this->weapons.get_actual_weapon().hasScope()) {
+			this->view_list.updateScope(this->actual_worm, this->actual_angle);
+		}
 	} else if (key_event->keyval == DOWN_ARROW) {
 		if (this->actual_angle > MIN_ANGLE) {
 			this->actual_angle--;
 		}
-		this->view_list.updateScope(this->actual_worm, this->actual_angle);
+		if (this->weapons.get_actual_weapon().hasScope()) {
+			this->view_list.updateScope(this->actual_worm, this->actual_angle);
+		}
 	} else if (key_event->keyval >= ASCII_1 && key_event->keyval <= ASCII_5) {
 		this->weapons_time = key_event->keyval - ASCII_OFFSET;
 	} else if (key_event->keyval == SPACE && key_event->type == GDK_KEY_PRESS) {
