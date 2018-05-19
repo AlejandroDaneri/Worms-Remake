@@ -1,6 +1,7 @@
 #include "Girder.h"
 #include "b2PolygonShape.h"
 #include "b2Fixture.h"
+#include "math_utils.h"
 
 Girder::Girder(World& world, size_t size, int rotation):
 	PhysicalObject(world, 0, TYPE_GIRDER), size(size), rotation(rotation){}
@@ -14,7 +15,7 @@ void Girder::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 
 void Girder::createFixtures(){
 	b2PolygonShape boxShape;
-	boxShape.SetAsBox(this->size / 2.0, girder_height / 2);
+	boxShape.SetAsBox(this->size / 2.0, girder_height / 2, b2Vec2(0, 0), Math::degrees_to_radians(this->rotation));
 
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
@@ -29,5 +30,3 @@ size_t Girder::getSize(){
 int Girder::getRotation(){
 	return this->rotation;
 }
-
-/////////////////////////////////////////////////////////////////////////////rotation
