@@ -17,7 +17,7 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 		this->label.set_label(std::to_string(this->life));
 		this->worm.attach(this->label, 0, 0, 1, 1);
 		this->worm.attach(this->image, 0, 1, 1, 1);
-		this->addToWorld(pos, worm_size, worm_size);
+		this->addToWorld(pos, worm_size, worm_size + 0.5);
 		printf("se creo\n");
 }
 
@@ -43,7 +43,7 @@ void WormView::updateData(int new_life, char new_dir, const Position& new_pos, c
 	this->dir_changed = this->dir != new_dir;
 	this->dir = new_dir;
 	this->weapon = weapon;
-	this->move(new_pos, worm_size, worm_size);
+	this->move(new_pos, worm_size, worm_size + 0.5);
 }
 
 void WormView::kill(){
