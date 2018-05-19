@@ -14,7 +14,7 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 	    for (int i = 0; i < alto/60 -1; i++) {
 			queue.push(Gdk::Pixbuf::create_subpixbuf(full_image, 0, i*60, ancho, ancho));
 		}*/
-		this->label.set_text(std::to_string(this->life));
+		this->label.set_label(std::to_string(this->life));
 		this->worm.attach(this->label, 0, 0, 1, 1);
 		this->worm.attach(this->image, 0, 1, 1, 1);
 		this->addToWorld(pos, worm_size, worm_size);
@@ -30,13 +30,15 @@ WormView::~WormView(){}
 	full_image(std::move(other.full_image)), image(std::move(other.image)){}*/
 	
 WormView::WormView(WormView&& other): Viewable(std::move(other)),
-	life(other.life), dir(other.dir), label(std::move(other.label)), image(std::move(other.image)),
-	worm(std::move(other.worm)) {
-	std::cout << this->label.get_text() << std::endl;
+	life(other.life), dir(other.dir), label(std::move(other.label)),
+	image(std::move(other.image)), worm(std::move(other.worm)) {
+	//std::cout << this->label.get_text() << std::endl;
 	//this->image.show();
 }
 
 void WormView::updateData(int new_life, char new_dir, const Position& new_pos, const std::string& weapon){
+	if (new_life != this->life)
+		this->label.set_label(std::to_string(new_life));
 	this->life = new_life;
 	this->dir_changed = this->dir != new_dir;
 	this->dir = new_dir;
