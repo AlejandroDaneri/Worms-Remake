@@ -11,7 +11,7 @@ private:
     Glib::RefPtr<Gtk::Builder> m_builder;
     std::vector<std::pair<Gtk::Image,Pos>> objects;
     unsigned int button_id,action;
-    std::map<unsigned int,std::string> pallete;
+    std::vector<std::string> pallete;
 
 public:
     Map(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);

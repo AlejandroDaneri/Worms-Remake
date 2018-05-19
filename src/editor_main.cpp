@@ -4,6 +4,7 @@
 #include <iostream>
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/window.h>
+#include "editor_WeaponsBar.h"
 #include "editor_Toolbox.h"
 #include "editor_Map.h"
 
@@ -45,6 +46,9 @@ int main (int argc, char *argv[])
         Toolbox* toolbox = nullptr;
         refBuilder->get_widget_derived("toolbox",toolbox);
         toolbox->link_map(map);
+
+        WeaponsBar* wepbar = nullptr;
+        refBuilder->get_widget_derived("weps_box",wepbar);
 
         mapw->override_background_color(Gdk::RGBA("lightgreen"));
 

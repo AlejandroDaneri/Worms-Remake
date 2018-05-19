@@ -2,19 +2,59 @@
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
-  <object class="GtkAdjustment" id="adjustment10">
+  <object class="GtkAdjustment" id="adjustment1">
     <property name="upper">50</property>
-    <property name="value">10</property>
     <property name="step_increment">1</property>
     <property name="page_increment">5</property>
+    <property name="page_size">5</property>
   </object>
-  <object class="GtkAdjustment" id="adjustment2">
+  <object class="GtkAdjustment" id="adjustment10">
     <property name="upper">50</property>
     <property name="value">2</property>
     <property name="step_increment">1</property>
     <property name="page_increment">5</property>
   </object>
+  <object class="GtkAdjustment" id="adjustment2">
+    <property name="upper">50</property>
+    <property name="value">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment3">
+    <property name="upper">50</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment4">
+    <property name="upper">50</property>
+    <property name="value">10</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+    <property name="page_size">5</property>
+  </object>
   <object class="GtkAdjustment" id="adjustment5">
+    <property name="upper">50</property>
+    <property name="value">5</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment6">
+    <property name="upper">50</property>
+    <property name="value">2</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment7">
+    <property name="upper">50</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment8">
+    <property name="upper">50</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">5</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment9">
     <property name="upper">50</property>
     <property name="value">5</property>
     <property name="step_increment">1</property>
@@ -149,6 +189,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkBox" id="box13">
+                                    <property name="name">Weapon</property>
                                     <property name="visible">True</property>
                                     <property name="can_focus">False</property>
                                     <child>
@@ -173,7 +214,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
-                                        <property name="adjustment">adjustment5</property>
+                                        <property name="adjustment">adjustment1</property>
                                         <property name="fill_level">100</property>
                                         <property name="round_digits">0</property>
                                         <property name="digits">0</property>
@@ -193,6 +234,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
                                         <property name="xalign">0</property>
+                                        <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
                                       <packing>
@@ -234,7 +276,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
-                                        <property name="adjustment">adjustment10</property>
+                                        <property name="adjustment">adjustment2</property>
                                         <property name="fill_level">100</property>
                                         <property name="round_digits">0</property>
                                         <property name="digits">0</property>
@@ -295,6 +337,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment3</property>
                                         <property name="fill_level">100</property>
                                         <property name="round_digits">0</property>
                                         <property name="digits">0</property>
@@ -356,7 +399,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
-                                        <property name="adjustment">adjustment10</property>
+                                        <property name="adjustment">adjustment4</property>
                                         <property name="fill_level">100</property>
                                         <property name="round_digits">0</property>
                                         <property name="digits">0</property>
@@ -478,7 +521,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
-                                        <property name="adjustment">adjustment2</property>
+                                        <property name="adjustment">adjustment6</property>
                                         <property name="fill_level">100</property>
                                         <property name="round_digits">0</property>
                                         <property name="digits">0</property>
@@ -539,6 +582,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment7</property>
                                         <property name="fill_level">100</property>
                                         <property name="round_digits">0</property>
                                         <property name="digits">0</property>
@@ -600,6 +644,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
+                                        <property name="adjustment">adjustment8</property>
                                         <property name="fill_level">100</property>
                                         <property name="round_digits">0</property>
                                         <property name="digits">0</property>
@@ -661,7 +706,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
-                                        <property name="adjustment">adjustment5</property>
+                                        <property name="adjustment">adjustment9</property>
                                         <property name="fill_level">100</property>
                                         <property name="round_digits">0</property>
                                         <property name="digits">0</property>
@@ -722,7 +767,7 @@
                                         <property name="can_focus">True</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
-                                        <property name="adjustment">adjustment2</property>
+                                        <property name="adjustment">adjustment10</property>
                                         <property name="fill_level">100</property>
                                         <property name="round_digits">0</property>
                                         <property name="digits">0</property>
