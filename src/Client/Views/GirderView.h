@@ -12,8 +12,8 @@ class GirderView: public Viewable{
 		int size;
 		int rotation;
 
-	protected:
-
+		float getWidth();
+		float getHeight();
 
 	public:
 		GirderView(WorldView& worldView, size_t size, Position pos, int rotation);
