@@ -21,7 +21,7 @@ Map::Map(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder)
 
 bool Map::on_button_clicked(GdkEventButton *button_event) {
     if(action==0) {
-        Gtk::Image new_image(pallete[button_id]);
+        Gtk::Image new_image(pallete[button_id-1]);
         Pos pos(button_event->x,button_event->y);
         const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
 
