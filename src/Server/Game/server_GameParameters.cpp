@@ -106,5 +106,9 @@ float GameParameters::getGravity(){
 	return this->config[GRAVITY].as<float>();
 }
 
+int GameParameters::getMaxGirderRotationToFriction(){
+	return this->config[MAX_GIRDER_ROTATION_FRICTION].as<int>();
+}
+
 GameParameters::GirderParams::GirderParams(size_t len, int pos_x, int pos_y, int rotation):
 	len(len), pos_x(pos_x), pos_y(pos_y), rotation(rotation){}

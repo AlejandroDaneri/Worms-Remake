@@ -21,7 +21,7 @@ int main(int argc, char* argv[]){
     
 		ClientProtocol protocol(std::move(socket));
 
-		Player player(protocol);
+		Player player(std::move(protocol));
 
 		window.add(player.getWindow());
 		window.show_all();

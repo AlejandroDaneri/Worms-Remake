@@ -4,7 +4,7 @@
 ViewsList::ViewsList(WorldView& world): world(world) {
 	this->scope.set("resources/images/scope/scope.png");
 	this->draw_scope = false;
-	this->world.addElement(this->scope, Position(-10,-10));
+	this->world.addElement(this->scope, Position(0,500), 0, 0);
 	this->scope.hide();
 }
 

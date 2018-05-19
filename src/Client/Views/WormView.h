@@ -6,6 +6,7 @@
 #include <gtkmm/image.h>
 #include <gtkmm/hvbox.h>
 #include <gdkmm/pixbuf.h>
+#include <gtkmm/label.h>
 #include <queue>
 
 #define DIR_RIGHT 1
@@ -16,13 +17,15 @@ class WormView: public Viewable{
 	private:
 		int player_id;
 		int life;
+		//std::string s_life;
 		char dir;
 		bool dir_changed;
 		std::string weapon;
 		//std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
 		//Glib::RefPtr<Gdk::Pixbuf> full_image;
-		//Gtk::VBox worm;
+		//Gtk::Label label;
 		Gtk::Image image; ////////////////////////////////////Cambiar por vbox para agegar barra de vida
+		Gtk::VBox worm;
 
 	public:
 		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon);

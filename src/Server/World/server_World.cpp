@@ -81,7 +81,8 @@ void World::removeTimedWeapon(Weapon& weapon){
 void World::removeObject(physical_object_ptr object){
 	b2Body* body = object->getBody();
 	if (body){
-		this->world.DestroyBody(object->getBody());
+		this->world.DestroyBody(body);
+		object->destroyBody();
 	}
 }
 
@@ -98,7 +99,7 @@ b2Vec2 World::getObjectPosition(PhysicalObject& object){
 void World::setLinearVelocity(PhysicalObject& object, b2Vec2& velocity){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	b2Body* body = object.getBody();
-	//body->ApplyLinearImpulse(velocity, body->GetWorldCenter(), true);
+	//body->ApplyLinearImpulse(velocity, body->GetWorldCenter(), true);////////////////////
 	body->SetLinearVelocity(velocity);
 }
 

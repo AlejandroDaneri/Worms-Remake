@@ -3,11 +3,12 @@
 #include "b2Fixture.h"
 #include "Protocol.h"
 #include "server_WeaponFactory.h"
+#include "Girder.h"
 #include <algorithm>
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), last_weapon_exploded(-1), max_height(0), colliding_with_girder(false){
+	dir(1), parameters(parameters), last_weapon_exploded(-1), max_height(0), colliding_with_girder(false), friction(false){
 		this->changeWeapon(BAZOOKA_NAME);
 	}
 
@@ -57,16 +58,21 @@ void Worm::reduce_life(int damage){
 }
 
 void Worm::move(char action){
+	this->body->SetGravityScale(1);
 	if (action == MOVE_RIGHT){
 		this->dir = action;
 		b2Vec2 velocity(parameters.getWormVelocity(), 0);
 		this->world.setLinearVelocity(*this, velocity);
-
 	} else if (action == MOVE_LEFT){
 		this->dir = action;
 		b2Vec2 velocity(-1 * parameters.getWormVelocity(), 0);
 		this->world.setLinearVelocity(*this, velocity);
-	} else if (action == JUMP){
+	}
+	if (this->body->IsAwake()){
+		return;
+	}
+	this->friction = false;
+	if (action == JUMP){
 		b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
 		velocity.x *= this->dir;
 		this->world.setLinearVelocity(*this, velocity);
@@ -78,6 +84,7 @@ void Worm::move(char action){
 }
 
 void Worm::changeWeapon(const std::string& weapon){
+	this->weapon.reset();
 	WeaponFactory factory(this->world, this->parameters);
 	this->weapon = factory.getWeapon(weapon);
 }
@@ -99,6 +106,8 @@ void Worm::receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id
 		this->reduce_life(damage);
 		std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
 		std::cout <<"normal: "<<normal.x<<"  "<<normal.y<<std::endl;
+		this->body->SetGravityScale(1);
+		this->friction = false;
 		this->body->SetLinearVelocity(-1 * damage * parameters.getWormExplosionVelocity() * normal);
 		this->last_weapon_exploded = weapon_id;
 	}
@@ -111,24 +120,35 @@ void Worm::collide_with_something(CollisionData* other){
 		int min_height = parameters.getWormHeightToDamage();
 		float current_height = this->body->GetPosition().y;
 		this->max_height -= current_height;
+		
 		if (this->max_height >= min_height){
 			std::cout <<"Danio por caida worm id: "<<this->getId()<<"  height: "<<this->max_height<<"  life anterior: "<<this->life;
 			this->reduce_life(std::min((int)this->max_height - min_height, parameters.getWormMaxHeightDamage()));
 			std::cout <<"  life actual: "<<this->life<<std::endl;
-			this->colliding_with_girder = true;
-			this->max_height = 0;
+		}
+		this->colliding_with_girder = true;
+		this->max_height = 0;
+
+		if (((Girder*)other->getObject())->has_friction()){
+			this->friction = true;
 		}
 	}
 }
 
 void Worm::end_collission_girder(){
+	this->body->SetGravityScale(1);
 	this->colliding_with_girder = false;
+	this->friction = false;
 }
 
 bool Worm::isActive(){
 	if (!this->colliding_with_girder){
 		float height = this->body->GetPosition().y;
 		this->max_height = std::max(this->max_height, height);
+	}
+	if (friction){
+		this->body->SetGravityScale(0);
+		this->body->SetLinearVelocity(b2Vec2(0, 0));
 	}
 	return PhysicalObject::isActive();
 }

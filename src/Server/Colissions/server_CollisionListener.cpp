@@ -25,7 +25,6 @@ void CollisionListener::BeginContact(b2Contact* contact){
 	}
 }
 
-#include <iostream>///////////
 void CollisionListener::EndContact(b2Contact* contact){
 	CollisionData* dataA = (CollisionData*)contact->GetFixtureA()->GetBody()->GetUserData();
 	CollisionData* dataB = (CollisionData*)contact->GetFixtureB()->GetBody()->GetUserData();
