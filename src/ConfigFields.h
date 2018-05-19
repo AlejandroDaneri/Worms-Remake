@@ -37,6 +37,8 @@ const std::string WORM_HEIGHT_TO_DAMAGE("worm_height_to_damage");
 
 const std::string WORM_MAX_HEIGHT_DAMAGE("worm_max_height_damage");
 
+const std::string MAX_GIRDER_ROTATION_FRICTION("max_girder_rotation_friction");
+
 //config del editor
 
 const std::string WORMS_LIFE("worms_life");

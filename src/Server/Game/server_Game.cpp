@@ -86,7 +86,7 @@ void Game::configure(){
 	std::vector<GirderParams> girders_list = this->parameters.getGirders();
 	size = girders_list.size();
 	for (size_t i = 0; i < size; i++){
-		physical_object_ptr girder(new Girder(this->world, girders_list[i].len, girders_list[i].rotation));
+		physical_object_ptr girder(new Girder(this->world, this->parameters, girders_list[i].len, girders_list[i].rotation));
 		this->world.addObject(girder, b2Vec2(girders_list[i].pos_x, girders_list[i].pos_y));
 	}
 	this->data_sender->sendGirders();

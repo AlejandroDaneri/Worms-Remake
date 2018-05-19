@@ -46,6 +46,8 @@ class GameParameters{
 		float getWindMinVelocity();
 		float getWindMaxVelocity();
 		float getGravity();
+
+		int getMaxGirderRotationToFriction();
 };
 
 class GameParameters::GirderParams{

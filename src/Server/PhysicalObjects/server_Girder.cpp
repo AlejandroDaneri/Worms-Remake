@@ -3,8 +3,9 @@
 #include "b2Fixture.h"
 #include "math_utils.h"
 
-Girder::Girder(World& world, size_t size, int rotation):
-	PhysicalObject(world, 0, TYPE_GIRDER), size(size), rotation(rotation){}
+Girder::Girder(World& world, GameParameters& parameters, size_t size, int rotation):
+	PhysicalObject(world, 0, TYPE_GIRDER), size(size), rotation(rotation),
+	max_rotation_to_friction(parameters.getMaxGirderRotationToFriction()){}
 
 Girder::~Girder(){}
 
@@ -29,4 +30,12 @@ size_t Girder::getSize(){
 
 int Girder::getRotation(){
 	return this->rotation;
+}
+
+bool Girder::has_friction(){
+	int angle = this->rotation;
+	if (angle > 90){
+		angle = 180 - angle;
+	}
+	return angle < this->max_rotation_to_friction;
 }
