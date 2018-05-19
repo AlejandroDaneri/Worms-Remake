@@ -4,7 +4,7 @@
 #include "Viewable.h"
 #include <gtkmm/widget.h>
 #include <gtkmm/image.h>
-#include <gtkmm/hvbox.h>
+#include <gtkmm/grid.h>
 #include <gdkmm/pixbuf.h>
 #include <gtkmm/label.h>
 #include <queue>
@@ -23,9 +23,9 @@ class WormView: public Viewable{
 		std::string weapon;
 		//std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
 		//Glib::RefPtr<Gdk::Pixbuf> full_image;
-		//Gtk::Label label;
+		Gtk::Label label;
 		Gtk::Image image; ////////////////////////////////////Cambiar por vbox para agegar barra de vida
-		Gtk::VBox worm;
+		Gtk::Grid worm;
 
 	public:
 		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon);

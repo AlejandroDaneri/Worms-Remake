@@ -30,7 +30,9 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, 
 	if (it == this->worms.end()){
 		//Worm no existe
 		WormView worm(this->world, life, dir, pos, player_id, weapon_name);
+		printf("Creado antes del movimiento\n");
 		this->worms.insert(std::make_pair(id, std::move(worm)));
+		printf("despues del movimiento\n");
 	} else {
 		//Worm existe
 		it->second.updateData(life, dir, pos, weapon_name);
