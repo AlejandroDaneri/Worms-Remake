@@ -58,9 +58,6 @@ void Worm::reduce_life(int damage){
 }
 
 void Worm::move(char action){
-	//if (this->body->IsAwake()){
-	///	return;
-	//}
 	this->body->SetGravityScale(1);
 	if (action == MOVE_RIGHT){
 		this->dir = action;
@@ -70,13 +67,16 @@ void Worm::move(char action){
 		this->dir = action;
 		b2Vec2 velocity(-1 * parameters.getWormVelocity(), 0);
 		this->world.setLinearVelocity(*this, velocity);
-	} else if (action == JUMP){
-		this->friction = false;
+	}
+	if (this->body->IsAwake()){
+		return;
+	}
+	this->friction = false;
+	if (action == JUMP){
 		b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
 		velocity.x *= this->dir;
 		this->world.setLinearVelocity(*this, velocity);
 	} else if (action == ROLLBACK){
-		this->friction = false;
 		b2Vec2 velocity(parameters.getWormRollbackVelocity(), parameters.getWormRollbackHeight());
 		velocity.x *= -1 * this->dir;
 		this->world.setLinearVelocity(*this, velocity);
@@ -114,7 +114,6 @@ void Worm::collide_with_something(CollisionData* other){
 	if (other->getType() == TYPE_BORDER){
 		this->reduce_life(this->life * 2);
 	} else if(other->getType() == TYPE_GIRDER){
-		std::cout <<"colision girder worm id: "<<this->getId()<<std::endl;
 		int min_height = parameters.getWormHeightToDamage();
 		float current_height = this->body->GetPosition().y;
 		this->max_height -= current_height;
