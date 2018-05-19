@@ -21,10 +21,8 @@ void WorldView::moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle) {
 	float pos_y = this->world.child_property_y(worm).get_value();
 	pos_x += 50 * Math::cos_degrees(angle);
 	pos_y -= 50 * Math::sin_degrees(angle);
-	pos_x -= worm.get_width() / 2; ///////////////////// Para que quede referenciado a la mitad de la imagen
-
-	Position pos = ViewTransformer().transformToPosition(Position(pos_x, pos_y));
-	this->world.move(scope, pos.getX(), pos.getY());
+	pos_x -= worm.get_width() / 2; // Para que quede referenciado a la mitad de la imagen
+	this->world.move(scope, pos_x, pos_y);
 }
 
 void WorldView::removeElement(Gtk::Widget& element){
