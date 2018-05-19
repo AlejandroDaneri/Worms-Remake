@@ -11,8 +11,8 @@ WorldView::WorldView(Player& player): player(player) {
 
 WorldView::~WorldView(){}
 
-void WorldView::moveElement(Gtk::Widget& element, const Position& position){
-	Position newPosition = ViewTransformer().transformToScreen(position);
+void WorldView::moveElement(Gtk::Widget& element, const Position& position, float width, float height){
+	Position newPosition = ViewTransformer().transformToScreenAndMove(position, width, height);
 	this->world.move(element, newPosition.getX(), newPosition.getY());
 }
 
@@ -22,15 +22,17 @@ void WorldView::moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle) {
 	pos_x += 50 * Math::cos_degrees(angle);
 	pos_y -= 50 * Math::sin_degrees(angle);
 	pos_x -= worm.get_width() / 2; ///////////////////// Para que quede referenciado a la mitad de la imagen
-	this->moveElement(scope, ViewTransformer().transformToPosition(Position(pos_x, pos_y)));
+
+	Position pos = ViewTransformer().transformToPosition(Position(pos_x, pos_y));
+	this->world.move(scope, pos.getX(), pos.getY());
 }
 
 void WorldView::removeElement(Gtk::Widget& element){
 	this->world.remove(element);
 }
 
-void WorldView::addElement(Gtk::Widget& element, const Position& position){
-	Position newPosition = ViewTransformer().transformToScreen(position);
+void WorldView::addElement(Gtk::Widget& element, const Position& position, float width, float height){
+	Position newPosition = ViewTransformer().transformToScreenAndMove(position, width, height);
 	this->world.put(element, newPosition.getX(), newPosition.getY());
 	element.show();
 }

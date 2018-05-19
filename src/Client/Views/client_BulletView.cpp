@@ -1,4 +1,5 @@
 #include "client_BulletView.h"
+#include "ObjectSizes.h"
 
 #define BULLETS_PATH "bullets/"
 
@@ -10,13 +11,13 @@ BulletView::BulletView(WorldView& worldView, std::string weapon, Position pos):
 	path += this->weapon_name;
 	path += ".png";
 	this->image.set(path);
-	this->addToWorld(pos);
+	this->addToWorld(pos, weapon_size, weapon_size);
 }
 
 BulletView::~BulletView(){}
 
 void BulletView::updateData(const Position& new_pos){
-	this->move(new_pos);
+	this->move(new_pos, weapon_size, weapon_size);
 }
 
 void BulletView::explode(){

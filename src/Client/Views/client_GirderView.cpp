@@ -10,8 +10,8 @@ GirderView::GirderView(WorldView& worldView, size_t size, Position pos, int rota
 	path += std::to_string(size);
 	path += ".png";
 	this->image.set(path);
-	Position position(pos.getX() - size / 2, pos.getY() - girder_height / 2);
-	this->addToWorld(position);
+	//Position position(pos.getX() - size / 2, pos.getY() - girder_height / 2);
+	this->addToWorld(pos, size, girder_height);
 }
 
 GirderView::~GirderView(){}

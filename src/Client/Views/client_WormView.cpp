@@ -12,7 +12,7 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 	    for (int i = 0; i < alto/60 -1; i++) {
 			queue.push(Gdk::Pixbuf::create_subpixbuf(full_image, 0, i*60, ancho, ancho));
 		}*/
-		this->addToWorld(pos);
+		this->addToWorld(pos, worm_size, worm_size);
 }
 
 WormView::~WormView(){}
@@ -29,8 +29,7 @@ void WormView::updateData(int new_life, char new_dir, const Position& new_pos, c
 	this->dir_changed = this->dir != new_dir;
 	this->dir = new_dir;
 	this->weapon = weapon;
-	Position position_new(new_pos.getX() + worm_size / 2, new_pos.getY() - worm_size / 2);
-	this->move(position_new);
+	this->move(new_pos, worm_size, worm_size);
 }
 
 void WormView::kill(){

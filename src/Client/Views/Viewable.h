@@ -12,11 +12,11 @@ class Viewable{
 		WorldView& worldView;
 
 	protected:
-		void addToWorld(const Position& pos);
+		void addToWorld(const Position& pos, float width, float height);
 
 		void removeFromWorld();
 
-		void move(const Position& pos);
+		void move(const Position& pos, float width, float height);
 
 	public:
 		Viewable(WorldView& worldView);

@@ -22,13 +22,13 @@ class WorldView{
 		WorldView(Player& player);
 		~WorldView();
 
-		void moveElement(Gtk::Widget& element, const Position& position);
+		void moveElement(Gtk::Widget& element, const Position& position, float width, float height);
 		
 		void moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle);
 
 		void removeElement(Gtk::Widget& element);
 
-		void addElement(Gtk::Widget& element, const Position& position);
+		void addElement(Gtk::Widget& element, const Position& position, float width, float height);
 
 		Gtk::ScrolledWindow& getWindow();
 

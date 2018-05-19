@@ -13,6 +13,7 @@ class ViewTransformer{
 		~ViewTransformer();
 
 		Position transformToScreen(const Position& position);
+		Position transformToScreenAndMove(const Position& position, float width, float height);
 		Position transformToPosition(const Position& position);
 };
 
