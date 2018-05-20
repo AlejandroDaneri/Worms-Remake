@@ -42,7 +42,7 @@ bool Map::on_button_clicked(GdkEventButton *button_event) {
              image.second.getPrintableHeigth(img->get_height()));
 
         action=0;
-    } 
+    }
     return true;
 }
 
