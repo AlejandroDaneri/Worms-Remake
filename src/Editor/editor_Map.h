@@ -24,6 +24,8 @@ public:
     void clicked_signal(unsigned int id);
 
     void move_signal();
+
+    void turn_signal();
 };
 
 

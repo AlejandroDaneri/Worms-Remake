@@ -16,12 +16,13 @@ class Toolbox : public Gtk::Grid {
 private:
     Glib::RefPtr<Gtk::Builder> m_builder;
     Gtk::Button* btn_clean;
-    Gtk::Button* undo; //pasar a toggle
+    Gtk::Button* erase; //pasar a toggle
     Map* map;
     Gtk::ToggleButton* worm;
     Gtk::ToggleButton* girder;
     Gtk::Button* move;// pasar a toggle
     bool item_pressed;
+    Gtk::Button* turn;
 
 public:
     Toolbox(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);

@@ -16,7 +16,7 @@ WeaponsBar::WeaponsBar(BaseObjectType* cobject,
         m_builder->get_widget("sc_wep"+std::to_string(i+1),scale);
         Gtk::CheckButton* checkbox = nullptr;
         m_builder->get_widget("cb_wep"+std::to_string(i+1),checkbox);
-        Wep *wep = new Wep(scale, checkbox); // para evitar segfault
+        Wep *wep = new Wep(scale, checkbox); // para evitar segfault, unique_ptr tampoco sirve
         weapons.push_back(*wep);
     }
     m_builder->get_widget("btn_reset_wep",reset_button);

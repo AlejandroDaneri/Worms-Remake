@@ -5,6 +5,7 @@
 class Pos {
 private:
     double x,y;
+    int angle;
 
     double calculatePos(double x, double size);
 public:
@@ -15,5 +16,9 @@ public:
     double getPrintableHeigth(double size);
 
     void updatePos(double x, double y);
+
+    int turn();
+
+    int getAngle();
 };
 #endif //WORMS_POSITION_H

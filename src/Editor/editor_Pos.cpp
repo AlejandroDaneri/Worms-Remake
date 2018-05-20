@@ -1,6 +1,6 @@
 #include "editor_Pos.h"
 
-Pos::Pos(const double x, const double y):x(x),y(y){
+Pos::Pos(const double x, const double y):x(x),y(y),angle(0){
 }
 
 double Pos::getPrintableWidth(double size) {
@@ -18,3 +18,9 @@ void Pos::updatePos(double x, double y) {
     this->y=y;
 
 }
+
+int Pos::turn() {
+     return angle+=10;
+}
+
+
