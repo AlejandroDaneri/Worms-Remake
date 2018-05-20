@@ -10,6 +10,7 @@
 class Viewable{
 	private:
 		WorldView& worldView;
+		bool has_focus;
 
 	protected:
 		void addToWorld(const Position& pos, float width, float height);
@@ -25,6 +26,10 @@ class Viewable{
 		Viewable(Viewable&& other);
 		
 		virtual Gtk::Widget& getWidget() = 0;
+
+		void setFocus(bool focus);
+
+		bool hasFocus() const;
 };
 
 #endif
