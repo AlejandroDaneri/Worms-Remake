@@ -30,9 +30,7 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, 
 	if (it == this->worms.end()){
 		//Worm no existe
 		WormView worm(this->world, life, dir, pos, player_id, weapon_name);
-		printf("Creado antes del movimiento\n");
 		this->worms.insert(std::make_pair(id, std::move(worm)));
-		printf("despues del movimiento\n");
 	} else {
 		//Worm existe
 		it->second.updateData(life, dir, pos, weapon_name);
@@ -52,11 +50,11 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float p
 	}
 }
 
-void ViewsList::updateScope(int worm_id, int angle) {
-	if (this->worms.find(worm_id) == this->worms.end()){
+void ViewsList::updateScope(int angle) {
+	if (this->worms.find(this->current_worm_id) == this->worms.end()){
 		return;
 	}
-	WormView& worm = this->worms.at(worm_id);
+	WormView& worm = this->worms.at(this->current_worm_id);
 	const char dir = worm.getDir();
 	if (dir == -1)
 		angle = 180 - angle;
@@ -71,4 +69,8 @@ void ViewsList::removeScopeVisibility() {
 void ViewsList::addGirder(size_t size, int pos_x, int pos_y, int rotation){
 	GirderView girder(this->world, size, Position(pos_x, pos_y), rotation);
 	this->girders.push_back(std::move(girder));
+}
+
+void ViewsList::setCurrentWorm(int id){
+	this->current_worm_id = id;
 }

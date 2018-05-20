@@ -11,15 +11,12 @@ class Player;
 
 class WorldView{
 	private:
-		Player& player;
 		Gtk::Fixed world;
 		Gtk::ScrolledWindow window;
-		bool inactive_key_handler(GdkEventKey* key_event);
-		bool inactive_button_handler(GdkEventButton *event);
 
 
 	public:
-		WorldView(Player& player);
+		WorldView();
 		~WorldView();
 
 		void moveElement(Gtk::Widget& element, const Position& position, float width, float height);
@@ -32,9 +29,6 @@ class WorldView{
 
 		Gtk::ScrolledWindow& getWindow();
 
-		void enable_all_handlers();
-		void enable_movement_handlers();
-		void disable_handlers();
 };
 
 

@@ -5,7 +5,6 @@
 #include "client_Protocol.h"
 #include "WorldView.h"
 #include "client_Turn.h"
-#include "client_Timer.h"
 #include "client_Weapon.h"
 #include "client_WeaponList.h"
 #include "WorldView.h"
@@ -14,23 +13,20 @@
 #include "ViewsList.h"
 #include "Position.h"
 #include "DataReceiver.h"
+#include "Handlers.h"
 
 class Player {
 	private:
 		ClientProtocol protocol;
-		int32_t weapons_time;
-		int32_t actual_angle;
 		int actual_dir;
-		int actual_worm;
 		WeaponList weapons;
 		std::unique_ptr<Turn> turn;
-		std::unique_ptr<Timer> timer;
 		WorldView world;
 		WeaponView weapons_view;
 		ScreenView screen;
 		ViewsList view_list;
 		DataReceiver data_receiver;
-		bool has_shoot;
+		Handlers handlers;
 		
 		void disable_attack_handlers();
 
@@ -43,18 +39,10 @@ class Player {
 
 		void change_weapon(std::string weapon);
 		
-		void shoot(int32_t power);
+		void shoot(int angle, int power, int time);
 		void shoot(Position position);
 		
 		void update_weapons_view();
-		
-		bool complete_key_press_handler(GdkEventKey* key_event);
-		
-		bool movement_key_press_handler(GdkEventKey* key_event);
-		
-		bool complete_key_release_handler(GdkEventKey* key_event);
-		
-		bool on_button_press_event(GdkEventButton *event);
 		
 		void play_tick_time();
 		
@@ -63,6 +51,8 @@ class Player {
 		WorldView& getWorld();
 		
 		ViewsList& getViewList();
+
+		ClientProtocol& getProtocol();
 };
 
 #endif

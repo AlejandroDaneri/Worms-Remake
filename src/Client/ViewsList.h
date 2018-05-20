@@ -17,6 +17,7 @@ class ViewsList{
 		std::vector<GirderView> girders;
 		Gtk::Image scope;
 		bool draw_scope;
+		int current_worm_id;
 
 	public:
 		ViewsList(WorldView& world);
@@ -29,11 +30,13 @@ class ViewsList{
 
 		void updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y);
 		
-		void updateScope(int worm_id, int angle);
+		void updateScope(int angle);
 		
 		void removeScopeVisibility();
 		
 		void addGirder(size_t size, int pos_x, int pos_y, int rotation);
+
+		void setCurrentWorm(int id);
 
 };
 

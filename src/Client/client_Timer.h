@@ -3,16 +3,16 @@
 
 #include "Thread.h"
 
-class Player;
+class Handlers;
 
 class Timer : public Thread {
 	private:
-		int32_t actual_time;
-		int32_t max_time;
-		Player& player;
+		int actual_time;
+		int max_time;
+		Handlers& handlers;
 
 	public:
-		Timer(Player& player, int time);
+		Timer(Handlers& handlers, int time);
 		~Timer();
 
 		void run();
