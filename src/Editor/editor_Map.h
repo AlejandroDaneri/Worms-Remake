@@ -29,6 +29,8 @@ public:
     void turn_signal();
 
     void save_signal();
+
+    void load_signal();
 };
 
 

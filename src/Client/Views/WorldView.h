@@ -5,6 +5,7 @@
 #include <gtkmm/fixed.h>
 #include <gtkmm/hvbox.h>
 #include <gtkmm/scrolledwindow.h>
+#include <gtkmm/label.h>
 #include "Position.h"
 
 class Player;
@@ -13,7 +14,7 @@ class WorldView{
 	private:
 		Gtk::Fixed world;
 		Gtk::ScrolledWindow window;
-
+		Gtk::Label message;
 
 	public:
 		WorldView();
@@ -31,6 +32,9 @@ class WorldView{
 
 		void setFocus(Gtk::Widget& element);
 
+		void showNewTurn();
+		void showEndTurn();
+		void hideMessage();
 };
 
 

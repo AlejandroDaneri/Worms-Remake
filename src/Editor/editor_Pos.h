@@ -9,7 +9,7 @@ private:
 
     double calculatePos(double x, double size);
 public:
-    Pos(double x,double y);
+    Pos(double x,double y,int angle=0);
 
     double getPrintableWidth(double size);
 
