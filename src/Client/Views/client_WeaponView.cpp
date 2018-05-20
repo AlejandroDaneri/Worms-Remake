@@ -23,3 +23,6 @@ Gtk::Grid& WeaponView::getWindow() {
 	return this->window;
 }
 
+void WeaponView::updateAmmo(const Weapon& weapon){
+	this->buttons[weapon.getName()]->setLabel(weapon.getAmmo());
+}

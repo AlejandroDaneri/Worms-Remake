@@ -20,6 +20,8 @@ class WeaponButton {
 		//WeaponButton(WeaponButton&& other);
 
 		Gtk::Widget& getButton();
+
+		void setLabel(unsigned int ammo);
 		
 		void on_clicked_button();
 		void on_released_button();

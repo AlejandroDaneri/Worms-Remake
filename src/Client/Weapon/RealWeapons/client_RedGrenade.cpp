@@ -2,7 +2,7 @@
 #include "WeaponNames.h"
 
 RedGrenade::RedGrenade(int ammo): 
-	DistanceWeapon(RED_GRENADE_NAME, ammo, true, true) {}
+	DistanceWeapon(RED_GRENADE_NAME, ammo, true) {}
 
 RedGrenade::~RedGrenade() {}
 

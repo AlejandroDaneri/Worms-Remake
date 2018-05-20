@@ -64,11 +64,9 @@ void Player::startTurn(int worm_id, int player_id){
 }
 
 void Player::endTurn() {
-	///////Sacar los handlers
 	this->world.disable_handlers();
 	this->view_list.removeScopeVisibility();
 	this->protocol.send_end_turn();
-	//this->turn->join();////////////////////////////////////////////Rompe en este join
 }
 
 void Player::disable_attack_handlers() {
@@ -91,6 +89,7 @@ void Player::shoot(Position position) {
 	this->disable_attack_handlers();
 	Position newPosition = ViewTransformer().transformToPosition(position);
 	this->protocol.send_weapon_self_directed_shoot(newPosition);
+	this->weapons_view.updateAmmo(this->weapons.get_actual_weapon());
 }
 
 void Player::play_tick_time() {
@@ -113,6 +112,7 @@ void Player::shoot(int32_t power) { ///////////////////////////////////// Creo q
 	}
 	this->protocol.send_weapon_shoot(angle, power, this->weapons_time);
 	this->view_list.removeScopeVisibility();
+	this->weapons_view.updateAmmo(this->weapons.get_actual_weapon());
 }
 
 bool Player::movement_key_press_handler(GdkEventKey* key_event) {

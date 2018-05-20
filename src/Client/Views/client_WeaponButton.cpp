@@ -5,13 +5,7 @@
 
 WeaponButton::WeaponButton(const std::string& weapon_name, unsigned int ammo, Player& player) :
 	weapon_name(weapon_name), player(player) {
-	std::string label = "Ammo:\n";
-	if (ammo > 100){
-		label += "inf";
-	} else {
-		label += std::to_string(ammo);
-	}
-	this->button.set_label(label);
+	this->setLabel(ammo);
 	std::string path = IMAGE_PATH;
 	path += weapon_name + ".png";
 	this->image.set(path);
@@ -28,5 +22,15 @@ void WeaponButton::on_clicked_button() {
 
 Gtk::Widget& WeaponButton::getButton() {
 	return this->button;
+}
+
+void WeaponButton::setLabel(unsigned int ammo){
+	std::string label = "Ammo:\n    ";
+	if (ammo > 100){
+		label += "inf";
+	} else {
+		label += std::to_string(ammo);
+	}
+	this->button.set_label(label);
 }
 

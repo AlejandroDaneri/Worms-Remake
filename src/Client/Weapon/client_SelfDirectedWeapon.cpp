@@ -6,7 +6,7 @@ SelfDirectedWeapon::~SelfDirectedWeapon() {}
 
 SelfDirectedWeapon::SelfDirectedWeapon(SelfDirectedWeapon&& other) : Weapon(std::move(other)) {}
 
-bool SelfDirectedWeapon::isSelfDirected(){
+bool SelfDirectedWeapon::isSelfDirected() const{
 	return true;
 }
 

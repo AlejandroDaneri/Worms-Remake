@@ -8,6 +8,7 @@
 class Player;
 class WeaponList;
 class WeaponButton;
+class Weapon;
 
 class WeaponView {
 	private:
@@ -21,6 +22,8 @@ class WeaponView {
 		~WeaponView();
 		
 		void update();
+
+		void updateAmmo(const Weapon& weapon);
 		
 		Gtk::Grid& getWindow();
 };

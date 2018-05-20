@@ -9,7 +9,7 @@ class SelfDirectedWeapon: public Weapon{
 		~SelfDirectedWeapon();
 		SelfDirectedWeapon(SelfDirectedWeapon&& other);
 
-		bool isSelfDirected() override;
+		bool isSelfDirected() const override;
 };
 
 #endif

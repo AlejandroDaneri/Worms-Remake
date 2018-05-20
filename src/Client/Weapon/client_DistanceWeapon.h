@@ -5,12 +5,11 @@
 
 class DistanceWeapon: public Weapon{
 	public:
-		DistanceWeapon(std::string name, int ammo, bool time = false,
-											bool fragmentable = false);
+		DistanceWeapon(std::string name, int ammo, bool time = false);
 		~DistanceWeapon();
 		DistanceWeapon(DistanceWeapon&& other);
 		
-		bool hasVariablePower() override;
+		bool hasVariablePower() const override;
 };
 
 #endif
