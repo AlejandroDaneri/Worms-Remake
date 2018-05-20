@@ -37,7 +37,6 @@ class ViewsList{
 		void addGirder(size_t size, int pos_x, int pos_y, int rotation);
 
 		void setCurrentWorm(int id);
-
 };
 
 

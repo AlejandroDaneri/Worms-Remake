@@ -116,7 +116,6 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 
 bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 	if (key_event->keyval == SPACE && key_event->type == GDK_KEY_RELEASE) {
-		printf("se solto la barra\n");
 		if (this->weapons.get_actual_weapon().isSelfDirected()) {
 			return true;
 		}
@@ -126,6 +125,7 @@ bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 		if (!this->weapons.get_actual_weapon().hasAmmo()) {
 			return true;
 		}
+		printf("se solto la barra\n");
 		printf("Timer stop\n");
 		this->timer->stop();
 	} else if (key_event->keyval == LEFT_ARROW) {}

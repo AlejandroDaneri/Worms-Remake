@@ -4,10 +4,15 @@
 #include "math_utils.h"
 #include <gtkmm/adjustment.h>
 
+const std::string NEW_TURN_MESSAGE = "Comenzó su turno";
+const std::string END_TURN_MESSAGE = "Ha terminado su turno";
+
 WorldView::WorldView(){
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
 	this->window.override_background_color(Gdk::RGBA("lightgreen"));////////////// Reemplazar por fondo de pantalla
+	//this->message.set_label(NEW_TURN_MESSAGE);
+	//this->world.put(this->message, -100, -100);
 }
 
 WorldView::~WorldView(){}
@@ -50,3 +55,24 @@ void WorldView::setFocus(Gtk::Widget& element){
 	this->window.get_hadjustment()->set_value(element.get_allocation().get_x() - this->window.get_hadjustment()->get_page_size() / 2);
 	this->window.get_vadjustment()->set_value(element.get_allocation().get_y() - this->window.get_vadjustment()->get_page_size() / 2);
 }
+
+void WorldView::showNewTurn() {
+	float pos_x = this->window.get_width() / 2.0;
+	pos_x += this->window.get_hadjustment()->get_value();
+	this->world.move(this->message, pos_x, 50);
+	this->message.set_label(NEW_TURN_MESSAGE);
+	this->message.show();
+}
+
+void WorldView::showEndTurn() {
+	float pos_x = this->window.get_width() / 2.0;
+	pos_x += this->window.get_hadjustment()->get_value();
+	this->world.move(this->message, pos_x, 50);
+	this->message.set_label(END_TURN_MESSAGE);
+	this->message.show();
+}
+
+void WorldView::hideMessage() {
+	this->message.hide();
+}
+
