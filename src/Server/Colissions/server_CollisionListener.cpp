@@ -18,7 +18,21 @@ void CollisionListener::BeginContact(b2Contact* contact){
 		dataA->getObject()->collide_with_something(dataB);
 	} else if (dataB->getType() == TYPE_WEAPON){
 		dataB->getObject()->collide_with_something(dataA);
-	} else if (dataA->getType() == TYPE_WORM){
+	}
+
+	b2WorldManifold manifold;
+	contact->GetWorldManifold(&manifold);
+	b2Vec2 normal = manifold.normal;
+
+	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_GIRDER && normal.y > 0){
+		return; //gusano colisiona por abajo de la viga
+	}
+
+	if (dataB->getType() == TYPE_WORM && dataA->getType() == TYPE_GIRDER && normal.y < 0){
+		return; //gusano colisiona por abajo de la viga
+	}
+
+	if (dataA->getType() == TYPE_WORM){
 		dataA->getObject()->collide_with_something(dataB);
 	} else if (dataB->getType() == TYPE_WORM){
 		dataB->getObject()->collide_with_something(dataA);
