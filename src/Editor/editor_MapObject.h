@@ -17,9 +17,9 @@ public:
 
     void updatePos(double x, double y);
 
-    double getPrintableWidth(int width);
+    double getPrintableWidth();
 
-    double getPrintableHeight(int height);
+    double getPrintableHeight();
 
     int turn();
 
