@@ -17,6 +17,7 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 		this->label.set_label(std::to_string(this->life));
 		this->worm.attach(this->label, 0, 0, 1, 1);
 		this->worm.attach(this->image, 0, 1, 1, 1);
+		this->worm.set_can_focus(true);
 		this->addToWorld(pos, worm_size, worm_size + 0.5);
 		printf("se creo\n");
 }

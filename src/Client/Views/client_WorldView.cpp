@@ -2,6 +2,7 @@
 #include "ViewTransformer.h"
 #include "client_Player.h"
 #include "math_utils.h"
+#include <gtkmm/adjustment.h>
 
 WorldView::WorldView(){
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
@@ -37,4 +38,11 @@ void WorldView::addElement(Gtk::Widget& element, const Position& position, float
 
 Gtk::ScrolledWindow& WorldView::getWindow(){
 	return this->window;
+}
+
+#include <iostream>///////////////////////////////////////////
+void WorldView::setFocus(Gtk::Widget& element){
+	std::cout<<"focusing...\n\n";
+	this->window.get_hadjustment()->set_value(element.get_allocation().get_x() - this->window.get_hadjustment()->get_page_size() / 2);
+	this->window.get_vadjustment()->set_value(element.get_allocation().get_y());
 }

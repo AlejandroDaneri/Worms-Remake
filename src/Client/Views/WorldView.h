@@ -29,6 +29,8 @@ class WorldView{
 
 		Gtk::ScrolledWindow& getWindow();
 
+		void setFocus(Gtk::Widget& element);
+
 };
 
 
