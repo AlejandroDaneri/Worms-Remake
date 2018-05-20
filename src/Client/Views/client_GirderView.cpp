@@ -2,7 +2,7 @@
 #include "ObjectSizes.h"
 #include "math_utils.h"
 
-#define GIRDER_PATH "resources/images/Girder/girder_"
+#define GIRDER_PATH "resources/images/Girder_client/girder_"
 
 GirderView::GirderView(WorldView& worldView, size_t size, Position pos, int rotation):
 	Viewable(worldView), size(size), rotation(rotation){
