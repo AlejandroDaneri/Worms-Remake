@@ -16,7 +16,6 @@ Toolbox::Toolbox(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& buil
     builder->get_widget("btn_turn",turn);
     turn->set_sensitive(false);
     builder->get_widget("btn_save",save);
-    save->set_sensitive(false); // en construccion
 
     worm->signal_clicked().connect( sigc::bind<int>
             (sigc::mem_fun(*this,&Toolbox::on_button_clicked),WORM_BUTTON_ID));

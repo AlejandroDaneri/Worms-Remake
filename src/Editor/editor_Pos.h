@@ -19,5 +19,11 @@ public:
 
     int turn();
 
+    double getX() const;
+
+    double getY() const;
+
+    int getAngle() const;
+
 };
 #endif //WORMS_POSITION_H

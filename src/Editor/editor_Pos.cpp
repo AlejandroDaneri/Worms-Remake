@@ -23,4 +23,16 @@ int Pos::turn() {
      return angle+=10;
 }
 
+double Pos::getX() const {
+    return x;
+}
+
+double Pos::getY() const {
+    return y;
+}
+
+int Pos::getAngle() const {
+    return angle;
+}
+
 

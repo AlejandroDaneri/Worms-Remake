@@ -2,6 +2,7 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/scrolledwindow.h>
 #include <iostream>
+#include <fstream>
 #include "yaml-cpp/yaml.h"
 #include "editor_Map.h"
 #include "editor_Pos.h"
@@ -69,7 +70,7 @@ void Map::move_signal() {
 
 void Map::turn_signal() {
     MapObject &object = objects.back().second;
-    
+
     Gtk::Image new_image(pallete[(object.turn()%180)/10+1]);
     const Glib::RefPtr<Gdk::Pixbuf> &pixb = object.getImagePixbuf();
     const Pos &pos = object.getPos();
@@ -85,23 +86,24 @@ void Map::turn_signal() {
 void Map::save_signal() {
     //gusanos
     std::vector<std::vector<double>> worms;
-    for (int i = 0; i < 5; i++){
-        std::vector<double> position;
-        position.push_back(10 * (i+1)); //pos x
-        position.push_back(60); //pos_y
-        worms.push_back(position);
+    std::vector<std::vector<double>> girders;
+    for (auto &object : objects) {
+        const Pos &pos = object.second.getPos();
+        if(object.first==1){//worm
+            std::vector<double> position;
+            position.push_back(pos.getX()); //pos x
+            position.push_back(pos.getY()); //pos_y
+            worms.push_back(position);
+        } else if(object.first==2){ //viga corta
+            std::vector<double> data;
+            data.push_back(3); //len
+            data.push_back(pos.getX()); //pos_x
+            data.push_back(pos.getY()); //pos_y
+            data.push_back(pos.getAngle()); //rotation
+            girders.push_back(data);
+        }
     }
 
-    //vigas
-    std::vector<std::vector<double>> girders;
-    for (int i = 0; i < 5; i++){
-        std::vector<double> data;
-        data.push_back(6); //len
-        data.push_back(10 * (i+1) - 3); //pos_x
-        data.push_back(20); //pos_y
-        data.push_back(0); //rotation
-        girders.push_back(data);
-    }
     YAML::Emitter out;
 
     out << YAML::BeginMap;
@@ -152,11 +154,11 @@ void Map::save_signal() {
 
 
     out << YAML::EndMap;
-/*/
+
     std::cout << "Here's the output YAML:\n\n\n" << out.c_str()<<std::endl;
 
     //lo guardo en un archivo
-    std::ofstream file("./src/Archivos_viejos_Quizas_alguno_sirve/pruebasGtk/yaml/config_editor.yaml");
+    std::ofstream file("config_editor.yaml");
     file << out.c_str();
-/*/
+
 }
