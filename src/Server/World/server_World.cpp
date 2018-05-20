@@ -16,8 +16,6 @@ World::World(GameParameters& parameters): world(b2Vec2(0, parameters.getGravity(
 		
 World::~World(){}
 
-
-#include <iostream>//////////////////////
 void World::run(){
 	float32 timeStep = 1/20.0;      //the length of time passed to simulate (seconds)
 	int32 velocityIterations = 8;   //how strongly to correct velocity
@@ -26,17 +24,9 @@ void World::run(){
 	while(this->running){
 		std::this_thread::sleep_for(std::chrono::milliseconds(60));
 
-		std::lock_guard<std::mutex> lock(this->mutex);
+		this->add_all_fragments();
 
-		for (auto it = this->fragments_to_add.begin(); it != this->fragments_to_add.end(); it++){
-			b2BodyDef body_def;
-			b2Vec2 pos = ((Fragment*)it->get())->get_shoot_position();
-			(*it)->getBodyDef(body_def, pos);
-			std::cout <<"adding fragment: "<<(*it)->getId();
-			this->initializeObject(*it, &body_def);
-			std::cout << "       ok "<<std::endl;
-		}
-		this->fragments_to_add.clear();
+		std::lock_guard<std::mutex> lock(this->mutex);
 
 		this->world.Step(timeStep, velocityIterations, positionIterations);
 
@@ -54,6 +44,18 @@ void World::run(){
 	}
 }
 
+void World::add_all_fragments(){
+	std::lock_guard<std::mutex> lock(this->mutex);
+
+	for (auto it = this->fragments_to_add.begin(); it != this->fragments_to_add.end(); it++){
+		b2BodyDef body_def;
+		b2Vec2 pos = ((Fragment*)it->get())->get_shoot_position();
+		(*it)->getBodyDef(body_def, pos);
+		this->initializeObject(*it, &body_def);
+	}
+	this->fragments_to_add.clear();
+}
+
 bool World::isActive(){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	return this->is_active;
@@ -68,10 +70,8 @@ void World::addObject(physical_object_ptr object, const b2Vec2& pos){
 	b2BodyDef body_def;
 	object->getBodyDef(body_def, pos);
 
-	std::cout << "adding object: "<<object->getId();
 	std::lock_guard<std::mutex> lock(this->mutex);
 	this->initializeObject(object, &body_def);
-	std::cout << "       ok "<<std::endl;
 }
 
 void World::initializeObject(physical_object_ptr object, b2BodyDef* body_def){
@@ -88,16 +88,18 @@ void World::addWeaponFragment(physical_object_ptr fragment){
 }
 
 void World::removeTimedWeapon(Weapon& weapon){
-	this->world.DestroyBody(weapon.getBody());
+	b2Body* body = weapon.getBody();
+	if (body){
+		this->world.DestroyBody(body);
+		weapon.destroyBody();
+	}
 }
 
 void World::removeObject(physical_object_ptr object){
 	b2Body* body = object->getBody();
 	if (body){
-		std::cout <<"removing object: "<<object->getId();
 		this->world.DestroyBody(body);
 		object->destroyBody();
-		std::cout <<"     ok "<<std::endl;
 	}
 }
 

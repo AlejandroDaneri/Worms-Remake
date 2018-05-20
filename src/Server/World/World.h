@@ -26,6 +26,7 @@ class World: public Thread{
 		void initialize();
 		void removeObject(physical_object_ptr object);
 		void initializeObject(physical_object_ptr object, b2BodyDef* body_def);
+		void add_all_fragments();
 
 	public:
 		World(GameParameters& parameters);
