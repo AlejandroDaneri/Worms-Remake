@@ -19,6 +19,5 @@ public:
 
     int turn();
 
-    int getAngle();
 };
 #endif //WORMS_POSITION_H

@@ -23,12 +23,14 @@ private:
     Gtk::Button* move;// pasar a toggle
     bool item_pressed;
     Gtk::Button* turn;
+    Gtk::Button* save;
 
 public:
     Toolbox(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 
     void link_map(Map *pMap);
     void on_button_clicked(int id) ;
+
 };
 
 

@@ -5,11 +5,12 @@
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
 #include "editor_Pos.h"
+#include "editor_MapObject.h"
 
 class Map : public Gtk::Layout {
 private:
     Glib::RefPtr<Gtk::Builder> m_builder;
-    std::vector<std::pair<Gtk::Image,Pos>> objects;
+    std::vector<std::pair<int,MapObject>> objects;
     unsigned int button_id,action;
     std::vector<std::string> pallete;
 
@@ -26,6 +27,8 @@ public:
     void move_signal();
 
     void turn_signal();
+
+    void save_signal();
 };
 
 

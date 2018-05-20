@@ -15,12 +15,16 @@ Toolbox::Toolbox(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& buil
     builder->get_widget("btn_move",move);
     builder->get_widget("btn_turn",turn);
     turn->set_sensitive(false);
+    builder->get_widget("btn_save",save);
+    save->set_sensitive(false); // en construccion
 
     worm->signal_clicked().connect( sigc::bind<int>
             (sigc::mem_fun(*this,&Toolbox::on_button_clicked),WORM_BUTTON_ID));
     girder->signal_clicked().connect( sigc::bind<int>
             (sigc::mem_fun(*this, &Toolbox::on_button_clicked),
              GIRDER_BUTTON_ID ));
+
+
 }
 
 void Toolbox::link_map(Map *pMap) { // lo tengo que hacer asi porque gtkmm<3.19
@@ -29,6 +33,7 @@ void Toolbox::link_map(Map *pMap) { // lo tengo que hacer asi porque gtkmm<3.19
     btn_clean->signal_clicked().connect( sigc::mem_fun(*map, &Map::clean));
     move->signal_clicked().connect(sigc::mem_fun(*map, &Map::move_signal));
     turn->signal_clicked().connect(sigc::mem_fun(*map, &Map::turn_signal));
+    save->signal_clicked().connect(sigc::mem_fun(*map,&Map::save_signal));
 
 }
 
@@ -49,3 +54,5 @@ void Toolbox::on_button_clicked(int id) {
         }
     }
 }
+
+
