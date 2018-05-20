@@ -41,7 +41,8 @@ const std::string& Weapon::getName() const{
 }
 
 void Weapon::shoot() {
-	this->ammo--;
+	if (this->ammo <= 100)
+		this->ammo--;
 }
 
 bool Weapon::hasAmmo() const{

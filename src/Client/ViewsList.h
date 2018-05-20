@@ -18,6 +18,7 @@ class ViewsList{
 		Gtk::Image scope;
 		bool draw_scope;
 		int current_worm_id;
+		int weapon_focused;
 
 	public:
 		ViewsList(WorldView& world);
@@ -37,7 +38,6 @@ class ViewsList{
 		void addGirder(size_t size, int pos_x, int pos_y, int rotation);
 
 		void setCurrentWorm(int id);
-
 };
 
 

@@ -28,6 +28,9 @@ Player::~Player() {
 
 void Player::startTurn(int worm_id, int player_id){
 	this->view_list.setCurrentWorm(worm_id);
+	/*this->world.showNewTurn();
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	this->world.hideMessage();*/
 	////////////////////////////////////////////////////////////hacer algo con los id
 	this->turn->join();
 	this->turn.reset(new Turn(*this));
@@ -41,6 +44,9 @@ void Player::startTurn(int worm_id, int player_id){
 void Player::endTurn() {
 	this->handlers.disable_all();
 	this->view_list.removeScopeVisibility();
+	/*this->world.showEndTurn();
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	this->world.hideMessage();*/
 	this->protocol.send_end_turn();
 }
 
