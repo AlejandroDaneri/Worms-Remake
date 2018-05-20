@@ -17,6 +17,9 @@ void ViewsList::removeWorm(int id){
 }
 
 void ViewsList::removeWeapon(int id){
+	if (this->weapon_focused == id){
+		this->weapon_focused = -1;
+	}
 	auto it = this->weapons.find(id);
 	if (it != this->weapons.end()){
 		it->second.explode();
@@ -43,6 +46,15 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float p
 	if (it == this->weapons.end()){
 		//Weapon no existe
 		BulletView weapon(this->world, weapon_name, pos);
+		weapon.setFocus(true);
+		if (this->weapon_focused != -1){
+			this->weapons.at(weapon_focused).setFocus(false);
+		}
+		this->weapon_focused = id;
+		auto it = this->worms.find(this->current_worm_id);
+		if (it != this->worms.end()){
+			it->second.setFocus(false);
+		}
 		this->weapons.insert(std::make_pair(id, std::move(weapon)));
 	} else {
 		//Weapon existe
@@ -73,6 +85,7 @@ void ViewsList::addGirder(size_t size, int pos_x, int pos_y, int rotation){
 
 void ViewsList::setCurrentWorm(int id){
 	this->current_worm_id = id;
+	this->weapon_focused = -1;
 	WormView& worm = this->worms.at(id);
 	this->world.setFocus(worm.getWidget());
 	worm.setFocus(true);
