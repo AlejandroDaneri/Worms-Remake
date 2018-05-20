@@ -67,9 +67,11 @@ void Map::turn_signal() {
     Pos new_pos = image.second;
 
     Gtk::Image new_image(pallete[(new_pos.turn()%180)/10+1]);
+    const Glib::RefPtr<Gdk::Pixbuf> &pixb = new_image.get_pixbuf();
+    
     objects.pop_back();
-    put(new_image, new_pos.getPrintableWidth(new_image.get_width()),
-        new_pos.getPrintableHeigth(new_image.get_height()));
+    put(new_image, new_pos.getPrintableWidth(pixb->get_width()),
+        new_pos.getPrintableHeigth(pixb->get_height()));
     new_image.show();
     objects.emplace_back(std::move(new_image),new_pos);
 }
