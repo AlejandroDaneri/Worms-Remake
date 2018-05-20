@@ -18,7 +18,6 @@
 class Player {
 	private:
 		ClientProtocol protocol;
-		int actual_dir;
 		WeaponList weapons;
 		std::unique_ptr<Turn> turn;
 		WorldView world;
