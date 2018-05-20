@@ -24,6 +24,7 @@ private:
     bool item_pressed;
     Gtk::Button* turn;
     Gtk::Button* save;
+    Gtk::Button* load;
 
 public:
     Toolbox(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);

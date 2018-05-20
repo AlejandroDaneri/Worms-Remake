@@ -44,8 +44,8 @@ bool Map::on_button_clicked(GdkEventButton *button_event) {
         Gtk::Image* image = object.getImageWidget();
         object.updatePos(button_event->x, button_event->y);
 
-        move(*image, object.getPrintableWidth(img->get_width()),
-             object.getPrintableHeight(img->get_height()));
+        move(*image, object.getPrintableWidth(),
+             object.getPrintableHeight());
 
         action=0;
     }
@@ -75,9 +75,10 @@ void Map::turn_signal() {
     const Glib::RefPtr<Gdk::Pixbuf> &pixb = object.getImagePixbuf();
     const Pos &pos = object.getPos();
 
+
+    put(new_image, object.getPrintableWidth(),
+        object.getPrintableHeight());
     objects.pop_back();
-    put(new_image, object.getPrintableWidth(pixb->get_width()),
-        object.getPrintableHeight(pixb->get_height()));
     new_image.show();
     MapObject new_obj(std::move(new_image),std::move(pos));
     objects.emplace_back(std::make_pair(button_id,std::move(new_obj)));
@@ -155,10 +156,49 @@ void Map::save_signal() {
 
     out << YAML::EndMap;
 
-    std::cout << "Here's the output YAML:\n\n\n" << out.c_str()<<std::endl;
+    //std::cout << "Here's the output YAML:\n\n\n" << out.c_str()<<std::endl;
 
-    //lo guardo en un archivo
     std::ofstream file("config_editor.yaml");
     file << out.c_str();
 
+}
+
+void Map::load_signal(){
+    clean();
+    YAML::Node config = YAML::LoadFile("config_editor.yaml");
+/*/
+    int worms_life = config["worms_life"].as<int>();
+    std::cout << "worms_life: " << worms_life << std::endl;
+
+    //convierto directamente a map
+    std::map<std::string, int> ammo = config["weapon_ammo"].as<std::map<std::string, int>>();
+
+    std::cout << "En el map: ammo bazooka: " << ammo["Bazooka"] << std::endl;
+    std::cout << "ammo dynamite: " << ammo["Dynamite"]<< std::endl;
+
+/*/
+    //carga de  worms
+    std::vector<std::vector<float>> worms = config["worms"].as<std::vector<std::vector<float>>>();
+
+    //std::cout <<"\nworms:\n\n";
+    for (auto &worm : worms) {
+        MapObject new_worm(Gtk::Image(pallete.front()),Pos(worm[0],worm[1]));
+        Gtk::Image *new_image = new_worm.getImageWidget();
+        put(*new_image, new_worm.getPrintableWidth(),
+            new_worm.getPrintableHeight());
+        new_image->show();
+        objects.emplace_back(std::make_pair(1,std::move(new_worm)));
+        //std::cout << "pos_x: " << worm[0] << " pos_y: " << worm[1] << std::endl;
+
+    }
+
+    //carga de vigas
+    std::vector<std::vector<float>> girders = config["girders"].as<std::vector<std::vector<float>>>();
+
+    //std::cout <<"\nGirders:\n\n";
+    for (auto &girder : girders) {
+        MapObject new_girder(Gtk::Image(pallete[1]),Pos(girder[1],girder[2],girder[3]));
+        objects.emplace_back(std::make_pair(2,std::move(new_girder)));
+        //std::cout << "len: " << girder[0] <<"  pos_x: " << girder[1] << " pos_y: " << girder[2] << "  rotation: "<< girder[3] << std::endl;
+    }
 }

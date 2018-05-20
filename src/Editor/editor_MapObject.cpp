@@ -18,12 +18,13 @@ Gtk::Image * MapObject::getImageWidget() {
     return &image;
 }
 
-double MapObject::getPrintableWidth(int width) {
-    return position.getPrintableWidth(width);
+double MapObject::getPrintableWidth() {
+    return position.getPrintableWidth(image.get_pixbuf()->get_width());
 }
 
-double MapObject::getPrintableHeight(int height) {
-    return position.getPrintableHeigth(height);
+double MapObject::getPrintableHeight() {
+    int hei = image.get_pixbuf()->get_height();
+    return position.getPrintableHeigth(hei);
 }
 
 int MapObject::turn() {

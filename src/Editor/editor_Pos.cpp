@@ -1,6 +1,6 @@
 #include "editor_Pos.h"
 
-Pos::Pos(const double x, const double y):x(x),y(y),angle(0){
+Pos::Pos(const double x, const double y, int angle):x(x),y(y),angle(angle){
 }
 
 double Pos::getPrintableWidth(double size) {
