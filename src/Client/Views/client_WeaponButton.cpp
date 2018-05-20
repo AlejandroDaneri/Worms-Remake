@@ -3,12 +3,20 @@
 
 #define IMAGE_PATH "resources/images/Weapons_icons/"
 
-WeaponButton::WeaponButton(const std::string& weapon_name, Player& player) :
+WeaponButton::WeaponButton(const std::string& weapon_name, unsigned int ammo, Player& player) :
 	weapon_name(weapon_name), player(player) {
+	std::string label = "Ammo:\n";
+	if (ammo > 100){
+		label += "inf";
+	} else {
+		label += std::to_string(ammo);
+	}
+	this->button.set_label(label);
 	std::string path = IMAGE_PATH;
 	path += weapon_name + ".png";
 	this->image.set(path);
 	this->button.set_image(this->image);
+	this->button.set_always_show_image(true);
 	this->button.signal_clicked().connect(sigc::mem_fun(*this, &WeaponButton::on_clicked_button));
 }
 

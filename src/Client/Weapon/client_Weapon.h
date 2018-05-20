@@ -25,5 +25,7 @@ class Weapon {
 		virtual std::string getName();
 		virtual void shoot();
 		virtual bool hasAmmo();
+
+		unsigned int getAmmo();
 };
 #endif

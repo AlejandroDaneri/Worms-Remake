@@ -15,7 +15,7 @@ class WeaponButton {
 		Gtk::Image image;
 
 	public:
-		WeaponButton(const std::string& weapon_name, Player& player);
+		WeaponButton(const std::string& weapon_name, unsigned int ammo, Player& player);
 		~WeaponButton();
 		//WeaponButton(WeaponButton&& other);
 

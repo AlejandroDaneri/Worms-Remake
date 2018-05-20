@@ -55,3 +55,7 @@ bool Weapon::hasAmmo() {
 	return this->ammo > 0;
 }
 
+unsigned int Weapon::getAmmo(){
+	return this->ammo;
+}
+
