@@ -19,6 +19,7 @@
 class Player {
 	private:
 		ClientProtocol protocol;
+		std::string name;
 		WeaponList weapons;
 		std::unique_ptr<Turn> turn;
 		WorldView world;
@@ -32,7 +33,7 @@ class Player {
 		void disable_attack_handlers();
 
 	public:
-		Player(ClientProtocol protocol);
+		Player(ClientProtocol protocol, const std::string& name);
 		~Player();
 
 		void startTurn(int worm_id, int player_id);

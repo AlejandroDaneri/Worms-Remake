@@ -21,7 +21,7 @@ int main(int argc, char* argv[]){
     
 		ClientProtocol protocol(std::move(socket));
 
-		Player player(std::move(protocol));
+		Player player(std::move(protocol), "Pepe");////////por ahora agrego el nombre asi
 
 		window.add(player.getWindow());
 		window.show_all();

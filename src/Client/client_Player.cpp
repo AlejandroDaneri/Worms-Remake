@@ -4,8 +4,8 @@
 
 const int NO_ANGLE = 500;
 
-Player::Player(ClientProtocol protocol) : 
-	protocol(std::move(protocol)), weapons_view(this->weapons, *this),
+Player::Player(ClientProtocol protocol, const std::string& name): 
+	protocol(std::move(protocol)), name(name), weapons_view(this->weapons, *this),
 	screen(this->world, this->weapons_view), view_list(this->world),
 	data_receiver(this->view_list, *this, this->protocol),
 	handlers(*this, this->view_list, this->weapons, this->world) {
@@ -31,14 +31,16 @@ void Player::startTurn(int worm_id, int player_id){
 	/*this->world.showNewTurn();
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	this->world.hideMessage();*/
-	////////////////////////////////////////////////////////////hacer algo con los id
-	this->turn->join();
-	this->turn.reset(new Turn(*this));
-	this->handlers.enable_all();
-	// mandar arma
-	this->change_weapon(this->weapons.get_actual_weapon().getName());
-	std::cout << "key event = " << this->weapons.get_actual_weapon().getName() << std::endl;
-	this->turn->start();
+	if (this->players_list.getPlayer(player_id) == this->name){
+		//Es mi turno
+		this->turn->join();
+		this->turn.reset(new Turn(*this));
+		this->handlers.enable_all();
+		// mandar arma
+		this->change_weapon(this->weapons.get_actual_weapon().getName());
+		std::cout << "key event = " << this->weapons.get_actual_weapon().getName() << std::endl;
+		this->turn->start();
+	}
 }
 
 void Player::endTurn() {
