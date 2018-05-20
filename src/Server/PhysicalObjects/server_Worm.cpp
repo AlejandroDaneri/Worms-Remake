@@ -4,6 +4,7 @@
 #include "Protocol.h"
 #include "server_WeaponFactory.h"
 #include "Girder.h"
+#include "math_utils.h"
 #include <algorithm>
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
@@ -92,7 +93,12 @@ void Worm::changeWeapon(const std::string& weapon){
 void Worm::shoot(int angle, int power, int time){
 	((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time);
 	b2Vec2 pos = this->getPosition();
-	pos.x += this->dir;
+	if (angle < 500){
+		pos.x += (Math::cos_degrees(angle) * dir);
+		pos.y += Math::sin_degrees(angle);
+	} else {
+		pos.x += this->dir;
+	}
 	this->world.addObject(this->weapon, pos);
 }
 

@@ -39,6 +39,7 @@ void Weapon::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 	body_def.type = b2_dynamicBody;
 	body_def.position.Set(pos.x, pos.y);
 	body_def.fixedRotation = true;
+	body_def.bullet = true;
 }
 
 void Weapon::createFixtures(){
