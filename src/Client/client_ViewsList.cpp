@@ -73,4 +73,7 @@ void ViewsList::addGirder(size_t size, int pos_x, int pos_y, int rotation){
 
 void ViewsList::setCurrentWorm(int id){
 	this->current_worm_id = id;
+	WormView& worm = this->worms.at(id);
+	this->world.setFocus(worm.getWidget());
+	worm.setFocus(true);
 }

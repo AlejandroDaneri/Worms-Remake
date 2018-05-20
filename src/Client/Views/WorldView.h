@@ -19,15 +19,17 @@ class WorldView{
 		WorldView();
 		~WorldView();
 
-		void moveElement(Gtk::Widget& element, const Position& position, float width, float height);
+		void moveElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus = false);
 		
 		void moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle);
 
 		void removeElement(Gtk::Widget& element);
 
-		void addElement(Gtk::Widget& element, const Position& position, float width, float height);
+		void addElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus = false);
 
 		Gtk::ScrolledWindow& getWindow();
+
+		void setFocus(Gtk::Widget& element);
 
 };
 
