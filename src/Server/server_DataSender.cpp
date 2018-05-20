@@ -16,7 +16,13 @@ void DataSender::run(){
 		while(it != this->objects.end()){
 			if ((*it)->isDead()){
 				for (size_t i = 0; i < this->players.size(); i++){
-					this->players[i].getProtocol().sendDeadObject(*it);
+					try{
+						if (this->players[i].isConnected()){
+							this->players[i].getProtocol().sendDeadObject(*it);
+						}
+					} catch(const SocketException& e){
+						this->players[i].disconnect();
+					}
 				}
 				it = this->objects.erase(it);
 				continue;
@@ -24,7 +30,13 @@ void DataSender::run(){
 
 			if ((*it)->isMoving()){
 				for (size_t i = 0; i < this->players.size(); i++){
-					this->players[i].getProtocol().sendObject(*it);
+					try{
+						if (this->players[i].isConnected()){
+							this->players[i].getProtocol().sendObject(*it);
+						}
+					} catch(const SocketException& e){
+						this->players[i].disconnect();
+					}
 					this->active = true;
 				}
 			}
@@ -35,34 +47,42 @@ void DataSender::run(){
 
 void DataSender::send_start_turn(int worm_id, int player_id){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		player->getProtocol().send_start_turn(worm_id, player_id);
+		try{
+			player->getProtocol().send_start_turn(worm_id, player_id);
+		} catch(const SocketException& e){}
 	}
 }
 
 void DataSender::send_players_id(){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		player->getProtocol().send_length(this->players.size());
-		for (auto it = this->players.begin(); it != this->players.end(); ++it){
-			player->getProtocol().sendPlayerId(*it);
-		}
+		try{
+			player->getProtocol().send_length(this->players.size());
+			for (auto it = this->players.begin(); it != this->players.end(); ++it){
+				player->getProtocol().sendPlayerId(*it);
+			}
+		} catch(const SocketException& e){}
 	}
 }
 
 void DataSender::sendGirders(){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		player->getProtocol().send_length(this->girders.size());
-		for (auto it = this->girders.begin(); it != this->girders.end(); ++it){
-			player->getProtocol().sendGirder(*it);
-		}
+		try{
+			player->getProtocol().send_length(this->girders.size());
+			for (auto it = this->girders.begin(); it != this->girders.end(); ++it){
+				player->getProtocol().sendGirder(*it);
+			}
+		} catch(const SocketException& e){}
 	}
 }
 
 void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		player->getProtocol().send_length(weapons.size());
-		for (auto it = weapons.begin(); it != weapons.end(); ++it){
-			player->getProtocol().sendWeaponAmmo(it->first, it->second);
-		}
+		try{
+			player->getProtocol().send_length(weapons.size());
+			for (auto it = weapons.begin(); it != weapons.end(); ++it){
+				player->getProtocol().sendWeaponAmmo(it->first, it->second);
+			}
+		} catch(const SocketException& e){}
 	}
 }
 

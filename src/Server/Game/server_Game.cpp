@@ -39,9 +39,8 @@ void Game::run(){
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	this->wait_to_world();
 
-/* PARA CUANDO ESTE IMPLEMENTADO EN EL CLIENTE LOS SEND*/
-	while (!this->turn.gameEnded()){
-		std::cout <<"empezo el juego\n";
+	while (!this->turn.gameEnded(this->world.getMutex())){
+		std::cout <<"empezo el turno\n";
 		this->player_turn_active = true;
 		this->turn.begin_turn();
 		int worm_id = this->turn.getCurrentPlayer().getCurrentWorm().getId();
@@ -49,24 +48,21 @@ void Game::run(){
 		this->data_sender->send_start_turn(worm_id, player_id);
 
 		while (this->player_turn_active){
-			this->turn.getCurrentPlayer().getProtocol().receive(*this);
+			try{
+				this->turn.getCurrentPlayer().getProtocol().receive(*this);
+			} catch (const SocketException& e){
+				std::lock_guard<std::mutex> lock(this->world.getMutex());
+				this->player_turn_active = false;
+				this->turn.getCurrentPlayer().disconnect();
+			}
 		}
 
 		this->wait_to_world();
 		this->world.update();
 
 	}
-//*/
+	std::cout <<"termino el juego\n";
 
-
-	//PARA PROBAR COSAS
-	/////////////////////////////////////////////////////////
-	//sleep(5);
-	//this->getCurrentWorm().changeWeapon("RedGrenade");
-	//this->getCurrentWorm().shoot(60, 1000, -1);
-	//this->getCurrentWorm().changeWeapon("AirAttack");
-	//this->getCurrentWorm().shoot(b2Vec2(20, 50));
-	////////////////////////////////////////////////////////
 }
 
 void Game::configure(){

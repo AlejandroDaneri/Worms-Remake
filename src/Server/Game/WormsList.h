@@ -26,6 +26,8 @@ class WormsList{
 
 		bool isEmpty();
 
+		void kill();
+
 };
 
 #endif

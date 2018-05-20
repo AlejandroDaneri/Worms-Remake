@@ -15,6 +15,7 @@ class Player{
 		std::string name;
 		WormsList worms;
 		int id;
+		bool connected;
 
 	public:
 		Player(Socket&& socket, const std::string& name);
@@ -36,6 +37,10 @@ class Player{
 		void distributeWorms(size_t max, int life_to_add);
 
 		bool isDead();
+
+		bool isConnected() const;
+
+		void disconnect();
 
 		const std::string& getName() const;
 

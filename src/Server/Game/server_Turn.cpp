@@ -51,7 +51,8 @@ void Turn::distributeWorms(size_t size, int life_to_add){
 	}
 }
 
-bool Turn::gameEnded(){
+bool Turn::gameEnded(std::mutex& mutex){
+	std::lock_guard<std::mutex> lock(mutex);
 	size_t players_alive = 0;
 	for (auto it = this->players.begin(); it != this->players.end(); ++it){
 		if (!it->isDead()){

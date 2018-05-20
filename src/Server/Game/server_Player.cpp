@@ -1,9 +1,11 @@
 #include "server_Player.h"
 
-Player::Player(Socket&& socket, const std::string& name): protocol(std::move(socket)), name(name), id(-1){}
+Player::Player(Socket&& socket, const std::string& name): protocol(std::move(socket)),
+	name(name), id(-1), connected(true){}
 
 Player::Player(Player&& other): 
-	protocol(std::move(other.protocol)), name(std::move(other.name)), worms(std::move(other.worms)), id(other.id){}
+	protocol(std::move(other.protocol)), name(std::move(other.name)),
+	worms(std::move(other.worms)), id(other.id), connected(other.connected){}
 
 Player::~Player(){}
 
@@ -43,4 +45,13 @@ ServerProtocol& Player::getProtocol(){
 
 const std::string& Player::getName() const{
 	return this->name;
+}
+
+bool Player::isConnected() const{
+	return this->connected;
+}
+
+void Player::disconnect(){
+	this->connected = false;
+	this->worms.kill();
 }

@@ -41,3 +41,12 @@ bool WormsList::isEmpty(){
 	}
 	return true;
 }
+
+void WormsList::kill(){
+	for (auto it = this->list.begin(); it != this->list.end(); ++it){
+		if (!(*it)->isDead()){
+			Worm* worm = (Worm*)it->get();
+			worm->reduce_life(worm->getLife() * 2);
+		}
+	}
+}

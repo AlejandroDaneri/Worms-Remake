@@ -29,7 +29,7 @@ class Turn{
 
 		void distributeWorms(size_t size, int life_to_add);
 
-		bool gameEnded();
+		bool gameEnded(std::mutex& mutex);
 
 };
 

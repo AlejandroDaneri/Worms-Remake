@@ -17,9 +17,6 @@ class Worm: public PhysicalObject{
 		bool colliding_with_girder;
 		bool friction;
 
-		void reduce_life(int damage);
-
-
 	protected:
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
 		void createFixtures() override;
@@ -34,6 +31,8 @@ class Worm: public PhysicalObject{
 		const std::string& getWeapon() const;
 
 		void addLife(int life);
+
+		void reduce_life(int damage);
 
 		void move(char action);
 
