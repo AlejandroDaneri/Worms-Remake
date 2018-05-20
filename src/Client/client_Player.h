@@ -14,6 +14,7 @@
 #include "Position.h"
 #include "DataReceiver.h"
 #include "Handlers.h"
+#include "client_PlayersList.h"
 
 class Player {
 	private:
@@ -26,6 +27,7 @@ class Player {
 		ViewsList view_list;
 		DataReceiver data_receiver;
 		Handlers handlers;
+		PlayersList players_list;
 		
 		void disable_attack_handlers();
 

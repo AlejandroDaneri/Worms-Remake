@@ -5,6 +5,7 @@
 #include "Protocol.h"
 #include "Position.h"
 #include "ViewsList.h"
+#include "client_PlayersList.h"
 
 class Player;
 class WeaponList;
@@ -27,7 +28,7 @@ class ClientProtocol: public Protocol {
 
 		void receive(Player& player, ViewsList& viewsList);
 
-		void receivePlayers(); ///////////////////////////////////////////////ver parametros que recibe
+		void receivePlayers(PlayersList& players_list);
 
 		void receiveGirders(ViewsList& viewsList);
 

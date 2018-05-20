@@ -102,7 +102,7 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 	}
 }
 
-void ClientProtocol::receivePlayers(){ /////////////////////ver parametros que recibe
+void ClientProtocol::receivePlayers(PlayersList& players_list){
 	int quantity = this->receive_length();
 
 	for (int i = 0; i < quantity; i++){
@@ -113,8 +113,7 @@ void ClientProtocol::receivePlayers(){ /////////////////////ver parametros que r
 		int id = this->receive_int(buffer, offset);
 		std::string name = this->receive_string(buffer, offset);
 		
-		///////////////hacer algo con los players
-		id ++;///para que no me tire error de compilacion
+		players_list.addPlayer(id, name);
 	}
 }
 

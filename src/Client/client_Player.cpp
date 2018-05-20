@@ -10,7 +10,7 @@ Player::Player(ClientProtocol protocol) :
 	data_receiver(this->view_list, *this, this->protocol),
 	handlers(*this, this->view_list, this->weapons, this->world) {
 
-	this->protocol.receivePlayers(); ///////////////////////////////////////////////ver parametros que recibe y que hace
+	this->protocol.receivePlayers(this->players_list);
 	this->protocol.receiveGirders(this->view_list);
 	this->protocol.receiveWeaponsAmmo(this->weapons);
 	this->weapons_view.update();
