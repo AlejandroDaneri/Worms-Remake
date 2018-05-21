@@ -16,6 +16,8 @@ class TurnLabel{
 
 		void beginTurn();
 
+		void beginTurn(const std::string& player_name);
+
 		void endTurn();
 
 		void setTime(int time);

@@ -17,6 +17,10 @@ void TurnLabel::beginTurn(){
 	this->message.set_markup(begining + "Tu turno" + ending);
 }
 
+void TurnLabel::beginTurn(const std::string& player_name){
+	this->message.set_markup(begining + "Turno de " + player_name + ending);
+}
+
 void TurnLabel::endTurn(){
 	this->time.set_markup("");
 	this->message.set_markup(begining + "Termino tu turno" + ending);

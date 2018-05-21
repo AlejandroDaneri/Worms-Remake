@@ -31,7 +31,8 @@ void Player::startTurn(int worm_id, int player_id){
 	/*this->world.showNewTurn();
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	this->world.hideMessage();*/
-	if (this->players_list.getPlayer(player_id) == this->name){
+	const std::string& current_player = this->players_list.getPlayer(player_id);
+	if (current_player == this->name){
 		//Es mi turno
 		this->turn->join();
 		this->turn.reset(new Turn(*this, this->turn_label));
@@ -41,6 +42,8 @@ void Player::startTurn(int worm_id, int player_id){
 		std::cout << "key event = " << this->weapons.get_actual_weapon().getName() << std::endl;
 		this->turn_label.beginTurn();
 		this->turn->start();
+	} else {
+		this->turn_label.beginTurn(current_player);
 	}
 }
 
