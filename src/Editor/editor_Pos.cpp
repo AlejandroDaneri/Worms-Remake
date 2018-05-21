@@ -16,7 +16,6 @@ double Pos::calculatePos(double x, double size) {
 void Pos::updatePos(double x, double y) {
     this->x=x;
     this->y=y;
-
 }
 
 int Pos::turn() {
