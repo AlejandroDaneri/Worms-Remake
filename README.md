@@ -27,15 +27,17 @@ https://developer.gnome.org/gnome-devel-demos/stable/c.html.es
 ### Instalar Sdl:
 
 sudo apt-get install libsdl2-2.0 (creo que no es necesario este)
+
 sudo apt-get install libsdl2-dev
+
 sudo apt-get install libsdl2-mixer-dev (para el sonido)
 
 Si no funciona con esto probar con lo que dice esta pagina:
 https://gist.github.com/BoredBored/3187339a99f7786c25075d4d9c80fad5
 
-Ejemplos: http://lazyfoo.net/tutorials/SDL/index.php
-
 (No estoy seguro cual de todos fue el que me funciono)
+
+Ejemplos: http://lazyfoo.net/tutorials/SDL/index.php
 
 ### valgrind  (es incorrible igual)
 
