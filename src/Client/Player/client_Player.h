@@ -22,11 +22,11 @@ class Player {
 		ClientProtocol protocol;
 		std::string name;
 		WeaponList weapons;
-		std::unique_ptr<Turn> turn;
 		WorldView world;
 		WeaponView weapons_view;
 		TurnLabel turn_label;
 		ScreenView screen;
+		std::unique_ptr<Turn> turn;
 		ViewsList view_list;
 		DataReceiver data_receiver;
 		Handlers handlers;

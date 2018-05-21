@@ -6,14 +6,18 @@ const int REDUCTION_TIME = 3000;
 const int TIME_STEP = 50;
 const int LIMIT_TIME = 10000;
 
-Turn::Turn(Player& player) : actual_time(0), max_time(TIMER), player(player) {}
+Turn::Turn(Player& player, TurnLabel& time_label):
+	actual_time(0), max_time(TIMER), player(player), time_label(time_label){}
 
 Turn::~Turn() {}
 
 void Turn::run() {
 	while (this->running && this->actual_time < this->max_time - LIMIT_TIME) {
-		std::this_thread::sleep_for(std::chrono::milliseconds(TIME_STEP));
-		this->actual_time += TIME_STEP;
+		for (int i = 0; i < 20 && this->running && this->actual_time <= this->max_time; i++) {
+			std::this_thread::sleep_for(std::chrono::milliseconds(TIME_STEP));
+			this->actual_time += TIME_STEP;
+		}
+		this->time_label.setTime((this->max_time - this->actual_time) / 1000);
 	}
 	// Inicio la cuenta regresiva
 	while (this->running && this->actual_time < this->max_time) {
@@ -22,6 +26,7 @@ void Turn::run() {
 			std::this_thread::sleep_for(std::chrono::milliseconds(TIME_STEP));
 			this->actual_time += TIME_STEP;
 		}
+		this->time_label.setTime((this->max_time - this->actual_time) / 1000);
 	}
 	this->player.endTurn();
 	this->running = false;

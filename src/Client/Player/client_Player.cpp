@@ -15,7 +15,7 @@ Player::Player(ClientProtocol protocol, const std::string& name):
 	this->protocol.receiveWeaponsAmmo(this->weapons);
 	this->weapons_view.update();
 	this->data_receiver.start();
-	this->turn.reset(new Turn(*this));
+	this->turn.reset(new Turn(*this, this->turn_label));
 }
 
 Player::~Player() {
@@ -34,7 +34,7 @@ void Player::startTurn(int worm_id, int player_id){
 	if (this->players_list.getPlayer(player_id) == this->name){
 		//Es mi turno
 		this->turn->join();
-		this->turn.reset(new Turn(*this));
+		this->turn.reset(new Turn(*this, this->turn_label));
 		this->handlers.enable_all();
 		// mandar arma
 		this->change_weapon(this->weapons.get_actual_weapon().getName());

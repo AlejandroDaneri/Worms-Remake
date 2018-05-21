@@ -3,6 +3,7 @@
 
 #include "Thread.h"
 #include <unistd.h>
+#include "TurnLabel.h"
 
 class Player;
 
@@ -11,9 +12,10 @@ class Turn : public Thread {
 		int actual_time;
 		int max_time;
 		Player& player;
+		TurnLabel& time_label;
 
 	public:
-		Turn(Player& player);
+		Turn(Player& player, TurnLabel& time_label);
 		~Turn();
 
 		void run();

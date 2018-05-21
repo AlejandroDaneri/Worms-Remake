@@ -6,7 +6,9 @@
 
 class TurnLabel{
 	private:
-		Gtk::Label label;
+		Gtk::Label message;
+		Gtk::Label time;
+		Gtk::HBox label;
 
 	public:
 		TurnLabel();
@@ -15,8 +17,10 @@ class TurnLabel{
 		void beginTurn();
 
 		void endTurn();
+
+		void setTime(int time);
 		
-		Gtk::Label& getWindow();
+		Gtk::Container& getWindow();
 };
 
 
