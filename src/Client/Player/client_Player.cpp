@@ -97,7 +97,7 @@ void Player::shoot(int angle, int power, int time) {
 
 
 
-Gtk::HBox& Player::getWindow() {
+Gtk::Container& Player::getWindow() {
 	return this->screen.getWindow();
 }
 

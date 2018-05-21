@@ -17,14 +17,13 @@ class WormView: public Viewable{
 	private:
 		int player_id;
 		int life;
-		//std::string s_life;
 		char dir;
 		bool dir_changed;
 		std::string weapon;
 		//std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
 		//Glib::RefPtr<Gdk::Pixbuf> full_image;
 		Gtk::Label label;
-		Gtk::Image image; ////////////////////////////////////Cambiar por vbox para agegar barra de vida
+		Gtk::Image image;
 		Gtk::Grid worm;
 
 	public:

@@ -9,7 +9,7 @@ ScreenView::ScreenView(WorldView& world, WeaponView& weapons) {
 
 ScreenView::~ScreenView() {}
 
-Gtk::HBox& ScreenView::getWindow() {
+Gtk::Container& ScreenView::getWindow() {
 	return this->screen;
 }
 

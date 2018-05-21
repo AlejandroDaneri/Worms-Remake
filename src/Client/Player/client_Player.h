@@ -48,7 +48,7 @@ class Player {
 		
 		void play_tick_time();
 		
-		Gtk::HBox& getWindow();
+		Gtk::Container& getWindow();
 		
 		WorldView& getWorld();
 		
