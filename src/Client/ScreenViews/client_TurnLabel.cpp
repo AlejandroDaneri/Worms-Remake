@@ -14,6 +14,10 @@ TurnLabel::~TurnLabel(){}
 void TurnLabel::beginTurn(){
 	this->label.set_markup(begining + "Empieza tu turno" + ending);
 }
+
+void TurnLabel::endTurn(){
+	this->label.set_markup(begining + "Termino tu turno" + ending);
+}
 		
 Gtk::Label& TurnLabel::getWindow(){
 	return this->label;

@@ -45,6 +45,7 @@ void Player::startTurn(int worm_id, int player_id){
 }
 
 void Player::endTurn() {
+	this->turn_label.endTurn();
 	this->handlers.disable_all();
 	this->view_list.removeScopeVisibility();
 	/*this->world.showEndTurn();

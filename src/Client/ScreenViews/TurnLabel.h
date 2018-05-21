@@ -13,6 +13,8 @@ class TurnLabel{
 		~TurnLabel();
 
 		void beginTurn();
+
+		void endTurn();
 		
 		Gtk::Label& getWindow();
 };

@@ -33,20 +33,20 @@ void Handlers::enable_all(){
 	this->current_angle = DEFAULT_ANGLE;
 	this->has_shoot = false;
 
-	this->world.getWindow().get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::complete_key_press_handler));
-	this->world.getWindow().get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::complete_key_release_handler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::complete_key_press_handler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::complete_key_release_handler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::on_button_press_event));
 }
 
 void Handlers::disable_all() {
-	this->world.getWindow().get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::inactive_key_handler));
-	this->world.getWindow().get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::inactive_key_handler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::inactive_key_handler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::inactive_key_handler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::inactive_button_handler));
 }
 
 void Handlers::disable_attack_handlers() {
-	this->world.getWindow().get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::movement_key_press_handler));
-	this->world.getWindow().get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::inactive_key_handler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::movement_key_press_handler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::inactive_key_handler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::inactive_button_handler));
 }
 
