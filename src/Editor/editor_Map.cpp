@@ -20,6 +20,9 @@ Map::Map(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder)
     for (int i = 0; i < 180; i=i+10) {
         pallete.emplace_back("resources/images/Girder/girder_3_"+std::to_string(i)+".png");
     }
+    for (int i = 0; i < 180; i=i+10) {
+        pallete.emplace_back("resources/images/Girder/girder_6_"+std::to_string(i)+".png");
+    }
 }
 
 

@@ -4,15 +4,15 @@
 #include <iostream>
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/window.h>
+#include "editor_Editor.h"
 #include "editor_WeaponsBar.h"
 #include "editor_Toolbox.h"
 #include "editor_Map.h"
 
 int main (int argc, char *argv[])
 {
-    Gtk::Window* pMainWindow = nullptr;
-    auto app = Gtk::Application::create(argc, argv);
-    auto refBuilder = Gtk::Builder::create();
+    Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
+    Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
     try
     {
         refBuilder->add_from_file("editor.glade");
@@ -32,29 +32,10 @@ int main (int argc, char *argv[])
         std::cerr << "BuilderError: " << ex.what() << std::endl;
         return 1;
     }
-    refBuilder->get_widget("window", pMainWindow);
-    if(pMainWindow)
-    {
-        pMainWindow->maximize();
 
-        Gtk::ScrolledWindow* mapw= nullptr;
-        refBuilder->get_widget("mapw",mapw);
-
-        Map* map= nullptr;
-        refBuilder->get_widget_derived("map",map);
-
-        Toolbox* toolbox = nullptr;
-        refBuilder->get_widget_derived("toolbox",toolbox);
-        toolbox->link_map(map);
-
-        WeaponsBar* wepbar = nullptr;
-        refBuilder->get_widget_derived("weps_box",wepbar);
-
-        mapw->override_background_color(Gdk::RGBA("lightgreen"));
-
-        pMainWindow->show_all_children();
-        app->run(*pMainWindow);
-    }
-
+    Editor* mainWindow = nullptr;
+    refBuilder->get_widget_derived("main_window", mainWindow);
+    app->run(*mainWindow);
+    
     return 0;
 }
