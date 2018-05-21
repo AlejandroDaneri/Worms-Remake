@@ -24,7 +24,7 @@ https://www.gtk.org/tutorial1.2/gtk_tut.html#toc10
 
 https://developer.gnome.org/gnome-devel-demos/stable/c.html.es
 
-###Instalar Sdl:
+### Instalar Sdl:
 
 sudo apt-get install libsdl2-2.0 (creo que no es necesario este)
 sudo apt-get install libsdl2-dev

@@ -184,6 +184,15 @@ server: $(o_yaml_files) $(o_box2d_files) $(o_common_files) $(o_server_files)
 
 clean:
 	$(RM) -f $(o_common_files) $(o_client_files) $(o_server_files) $(o_editcli_files) $(o_editor_files) client server editor
+	
+clean_client:
+	$(RM) -f $(o_common_files) $(o_client_files) $(o_editcli_files) client
+
+clean_server:
+	$(RM) -f $(o_common_files) $(o_server_files) server
+	
+clean_editor:
+	$(RM) -f $(o_common_files) $(o_editcli_files) $(o_editor_files) editor
 
 clean_libs: clean
 	$(RM) -f $(o_box2d_files) $(o_yaml_files)
