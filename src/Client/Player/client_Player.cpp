@@ -6,7 +6,7 @@ const int NO_ANGLE = 500;
 
 Player::Player(ClientProtocol protocol, const std::string& name): 
 	protocol(std::move(protocol)), name(name), weapons_view(this->weapons, *this),
-	screen(this->world, this->weapons_view), view_list(this->world),
+	screen(this->world, this->weapons_view, this->turn_label), view_list(this->world),
 	data_receiver(this->view_list, *this, this->protocol),
 	handlers(*this, this->view_list, this->weapons, this->world) {
 
@@ -39,6 +39,7 @@ void Player::startTurn(int worm_id, int player_id){
 		// mandar arma
 		this->change_weapon(this->weapons.get_actual_weapon().getName());
 		std::cout << "key event = " << this->weapons.get_actual_weapon().getName() << std::endl;
+		this->turn_label.beginTurn();
 		this->turn->start();
 	}
 }

@@ -15,6 +15,7 @@
 #include "DataReceiver.h"
 #include "Handlers.h"
 #include "client_PlayersList.h"
+#include "TurnLabel.h"
 
 class Player {
 	private:
@@ -24,6 +25,7 @@ class Player {
 		std::unique_ptr<Turn> turn;
 		WorldView world;
 		WeaponView weapons_view;
+		TurnLabel turn_label;
 		ScreenView screen;
 		ViewsList view_list;
 		DataReceiver data_receiver;
