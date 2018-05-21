@@ -10,8 +10,8 @@
 
 class ScreenView {
 	private:
-		Gtk::HBox screen;
-		Gtk::VBox world_label;
+		Gtk::VBox screen;
+		Gtk::HBox world_box;
 
 	public:
 		ScreenView(WorldView& world, WeaponView& weapons, TurnLabel& label);
