@@ -101,6 +101,8 @@ ifdef static
 LDFLAGS += -static
 endif
 
+LDFLAGS += -lSDL2
+
 # Se reutilizan los flags de C para C++ también
 CXXFLAGS += $(CFLAGS)
 
