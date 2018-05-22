@@ -36,7 +36,7 @@ int Worm::getPlayerId() const{
 }
 
 int Worm::getLife() const{
-	return this->life;
+	return this->life > 0 ? this->life : 0;
 }
 
 char Worm::getDir() const{

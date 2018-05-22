@@ -8,11 +8,13 @@
 #include "WormView.h"
 #include "client_BulletView.h"
 #include "GirderView.h"
+#include "client_PlayersList.h"
 
 class ViewsList{
 	private:
 		WorldView& world;
 		Player& player;
+		PlayersList& players_list;
 		std::unordered_map<int, WormView> worms;
 		std::unordered_map<int, BulletView> weapons;
 		std::vector<GirderView> girders;
@@ -22,7 +24,7 @@ class ViewsList{
 		int weapon_focused;
 
 	public:
-		ViewsList(WorldView& world, Player& player);
+		ViewsList(WorldView& world, Player& player, PlayersList& players_list);
 		~ViewsList();
 
 		void removeWorm(int id);
