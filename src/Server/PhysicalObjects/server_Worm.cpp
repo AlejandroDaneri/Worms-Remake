@@ -9,7 +9,7 @@
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), last_weapon_exploded(-1), max_height(0), colliding_with_girder(false), friction(false){
+	dir(1), parameters(parameters), last_weapon_exploded(-1), max_height(0), colliding_with_girder(0), friction(false){
 		this->changeWeapon(BAZOOKA_NAME);
 	}
 
@@ -59,6 +59,9 @@ void Worm::reduce_life(int damage){
 }
 
 void Worm::move(char action){
+	if (!this->colliding_with_girder){
+		return;
+	}
 	this->body->SetGravityScale(1);
 	if (action == MOVE_RIGHT){
 		this->dir = action;
@@ -69,9 +72,7 @@ void Worm::move(char action){
 		b2Vec2 velocity(-1 * parameters.getWormVelocity(), 0);
 		this->world.setLinearVelocity(*this, velocity);
 	}
-	if (this->body->IsAwake()){
-		return;
-	}
+	
 	this->friction = false;
 	if (action == JUMP){
 		b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
@@ -132,7 +133,7 @@ void Worm::collide_with_something(CollisionData* other){
 			this->reduce_life(std::min((int)this->max_height - min_height, parameters.getWormMaxHeightDamage()));
 			std::cout <<"  life actual: "<<this->life<<std::endl;
 		}
-		this->colliding_with_girder = true;
+		this->colliding_with_girder++;
 		this->max_height = 0;
 
 		if (((Girder*)other->getObject())->has_friction()){
@@ -143,7 +144,7 @@ void Worm::collide_with_something(CollisionData* other){
 
 void Worm::end_collission_girder(){
 	this->body->SetGravityScale(1);
-	this->colliding_with_girder = false;
+	this->colliding_with_girder--;
 	this->friction = false;
 }
 
