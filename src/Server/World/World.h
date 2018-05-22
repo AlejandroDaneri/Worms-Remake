@@ -6,6 +6,7 @@
 #include "b2Body.h"
 #include "PhysicalObject.h"
 #include "CollisionListener.h"
+#include "RayCastWeaponExploded.h"
 #include "Wind.h"
 #include <mutex>
 #include <list>
@@ -48,7 +49,7 @@ class World: public Thread{
 
 		void update();
 
-		b2Body* getClosestObject(b2Vec2 center, b2Vec2 end, b2Vec2& normal);
+		b2Body* getClosestObject(RayCastWeaponExploded* callback, b2Vec2 center, b2Vec2 end);
 
 		std::list<physical_object_ptr>& getObjectsList();
 		std::list<physical_object_ptr>& getGirdersList();

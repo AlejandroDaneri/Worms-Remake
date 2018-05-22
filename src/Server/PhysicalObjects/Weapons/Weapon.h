@@ -7,6 +7,7 @@
 #include "WeaponExplodeTime.h"
 #include <string>
 #include "WeaponNames.h"
+#include "RayCastWeaponExploded.h"
 
 class Worm;
 
@@ -20,6 +21,7 @@ class Weapon: public PhysicalObject{
 		float angle;
 		float power;
 		WeaponExplodeTime explode_time;
+		RayCastWeaponExploded explosion;
 
 		virtual void createFixtures() override;
 		virtual void setInitialVelocity() override;
