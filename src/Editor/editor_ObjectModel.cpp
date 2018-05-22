@@ -11,3 +11,9 @@ void ObjectModel::updatePos(double x, double y) {
 int ObjectModel::turn() {
     return position.turn();
 }
+
+void ObjectModel::getPos(double &x, double &y) {
+    x=position.getX();
+    y=position.getY();
+
+}

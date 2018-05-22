@@ -15,11 +15,13 @@ public:
 
     void clean();
 
-    void add(unsigned int id, double x, double y);
+    void add(unsigned int id, double &x, double &y);
 
-    void moveLast(double x, double y);
+    void moveLast(double &x, double &y);
 
     int turnLast();
+
+    void getLastPosition(double &x, double &y);
 };
 
 

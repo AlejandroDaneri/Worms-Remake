@@ -32,17 +32,17 @@ void Map::add(unsigned int id, double x, double y) {
     objects.push_back(std::move(new_image));
 }
 
-void Map::moveLast(double x, double y) {
+void Map::moveLast(double &x, double &y) {
     Gtk::Image &actual_object = objects.back();
     move(actual_object,x-actual_object.get_width()/2,y-actual_object.get_height()/2);
     actual_object.show();
 }
 
-void Map::turnLast(int angle) {
+void Map::turnLast(int &angle, double &x, double &y) {
     objects.pop_back();
     Gtk::Image new_image(pallete[(angle % 180) / 10 + 1]);
-    //TODO: como obtengo la posicion nueva??
-    put(new_image, 100, 100);
+    put(new_image, x - new_image.get_pixbuf()->get_width()/ 2,
+        y - new_image.get_pixbuf()->get_height() / 2);
     new_image.show();
     objects.push_back(std::move(new_image));
 }

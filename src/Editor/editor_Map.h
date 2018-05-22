@@ -38,9 +38,9 @@ public:
 
     void add(unsigned int id, double x, double y);
 
-    void moveLast(double x, double y);
+    void moveLast(double &x, double &y);
 
-    void turnLast(int angle);
+    void turnLast(int &angle, double &x, double &y);
 };
 
 

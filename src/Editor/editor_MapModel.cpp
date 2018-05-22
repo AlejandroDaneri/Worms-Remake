@@ -11,13 +11,13 @@ void MapModel::clean() {
     this->objects.clear();
 }
 
-void MapModel::add(unsigned int id, double x, double y) {
+void MapModel::add(unsigned int id, double &x, double &y) {
     Pos new_pos(x,y);
     ObjectModel new_object(new_pos);
     objects.emplace_back(std::make_pair(id,new_object));
 }
 
-void MapModel::moveLast(double x, double y) {
+void MapModel::moveLast(double &x, double &y) {
     ObjectModel &object = objects.back().second;
     object.updatePos(x,y);
 }
@@ -25,4 +25,9 @@ void MapModel::moveLast(double x, double y) {
 int MapModel::turnLast() {
     ObjectModel &object = objects.back().second;
     return object.turn();
+}
+
+void MapModel::getLastPosition(double &x, double &y) {
+    ObjectModel &last_pos = objects.back().second;
+    last_pos.getPos(x,y);
 }

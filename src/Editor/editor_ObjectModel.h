@@ -13,6 +13,8 @@ public:
     void updatePos(double x, double y);
 
     int turn();
+
+    void getPos(double& x, double& y);
 };
 
 
