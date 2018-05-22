@@ -6,9 +6,10 @@
 class WormLifeView{
 	private:
 		Gtk::Label label;
+		std::string color;
 
 	public:
-		WormLifeView(int life);
+		WormLifeView(int life, const std::string& color);
 		~WormLifeView();
 		WormLifeView(WormLifeView&& other);
 

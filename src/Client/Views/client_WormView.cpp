@@ -1,13 +1,14 @@
 #include "WormView.h"
 #include "ObjectSizes.h"
 #include <string>
+#include "GamePlayers.h"
 
 #include <iostream>/////////////////////////////////////////////////////
 
 #define WORM_IMAGE "_worm.png"
 
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon):
-	Viewable(worldView), player_id(player_id), life(life), dir(dir), dir_changed(true), weapon(weapon), label(life){
+	Viewable(worldView), player_id(player_id), life(life), dir(dir), dir_changed(true), weapon(weapon), label(life, colors[player_id]){
 	    /*this->full_image = Gdk::Pixbuf::create_from_file("resources/images/walk.png");
 	    int ancho = full_image->get_width();
 	    int alto = full_image->get_height();
