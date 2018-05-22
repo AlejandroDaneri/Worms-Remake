@@ -12,6 +12,7 @@
 class ViewsList{
 	private:
 		WorldView& world;
+		Player& player;
 		std::unordered_map<int, WormView> worms;
 		std::unordered_map<int, BulletView> weapons;
 		std::vector<GirderView> girders;
@@ -21,7 +22,7 @@ class ViewsList{
 		int weapon_focused;
 
 	public:
-		ViewsList(WorldView& world);
+		ViewsList(WorldView& world, Player& player);
 		~ViewsList();
 
 		void removeWorm(int id);

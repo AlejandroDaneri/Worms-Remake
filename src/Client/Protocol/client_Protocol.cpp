@@ -17,6 +17,7 @@ void ClientProtocol::send_move_action(char action){
 	buffer[offset++] = MOVE_ACTION;
 	buffer[offset++] = action;
 	this->send_buffer(buffer, offset);
+	std::this_thread::sleep_for(std::chrono::milliseconds(15));
 }
 
 void ClientProtocol::send_change_weapon(const std::string& weapon){

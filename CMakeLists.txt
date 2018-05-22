@@ -1,15 +1,27 @@
 cmake_minimum_required(VERSION 2.8)
 project(worms)
 
-find_package(PkgConfig)
-pkg_check_modules(GTKMM gtkmm-3.0)
+message("[INFO] Librerias necesarias: \n")
+message("-Gtkmm version 3.0:")
+message("sudo apt-get install libgtkmm-3.0-dev\n")
+message("-SDL version 2:")
+message("sudo apt-get install libsdl2-mixer-dev\n")
 
-find_package (Threads)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTKMM gtkmm-3.0 REQUIRED)
+
+find_package (Threads REQUIRED)
+find_package (SDL2 REQUIRED)
+find_package (SDL2_Mixer REQUIRED)
 
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline -std=c++11" )
 
 include_directories(${GTKMM_INCLUDE_DIRS})
 link_directories(${GTKMM_LIBRARY_DIRS})
+
+include_directories(${SDL2_INCLUDE_DIR})
 
 
 MACRO(HEADER_DIRECTORIES return_list)
@@ -45,7 +57,7 @@ add_executable(client ${CLIENT_SOURCES})
 add_executable(server ${SERVER_SOURCES})
 add_executable(editor ${EDITOR_SOURCES})
 
-target_link_libraries(client m ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} common editcli)
+target_link_libraries(client m ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} common editcli ${SDL2_LIBRARY})
 target_link_libraries(editor m yaml ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} common editcli)
 target_link_libraries(server m box2d yaml ${CMAKE_THREAD_LIBS_INIT} common)
 

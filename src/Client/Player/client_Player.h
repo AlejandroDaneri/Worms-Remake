@@ -50,6 +50,9 @@ class Player {
 		/* Finaliza el turno del jugador actual */
 		void endTurn();
 
+		/* El jugador actual recibio danio */
+		void damageReceived();
+
 		/* Cambia el arma actual por la espeificada */
 		void change_weapon(std::string weapon);
 		

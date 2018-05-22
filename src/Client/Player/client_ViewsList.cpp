@@ -1,7 +1,8 @@
 #include "ViewsList.h"
 #include "ObjectSizes.h"
+#include "client_Player.h"
 
-ViewsList::ViewsList(WorldView& world): world(world) {
+ViewsList::ViewsList(WorldView& world, Player& player): world(world), player(player) {
 	this->scope.set("resources/images/scope/scope.png");
 	this->draw_scope = false;
 	this->world.addElement(this->scope, Position(0,500), 0, 0);
@@ -12,6 +13,9 @@ ViewsList::~ViewsList(){}
 
 void ViewsList::removeWorm(int id){
 	auto it = this->worms.find(id);
+	if (id == this->current_worm_id){
+		this->player.damageReceived();
+	}
 	it->second.kill();
 	this->worms.erase(it);
 }
@@ -36,6 +40,9 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, 
 		this->worms.insert(std::make_pair(id, std::move(worm)));
 	} else {
 		//Worm existe
+		if (id == this->current_worm_id && it->second.getLife() != life){
+			this->player.damageReceived();
+		}
 		it->second.updateData(life, dir, pos, weapon_name);
 	}
 }

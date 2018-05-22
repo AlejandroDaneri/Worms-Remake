@@ -9,7 +9,7 @@
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), last_weapon_exploded(-1), max_height(0), colliding_with_girder(false), friction(false){
+	dir(1), parameters(parameters), last_weapon_exploded(-1), max_height(0), colliding_with_girder(0), friction(false){
 		this->changeWeapon(BAZOOKA_NAME);
 	}
 
@@ -59,6 +59,9 @@ void Worm::reduce_life(int damage){
 }
 
 void Worm::move(char action){
+	if (!this->colliding_with_girder){
+		return;
+	}
 	this->body->SetGravityScale(1);
 	if (action == MOVE_RIGHT){
 		this->dir = action;
@@ -68,19 +71,18 @@ void Worm::move(char action){
 		this->dir = action;
 		b2Vec2 velocity(-1 * parameters.getWormVelocity(), 0);
 		this->world.setLinearVelocity(*this, velocity);
-	}
-	if (this->body->IsAwake()){
-		return;
-	}
-	this->friction = false;
-	if (action == JUMP){
-		b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
-		velocity.x *= this->dir;
-		this->world.setLinearVelocity(*this, velocity);
-	} else if (action == ROLLBACK){
-		b2Vec2 velocity(parameters.getWormRollbackVelocity(), parameters.getWormRollbackHeight());
-		velocity.x *= -1 * this->dir;
-		this->world.setLinearVelocity(*this, velocity);
+	} else {
+	
+		this->friction = 0;
+		if (action == JUMP){
+			b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
+			velocity.x *= this->dir;
+			this->world.setLinearVelocity(*this, velocity);
+		} else if (action == ROLLBACK){
+			b2Vec2 velocity(parameters.getWormRollbackVelocity(), parameters.getWormRollbackHeight());
+			velocity.x *= -1 * this->dir;
+			this->world.setLinearVelocity(*this, velocity);
+		}
 	}
 }
 
@@ -94,8 +96,8 @@ void Worm::shoot(int angle, int power, int time){
 	((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time);
 	b2Vec2 pos = this->getPosition();
 	if (angle < 500){
-		pos.x += (Math::cos_degrees(angle) * dir);
-		pos.y += Math::sin_degrees(angle);
+		pos.x += (worm_size * Math::cos_degrees(angle) * dir);
+		pos.y += (worm_size * Math::sin_degrees(angle));
 	} else {
 		pos.x += this->dir;
 	}
@@ -113,7 +115,7 @@ void Worm::receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id
 		std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
 		std::cout <<"normal: "<<normal.x<<"  "<<normal.y<<std::endl;
 		this->body->SetGravityScale(1);
-		this->friction = false;
+		this->friction = 0;
 		this->body->SetLinearVelocity(-1 * damage * parameters.getWormExplosionVelocity() * normal);
 		this->last_weapon_exploded = weapon_id;
 	}
@@ -132,19 +134,21 @@ void Worm::collide_with_something(CollisionData* other){
 			this->reduce_life(std::min((int)this->max_height - min_height, parameters.getWormMaxHeightDamage()));
 			std::cout <<"  life actual: "<<this->life<<std::endl;
 		}
-		this->colliding_with_girder = true;
+		this->colliding_with_girder++;
 		this->max_height = 0;
-
 		if (((Girder*)other->getObject())->has_friction()){
-			this->friction = true;
+			this->friction++;
 		}
 	}
 }
 
-void Worm::end_collission_girder(){
+void Worm::end_collission_girder(char has_friction){
 	this->body->SetGravityScale(1);
-	this->colliding_with_girder = false;
-	this->friction = false;
+	this->colliding_with_girder--;
+	this->friction -= has_friction;
+	if (this->friction < 0){
+		this->friction = 0;
+	}
 }
 
 bool Worm::isActive(){
@@ -152,7 +156,7 @@ bool Worm::isActive(){
 		float height = this->body->GetPosition().y;
 		this->max_height = std::max(this->max_height, height);
 	}
-	if (friction){
+	if (this->friction){
 		this->body->SetGravityScale(0);
 		this->body->SetLinearVelocity(b2Vec2(0, 0));
 	}

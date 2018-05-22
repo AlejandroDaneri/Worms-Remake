@@ -4,7 +4,10 @@
 #include <random>
 
 GameParameters::GameParameters(const std::string& config_file, const std::string& config_editor):
-	config(YAML::LoadFile(config_file)), config_editor(YAML::LoadFile(config_editor)){}
+	config(YAML::LoadFile(config_file)), config_editor(YAML::LoadFile(config_editor)){
+			
+	this->world_max_height = 999999;
+}
 	
 GameParameters::~GameParameters(){}
 
@@ -108,6 +111,14 @@ float GameParameters::getGravity(){
 
 int GameParameters::getMaxGirderRotationToFriction(){
 	return this->config[MAX_GIRDER_ROTATION_FRICTION].as<int>();
+}
+
+void GameParameters::setMaxHeight(int height){
+	this->world_max_height = height + 15;
+}
+
+int GameParameters::getMaxHeight(){
+	return this->world_max_height;
 }
 
 GameParameters::GirderParams::GirderParams(size_t len, int pos_x, int pos_y, int rotation):

@@ -97,8 +97,11 @@ void Weapon::attackWormExplosion(const b2Vec2& center, int angle){
 
 void Weapon::collide_with_something(CollisionData* other){
 	std::cout<<"weapon collision"<<std::endl;
-	if (this->time_to_explode == -1 || other->getType() == TYPE_BORDER){
+	if (this->time_to_explode == -1){
 		this->explode_time.stop();
 		this->explode();
+	} else if (other->getType() == TYPE_BORDER){
+		this->explode_time.stop();
+		this->is_dead = true;
 	}
 }

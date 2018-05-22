@@ -15,6 +15,8 @@ class GameParameters{
 		YAML::Node config;
 		YAML::Node config_editor;
 
+		int world_max_height;
+
 	public:
 		GameParameters(const std::string& config_file, const std::string& config_editor);
 		~GameParameters();
@@ -48,6 +50,8 @@ class GameParameters{
 		float getGravity();
 
 		int getMaxGirderRotationToFriction();
+		void setMaxHeight(int height);
+		int getMaxHeight();
 };
 
 class GameParameters::GirderParams{

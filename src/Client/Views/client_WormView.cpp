@@ -22,18 +22,10 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 }
 
 WormView::~WormView(){}
-
-//label(std::move(other.label)),
-
-/*WormView::WormView(WormView&& other): Viewable(std::move(other)),
-	life(other.life), dir(other.dir), queue(std::move(other.queue)),
-	full_image(std::move(other.full_image)), image(std::move(other.image)){}*/
 	
 WormView::WormView(WormView&& other): Viewable(std::move(other)),
 	life(other.life), dir(other.dir), label(std::move(other.label)),
 	image(std::move(other.image)), worm(std::move(other.worm)) {
-	//std::cout << this->label.get_text() << std::endl;
-	//this->image.show();
 }
 
 void WormView::updateData(int new_life, char new_dir, const Position& new_pos, const std::string& weapon){
@@ -81,7 +73,11 @@ Gtk::Widget& WormView::getWidget(){
 	//return this->image;
 }
 
-const char WormView::getDir() const {
+int WormView::getLife() const{
+	return this->life;
+}
+
+char WormView::getDir() const {
 	return this->dir;
 }
 
