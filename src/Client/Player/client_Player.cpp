@@ -6,7 +6,7 @@ const int NO_ANGLE = 500;
 
 Player::Player(ClientProtocol protocol, const std::string& name): 
 	protocol(std::move(protocol)), name(name), weapons_view(this->weapons, *this),
-	screen(this->world, this->weapons_view, this->turn_label), view_list(this->world),
+	screen(this->world, this->weapons_view, this->turn_label), view_list(this->world, *this),
 	data_receiver(this->view_list, *this, this->protocol),
 	handlers(*this, this->view_list, this->weapons, this->world) {
 
@@ -28,14 +28,11 @@ Player::~Player() {
 
 void Player::startTurn(int worm_id, int player_id){
 	this->view_list.setCurrentWorm(worm_id);
-	/*this->world.showNewTurn();
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	this->world.hideMessage();*/
+	this->turn->join();
+	this->turn.reset(new Turn(*this, this->turn_label));
 	const std::string& current_player = this->players_list.getPlayer(player_id);
 	if (current_player == this->name){
 		//Es mi turno
-		this->turn->join();
-		this->turn.reset(new Turn(*this, this->turn_label));
 		this->handlers.enable_all();
 		// mandar arma
 		this->change_weapon(this->weapons.get_actual_weapon().getName());
@@ -51,10 +48,11 @@ void Player::endTurn() {
 	this->turn_label.endTurn();
 	this->handlers.disable_all();
 	this->view_list.removeScopeVisibility();
-	/*this->world.showEndTurn();
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	this->world.hideMessage();*/
 	this->protocol.send_end_turn();
+}
+
+void Player::damageReceived(){
+	this->turn->stop();
 }
 
 void Player::disable_attack_handlers() {

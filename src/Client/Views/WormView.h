@@ -33,9 +33,11 @@ class WormView: public Viewable{
 
 		void updateData(int new_life, char new_dir, const Position& new_pos, const std::string& weapon);
 
-		const char getDir() const;
+		char getDir() const;
 
 		void kill();
+
+		int getLife() const;
 		
 		Gtk::Widget& getWidget() override;
 };
