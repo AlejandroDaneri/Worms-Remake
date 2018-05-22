@@ -9,6 +9,7 @@
 #include "client_BulletView.h"
 #include "GirderView.h"
 #include "client_PlayersList.h"
+#include "client_explosionView.h"
 
 class ViewsList{
 	private:
@@ -22,6 +23,7 @@ class ViewsList{
 		bool draw_scope;
 		int current_worm_id;
 		int weapon_focused;
+		std::unique_ptr<ExplosionView> animation;
 
 	public:
 		ViewsList(WorldView& world, Player& player, PlayersList& players_list);
@@ -29,6 +31,8 @@ class ViewsList{
 
 		void removeWorm(int id);
 		void removeWeapon(int id);
+		
+		void eraseWeapon(int id);
 
 		void updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name);
 
