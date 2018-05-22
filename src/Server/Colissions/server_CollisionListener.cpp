@@ -1,6 +1,7 @@
 #include "CollisionListener.h"
 #include "PhysicalObject.h"
 #include "Worm.h"
+#include "Girder.h"
 
 CollisionListener::CollisionListener(){}
 
@@ -44,9 +45,11 @@ void CollisionListener::EndContact(b2Contact* contact){
 	CollisionData* dataB = (CollisionData*)contact->GetFixtureB()->GetBody()->GetUserData();
 
 	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_GIRDER){
-		((Worm*)dataA->getObject())->end_collission_girder();
+		bool friction = ((Girder*)dataB->getObject())->has_friction();
+		((Worm*)dataA->getObject())->end_collission_girder(friction);
 	} else if (dataB->getType() == TYPE_WORM && dataA->getType() == TYPE_GIRDER){
-		((Worm*)dataB->getObject())->end_collission_girder();
+		bool friction = ((Girder*)dataA->getObject())->has_friction();
+		((Worm*)dataB->getObject())->end_collission_girder(friction);
 	}
 }
 

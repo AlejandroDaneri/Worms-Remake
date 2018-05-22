@@ -15,7 +15,7 @@ class Worm: public PhysicalObject{
 		int last_weapon_exploded;
 		float max_height;
 		int colliding_with_girder;
-		bool friction;
+		int friction;
 
 	protected:
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
@@ -44,7 +44,7 @@ class Worm: public PhysicalObject{
 
 		void collide_with_something(CollisionData* other) override;
 
-		void end_collission_girder();
+		void end_collission_girder(char friction);
 
 		void receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id);
 

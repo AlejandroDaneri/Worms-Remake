@@ -71,17 +71,18 @@ void Worm::move(char action){
 		this->dir = action;
 		b2Vec2 velocity(-1 * parameters.getWormVelocity(), 0);
 		this->world.setLinearVelocity(*this, velocity);
-	}
+	} else {
 	
-	this->friction = false;
-	if (action == JUMP){
-		b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
-		velocity.x *= this->dir;
-		this->world.setLinearVelocity(*this, velocity);
-	} else if (action == ROLLBACK){
-		b2Vec2 velocity(parameters.getWormRollbackVelocity(), parameters.getWormRollbackHeight());
-		velocity.x *= -1 * this->dir;
-		this->world.setLinearVelocity(*this, velocity);
+		this->friction = 0;
+		if (action == JUMP){
+			b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
+			velocity.x *= this->dir;
+			this->world.setLinearVelocity(*this, velocity);
+		} else if (action == ROLLBACK){
+			b2Vec2 velocity(parameters.getWormRollbackVelocity(), parameters.getWormRollbackHeight());
+			velocity.x *= -1 * this->dir;
+			this->world.setLinearVelocity(*this, velocity);
+		}
 	}
 }
 
@@ -114,7 +115,7 @@ void Worm::receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id
 		std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
 		std::cout <<"normal: "<<normal.x<<"  "<<normal.y<<std::endl;
 		this->body->SetGravityScale(1);
-		this->friction = false;
+		this->friction = 0;
 		this->body->SetLinearVelocity(-1 * damage * parameters.getWormExplosionVelocity() * normal);
 		this->last_weapon_exploded = weapon_id;
 	}
@@ -135,17 +136,19 @@ void Worm::collide_with_something(CollisionData* other){
 		}
 		this->colliding_with_girder++;
 		this->max_height = 0;
-
 		if (((Girder*)other->getObject())->has_friction()){
-			this->friction = true;
+			this->friction++;
 		}
 	}
 }
 
-void Worm::end_collission_girder(){
+void Worm::end_collission_girder(char has_friction){
 	this->body->SetGravityScale(1);
 	this->colliding_with_girder--;
-	this->friction = false;
+	this->friction -= has_friction;
+	if (this->friction < 0){
+		this->friction = 0;
+	}
 }
 
 bool Worm::isActive(){
@@ -153,7 +156,7 @@ bool Worm::isActive(){
 		float height = this->body->GetPosition().y;
 		this->max_height = std::max(this->max_height, height);
 	}
-	if (friction){
+	if (this->friction){
 		this->body->SetGravityScale(0);
 		this->body->SetLinearVelocity(b2Vec2(0, 0));
 	}
