@@ -24,7 +24,7 @@ Map::Map(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder)
 }
 
 
-void Map::add(unsigned int id, double x, double y) {
+void Map::add(unsigned int &id, double &x, double &y) {
     Gtk::Image new_image(pallete[id - 1]);
     const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
     put(new_image, x-img->get_width()/2,y-img->get_height()/2);
@@ -48,57 +48,9 @@ void Map::turnLast(int &angle, double &x, double &y) {
 }
 
 
-//VIEJO
-void Map::turn_signal() {
-    /*/
-    MapObject &object = objects.back().second;
-
-    Gtk::Image new_image(pallete[(object.turn() % 180) / 10 + 1]);
-    const Glib::RefPtr<Gdk::Pixbuf> &pixb = object.getImagePixbuf();
-    const Pos &pos = object.getPos();
-
-
-    put(new_image, object.getPrintableWidth(),
-        object.getPrintableHeight());
-    objects.pop_back();
-    new_image.show();
-    MapObject new_obj(std::move(new_image), std::move(pos));
-    objects.emplace_back(std::make_pair(button_id, std::move(new_obj)));
-
-     /*/
-}
-
 bool Map::on_button_clicked(GdkEventButton *button_event) {
     controller->mapClickedSignal(button_event);
-    /*/
-    if (action == 0) { //nuevo
-        Gtk::Image new_image(pallete[button_id - 1]);
-        Pos pos(button_event->x, button_event->y);
-
-        const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
-
-        put(new_image, pos.getPrintableWidth(img->get_width()),
-            pos.getPrintableHeigth(img->get_height()));
-        new_image.show();
-        MapObject object(std::move(new_image), pos);
-        objects.emplace_back(std::make_pair(button_id, std::move(object)));
-
-
-    } else if (action == 1) { //mover
-
-        MapObject &object = objects.back().second;
-        const Glib::RefPtr<Gdk::Pixbuf> &img = object.getImagePixbuf();
-        Gtk::Image *image = object.getImageWidget();
-        object.updatePos(button_event->x, button_event->y);
-
-        move(*image, object.getPrintableWidth(),
-             object.getPrintableHeight());
-
-        action = 0;
-    }
-     /*/
     return true;
-
 }
 
 void Map::undo() {

@@ -28,15 +28,13 @@ public:
 
     void clean();
 
-    void turn_signal();
-
     void save_signal();
 
     void load_signal();
 
     void linkController(MapController *pController);
 
-    void add(unsigned int id, double x, double y);
+    void add(unsigned int &id, double &x, double &y);
 
     void moveLast(double &x, double &y);
 

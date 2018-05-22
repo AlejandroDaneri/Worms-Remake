@@ -31,7 +31,6 @@ public:
 
     void loadSignal();
 
-
     void mapClickedSignal(GdkEventButton *event_button);
 };
 

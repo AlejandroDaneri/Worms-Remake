@@ -11,7 +11,7 @@ void MapModel::clean() {
     this->objects.clear();
 }
 
-void MapModel::add(unsigned int id, double &x, double &y) {
+void MapModel::add(unsigned int &id, double &x, double &y) {
     Pos new_pos(x,y);
     ObjectModel new_object(new_pos);
     objects.emplace_back(std::make_pair(id,new_object));
