@@ -79,12 +79,17 @@ void Game::configure(){
 	this->turn.distributeWorms(size, this->parameters.get_worms_life_to_add());
 
 	//Creacion de vigas
+	int max_height = 0;
 	std::vector<GirderParams> girders_list = this->parameters.getGirders();
 	size = girders_list.size();
 	for (size_t i = 0; i < size; i++){
 		physical_object_ptr girder(new Girder(this->world, this->parameters, girders_list[i].len, girders_list[i].rotation));
 		this->world.addObject(girder, b2Vec2(girders_list[i].pos_x, girders_list[i].pos_y));
+		if (girders_list[i].pos_y > max_height){
+			max_height = girders_list[i].pos_y;
+		}
 	}
+	this->parameters.setMaxHeight(max_height);
 	this->data_sender->sendGirders();
 
 	//Municion de las armas
