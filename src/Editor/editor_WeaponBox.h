@@ -11,13 +11,13 @@
 class WeaponController;
 
 class WeaponBox {
-    Gtk::Scale* ammo_selector;
-    Gtk::CheckButton* infinite;
+    Gtk::Scale *ammo_selector;
+    Gtk::CheckButton *infinite;
     const bool default_checkbox_state;
     const int default_ammo_selector_value;
-    WeaponController* controller;
+    WeaponController *controller;
 public:
-    WeaponBox(Gtk::Scale* pWidget, Gtk::CheckButton* pButton);
+    WeaponBox(Gtk::Scale *pWidget, Gtk::CheckButton *pButton);
 
     void on_ammo_value_change();
 
@@ -25,7 +25,7 @@ public:
 
     void reset_ammo();
 
-    void linkController(WeaponController* controller);
+    void linkController(WeaponController *controller);
 };
 
 

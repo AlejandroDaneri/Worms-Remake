@@ -10,12 +10,13 @@
 class Map : public Gtk::Layout {
 private:
     Glib::RefPtr<Gtk::Builder> m_builder;
-    std::vector<std::pair<int,MapObject>> objects;
-    unsigned int button_id,action;
+    std::vector<std::pair<int, MapObject>> objects;
+    unsigned int button_id, action;
     std::vector<std::string> pallete;
 
 public:
     Map(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
+
     bool on_button_clicked(GdkEventButton *button_event);
 
     void undo();

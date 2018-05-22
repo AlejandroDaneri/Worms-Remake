@@ -8,7 +8,7 @@
 class WeaponsListController {
 private:
     WeaponListt weapons;
-    Gtk::Button* reset_button;
+    Gtk::Button *reset_button;
 public:
     WeaponsListController(WeaponListt weapons, Gtk::Button *reset_button);
 

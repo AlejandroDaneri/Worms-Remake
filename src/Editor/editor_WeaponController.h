@@ -1,6 +1,6 @@
 
-#ifndef WORMS_WEAPONSONTROLLER_H
-#define WORMS_WEAPONSONTROLLER_H
+#ifndef WORMS_WEAPONCONTROLLER_H
+#define WORMS_WEAPONCONTROLLER_H
 
 
 //#include "_editor_WeaponsBar.h"
@@ -11,10 +11,10 @@ class WeaponBox;
 
 class WeaponController {
 private:
-    WeaponBox& weapon_view;
-    WeaponModel* weapon_model;
+    WeaponBox &weapon_view;
+    WeaponModel *weapon_model;
 public:
-    WeaponController(WeaponBox &View, WeaponModel* model);
+    WeaponController(WeaponBox &View, WeaponModel *model);
 
     void reset_ammo();
 
@@ -22,4 +22,4 @@ public:
 };
 
 
-#endif //WORMS_WEAPONSCONTROLLER_H
+#endif //WORMS_WEAPONCONTROLLER_H

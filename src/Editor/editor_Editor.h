@@ -12,16 +12,16 @@
 
 class Editor : public Gtk::Window {
     Glib::RefPtr<Gtk::Builder> m_builder;
-    Gtk::ScrolledWindow* map_window;
-    Map* map;
-    Toolbox* toolbox;
+    Gtk::ScrolledWindow *map_window;
+    Map *map;
+    Toolbox *toolbox;
 
-    Gtk::Button* weps_reset_button;
+    Gtk::Button *weps_reset_button;
     WeaponListt weplist;
     WeaponsListController weps_list_controller;
 
 public:
-    Editor(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder);
+    Editor(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 
 };
 

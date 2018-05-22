@@ -2,8 +2,7 @@
 #include "editor_MapObject.h"
 
 MapObject::MapObject(Gtk::Image image, Pos pos)
-        : image(std::move(image)),position(pos)
-{
+        : image(std::move(image)), position(pos) {
 }
 
 Glib::RefPtr<Gdk::Pixbuf> MapObject::getImagePixbuf() {
@@ -11,10 +10,10 @@ Glib::RefPtr<Gdk::Pixbuf> MapObject::getImagePixbuf() {
 }
 
 void MapObject::updatePos(double x, double y) {
-    position.updatePos(x,y);
+    position.updatePos(x, y);
 }
 
-Gtk::Image * MapObject::getImageWidget() {
+Gtk::Image *MapObject::getImageWidget() {
     return &image;
 }
 

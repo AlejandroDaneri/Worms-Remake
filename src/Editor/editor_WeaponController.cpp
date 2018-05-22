@@ -1,10 +1,9 @@
 
 #include "editor_WeaponController.h"
 
-WeaponController::WeaponController(WeaponBox& View, WeaponModel* model)
+WeaponController::WeaponController(WeaponBox &View, WeaponModel *model)
         : weapon_view(View),
-          weapon_model(model)
-{}
+          weapon_model(model) {}
 
 void WeaponController::reset_ammo() {
     weapon_view.reset_ammo();

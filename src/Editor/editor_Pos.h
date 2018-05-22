@@ -4,12 +4,13 @@
 
 class Pos {
 private:
-    double x,y;
+    double x, y;
     int angle;
 
     double calculatePos(double x, double size);
+
 public:
-    Pos(double x,double y,int angle=0);
+    Pos(double x, double y, int angle = 0);
 
     double getPrintableWidth(double size);
 
@@ -26,4 +27,5 @@ public:
     int getAngle() const;
 
 };
+
 #endif //WORMS_POSITION_H

@@ -8,12 +8,12 @@
 #include "editor_WeaponModel.h"
 
 class WeaponListt {
-    Glib::RefPtr <Gtk::Builder> m_builder;
-    std::vector<WeaponModel*> weapons;
+    Glib::RefPtr<Gtk::Builder> m_builder;
+    std::vector<WeaponModel *> weapons;
     std::vector<WeaponBox> weapons_view;
     std::vector<WeaponController> wep_controllers;
 public:
-    WeaponListt(const Glib::RefPtr <Gtk::Builder> &builder);
+    WeaponListt(const Glib::RefPtr<Gtk::Builder> &builder);
 
     void reset_ammo();
 };

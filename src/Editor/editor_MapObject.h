@@ -13,7 +13,8 @@ public:
     MapObject(Gtk::Image image, Pos pos);
 
     Glib::RefPtr<Gdk::Pixbuf> getImagePixbuf();
-    Gtk::Image * getImageWidget();
+
+    Gtk::Image *getImageWidget();
 
     void updatePos(double x, double y);
 

@@ -5,76 +5,78 @@
 #include <fstream>
 #include "yaml-cpp/yaml.h"
 #include "editor_Map.h"
-#include "editor_Pos.h"
 
-Map::Map(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& builder)
+Map::Map(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),
           m_builder(builder),
           button_id(1),
-          action(0)
-{
+          action(0) {
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
-            sigc::mem_fun(*this,&Map::on_button_clicked));
+            sigc::mem_fun(*this, &Map::on_button_clicked));
     pallete.emplace_back("resources/images/right_worm.png");
-    for (int i = 0; i < 180; i=i+10) {
-        pallete.emplace_back("resources/images/Girder/girder_3_"+std::to_string(i)+".png");
+    for (int i = 0; i < 180; i = i + 10) {
+        pallete.emplace_back(
+                "resources/images/Girder/girder_3_" + std::to_string(i) +
+                ".png");
     }
-    for (int i = 0; i < 180; i=i+10) {
-        pallete.emplace_back("resources/images/Girder/girder_6_"+std::to_string(i)+".png");
+    for (int i = 0; i < 180; i = i + 10) {
+        pallete.emplace_back(
+                "resources/images/Girder/girder_6_" + std::to_string(i) +
+                ".png");
     }
 }
 
 
 bool Map::on_button_clicked(GdkEventButton *button_event) {
-    if(action==0) { //nuevo
-        Gtk::Image new_image(pallete[button_id-1]);
-        Pos pos(button_event->x,button_event->y);
+    if (action == 0) { //nuevo
+        Gtk::Image new_image(pallete[button_id - 1]);
+        Pos pos(button_event->x, button_event->y);
 
         const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
 
         put(new_image, pos.getPrintableWidth(img->get_width()),
             pos.getPrintableHeigth(img->get_height()));
         new_image.show();
-        MapObject object(std::move(new_image),pos);
-        objects.emplace_back(std::make_pair(button_id,std::move(object)));
+        MapObject object(std::move(new_image), pos);
+        objects.emplace_back(std::make_pair(button_id, std::move(object)));
 
 
-    } else if(action==1){ //mover
+    } else if (action == 1) { //mover
 
         MapObject &object = objects.back().second;
         const Glib::RefPtr<Gdk::Pixbuf> &img = object.getImagePixbuf();
-        Gtk::Image* image = object.getImageWidget();
+        Gtk::Image *image = object.getImageWidget();
         object.updatePos(button_event->x, button_event->y);
 
         move(*image, object.getPrintableWidth(),
              object.getPrintableHeight());
 
-        action=0;
+        action = 0;
     }
     return true;
 }
 
-void Map::undo(){
+void Map::undo() {
     objects.pop_back();
 }
 
-void Map::clean(){
+void Map::clean() {
     objects.clear();
 }
 
 void Map::clicked_signal(unsigned int id) {
-    button_id=id;
+    button_id = id;
 }
 
 void Map::move_signal() {
-    action=1;
+    action = 1;
 }
 
 void Map::turn_signal() {
     MapObject &object = objects.back().second;
 
-    Gtk::Image new_image(pallete[(object.turn()%180)/10+1]);
+    Gtk::Image new_image(pallete[(object.turn() % 180) / 10 + 1]);
     const Glib::RefPtr<Gdk::Pixbuf> &pixb = object.getImagePixbuf();
     const Pos &pos = object.getPos();
 
@@ -83,8 +85,8 @@ void Map::turn_signal() {
         object.getPrintableHeight());
     objects.pop_back();
     new_image.show();
-    MapObject new_obj(std::move(new_image),std::move(pos));
-    objects.emplace_back(std::make_pair(button_id,std::move(new_obj)));
+    MapObject new_obj(std::move(new_image), std::move(pos));
+    objects.emplace_back(std::make_pair(button_id, std::move(new_obj)));
 }
 
 void Map::save_signal() {
@@ -93,12 +95,12 @@ void Map::save_signal() {
     std::vector<std::vector<double>> girders;
     for (auto &object : objects) {
         const Pos &pos = object.second.getPos();
-        if(object.first==1){//worm
+        if (object.first == 1) {//worm
             std::vector<double> position;
             position.push_back(pos.getX()); //pos x
             position.push_back(pos.getY()); //pos_y
             worms.push_back(position);
-        } else if(object.first==2){ //viga corta
+        } else if (object.first == 2) { //viga corta
             std::vector<double> data;
             data.push_back(3); //len
             data.push_back(pos.getX()); //pos_x
@@ -166,7 +168,7 @@ void Map::save_signal() {
 
 }
 
-void Map::load_signal(){
+void Map::load_signal() {
     clean();
     YAML::Node config = YAML::LoadFile("config_editor.yaml");
 /*/
@@ -185,12 +187,12 @@ void Map::load_signal(){
 
     //std::cout <<"\nworms:\n\n";
     for (auto &worm : worms) {
-        MapObject new_worm(Gtk::Image(pallete.front()),Pos(worm[0],worm[1]));
+        MapObject new_worm(Gtk::Image(pallete.front()), Pos(worm[0], worm[1]));
         Gtk::Image *new_image = new_worm.getImageWidget();
         put(*new_image, new_worm.getPrintableWidth(),
             new_worm.getPrintableHeight());
         new_image->show();
-        objects.emplace_back(std::make_pair(1,std::move(new_worm)));
+        objects.emplace_back(std::make_pair(1, std::move(new_worm)));
         //std::cout << "pos_x: " << worm[0] << " pos_y: " << worm[1] << std::endl;
 
     }
@@ -200,8 +202,9 @@ void Map::load_signal(){
 
     //std::cout <<"\nGirders:\n\n";
     for (auto &girder : girders) {
-        MapObject new_girder(Gtk::Image(pallete[1]),Pos(girder[1],girder[2],girder[3]));
-        objects.emplace_back(std::make_pair(2,std::move(new_girder)));
+        MapObject new_girder(Gtk::Image(pallete[1]),
+                             Pos(girder[1], girder[2], girder[3]));
+        objects.emplace_back(std::make_pair(2, std::move(new_girder)));
         //std::cout << "len: " << girder[0] <<"  pos_x: " << girder[1] << " pos_y: " << girder[2] << "  rotation: "<< girder[3] << std::endl;
     }
 }
