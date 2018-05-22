@@ -96,8 +96,8 @@ void Worm::shoot(int angle, int power, int time){
 	((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time);
 	b2Vec2 pos = this->getPosition();
 	if (angle < 500){
-		pos.x += (Math::cos_degrees(angle) * dir);
-		pos.y += Math::sin_degrees(angle);
+		pos.x += (worm_size * Math::cos_degrees(angle) * dir);
+		pos.y += (worm_size * Math::sin_degrees(angle));
 	} else {
 		pos.x += this->dir;
 	}
