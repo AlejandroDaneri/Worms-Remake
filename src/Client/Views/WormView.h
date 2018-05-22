@@ -6,7 +6,7 @@
 #include <gtkmm/image.h>
 #include <gtkmm/grid.h>
 #include <gdkmm/pixbuf.h>
-#include <gtkmm/label.h>
+#include "WormLifeView.h"
 #include <queue>
 
 #define DIR_RIGHT 1
@@ -22,7 +22,7 @@ class WormView: public Viewable{
 		std::string weapon;
 		//std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
 		//Glib::RefPtr<Gdk::Pixbuf> full_image;
-		Gtk::Label label;
+		WormLifeView label;
 		Gtk::Image image;
 		Gtk::Grid worm;
 
