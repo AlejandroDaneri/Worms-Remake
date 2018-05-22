@@ -2,7 +2,9 @@
 #include "ObjectSizes.h"
 #include "client_Player.h"
 
-ViewsList::ViewsList(WorldView& world, Player& player): world(world), player(player) {
+ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list):
+	world(world), player(player), players_list(players_list){
+
 	this->scope.set("resources/images/scope/scope.png");
 	this->draw_scope = false;
 	this->world.addElement(this->scope, Position(0,500), 0, 0);
@@ -13,6 +15,7 @@ ViewsList::~ViewsList(){}
 
 void ViewsList::removeWorm(int id){
 	auto it = this->worms.find(id);
+	this->players_list.reducePlayerLife(it->second.getPlayerId(), it->second.getLife());
 	if (id == this->current_worm_id){
 		this->player.damageReceived();
 	}
@@ -38,10 +41,15 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, 
 		//Worm no existe
 		WormView worm(this->world, life, dir, pos, player_id, weapon_name);
 		this->worms.insert(std::make_pair(id, std::move(worm)));
+		this->players_list.addPlayerLife(player_id, life);
 	} else {
 		//Worm existe
-		if (id == this->current_worm_id && it->second.getLife() != life){
-			this->player.damageReceived();
+		int current_life = it->second.getLife();
+		if (current_life != life){
+			this->players_list.reducePlayerLife(player_id, current_life - life);
+			if (id == this->current_worm_id){
+				this->player.damageReceived();
+			}
 		}
 		it->second.updateData(life, dir, pos, weapon_name);
 	}

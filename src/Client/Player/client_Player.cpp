@@ -6,7 +6,8 @@ const int NO_ANGLE = 500;
 
 Player::Player(ClientProtocol protocol, const std::string& name): 
 	protocol(std::move(protocol)), name(name), weapons_view(this->weapons, *this),
-	screen(this->world, this->weapons_view, this->turn_label), view_list(this->world, *this),
+	screen(this->world, this->weapons_view, this->turn_label, this->players_list),
+	view_list(this->world, *this, this->players_list),
 	data_receiver(this->view_list, *this, this->protocol),
 	handlers(*this, this->view_list, this->weapons, this->world) {
 

@@ -38,6 +38,8 @@ class WormView: public Viewable{
 		void kill();
 
 		int getLife() const;
+
+		int getPlayerId() const;
 		
 		Gtk::Widget& getWidget() override;
 };

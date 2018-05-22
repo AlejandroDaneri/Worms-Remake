@@ -70,8 +70,6 @@ Gtk::Widget& WormView::getWidget(){
 	//this->worm.add(this->image);
 	//this->worm.show();
 	return this->worm;
-	
-	//return this->image;
 }
 
 int WormView::getLife() const{
@@ -82,3 +80,6 @@ char WormView::getDir() const {
 	return this->dir;
 }
 
+int WormView::getPlayerId() const{
+	return this->player_id;
+}

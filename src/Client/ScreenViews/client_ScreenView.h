@@ -6,6 +6,7 @@
 #include "WorldView.h"
 #include "client_WeaponView.h"
 #include "TurnLabel.h"
+#include "client_PlayersList.h"
 
 
 class ScreenView {
@@ -14,7 +15,7 @@ class ScreenView {
 		Gtk::HBox world_box;
 
 	public:
-		ScreenView(WorldView& world, WeaponView& weapons, TurnLabel& label);
+		ScreenView(WorldView& world, WeaponView& weapons, TurnLabel& label, PlayersList& players);
 		~ScreenView();
 		
 		Gtk::Container& getWindow();

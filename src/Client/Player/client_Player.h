@@ -25,12 +25,12 @@ class Player {
 		WorldView world;
 		WeaponView weapons_view;
 		TurnLabel turn_label;
+		PlayersList players_list;
 		ScreenView screen;
 		std::unique_ptr<Turn> turn;
 		ViewsList view_list;
 		DataReceiver data_receiver;
 		Handlers handlers;
-		PlayersList players_list;
 		
 		void disable_attack_handlers();
 
