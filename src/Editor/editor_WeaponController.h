@@ -10,10 +10,12 @@ class WeaponBox;
 
 class WeaponController {
 private:
-    WeaponBox &weapon_view;
-    WeaponModel *weapon_model;
+    std::shared_ptr<WeaponBox> weapon_view;
+    std::shared_ptr<WeaponModel> weapon_model;
 public:
-    WeaponController(WeaponBox &View, WeaponModel *model);
+    WeaponController(std::shared_ptr<WeaponBox>,
+            std::shared_ptr<WeaponModel>
+            model);
 
     void reset_ammo();
 

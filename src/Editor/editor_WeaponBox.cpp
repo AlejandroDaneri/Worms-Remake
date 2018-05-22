@@ -14,7 +14,7 @@ WeaponBox::WeaponBox(Gtk::Scale *pWidget, Gtk::CheckButton *pButton)
             sigc::mem_fun(*this, &WeaponBox::on_checkbox_clicked));
 }
 
-void WeaponBox::on_ammo_value_change() { ////mejorar?
+void WeaponBox::on_ammo_value_change() {
     controller->updateAmmo(ammo_selector->get_value());
 }
 

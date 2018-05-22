@@ -22,6 +22,8 @@ public:
     int turnLast();
 
     void getLastPosition(double &x, double &y);
+
+    bool lastIsGirder();
 };
 
 

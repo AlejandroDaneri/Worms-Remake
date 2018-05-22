@@ -36,7 +36,7 @@ public:
 
     void moveLast(double &x, double &y);
 
-    void turnLast(int &angle, double &x, double &y);
+    void turnLast(int &angle);
 };
 
 

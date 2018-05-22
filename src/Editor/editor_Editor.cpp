@@ -9,7 +9,7 @@ Editor::Editor(BaseObjectType *cobject,
         //weapons
           weplist(m_builder),
           weps_list_controller(weplist, weps_reset_button) {
-    fullscreen();
+    maximize();
     m_builder->get_widget("map_window", map_window);
 
 
@@ -19,7 +19,6 @@ Editor::Editor(BaseObjectType *cobject,
     MapController* map_controller = new MapController(map_model,*map);
     toolbox->linkController(map_controller);
     map->linkController(map_controller);
-
 
     m_builder->get_widget("btn_reset_wep", weps_reset_button);
     weps_reset_button->signal_clicked().connect(

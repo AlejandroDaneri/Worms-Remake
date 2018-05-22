@@ -3,7 +3,8 @@
 
 //TODO: cambiar posicion por centro
 void MapModel::undo() {
-    this->objects.pop_back();
+    if(!objects.empty())
+        this->objects.pop_back();
 }
 
 void MapModel::clean() {
@@ -28,4 +29,8 @@ int MapModel::turnLast() {
 void MapModel::getLastPosition(double &x, double &y) {
     ObjectModel &last_pos = objects.back().second;
     last_pos.getPosition(x, y);
+}
+
+bool MapModel::lastIsGirder() {
+    return objects.back().first==2;
 }

@@ -22,13 +22,12 @@ void MapController::clean(){
 }
 void MapController::moveSignal(){
     this->actual_action_id=MOVE_CMD_ID;
-
 }
 void MapController::turnSignal(){
-    int new_angle = this->model.turnLast();
-    double x,y;
-    this->model.getLastPosition(x,y);
-    this->view.turnLast(new_angle, x, y);
+    if(model.lastIsGirder()) {
+        int new_angle = this->model.turnLast();
+        this->view.turnLast(new_angle);
+    }
 }
 void MapController::saveSignal(){
 

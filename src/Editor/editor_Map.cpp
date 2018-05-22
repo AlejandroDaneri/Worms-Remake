@@ -32,19 +32,20 @@ void Map::add(unsigned int &id, double &x, double &y) {
     objects.push_back(std::move(new_image));
 }
 
-void Map::moveLast(double &x, double &y) {
-    Gtk::Image &actual_object = objects.back();
-    move(actual_object,x-actual_object.get_width()/2,y-actual_object.get_height()/2);
-    actual_object.show();
+void Map::moveLast(double &x, double &y){
+    if(!objects.empty()) {
+        Gtk::Image &actual_object = objects.back();
+        move(actual_object, x - actual_object.get_width() / 2,
+             y - actual_object.get_height() / 2);
+        actual_object.show();
+    }
 }
 
-void Map::turnLast(int &angle, double &x, double &y) {
-    objects.pop_back();
-    Gtk::Image new_image(pallete[(angle % 180) / 10 + 1]);
-    put(new_image, x - new_image.get_pixbuf()->get_width()/ 2,
-        y - new_image.get_pixbuf()->get_height() / 2);
-    new_image.show();
-    objects.push_back(std::move(new_image));
+void Map::turnLast(int &angle) {
+    if (!objects.empty()) {
+        Gtk::Image &image = objects.back();
+        image.set(pallete[(angle % 180) / 10 + 1]);
+    }
 }
 
 
@@ -54,7 +55,8 @@ bool Map::on_button_clicked(GdkEventButton *button_event) {
 }
 
 void Map::undo() {
-    objects.pop_back();
+    if(!objects.empty())
+        objects.pop_back();
 }
 
 void Map::clean() {
