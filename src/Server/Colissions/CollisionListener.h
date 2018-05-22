@@ -5,8 +5,11 @@
 #include "CollisionData.h"
 #include "b2WorldCallbacks.h"
 #include "b2Contact.h"
+#include <list>
 
 class CollisionListener: public b2ContactListener, public b2ContactFilter{
+	private:
+		std::list<b2Contact*> contacts_disabled;
 	public:
 		CollisionListener();
 		~CollisionListener();

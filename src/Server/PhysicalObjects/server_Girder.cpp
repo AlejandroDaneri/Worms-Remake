@@ -37,5 +37,5 @@ bool Girder::has_friction(){
 	if (angle > 90){
 		angle = 180 - angle;
 	}
-	return angle > 0 && angle < this->max_rotation_to_friction;
+	return angle < this->max_rotation_to_friction;
 }

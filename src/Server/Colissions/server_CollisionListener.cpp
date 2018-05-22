@@ -23,14 +23,24 @@ void CollisionListener::BeginContact(b2Contact* contact){
 
 	b2WorldManifold manifold;
 	contact->GetWorldManifold(&manifold);
-	b2Vec2 normal = manifold.normal;
+	b2Vec2 collision_point = manifold.points[0];
 
-	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_GIRDER && normal.y > 0){
-		return; //gusano colisiona por abajo de la viga
+	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_GIRDER){
+		Worm* worm = (Worm*)dataA->getObject();
+		if (worm->getPosition().y < collision_point.y){
+			//gusano colisiona por abajo de la viga
+			this->contacts_disabled.push_back(contact);
+			return;
+		}
 	}
 
-	if (dataB->getType() == TYPE_WORM && dataA->getType() == TYPE_GIRDER && normal.y < 0){
-		return; //gusano colisiona por abajo de la viga
+	if (dataB->getType() == TYPE_WORM && dataA->getType() == TYPE_GIRDER){
+		Worm* worm = (Worm*)dataB->getObject();
+		if (worm->getPosition().y < collision_point.y){
+			//gusano colisiona por abajo de la viga
+			this->contacts_disabled.push_back(contact);
+			return;
+		}
 	}
 
 	if (dataA->getType() == TYPE_WORM){
@@ -43,6 +53,13 @@ void CollisionListener::BeginContact(b2Contact* contact){
 void CollisionListener::EndContact(b2Contact* contact){
 	CollisionData* dataA = (CollisionData*)contact->GetFixtureA()->GetBody()->GetUserData();
 	CollisionData* dataB = (CollisionData*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+	for (auto it = this->contacts_disabled.begin(); it != this->contacts_disabled.end(); ++it){
+		if (*it == contact){
+			this->contacts_disabled.erase(it);
+			return;
+		}
+	}
 
 	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_GIRDER){
 		bool friction = ((Girder*)dataB->getObject())->has_friction();
