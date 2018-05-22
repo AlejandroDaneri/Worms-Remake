@@ -9,11 +9,11 @@
 
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon):
 	Viewable(worldView), player_id(player_id), life(life), dir(dir), dir_changed(true), weapon(weapon), label(life, colors[player_id]){
-	    /*this->full_image = Gdk::Pixbuf::create_from_file("resources/images/walk.png");
+	    /*this->full_image = Gdk::Pixbuf::create_from_file("resources/images/walk2.png");
 	    int ancho = full_image->get_width();
 	    int alto = full_image->get_height();
-	    for (int i = 0; i < alto/60 -1; i++) {
-			queue.push(Gdk::Pixbuf::create_subpixbuf(full_image, 0, i*60, ancho, ancho));
+	    for (int i = 0; i < alto/30 -1; i++) {
+			queue.push(Gdk::Pixbuf::create_subpixbuf(full_image, 0, i*30, ancho, 30));
 		}*/
 		this->worm.attach(this->label.getWidget(), 0, 0, 1, 1);
 		this->worm.attach(this->image, 0, 1, 1, 1);
@@ -62,11 +62,9 @@ Gtk::Widget& WormView::getWidget(){
 		//this->queue.push(std::move(this->queue.front()));
 		//this->queue.pop();
 	}
-	/*if (this->dir == DIR_RIGHT) {
-		this->image.set(Gdk::Pixbuf::create_subpixbuf(this->queue.back(), 0, 0, 60, 60));
-	} else {
-		this->image.set(Gdk::Pixbuf::create_subpixbuf(this->queue.back(), 60, 0, 60, 60));
-	}*/
+	//this->image.set(Gdk::Pixbuf::create_subpixbuf(this->queue.back(), 30 + this->dir * 30, 0, 30, 30));
+	
+	
 	//this->worm.add(this->image);
 	//this->worm.show();
 	return this->worm;

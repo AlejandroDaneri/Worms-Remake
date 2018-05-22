@@ -9,6 +9,8 @@ ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list
 	this->draw_scope = false;
 	this->world.addElement(this->scope, Position(0,500), 0, 0);
 	this->scope.hide();
+	this->current_worm_id = -1;
+	this->animation = nullptr;
 }
 
 ViewsList::~ViewsList(){}
@@ -29,6 +31,16 @@ void ViewsList::removeWeapon(int id){
 	}
 	auto it = this->weapons.find(id);
 	if (it != this->weapons.end()){
+		if (this->animation != nullptr)
+			this->animation->join();
+		this->animation.reset(new ExplosionView(it->second, *this, id));
+		this->animation->start();
+	}
+}
+
+void ViewsList::eraseWeapon(int id) {
+	auto it = this->weapons.find(id);
+	if (it != this->weapons.end()) {
 		it->second.explode();
 		this->weapons.erase(it);
 	}
