@@ -11,9 +11,15 @@ Editor::Editor(BaseObjectType *cobject,
           weps_list_controller(weplist, weps_reset_button) {
     fullscreen();
     m_builder->get_widget("map_window", map_window);
+
+
     m_builder->get_widget_derived("map", map);
     m_builder->get_widget_derived("toolbox", toolbox);
-    toolbox->link_map(map);
+
+    MapController* map_controller = new MapController(map_model,*map);
+    toolbox->linkController(map_controller);
+    map->linkController(map_controller);
+
 
     m_builder->get_widget("btn_reset_wep", weps_reset_button);
     weps_reset_button->signal_clicked().connect(

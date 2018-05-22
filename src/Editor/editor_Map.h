@@ -2,17 +2,22 @@
 #ifndef WORMS_MAP_H
 #define WORMS_MAP_H
 
+#include <gtkmm/builder.h>
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
 #include "editor_Pos.h"
 #include "editor_MapObject.h"
+#include "editor_MapController.h"
+#include "editor_ObjectView.h"
+
+class MapController;
 
 class Map : public Gtk::Layout {
 private:
     Glib::RefPtr<Gtk::Builder> m_builder;
-    std::vector<std::pair<int, MapObject>> objects;
-    unsigned int button_id, action;
+    std::vector<Gtk::Image> objects;
     std::vector<std::string> pallete;
+    MapController *controller;
 
 public:
     Map(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
@@ -23,15 +28,19 @@ public:
 
     void clean();
 
-    void clicked_signal(unsigned int id);
-
-    void move_signal();
-
     void turn_signal();
 
     void save_signal();
 
     void load_signal();
+
+    void linkController(MapController *pController);
+
+    void add(unsigned int id, double x, double y);
+
+    void moveLast(double x, double y);
+
+    void turnLast(int angle);
 };
 
 

@@ -15,6 +15,7 @@ class Editor : public Gtk::Window {
     Gtk::ScrolledWindow *map_window;
     Map *map;
     Toolbox *toolbox;
+    MapModel map_model;
 
     Gtk::Button *weps_reset_button;
     WeaponListt weplist;

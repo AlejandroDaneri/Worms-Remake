@@ -7,6 +7,7 @@
 #include <gtkmm/layout.h>
 #include <gtkmm/togglebutton.h>
 #include "editor_Map.h"
+#include "editor_MapController.h"
 
 
 #define WORM_BUTTON_ID 1
@@ -17,11 +18,11 @@ private:
     Glib::RefPtr<Gtk::Builder> m_builder;
     Gtk::Button *btn_clean;
     Gtk::Button *erase; //pasar a toggle
-    Map *map;
+    MapController *map_controller;
     Gtk::ToggleButton *worm;
     Gtk::ToggleButton *girder;
     Gtk::Button *move;// pasar a toggle
-    bool item_pressed;
+
     Gtk::Button *turn;
     Gtk::Button *save;
     Gtk::Button *load;
@@ -29,9 +30,9 @@ private:
 public:
     Toolbox(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 
-    void link_map(Map *pMap);
+    void linkController(MapController *controller);
 
-    void on_button_clicked(int id);
+    void on_button_clicked(unsigned int id);
 
 };
 
