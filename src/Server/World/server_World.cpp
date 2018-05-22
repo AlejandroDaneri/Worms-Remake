@@ -2,7 +2,6 @@
 #include "Weapon.h"
 #include "BottomBorder.h"
 #include "b2WorldCallbacks.h"
-#include "RayCastClosestCallback.h"
 #include "server_Fragment.h"
 
 World::World(GameParameters& parameters): world(b2Vec2(0, parameters.getGravity())),
@@ -120,11 +119,9 @@ void World::setLinearVelocity(PhysicalObject& object, b2Vec2& velocity){
 	body->SetLinearVelocity(velocity);
 }
 
-b2Body* World::getClosestObject(b2Vec2 center, b2Vec2 end, b2Vec2& normal){
-	RayCastClosestCallback callback;
-	this->world.RayCast(&callback, center, end);
-	normal = callback.getClosestNormal();
-	return callback.getClosestBody();
+b2Body* World::getClosestObject(RayCastWeaponExploded* callback, b2Vec2 center, b2Vec2 end){
+	this->world.RayCast(callback, center, end);
+	return callback->getClosestWorm();
 }
 
 std::list<physical_object_ptr>& World::getObjectsList(){

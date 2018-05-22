@@ -12,7 +12,6 @@ class Worm: public PhysicalObject{
 		char dir;
 		GameParameters& parameters;
 		physical_object_ptr weapon;
-		int last_weapon_exploded;
 		float max_height;
 		int colliding_with_girder;
 		int friction;
@@ -46,7 +45,7 @@ class Worm: public PhysicalObject{
 
 		void end_collission_girder(char friction);
 
-		void receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id);
+		void receive_weapon_damage(int damage, const b2Vec2& epicenter);
 
 		bool isActive() override;
 };

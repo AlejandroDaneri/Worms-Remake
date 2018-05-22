@@ -9,7 +9,7 @@
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), last_weapon_exploded(-1), max_height(0), colliding_with_girder(0), friction(false){
+	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(false){
 		this->changeWeapon(BAZOOKA_NAME);
 	}
 
@@ -109,16 +109,15 @@ void Worm::shoot(b2Vec2 pos){
 }
 
 #include <iostream>/////////////////////////////////////
-void Worm::receive_weapon_damage(int damage, const b2Vec2& normal, int weapon_id){
-	if (weapon_id != this->last_weapon_exploded){
-		this->reduce_life(damage);
-		std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
-		std::cout <<"normal: "<<normal.x<<"  "<<normal.y<<std::endl;
-		this->body->SetGravityScale(1);
-		this->friction = 0;
-		this->body->SetLinearVelocity(-1 * damage * parameters.getWormExplosionVelocity() * normal);
-		this->last_weapon_exploded = weapon_id;
-	}
+void Worm::receive_weapon_damage(int damage, const b2Vec2& epicenter){
+	this->reduce_life(damage);
+	b2Vec2 direction = this->body->GetPosition() - epicenter;
+	std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
+	std::cout <<"direction: "<<direction.x<<"  "<<direction.y<<std::endl;
+	direction.Normalize();
+	this->body->SetGravityScale(1);
+	this->friction = 0;
+	this->body->SetLinearVelocity(damage * parameters.getWormExplosionVelocity() * direction);
 }
 
 void Worm::collide_with_something(CollisionData* other){
@@ -143,11 +142,11 @@ void Worm::collide_with_something(CollisionData* other){
 }
 
 void Worm::end_collission_girder(char has_friction){
-	this->body->SetGravityScale(1);
 	this->colliding_with_girder--;
 	this->friction -= has_friction;
-	if (this->friction < 0){
+	if (this->friction <= 0){
 		this->friction = 0;
+		this->body->SetGravityScale(1);
 	}
 }
 
