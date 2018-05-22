@@ -6,7 +6,6 @@
 #include <gtkmm/window.h>
 #include <gtkmm/scrolledwindow.h>
 #include "editor_Map.h"
-//#include "_editor_WeaponsBar.h"
 #include "editor_Toolbox.h"
 #include "editor_WeaponsListController.h"
 

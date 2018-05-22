@@ -1,6 +1,5 @@
 
 #include "editor_MapModel.h"
-#include "editor_Pos.h"
 
 //TODO: cambiar posicion por centro
 void MapModel::undo() {
@@ -12,14 +11,13 @@ void MapModel::clean() {
 }
 
 void MapModel::add(unsigned int &id, double &x, double &y) {
-    Pos new_pos(x,y);
-    ObjectModel new_object(new_pos);
+    ObjectModel new_object(x,y);
     objects.emplace_back(std::make_pair(id,new_object));
 }
 
 void MapModel::moveLast(double &x, double &y) {
     ObjectModel &object = objects.back().second;
-    object.updatePos(x,y);
+    object.updatePosition(x, y);
 }
 
 int MapModel::turnLast() {
@@ -29,5 +27,5 @@ int MapModel::turnLast() {
 
 void MapModel::getLastPosition(double &x, double &y) {
     ObjectModel &last_pos = objects.back().second;
-    last_pos.getPos(x,y);
+    last_pos.getPosition(x, y);
 }

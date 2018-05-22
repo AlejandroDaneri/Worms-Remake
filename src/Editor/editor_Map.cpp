@@ -67,7 +67,7 @@ void Map::save_signal() {
     std::vector<std::vector<double>> worms;
     std::vector<std::vector<double>> girders;
     for (auto &object : objects) {
-        const Pos &pos = object.second.getPos();
+        const Pos &pos = object.second.getPosition();
         if (object.first == 1) {//worm
             std::vector<double> position;
             position.push_back(pos.getX()); //pos x

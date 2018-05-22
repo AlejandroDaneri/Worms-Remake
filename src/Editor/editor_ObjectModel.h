@@ -3,18 +3,18 @@
 #define WORMS_OBJECTMODEL_H
 
 
-#include "editor_Pos.h"
 
 class ObjectModel {
-    Pos position;
+    double x,y;
+    int angle;
 public:
-    explicit ObjectModel(const Pos &position);
+    ObjectModel(const double &x, const double &y, const int &angle=0);
 
-    void updatePos(double x, double y);
+    void updatePosition(double x, double y);
 
     int turn();
 
-    void getPos(double& x, double& y);
+    void getPosition(double &x, double &y);
 };
 
 
