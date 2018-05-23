@@ -44,7 +44,7 @@ void Map::moveLast(double &x, double &y){
 void Map::turnLast(int &angle) {
     if (!objects.empty()) {
         Gtk::Image &image = objects.back();
-        image.set(pallete[(angle % 180) / 10 + 1]);
+        image.set(pallete[angle / 10 + 1]);
     }
 }
 

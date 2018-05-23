@@ -10,7 +10,7 @@ void ObjectModel::updatePosition(double x, double y) {
 }
 
 int ObjectModel::turn() {
-    return angle += 10;
+    return angle = (angle +10)%180;
 }
 
 void ObjectModel::getPosition(double &x, double &y) {

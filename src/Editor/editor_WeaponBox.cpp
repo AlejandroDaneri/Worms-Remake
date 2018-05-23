@@ -7,6 +7,7 @@ WeaponBox::WeaponBox(Gtk::Scale *pWidget, Gtk::CheckButton *pButton)
           default_ammo_selector_value(ammo_selector->get_value()),
           controller(nullptr) {
     ammo_selector->set_sensitive(!default_checkbox_state);
+
     ammo_selector->signal_value_changed().connect(
             sigc::mem_fun(*this, &WeaponBox::on_ammo_value_change));
 
