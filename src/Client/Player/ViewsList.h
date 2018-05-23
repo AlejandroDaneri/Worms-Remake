@@ -6,10 +6,10 @@
 #include <string>
 #include "WorldView.h"
 #include "WormView.h"
-#include "client_BulletView.h"
+#include "BulletView.h"
 #include "GirderView.h"
-#include "client_PlayersList.h"
-#include "client_explosionView.h"
+#include "PlayersList.h"
+#include "ExplosionView.h"
 
 class ViewsList{
 	private:
