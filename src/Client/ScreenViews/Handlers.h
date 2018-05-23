@@ -1,7 +1,7 @@
 #ifndef __HANDLERS__H__
 #define __HANDLERS__H__
 
-#include "client_Timer.h"
+#include "Timer.h"
 #include <gdk/gdk.h>
 
 class Player;

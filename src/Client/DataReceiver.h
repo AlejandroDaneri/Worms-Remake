@@ -3,7 +3,7 @@
 
 #include "Thread.h"
 #include "ViewsList.h"
-#include "client_Protocol.h"
+#include "ClientProtocol.h"
 
 class Player;
 
