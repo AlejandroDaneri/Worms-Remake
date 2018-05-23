@@ -32,7 +32,7 @@ class Player {
 		DataReceiver data_receiver;
 		Handlers handlers;
 		
-		void disable_attack_handlers();
+		void shootWeapon();
 
 	public:
 		/* Constructor */

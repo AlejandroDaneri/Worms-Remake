@@ -63,9 +63,6 @@ class Handlers{
 		/* Deshabilita todos los handlers */
 		void disable_all();
 
-		/* Deshabilita los handlers de ataque */
-		void disable_attack_handlers();
-
 		/* Realiza el shoot del player */
 		void timerStopped(int power);
 

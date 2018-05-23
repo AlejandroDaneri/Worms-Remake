@@ -23,7 +23,9 @@ class ViewsList{
 		bool draw_scope;
 		int current_worm_id;
 		int weapon_focused;
-		std::unique_ptr<ExplosionView> animation;
+		std::unique_ptr<ExplosionView> animation; ////////////////////// Cambiar por un vector de ExplosionView
+		//////////////////Este vector se encargara de recorrerlos y de hacerles el join y de hacer el start.
+		///////// ExplosionView tendra que recibir la imagen por movimiento y el bulletView. Despues de la animacion llama a explode para eliminarlo del word.
 
 	public:
 		ViewsList(WorldView& world, Player& player, PlayersList& players_list);

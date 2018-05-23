@@ -25,7 +25,7 @@ int main(int argc, char* argv[]){
 
 		window.add(player.getWindow());
 		window.show_all();
-
+		window.maximize();
 		app->run(window);
     } catch (const std::exception& e){
     	std::cout << e.what() << std::endl;

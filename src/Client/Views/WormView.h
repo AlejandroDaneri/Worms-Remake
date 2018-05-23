@@ -13,7 +13,7 @@
 #define DIR_LEFT -1
 
 
-class WormView: public Viewable{
+class WormView: public Viewable {
 	private:
 		int player_id;
 		int life;
@@ -23,8 +23,8 @@ class WormView: public Viewable{
 		WormLifeView label;
 		Gtk::Image image;
 		Gtk::Grid worm;
-		//std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
-		//Glib::RefPtr<Gdk::Pixbuf> full_image;
+		std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
+		Glib::RefPtr<Gdk::Pixbuf> full_image;
 
 	public:
 		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon);

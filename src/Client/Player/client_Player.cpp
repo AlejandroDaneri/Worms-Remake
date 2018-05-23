@@ -56,8 +56,7 @@ void Player::damageReceived(){
 	this->turn->stop();
 }
 
-void Player::disable_attack_handlers() {
-	this->handlers.disable_attack_handlers();
+void Player::shootWeapon() {
 	this->turn->reduceTime();
 	this->weapons.get_actual_weapon().shoot();
 }
@@ -73,7 +72,7 @@ void Player::change_weapon(std::string weapon) {
 }
 
 void Player::shoot(Position position) {
-	this->disable_attack_handlers();
+	this->shootWeapon();
 	Position newPosition = ViewTransformer().transformToPosition(position);
 	this->protocol.send_weapon_self_directed_shoot(newPosition);
 	this->weapons_view.updateAmmo(this->weapons.get_actual_weapon());
@@ -87,7 +86,7 @@ void Player::play_tick_time() {
 void Player::shoot(int angle, int power, int time) {
 	// Elimino los handlers de disparo
 	printf("shoot\n");
-	this->disable_attack_handlers();
+	this->shootWeapon();
 	if (!this->weapons.get_actual_weapon().isTimed()) {
 		time = -1;
 	}
