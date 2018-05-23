@@ -1,7 +1,7 @@
 
 #include "WeaponModel.h"
 
-WeaponModel::WeaponModel(const int & default_ammo)
+WeaponModel::WeaponModel(const int &default_ammo)
         : default_ammo(default_ammo),
           actual_ammo(default_ammo) {}
 

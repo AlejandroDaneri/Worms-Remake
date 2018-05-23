@@ -13,13 +13,14 @@ class WeaponController;
 
 class WeaponView {
     const Glib::RefPtr<Gtk::Builder> m_builder;
-    Gtk::Scale * ammo_selector;
+    Gtk::Scale *ammo_selector;
     Gtk::CheckButton *infinite;
     bool default_checkbox_state;
     int default_ammo_selector_value;
     WeaponController *controller;
 public:
-    WeaponView(const Glib::RefPtr<Gtk::Builder> &builder, const unsigned int &id);
+    WeaponView(const Glib::RefPtr<Gtk::Builder> &builder,
+               const unsigned int &id);
 
     void on_ammo_value_change();
 

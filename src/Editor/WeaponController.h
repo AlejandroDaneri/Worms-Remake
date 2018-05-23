@@ -13,8 +13,8 @@ private:
     std::shared_ptr<WeaponModel> weapon_model;
 public:
     WeaponController(std::shared_ptr<WeaponView>,
-            std::shared_ptr<WeaponModel>
-            model);
+                     std::shared_ptr<WeaponModel>
+                     model);
 
     void reset_ammo();
 

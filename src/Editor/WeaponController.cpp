@@ -2,7 +2,7 @@
 #include "WeaponController.h"
 
 WeaponController::WeaponController(std::shared_ptr<WeaponView> View,
-                                   std::shared_ptr<WeaponModel>model)
+                                   std::shared_ptr<WeaponModel> model)
         : weapon_view(View),
           weapon_model(model) {
     weapon_view->linkController(this);

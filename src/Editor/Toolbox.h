@@ -6,7 +6,7 @@
 #include <gtkmm/button.h>
 #include <gtkmm/layout.h>
 #include <gtkmm/togglebutton.h>
-#include "Map.h"
+#include "MapView.h"
 #include "MapController.h"
 
 

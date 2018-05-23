@@ -7,14 +7,14 @@
 
 class ToolboxController {
 private:
-    Toolbox* toolbox;
-    Map *map;
+    Toolbox *toolbox;
+    MapView *map;
 public:
     ToolboxController(Toolbox *pToolbox);
 
     void clickedSignal(unsigned int id);
 
-    void link_map(Map *pMap);
+    void link_map(MapView *pMap);
 
 
 };

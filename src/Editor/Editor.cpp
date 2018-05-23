@@ -16,7 +16,7 @@ Editor::Editor(BaseObjectType *cobject,
     m_builder->get_widget_derived("map", map);
     m_builder->get_widget_derived("toolbox", toolbox);
 
-    MapController* map_controller = new MapController(map_model,*map);
+    MapController *map_controller = new MapController(map_model, *map);
     toolbox->linkController(map_controller);
     map->linkController(map_controller);
 

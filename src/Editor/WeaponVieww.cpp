@@ -1,13 +1,14 @@
 #include "WeaponVieww.h"
 
-WeaponView::WeaponView(const Glib::RefPtr<Gtk::Builder> &builder, const unsigned int &id)
+WeaponView::WeaponView(const Glib::RefPtr<Gtk::Builder> &builder,
+                       const unsigned int &id)
         : m_builder(builder) {
 
     m_builder->get_widget("sc_wep" + std::to_string(id), ammo_selector);
     m_builder->get_widget("cb_wep" + std::to_string(id), infinite);
 
-    default_checkbox_state=infinite->get_active();
-    default_ammo_selector_value=ammo_selector->get_value();
+    default_checkbox_state = infinite->get_active();
+    default_ammo_selector_value = ammo_selector->get_value();
 
     ammo_selector->set_sensitive(!default_checkbox_state);
 
@@ -40,6 +41,6 @@ void WeaponView::linkController(WeaponController *controller) {
     this->controller = controller;
 }
 
-const int WeaponView::getInitialAmmo(){
+const int WeaponView::getInitialAmmo() {
     return default_ammo_selector_value;
 }

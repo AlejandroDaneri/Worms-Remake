@@ -3,19 +3,19 @@
 #define WORMS_MAPCONTROLLER_H
 
 
+#include "MapView.h"
 #include "Map.h"
-#include "MapModel.h"
 
-class Map;
+class MapView;
 
 class MapController {
-    MapModel model;
-    Map& view;
+    Map model;
+    MapView &view;
     unsigned int actual_item_selected;
     unsigned int actual_action_id;
 
 public:
-    MapController(const MapModel &model, Map &view);
+    MapController(const Map &model, MapView &view);
 
     void itemSelectedSignal(unsigned int id);
 
