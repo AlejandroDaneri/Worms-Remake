@@ -3,6 +3,7 @@
 #include <utility>
 #include "WeaponsListController.h"
 #include "FileWriter.h"
+#include "FileReader.h"
 
 FileBoxController::FileBoxController(const WeaponsListController &wep_controller,
                                      std::shared_ptr<MapController> map_controller)
@@ -26,7 +27,11 @@ void FileBoxController::onSaveClicked() const {
 }
 
 void FileBoxController::onLoadClicked() const {
+    FileReader file("config_editor.yaml");
+    file.read();
 
+    //weapons_controller.loadWeapons();
+    //map_controller.loadObjects;
 }
 
 
