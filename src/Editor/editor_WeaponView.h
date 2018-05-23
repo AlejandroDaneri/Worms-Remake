@@ -6,18 +6,20 @@
 #include <gtkmm/hvbox.h>
 #include <gtkmm/scale.h>
 #include <gtkmm/checkbutton.h>
+#include <gtkmm/builder.h>
 #include "editor_WeaponController.h"
 
 class WeaponController;
 
-class WeaponBox {
-    Gtk::Scale *ammo_selector;
+class WeaponView {
+    const Glib::RefPtr<Gtk::Builder> m_builder;
+    Gtk::Scale * ammo_selector;
     Gtk::CheckButton *infinite;
-    const bool default_checkbox_state;
-    const int default_ammo_selector_value;
+    bool default_checkbox_state;
+    int default_ammo_selector_value;
     WeaponController *controller;
 public:
-    WeaponBox(Gtk::Scale *pWidget, Gtk::CheckButton *pButton);
+    WeaponView(const Glib::RefPtr<Gtk::Builder> &builder, const unsigned int &id);
 
     void on_ammo_value_change();
 
@@ -26,6 +28,8 @@ public:
     void reset_ammo();
 
     void linkController(WeaponController *controller);
+
+    const int getInitialAmmo();
 };
 
 

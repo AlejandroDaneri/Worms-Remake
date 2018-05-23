@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "editor_WeaponBox.h"
+#include "editor_WeaponView.h"
 #define MAX_AMMO 51
 #define CHANGE_AMMO_STEP 1
 

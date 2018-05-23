@@ -12,7 +12,7 @@ class MapController;
 
 class Map : public Gtk::Layout {
 private:
-    Glib::RefPtr<Gtk::Builder> m_builder;
+    const Glib::RefPtr<Gtk::Builder> m_builder;
     std::vector<Gtk::Image> objects;
     std::vector<std::string> pallete;
     MapController *controller;

@@ -3,17 +3,17 @@
 #define WORMS_WEAPONCONTROLLER_H
 
 
-#include "editor_WeaponBox.h"
+#include "editor_WeaponView.h"
 #include "editor_WeaponModel.h"
 
-class WeaponBox;
+class WeaponView;
 
 class WeaponController {
 private:
-    std::shared_ptr<WeaponBox> weapon_view;
+    std::shared_ptr<WeaponView> weapon_view;
     std::shared_ptr<WeaponModel> weapon_model;
 public:
-    WeaponController(std::shared_ptr<WeaponBox>,
+    WeaponController(std::shared_ptr<WeaponView>,
             std::shared_ptr<WeaponModel>
             model);
 

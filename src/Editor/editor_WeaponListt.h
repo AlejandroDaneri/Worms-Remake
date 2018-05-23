@@ -8,10 +8,9 @@
 #include "editor_WeaponModel.h"
 
 class WeaponListt {
-    Glib::RefPtr<Gtk::Builder> m_builder;
     std::vector<std::shared_ptr<WeaponModel>> weapons;
-    std::vector<std::shared_ptr<WeaponBox >> weapons_view;
-    std::vector<WeaponController *> wep_controllers;
+    std::vector<std::shared_ptr<WeaponView >> weapons_view;
+    std::vector<std::shared_ptr<WeaponController> > wep_controllers;
 public:
     explicit WeaponListt(const Glib::RefPtr<Gtk::Builder> &builder);
 
