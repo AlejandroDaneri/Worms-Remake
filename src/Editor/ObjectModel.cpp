@@ -1,5 +1,5 @@
 
-#include "editor_ObjectModel.h"
+#include "ObjectModel.h"
 
 ObjectModel::ObjectModel(const double &x, const double &y, const int &angle) :
         x(x),y(y),angle(angle) {}

@@ -1,5 +1,5 @@
 
-#include "editor_Editor.h"
+#include "Editor.h"
 
 Editor::Editor(BaseObjectType *cobject,
                const Glib::RefPtr<Gtk::Builder> &builder)

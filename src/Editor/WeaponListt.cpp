@@ -1,7 +1,7 @@
 
 #include <glibmm/refptr.h>
 
-#include "editor_WeaponListt.h"
+#include "WeaponListt.h"
 
 WeaponListt::WeaponListt(const Glib::RefPtr<Gtk::Builder> &builder)
         : m_builder(builder) {

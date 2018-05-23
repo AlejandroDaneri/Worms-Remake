@@ -5,7 +5,7 @@
 
 #include <utility>
 #include <vector>
-#include "editor_ObjectModel.h"
+#include "ObjectModel.h"
 
 class MapModel {
     std::vector<std::pair<int,ObjectModel>> objects;

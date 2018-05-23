@@ -6,8 +6,8 @@
 #include <gtkmm/button.h>
 #include <gtkmm/layout.h>
 #include <gtkmm/togglebutton.h>
-#include "editor_Map.h"
-#include "editor_MapController.h"
+#include "Map.h"
+#include "MapController.h"
 
 
 #define WORM_BUTTON_ID 1

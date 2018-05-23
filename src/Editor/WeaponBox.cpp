@@ -1,4 +1,4 @@
-#include "editor_WeaponBox.h"
+#include "WeaponBox.h"
 
 WeaponBox::WeaponBox(Gtk::Scale *pWidget, Gtk::CheckButton *pButton)
         : ammo_selector(pWidget),

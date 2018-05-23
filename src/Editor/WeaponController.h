@@ -3,8 +3,8 @@
 #define WORMS_WEAPONCONTROLLER_H
 
 
-#include "editor_WeaponBox.h"
-#include "editor_WeaponModel.h"
+#include "WeaponBox.h"
+#include "WeaponModel.h"
 
 class WeaponBox;
 

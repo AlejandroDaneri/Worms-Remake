@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include "yaml-cpp/yaml.h"
-#include "editor_Map.h"
+#include "Map.h"
 
 Map::Map(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),

@@ -5,9 +5,9 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/window.h>
 #include <gtkmm/scrolledwindow.h>
-#include "editor_Map.h"
-#include "editor_Toolbox.h"
-#include "editor_WeaponsListController.h"
+#include "Map.h"
+#include "Toolbox.h"
+#include "WeaponsListController.h"
 
 class Editor : public Gtk::Window {
     Glib::RefPtr<Gtk::Builder> m_builder;

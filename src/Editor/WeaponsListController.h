@@ -3,7 +3,7 @@
 #define WORMS_WEAPONSLISTCONTROLLER_H
 
 
-#include "editor_WeaponListt.h"
+#include "WeaponListt.h"
 
 class WeaponsListController {
 private:

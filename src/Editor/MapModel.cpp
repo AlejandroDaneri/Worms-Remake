@@ -1,5 +1,5 @@
 
-#include "editor_MapModel.h"
+#include "MapModel.h"
 
 //TODO: cambiar posicion por centro
 void MapModel::undo() {

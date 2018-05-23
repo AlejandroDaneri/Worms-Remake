@@ -1,5 +1,5 @@
 
-#include "editor_ToolboxController.h"
+#include "ToolboxController.h"
 
 ToolboxController::ToolboxController(Toolbox *pToolbox)
         : toolbox(pToolbox)

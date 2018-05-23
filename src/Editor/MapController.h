@@ -3,8 +3,8 @@
 #define WORMS_MAPCONTROLLER_H
 
 
-#include "editor_Map.h"
-#include "editor_MapModel.h"
+#include "Map.h"
+#include "MapModel.h"
 
 class Map;
 

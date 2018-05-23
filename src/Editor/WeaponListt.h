@@ -4,8 +4,8 @@
 
 #include <gtkmm/builder.h>
 
-#include "editor_WeaponController.h"
-#include "editor_WeaponModel.h"
+#include "WeaponController.h"
+#include "WeaponModel.h"
 
 class WeaponListt {
     Glib::RefPtr<Gtk::Builder> m_builder;

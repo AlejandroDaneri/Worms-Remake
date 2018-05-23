@@ -3,7 +3,7 @@
 #define WORMS_TOOLBOXCONTROLLER_H
 
 
-#include "editor_Toolbox.h"
+#include "Toolbox.h"
 
 class ToolboxController {
 private:

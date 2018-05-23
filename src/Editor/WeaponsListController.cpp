@@ -1,5 +1,5 @@
 
-#include "editor_WeaponsListController.h"
+#include "WeaponsListController.h"
 
 WeaponsListController::WeaponsListController(WeaponListt weapons,
                                              Gtk::Button *reset_button)

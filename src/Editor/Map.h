@@ -5,8 +5,8 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
-#include "editor_MapController.h"
-#include "editor_ObjectView.h"
+#include "MapController.h"
+#include "ObjectView.h"
 
 class MapController;
 

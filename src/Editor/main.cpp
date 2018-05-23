@@ -4,9 +4,9 @@
 #include <iostream>
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/window.h>
-#include "editor_Editor.h"
-#include "editor_Toolbox.h"
-#include "editor_Map.h"
+#include "Editor.h"
+#include "Toolbox.h"
+#include "Map.h"
 
 int main (int argc, char *argv[])
 {

@@ -1,5 +1,5 @@
 
-#include "editor_WeaponModel.h"
+#include "WeaponModel.h"
 
 WeaponModel::WeaponModel(int default_ammo)
         : default_ammo(default_ammo),

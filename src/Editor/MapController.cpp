@@ -1,5 +1,5 @@
 
-#include "editor_MapController.h"
+#include "MapController.h"
 
 #define ADD_CMD_ID 0
 #define MOVE_CMD_ID 1

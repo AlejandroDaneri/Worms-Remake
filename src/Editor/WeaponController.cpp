@@ -1,5 +1,5 @@
 
-#include "editor_WeaponController.h"
+#include "WeaponController.h"
 
 WeaponController::WeaponController(std::shared_ptr<WeaponBox> View,
                                    std::shared_ptr<WeaponModel>model)

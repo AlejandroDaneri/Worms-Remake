@@ -1,6 +1,6 @@
 
 #include <gtkmm/builder.h>
-#include "editor_Toolbox.h"
+#include "Toolbox.h"
 
 Toolbox::Toolbox(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
