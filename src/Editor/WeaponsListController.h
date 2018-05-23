@@ -3,14 +3,20 @@
 #define WORMS_WEAPONSLISTCONTROLLER_H
 
 
-#include "WeaponListt.h"
+#include <gtkmm/button.h>
+#include "WeaponModel.h"
+#include "WeaponVieww.h"
 
 class WeaponsListController {
 private:
-    WeaponListt weapons;
+    //WeaponListt weapons;
     Gtk::Button *reset_button;
+    std::vector<std::shared_ptr<WeaponModel>> weapons;
+    std::vector<std::shared_ptr<WeaponView>> weapons_view;
+    std::vector<std::shared_ptr<WeaponController> > wep_controllers;
 public:
-    WeaponsListController(WeaponListt weapons, Gtk::Button *reset_button);
+    WeaponsListController(const Glib::RefPtr<Gtk::Builder> &builder,
+                          Gtk::Button *reset_button);
 
     void on_reset_clicked();
 };

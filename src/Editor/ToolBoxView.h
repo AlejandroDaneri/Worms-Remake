@@ -18,7 +18,7 @@ private:
     Glib::RefPtr<Gtk::Builder> m_builder;
     Gtk::Button *btn_clean;
     Gtk::Button *erase; //pasar a toggle
-    MapController *map_controller;
+    std::shared_ptr<MapController> map_controller;
     Gtk::ToggleButton *worm;
     Gtk::ToggleButton *girder;
     Gtk::Button *move;// pasar a toggle
@@ -30,7 +30,7 @@ private:
 public:
     ToolBoxView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 
-    void linkController(MapController *controller);
+    void linkController(std::shared_ptr<MapController> controller);
 
     void on_button_clicked(unsigned int id);
 

@@ -1,5 +1,6 @@
 
 #include <gtkmm/builder.h>
+#include <utility>
 #include "ToolBoxView.h"
 
 ToolBoxView::ToolBoxView(BaseObjectType *cobject,
@@ -27,9 +28,8 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                                               GIRDER_BUTTON_ID));
 }
 
-void ToolBoxView::linkController(
-        MapController *controller) { // lo tengo que hacer asi porque gtkmm<3.19
-    this->map_controller = controller;
+void ToolBoxView::linkController(std::shared_ptr<MapController> controller) {
+    this->map_controller = std::move(controller);
 
     erase->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::undo));

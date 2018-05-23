@@ -17,7 +17,7 @@ class Editor : public Gtk::Window {
     Map map_model;
 
     Gtk::Button *weps_reset_button;
-    WeaponListt weplist;
+    //WeaponListt weplist;
     WeaponsListController weps_list_controller;
 
 public:

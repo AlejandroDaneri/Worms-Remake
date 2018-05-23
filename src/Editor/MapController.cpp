@@ -5,7 +5,9 @@
 #define MOVE_CMD_ID 1
 
 MapController::MapController(const Map &model, MapView &view) : model(
-        model), view(view), actual_item_selected(1), actual_action_id(0) {}
+        model), view(view), actual_item_selected(1), actual_action_id(0) {
+    view.linkController(this);
+}
 
 void MapController::itemSelectedSignal(unsigned int id) {
     this->actual_item_selected = id;
