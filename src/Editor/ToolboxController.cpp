@@ -1,7 +1,7 @@
 
 #include "ToolboxController.h"
 
-ToolboxController::ToolboxController(Toolbox *pToolbox)
+ToolboxController::ToolboxController(ToolBoxView *pToolbox)
         : toolbox(pToolbox) {
 
 }

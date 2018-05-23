@@ -6,14 +6,14 @@
 #include <gtkmm/window.h>
 #include <gtkmm/scrolledwindow.h>
 #include "MapView.h"
-#include "Toolbox.h"
+#include "ToolBoxView.h"
 #include "WeaponsListController.h"
 
 class Editor : public Gtk::Window {
     Glib::RefPtr<Gtk::Builder> m_builder;
     Gtk::ScrolledWindow *map_window;
     MapView *map;
-    Toolbox *toolbox;
+    ToolBoxView *toolbox;
     Map map_model;
 
     Gtk::Button *weps_reset_button;

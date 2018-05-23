@@ -3,14 +3,14 @@
 #define WORMS_TOOLBOXCONTROLLER_H
 
 
-#include "Toolbox.h"
+#include "ToolBoxView.h"
 
 class ToolboxController {
 private:
-    Toolbox *toolbox;
+    ToolBoxView *toolbox;
     MapView *map;
 public:
-    ToolboxController(Toolbox *pToolbox);
+    ToolboxController(ToolBoxView *pToolbox);
 
     void clickedSignal(unsigned int id);
 

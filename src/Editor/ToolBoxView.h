@@ -13,7 +13,7 @@
 #define WORM_BUTTON_ID 1
 #define GIRDER_BUTTON_ID 2
 
-class Toolbox : public Gtk::Grid {
+class ToolBoxView : public Gtk::Grid {
 private:
     Glib::RefPtr<Gtk::Builder> m_builder;
     Gtk::Button *btn_clean;
@@ -28,7 +28,7 @@ private:
     Gtk::Button *load;
 
 public:
-    Toolbox(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
+    ToolBoxView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 
     void linkController(MapController *controller);
 

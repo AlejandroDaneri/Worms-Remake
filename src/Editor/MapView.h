@@ -6,7 +6,7 @@
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
 #include "MapController.h"
-#include "ObjectView.h"
+
 
 class MapController;
 

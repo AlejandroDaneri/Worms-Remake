@@ -1,8 +1,8 @@
 
 #include <gtkmm/builder.h>
-#include "Toolbox.h"
+#include "ToolBoxView.h"
 
-Toolbox::Toolbox(BaseObjectType *cobject,
+ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Grid(cobject),
           m_builder(builder) {
@@ -19,15 +19,15 @@ Toolbox::Toolbox(BaseObjectType *cobject,
 
     worm->signal_clicked().connect(sigc::bind<int>
                                            (sigc::mem_fun(*this,
-                                                          &Toolbox::on_button_clicked),
+                                                          &ToolBoxView::on_button_clicked),
                                             WORM_BUTTON_ID));
     girder->signal_clicked().connect(sigc::bind<int>
                                              (sigc::mem_fun(*this,
-                                                            &Toolbox::on_button_clicked),
+                                                            &ToolBoxView::on_button_clicked),
                                               GIRDER_BUTTON_ID));
 }
 
-void Toolbox::linkController(
+void ToolBoxView::linkController(
         MapController *controller) { // lo tengo que hacer asi porque gtkmm<3.19
     this->map_controller = controller;
 
@@ -50,7 +50,7 @@ void Toolbox::linkController(
             sigc::mem_fun(*map_controller, &MapController::loadSignal));
 }
 
-void Toolbox::on_button_clicked(unsigned id) {
+void ToolBoxView::on_button_clicked(unsigned id) {
     if (id == WORM_BUTTON_ID) {
         if (worm->get_active()) {
             girder->set_active(false);

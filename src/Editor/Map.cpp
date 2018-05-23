@@ -26,11 +26,6 @@ int Map::turnLast() {
     return object.turn();
 }
 
-void Map::getLastPosition(double &x, double &y) {
-    ObjectModel &last_pos = objects.back().second;
-    last_pos.getPosition(x, y);
-}
-
 bool Map::lastIsGirder() {
     return objects.back().first == 2;
 }
