@@ -42,5 +42,5 @@ void WeaponView::linkController(WeaponController *controller) {
 }
 
 const int WeaponView::getInitialAmmo() {
-    return default_ammo_selector_value;
+    return default_checkbox_state? -1:default_ammo_selector_value;
 }
