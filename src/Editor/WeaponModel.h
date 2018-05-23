@@ -10,9 +10,11 @@ private:
 public:
     explicit WeaponModel(const int &default_ammo);
 
-    void reset_ammo();
+    void resetAmmo();
 
-    void set_ammo(const int &new_ammo);
+    void setAmmo(const int &new_ammo);
+
+    int getAmmo() const;
 };
 
 

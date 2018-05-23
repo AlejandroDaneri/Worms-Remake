@@ -19,6 +19,10 @@ public:
                           Gtk::Button *reset_button);
 
     void on_reset_clicked();
+
+    const std::vector<int> &getWeapons() const;
+
+    void getWeapons(std::vector<int> &weps_ammo) const;
 };
 
 

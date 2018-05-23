@@ -3,17 +3,19 @@
 #define WORMS_OBJECTMODEL_H
 
 
-class ObjectModel {
+class MapObject {
     double x, y;
     int angle;
 public:
-    ObjectModel(const double &x, const double &y, const int &angle = 0);
+    MapObject(const double &x, const double &y, const int &angle = 0);
 
     void updatePosition(double x, double y);
 
     int turn();
 
-    void getPosition(double &x, double &y);
+    void getPosition(double &x, double &y) const;
+
+    int getAngle() const;
 };
 
 

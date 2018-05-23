@@ -16,9 +16,11 @@ public:
                      std::shared_ptr<WeaponModel>
                      model);
 
-    void reset_ammo();
+    void resetAmmo();
 
-    void updateAmmo(double ammo);
+    void updateAmmo(int ammo);
+
+    int getAmmo();
 };
 
 

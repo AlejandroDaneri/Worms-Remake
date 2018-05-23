@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
     Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
     try {
-        refBuilder->add_from_file("editor.glade");
+        refBuilder->add_from_file("editor2.glade");
     }
     catch (const Glib::FileError &ex) {
         std::cerr << "FileError: " << ex.what() << std::endl;

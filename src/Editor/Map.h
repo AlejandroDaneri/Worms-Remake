@@ -5,10 +5,10 @@
 
 #include <utility>
 #include <vector>
-#include "ObjectModel.h"
+#include "MapObject.h"
 
 class Map {
-    std::vector<std::pair<int, ObjectModel>> objects;
+    std::vector<std::pair<int, MapObject>> objects;
 
 public:
     void undo();
@@ -22,6 +22,13 @@ public:
     int turnLast();
 
     bool lastIsGirder();
+
+    void load_signal();
+
+    void getObjects(std::vector<std::vector<double>>& worms,
+                     std::vector<std::vector<double>>& girders) const;
+
+    const std::vector<std::pair<int, MapObject>> &getObjects() const;
 };
 
 

@@ -8,6 +8,8 @@
 #include "MapView.h"
 #include "ToolBoxView.h"
 #include "WeaponsListController.h"
+#include "FileBoxController.h"
+#include "FileBoxView.h"
 
 class Editor : public Gtk::Window {
     Glib::RefPtr<Gtk::Builder> m_builder;
@@ -17,9 +19,9 @@ class Editor : public Gtk::Window {
     Map map_model;
 
     Gtk::Button *weps_reset_button;
-    //WeaponListt weplist;
     WeaponsListController weps_list_controller;
 
+    FileBoxView* filebox;
 public:
     Editor(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 

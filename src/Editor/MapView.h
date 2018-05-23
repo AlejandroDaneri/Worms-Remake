@@ -26,10 +26,6 @@ public:
 
     void clean();
 
-    void save_signal();
-
-    void load_signal();
-
     void linkController(MapController *pController);
 
     void add(unsigned int &id, double &x, double &y);

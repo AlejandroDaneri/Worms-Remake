@@ -13,7 +13,8 @@ Editor::Editor(BaseObjectType *cobject,
 
     m_builder->get_widget_derived("map", map);
     m_builder->get_widget_derived("toolbox", toolbox);
-    std::shared_ptr<MapController> map_controller (new MapController(map_model, *map));
+    std::shared_ptr<MapController> map_controller
+            (new MapController(map_model, *map));
     toolbox->linkController(map_controller);
 
     m_builder->get_widget("btn_reset_wep", weps_reset_button);
@@ -21,6 +22,10 @@ Editor::Editor(BaseObjectType *cobject,
             sigc::mem_fun(weps_list_controller,
                           &WeaponsListController::on_reset_clicked));
 
+    m_builder->get_widget_derived("filebox", filebox);
+    std::shared_ptr<FileBoxController> filebox_controller(
+            new FileBoxController(weps_list_controller, map_controller));
+    filebox->linkControler(filebox_controller);
 
     show_all_children();
 }

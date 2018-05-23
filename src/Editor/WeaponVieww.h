@@ -26,7 +26,7 @@ public:
 
     void on_checkbox_clicked();
 
-    void reset_ammo();
+    void resetAmmo();
 
     void linkController(WeaponController *controller);
 

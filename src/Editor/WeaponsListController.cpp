@@ -23,6 +23,12 @@ WeaponsListController::WeaponsListController(const Glib::RefPtr<Gtk::Builder> &b
 
 void WeaponsListController::on_reset_clicked() {
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
-        actual_controller->reset_ammo();
+        actual_controller->resetAmmo();
+    }
+}
+
+void WeaponsListController::getWeapons(std::vector<int>& weps_ammo) const{
+    for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
+        weps_ammo.push_back(actual_controller->getAmmo());
     }
 }

@@ -32,6 +32,9 @@ public:
     void loadSignal();
 
     void mapClickedSignal(GdkEventButton *event_button);
+
+    void getObjects(std::vector<std::vector<double>> &worms,
+                    std::vector<std::vector<double>> &girders) const;
 };
 
 
