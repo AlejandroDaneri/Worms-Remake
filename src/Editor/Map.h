@@ -25,8 +25,8 @@ public:
 
     void load_signal();
 
-    void getObjects(std::vector<std::vector<double>>& worms,
-                     std::vector<std::vector<double>>& girders) const;
+    void getObjects(std::vector<std::vector<double>> &worms,
+                    std::vector<std::vector<double>> &girders) const;
 
     const std::vector<std::pair<int, MapObject>> &getObjects() const;
 };

@@ -4,7 +4,8 @@
 #include "yaml-cpp/yaml.h"
 #include "MapView.h"
 
-MapView::MapView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder)
+MapView::MapView(BaseObjectType *cobject,
+                 const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),
           m_builder(builder) {
     add_events(Gdk::BUTTON_PRESS_MASK);

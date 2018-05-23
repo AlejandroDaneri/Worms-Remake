@@ -11,7 +11,7 @@ protected:
     std::fstream file;
 public:
 
-    File(const std::string &filename, const std::ios_base::openmode& openmode);
+    File(const std::string &filename, const std::ios_base::openmode &openmode);
 };
 
 

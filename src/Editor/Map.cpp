@@ -31,11 +31,12 @@ bool Map::lastIsGirder() {
     return objects.back().first == 2;
 }
 
-void Map::getObjects(std::vector<std::vector<double>> &worms,std::vector<std::vector<double>> &girders) const{
+void Map::getObjects(std::vector<std::vector<double>> &worms,
+                     std::vector<std::vector<double>> &girders) const {
     //gusanos
     for (auto &object : objects) {
-        double x,y;
-        object.second.getPosition(x,y);
+        double x, y;
+        object.second.getPosition(x, y);
         if (object.first == 1) {//worm
             std::vector<double> position;
             position.push_back(x); //pos x

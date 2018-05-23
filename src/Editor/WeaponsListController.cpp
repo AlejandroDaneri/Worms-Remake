@@ -1,9 +1,9 @@
 
 #include "WeaponsListController.h"
-#include <utility>
 
-WeaponsListController::WeaponsListController(const Glib::RefPtr<Gtk::Builder> &builder,
-                                              Gtk::Button *reset_button)
+WeaponsListController::WeaponsListController(
+        const Glib::RefPtr<Gtk::Builder> &builder,
+        Gtk::Button *reset_button)
         : reset_button(reset_button) {
     for (size_t i = 1; i <= 10; ++i) {
         std::shared_ptr<WeaponView> weapon_view(new WeaponView(builder, i));
@@ -27,7 +27,7 @@ void WeaponsListController::on_reset_clicked() {
     }
 }
 
-void WeaponsListController::getWeapons(std::vector<int>& weps_ammo) const{
+void WeaponsListController::getWeapons(std::vector<int> &weps_ammo) const {
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         weps_ammo.push_back(actual_controller->getAmmo());
     }

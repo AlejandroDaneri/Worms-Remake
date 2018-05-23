@@ -13,7 +13,7 @@ private:
     std::shared_ptr<MapController> map_controller;
 public:
     FileBoxController(const WeaponsListController &controller,
-                          std::shared_ptr<MapController> ptr);
+                      std::shared_ptr<MapController> ptr);
 
     void onSaveClicked() const;
 

@@ -21,7 +21,7 @@ class Editor : public Gtk::Window {
     Gtk::Button *weps_reset_button;
     WeaponsListController weps_list_controller;
 
-    FileBoxView* filebox;
+    FileBoxView *filebox;
 public:
     Editor(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 

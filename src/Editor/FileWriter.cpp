@@ -4,15 +4,14 @@
 #include <WeaponNames.h>
 #include <ConfigFields.h>
 #include "FileWriter.h"
-#include "MapObject.h"
 
 FileWriter::FileWriter(const std::string &filename)
         : File(filename, std::fstream::out | std::ios_base::trunc) {}
 
 
-void FileWriter::save(const std::vector<int>& weapons,
-                std::vector<std::vector<double>>& worms,
-                std::vector<std::vector<double>>& girders) {
+void FileWriter::save(const std::vector<int> &weapons,
+                      std::vector<std::vector<double>> &worms,
+                      std::vector<std::vector<double>> &girders) {
     YAML::Emitter out;
 
     out << YAML::BeginMap;
@@ -56,7 +55,7 @@ void FileWriter::save(const std::vector<int>& weapons,
 
     out << YAML::EndMap;
 
-    std::cout << "Here's the output YAML:\n\n\n" << out.c_str()<<std::endl;
+    std::cout << "Here's the output YAML:\n\n\n" << out.c_str() << std::endl;
 
     file << out.c_str();
 }

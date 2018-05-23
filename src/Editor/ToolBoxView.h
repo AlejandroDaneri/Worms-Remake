@@ -28,7 +28,8 @@ private:
     Gtk::Button *load;
 
 public:
-    ToolBoxView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
+    ToolBoxView(BaseObjectType *cobject,
+                const Glib::RefPtr<Gtk::Builder> &builder);
 
     void linkController(std::shared_ptr<MapController> controller);
 

@@ -10,14 +10,15 @@
 
 class FileBoxController;
 
-class FileBoxView : public Gtk::Grid{
+class FileBoxView : public Gtk::Grid {
 private:
-    const Glib::RefPtr<Gtk::Builder> & m_builder;
+    const Glib::RefPtr<Gtk::Builder> &m_builder;
     Gtk::Button *save;
     Gtk::Button *load;
     std::shared_ptr<FileBoxController> file_box_controller;
 public:
-    FileBoxView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
+    FileBoxView(BaseObjectType *cobject,
+                const Glib::RefPtr<Gtk::Builder> &builder);
 
     void linkControler(std::shared_ptr<FileBoxController> controller);
 };

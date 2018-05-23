@@ -56,7 +56,7 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
 
 void MapController::getObjects(std::vector<std::vector<double>> &worms,
                                std::vector<std::vector<double>> &girders) const {
-    model.getObjects(worms,girders);
+    model.getObjects(worms, girders);
 }
 
 

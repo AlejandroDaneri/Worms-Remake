@@ -1,15 +1,13 @@
 
 #include "FileBoxController.h"
-#include <utility>
-#include "WeaponsListController.h"
 #include "FileWriter.h"
 #include "FileReader.h"
 
-FileBoxController::FileBoxController(const WeaponsListController &wep_controller,
-                                     std::shared_ptr<MapController> map_controller)
-        :weapons_controller(wep_controller),
-         map_controller(std::move(map_controller))
-{
+FileBoxController::FileBoxController(
+        const WeaponsListController &wep_controller,
+        std::shared_ptr<MapController> map_controller)
+        : weapons_controller(wep_controller),
+          map_controller(std::move(map_controller)) {
 
 
 }

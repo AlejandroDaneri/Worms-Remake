@@ -2,7 +2,7 @@
 #include "FileReader.h"
 
 FileReader::FileReader(const std::string &filename) : File(filename,
-                                                           std::fstream::in ) {}
+                                                           std::fstream::in) {}
 
 void FileReader::read() {
     /*/

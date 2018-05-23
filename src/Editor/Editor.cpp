@@ -5,8 +5,7 @@ Editor::Editor(BaseObjectType *cobject,
                const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Window(cobject),
           m_builder(builder),
-          weps_list_controller(m_builder, weps_reset_button)
-{
+          weps_list_controller(m_builder, weps_reset_button) {
     maximize();
     m_builder->get_widget("map_window", map_window);
     map_window->override_background_color(Gdk::RGBA("lightgreen"));

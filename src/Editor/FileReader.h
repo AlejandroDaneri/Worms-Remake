@@ -5,7 +5,7 @@
 
 #include "File.h"
 
-class FileReader : public File{
+class FileReader : public File {
 public:
 
     explicit FileReader(const std::string &filename);

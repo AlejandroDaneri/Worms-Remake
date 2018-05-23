@@ -1,6 +1,5 @@
 
 #include "WeaponController.h"
-#include <utility>
 
 WeaponController::WeaponController(std::shared_ptr<WeaponView> View,
                                    std::shared_ptr<WeaponModel> model)
@@ -18,6 +17,6 @@ void WeaponController::updateAmmo(int ammo) {
     weapon_model->setAmmo(ammo);
 }
 
-int WeaponController::getAmmo(){
+int WeaponController::getAmmo() {
     return weapon_model->getAmmo();
 }

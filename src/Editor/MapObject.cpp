@@ -13,7 +13,7 @@ int MapObject::turn() {
     return angle = (angle + 10) % 180;
 }
 
-void MapObject::getPosition(double &x, double &y) const{
+void MapObject::getPosition(double &x, double &y) const {
     x = this->x;
     y = this->y;
 }

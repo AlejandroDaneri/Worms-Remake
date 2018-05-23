@@ -1,10 +1,9 @@
 
 #include <gtkmm/builder.h>
-#include <utility>
 #include "ToolBoxView.h"
 
 ToolBoxView::ToolBoxView(BaseObjectType *cobject,
-                 const Glib::RefPtr<Gtk::Builder> &builder)
+                         const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Grid(cobject),
           m_builder(builder) {
     builder->get_widget("btn_undo", erase);
