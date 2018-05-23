@@ -1,4 +1,4 @@
-#include "server_Fragment.h"
+#include "Fragment.h"
 
 Fragment::Fragment(World& world, GameParameters& parameters, int damage, int radius):
 	Weapon(world, parameters, damage, radius){}

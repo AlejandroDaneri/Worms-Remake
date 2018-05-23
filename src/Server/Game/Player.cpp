@@ -1,4 +1,4 @@
-#include "server_Player.h"
+#include "Player.h"
 
 Player::Player(Socket&& socket, const std::string& name): protocol(std::move(socket)),
 	name(name), id(-1), connected(true){}

@@ -1,4 +1,4 @@
-#include "server_Mortar.h"
+#include "Mortar.h"
 
 Mortar::Mortar(World& world, GameParameters& parameters):
 	FragmentableWeapon(world, parameters, parameters.getWeaponDamage(MORTAR_NAME), parameters.getWeaponFragments(MORTAR_NAME), parameters.getWeaponRadius(MORTAR_NAME)){}

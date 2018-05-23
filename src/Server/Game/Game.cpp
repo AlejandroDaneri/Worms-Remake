@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "Girder.h"
-#include "server_WeaponFactory.h"
+#include "WeaponFactory.h"
 
 
 Game::Game(size_t players, const std::string& config_file, const std::string& config_editor):

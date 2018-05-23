@@ -2,7 +2,7 @@
 #include "b2PolygonShape.h"
 #include "b2Fixture.h"
 #include "Protocol.h"
-#include "server_WeaponFactory.h"
+#include "WeaponFactory.h"
 #include "Girder.h"
 #include "math_utils.h"
 #include <algorithm>

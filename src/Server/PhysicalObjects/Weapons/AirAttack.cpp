@@ -1,5 +1,5 @@
-#include "server_AirAttack.h"
-#include "server_WeaponFactory.h"
+#include "AirAttack.h"
+#include "WeaponFactory.h"
 #include "Worm.h"
 
 #define SEPARATION (weapon_size * 2)

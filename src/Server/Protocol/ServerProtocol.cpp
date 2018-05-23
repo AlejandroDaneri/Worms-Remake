@@ -1,9 +1,9 @@
-#include "server_Protocol.h"
+#include "ServerProtocol.h"
 #include "Game.h"
 #include "Weapon.h"
 #include "Girder.h"
 #include "ObjectSizes.h"
-#include "server_Player.h"
+#include "Player.h"
 #include <string>
 
 ServerProtocol::ServerProtocol(Socket&& socket): Protocol(std::move(socket)){}

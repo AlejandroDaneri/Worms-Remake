@@ -3,7 +3,7 @@
 
 #include "WormsList.h"
 #include "Socket.h"
-#include "server_Protocol.h"
+#include "ServerProtocol.h"
 #include "Worm.h"
 #include "World.h"
 #include "GameParameters.h"

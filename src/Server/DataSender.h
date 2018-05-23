@@ -4,8 +4,8 @@
 #include "Thread.h"
 #include "World.h"
 #include "PhysicalObject.h"
-#include "server_Player.h"
-#include "server_Protocol.h"
+#include "Player.h"
+#include "ServerProtocol.h"
 #include <list>
 
 class DataSender: public Thread{

@@ -1,4 +1,4 @@
-#include "server_Bazooka.h"
+#include "Bazooka.h"
 
 Bazooka::Bazooka(World& world, GameParameters& parameters):
 	Weapon(world, parameters, parameters.getWeaponDamage(BAZOOKA_NAME), parameters.getWeaponRadius(BAZOOKA_NAME)){}

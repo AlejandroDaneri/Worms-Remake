@@ -1,4 +1,4 @@
-#include "server_MortarFragment.h"
+#include "MortarFragment.h"
 
 MortarFragment::MortarFragment(World& world, GameParameters& parameters):
 	Fragment(world, parameters, parameters.getWeaponDamage(MORTAR_FRAGMENTS_NAME), parameters.getWeaponRadius(MORTAR_FRAGMENTS_NAME)){}

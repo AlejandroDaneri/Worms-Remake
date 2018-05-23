@@ -1,7 +1,7 @@
 #ifndef __SERVERTURN_H__
 #define __SERVERTURN_H__
 
-#include "server_Player.h"
+#include "Player.h"
 #include <vector>
 
 class Turn{

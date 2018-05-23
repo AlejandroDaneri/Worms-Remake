@@ -1,7 +1,7 @@
 #ifndef __SERVERREDGRENADEFRAGMENT_H__
 #define __SERVERREDGRENADEFRAGMENT_H__
 
-#include "server_Fragment.h"
+#include "Fragment.h"
 
 class RedGrenadeFragment: public Fragment{
 	public:

@@ -1,6 +1,6 @@
 #include "FragmentableWeapon.h"
-#include "server_WeaponFactory.h"
-#include "server_Fragment.h"
+#include "WeaponFactory.h"
+#include "Fragment.h"
 #include "math_utils.h"
 
 FragmentableWeapon::FragmentableWeapon(World& world, GameParameters& parameters, int damage, int fragments, int radius):

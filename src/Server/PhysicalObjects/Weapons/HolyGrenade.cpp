@@ -1,4 +1,4 @@
-#include "server_HolyGrenade.h"
+#include "HolyGrenade.h"
 
 HolyGrenade::HolyGrenade(World& world, GameParameters& parameters):
 	Weapon(world, parameters, parameters.getWeaponDamage(HOLY_GRENADE_NAME), parameters.getWeaponRadius(HOLY_GRENADE_NAME)){}

@@ -2,7 +2,7 @@
 #include "Weapon.h"
 #include "BottomBorder.h"
 #include "b2WorldCallbacks.h"
-#include "server_Fragment.h"
+#include "Fragment.h"
 
 World::World(GameParameters& parameters): world(b2Vec2(0, parameters.getGravity())),
 	wind(parameters), is_active(false){

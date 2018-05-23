@@ -1,10 +1,10 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 
-#include "server_Turn.h"
+#include "Turn.h"
 #include "GameParameters.h"
 #include "Thread.h"
-#include "server_Player.h"
+#include "Player.h"
 #include "Worm.h"
 #include <mutex>
 #include <vector>

@@ -1,7 +1,7 @@
 #ifndef __SERVERMORTARFRAGMENT_H__
 #define __SERVERMORTARFRAGMENT_H__
 
-#include "server_Fragment.h"
+#include "Fragment.h"
 
 class MortarFragment: public Fragment{
 	public:

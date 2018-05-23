@@ -1,4 +1,4 @@
-#include "server_Bat.h"
+#include "Bat.h"
 
 Bat::Bat(World& world, GameParameters& parameters):
 	Weapon(world, parameters, parameters.getWeaponDamage(BAT_NAME), parameters.getWeaponRadius(BAT_NAME)){}
