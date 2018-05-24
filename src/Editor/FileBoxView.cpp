@@ -15,7 +15,7 @@ void FileBoxView::linkControler(std::shared_ptr<FileBoxController> controller) {
             sigc::mem_fun(*file_box_controller,
                           &FileBoxController::onSaveClicked));
 
-    save->signal_clicked().connect(
+    load->signal_clicked().connect(
             sigc::mem_fun(*file_box_controller,
                           &FileBoxController::onLoadClicked));
 }

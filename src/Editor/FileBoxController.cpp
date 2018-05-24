@@ -8,8 +8,6 @@ FileBoxController::FileBoxController(
         std::shared_ptr<MapController> map_controller)
         : weapons_controller(wep_controller),
           map_controller(std::move(map_controller)) {
-
-
 }
 
 void FileBoxController::onSaveClicked() const {
@@ -26,10 +24,12 @@ void FileBoxController::onSaveClicked() const {
 
 void FileBoxController::onLoadClicked() const {
     FileReader file("config_editor.yaml");
-    file.read();
+    std::vector<std::vector<double>> worms;
+    std::vector<std::vector<double>> girders;
+    file.read(worms,girders);
 
     //weapons_controller.loadWeapons();
-    //map_controller.loadObjects;
+    map_controller->loadObjects(worms,girders);
 }
 
 

@@ -25,7 +25,7 @@ MapView::MapView(BaseObjectType *cobject,
 }
 
 
-void MapView::add(unsigned int &id, double &x, double &y) {
+void MapView::add(unsigned int id, const double & x, const double & y) {
     Gtk::Image new_image(pallete[id - 1]);
     const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
     put(new_image, x - img->get_width() / 2, y - img->get_height() / 2);

@@ -35,6 +35,9 @@ public:
 
     void getObjects(std::vector<std::vector<double>> &worms,
                     std::vector<std::vector<double>> &girders) const;
+
+    void loadObjects(std::vector<std::vector<double>> &worms,
+                     std::vector<std::vector<double>> &girders);
 };
 
 

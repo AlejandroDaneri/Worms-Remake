@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include "MapObject.h"
+#include <yaml.h>
 
 class File {
 protected:
@@ -12,6 +13,8 @@ protected:
 public:
 
     File(const std::string &filename, const std::ios_base::openmode &openmode);
+
+    virtual ~File();
 };
 
 

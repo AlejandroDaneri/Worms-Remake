@@ -10,7 +10,9 @@ public:
 
     explicit FileReader(const std::string &filename);
 
-    void read();
+
+    void read(std::vector<std::vector<double>> &worms,
+              std::vector<std::vector<double>> &girders);
 };
 
 

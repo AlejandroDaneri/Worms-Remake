@@ -15,7 +15,7 @@ public:
 
     void clean();
 
-    void add(unsigned int &id, double &x, double &y);
+    void add(unsigned int id, const double & x, const double & y);
 
     void moveLast(double &x, double &y);
 
@@ -28,7 +28,6 @@ public:
     void getObjects(std::vector<std::vector<double>> &worms,
                     std::vector<std::vector<double>> &girders) const;
 
-    const std::vector<std::pair<int, MapObject>> &getObjects() const;
 };
 
 

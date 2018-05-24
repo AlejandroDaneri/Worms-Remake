@@ -4,6 +4,7 @@
 #define ADD_CMD_ID 0
 #define MOVE_CMD_ID 1
 
+
 MapController::MapController(const Map &model, MapView &view) : model(
         model), view(view), actual_item_selected(1), actual_action_id(0) {
     view.linkController(this);
@@ -57,6 +58,15 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
 void MapController::getObjects(std::vector<std::vector<double>> &worms,
                                std::vector<std::vector<double>> &girders) const {
     model.getObjects(worms, girders);
+}
+
+void MapController::loadObjects(std::vector<std::vector<double>> &worms,
+                                std::vector<std::vector<double>> &girders) {
+    clean();
+    for(const auto &worm:worms){
+        this->model.add(1, worm[0], worm[1]);
+        this->view.add(1,worm[0], worm[1]);
+    }
 }
 
 

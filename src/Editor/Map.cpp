@@ -12,7 +12,7 @@ void Map::clean() {
     this->objects.clear();
 }
 
-void Map::add(unsigned int &id, double &x, double &y) {
+void Map::add(unsigned int id, const double & x, const double & y) {
     MapObject new_object(x, y);
     objects.emplace_back(std::make_pair(id, new_object));
 }
