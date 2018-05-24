@@ -11,10 +11,12 @@ MapController::MapController(const Map &model, MapView &view) : model(
 }
 
 void MapController::itemSelectedSignal(unsigned int id) {
+    this->pre_actual_item_selected=actual_item_selected;
     this->actual_item_selected = id;
 }
 
 void MapController::undo() {
+    actual_item_selected=pre_actual_item_selected;
     model.undo();
     view.undo();
 }
@@ -49,6 +51,7 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
         this->view.moveLast(event_button->x, event_button->y);
         actual_action_id = ADD_CMD_ID;
     } else {
+
         this->model.add(actual_item_selected, event_button->x, event_button->y);
         this->view.add(actual_item_selected, event_button->x, event_button->y);
     }

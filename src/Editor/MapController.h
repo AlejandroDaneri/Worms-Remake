@@ -12,6 +12,7 @@ class MapController {
     Map model;
     MapView &view;
     unsigned int actual_item_selected;
+    unsigned int pre_actual_item_selected;
     unsigned int actual_action_id;
 
 public:
