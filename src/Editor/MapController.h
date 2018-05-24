@@ -25,11 +25,7 @@ public:
 
     void moveSignal();
 
-    void turnSignal();
-
-    void saveSignal();
-
-    void loadSignal();
+    void turnCCWSignal();
 
     void mapClickedSignal(GdkEventButton *event_button);
 
@@ -38,6 +34,8 @@ public:
 
     void loadObjects(std::vector<std::vector<double>> &worms,
                      std::vector<std::vector<double>> &girders);
+
+    void turnCWSignal();
 };
 
 

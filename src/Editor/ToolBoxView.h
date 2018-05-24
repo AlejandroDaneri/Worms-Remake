@@ -25,8 +25,6 @@ private:
 
     Gtk::Button *turnccw;
     Gtk::Button *turncw;
-    Gtk::Button *save;
-    Gtk::Button *load;
 
 public:
     ToolBoxView(BaseObjectType *cobject,

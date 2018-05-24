@@ -16,8 +16,7 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
     builder->get_widget("btn_turn_cw", turncw);
     turnccw->set_sensitive(false);
     turncw->set_sensitive(false);
-    builder->get_widget("btn_save", save);
-    builder->get_widget("btn_load", load);
+
 
     worm->signal_clicked().connect(sigc::bind<int>
                                            (sigc::mem_fun(*this,
@@ -42,13 +41,11 @@ void ToolBoxView::linkController(std::shared_ptr<MapController> controller) {
             sigc::mem_fun(*map_controller, &MapController::moveSignal));
 
     turnccw->signal_clicked().connect(
-            sigc::mem_fun(*map_controller, &MapController::turnSignal));
+            sigc::mem_fun(*map_controller, &MapController::turnCCWSignal));
 
-    save->signal_clicked().connect(
-            sigc::mem_fun(*map_controller, &MapController::saveSignal));
+    turncw->signal_clicked().connect(
+            sigc::mem_fun(*map_controller, &MapController::turnCWSignal));
 
-    load->signal_clicked().connect(
-            sigc::mem_fun(*map_controller, &MapController::loadSignal));
 }
 
 void ToolBoxView::on_button_clicked(unsigned id) {
@@ -56,11 +53,13 @@ void ToolBoxView::on_button_clicked(unsigned id) {
         if (worm->get_active()) {
             girder->set_active(false);
             turnccw->set_sensitive(false);
+            turncw->set_sensitive(false);
         }
     } else {
         if (girder->get_active()) {
             worm->set_active(false);
             turnccw->set_sensitive(true);
+            turncw->set_sensitive(true);
         }
     }
     map_controller->itemSelectedSignal(id);

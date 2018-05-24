@@ -19,7 +19,7 @@ public:
 
     void moveLast(double &x, double &y);
 
-    int turnLast();
+    int turnCCWLast();
 
     bool lastIsGirder();
 
@@ -28,6 +28,7 @@ public:
     void getObjects(std::vector<std::vector<double>> &worms,
                     std::vector<std::vector<double>> &girders) const;
 
+    int turnCWLast();
 };
 
 

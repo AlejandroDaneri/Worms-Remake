@@ -11,11 +11,13 @@ public:
 
     void updatePosition(double x, double y);
 
-    int turn();
+    int turnCCW();
 
     void getPosition(double &x, double &y) const;
 
     int getAngle() const;
+
+    int turnCW();
 };
 
 

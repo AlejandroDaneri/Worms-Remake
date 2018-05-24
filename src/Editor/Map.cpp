@@ -22,14 +22,21 @@ void Map::moveLast(double &x, double &y) {
     object.updatePosition(x, y);
 }
 
-int Map::turnLast() {
+int Map::turnCCWLast() {
     MapObject &object = objects.back().second;
-    return object.turn();
+    return object.turnCCW();
+}
+
+int Map::turnCWLast() {
+    MapObject &object = objects.back().second;
+    return object.turnCW();
 }
 
 bool Map::lastIsGirder() {
     return objects.back().first == 2;
 }
+
+
 
 void Map::getObjects(std::vector<std::vector<double>> &worms,
                      std::vector<std::vector<double>> &girders) const {
@@ -57,4 +64,6 @@ void Map::getObjects(std::vector<std::vector<double>> &worms,
 void Map::load_signal() {
 
 }
+
+
 

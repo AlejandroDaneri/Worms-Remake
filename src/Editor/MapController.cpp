@@ -29,19 +29,18 @@ void MapController::moveSignal() {
     this->actual_action_id = MOVE_CMD_ID;
 }
 
-void MapController::turnSignal() {
+void MapController::turnCCWSignal() {
     if (model.lastIsGirder()) {
-        int new_angle = this->model.turnLast();
+        int new_angle = this->model.turnCCWLast();
         this->view.turnLast(new_angle);
     }
 }
 
-void MapController::saveSignal() {
-
-}
-
-void MapController::loadSignal() {
-
+void MapController::turnCWSignal() {
+    if (model.lastIsGirder()) {
+        int new_angle = this->model.turnCWLast();
+        this->view.turnLast(new_angle);
+    }
 }
 
 void MapController::mapClickedSignal(GdkEventButton *event_button) {
