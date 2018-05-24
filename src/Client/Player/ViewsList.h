@@ -39,7 +39,9 @@ class ViewsList{
 		void updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name);
 
 		void updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y);
-		
+
+		void chageWeapon(const std::string& weapon_name);
+
 		void updateScope(int angle);
 		
 		void removeScopeVisibility();

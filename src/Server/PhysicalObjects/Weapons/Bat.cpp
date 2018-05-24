@@ -6,7 +6,7 @@ Bat::Bat(World& world, GameParameters& parameters):
 Bat::~Bat(){}
 
 const std::string& Bat::getName(){
-	return DYNAMITE_NAME;
+	return BAT_NAME;
 }
 
 void Bat::setInitialVelocity(){

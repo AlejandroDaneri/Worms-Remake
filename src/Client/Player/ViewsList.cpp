@@ -89,6 +89,11 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float p
 	}
 }
 
+void ViewsList::chageWeapon(const std::string& weapon_name) {
+    this->worms.at(this->current_worm_id).changeWeapon(weapon_name);
+}
+
+
 void ViewsList::updateScope(int angle) {
 	if (this->worms.find(this->current_worm_id) == this->worms.end()){
 		return;

@@ -23,8 +23,8 @@ class WormView: public Viewable {
 		WormLifeView label;
 		Gtk::Image image;
 		Gtk::Grid worm;
-		std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
-		Glib::RefPtr<Gdk::Pixbuf> full_image;
+		//std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
+		//Glib::RefPtr<Gdk::Pixbuf> full_image;
 
 	public:
 		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon);
@@ -32,6 +32,8 @@ class WormView: public Viewable {
 		WormView(WormView&& other);
 
 		void updateData(int new_life, char new_dir, const Position& new_pos, const std::string& weapon);
+
+		void changeWeapon(const std::string &weapon);
 
 		char getDir() const;
 
