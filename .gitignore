@@ -6,3 +6,5 @@ server
 editor
 build
 Build
+.idea
+cmake-build-debug

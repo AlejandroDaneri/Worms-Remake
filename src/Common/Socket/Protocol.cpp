@@ -23,27 +23,27 @@ size_t Protocol::receive_buffer(char* buffer) {
 	return len;
 }
 
-void Protocol::send_int(char* buffer, size_t& offset, int32_t value) {
+void Protocol::send_int_buffer(char *buffer, size_t &offset, int32_t value) {
 	value = htonl(value);
 	std::memcpy(buffer + offset, &value, sizeof(value));
 	offset += sizeof(value);
 }
 
-int Protocol::receive_int(char* buffer, size_t& offset) {
+int Protocol::receive_int_buffer(char *buffer, size_t &offset) {
 	int32_t value;
 	std::memcpy(&value, buffer + offset, sizeof(value));
 	offset += sizeof(value);
 	return ntohl(value);
 }
 
-void Protocol::send_string(char* buffer, size_t& offset, const std::string& string) {
+void Protocol::send_string_buffer(char *buffer, size_t &offset, const std::string &string) {
 	for (size_t j = 0; j < string.size(); offset++, j++){
 		buffer[offset] = string[j];
 	}
 	buffer[offset++] = '\0';
 }
 
-std::string Protocol::receive_string(char* buffer, size_t& offset) {
+std::string Protocol::receive_string_buffer(char *buffer, size_t &offset) {
 	std::string string;
 	while (buffer[offset] != '\0'){
 		string += buffer[offset++];

@@ -37,7 +37,7 @@ void ServerProtocol::sendDeadObject(physical_object_ptr& object){
 	}
 
 	uint32_t id = object->getId();
-	this->send_int(buffer, offset, id);
+    this->send_int_buffer(buffer, offset, id);
 
 	this->send_buffer(buffer, offset);
 }
@@ -52,13 +52,13 @@ void ServerProtocol::send_worm(physical_object_ptr& object, char* buffer){
 
 	char dir = worm->getDir();
 
-	this->send_int(buffer, offset, id);
-	this->send_int(buffer, offset, worm->getPlayerId());
-	this->send_int(buffer, offset, position.x * UNIT_TO_SEND);
-	this->send_int(buffer, offset, position.y * UNIT_TO_SEND);
-	this->send_int(buffer, offset, worm->getLife());
+    this->send_int_buffer(buffer, offset, id);
+    this->send_int_buffer(buffer, offset, worm->getPlayerId());
+    this->send_int_buffer(buffer, offset, position.x * UNIT_TO_SEND);
+    this->send_int_buffer(buffer, offset, position.y * UNIT_TO_SEND);
+    this->send_int_buffer(buffer, offset, worm->getLife());
 	buffer[offset++] = dir;
-	this->send_string(buffer, offset, worm->getWeapon());
+	this->send_string_buffer(buffer, offset, worm->getWeapon());
 	
 	this->send_buffer(buffer, offset);
 }
@@ -66,17 +66,17 @@ void ServerProtocol::send_worm(physical_object_ptr& object, char* buffer){
 void ServerProtocol::send_weapon(physical_object_ptr& object, char* buffer){
 	size_t offset = 1;
 	buffer[offset++] = WEAPON_TYPE;
-	this->send_int(buffer, offset, object->getId());
+    this->send_int_buffer(buffer, offset, object->getId());
 
 
 	b2Vec2 position = object->getPosition();
 	Weapon* weapon = (Weapon*)object.get();
 	std::string name = weapon->getName();
 
-	this->send_string(buffer, offset, name);
-	
-	this->send_int(buffer, offset, position.x * UNIT_TO_SEND);
-	this->send_int(buffer, offset, position.y * UNIT_TO_SEND);
+	this->send_string_buffer(buffer, offset, name);
+
+    this->send_int_buffer(buffer, offset, position.x * UNIT_TO_SEND);
+    this->send_int_buffer(buffer, offset, position.y * UNIT_TO_SEND);
 
 	this->send_buffer(buffer, offset);
 }
@@ -86,8 +86,8 @@ void ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_pl
 	size_t offset = 0;
 	buffer[offset++] = START_TURN;
 
-	this->send_int(buffer, offset, current_worm_id);
-	this->send_int(buffer, offset, current_player_id);
+    this->send_int_buffer(buffer, offset, current_worm_id);
+    this->send_int_buffer(buffer, offset, current_player_id);
 
 	this->send_buffer(buffer, offset);
 }
@@ -109,17 +109,17 @@ void ServerProtocol::receive(Game& game){
 			char move = buffer[offset++];
 			game.getCurrentWorm().move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION){
-			std::string weapon(this->receive_string(buffer, offset));
+			std::string weapon(this->receive_string_buffer(buffer, offset));
 			game.getCurrentWorm().changeWeapon(weapon);
 		} else if (worm_action == SHOOT_WEAPON){
-			int angle = this->receive_int(buffer, offset);
-			int power = this->receive_int(buffer, offset);
-			int time = this->receive_int(buffer, offset);
+			int angle = this->receive_int_buffer(buffer, offset);
+			int power = this->receive_int_buffer(buffer, offset);
+			int time = this->receive_int_buffer(buffer, offset);
 			
 			game.getCurrentWorm().shoot(angle, power, time);
 		} else if(worm_action == SHOOT_SELF_DIRECTED){
-			int pos_x = this->receive_int(buffer, offset);
-			int pos_y = this->receive_int(buffer, offset);
+			int pos_x = this->receive_int_buffer(buffer, offset);
+			int pos_y = this->receive_int_buffer(buffer, offset);
 			game.getCurrentWorm().shoot(b2Vec2(pos_x, pos_y));
 		}
 	}
@@ -129,8 +129,8 @@ void ServerProtocol::sendPlayerId(const Player& player){
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 
-	this->send_int(buffer, offset, player.getId());
-	this->send_string(buffer, offset, player.getName());
+    this->send_int_buffer(buffer, offset, player.getId());
+	this->send_string_buffer(buffer, offset, player.getName());
 
 	this->send_buffer(buffer, offset);
 }
@@ -140,12 +140,12 @@ void ServerProtocol::sendGirder(physical_object_ptr& object){
 
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
-	this->send_int(buffer, offset, girder->getSize());
+    this->send_int_buffer(buffer, offset, girder->getSize());
 
 	b2Vec2 position = object->getPosition();
-	this->send_int(buffer, offset, position.x);
-	this->send_int(buffer, offset, position.y);
-	this->send_int(buffer, offset, girder->getRotation());
+    this->send_int_buffer(buffer, offset, position.x);
+    this->send_int_buffer(buffer, offset, position.y);
+    this->send_int_buffer(buffer, offset, girder->getRotation());
 
 	this->send_buffer(buffer, offset);
 }
@@ -154,8 +154,8 @@ void ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 
-	this->send_string(buffer, offset, weapon_name);
-	this->send_int(buffer, offset, ammo);
+	this->send_string_buffer(buffer, offset, weapon_name);
+    this->send_int_buffer(buffer, offset, ammo);
 
 	this->send_buffer(buffer, offset);
 }

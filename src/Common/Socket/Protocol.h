@@ -42,11 +42,11 @@ class Protocol {
 		void send_buffer(const char* buffer, size_t size);
 		size_t receive_buffer(char* buffer);
 		
-		void send_int(char* buffer, size_t& offset, int32_t value);
-		int receive_int(char* buffer, size_t& offset);
+		void send_int_buffer(char *buffer, size_t &offset, int32_t value);
+		int receive_int_buffer(char *buffer, size_t &offset);
 		
-		void send_string(char* buffer, size_t& offset, const std::string& string);
-		std::string receive_string(char* buffer, size_t& offset); 
+		void send_string_buffer(char *buffer, size_t &offset, const std::string &string);
+		std::string receive_string_buffer(char *buffer, size_t &offset);
 
 		void send_length(uint32_t length);
 		size_t receive_length();

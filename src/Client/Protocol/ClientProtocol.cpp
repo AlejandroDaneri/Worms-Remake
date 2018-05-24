@@ -26,7 +26,7 @@ void ClientProtocol::send_change_weapon(const std::string& weapon){
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
 	buffer[offset++] = CHANGE_WEAPON_ACTION;
-	this->send_string(buffer, offset, weapon);
+	this->send_string_buffer(buffer, offset, weapon);
 	this->send_buffer(buffer, offset);
 }
 
@@ -37,9 +37,9 @@ void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t tim
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
 	buffer[offset++] = SHOOT_WEAPON;
-	this->send_int(buffer, offset, angle);
-	this->send_int(buffer, offset, power);
-	this->send_int(buffer, offset, time);
+    this->send_int_buffer(buffer, offset, angle);
+    this->send_int_buffer(buffer, offset, power);
+    this->send_int_buffer(buffer, offset, time);
 	this->send_buffer(buffer, offset);
 }
 
@@ -49,9 +49,9 @@ void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
 	buffer[offset++] = SHOOT_SELF_DIRECTED;
-	
-	this->send_int(buffer, offset, pos.getX());
-	this->send_int(buffer, offset, pos.getY());
+
+    this->send_int_buffer(buffer, offset, pos.getX());
+    this->send_int_buffer(buffer, offset, pos.getY());
 
 	this->send_buffer(buffer, offset);
 }
@@ -70,31 +70,31 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 	char action = buffer[offset++];
 
 	if (action == START_TURN){
-		int worm_id = this->receive_int(buffer, offset);
-		int player_id = this->receive_int(buffer, offset);
+		int worm_id = this->receive_int_buffer(buffer, offset);
+		int player_id = this->receive_int_buffer(buffer, offset);
 		player.startTurn(worm_id, player_id);
 	} else if (action == MOVING_OBJECT){
 		char type = buffer[offset++];
-		int id = this->receive_int(buffer, offset);
+		int id = this->receive_int_buffer(buffer, offset);
 
 		if (type == WORM_TYPE){
-			int player_id = this->receive_int(buffer, offset);
-			int pos_x = this->receive_int(buffer, offset);
-			int pos_y = this->receive_int(buffer, offset);
-			int life = this->receive_int(buffer, offset);
+			int player_id = this->receive_int_buffer(buffer, offset);
+			int pos_x = this->receive_int_buffer(buffer, offset);
+			int pos_y = this->receive_int_buffer(buffer, offset);
+			int life = this->receive_int_buffer(buffer, offset);
 			char dir = buffer[offset++];
-			std::string weapon(this->receive_string(buffer, offset));
+			std::string weapon(this->receive_string_buffer(buffer, offset));
 			viewsList.updateWormData(id, player_id, pos_x, pos_y, life, dir, weapon);
 		} else if (type == WEAPON_TYPE){
-			std::string weapon(this->receive_string(buffer, offset));
+			std::string weapon(this->receive_string_buffer(buffer, offset));
 
-			int pos_x = this->receive_int(buffer, offset);
-			int pos_y = this->receive_int(buffer, offset);
+			int pos_x = this->receive_int_buffer(buffer, offset);
+			int pos_y = this->receive_int_buffer(buffer, offset);
 			viewsList.updateWeaponData(id, weapon, pos_x, pos_y);
 		}
 	} else if (action == DEAD_OBJECT){
 		char type = buffer[offset++];
-		int id = this->receive_int(buffer, offset);
+		int id = this->receive_int_buffer(buffer, offset);
 		if (type == WORM_TYPE){
 			viewsList.removeWorm(id);
 		} else if (type == WEAPON_TYPE){
@@ -111,8 +111,8 @@ void ClientProtocol::receivePlayers(PlayersList& players_list){
 		this->receive_buffer(buffer);
 		size_t offset = 0;
 
-		int id = this->receive_int(buffer, offset);
-		std::string name = this->receive_string(buffer, offset);
+		int id = this->receive_int_buffer(buffer, offset);
+		std::string name = this->receive_string_buffer(buffer, offset);
 		
 		players_list.addPlayer(id, name);
 	}
@@ -126,10 +126,10 @@ void ClientProtocol::receiveGirders(ViewsList& viewsList){
 		this->receive_buffer(buffer);
 		size_t offset = 0;
 
-		int size = this->receive_int(buffer, offset);
-		int pos_x = this->receive_int(buffer, offset);
-		int pos_y = this->receive_int(buffer, offset);
-		int rotation = this->receive_int(buffer, offset);
+		int size = this->receive_int_buffer(buffer, offset);
+		int pos_x = this->receive_int_buffer(buffer, offset);
+		int pos_y = this->receive_int_buffer(buffer, offset);
+		int rotation = this->receive_int_buffer(buffer, offset);
 		viewsList.addGirder(size, pos_x, pos_y, rotation);
 	}
 }
@@ -142,8 +142,8 @@ void ClientProtocol::receiveWeaponsAmmo(WeaponList& weapon_list){
 		this->receive_buffer(buffer);
 		size_t offset = 0;
 
-		std::string name = this->receive_string(buffer, offset);
-		int ammo = this->receive_int(buffer, offset);
+		std::string name = this->receive_string_buffer(buffer, offset);
+		int ammo = this->receive_int_buffer(buffer, offset);
 		weapon_list.add(name, ammo);
 	}
 }
