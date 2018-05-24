@@ -11,7 +11,8 @@
 
 
 #define WORM_BUTTON_ID 1
-#define GIRDER_BUTTON_ID 2
+#define GIRDER_3_BUTTON_ID 2
+#define GIRDER_6_BUTTON_ID 3
 
 class ToolBoxView : public Gtk::Grid {
 private:
@@ -20,7 +21,8 @@ private:
     Gtk::Button *erase; //pasar a toggle
     std::shared_ptr<MapController> map_controller;
     Gtk::ToggleButton *worm;
-    Gtk::ToggleButton *girder;
+    Gtk::ToggleButton *girder_3m;
+    Gtk::ToggleButton *girder_6m;
     Gtk::Button *move;// pasar a toggle
 
     Gtk::Button *turnccw;

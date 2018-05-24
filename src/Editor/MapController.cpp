@@ -32,14 +32,14 @@ void MapController::moveSignal() {
 void MapController::turnCCWSignal() {
     if (model.lastIsGirder()) {
         int new_angle = this->model.turnCCWLast();
-        this->view.turnLast(new_angle);
+        this->view.turnLast(actual_item_selected, new_angle);
     }
 }
 
 void MapController::turnCWSignal() {
     if (model.lastIsGirder()) {
         int new_angle = this->model.turnCWLast();
-        this->view.turnLast(new_angle);
+        this->view.turnLast(actual_item_selected, new_angle);
     }
 }
 

@@ -11,28 +11,39 @@ MapView::MapView(BaseObjectType *cobject,
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
             sigc::mem_fun(*this, &MapView::on_button_clicked));
-    pallete.emplace_back("resources/images/right_worm.png");
+
+    std::vector<std::string> worms_imgs;
+    worms_imgs.emplace_back("resources/images/right_worm.png");
+    worms_imgs.emplace_back("resources/images/left_worm.png");
+    pallete.push_back(worms_imgs);
+
+
+    std::vector<std::string> girder_3_imgs;
     for (int i = 0; i < 180; i = i + 10) {
-        pallete.emplace_back(
+        girder_3_imgs.emplace_back(
                 "resources/images/Girder/girder_3_" + std::to_string(i) +
                 ".png");
     }
+    pallete.push_back(girder_3_imgs);
+
+    std::vector<std::string> girder_6_imgs;
     for (int i = 0; i < 180; i = i + 10) {
-        pallete.emplace_back(
+        girder_6_imgs.push_back(
                 "resources/images/Girder/girder_6_" + std::to_string(i) +
                 ".png");
     }
+    pallete.push_back(girder_6_imgs);
 }
 
 
 void MapView::add(unsigned int id, const double &x, const double &y, const int &angle) {
-    Gtk::Image new_image(pallete[id - 1]);
+    Gtk::Image new_image(pallete[id - 1][0]);
     const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
     put(new_image, x - img->get_width() / 2, y - img->get_height() / 2);
     new_image.show();
     objects.push_back(std::move(new_image));
     if (angle>0)
-        turnLast(angle);
+        turnLast(angle, 0);
 }
 
 void MapView::moveLast(const double &x, const double &y) {
@@ -44,10 +55,11 @@ void MapView::moveLast(const double &x, const double &y) {
     }
 }
 
-void MapView::turnLast(const int &angle) {
+//TODO: no usar mas el id
+void MapView::turnLast(const unsigned int &id, const int &angle) {
     if (!objects.empty()) {
         Gtk::Image &image = objects.back();
-        image.set(pallete[angle / 10 + 1]);
+        image.set(pallete[id-1][angle / 10]);
     }
 }
 

@@ -2,6 +2,8 @@
 #include <gtkmm/builder.h>
 #include "ToolBoxView.h"
 
+
+
 ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Grid(cobject),
@@ -10,22 +12,28 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
     builder->get_widget("btn_clean", btn_clean);
     builder->get_widget("tbtn_worm", worm);
     worm->set_active(true);
-    builder->get_widget("tbtn_grd", girder);
+    builder->get_widget("tbtn_grd", girder_3m);
+    builder->get_widget("tbtn_grd6", girder_6m);
     builder->get_widget("btn_move", move);
     builder->get_widget("btn_turn_ccw", turnccw);
     builder->get_widget("btn_turn_cw", turncw);
-    turnccw->set_sensitive(false);
-    turncw->set_sensitive(false);
+    //turnccw->set_sensitive(false);
+    //turncw->set_sensitive(false);
 
 
     worm->signal_clicked().connect(sigc::bind<int>
                                            (sigc::mem_fun(*this,
                                                           &ToolBoxView::on_button_clicked),
                                             WORM_BUTTON_ID));
-    girder->signal_clicked().connect(sigc::bind<int>
+    girder_3m->signal_clicked().connect(sigc::bind<int>
                                              (sigc::mem_fun(*this,
                                                             &ToolBoxView::on_button_clicked),
-                                              GIRDER_BUTTON_ID));
+                                              GIRDER_3_BUTTON_ID));
+
+    girder_6m->signal_clicked().connect(sigc::bind<int>
+                                                (sigc::mem_fun(*this,
+                                                               &ToolBoxView::on_button_clicked),
+                                                 GIRDER_6_BUTTON_ID));
 }
 
 void ToolBoxView::linkController(std::shared_ptr<MapController> controller) {
@@ -51,16 +59,23 @@ void ToolBoxView::linkController(std::shared_ptr<MapController> controller) {
 void ToolBoxView::on_button_clicked(unsigned id) {
     if (id == WORM_BUTTON_ID) {
         if (worm->get_active()) {
-            girder->set_active(false);
+            girder_3m->set_active(false);
+            girder_6m->set_active(false);
             turnccw->set_sensitive(false);
             turncw->set_sensitive(false);
         }
-    } else {
-        if (girder->get_active()) {
+    } else if (id == GIRDER_3_BUTTON_ID){
+        if (girder_3m->get_active()) {
             worm->set_active(false);
+            girder_6m->set_active(false);
             turnccw->set_sensitive(true);
             turncw->set_sensitive(true);
         }
+    }else{
+        girder_3m->set_active(false);
+        worm->set_active(false);
+        turnccw->set_sensitive(true);
+        turncw->set_sensitive(true);
     }
     map_controller->itemSelectedSignal(id);
 }

@@ -33,10 +33,8 @@ int Map::turnCWLast() {
 }
 
 bool Map::lastIsGirder() {
-    return objects.back().first == 2;
+    return (objects.back().first == 2 || objects.back().first == 3);
 }
-
-
 
 void Map::getObjects(std::vector<std::vector<double>> &worms,
                      std::vector<std::vector<double>> &girders) const {
