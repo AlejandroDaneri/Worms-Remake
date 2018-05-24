@@ -100,6 +100,56 @@
     <property name="valign">baseline</property>
     <property name="pixbuf">resources/images/right_worm.png</property>
   </object>
+  <object class="GtkImage" id="inf1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
+  <object class="GtkImage" id="inf10">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
+  <object class="GtkImage" id="inf2">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
+  <object class="GtkImage" id="inf3">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
+  <object class="GtkImage" id="inf4">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
+  <object class="GtkImage" id="inf5">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
+  <object class="GtkImage" id="inf6">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
+  <object class="GtkImage" id="inf7">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
+  <object class="GtkImage" id="inf8">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
+  <object class="GtkImage" id="inf9">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/inf.png</property>
+  </object>
   <object class="GtkImage" id="move_arrow">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -292,11 +342,12 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep1">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf1</property>
                                         <property name="xalign">0</property>
+                                        <property name="yalign">0.43999999761581421</property>
                                         <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
@@ -354,10 +405,10 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep2">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf2</property>
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
@@ -415,10 +466,10 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep3">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf3</property>
                                         <property name="xalign">0</property>
                                         <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
@@ -477,10 +528,10 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep4">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf4</property>
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
@@ -538,10 +589,10 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep5">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf5</property>
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
@@ -599,10 +650,10 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep6">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf6</property>
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
@@ -660,10 +711,10 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep7">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf7</property>
                                         <property name="xalign">0</property>
                                         <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
@@ -722,10 +773,10 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep8">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf8</property>
                                         <property name="xalign">0</property>
                                         <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
@@ -784,10 +835,10 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep9">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf9</property>
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
@@ -845,10 +896,10 @@
                                     </child>
                                     <child>
                                       <object class="GtkCheckButton" id="cb_wep10">
-                                        <property name="label" translatable="yes">∞</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="receives_default">False</property>
+                                        <property name="image">inf10</property>
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
                                       </object>
