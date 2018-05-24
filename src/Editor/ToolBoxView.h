@@ -23,7 +23,8 @@ private:
     Gtk::ToggleButton *girder;
     Gtk::Button *move;// pasar a toggle
 
-    Gtk::Button *turn;
+    Gtk::Button *turnccw;
+    Gtk::Button *turncw;
     Gtk::Button *save;
     Gtk::Button *load;
 

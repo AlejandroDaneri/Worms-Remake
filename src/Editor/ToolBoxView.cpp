@@ -12,8 +12,10 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
     worm->set_active(true);
     builder->get_widget("tbtn_grd", girder);
     builder->get_widget("btn_move", move);
-    builder->get_widget("btn_turn", turn);
-    turn->set_sensitive(false);
+    builder->get_widget("btn_turn_ccw", turnccw);
+    builder->get_widget("btn_turn_cw", turncw);
+    turnccw->set_sensitive(false);
+    turncw->set_sensitive(false);
     builder->get_widget("btn_save", save);
     builder->get_widget("btn_load", load);
 
@@ -39,7 +41,7 @@ void ToolBoxView::linkController(std::shared_ptr<MapController> controller) {
     move->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::moveSignal));
 
-    turn->signal_clicked().connect(
+    turnccw->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::turnSignal));
 
     save->signal_clicked().connect(
@@ -53,12 +55,12 @@ void ToolBoxView::on_button_clicked(unsigned id) {
     if (id == WORM_BUTTON_ID) {
         if (worm->get_active()) {
             girder->set_active(false);
-            turn->set_sensitive(false);
+            turnccw->set_sensitive(false);
         }
     } else {
         if (girder->get_active()) {
             worm->set_active(false);
-            turn->set_sensitive(true);
+            turnccw->set_sensitive(true);
         }
     }
     map_controller->itemSelectedSignal(id);
