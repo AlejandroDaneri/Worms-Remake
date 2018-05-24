@@ -11,12 +11,10 @@ MapController::MapController(const Map &model, MapView &view) : model(
 }
 
 void MapController::itemSelectedSignal(unsigned int id) {
-    this->pre_actual_item_selected=actual_item_selected;
     this->actual_item_selected = id;
 }
 
 void MapController::undo() {
-    actual_item_selected=pre_actual_item_selected;
     model.undo();
     view.undo();
 }
