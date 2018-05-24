@@ -67,6 +67,10 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
         this->model.add(1, worm[0], worm[1]);
         this->view.add(1,worm[0], worm[1]);
     }
+    for(const auto &girder:girders){
+        this->model.add(2, girder[1], girder[2],girder[3]);
+        this->view.add(2,girder[1], girder[2],girder[3]);
+    }
 }
 
 

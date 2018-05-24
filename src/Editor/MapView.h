@@ -28,11 +28,11 @@ public:
 
     void linkController(MapController *pController);
 
-    void add(unsigned int id, const double & x, const double & y);
+    void add(unsigned int id, const double & x, const double & y, const int &angle=0);
 
-    void moveLast(double &x, double &y);
+    void moveLast(const double &x, const double &y);
 
-    void turnLast(int &angle);
+    void turnLast(const int &angle);
 };
 
 
