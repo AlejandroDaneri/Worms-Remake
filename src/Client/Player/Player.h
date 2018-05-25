@@ -22,8 +22,6 @@ class Player {
 		ClientProtocol protocol;
 		std::string name;
 		WeaponList weapons;
-		WorldView world;
-		WeaponView weapons_view;
 		TurnLabel turn_label;
 		PlayersList players_list;
 		ScreenView screen;

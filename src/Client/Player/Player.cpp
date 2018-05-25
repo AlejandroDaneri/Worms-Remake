@@ -5,16 +5,16 @@
 const int NO_ANGLE = 500;
 
 Player::Player(ClientProtocol protocol, const std::string& name): 
-	protocol(std::move(protocol)), name(name), weapons_view(this->weapons, *this),
-	screen(this->world, this->weapons_view, this->turn_label, this->players_list),
-	view_list(this->world, *this, this->players_list),
+	protocol(std::move(protocol)), name(name),
+	screen(*this, this->weapons, this->turn_label, this->players_list),
+	view_list(this->screen.getWorld(), *this, this->players_list),
 	data_receiver(this->view_list, *this, this->protocol),
-	handlers(*this, this->view_list, this->weapons, this->world) {
+	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()) {
 
 	this->protocol.receivePlayers(this->players_list);
 	this->protocol.receiveGirders(this->view_list);
 	this->protocol.receiveWeaponsAmmo(this->weapons);
-	this->weapons_view.update();
+	this->screen.getWeaponsView().update();
 	this->data_receiver.start();
 	this->turn.reset(new Turn(*this, this->turn_label));
 }
@@ -80,7 +80,7 @@ void Player::shoot(Position position) {
 	this->shootWeapon();
 	Position newPosition = ViewTransformer().transformToPosition(position);
 	this->protocol.send_weapon_self_directed_shoot(newPosition);
-	this->weapons_view.updateAmmo(this->weapons.get_actual_weapon());
+	this->screen.getWeaponsView().updateAmmo(this->weapons.get_actual_weapon());
 }
 
 void Player::play_tick_time() {
@@ -100,7 +100,7 @@ void Player::shoot(int angle, int power, int time) {
 	}
 	this->protocol.send_weapon_shoot(angle, power, time);
 	this->view_list.removeScopeVisibility();
-	this->weapons_view.updateAmmo(this->weapons.get_actual_weapon());
+	this->screen.getWeaponsView().updateAmmo(this->weapons.get_actual_weapon());
 }
 
 
@@ -110,7 +110,7 @@ Gtk::Container& Player::getWindow() {
 }
 
 WorldView& Player::getWorld() {
-	return this->world;
+	return this->screen.getWorld();
 }
 
 ViewsList& Player::getViewList() {

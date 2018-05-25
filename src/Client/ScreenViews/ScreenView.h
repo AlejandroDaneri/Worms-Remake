@@ -14,11 +14,17 @@ class ScreenView {
 		Gtk::VBox screen;
 		Gtk::HBox world_box;
 
+        WorldView world;
+        WeaponView weapons_view;
+
 	public:
-		ScreenView(WorldView& world, WeaponView& weapons, TurnLabel& label, PlayersList& players);
+		ScreenView(Player& player, WeaponList& weapons,TurnLabel& label, PlayersList& players);
 		~ScreenView();
 		
 		Gtk::Container& getWindow();
+
+        WorldView& getWorld();
+        WeaponView& getWeaponsView();
 };
 
 
