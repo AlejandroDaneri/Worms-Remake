@@ -3,7 +3,7 @@
 #include "Socket.h"
 #include "ClientProtocol.h"
 #include "Player.h"
-//#include "MusicPlayer.h"
+#include "MusicPlayer.h"
 
 #include <iostream>
 
@@ -13,7 +13,7 @@ int main(int argc, char* argv[]){
     Gtk::Window window;
     window.resize(1280, 720);
 	try {
-	    //MusicPlayer musicPlayer;
+	    MusicPlayer musicPlayer;
 
     	Socket socket(Socket::Client("127.0.0.1", "7777"));
     
@@ -24,7 +24,7 @@ int main(int argc, char* argv[]){
 		window.add(player.getWindow());
 		window.show_all();
 		window.maximize();
-		//musicPlayer.playMusic();
+		musicPlayer.playMusic();
 		app->run(window);
     } catch (const std::exception& e){
     	std::cout << e.what() << std::endl;

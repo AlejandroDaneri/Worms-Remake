@@ -3,8 +3,6 @@
 #include "Player.h"
 #include "WeaponList.h"
 
-#include <iostream>
-
 ClientProtocol::ClientProtocol(Socket&& socket): Protocol(std::move(socket)) {}
 
 ClientProtocol::ClientProtocol(ClientProtocol&& other): Protocol(std::move(other)) {}
@@ -12,7 +10,6 @@ ClientProtocol::ClientProtocol(ClientProtocol&& other): Protocol(std::move(other
 ClientProtocol::~ClientProtocol(){}
 
 void ClientProtocol::send_move_action(char action){
-	printf("Move_action\n");
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
@@ -23,7 +20,6 @@ void ClientProtocol::send_move_action(char action){
 }
 
 void ClientProtocol::send_change_weapon(const std::string& weapon){
-	printf("Weapon\n");
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
@@ -33,8 +29,6 @@ void ClientProtocol::send_change_weapon(const std::string& weapon){
 }
 
 void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t time){
-	printf("shoot protocol\n");
-	printf("angle = %i, power = %i, time = %i\n",angle,power,time);//////////////////////////////////////////////////
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
@@ -46,7 +40,6 @@ void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t tim
 }
 
 void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
-	printf("dirigido\n");
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
 	buffer[offset++] = ACTION;
@@ -59,7 +52,6 @@ void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
 }
 
 void ClientProtocol::send_end_turn(){
-	printf("fin turno\n");
 	char buffer[MAX_BUF_LEN];
 	buffer[0] = END_TURN;
 	this->send_buffer(buffer, 1);
@@ -79,7 +71,6 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
         //char buffer[MAX_BUF_LEN];
         //this->receive_buffer(buffer);
         std::string weapon(this->receive_string_buffer(buffer, offset));
-        std::cout << weapon << std::endl;
         player.update_weapons_view(weapon);
     } else if (action == MOVING_OBJECT) {
 		char type = buffer[offset++];

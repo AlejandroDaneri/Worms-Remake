@@ -109,6 +109,7 @@ void ServerProtocol::receive(Game& game){
 			char move = buffer[offset++];
 			game.getCurrentWorm().move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION){
+		    ////////////////////////////////////////////// Mejorar por algo mas simple
 			std::string weapon(this->receive_string_buffer(buffer, offset));
 			game.getCurrentWorm().changeWeapon(weapon);
 			char weapon_buffer[MAX_BUF_LEN];
