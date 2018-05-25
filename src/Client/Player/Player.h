@@ -29,7 +29,8 @@ class Player {
 		ViewsList view_list;
 		DataReceiver data_receiver;
 		Handlers handlers;
-		
+
+		/* Reduce el tiempo del turno y actualiza la municion */
 		void shootWeapon();
 
 	public:

@@ -15,16 +15,21 @@ class WeaponButton {
 		Gtk::Image image;
 
 	public:
+		/* Constructor */
 		WeaponButton(const std::string& weapon_name, unsigned int ammo, Player& player);
+
+		/* Destructor */
 		~WeaponButton();
 		//WeaponButton(WeaponButton&& other);
 
+        /* Devuelve el wiget del boton */
 		Gtk::Widget& getButton();
 
+		/* Setea el label del boton */
 		void setLabel(unsigned int ammo);
-		
+
+		/* Handler del boton al ser clickeado */
 		void on_clicked_button();
-		void on_released_button();
 };
 
 

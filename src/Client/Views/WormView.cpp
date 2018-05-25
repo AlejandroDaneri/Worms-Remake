@@ -70,7 +70,6 @@ Gtk::Widget& WormView::getWidget(){
 	////////////////////////////////Por ahora no uso la vida,         hacer un vbox con la vida y la imagen
 
 	//////////////////////////hacer algo con el arma actual
-	std::cout <<  "Arma del path = " << this->weapon << std::endl;
 	if (this->dir_changed){
 		/*std::string path(IMAGES_PATH);
 		path += WORM_IMAGE;

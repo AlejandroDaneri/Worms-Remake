@@ -28,27 +28,63 @@ class ViewsList{
 		///////// ExplosionView tendra que recibir la imagen por movimiento y el bulletView. Despues de la animacion llama a explode para eliminarlo del word.
 
 	public:
+        /* Constructor */
 		ViewsList(WorldView& world, Player& player, PlayersList& players_list);
+
+		/* Destructor */
 		~ViewsList();
 
+
+		/* CallBack de removeWorm */
+        bool removeWormCallBack(int id);
+        /* Elimina al worm de la vista actualizando la vida del player */
 		void removeWorm(int id);
+
+		/* CallBack de removeWeapon */
+        bool removeWeaponCallBack(int id);
+        /* Elimina la vista del arma y la reemplaza por la animacion de la explosion */
 		void removeWeapon(int id);
-		
+
+		/* CallBack de eraseWeapon */
+        bool eraseWeaponCallBack(int id);
+        /* Elimina el arma de la vista */
 		void eraseWeapon(int id);
 
-		void updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name);
+		/* CallBack de updateWormData */
+        bool updateWormDataCallBack(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name);
+		/* Actualiza la posicion y la vida del worm */
+        void updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name);
 
-		void updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y);
+        /* CallBack de updateWeaponData */
+        bool updateWeaponDataCallBack(int id, const std::string& weapon_name, float pos_x, float pos_y);
+		/* Actualiza la posicion del arma */
+        void updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y);
 
-		void changeWeapon(const std::string &weapon_name);
+        /* CallBack de changeWeapon */
+        bool changeWeaponCallBack(const std::string &weapon_name);
+		/* Actualiza la vista del worm con el arma nueva */
+        void changeWeapon(const std::string &weapon_name);
 
+        /* CallBack de updateScope */
+		bool updateScopeCallBack(int angle);
+        /* Actualiza la posicion del scope */
 		void updateScope(int angle);
-		
-		void removeScopeVisibility();
-		
+
+        /* CallBack de removeScopeVisibility */
+        bool removeScopeVisibilityCallBack();
+		/* Esconde la vista del scope */
+        void removeScopeVisibility();
+
+        /* CallBack de addGirder */
+        bool addGirderCallBack(size_t size, int pos_x, int pos_y, int rotation);
+        /* Agrega una viga a la vista en la posicion indicada y
+         * con la rotacion indicada */
 		void addGirder(size_t size, int pos_x, int pos_y, int rotation);
 
-		void setCurrentWorm(int id);
+        /* CallBack de setCurrentWorm */
+        bool setCurrentWormCallBack(int id);
+		/* Actualiza el worm actual y hace focus en este */
+        void setCurrentWorm(int id);
 };
 
 

@@ -8,7 +8,6 @@
 #include "TurnLabel.h"
 #include "PlayersList.h"
 
-
 class ScreenView {
 	private:
 		Gtk::VBox screen;
@@ -18,14 +17,21 @@ class ScreenView {
         WeaponView weapons_view;
 
 	public:
+        /* Constructor */
 		ScreenView(Player& player, WeaponList& weapons,TurnLabel& label, PlayersList& players);
-		~ScreenView();
-		
+
+        /* Destructor */
+        ~ScreenView();
+
+
+        /* Devuelve el contenedor de la vista */
 		Gtk::Container& getWindow();
 
+        /* Devuelve el WorldView */
         WorldView& getWorld();
+
+        /* Devuelve el WeaponView */
         WeaponView& getWeaponsView();
 };
-
 
 #endif
