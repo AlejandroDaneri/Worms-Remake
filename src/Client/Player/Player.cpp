@@ -69,7 +69,11 @@ void Player::change_weapon(std::string weapon) {
 	} else {
 		this->view_list.removeScopeVisibility();
 	}
-	this->view_list.chageWeapon(weapon); ///////////////////////// Cambiar a que sea por protocolo
+}
+
+void Player::update_weapons_view(std::string weapon) {
+    this->view_list.changeWeapon(weapon);
+
 }
 
 void Player::shoot(Position position) {

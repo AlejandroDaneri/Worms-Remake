@@ -89,7 +89,7 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float p
 	}
 }
 
-void ViewsList::chageWeapon(const std::string& weapon_name) {
+void ViewsList::changeWeapon(const std::string &weapon_name) {
     this->worms.at(this->current_worm_id).changeWeapon(weapon_name);
 }
 

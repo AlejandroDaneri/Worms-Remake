@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "WeaponList.h"
 
+#include <iostream>
+
 ClientProtocol::ClientProtocol(Socket&& socket): Protocol(std::move(socket)) {}
 
 ClientProtocol::ClientProtocol(ClientProtocol&& other): Protocol(std::move(other)) {}
@@ -73,7 +75,13 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 		int worm_id = this->receive_int_buffer(buffer, offset);
 		int player_id = this->receive_int_buffer(buffer, offset);
 		player.startTurn(worm_id, player_id);
-	} else if (action == MOVING_OBJECT){
+	} else if (action == CHANGE_WEAPON_ACTION) {
+        //char buffer[MAX_BUF_LEN];
+        //this->receive_buffer(buffer);
+        std::string weapon(this->receive_string_buffer(buffer, offset));
+        std::cout << weapon << std::endl;
+        player.update_weapons_view(weapon);
+    } else if (action == MOVING_OBJECT) {
 		char type = buffer[offset++];
 		int id = this->receive_int_buffer(buffer, offset);
 

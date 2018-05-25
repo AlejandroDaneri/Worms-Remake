@@ -40,7 +40,7 @@ class ViewsList{
 
 		void updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y);
 
-		void chageWeapon(const std::string& weapon_name);
+		void changeWeapon(const std::string &weapon_name);
 
 		void updateScope(int angle);
 		
