@@ -1,6 +1,5 @@
 
-#include <WeaponNames.h>
-#include <ConfigFields.h>
+
 #include "FileWriter.h"
 
 FileWriter::FileWriter(const std::string &filename)

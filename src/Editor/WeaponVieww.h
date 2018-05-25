@@ -31,6 +31,8 @@ public:
     void linkController(WeaponController *controller);
 
     const int getInitialAmmo();
+
+    void setAmmo(const int &ammo);
 };
 
 

@@ -26,9 +26,10 @@ void FileBoxController::onLoadClicked() const {
     FileReader file("config_editor.yaml");
     std::vector<std::vector<double>> worms;
     std::vector<std::vector<double>> girders;
-    file.read(worms,girders);
+    std::vector<int> weps_ammo;
+    file.read(worms, girders, weps_ammo);
 
-    //weapons_controller.loadWeapons();
+    weapons_controller.loadWeapons(weps_ammo);
     map_controller->loadObjects(worms,girders);
 }
 

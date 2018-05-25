@@ -44,3 +44,16 @@ void WeaponView::linkController(WeaponController *controller) {
 const int WeaponView::getInitialAmmo() {
     return default_checkbox_state ? -1 : default_ammo_selector_value;
 }
+
+void WeaponView::setAmmo(const int &ammo) {
+    if (ammo<0){
+        infinite->set_active(true);
+        ammo_selector->set_sensitive(false);
+    }
+    else{
+        infinite->set_active(false);
+        ammo_selector->set_sensitive(true);
+        ammo_selector->set_value(ammo);
+    }
+
+}

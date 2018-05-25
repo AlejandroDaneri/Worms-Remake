@@ -6,6 +6,8 @@
 #include <fstream>
 #include "MapObject.h"
 #include <yaml.h>
+#include <WeaponNames.h>
+#include <ConfigFields.h>
 
 class File {
 protected:

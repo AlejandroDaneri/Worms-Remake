@@ -15,6 +15,7 @@ void WeaponController::resetAmmo() {
 
 void WeaponController::updateAmmo(int ammo) {
     weapon_model->setAmmo(ammo);
+    weapon_view->setAmmo(ammo);
 }
 
 int WeaponController::getAmmo() {

@@ -32,3 +32,12 @@ void WeaponsListController::getWeapons(std::vector<int> &weps_ammo) const {
         weps_ammo.push_back(actual_controller->getAmmo());
     }
 }
+
+void WeaponsListController::loadWeapons(std::vector<int> &weps_ammo) const {
+    int i = 0;
+    for (const std::shared_ptr<WeaponController> &actual_controller
+            :wep_controllers){
+        actual_controller->updateAmmo(weps_ammo[i]);
+        i++;
+    }
+}

@@ -20,9 +20,9 @@ public:
 
     void on_reset_clicked();
 
-    const std::vector<int> &getWeapons() const;
-
     void getWeapons(std::vector<int> &weps_ammo) const;
+
+    void loadWeapons(std::vector<int> &weps_ammo) const ;
 };
 
 
