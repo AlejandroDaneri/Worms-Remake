@@ -22,6 +22,7 @@ include_directories(${GTKMM_INCLUDE_DIRS})
 link_directories(${GTKMM_LIBRARY_DIRS})
 
 include_directories(${SDL2_INCLUDE_DIR})
+include_directories(${SDL2MIXER_INCLUDE_DIR})
 
 
 MACRO(HEADER_DIRECTORIES src_dir return_list)
@@ -72,7 +73,7 @@ target_include_directories(client PUBLIC ${headers_client} ${headers_common} ${h
 target_include_directories(server PUBLIC ${headers_server} ${headers_common} ${headers_box2d} ${headers_yaml})
 target_include_directories(editor PUBLIC ${headers_editor} ${headers_common} ${headers_commonui} ${headers_yaml})
 
-target_link_libraries(client m ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} common commonui ${SDL2_LIBRARY})
+target_link_libraries(client m ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} common commonui ${SDL2_LIBRARY} ${SDL2MIXER_LIBRARY})
 target_link_libraries(editor m yaml ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} common commonui)
 target_link_libraries(server m box2d yaml ${CMAKE_THREAD_LIBS_INIT} common)
 
