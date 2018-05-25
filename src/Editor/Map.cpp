@@ -2,7 +2,6 @@
 #include <yaml.h>
 #include "Map.h"
 
-//TODO: cambiar posicion por centro
 void Map::undo() {
     if (!objects.empty())
         this->objects.pop_back();
@@ -33,7 +32,7 @@ int Map::turnCWLast() {
 }
 
 bool Map::lastIsGirder() {
-    return (objects.back().first == 2 || objects.back().first == 3);
+    return (objects.back().first >1);
 }
 
 void Map::getObjects(std::vector<std::vector<double>> &worms,
@@ -47,19 +46,15 @@ void Map::getObjects(std::vector<std::vector<double>> &worms,
             position.push_back(x); //pos x
             position.push_back(y); //pos_y
             worms.push_back(position);
-        } else if (object.first == 2) { //viga corta
+        } else { //viga
             std::vector<double> data;
-            data.push_back(3); //len
+            data.push_back(object.first); //len
             data.push_back(x); //pos_x
             data.push_back(y); //pos_y
             data.push_back(object.second.getAngle()); //rotation
             girders.push_back(data);
         }
     }
-
-}
-
-void Map::load_signal() {
 
 }
 

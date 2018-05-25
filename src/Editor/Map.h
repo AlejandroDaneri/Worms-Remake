@@ -23,8 +23,6 @@ public:
 
     bool lastIsGirder();
 
-    void load_signal();
-
     void getObjects(std::vector<std::vector<double>> &worms,
                     std::vector<std::vector<double>> &girders) const;
 

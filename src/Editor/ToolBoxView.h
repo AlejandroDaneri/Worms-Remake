@@ -11,8 +11,8 @@
 
 
 #define WORM_BUTTON_ID 1
-#define GIRDER_3_BUTTON_ID 2
-#define GIRDER_6_BUTTON_ID 3
+#define GIRDER_3_BUTTON_ID 3
+#define GIRDER_6_BUTTON_ID 6
 
 class ToolBoxView : public Gtk::Grid {
 private:

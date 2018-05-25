@@ -17,8 +17,8 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
     builder->get_widget("btn_move", move);
     builder->get_widget("btn_turn_ccw", turnccw);
     builder->get_widget("btn_turn_cw", turncw);
-    //turnccw->set_sensitive(false);
-    //turncw->set_sensitive(false);
+    turnccw->set_sensitive(false);
+    turncw->set_sensitive(false);
 
 
     worm->signal_clicked().connect(sigc::bind<int>

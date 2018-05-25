@@ -37,13 +37,13 @@ MapView::MapView(BaseObjectType *cobject,
 
 
 void MapView::add(unsigned int id, const double &x, const double &y, const int &angle) {
-    Gtk::Image new_image(pallete[id - 1][0]);
+    Gtk::Image new_image(pallete[id - id/2-1][0]);
     const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
     put(new_image, x - img->get_width() / 2, y - img->get_height() / 2);
     new_image.show();
     objects.push_back(std::move(new_image));
     if (angle>0)
-        turnLast(angle, 0);
+        turnLast(id, angle);
 }
 
 void MapView::moveLast(const double &x, const double &y) {
@@ -59,7 +59,7 @@ void MapView::moveLast(const double &x, const double &y) {
 void MapView::turnLast(const unsigned int &id, const int &angle) {
     if (!objects.empty()) {
         Gtk::Image &image = objects.back();
-        image.set(pallete[id-1][angle / 10]);
+        image.set(pallete[id-id/2-1][angle / 10]);
     }
 }
 
