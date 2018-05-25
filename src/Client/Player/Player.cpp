@@ -7,6 +7,7 @@ const int NO_ANGLE = 500;
 Player::Player(ClientProtocol protocol, const std::string& name): 
 	protocol(std::move(protocol)), name(name),
 	screen(*this, this->weapons, this->turn_label, this->players_list),
+    turn(*this, this->turn_label),
 	view_list(this->screen.getWorld(), *this, this->players_list),
 	data_receiver(this->view_list, *this, this->protocol),
 	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()) {
@@ -16,21 +17,20 @@ Player::Player(ClientProtocol protocol, const std::string& name):
 	this->protocol.receiveWeaponsAmmo(this->weapons);
 	this->screen.getWeaponsView().update();
 	this->data_receiver.start();
-	this->turn.reset(new Turn(*this, this->turn_label));
 }
 
 Player::~Player() {
 	std::cout << "destruyo" << std::endl;
-	this->turn->stop();
-	this->turn->join();
+	//this->turn->stop();
+	//this->turn->join();
 	this->data_receiver.stop();
 	this->data_receiver.join();
 }
 
 void Player::startTurn(int worm_id, int player_id){
 	this->view_list.setCurrentWorm(worm_id);
-	this->turn->join();
-	this->turn.reset(new Turn(*this, this->turn_label));
+	//this->turn->join();
+	//this->turn.reset(new Turn(*this, this->turn_label));
 	const std::string& current_player = this->players_list.getPlayer(player_id);
 	if (current_player == this->name){
 		//Es mi turno
@@ -39,7 +39,7 @@ void Player::startTurn(int worm_id, int player_id){
 		this->change_weapon(this->weapons.get_actual_weapon().getName());
 		std::cout << "key event = " << this->weapons.get_actual_weapon().getName() << std::endl;
 		this->turn_label.beginTurn();
-		this->turn->start();
+		this->turn.start();
 	} else {
 		this->turn_label.beginTurn(current_player);
 	}
@@ -53,11 +53,11 @@ void Player::endTurn() {
 }
 
 void Player::damageReceived(){
-	this->turn->stop();
+	this->turn.stop();
 }
 
 void Player::shootWeapon() {
-	this->turn->reduceTime();
+	this->turn.reduceTime();
 	this->weapons.get_actual_weapon().shoot();
 }
 

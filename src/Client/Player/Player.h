@@ -25,7 +25,7 @@ class Player {
 		TurnLabel turn_label;
 		PlayersList players_list;
 		ScreenView screen;
-		std::unique_ptr<Turn> turn;
+		Turn turn;
 		ViewsList view_list;
 		DataReceiver data_receiver;
 		Handlers handlers;

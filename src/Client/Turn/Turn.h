@@ -7,19 +7,21 @@
 
 class Player;
 
-class Turn : public Thread {
+class Turn {
 	private:
 		int actual_time;
-		int max_time;
 		Player& player;
 		TurnLabel& time_label;
+		sigc::connection my_connection;
 
 	public:
 		Turn(Player& player, TurnLabel& time_label);
 		~Turn();
 
-		void run();
+	    bool startCallBack();
+	    void start();
 		void reduceTime();
+		void stop();
 };
 
 #endif
