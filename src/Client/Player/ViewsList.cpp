@@ -3,15 +3,15 @@
 #include "ObjectSizes.h"
 #include "Player.h"
 
+#include <iostream>
+
 ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list):
-	world(world), player(player), players_list(players_list){
+	world(world), player(player), players_list(players_list) {
 
 	this->scope.set("resources/images/scope/scope.png");
-	this->draw_scope = false;
 	this->world.addElement(this->scope, Position(0,500), 0, 0);
 	this->scope.hide();
 	this->current_worm_id = -1;
-	this->animation = nullptr;
 }
 
 ViewsList::~ViewsList(){}
@@ -38,10 +38,13 @@ bool ViewsList::removeWeaponCallBack(int id){
     }
     auto it = this->weapons.find(id);
     if (it != this->weapons.end()){
-        if (this->animation != nullptr)
-            this->animation->join();
-        this->animation.reset(new ExplosionView(it->second, *this, id));
-        this->animation->start();
+        //if (this->animation != nullptr)
+          //  this->animation->join();
+        ExplosionView explotion(it->second, *this, id); ////////// cambiar por clase normal
+        this->animation.add(id, std::move(explotion));
+        //this->animation.reset(new ExplosionView(it->second, *this, id));
+        std::cout << "Id del misil = " << id << std::endl;
+        this->animation.at(id).start();
     }
     return false;
 }

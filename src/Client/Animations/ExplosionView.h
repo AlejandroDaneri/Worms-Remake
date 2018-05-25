@@ -8,19 +8,23 @@
 class ViewsList;
 class BulletView;
 
-class ExplosionView: public Thread{
+class ExplosionView {
 	private:
 		BulletView& bulletView;
 		ViewsList& viewList;
 		int id;
 		std::vector<Glib::RefPtr<Gdk::Pixbuf>> animation_vector;
 		Glib::RefPtr<Gdk::Pixbuf> animation;
+        std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter;
 
 	public:
 		ExplosionView(BulletView& bullet, ViewsList& viewList, int id);
 		~ExplosionView();
+        ExplosionView(ExplosionView&& other);
 
-		void run();
+		bool startCallBack();
+		void start();
+		bool hasFinished();
 };
 
 

@@ -47,4 +47,5 @@ void Turn::reduceTime() {
 
 void Turn::stop() {
     this->my_connection.disconnect();
+    this->player.endTurn();
 }

@@ -10,6 +10,7 @@
 #include "GirderView.h"
 #include "PlayersList.h"
 #include "ExplosionView.h"
+#include "ExplosionViewList.h"
 
 class ViewsList{
 	private:
@@ -20,12 +21,9 @@ class ViewsList{
 		std::unordered_map<int, BulletView> weapons;
 		std::vector<GirderView> girders;
 		Gtk::Image scope;
-		bool draw_scope;
 		int current_worm_id;
 		int weapon_focused;
-		std::unique_ptr<ExplosionView> animation; ////////////////////// Cambiar por un vector de ExplosionView
-		//////////////////Este vector se encargara de recorrerlos y de hacerles el join y de hacer el start.
-		///////// ExplosionView tendra que recibir la imagen por movimiento y el bulletView. Despues de la animacion llama a explode para eliminarlo del word.
+        ExplosionViewList animation;
 
 	public:
         /* Constructor */
