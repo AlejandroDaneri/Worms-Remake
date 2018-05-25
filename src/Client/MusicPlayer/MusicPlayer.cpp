@@ -30,6 +30,7 @@ MusicPlayer::MusicPlayer() {
 
 MusicPlayer::~MusicPlayer() {
     Mix_HaltChannel(-1);
+    this->stop();
     if (this->music != NULL) {
         Mix_FreeMusic(this->music);
     }
@@ -112,5 +113,5 @@ void MusicPlayer::stop() {
 }
 
 bool MusicPlayer::isPlaying() {
-    return Mix_PlayingMusic();
+    return Mix_PlayingMusic() == 1;
 }

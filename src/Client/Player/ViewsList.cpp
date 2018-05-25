@@ -1,9 +1,7 @@
 #include "ViewsList.h"
+#include <glibmm/main.h>
 #include "ObjectSizes.h"
 #include "Player.h"
-
-#include <glibmm/main.h>
-
 
 ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list):
 	world(world), player(player), players_list(players_list){
@@ -156,7 +154,6 @@ bool ViewsList::removeScopeVisibilityCallBack() {
 }
 
 void ViewsList::removeScopeVisibility() {
-    //sigc::slot<bool> my_slot = sigc::mem_fun(*this, &ViewsList::removeScopeVisibilityCallBack);
     Glib::signal_idle().connect(sigc::mem_fun(*this, &ViewsList::removeScopeVisibilityCallBack));
 }
 

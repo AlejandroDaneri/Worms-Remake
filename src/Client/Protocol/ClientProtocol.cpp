@@ -57,6 +57,8 @@ void ClientProtocol::send_end_turn(){
 	this->send_buffer(buffer, 1);
 }
 
+///////////////////////////////// Enviar mensaje de dejo de moverse
+
 void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 	char buffer[MAX_BUF_LEN];
 	this->receive_buffer(buffer);
