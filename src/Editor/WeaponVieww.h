@@ -12,7 +12,6 @@
 class WeaponController;
 
 class WeaponView {
-    const Glib::RefPtr<Gtk::Builder> m_builder;
     Gtk::Scale *ammo_selector;
     Gtk::CheckButton *infinite;
     bool default_checkbox_state;

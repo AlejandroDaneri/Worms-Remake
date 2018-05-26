@@ -3,10 +3,9 @@
 
 FileBoxView::FileBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
-        : Gtk::HBox(cobject),
-          m_builder(builder) {
-    m_builder->get_widget("btn_save", save);
-    m_builder->get_widget("btn_load", load);
+        : Gtk::HBox(cobject){
+    builder->get_widget("btn_save", save);
+    builder->get_widget("btn_load", load);
 }
 
 void FileBoxView::linkControler(std::shared_ptr<FileBoxController> controller) {

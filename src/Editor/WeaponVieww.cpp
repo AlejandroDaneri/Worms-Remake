@@ -1,11 +1,9 @@
 #include "WeaponVieww.h"
 
 WeaponView::WeaponView(const Glib::RefPtr<Gtk::Builder> &builder,
-                       const unsigned int &id)
-        : m_builder(builder) {
-
-    m_builder->get_widget("sc_wep" + std::to_string(id), ammo_selector);
-    m_builder->get_widget("cb_wep" + std::to_string(id), infinite);
+                       const unsigned int &id) {
+    builder->get_widget("sc_wep" + std::to_string(id), ammo_selector);
+    builder->get_widget("cb_wep" + std::to_string(id), infinite);
 
     default_checkbox_state = infinite->get_active();
     default_ammo_selector_value = ammo_selector->get_value();

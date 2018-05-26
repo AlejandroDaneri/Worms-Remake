@@ -14,13 +14,10 @@
 
 
 class Editor : public Gtk::Window {
-    Glib::RefPtr<Gtk::Builder> m_builder;
     Gtk::ScrolledWindow *map_window;
     MapView *map;
     ToolBoxView *toolbox;
     Map map_model;
-
-    Gtk::Button *reset_button;
     WeaponsAndLifeController weps_list_controller;
 
     FileBoxView *filebox;

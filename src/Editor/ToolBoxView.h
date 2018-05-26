@@ -16,7 +16,6 @@
 
 class ToolBoxView : public Gtk::Grid {
 private:
-    Glib::RefPtr<Gtk::Builder> m_builder;
     Gtk::Button *btn_clean;
     Gtk::Button *erase; //pasar a toggle
     std::shared_ptr<MapController> map_controller;

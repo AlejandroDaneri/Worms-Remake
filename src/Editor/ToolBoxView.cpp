@@ -5,8 +5,7 @@
 
 ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
-        : Gtk::Grid(cobject),
-          m_builder(builder) {
+        : Gtk::Grid(cobject) {
     builder->get_widget("btn_undo", erase);
     builder->get_widget("btn_clean", btn_clean);
     builder->get_widget("tbtn_worm", worm);

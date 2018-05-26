@@ -12,7 +12,6 @@ class FileBoxController;
 
 class FileBoxView : public Gtk::HBox {
 private:
-    const Glib::RefPtr<Gtk::Builder> &m_builder;
     Gtk::Button *save;
     Gtk::Button *load;
     std::shared_ptr<FileBoxController> file_box_controller;
