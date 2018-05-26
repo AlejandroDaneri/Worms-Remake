@@ -127,6 +127,8 @@ void ServerProtocol::receive(Game& game){
 			int pos_x = this->receive_int_buffer(buffer, offset);
 			int pos_y = this->receive_int_buffer(buffer, offset);
 			game.getCurrentWorm().shoot(b2Vec2(pos_x, pos_y));
+		} else if (worm_action == STOP_MOVING) {
+			//////////////////////////////// Enviar a todos los clientes que se dejo de mover
 		}
 	}
 }

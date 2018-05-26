@@ -18,13 +18,12 @@
 #define CHANGE_WEAPON_ACTION 6
 #define SHOOT_WEAPON 7
 #define SHOOT_SELF_DIRECTED 8
+#define STOP_MOVING 9
 
 #define MOVE_RIGHT 1
 #define MOVE_LEFT -1
 #define JUMP 2
 #define ROLLBACK 3
-#define EXTEND_ANGLE 4/////////////////////////
-#define REDUCE_ANGLE 5/////////////////////////
 
 #define WORM_TYPE 0
 #define WEAPON_TYPE 1

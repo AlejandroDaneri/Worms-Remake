@@ -110,23 +110,24 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 }
 
 bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
-	if (key_event->keyval == SPACE && key_event->type == GDK_KEY_RELEASE) {
-		if (this->weapons.get_actual_weapon().isSelfDirected()) {
-			return true;
+	if (key_event->type == GDK_KEY_RELEASE) {
+		if (key_event->keyval == SPACE) {
+			if (this->weapons.get_actual_weapon().isSelfDirected()) {
+				return true;
+			}
+			if (!this->weapons.get_actual_weapon().hasVariablePower()) {
+				return true;
+			}
+			if (!this->weapons.get_actual_weapon().hasAmmo()) {
+				return true;
+			}
+			printf("se solto la barra\n");
+			printf("Timer stop\n");
+			this->timer->stop();
+		} else if (key_event->keyval == GDK_KEY_Left || key_event->keyval == GDK_KEY_Right) {
+			this->player.getProtocol().send_stop_moving();
 		}
-		if (!this->weapons.get_actual_weapon().hasVariablePower()) {
-			return true;
-		}
-		if (!this->weapons.get_actual_weapon().hasAmmo()) {
-			return true;
-		}
-		printf("se solto la barra\n");
-		printf("Timer stop\n");
-		this->timer->stop();
-	} else if (key_event->keyval == GDK_KEY_Left) {}
-		///////////////////////// ANIMACION DE SACAR EL ARMA
-	else if (key_event->keyval == GDK_KEY_Right) {}
-		///////////////////////// ANIMACION DE SACAR EL ARMA
+	}
 	return true;
 }
 
