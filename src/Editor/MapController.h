@@ -13,6 +13,7 @@ class MapController {
     MapView &view;
     unsigned int actual_item_selected;
     unsigned int actual_action_id;
+    unsigned int last_item_added;
 
 public:
     MapController(const Map &model, MapView &view);
@@ -36,6 +37,8 @@ public:
                      std::vector<std::vector<double>> &girders);
 
     void turnCWSignal();
+
+
 };
 
 

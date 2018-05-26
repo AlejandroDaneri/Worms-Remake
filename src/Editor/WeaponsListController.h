@@ -4,12 +4,14 @@
 
 
 #include <gtkmm/button.h>
+#include <gtkmm/spinbutton.h>
 #include "WeaponModel.h"
 #include "WeaponVieww.h"
 
 class WeaponsListController {
 private:
-    //WeaponListt weapons;
+    Gtk::SpinButton* life_spin;
+
     Gtk::Button *reset_button;
     std::vector<std::shared_ptr<WeaponModel>> weapons;
     std::vector<std::shared_ptr<WeaponView>> weapons_view;

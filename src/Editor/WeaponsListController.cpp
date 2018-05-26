@@ -4,7 +4,12 @@
 WeaponsListController::WeaponsListController(
         const Glib::RefPtr<Gtk::Builder> &builder,
         Gtk::Button *reset_button)
-        : reset_button(reset_button) {
+        : reset_button(reset_button)
+{
+
+    builder->get_widget("life", life_spin);
+
+
     for (size_t i = 1; i <= 10; ++i) {
         std::shared_ptr<WeaponView> weapon_view(new WeaponView(builder, i));
 
@@ -22,6 +27,7 @@ WeaponsListController::WeaponsListController(
 }
 
 void WeaponsListController::on_reset_clicked() {
+
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         actual_controller->resetAmmo();
     }

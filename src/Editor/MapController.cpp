@@ -32,14 +32,14 @@ void MapController::moveSignal() {
 void MapController::turnCCWSignal() {
     if (model.lastIsGirder()) {
         int new_angle = this->model.turnCCWLast();
-        this->view.turnLast(actual_item_selected, new_angle);
+        this->view.turnLast(last_item_added, new_angle);
     }
 }
 
 void MapController::turnCWSignal() {
     if (model.lastIsGirder()) {
         int new_angle = this->model.turnCWLast();
-        this->view.turnLast(actual_item_selected, new_angle);
+        this->view.turnLast(last_item_added, new_angle);
     }
 }
 
@@ -49,7 +49,7 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
         this->view.moveLast(event_button->x, event_button->y);
         actual_action_id = ADD_CMD_ID;
     } else {
-
+        last_item_added=actual_item_selected;
         this->model.add(actual_item_selected, event_button->x, event_button->y);
         this->view.add(actual_item_selected, event_button->x, event_button->y);
     }

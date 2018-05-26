@@ -5,11 +5,13 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/window.h>
 #include <gtkmm/scrolledwindow.h>
+#include <gtkmm/spinbutton.h>
 #include "MapView.h"
 #include "ToolBoxView.h"
 #include "WeaponsListController.h"
 #include "FileBoxController.h"
 #include "FileBoxView.h"
+
 
 class Editor : public Gtk::Window {
     Glib::RefPtr<Gtk::Builder> m_builder;
