@@ -89,11 +89,6 @@
     <property name="can_focus">False</property>
     <property name="pixbuf">resources/images/editor_toolbox/load_icon.png</property>
   </object>
-  <object class="GtkImage" id="imagen">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="pixbuf">resources/images/Girder/girder_3.png</property>
-  </object>
   <object class="GtkImage" id="img_bg">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -1207,7 +1202,9 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
+                <property name="hscroll_policy">natural</property>
                 <property name="width">20000</property>
+                <property name="height">5000</property>
               </object>
             </child>
           </object>

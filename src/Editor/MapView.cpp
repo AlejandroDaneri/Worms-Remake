@@ -6,8 +6,9 @@
 
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
-        : Gtk::Layout(cobject),
-          m_builder(builder) {
+        : Gtk::Layout(cobject){
+
+    setBackground("resources/images/editor_toolbox/background1.png");
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
             sigc::mem_fun(*this, &MapView::on_button_clicked));
@@ -81,6 +82,22 @@ void MapView::clean() {
 
 void MapView::linkController(MapController *pController) {
     this->controller = pController;
+}
+
+void MapView::setBackground(std::string name) {
+    Gtk::Image bg(name);
+    int width = bg.get_pixbuf()->get_width();
+    int heigth = bg.get_pixbuf()->get_height();
+    guint winw,winh;
+    this->get_size(winw,winh);
+    for(size_t x=0;x<winw;x+=width){
+        for(size_t y=0;y<winh;y+=heigth){
+            Gtk::Image asd(name);
+            asd.show();
+            put(asd,x,y);
+            back.push_back(std::move(asd));
+        }
+    }
 }
 
 

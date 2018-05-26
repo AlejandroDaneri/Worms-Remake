@@ -12,10 +12,14 @@ class MapController;
 
 class MapView : public Gtk::Layout {
 private:
-    const Glib::RefPtr<Gtk::Builder> m_builder;
     std::vector<Gtk::Image> objects;
     std::vector<std::vector<std::string>> pallete;
     MapController *controller;
+
+    std::vector<Gtk::Image> back;
+
+    void setBackground(std::string name);
+
 
 public:
     MapView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
@@ -34,6 +38,8 @@ public:
     void moveLast(const double &x, const double &y);
 
     void turnLast(const unsigned int &id, const int &angle);
+
+
 };
 
 
