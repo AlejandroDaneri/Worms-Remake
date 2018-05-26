@@ -1,11 +1,7 @@
 #include "WeaponList.h"
 #include "WeaponNames.h"
 
-const std::string initial_weapon(BAZOOKA_NAME);
-
-WeaponList::WeaponList() {
-	this->actual_weapon = initial_weapon;
-}
+WeaponList::WeaponList(): current_weapon(DEFAULT_WEAPON){}
 
 WeaponList::~WeaponList() {}
 
@@ -15,11 +11,11 @@ void WeaponList::add(std::string weapon, int ammo) {
 }
 
 void WeaponList::change_weapon(std::string weapon) {
-	this->actual_weapon = weapon;
+	this->current_weapon = weapon;
 }
 
-Weapon& WeaponList::get_actual_weapon() {
-	return *this->weapons.at(this->actual_weapon);
+Weapon& WeaponList::get_current_weapon() {
+	return *this->weapons.at(this->current_weapon);
 }
 
 WeaponList::iterator WeaponList::begin() {

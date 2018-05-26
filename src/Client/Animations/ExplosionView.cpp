@@ -31,19 +31,12 @@ bool ExplosionView::startCallBack() {
 	this->iter++;
 	if (this->iter == this->animation_vector.end()) {
         this->viewList.eraseWeapon(this->id);
+        return false;
     }
-    return this->iter != this->animation_vector.end();
+    return true;
 }
 
 void ExplosionView::start() {
-	/*Gtk::Image& image = (Gtk::Image&)this->bulletView.getWidget();
-	std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter;
-	for (iter = this->animation_vector.begin(); iter != this->animation_vector.end(); iter++) {
-		image.set(Gdk::Pixbuf::create_subpixbuf(*iter, 0, 0, 60, 60));
-		std::this_thread::sleep_for(std::chrono::milliseconds(40));
-	}
-	this->running = false;
-	this->viewList.eraseWeapon(this->id);*/
     Glib::signal_timeout().connect(sigc::mem_fun(*this, &ExplosionView::startCallBack), 40);
 }
 

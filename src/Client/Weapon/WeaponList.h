@@ -9,7 +9,7 @@ class WeaponList {
 	private:
 	    typedef std::map<std::string, weapon_ptr> WeaponsList;
 		WeaponsList weapons;
-		std::string actual_weapon;
+		std::string current_weapon;
 
 	public:
 		WeaponList();
@@ -17,7 +17,7 @@ class WeaponList {
 		
 		void add(std::string weapon, int ammo);
 		
-		Weapon& get_actual_weapon();
+		Weapon& get_current_weapon();
 		
 		void change_weapon(std::string weapon);
 		

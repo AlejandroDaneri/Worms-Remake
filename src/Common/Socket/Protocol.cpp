@@ -7,48 +7,49 @@ Protocol::Protocol(Protocol&& other) : socket(std::move(other.socket)) {}
 
 Protocol::~Protocol() {}
 
-void Protocol::send_buffer(const char* buffer, size_t size) {
-	uint32_t len_converted = htonl(size);
+void Protocol::send_buffer(Buffer& buffer) {
+	uint32_t len_converted = htonl(buffer.getSize());
 	std::lock_guard<std::mutex> lock(this->mutex_send);
 	this->socket.send_data(&len_converted, sizeof len_converted);
-	this->socket.send_data(buffer, size);
+	this->socket.send_data(buffer.getPointer(), buffer.getSize());
 }
 
-size_t Protocol::receive_buffer(char* buffer) {
+Buffer Protocol::receive_buffer() {
 	uint32_t len;
 	this->socket.receive(&len, sizeof (uint32_t));
 	len = ntohl(len);
 
-	this->socket.receive(buffer, len);
-	return len;
+	Buffer buffer;
+	this->socket.receive(buffer.getPointer(), len);
+	return std::move(buffer);
 }
 
-void Protocol::send_int_buffer(char *buffer, size_t &offset, int32_t value) {
+void Protocol::send_int_buffer(Buffer& buffer, int32_t value) {
 	value = htonl(value);
-	std::memcpy(buffer + offset, &value, sizeof(value));
-	offset += sizeof(value);
+	std::memcpy(buffer.getPointer() + buffer.getSize(), &value, sizeof(value));
+	buffer.incrementOffset(sizeof(value));
 }
 
-int Protocol::receive_int_buffer(char *buffer, size_t &offset) {
+int Protocol::receive_int_buffer(Buffer& buffer) {
 	int32_t value;
-	std::memcpy(&value, buffer + offset, sizeof(value));
-	offset += sizeof(value);
+	std::memcpy(&value, buffer.getPointer() + buffer.getSize(), sizeof(value));
+	buffer.incrementOffset(sizeof(value));
 	return ntohl(value);
 }
 
-void Protocol::send_string_buffer(char *buffer, size_t &offset, const std::string &string) {
-	for (size_t j = 0; j < string.size(); offset++, j++){
-		buffer[offset] = string[j];
+void Protocol::send_string_buffer(Buffer& buffer, const std::string &string) {
+	for (size_t j = 0; j < string.size(); j++){
+		buffer.setNext(string[j]);
 	}
-	buffer[offset++] = '\0';
+	buffer.setNext('\0');
 }
 
-std::string Protocol::receive_string_buffer(char *buffer, size_t &offset) {
+std::string Protocol::receive_string_buffer(Buffer& buffer) {
 	std::string string;
-	while (buffer[offset] != '\0'){
-		string += buffer[offset++];
+	char c;
+	while ((c = buffer.getNext()) != '\0'){
+		string += c;
 	}
-	offset++;
 	return string;
 }
 

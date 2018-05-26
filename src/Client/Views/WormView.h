@@ -18,17 +18,25 @@ class WormView: public Viewable {
 		int player_id;
 		int life;
 		char dir;
-		bool dir_changed;
 		std::string weapon;
+		Position last_position;
 		WormLifeView label;
 		Gtk::Image image;
 		Gtk::Grid worm;
-		//std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
-		//Glib::RefPtr<Gdk::Pixbuf> full_image;
+		std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
+		Glib::RefPtr<Gdk::Pixbuf> full_image;
+
+		void setNewImage(bool dir_changed, bool moved, bool colliding, bool is_current_worm);
+
+		void setWeaponImage();
+
+		void setMovementImage();
+
+		void setStaticImage(bool dir_changed);
 
 	public:
 	    /* Constructor */
-		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id, const std::string& weapon);
+		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id);
 
 		/* Destructor */
 		~WormView();
@@ -38,7 +46,7 @@ class WormView: public Viewable {
 
 
 		/* Actualiza la posicion y vida del worm */
-		void updateData(int new_life, char new_dir, const Position& new_pos, const std::string& weapon);
+		void updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm);
 
         /* Actualiza el arma del worm y cambia la imagen */
 		void changeWeapon(const std::string &weapon);
@@ -48,6 +56,9 @@ class WormView: public Viewable {
 
 		/* Elimina al worm del WorldView */
 		void kill();
+
+		/* Elimina la imagen del arma del worm */
+		void removeWeaponImage();
 
 		/* Devuelve la vida del worm */
 		int getLife() const;

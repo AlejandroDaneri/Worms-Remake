@@ -10,7 +10,7 @@
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
 	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(false){
-		this->changeWeapon(BAZOOKA_NAME);
+		this->changeWeapon(DEFAULT_WEAPON);
 	}
 
 Worm::~Worm(){}
@@ -43,8 +43,8 @@ char Worm::getDir() const{
 	return this->dir;
 }
 
-const std::string& Worm::getWeapon() const{
-	return ((Weapon*)this->weapon.get())->getName();
+bool Worm::isColliding() const{
+	return this->colliding_with_girder > 0;
 }
 
 void Worm::addLife(int life){

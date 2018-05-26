@@ -39,6 +39,8 @@ class Game: public Thread{
 
 		Worm& getCurrentWorm();
 
+		void weaponChanged(const std::string& weapon);
+
 		void endTurn();
 };
 
