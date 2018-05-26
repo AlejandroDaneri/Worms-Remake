@@ -7,10 +7,11 @@
 #include <gtkmm/spinbutton.h>
 #include "WeaponModel.h"
 #include "WeaponVieww.h"
+#include "LifeView.h"
 
 class WeaponsListController {
 private:
-    Gtk::SpinButton* life_spin;
+    LifeView* life_spin;
 
     Gtk::Button *reset_button;
     std::vector<std::shared_ptr<WeaponModel>> weapons;
@@ -22,9 +23,9 @@ public:
 
     void on_reset_clicked();
 
-    void getWeapons(std::vector<int> &weps_ammo) const;
+    void getWeapons(std::vector<int> &weps_ammo, unsigned int& life) const;
 
-    void loadWeapons(std::vector<int> &weps_ammo) const ;
+    void loadWeapons(std::vector<int> &weps_ammo, const unsigned int &life) const ;
 };
 
 

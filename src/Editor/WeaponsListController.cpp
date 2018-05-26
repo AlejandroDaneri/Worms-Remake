@@ -6,9 +6,7 @@ WeaponsListController::WeaponsListController(
         Gtk::Button *reset_button)
         : reset_button(reset_button)
 {
-
-    builder->get_widget("life", life_spin);
-
+    builder->get_widget_derived("life", life_spin);
 
     for (size_t i = 1; i <= 10; ++i) {
         std::shared_ptr<WeaponView> weapon_view(new WeaponView(builder, i));
@@ -27,23 +25,25 @@ WeaponsListController::WeaponsListController(
 }
 
 void WeaponsListController::on_reset_clicked() {
-
+    life_spin->reset();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         actual_controller->resetAmmo();
     }
 }
 
-void WeaponsListController::getWeapons(std::vector<int> &weps_ammo) const {
+void WeaponsListController::getWeapons(std::vector<int> &weps_ammo, unsigned int &life) const {
+    life=life_spin->get_value();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         weps_ammo.push_back(actual_controller->getAmmo());
     }
 }
 
-void WeaponsListController::loadWeapons(std::vector<int> &weps_ammo) const {
+void WeaponsListController::loadWeapons(std::vector<int> &weps_ammo, const unsigned int &life) const {
     int i = 0;
     for (const std::shared_ptr<WeaponController> &actual_controller
             :wep_controllers){
         actual_controller->updateAmmo(weps_ammo[i]);
         i++;
     }
+    life_spin->update(life);
 }

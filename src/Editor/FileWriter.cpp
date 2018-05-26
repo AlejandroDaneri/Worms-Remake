@@ -6,15 +6,14 @@ FileWriter::FileWriter(const std::string &filename)
         : File(filename, std::fstream::out | std::ios_base::trunc) {}
 
 
-void FileWriter::save(const std::vector<int> &weapons,
-                      std::vector<std::vector<double>> &worms,
-                      std::vector<std::vector<double>> &girders) {
+void FileWriter::save(std::vector<int> weapons, const std::vector<std::vector<double>> &worms,
+                      const std::vector<std::vector<double>> &girders, unsigned int worm_life) {
     YAML::Emitter out;
 
     out << YAML::BeginMap;
 
     out << YAML::Key << WORMS_LIFE;
-        out << YAML::Value << 200;
+        out << YAML::Value << worm_life;
 
     //armas
     out << YAML::Key << WEAPON_AMMO;

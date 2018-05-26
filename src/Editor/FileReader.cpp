@@ -6,15 +6,12 @@
 FileReader::FileReader(const std::string &filename) : File(filename,
                                                            std::fstream::in) {}
 
-void FileReader::read(std::vector<std::vector<double>>& worms,
-                      std::vector<std::vector<double>>& girders,
-                      std::vector<int>& weps_ammo) {
+void FileReader::read(std::vector<std::vector<double>> &worms,
+                      std::vector<std::vector<double>> &girders, std::vector<int> &weps_ammo,
+                      unsigned int &worms_life) {
     YAML::Node config = YAML::LoadFile("config_editor.yaml");
 
-  /*/
-    int worms_life = config["worms_life"].as<int>();
-    std::cout << "worms_life: " << worms_life << std::endl;
-/*/
+    worms_life = config[WORMS_LIFE].as<unsigned int>();
 
     //convierto directamente a map
     std::map<std::string, int> ammo = config[WEAPON_AMMO].as<std::map<std::string,
@@ -29,12 +26,11 @@ void FileReader::read(std::vector<std::vector<double>>& worms,
     weps_ammo.push_back(ammo[BAT_NAME]);
     weps_ammo.push_back(ammo[DYNAMITE_NAME]);
     weps_ammo.push_back(ammo[HOLY_GRENADE_NAME]);
-    std::cout << "ammo dynamite: " << ammo["Dynamite"]<< std::endl;
 
     //carga de  worms
-    worms = config["worms"].as<std::vector<std::vector<double>>>();
+    worms = config[WORMS_DATA].as<std::vector<std::vector<double>>>();
 
     //carga de vigas
-    girders = config["girders"].as<std::vector<std::vector<double>>>();
+    girders = config[GIRDERS_DATA].as<std::vector<std::vector<double>>>();
 
 }

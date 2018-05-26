@@ -12,14 +12,16 @@ FileBoxController::FileBoxController(
 
 void FileBoxController::onSaveClicked() const {
     std::vector<int> weapons_ammo;
-    weapons_controller.getWeapons(weapons_ammo);
+    unsigned int life;
+    weapons_controller.getWeapons(weapons_ammo,life);
 
     std::vector<std::vector<double>> worms;
     std::vector<std::vector<double>> girders;
     map_controller->getObjects(worms, girders);
 
     FileWriter file("config_editor.yaml");
-    file.save(weapons_ammo, worms, girders);
+    file.save(weapons_ammo, worms,
+              girders, life);
 }
 
 void FileBoxController::onLoadClicked() const {
@@ -27,9 +29,11 @@ void FileBoxController::onLoadClicked() const {
     std::vector<std::vector<double>> worms;
     std::vector<std::vector<double>> girders;
     std::vector<int> weps_ammo;
-    file.read(worms, girders, weps_ammo);
+    unsigned int life;
+    file.read(worms, girders,
+              weps_ammo, life);
 
-    weapons_controller.loadWeapons(weps_ammo);
+    weapons_controller.loadWeapons(weps_ammo,life);
     map_controller->loadObjects(worms,girders);
 }
 
