@@ -4,6 +4,7 @@
 #include <gtkmm/grid.h>
 #include <unordered_map>
 #include <memory>
+#include <string>
 
 class Player;
 class WeaponList;
@@ -23,6 +24,7 @@ class WeaponView {
 		
 		void update();
 
+        bool updateAmmoCallBack(const std::string& weapon_name, unsigned int ammo);
 		void updateAmmo(const Weapon& weapon);
 		
 		Gtk::Grid& getWindow();
