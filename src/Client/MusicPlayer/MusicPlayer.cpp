@@ -3,10 +3,15 @@
 #include "MusicPlayerException.h"
 
 const std::string BACKGROUND_MUSIC = "resources/Sounds/menu principal/music.mp3"; ///////////////// cambiar
+const std::string START_TURN_SOUND = "resources/Sounds/misc/StartRound.wav";
 const std::string TICK_SOUND = "resources/Sounds/misc/TIMERTICK.WAV";
 const std::string WALK_SOUND = "resources/Sounds/misc/Walk-Expand.wav";
+const std::string BORING_SOUND = "resources/Sounds/Worms/BORING.WAV";
+const std::string RUN_AWAY_SOUND = "resources/Sounds/Worms/RUNAWAY.WAV";
+const std::string DEATH_SOUND = "resources/Sounds/Worms/NOOO.WAV";
 const std::string EXPLOSION_SOUND = "resources/Sounds/Weapons/Explosion1.wav";
 const std::string TELEPORT_SOUND = "resources/Sounds/Weapons/TELEPORT.WAV";
+const std::string BAT_SOUND = "resources/Sounds/Weapons/BaseballSound.wav";
 const std::string HOLY_GRENADE_SOUND = "resources/Sounds/Weapons/HOLYGRENADE.WAV";
 
 MusicPlayer::MusicPlayer() {
@@ -82,11 +87,16 @@ void MusicPlayer::playMusic() {
 	if (Mix_PlayMusic(this->music, -1) == -1) {
         std::cout << "Error al reproducir el audio" << std::endl;
     }
+    Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
 }
 
 /*void playEffect(std::string audio) {
     this->addEffect(audio);
 }*/
+
+void MusicPlayer::playStartTurnSound() {
+    this->addEffect(START_TURN_SOUND);
+}
 
 void MusicPlayer::playTickSound() {
     this->addEffect(TICK_SOUND);
@@ -96,6 +106,18 @@ void MusicPlayer::playWalkSound() {
     this->addEffect(WALK_SOUND);
 }
 
+void MusicPlayer::playBoring() {
+    this->addEffect(BORING_SOUND);
+}
+
+void MusicPlayer::playRunAway() {
+    this->addEffect(RUN_AWAY_SOUND);
+}
+
+void MusicPlayer::playDeathSound() {
+    this->addEffect(DEATH_SOUND);
+}
+
 void MusicPlayer::playExplosionSound() {
     this->addEffect(EXPLOSION_SOUND);
 }
@@ -103,6 +125,11 @@ void MusicPlayer::playExplosionSound() {
 void MusicPlayer::playTeleportSound() {
     this->addEffect(TELEPORT_SOUND);
 }
+
+void MusicPlayer::playBatSound() {
+    this->addEffect(BAT_SOUND);
+}
+
 
 void MusicPlayer::playHolyGrenadeSound() {
     this->addEffect(HOLY_GRENADE_SOUND);

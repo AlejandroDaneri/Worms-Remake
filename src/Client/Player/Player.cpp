@@ -4,13 +4,14 @@
 
 const int NO_ANGLE = 500;
 
-Player::Player(ClientProtocol protocol, const std::string& name): 
+Player::Player(ClientProtocol protocol, const std::string& name, MusicPlayer& musicPlayer):
 	protocol(std::move(protocol)), name(name),
 	screen(*this, this->weapons, this->turn_label, this->players_list),
     turn(*this, this->turn_label),
-	view_list(this->screen.getWorld(), *this, this->players_list),
+	view_list(this->screen.getWorld(), *this, this->players_list, musicPlayer),
 	data_receiver(this->view_list, *this, this->protocol),
-	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()) {
+	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()),
+	musicPlayer(musicPlayer) {
 
 	this->protocol.receivePlayers(this->players_list);
 	this->protocol.receiveGirders(this->view_list);
@@ -33,6 +34,7 @@ void Player::startTurn(int worm_id, int player_id){
 	//this->turn.reset(new Turn(*this, this->turn_label));
 	const std::string& current_player = this->players_list.getPlayer(player_id);
 	if (current_player == this->name){
+	    this->musicPlayer.playStartTurnSound();
 		//Es mi turno
 		this->handlers.enable_all();
 		// mandar arma
@@ -59,6 +61,13 @@ void Player::damageReceived(){
 void Player::shootWeapon() {
 	this->turn.reduceTime();
 	this->weapons.get_actual_weapon().shoot();
+    if (this->weapons.get_actual_weapon().getName() == "Teleportation") {
+        this->musicPlayer.playTeleportSound();
+    } else if (this->weapons.get_actual_weapon().getName() == "Bat") {
+        this->musicPlayer.playBatSound();
+    } else if (this->weapons.get_actual_weapon().getName() == "Dynamite") {
+        this->musicPlayer.playRunAway();
+    }
 }
 
 void Player::change_weapon(std::string weapon) {
@@ -85,6 +94,7 @@ void Player::shoot(Position position) {
 
 void Player::play_tick_time() {
 	printf("Tick\n");
+	this->musicPlayer.playTickSound();
 	///////////////////////////////////// Reproducir sonido de falta de tiempo
 }
 

@@ -4,7 +4,7 @@
 #define BULLETS_PATH "bullets/"
 
 BulletView::BulletView(WorldView& worldView, std::string weapon, Position pos):
-	Viewable(worldView), weapon_name(std::move(weapon)){
+	Viewable(worldView), weapon_name(std::move(weapon)) {
 
 	std::string path(IMAGES_PATH);///////////////por ahora es mas eficiente porque es solo una imagen
 	path += BULLETS_PATH;
@@ -37,4 +37,7 @@ Gtk::Widget& BulletView::getWidget(){
 	return this->image;
 }
 
+std::string BulletView::getName() {
+    return this->weapon_name;
+}
 

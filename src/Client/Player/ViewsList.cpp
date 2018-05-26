@@ -5,8 +5,8 @@
 
 #include <iostream>
 
-ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list):
-	world(world), player(player), players_list(players_list) {
+ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list, MusicPlayer& musicPlayer):
+	world(world), player(player), players_list(players_list), musicPlayer(musicPlayer) {
 
 	this->scope.set("resources/images/scope/scope.png");
 	this->world.addElement(this->scope, Position(0,500), 0, 0);
@@ -24,6 +24,7 @@ bool ViewsList::removeWormCallBack(int id){
     }
     it->second.kill();
     this->worms.erase(it);
+    this->musicPlayer.playDeathSound();
     return false;
 }
 
@@ -50,6 +51,9 @@ bool ViewsList::removeWeaponCallBack(int id){
 }
 
 void ViewsList::removeWeapon(int id){
+    if (this->weapons.find(id) != this->weapons.end()) {
+        this->musicPlayer.playExplosionSound();
+    }
     sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::removeWeaponCallBack), id);
     Glib::signal_idle().connect(my_slot);
 }

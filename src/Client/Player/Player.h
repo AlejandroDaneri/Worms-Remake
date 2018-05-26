@@ -16,6 +16,8 @@
 #include "Handlers.h"
 #include "PlayersList.h"
 #include "TurnLabel.h"
+#include "MusicPlayer.h"
+
 
 class Player {
 	private:
@@ -29,13 +31,14 @@ class Player {
 		ViewsList view_list;
 		DataReceiver data_receiver;
 		Handlers handlers;
+		MusicPlayer& musicPlayer;
 
 		/* Reduce el tiempo del turno y actualiza la municion */
 		void shootWeapon();
 
 	public:
 		/* Constructor */
-		Player(ClientProtocol protocol, const std::string& name);
+		Player(ClientProtocol protocol, const std::string& name, MusicPlayer& musicPlayer);
 		
 		/* Destructor */
 		~Player();

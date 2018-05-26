@@ -2,7 +2,6 @@
 #define WORMS_EXPLOSIONVIEWLIST_H
 
 #include <unordered_map>
-#include <memory>
 #include "ExplosionView.h"
 
 class ExplosionViewList {

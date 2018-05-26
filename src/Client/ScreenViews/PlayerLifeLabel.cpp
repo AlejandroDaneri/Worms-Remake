@@ -2,8 +2,9 @@
 
 const std::string begining("<span size='13000'>  ");
 const std::string ending("</span>");
+const std::string empty_name(" ");
 
-PlayerLifeLabel::PlayerLifeLabel(): life(0){
+PlayerLifeLabel::PlayerLifeLabel(): player_name(empty_name), life(0){
 	this->label.set_use_markup(true);
 }
 

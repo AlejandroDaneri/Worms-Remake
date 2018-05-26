@@ -11,6 +11,7 @@
 #include "PlayersList.h"
 #include "ExplosionView.h"
 #include "ExplosionViewList.h"
+#include "MusicPlayer.h"
 
 class ViewsList{
 	private:
@@ -24,10 +25,11 @@ class ViewsList{
 		int current_worm_id;
 		int weapon_focused;
         ExplosionViewList animation;
+        MusicPlayer& musicPlayer;
 
 	public:
         /* Constructor */
-		ViewsList(WorldView& world, Player& player, PlayersList& players_list);
+		ViewsList(WorldView& world, Player& player, PlayersList& players_list, MusicPlayer& musicPlayer);
 
 		/* Destructor */
 		~ViewsList();

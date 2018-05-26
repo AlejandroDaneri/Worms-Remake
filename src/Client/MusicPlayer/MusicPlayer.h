@@ -27,17 +27,31 @@ class MusicPlayer {
 		//////////// Ver de cambiar a un unico metodo y que se le pase el path
 		//void playEffect(std::string audio);
 
-        /* Reproduce el sonido de falta de tiempo */
+		/* Reproduce el sonido de inicio de turno */
+		void playStartTurnSound();
+
+		/* Reproduce el sonido de falta de tiempo */
 		void playTickSound();
 
 		/* Reproduce el sonido del worm caminando */
         void playWalkSound();
+
+        /* Reproduce el sonido de boring del worm */
+        void playBoring();
+
+        /* Reproduce el sonido de run away del worm */
+        void playRunAway();
+
+        void playDeathSound();
 
         /* Reproduce el sonido de la explosion */
         void playExplosionSound();
 
         /* Reproduce el sonido de la teletransportacion */
         void playTeleportSound();
+
+		/* Reproduce el sonido del bate */
+		void playBatSound();
 
         /* Reproduce el sonido de la granada santa */
         void playHolyGrenadeSound();

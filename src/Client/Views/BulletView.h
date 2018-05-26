@@ -23,6 +23,8 @@ class BulletView: public Viewable{
 		void explode();
 		
 		Gtk::Widget& getWidget() override;
+
+		std::string getName();
 };
 
 
