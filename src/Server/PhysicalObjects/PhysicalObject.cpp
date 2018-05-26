@@ -3,7 +3,7 @@
 
 PhysicalObject::PhysicalObject(World& world, int id, const std::string& type):
 	world(world), body(NULL), is_dead(false), id(id), type(type), last_position(-1, -1),
-	collision_data(type, this){}
+	last_position_sended(false), collision_data(type, this){}
 
 PhysicalObject::~PhysicalObject(){}
 
@@ -31,7 +31,16 @@ bool PhysicalObject::isMoving(){
 	bool moved_x = (int)(pos.x * UNIT_TO_SEND) != (int)(this->last_position.x * UNIT_TO_SEND);
 	bool moved_y = (int)(pos.y * UNIT_TO_SEND) != (int)(this->last_position.y * UNIT_TO_SEND);
 	this->last_position = pos;
-	return moved_x || moved_y;
+	bool moved = moved_x || moved_y;
+	if (moved){
+		this->last_position_sended = false;
+		return true;
+	}
+	if (!this->body->IsAwake() && !this->last_position_sended){
+		this->last_position_sended = true;
+		return true;
+	}
+	return false;
 }
 
 bool PhysicalObject::isActive(){

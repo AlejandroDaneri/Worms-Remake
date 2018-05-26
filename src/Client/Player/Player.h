@@ -65,9 +65,6 @@ class Player {
 		/* Realiza el disparo del arma en la posicion pasada */
 		void shoot(Position position);
 		
-		/* Actualiza la vista del WeaponView */
-		void update_weapons_view(std::string weapon);
-		
 		/* Reproduce el sonido de falta de tiempo */
 		void play_tick_time();
 		

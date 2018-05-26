@@ -57,8 +57,6 @@ void ClientProtocol::send_end_turn(){
 	this->send_buffer(buffer, 1);
 }
 
-///////////////////////////////// Enviar mensaje de dejo de moverse
-
 void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 	char buffer[MAX_BUF_LEN];
 	this->receive_buffer(buffer);
@@ -70,10 +68,8 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 		int player_id = this->receive_int_buffer(buffer, offset);
 		player.startTurn(worm_id, player_id);
 	} else if (action == CHANGE_WEAPON_ACTION) {
-        //char buffer[MAX_BUF_LEN];
-        //this->receive_buffer(buffer);
         std::string weapon(this->receive_string_buffer(buffer, offset));
-        player.update_weapons_view(weapon);
+        viewsList.changeWeapon(weapon);
     } else if (action == MOVING_OBJECT) {
 		char type = buffer[offset++];
 		int id = this->receive_int_buffer(buffer, offset);
@@ -84,8 +80,8 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 			int pos_y = this->receive_int_buffer(buffer, offset);
 			int life = this->receive_int_buffer(buffer, offset);
 			char dir = buffer[offset++];
-			std::string weapon(this->receive_string_buffer(buffer, offset));
-			viewsList.updateWormData(id, player_id, pos_x, pos_y, life, dir, weapon);
+			bool colliding = buffer[offset++];
+			viewsList.updateWormData(id, player_id, pos_x, pos_y, life, dir, colliding);
 		} else if (type == WEAPON_TYPE){
 			std::string weapon(this->receive_string_buffer(buffer, offset));
 

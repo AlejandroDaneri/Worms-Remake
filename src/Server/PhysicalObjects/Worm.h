@@ -27,7 +27,7 @@ class Worm: public PhysicalObject{
 		int getPlayerId() const;
 		int getLife() const;
 		char getDir() const;
-		const std::string& getWeapon() const;
+		bool isColliding() const;
 
 		void addLife(int life);
 

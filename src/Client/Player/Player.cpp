@@ -75,11 +75,6 @@ void Player::change_weapon(std::string weapon) {
 	}
 }
 
-void Player::update_weapons_view(std::string weapon) {
-    this->view_list.changeWeapon(weapon);
-
-}
-
 void Player::shoot(Position position) {
 	this->shootWeapon();
 	Position newPosition = ViewTransformer().transformToPosition(position);

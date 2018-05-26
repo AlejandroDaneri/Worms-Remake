@@ -51,9 +51,9 @@ class ViewsList{
 		void eraseWeapon(int id);
 
 		/* CallBack de updateWormData */
-        bool updateWormDataCallBack(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name);
+        bool updateWormDataCallBack(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding);
 		/* Actualiza la posicion y la vida del worm */
-        void updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name);
+        void updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding);
 
         /* CallBack de updateWeaponData */
         bool updateWeaponDataCallBack(int id, const std::string& weapon_name, float pos_x, float pos_y);

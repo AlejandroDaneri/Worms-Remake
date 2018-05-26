@@ -50,15 +50,13 @@ void ServerProtocol::send_worm(physical_object_ptr& object, char* buffer){
 
 	b2Vec2 position = worm->getPosition();
 
-	char dir = worm->getDir();
-
     this->send_int_buffer(buffer, offset, id);
     this->send_int_buffer(buffer, offset, worm->getPlayerId());
     this->send_int_buffer(buffer, offset, position.x * UNIT_TO_SEND);
     this->send_int_buffer(buffer, offset, position.y * UNIT_TO_SEND);
     this->send_int_buffer(buffer, offset, worm->getLife());
-	buffer[offset++] = dir;
-	this->send_string_buffer(buffer, offset, worm->getWeapon());
+	buffer[offset++] = worm->getDir();
+	buffer[offset++] = (char)worm->isColliding();
 	
 	this->send_buffer(buffer, offset);
 }
@@ -109,14 +107,16 @@ void ServerProtocol::receive(Game& game) {
 			char move = buffer[offset++];
 			game.getCurrentWorm().move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
-		    ////////////////////////////////////////////// Mejorar por algo mas simple
+		    ////////////////////////////////////////////// Mejorar por algo mas simple//////////////////////////
 			std::string weapon(this->receive_string_buffer(buffer, offset));
 			game.getCurrentWorm().changeWeapon(weapon);
+			/////////////////////////////////////////////////////////////////
 			char weapon_buffer[MAX_BUF_LEN];
 			size_t aux = 0;
             weapon_buffer[aux++] = CHANGE_WEAPON_ACTION;
 			this->send_string_buffer(weapon_buffer, aux, weapon);
 			this->send_buffer(weapon_buffer, aux);
+			////////////////////////////////////////////////////////////////
 		} else if (worm_action == SHOOT_WEAPON) {
 			int angle = this->receive_int_buffer(buffer, offset);
 			int power = this->receive_int_buffer(buffer, offset);

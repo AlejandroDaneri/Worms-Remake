@@ -39,11 +39,8 @@ bool ViewsList::removeWeaponCallBack(int id){
     }
     auto it = this->weapons.find(id);
     if (it != this->weapons.end()){
-        //if (this->animation != nullptr)
-          //  this->animation->join();
-        ExplosionView explotion(it->second, *this, id); ////////// cambiar por clase normal
+        ExplosionView explotion(it->second, *this, id);
         this->animation.add(id, std::move(explotion));
-        //this->animation.reset(new ExplosionView(it->second, *this, id));
         std::cout << "Id del misil = " << id << std::endl;
         this->animation.at(id).start();
     }
@@ -72,12 +69,12 @@ void ViewsList::eraseWeapon(int id) {
     Glib::signal_idle().connect(my_slot);
 }
 
-bool ViewsList::updateWormDataCallBack(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name){
+bool ViewsList::updateWormDataCallBack(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding){
     auto it = this->worms.find(id);
     Position pos(pos_x / UNIT_TO_SEND, pos_y / UNIT_TO_SEND);
     if (it == this->worms.end()){
         //Worm no existe
-        WormView worm(this->world, life, dir, pos, player_id, weapon_name);
+        WormView worm(this->world, life, dir, pos, player_id);
         this->worms.insert(std::make_pair(id, std::move(worm)));
         this->players_list.addPlayerLife(player_id, life);
     } else {
@@ -89,13 +86,13 @@ bool ViewsList::updateWormDataCallBack(int id, int player_id, float pos_x, float
                 this->player.damageReceived();
             }
         }
-        it->second.updateData(life, dir, pos, weapon_name);
+        it->second.updateData(life, dir, pos, colliding, id == this->current_worm_id);
     }
     return false;
 }
 
-void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, const std::string& weapon_name){
-    sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::updateWormDataCallBack), id, player_id, pos_x, pos_y, life, dir, weapon_name);
+void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding){
+    sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::updateWormDataCallBack), id, player_id, pos_x, pos_y, life, dir, colliding);
     Glib::signal_idle().connect(my_slot);
 }
 
@@ -176,6 +173,10 @@ void ViewsList::addGirder(size_t size, int pos_x, int pos_y, int rotation){
 }
 
 bool ViewsList::setCurrentWormCallBack(int id){
+    auto it = this->worms.find(this->current_worm_id);
+    if (it != this->worms.end()){
+        it->second.setFocus(false);
+    }
     this->current_worm_id = id;
     this->weapon_focused = -1;
     WormView& worm = this->worms.at(id);

@@ -43,8 +43,8 @@ char Worm::getDir() const{
 	return this->dir;
 }
 
-const std::string& Worm::getWeapon() const{
-	return ((Weapon*)this->weapon.get())->getName();
+bool Worm::isColliding() const{
+	return this->colliding_with_girder > 0;
 }
 
 void Worm::addLife(int life){
