@@ -20,14 +20,10 @@ const int MAX_ANGLE = 90;
 const int MIN_ANGLE = -90;
 
 Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons, WorldView& world):
-	player(player), view_list(view_list), weapons(weapons), world(world){
-		this->timer.reset(new Timer(*this, MAX_TIME));
-	}
+	player(player), view_list(view_list), weapons(weapons), world(world),
+	timer(*this, MAX_TIME) {}
 
-Handlers::~Handlers(){
-	this->timer->stop();
-	this->timer->join();
-}
+Handlers::~Handlers() {}
 
 void Handlers::enable_all(){
 	this->weapons_time = WEAPONS_TIME;
@@ -100,9 +96,7 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 		if (!this->weapons.get_actual_weapon().hasVariablePower()) {
 			this->player.shoot(this->current_angle, -1, this->weapons_time);
 		} else {
-			this->timer->join();
-			this->timer.reset(new Timer(*this, MAX_TIME));
-			this->timer->start(); 
+			this->timer.start();
 			printf("Salio\n");
 		}
 	}
@@ -123,9 +117,9 @@ bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 			}
 			printf("se solto la barra\n");
 			printf("Timer stop\n");
-			this->timer->stop();
+			this->timer.stop();
 		} else if (key_event->keyval == GDK_KEY_Left || key_event->keyval == GDK_KEY_Right) {
-			this->player.getProtocol().send_stop_moving();
+			/////////////////////////////ANIMACION DE SACAR EL ARMA
 		}
 	}
 	return true;

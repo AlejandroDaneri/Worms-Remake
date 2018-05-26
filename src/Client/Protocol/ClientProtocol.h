@@ -24,9 +24,6 @@ class ClientProtocol: public Protocol {
 		/* Envia un mensaje que indica una accion de movimiento */
 		void send_move_action(char action);
 
-	    /* Envia un mensaje que indica que el worm dejo de moverse */
-	    void send_stop_moving();
-
 		/* Envia un mensaje que indica una accion de cambio de arma
 		 * con el nombre del arma */
 		void send_change_weapon(const std::string& weapon);

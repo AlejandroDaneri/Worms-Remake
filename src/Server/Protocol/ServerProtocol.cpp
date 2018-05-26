@@ -92,7 +92,7 @@ void ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_pl
 	this->send_buffer(buffer, offset);
 }
 
-void ServerProtocol::receive(Game& game){
+void ServerProtocol::receive(Game& game) {
 
 	char buffer[MAX_BUF_LEN];
 	
@@ -101,14 +101,14 @@ void ServerProtocol::receive(Game& game){
 	size_t offset = 0;
 	char action = buffer[offset++];
 
-	if (action == END_TURN){
+	if (action == END_TURN) {
 		game.endTurn();
-	} else if (action == ACTION){
+	} else if (action == ACTION) {
 		char worm_action = buffer[offset++];
 		if (worm_action == MOVE_ACTION){
 			char move = buffer[offset++];
 			game.getCurrentWorm().move(move);
-		} else if (worm_action == CHANGE_WEAPON_ACTION){
+		} else if (worm_action == CHANGE_WEAPON_ACTION) {
 		    ////////////////////////////////////////////// Mejorar por algo mas simple
 			std::string weapon(this->receive_string_buffer(buffer, offset));
 			game.getCurrentWorm().changeWeapon(weapon);
@@ -117,18 +117,16 @@ void ServerProtocol::receive(Game& game){
             weapon_buffer[aux++] = CHANGE_WEAPON_ACTION;
 			this->send_string_buffer(weapon_buffer, aux, weapon);
 			this->send_buffer(weapon_buffer, aux);
-		} else if (worm_action == SHOOT_WEAPON){
+		} else if (worm_action == SHOOT_WEAPON) {
 			int angle = this->receive_int_buffer(buffer, offset);
 			int power = this->receive_int_buffer(buffer, offset);
 			int time = this->receive_int_buffer(buffer, offset);
 			
 			game.getCurrentWorm().shoot(angle, power, time);
-		} else if(worm_action == SHOOT_SELF_DIRECTED){
+		} else if(worm_action == SHOOT_SELF_DIRECTED) {
 			int pos_x = this->receive_int_buffer(buffer, offset);
 			int pos_y = this->receive_int_buffer(buffer, offset);
 			game.getCurrentWorm().shoot(b2Vec2(pos_x, pos_y));
-		} else if (worm_action == STOP_MOVING) {
-			//////////////////////////////// Enviar a todos los clientes que se dejo de mover
 		}
 	}
 }

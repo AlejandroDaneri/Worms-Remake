@@ -22,7 +22,7 @@ class Handlers{
 		int current_angle;
 		int weapons_time;
 
-		std::unique_ptr<Timer> timer;
+		Timer timer;
 
 
 	public:

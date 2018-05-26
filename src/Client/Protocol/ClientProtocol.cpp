@@ -19,14 +19,6 @@ void ClientProtocol::send_move_action(char action){
 	std::this_thread::sleep_for(std::chrono::milliseconds(15));
 }
 
-void ClientProtocol::send_stop_moving() {
-    char buffer[MAX_BUF_LEN];
-    size_t offset = 0;
-    buffer[offset++] = ACTION;
-    buffer[offset++] = STOP_MOVING;
-    this->send_buffer(buffer, offset);
-}
-
 void ClientProtocol::send_change_weapon(const std::string& weapon){
 	char buffer[MAX_BUF_LEN];
 	size_t offset = 0;
@@ -82,9 +74,7 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
         //this->receive_buffer(buffer);
         std::string weapon(this->receive_string_buffer(buffer, offset));
         player.update_weapons_view(weapon);
-    } else if (action == STOP_MOVING) {
-		//viewsList.weaponAnimation(); ////////////////////////////// HACERLA
-	} else if (action == MOVING_OBJECT) {
+    } else if (action == MOVING_OBJECT) {
 		char type = buffer[offset++];
 		int id = this->receive_int_buffer(buffer, offset);
 

@@ -18,7 +18,6 @@
 #define CHANGE_WEAPON_ACTION 6
 #define SHOOT_WEAPON 7
 #define SHOOT_SELF_DIRECTED 8
-#define STOP_MOVING 9
 
 #define MOVE_RIGHT 1
 #define MOVE_LEFT -1

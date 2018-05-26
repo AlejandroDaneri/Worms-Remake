@@ -46,6 +46,8 @@ void Turn::reduceTime() {
 }
 
 void Turn::stop() {
-    this->my_connection.disconnect();
-    this->player.endTurn();
+    if (this->my_connection.connected()) {
+        this->my_connection.disconnect();
+        this->player.endTurn();
+    }
 }
