@@ -16,24 +16,11 @@ bool Turn::startCallBack() {
     if (this->actual_time <= LIMIT_TIME){
         this->player.play_tick_time();
     }
-    if (this->actual_time == 0) { //////////////////// Cambiarlo a que el protocolo llame a endTurn
+    if (this->actual_time == 0) {
         this->player.endTurn();
     }
     this->actual_time--;
     return this->actual_time >= 0;
-    /* while (this->running && this->actual_time < this->max_time) {
-		this->time_label.setTime((this->max_time - this->actual_time) / 1000);
-		for (int i = 0; i < ITERATIONS_ONE_SECOND && this->running && this->actual_time <= this->max_time; i++) {
-			std::this_thread::sleep_for(std::chrono::milliseconds(TIME_STEP));
-			this->actual_time += TIME_STEP;
-		}
-		if (this->actual_time > this->max_time - LIMIT_TIME){
-			this->player.play_tick_time();
-		}
-	}
-	
-	this->player.endTurn();
-	this->running = false; */
 }
 
 void Turn::start() {
