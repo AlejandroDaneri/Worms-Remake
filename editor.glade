@@ -270,7 +270,7 @@
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="orientation">vertical</property>
-                                <property name="spacing">20</property>
+                                <property name="spacing">10</property>
                                 <child>
                                   <object class="GtkButton" id="btn_reset_wep">
                                     <property name="label" translatable="yes">PREDETERMINADO</property>
@@ -309,9 +309,9 @@
                                         <property name="height_request">0</property>
                                         <property name="visible">True</property>
                                         <property name="can_focus">False</property>
-                                        <property name="tooltip_text" translatable="yes">Seleccione cantidad de munición</property>
+                                        <property name="tooltip_markup" translatable="yes">Seleccione cantidad de munición</property>
+                                        <property name="valign">center</property>
                                         <property name="margin_top">10</property>
-                                        <property name="margin_bottom">10</property>
                                         <property name="adjustment">adjustment1</property>
                                         <property name="lower_stepper_sensitivity">off</property>
                                         <property name="upper_stepper_sensitivity">off</property>
@@ -377,6 +377,7 @@
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="tooltip_text" translatable="yes">Seleccione cantidad de munición</property>
+                                        <property name="valign">center</property>
                                         <property name="margin_top">10</property>
                                         <property name="margin_bottom">10</property>
                                         <property name="adjustment">adjustment2</property>
