@@ -21,7 +21,6 @@ Player::Player(ClientProtocol protocol, const std::string& name, MusicPlayer& mu
 }
 
 Player::~Player() {
-	std::cout << "destruyo" << std::endl;
 	this->data_receiver.stop();
 	this->data_receiver.join();
 }
@@ -33,8 +32,7 @@ void Player::startTurn(int worm_id, int player_id){
 	    this->musicPlayer.playStartTurnSound();
 		//Es mi turno
 		this->handlers.enable_all();
-		this->change_weapon(this->weapons.get_actual_weapon().getName());
-		std::cout << "key event = " << this->weapons.get_actual_weapon().getName() << std::endl;
+		this->change_weapon(this->weapons.get_current_weapon().getName());
 		this->turn_label.beginTurn();
 		this->turn.start();
 	} else {
@@ -55,12 +53,12 @@ void Player::damageReceived(){
 
 void Player::shootWeapon() {
 	this->turn.reduceTime();
-	this->weapons.get_actual_weapon().shoot();
-    if (this->weapons.get_actual_weapon().getName() == "Teleportation") { ////////////////esto no va aca, sino solo lo escucha un jugador
+	this->weapons.get_current_weapon().shoot();
+    if (this->weapons.get_current_weapon().getName() == "Teleportation") { ////////////////esto no va aca, sino solo lo escucha un jugador
         this->musicPlayer.playTeleportSound();
-    } else if (this->weapons.get_actual_weapon().getName() == "Bat") {
+    } else if (this->weapons.get_current_weapon().getName() == "Bat") {
         this->musicPlayer.playBatSound();
-    } else if (this->weapons.get_actual_weapon().getName() == "Dynamite") {
+    } else if (this->weapons.get_current_weapon().getName() == "Dynamite") {
         this->musicPlayer.playRunAway();
     }
 }
@@ -68,7 +66,7 @@ void Player::shootWeapon() {
 void Player::change_weapon(std::string weapon) {
 	this->weapons.change_weapon(weapon);
 	this->protocol.send_change_weapon(weapon);
-	if (this->weapons.get_actual_weapon().hasScope()) {
+	if (this->weapons.get_current_weapon().hasScope()) {
 		this->view_list.updateScope(this->handlers.getCurrentAngle());
 	} else {
 		this->view_list.removeScopeVisibility();
@@ -79,27 +77,26 @@ void Player::shoot(Position position) {
 	this->shootWeapon();
 	Position newPosition = ViewTransformer().transformToPosition(position);
 	this->protocol.send_weapon_self_directed_shoot(newPosition);
-	this->screen.getWeaponsView().updateAmmo(this->weapons.get_actual_weapon());
+	this->screen.getWeaponsView().updateAmmo(this->weapons.get_current_weapon());
 }
 
 void Player::play_tick_time() {
-	printf("Tick\n");
+	std::cout <<"Tick\n";
 	this->musicPlayer.playTickSound();
 	///////////////////////////////////// Reproducir sonido de falta de tiempo
 }
 
 void Player::shoot(int angle, int power, int time) {
-	printf("shoot\n");
 	this->shootWeapon();
-	if (!this->weapons.get_actual_weapon().isTimed()) {
+	if (!this->weapons.get_current_weapon().isTimed()) {
 		time = -1;
 	}
-	if (!this->weapons.get_actual_weapon().hasScope()) {
+	if (!this->weapons.get_current_weapon().hasScope()) {
 		angle = NO_ANGLE;
 	}
 	this->protocol.send_weapon_shoot(angle, power, time);
 	this->view_list.removeScopeVisibility();
-	this->screen.getWeaponsView().updateAmmo(this->weapons.get_actual_weapon());
+	this->screen.getWeaponsView().updateAmmo(this->weapons.get_current_weapon());
 }
 
 

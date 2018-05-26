@@ -9,7 +9,7 @@ const int IMAGE_WIDTH = 30;
 
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id):
 	Viewable(worldView), player_id(player_id), life(life), dir(dir),
-	weapon(BAZOOKA_NAME), last_position(Position(-1, -1)), label(life, colors[player_id]){
+	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)), label(life, colors[player_id]){
 	    this->full_image = Gdk::Pixbuf::create_from_file("resources/images/walk2.png");
 	    int width = full_image->get_width();
 	    int height = full_image->get_height();

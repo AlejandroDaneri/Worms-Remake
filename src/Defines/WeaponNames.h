@@ -31,4 +31,7 @@ const std::string TELEPORT_NAME("Teleportation");
 
 const std::string FRAGMENT("Fragment");
 
+
+const std::string DEFAULT_WEAPON(BAZOOKA_NAME);
+
 #endif

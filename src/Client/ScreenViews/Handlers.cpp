@@ -62,23 +62,23 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 		if (this->current_angle < MAX_ANGLE) {
 			this->current_angle += 5;
 		}
-		if (this->weapons.get_actual_weapon().hasScope()) {
+		if (this->weapons.get_current_weapon().hasScope()) {
 			this->view_list.updateScope(this->current_angle);
 		}
 	} else if (key_event->keyval == GDK_KEY_Down) {
 		if (this->current_angle > MIN_ANGLE) {
 			this->current_angle -= 5;
 		}
-		if (this->weapons.get_actual_weapon().hasScope()) {
+		if (this->weapons.get_current_weapon().hasScope()) {
 			this->view_list.updateScope(this->current_angle);
 		}
 	} else if (key_event->keyval >= ASCII_1 && key_event->keyval <= ASCII_5) {
 		this->weapons_time = key_event->keyval - ASCII_OFFSET;
 	} else if (key_event->keyval == SPACE && key_event->type == GDK_KEY_PRESS) {
-		if (this->weapons.get_actual_weapon().isSelfDirected()) {
+		if (this->weapons.get_current_weapon().isSelfDirected()) {
 			return true;
 		}
-		if (!this->weapons.get_actual_weapon().hasAmmo()) {
+		if (!this->weapons.get_current_weapon().hasAmmo()) {
 			///////////////////////// Hacer sonido u otra cosa
 			return true;
 		}
@@ -86,12 +86,10 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 			return true;
 		}
 		this->has_shoot = true;
-		printf("se apreto la barra\n");
-		if (!this->weapons.get_actual_weapon().hasVariablePower()) {
+		if (!this->weapons.get_current_weapon().hasVariablePower()) {
 			this->player.shoot(this->current_angle, -1, this->weapons_time);
 		} else {
 			this->timer.start();
-			printf("Salio\n");
 		}
 	}
 	return true;
@@ -100,17 +98,15 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 	if (key_event->type == GDK_KEY_RELEASE) {
 		if (key_event->keyval == SPACE) {
-			if (this->weapons.get_actual_weapon().isSelfDirected()) {
+			if (this->weapons.get_current_weapon().isSelfDirected()) {
 				return true;
 			}
-			if (!this->weapons.get_actual_weapon().hasVariablePower()) {
+			if (!this->weapons.get_current_weapon().hasVariablePower()) {
 				return true;
 			}
-			if (!this->weapons.get_actual_weapon().hasAmmo()) {
+			if (!this->weapons.get_current_weapon().hasAmmo()) {
 				return true;
 			}
-			printf("se solto la barra\n");
-			printf("Timer stop\n");
 			this->timer.stop();
 		}
 	}
@@ -118,10 +114,10 @@ bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 }
 
 bool Handlers::on_button_press_event(GdkEventButton* event) {
-	if (!this->weapons.get_actual_weapon().isSelfDirected()) {
+	if (!this->weapons.get_current_weapon().isSelfDirected()) {
 		return true;
 	}
-	if (!this->weapons.get_actual_weapon().hasAmmo()) {
+	if (!this->weapons.get_current_weapon().hasAmmo()) {
 		return true;
 	}
 	if (this->has_shoot) {
@@ -132,7 +128,6 @@ bool Handlers::on_button_press_event(GdkEventButton* event) {
 		int y = (int)event->y;
 		x += this->world.getWindow().get_hadjustment()->get_value();
 		y += this->world.getWindow().get_vadjustment()->get_value();
-		printf("x = %i   y=%i\n", x,y);
 		this->has_shoot = true;
 		Position position(x, y);
 		this->player.shoot(position);
