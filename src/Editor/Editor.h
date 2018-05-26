@@ -18,7 +18,7 @@ class Editor : public Gtk::Window {
     ToolBoxView *toolbox;
     Map map_model;
 
-    Gtk::Button *weps_reset_button;
+    Gtk::Button *reset_button;
     WeaponsListController weps_list_controller;
 
     FileBoxView *filebox;

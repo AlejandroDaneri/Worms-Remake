@@ -256,7 +256,7 @@
                     <property name="can_focus">False</property>
                     <property name="vexpand">True</property>
                     <property name="orientation">vertical</property>
-                    <property name="spacing">10</property>
+                    <property name="spacing">5</property>
                     <child>
                       <object class="GtkScrolledWindow" id="wepwin">
                         <property name="visible">True</property>
@@ -268,7 +268,7 @@
                           <object class="GtkViewport" id="weps_view">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
-                            <property name="margin_left">8</property>
+                            <property name="margin_left">2</property>
                             <property name="margin_right">8</property>
                             <property name="hexpand">False</property>
                             <property name="vexpand">False</property>
@@ -279,17 +279,7 @@
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">10</property>
                                 <child>
-                                  <object class="GtkButton" id="btn_reset_wep">
-                                    <property name="label" translatable="yes">PREDETERMINADO</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">True</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
+                                  <placeholder/>
                                 </child>
                                 <child>
                                   <object class="GtkBox" id="wep1">
@@ -948,16 +938,6 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="separator3">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">9</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkBox" id="box2">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -1072,6 +1052,7 @@
                         <property name="tooltip_text" translatable="yes">Borrar ultimo</property>
                         <property name="image">undo</property>
                         <property name="relief">none</property>
+                        <property name="yalign">0.50999999046325684</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1086,16 +1067,6 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkSeparator" id="separator1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">7</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkBox" id="box4">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -1106,7 +1077,7 @@
                         <property name="can_focus">False</property>
                         <property name="halign">center</property>
                         <property name="valign">baseline</property>
-                        <property name="margin_left">10</property>
+                        <property name="margin_left">12</property>
                         <property name="pixbuf">resources/images/editor_toolbox/worm_life.png</property>
                       </object>
                       <packing>
@@ -1119,7 +1090,7 @@
                       <object class="GtkSpinButton" id="spinbutton1">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="margin_left">5</property>
+                        <property name="margin_left">10</property>
                         <property name="max_width_chars">4</property>
                         <property name="input_purpose">digits</property>
                         <property name="adjustment">life</property>
@@ -1134,11 +1105,12 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="button1">
+                      <object class="GtkButton" id="btn_reset">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="margin_right">10</property>
+                        <property name="tooltip_text" translatable="yes">Volver a valores predeterminados de vida y armas</property>
+                        <property name="margin_right">5</property>
                         <property name="image">image3</property>
                         <property name="relief">none</property>
                       </object>
@@ -1155,11 +1127,25 @@
                     <property name="top_attach">6</property>
                   </packing>
                 </child>
+                <child>
+                  <placeholder/>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
                 <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="separator1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -1201,7 +1187,7 @@
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
-                <property name="position">1</property>
+                <property name="position">2</property>
               </packing>
             </child>
           </object>
