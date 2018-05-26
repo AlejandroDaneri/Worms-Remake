@@ -74,16 +74,6 @@
     <property name="margin_bottom">3</property>
     <property name="pixbuf">resources/images/editor_toolbox/counter_clockwise_arrow.png</property>
   </object>
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
-  <object class="GtkImage" id="image2">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
-  </object>
   <object class="GtkImage" id="image3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -92,17 +82,22 @@
   <object class="GtkImage" id="image4">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
+    <property name="pixbuf">resources/images/editor_toolbox/save_icon.png</property>
   </object>
   <object class="GtkImage" id="image5">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="stock">gtk-missing-image</property>
+    <property name="pixbuf">resources/images/editor_toolbox/load_icon.png</property>
   </object>
   <object class="GtkImage" id="imagen">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="pixbuf">resources/images/Girder/girder_3.png</property>
+  </object>
+  <object class="GtkImage" id="img_bg">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/change_bg_orig.png</property>
   </object>
   <object class="GtkImage" id="img_grd">
     <property name="visible">True</property>
@@ -117,6 +112,11 @@
     <property name="halign">center</property>
     <property name="valign">baseline</property>
     <property name="pixbuf">resources/images/Girder/girder_3_6.png</property>
+  </object>
+  <object class="GtkImage" id="img_new">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/images/editor_toolbox/new_file.png</property>
   </object>
   <object class="GtkImage" id="img_worms">
     <property name="visible">True</property>
@@ -220,7 +220,6 @@
                     <property name="tooltip_text" translatable="yes">Viga de 3 metros</property>
                     <property name="image">img_grd</property>
                     <property name="relief">none</property>
-                    <property name="xalign">0.51999998092651367</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -1041,7 +1040,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Cambiar fondo</property>
-                        <property name="image">image1</property>
+                        <property name="image">img_bg</property>
                         <property name="relief">none</property>
                       </object>
                       <packing>
@@ -1056,7 +1055,7 @@
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Nuevo mapa</property>
-                        <property name="image">image2</property>
+                        <property name="image">img_new</property>
                         <property name="relief">none</property>
                       </object>
                       <packing>
