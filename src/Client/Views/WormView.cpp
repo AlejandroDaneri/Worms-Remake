@@ -31,11 +31,6 @@ WormView::WormView(WormView&& other): Viewable(std::move(other)),
 }*/
 
 void WormView::updateData(int new_life, char new_dir, const Position& new_pos, const std::string& weapon){
-
- /* Gtk::Main::idle.connect(slot(this,&updateDataCallback::idle_callback, new_life, slslsl));, 
-}
-bool WormView::updateDataCallback(int new_life, char new_dir, const Position& new_pos, const std::string& weapon){*/
-
 	if (new_life != this->life){
 		this->label.updateLife(new_life);
 	}
@@ -44,7 +39,6 @@ bool WormView::updateDataCallback(int new_life, char new_dir, const Position& ne
 	this->dir = new_dir;
 	this->weapon = weapon;
 	this->move(new_pos, worm_size, worm_size + 0.5);
-	//return false;
 }
 
 void WormView::kill(){
