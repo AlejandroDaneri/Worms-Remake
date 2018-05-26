@@ -3,7 +3,7 @@
 
 FileBoxView::FileBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
-        : Gtk::Grid(cobject),
+        : Gtk::HBox(cobject),
           m_builder(builder) {
     m_builder->get_widget("btn_save", save);
     m_builder->get_widget("btn_load", load);

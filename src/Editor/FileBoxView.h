@@ -4,13 +4,13 @@
 
 
 #include <gtkmm/builder.h>
-#include <gtkmm/grid.h>
+#include <gtkmm/hvbox.h>
 #include <gtkmm/button.h>
 #include "FileBoxController.h"
 
 class FileBoxController;
 
-class FileBoxView : public Gtk::Grid {
+class FileBoxView : public Gtk::HBox {
 private:
     const Glib::RefPtr<Gtk::Builder> &m_builder;
     Gtk::Button *save;

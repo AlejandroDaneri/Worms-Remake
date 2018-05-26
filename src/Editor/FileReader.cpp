@@ -17,7 +17,8 @@ void FileReader::read(std::vector<std::vector<double>>& worms,
 /*/
 
     //convierto directamente a map
-    std::map<std::string, int> ammo = config["weapon_ammo"].as<std::map<std::string, int>>();
+    std::map<std::string, int> ammo = config[WEAPON_AMMO].as<std::map<std::string,
+            int>>();
 
     weps_ammo.push_back(ammo[BAZOOKA_NAME]);
     weps_ammo.push_back(ammo[MORTAR_NAME]);
