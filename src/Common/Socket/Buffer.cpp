@@ -20,3 +20,23 @@ Buffer::Buffer(const Buffer& other): buffer(new char[MAX_BUF_LEN]){
 Buffer::Buffer(Buffer&& other): buffer(other.buffer), offset(other.offset){
 	other.buffer = NULL;
 }
+
+void Buffer::setNext(char value){
+	this->buffer[this->offset++] = value;
+}
+
+char Buffer::getNext(){
+	return this->buffer[this->offset++];
+}
+
+char* Buffer::getPointer(){
+	return this->buffer;
+}
+
+void Buffer::incrementOffset(size_t value){
+	this->offset += value;
+}
+
+size_t Buffer::getSize() const{
+	return this->offset;
+}

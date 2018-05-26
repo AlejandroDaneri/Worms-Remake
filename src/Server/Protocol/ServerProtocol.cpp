@@ -14,7 +14,7 @@ ServerProtocol::~ServerProtocol(){}
 
 void ServerProtocol::sendObject(physical_object_ptr& object){
 	Buffer buffer;
-	buffer.buffer[buffer.offset++] = MOVING_OBJECT;
+	buffer.setNext(MOVING_OBJECT);
 
 	const std::string& type = object->getType();
 	if (type == TYPE_WORM){
@@ -26,13 +26,13 @@ void ServerProtocol::sendObject(physical_object_ptr& object){
 
 void ServerProtocol::sendDeadObject(physical_object_ptr& object){
 	Buffer buffer;
-	buffer.buffer[buffer.offset++] = DEAD_OBJECT;
+	buffer.setNext(DEAD_OBJECT);
 
 	const std::string& type = object->getType();
 	if (type == TYPE_WORM){
-		buffer.buffer[buffer.offset++] = WORM_TYPE;
+		buffer.setNext(WORM_TYPE);
 	} else if (type == TYPE_WEAPON){
-		buffer.buffer[buffer.offset++] = WEAPON_TYPE;
+		buffer.setNext(WEAPON_TYPE);
 	}
 
 	uint32_t id = object->getId();
@@ -43,7 +43,7 @@ void ServerProtocol::sendDeadObject(physical_object_ptr& object){
 
 void ServerProtocol::send_worm(physical_object_ptr& object, Buffer& buffer){
 	Worm* worm = (Worm*)object.get();
-	buffer.buffer[buffer.offset++] = WORM_TYPE;
+	buffer.setNext(WORM_TYPE);
 	int32_t id = worm->getId();
 
 	b2Vec2 position = worm->getPosition();
@@ -53,14 +53,14 @@ void ServerProtocol::send_worm(physical_object_ptr& object, Buffer& buffer){
     this->send_int_buffer(buffer, position.x * UNIT_TO_SEND);
     this->send_int_buffer(buffer, position.y * UNIT_TO_SEND);
     this->send_int_buffer(buffer, worm->getLife());
-	buffer.buffer[buffer.offset++] = worm->getDir();
-	buffer.buffer[buffer.offset++] = (char)worm->isColliding();
+	buffer.setNext(worm->getDir());
+	buffer.setNext(worm->isColliding());
 	
 	this->send_buffer(buffer);
 }
 
 void ServerProtocol::send_weapon(physical_object_ptr& object, Buffer& buffer){
-	buffer.buffer[buffer.offset++] = WEAPON_TYPE;
+	buffer.setNext(WEAPON_TYPE);
     this->send_int_buffer(buffer, object->getId());
 
 
@@ -78,7 +78,7 @@ void ServerProtocol::send_weapon(physical_object_ptr& object, Buffer& buffer){
 
 void ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_player_id){
 	Buffer buffer;
-	buffer.buffer[buffer.offset++] = START_TURN;
+	buffer.setNext(START_TURN);
 
     this->send_int_buffer(buffer, current_worm_id);
     this->send_int_buffer(buffer, current_player_id);
@@ -90,14 +90,14 @@ void ServerProtocol::receive(Game& game) {
 
 	Buffer buffer = std::move(this->receive_buffer());
 
-	char action = buffer.buffer[buffer.offset++];
+	char action = buffer.getNext();
 
 	if (action == END_TURN) {
 		game.endTurn();
 	} else if (action == ACTION) {
-		char worm_action = buffer.buffer[buffer.offset++];
+		char worm_action = buffer.getNext();
 		if (worm_action == MOVE_ACTION){
-			char move = buffer.buffer[buffer.offset++];
+			char move = buffer.getNext();
 			game.getCurrentWorm().move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
 			std::string weapon(this->receive_string_buffer(buffer));
@@ -150,7 +150,7 @@ void ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
 void ServerProtocol::send_weapon_changed(const std::string& weapon){
 	Buffer buffer;
 
-	buffer.buffer[buffer.offset++] = CHANGE_WEAPON_ACTION;
+	buffer.setNext(CHANGE_WEAPON_ACTION);
 	this->send_string_buffer(buffer, weapon);
 
 	this->send_buffer(buffer);
