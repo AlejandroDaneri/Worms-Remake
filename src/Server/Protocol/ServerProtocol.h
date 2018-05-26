@@ -12,8 +12,8 @@ class Player;
 class ServerProtocol : public Protocol{
 	private:
 
-		void send_worm(physical_object_ptr& object, char* buffer);
-		void send_weapon(physical_object_ptr& weapon, char* buffer);
+		void send_worm(physical_object_ptr& object, Buffer& buffer);
+		void send_weapon(physical_object_ptr& weapon, Buffer& buffer);
 
 	public:
 		ServerProtocol(Socket&& socket);

@@ -1,6 +1,5 @@
 #include "Thread.h"
 
-
 Thread::Thread(): running(false){}
 		
 Thread::~Thread(){}

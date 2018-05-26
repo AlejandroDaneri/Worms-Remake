@@ -3,9 +3,8 @@
 
 #include <string>
 #include <mutex>
+#include "Buffer.h"
 #include "Socket.h"
-
-#define MAX_BUF_LEN 200
 
 #define MOVING_OBJECT 0
 #define DEAD_OBJECT 1
@@ -37,14 +36,14 @@ class Protocol {
 		Protocol(Protocol&& other);
 		~Protocol();
 		
-		void send_buffer(const char* buffer, size_t size);
-		size_t receive_buffer(char* buffer);
+		void send_buffer(Buffer& buffer);
+		Buffer receive_buffer();
 		
-		void send_int_buffer(char *buffer, size_t &offset, int32_t value);
-		int receive_int_buffer(char *buffer, size_t &offset);
+		void send_int_buffer(Buffer& buffer, int32_t value);
+		int receive_int_buffer(Buffer& buffer);
 		
-		void send_string_buffer(char *buffer, size_t &offset, const std::string &string);
-		std::string receive_string_buffer(char *buffer, size_t &offset);
+		void send_string_buffer(Buffer& buffer, const std::string &string);
+		std::string receive_string_buffer(Buffer& buffer);
 
 		void send_length(uint32_t length);
 		size_t receive_length();

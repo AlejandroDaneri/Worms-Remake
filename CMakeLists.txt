@@ -73,9 +73,9 @@ target_include_directories(client PUBLIC ${headers_client} ${headers_common} ${h
 target_include_directories(server PUBLIC ${headers_server} ${headers_common} ${headers_box2d} ${headers_yaml})
 target_include_directories(editor PUBLIC ${headers_editor} ${headers_common} ${headers_commonui} ${headers_yaml})
 
-target_link_libraries(client m ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} common commonui ${SDL2_LIBRARY} ${SDL2MIXER_LIBRARY})
-target_link_libraries(editor m yaml ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} common commonui)
-target_link_libraries(server m box2d yaml ${CMAKE_THREAD_LIBS_INIT} common)
+target_link_libraries(client m common ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} commonui ${SDL2_LIBRARY} ${SDL2MIXER_LIBRARY})
+target_link_libraries(editor m common yaml ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} commonui)
+target_link_libraries(server m common box2d yaml ${CMAKE_THREAD_LIBS_INIT})
 
 #install() aca se podria poner para instalar el gtkmm si no se tiene
 
