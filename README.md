@@ -5,7 +5,9 @@ mkdir build
 
 cd build
 
-cmake -DROOT=/home/mati/Desktop/worms .. && make install  (para instalar en otra carpeta, con el otro cmakelists.txt) 
+cmake -DROOT=/home/mati/Desktop/worms .. && make install  
+
+elegir la ruta (para instalar en otra carpeta, con el otro cmakelists.txt) 
 
 
 ### Lista de tareas
