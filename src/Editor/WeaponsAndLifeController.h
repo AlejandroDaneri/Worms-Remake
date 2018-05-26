@@ -9,23 +9,23 @@
 #include "WeaponVieww.h"
 #include "LifeView.h"
 
-class WeaponsListController {
+class WeaponsAndLifeController {
 private:
-    LifeView* life_spin;
+    LifeView *life_spin;
 
     Gtk::Button *reset_button;
     std::vector<std::shared_ptr<WeaponModel>> weapons;
     std::vector<std::shared_ptr<WeaponView>> weapons_view;
     std::vector<std::shared_ptr<WeaponController> > wep_controllers;
 public:
-    WeaponsListController(const Glib::RefPtr<Gtk::Builder> &builder,
-                          Gtk::Button *reset_button);
+    explicit WeaponsAndLifeController(const Glib::RefPtr<Gtk::Builder> &builder);
 
     void on_reset_clicked();
 
-    void getWeapons(std::vector<int> &weps_ammo, unsigned int& life) const;
+    void getWeapons(std::vector<int> &weps_ammo, unsigned int &life) const;
 
-    void loadWeapons(std::vector<int> &weps_ammo, const unsigned int &life) const ;
+    void
+    loadWeapons(std::vector<int> &weps_ammo, const unsigned int &life) const;
 };
 
 

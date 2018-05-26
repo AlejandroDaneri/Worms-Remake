@@ -15,7 +15,8 @@ public:
 
     void clean();
 
-    void add(unsigned int id, const double & x, const double & y, const int &angle=0);
+    void add(unsigned int id, const double &x, const double &y,
+             const int &angle = 0);
 
     void moveLast(double &x, double &y);
 

@@ -7,13 +7,13 @@ FileReader::FileReader(const std::string &filename) : File(filename,
                                                            std::fstream::in) {}
 
 void FileReader::read(std::vector<std::vector<double>> &worms,
-                      std::vector<std::vector<double>> &girders, std::vector<int> &weps_ammo,
+                      std::vector<std::vector<double>> &girders,
+                      std::vector<int> &weps_ammo,
                       unsigned int &worms_life) {
     YAML::Node config = YAML::LoadFile("config_editor.yaml");
 
     worms_life = config[WORMS_LIFE].as<unsigned int>();
 
-    //convierto directamente a map
     std::map<std::string, int> ammo = config[WEAPON_AMMO].as<std::map<std::string,
             int>>();
 
@@ -27,10 +27,8 @@ void FileReader::read(std::vector<std::vector<double>> &worms,
     weps_ammo.push_back(ammo[DYNAMITE_NAME]);
     weps_ammo.push_back(ammo[HOLY_GRENADE_NAME]);
 
-    //carga de  worms
     worms = config[WORMS_DATA].as<std::vector<std::vector<double>>>();
 
-    //carga de vigas
     girders = config[GIRDERS_DATA].as<std::vector<std::vector<double>>>();
 
 }

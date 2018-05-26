@@ -11,7 +11,7 @@ private:
     const unsigned int default_hp;
 public:
     LifeView(BaseObjectType *cobject,
-                       const Glib::RefPtr<Gtk::Builder> &builder);
+             const Glib::RefPtr<Gtk::Builder> &builder);
 
     void reset();
 

@@ -8,7 +8,7 @@
 #include <gtkmm/spinbutton.h>
 #include "MapView.h"
 #include "ToolBoxView.h"
-#include "WeaponsListController.h"
+#include "WeaponsAndLifeController.h"
 #include "FileBoxController.h"
 #include "FileBoxView.h"
 
@@ -21,7 +21,7 @@ class Editor : public Gtk::Window {
     Map map_model;
 
     Gtk::Button *reset_button;
-    WeaponsListController weps_list_controller;
+    WeaponsAndLifeController weps_list_controller;
 
     FileBoxView *filebox;
 public:

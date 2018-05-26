@@ -4,15 +4,15 @@
 
 
 #include "FileBoxView.h"
-#include "WeaponsListController.h"
+#include "WeaponsAndLifeController.h"
 #include "MapController.h"
 
 class FileBoxController {
 private:
-    const WeaponsListController &weapons_controller;
+    const WeaponsAndLifeController &weapons_controller;
     std::shared_ptr<MapController> map_controller;
 public:
-    FileBoxController(const WeaponsListController &controller,
+    FileBoxController(const WeaponsAndLifeController &controller,
                       std::shared_ptr<MapController> ptr);
 
     void onSaveClicked() const;

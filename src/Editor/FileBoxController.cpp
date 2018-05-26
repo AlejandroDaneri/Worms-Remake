@@ -4,7 +4,7 @@
 #include "FileReader.h"
 
 FileBoxController::FileBoxController(
-        const WeaponsListController &wep_controller,
+        const WeaponsAndLifeController &wep_controller,
         std::shared_ptr<MapController> map_controller)
         : weapons_controller(wep_controller),
           map_controller(std::move(map_controller)) {
@@ -13,7 +13,7 @@ FileBoxController::FileBoxController(
 void FileBoxController::onSaveClicked() const {
     std::vector<int> weapons_ammo;
     unsigned int life;
-    weapons_controller.getWeapons(weapons_ammo,life);
+    weapons_controller.getWeapons(weapons_ammo, life);
 
     std::vector<std::vector<double>> worms;
     std::vector<std::vector<double>> girders;
@@ -33,8 +33,8 @@ void FileBoxController::onLoadClicked() const {
     file.read(worms, girders,
               weps_ammo, life);
 
-    weapons_controller.loadWeapons(weps_ammo,life);
-    map_controller->loadObjects(worms,girders);
+    weapons_controller.loadWeapons(weps_ammo, life);
+    map_controller->loadObjects(worms, girders);
 }
 
 

@@ -1,11 +1,13 @@
 
-#include "WeaponsListController.h"
+#include "WeaponsAndLifeController.h"
 
-WeaponsListController::WeaponsListController(
-        const Glib::RefPtr<Gtk::Builder> &builder,
-        Gtk::Button *reset_button)
-        : reset_button(reset_button)
-{
+WeaponsAndLifeController::WeaponsAndLifeController(
+        const Glib::RefPtr<Gtk::Builder> &builder){
+    builder->get_widget("btn_reset", reset_button);
+    reset_button->signal_clicked().connect(
+            sigc::mem_fun(*this,
+                          &WeaponsAndLifeController::on_reset_clicked));
+
     builder->get_widget_derived("life", life_spin);
 
     for (size_t i = 1; i <= 10; ++i) {
@@ -24,24 +26,26 @@ WeaponsListController::WeaponsListController(
     }
 }
 
-void WeaponsListController::on_reset_clicked() {
+void WeaponsAndLifeController::on_reset_clicked() {
     life_spin->reset();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         actual_controller->resetAmmo();
     }
 }
 
-void WeaponsListController::getWeapons(std::vector<int> &weps_ammo, unsigned int &life) const {
-    life=life_spin->get_value();
+void WeaponsAndLifeController::getWeapons(std::vector<int> &weps_ammo,
+                                       unsigned int &life) const {
+    life = life_spin->get_value();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         weps_ammo.push_back(actual_controller->getAmmo());
     }
 }
 
-void WeaponsListController::loadWeapons(std::vector<int> &weps_ammo, const unsigned int &life) const {
+void WeaponsAndLifeController::loadWeapons(std::vector<int> &weps_ammo,
+                                        const unsigned int &life) const {
     int i = 0;
     for (const std::shared_ptr<WeaponController> &actual_controller
-            :wep_controllers){
+            :wep_controllers) {
         actual_controller->updateAmmo(weps_ammo[i]);
         i++;
     }

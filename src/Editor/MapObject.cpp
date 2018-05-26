@@ -15,8 +15,8 @@ int MapObject::turnCCW() {
 }
 
 int MapObject::turnCW() {
-    if(angle==0)
-        angle=180;
+    if (angle == 0)
+        angle = 180;
     return angle = abs((angle - 10) % 180);
 }
 

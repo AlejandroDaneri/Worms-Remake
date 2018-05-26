@@ -46,11 +46,10 @@ const int WeaponView::getInitialAmmo() {
 }
 
 void WeaponView::setAmmo(const int &ammo) {
-    if (ammo<0){
+    if (ammo < 0) {
         infinite->set_active(true);
         ammo_selector->set_sensitive(false);
-    }
-    else{
+    } else {
         infinite->set_active(false);
         ammo_selector->set_sensitive(true);
         ammo_selector->set_value(ammo);

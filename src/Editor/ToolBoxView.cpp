@@ -3,7 +3,6 @@
 #include "ToolBoxView.h"
 
 
-
 ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Grid(cobject),
@@ -26,9 +25,9 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                                                           &ToolBoxView::on_button_clicked),
                                             WORM_BUTTON_ID));
     girder_3m->signal_clicked().connect(sigc::bind<int>
-                                             (sigc::mem_fun(*this,
-                                                            &ToolBoxView::on_button_clicked),
-                                              GIRDER_3_BUTTON_ID));
+                                                (sigc::mem_fun(*this,
+                                                               &ToolBoxView::on_button_clicked),
+                                                 GIRDER_3_BUTTON_ID));
 
     girder_6m->signal_clicked().connect(sigc::bind<int>
                                                 (sigc::mem_fun(*this,
@@ -64,14 +63,14 @@ void ToolBoxView::on_button_clicked(unsigned id) {
             turnccw->set_sensitive(false);
             turncw->set_sensitive(false);
         }
-    } else if (id == GIRDER_3_BUTTON_ID){
+    } else if (id == GIRDER_3_BUTTON_ID) {
         if (girder_3m->get_active()) {
             worm->set_active(false);
             girder_6m->set_active(false);
             turnccw->set_sensitive(true);
             turncw->set_sensitive(true);
         }
-    }else{
+    } else {
         girder_3m->set_active(false);
         worm->set_active(false);
         turnccw->set_sensitive(true);

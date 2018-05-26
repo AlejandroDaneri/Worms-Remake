@@ -49,7 +49,7 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
         this->view.moveLast(event_button->x, event_button->y);
         actual_action_id = ADD_CMD_ID;
     } else {
-        last_item_added=actual_item_selected;
+        last_item_added = actual_item_selected;
         this->model.add(actual_item_selected, event_button->x, event_button->y);
         this->view.add(actual_item_selected, event_button->x, event_button->y);
     }
@@ -63,13 +63,13 @@ void MapController::getObjects(std::vector<std::vector<double>> &worms,
 void MapController::loadObjects(std::vector<std::vector<double>> &worms,
                                 std::vector<std::vector<double>> &girders) {
     clean();
-    for(const auto &worm:worms){
+    for (const auto &worm:worms) {
         this->model.add(1, worm[0], worm[1]);
-        this->view.add(1,worm[0], worm[1]);
+        this->view.add(1, worm[0], worm[1]);
     }
-    for(const auto &girder:girders){
-        this->model.add(girder[0], girder[1], girder[2],girder[3]);
-        this->view.add(girder[0],girder[1], girder[2],girder[3]);
+    for (const auto &girder:girders) {
+        this->model.add(girder[0], girder[1], girder[2], girder[3]);
+        this->view.add(girder[0], girder[1], girder[2], girder[3]);
     }
 }
 

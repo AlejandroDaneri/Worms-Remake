@@ -11,8 +11,9 @@ void Map::clean() {
     this->objects.clear();
 }
 
-void Map::add(unsigned int id, const double & x, const double & y, const int &angle) {
-    MapObject new_object(x, y,angle);
+void
+Map::add(unsigned int id, const double &x, const double &y, const int &angle) {
+    MapObject new_object(x, y, angle);
     objects.emplace_back(std::make_pair(id, new_object));
 }
 
@@ -32,7 +33,7 @@ int Map::turnCWLast() {
 }
 
 bool Map::lastIsGirder() {
-    return (objects.back().first >1);
+    return (objects.back().first > 1);
 }
 
 void Map::getObjects(std::vector<std::vector<double>> &worms,
