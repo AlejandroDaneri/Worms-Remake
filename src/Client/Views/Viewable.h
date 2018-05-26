@@ -4,8 +4,7 @@
 #include "WorldView.h"
 #include "Position.h"
 #include <gtkmm/widget.h>
-
-#define IMAGES_PATH "resources/images/"
+#include "Path.h"
 
 class Viewable{
 	private:

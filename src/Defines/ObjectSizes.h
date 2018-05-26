@@ -13,4 +13,6 @@ const float weapon_size = 0.25;
 
 const float girder_height = 0.4;
 
+const int WORM_IMAGE_WIDTH = 30;
+
 #endif

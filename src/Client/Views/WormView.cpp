@@ -4,17 +4,14 @@
 #include <string>
 #include "GamePlayers.h"
 
-#define WORM_IMAGE "worms/"
-const int IMAGE_WIDTH = 30;
-
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id):
 	Viewable(worldView), player_id(player_id), life(life), dir(dir),
 	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)), label(life, colors[player_id]){
-	    this->full_image = Gdk::Pixbuf::create_from_file("resources/images/walk2.png");
+	    this->full_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + "walk.png");
 	    int width = full_image->get_width();
 	    int height = full_image->get_height();
-	    for (int i = 0; i < height/IMAGE_WIDTH -1; i++) {
-			queue.push(Gdk::Pixbuf::create_subpixbuf(full_image, 0, i * IMAGE_WIDTH, width, IMAGE_WIDTH));
+	    for (int i = 0; i < height/WORM_IMAGE_WIDTH -1; i++) {
+			queue.push(Gdk::Pixbuf::create_subpixbuf(full_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
 		}
 		this->worm.attach(this->label.getWidget(), 0, 0, 1, 1);
 		this->worm.attach(this->image, 0, 1, 1, 1);
@@ -65,8 +62,7 @@ void WormView::setNewImage(bool dir_changed, bool moved, bool colliding, bool is
 }
 
 void WormView::setWeaponImage(){
-	std::string path(IMAGES_PATH);
-    path += WORM_IMAGE;
+	std::string path(WORMS_PATH);
     path += this->weapon;
     if (this->dir == DIR_RIGHT){
         path += "_right.png";
@@ -77,14 +73,14 @@ void WormView::setWeaponImage(){
 }
 
 void WormView::setMovementImage(){
+	this->setStaticImage(true);
 	this->queue.push(std::move(this->queue.front()));
 	this->queue.pop();
-	this->image.set(Gdk::Pixbuf::create_subpixbuf(this->queue.back(), IMAGE_WIDTH + this->dir * IMAGE_WIDTH, 0, IMAGE_WIDTH, IMAGE_WIDTH));
 }
 
 void WormView::setStaticImage(bool dir_changed){
 	if (dir_changed){
-		this->image.set(Gdk::Pixbuf::create_subpixbuf(this->queue.back(), IMAGE_WIDTH + this->dir * IMAGE_WIDTH, 0, IMAGE_WIDTH, IMAGE_WIDTH));
+		this->image.set(Gdk::Pixbuf::create_subpixbuf(this->queue.back(), WORM_IMAGE_WIDTH + this->dir * WORM_IMAGE_WIDTH, 0, WORM_IMAGE_WIDTH, WORM_IMAGE_WIDTH));
 	}
 }
 
