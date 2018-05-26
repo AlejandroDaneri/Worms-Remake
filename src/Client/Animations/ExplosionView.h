@@ -17,12 +17,13 @@ class ExplosionView {
 		Glib::RefPtr<Gdk::Pixbuf> animation;
         std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter;
 
+        bool startCallBack();
+
 	public:
 		ExplosionView(BulletView& bullet, ViewsList& viewList, int id);
 		~ExplosionView();
         ExplosionView(ExplosionView&& other);
 
-		bool startCallBack();
 		void start();
 		bool hasFinished();
 };

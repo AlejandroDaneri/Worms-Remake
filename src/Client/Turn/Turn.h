@@ -12,11 +12,12 @@ class Turn {
 		TurnLabel& time_label;
 		sigc::connection my_connection;
 
+		bool startCallBack();
+
 	public:
 		Turn(Player& player, TurnLabel& time_label);
 		~Turn();
 
-	    bool startCallBack();
 	    void start();
 		void reduceTime();
 		void stop();

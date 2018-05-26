@@ -7,8 +7,6 @@
 
 int Weapon::weapon_id = 1;
 
-#include <iostream>////////////////////////////////////////////////////////////////////////////////////////
-
 Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius): 
 	PhysicalObject(world, Weapon::weapon_id++, TYPE_WEAPON), parameters(parameters), 
 	damage(damage), radius(radius), 
@@ -30,7 +28,6 @@ void Weapon::shoot(char dir, int angle, int power, int time){
 	this->time_to_explode = time;
 	this->angle = angle;
 	this->power = power;
-	std::cout<<"weapon shoot"<<std::endl;
 }
 
 void Weapon::shoot(Worm& shooter, b2Vec2 pos){}
@@ -44,8 +41,8 @@ void Weapon::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 
 void Weapon::createFixtures(){
 	b2CircleShape circleShape;
-	circleShape.m_p.Set(0, 0); //position, relative to body position
-	circleShape.m_radius = weapon_size / 2; //radius
+	circleShape.m_p.Set(0, 0);
+	circleShape.m_radius = weapon_size / 2; 
 		  
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &circleShape;
@@ -69,7 +66,6 @@ void Weapon::setInitialVelocity(){
 
 
 void Weapon::explode(){
-	std::cout<<"weapon explode: "<<this->getId()<<std::endl;
 	b2Vec2 center = this->body->GetPosition();
 	for (float bullet_angle = 0; bullet_angle < 360; bullet_angle+= 5){
 		this->attackWormExplosion(center, bullet_angle);
@@ -92,7 +88,6 @@ void Weapon::attackWormExplosion(const b2Vec2& center, int angle){
 }
 
 void Weapon::collide_with_something(CollisionData* other){
-	std::cout<<"weapon collision"<<std::endl;
 	if (this->time_to_explode == -1){
 		this->explode_time.stop();
 		this->explode();

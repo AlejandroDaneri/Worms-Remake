@@ -4,6 +4,7 @@
 #include "PhysicalObject.h"
 #include "GameParameters.h"
 #include "Weapon.h"
+#include <mutex>
 
 class Worm: public PhysicalObject{	
 	private:
@@ -15,6 +16,7 @@ class Worm: public PhysicalObject{
 		float max_height;
 		int colliding_with_girder;
 		int friction;
+		std::mutex mutex;
 
 	protected:
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;

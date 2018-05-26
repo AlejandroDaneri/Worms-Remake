@@ -13,15 +13,15 @@ class Timer {
 		Handlers& handlers;
         sigc::connection my_connection;
 
+        /* Callback de start */
+        bool startCallBack();
+
 	public:
 		/* Constructor */
 		Timer(Handlers& handlers, int time);
 
 		/* Destructor */
 		~Timer();
-
-		/* Callback de start */
-        bool startCallBack();
 
 		/* Cuenta el tiempo transcurrido y llama al metodo timerStopped
 		   de la clase Handler con este tiempo */

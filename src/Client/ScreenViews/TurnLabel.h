@@ -10,6 +10,8 @@ class TurnLabel{
 		Gtk::Label time;
 		Gtk::HBox label;
 
+		bool setLabelCallback(std::string text);
+
 	public:
 		TurnLabel();
 		~TurnLabel();
@@ -23,8 +25,6 @@ class TurnLabel{
 		void setTime(int time);
 		
 		Gtk::Container& getWindow();
-
-		bool setLabelCallback(std::string text);
 };
 
 

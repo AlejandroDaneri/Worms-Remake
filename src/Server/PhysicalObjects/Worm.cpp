@@ -36,7 +36,7 @@ int Worm::getPlayerId() const{
 }
 
 int Worm::getLife() const{
-	return this->life > 0 ? this->life : 0;
+	return this->life;
 }
 
 char Worm::getDir() const{
@@ -52,8 +52,10 @@ void Worm::addLife(int life){
 }
 
 void Worm::reduce_life(int damage){
+	std::lock_guard<std::mutex> lock(this->mutex);
 	this->life -= damage;
 	if (this->life <= 0){
+		this->life = 0;
 		this->is_dead = true;
 	}
 }
@@ -108,12 +110,9 @@ void Worm::shoot(b2Vec2 pos){
 	((Weapon*)this->weapon.get())->shoot(*this, pos);
 }
 
-#include <iostream>/////////////////////////////////////
 void Worm::receive_weapon_damage(int damage, const b2Vec2& epicenter){
 	this->reduce_life(damage);
 	b2Vec2 direction = this->body->GetPosition() - epicenter;
-	std::cout <<"Danio worm id: "<<this->getId()<<" damage: "<<damage<<"  life: "<<this->life<<std::endl;
-	std::cout <<"direction: "<<direction.x<<"  "<<direction.y<<std::endl;
 	direction.Normalize();
 	this->body->SetGravityScale(1);
 	this->friction = 0;
@@ -129,9 +128,7 @@ void Worm::collide_with_something(CollisionData* other){
 		this->max_height -= current_height;
 		
 		if (this->max_height >= min_height){
-			std::cout <<"Danio por caida worm id: "<<this->getId()<<"  height: "<<this->max_height<<"  life anterior: "<<this->life;
 			this->reduce_life(std::min((int)this->max_height - min_height, parameters.getWormMaxHeightDamage()));
-			std::cout <<"  life actual: "<<this->life<<std::endl;
 		}
 		this->colliding_with_girder++;
 		this->max_height = 0;
