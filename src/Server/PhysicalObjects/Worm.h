@@ -16,6 +16,7 @@ class Worm: public PhysicalObject{
 		float max_height;
 		int colliding_with_girder;
 		int friction;
+		int angle;
 		std::mutex mutex;
 
 	protected:

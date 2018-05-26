@@ -9,7 +9,7 @@
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(false){
+	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(0), angle(0){
 		this->changeWeapon(DEFAULT_WEAPON);
 	}
 
@@ -27,7 +27,7 @@ void Worm::createFixtures(){
 		  
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
-	boxFixtureDef.density = 1;
+	boxFixtureDef.density = 10;
 	this->body->CreateFixture(&boxFixtureDef);
 }
 
@@ -97,12 +97,12 @@ void Worm::changeWeapon(const std::string& weapon){
 void Worm::shoot(int angle, int power, int time){
 	((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time);
 	b2Vec2 pos = this->getPosition();
-	if (angle < 500){
-		pos.x += (worm_size * Math::cos_degrees(angle) * dir);
-		pos.y += (worm_size * Math::sin_degrees(angle));
-	} else {
-		pos.x += this->dir;
+	if (angle > 500){
+		angle = this->angle;
 	}
+	pos.x += (worm_size * Math::cos_degrees(angle) * this->dir);
+	pos.y += (worm_size * Math::sin_degrees(angle));
+
 	this->world.addObject(this->weapon, pos);
 }
 
@@ -132,7 +132,9 @@ void Worm::collide_with_something(CollisionData* other){
 		}
 		this->colliding_with_girder++;
 		this->max_height = 0;
-		if (((Girder*)other->getObject())->has_friction()){
+		Girder* girder = (Girder*)other->getObject();
+		this->angle = girder->getAngle();
+		if (girder->has_friction()){
 			this->friction++;
 		}
 	}
@@ -144,6 +146,9 @@ void Worm::end_collission_girder(char has_friction){
 	if (this->friction <= 0){
 		this->friction = 0;
 		this->body->SetGravityScale(1);
+	}
+	if(this->colliding_with_girder == 0){
+		this->angle = 0;
 	}
 }
 

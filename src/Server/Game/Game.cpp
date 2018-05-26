@@ -51,7 +51,6 @@ void Game::run(){
 			try{
 				this->turn.getCurrentPlayer().getProtocol().receive(*this);
 			} catch (const SocketException& e){
-				std::lock_guard<std::mutex> lock(this->world.getMutex());
 				this->player_turn_active = false;
 				this->turn.getCurrentPlayer().disconnect();
 			}

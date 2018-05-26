@@ -22,6 +22,7 @@ class Girder: public PhysicalObject{
 		int getRotation();
 
 		bool has_friction();
+		int getAngle();
 
 };
 
