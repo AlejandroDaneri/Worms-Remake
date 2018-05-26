@@ -21,4 +21,6 @@ const std::string ANIMATIONS_PATH(IMAGES_PATH + "animations/");
 
 const std::string SOUNDS_PATH(RESOURCES + "Sounds/");
 
+const std::string CONFIG_PATH(ROOT_PATH + "/config/");
+
 #endif
