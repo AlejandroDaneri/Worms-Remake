@@ -6,7 +6,7 @@
 ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list, MusicPlayer& musicPlayer):
 	world(world), player(player), players_list(players_list), musicPlayer(musicPlayer) {
 
-	this->scope.set("resources/images/scope/scope.png");
+	this->scope.set(SCOPE_IMAGE);
 	this->world.addElement(this->scope, Position(0,500), 0, 0);
 	this->scope.hide();
 	this->current_worm_id = -1;

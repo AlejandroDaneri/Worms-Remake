@@ -4,10 +4,10 @@
 #include <string>
 
 #ifndef ROOT_PATH
-#define ROOT_PATH std::string(".")
+#define ROOT_PATH "."
 #endif
 
-const std::string RESOURCES(ROOT_PATH + "/resources/");
+const std::string RESOURCES(std::string(ROOT_PATH) + "/resources/");
 
 const std::string IMAGES_PATH(RESOURCES + "images/");
 
@@ -17,10 +17,14 @@ const std::string BULLETS_PATH(IMAGES_PATH + "bullets/");
 
 const std::string WORMS_PATH(IMAGES_PATH + "worms/");
 
+const std::string WEAPONS_PATH(IMAGES_PATH + "Weapons_icons/");
+
+const std::string SCOPE_IMAGE(IMAGES_PATH + "scope/scope.png");
+
 const std::string ANIMATIONS_PATH(IMAGES_PATH + "animations/");
 
 const std::string SOUNDS_PATH(RESOURCES + "Sounds/");
 
-const std::string CONFIG_PATH(ROOT_PATH + "/config/");
+const std::string CONFIG_PATH(std::string(ROOT_PATH) + "/config/");
 
 #endif
