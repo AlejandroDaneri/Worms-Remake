@@ -5,22 +5,19 @@ ExplosionViewList::ExplosionViewList() {}
 ExplosionViewList::~ExplosionViewList() {}
 
 void ExplosionViewList::check() {
-    std::unordered_map<int, ExplosionView>::iterator iter;
+    std::list<ExplosionView>::iterator iter;
     iter = this->animations.begin();
     while (iter != this->animations.end()) {
-        if (iter->second.hasFinished()) {
+        if (iter->hasFinished()) {
             iter = this->animations.erase(iter);
         } else {
-            iter++;
+            ++iter;
         }
     }
 }
 
-void ExplosionViewList::add(int id, ExplosionView&& animation) {
+void ExplosionViewList::addAndStart(ExplosionView&& animation) {
     this->check();
-    this->animations.insert(std::make_pair(id, std::move(animation)));
-}
-
-ExplosionView& ExplosionViewList::at(int id) {
-    return this->animations.at(id);
+    this->animations.push_back(std::move(animation));
+    this->animations.back().start();
 }

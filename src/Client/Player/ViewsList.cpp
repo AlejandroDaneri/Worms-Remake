@@ -36,9 +36,9 @@ bool ViewsList::removeWeaponCallBack(int id){
         this->weapon_focused = -1;
     }
     auto it = this->weapons.find(id);
-    ExplosionView explotion(it->second, *this, id);
-    this->animation.add(id, std::move(explotion));
-    this->animation.at(id).start();
+    ExplosionView explotion(std::move(it->second));
+    this->animation.addAndStart(std::move(explotion));
+    this->weapons.erase(it);
     return false;
 }
 
@@ -48,20 +48,6 @@ void ViewsList::removeWeapon(int id){
         sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::removeWeaponCallBack), id);
         Glib::signal_idle().connect(my_slot);
     }
-}
-
-bool ViewsList::eraseWeaponCallBack(int id) {
-    auto it = this->weapons.find(id);
-    if (it != this->weapons.end()) {
-        it->second.explode();
-        this->weapons.erase(it);
-    }
-    return false;
-}
-
-void ViewsList::eraseWeapon(int id) {
-    sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::eraseWeaponCallBack), id);
-    Glib::signal_idle().connect(my_slot);
 }
 
 bool ViewsList::updateWormDataCallBack(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding){

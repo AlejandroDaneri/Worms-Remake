@@ -32,7 +32,6 @@ class ViewsList{
         /* CallBacks */
         bool removeWormCallBack(int id);
         bool removeWeaponCallBack(int id);
-        bool eraseWeaponCallBack(int id);
         bool updateWormDataCallBack(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding);
         bool updateWeaponDataCallBack(int id, const std::string& weapon_name, float pos_x, float pos_y);
         bool updateScopeCallBack(int angle);
@@ -52,9 +51,6 @@ class ViewsList{
 
         /* Elimina la vista del arma y la reemplaza por la animacion de la explosion */
 		void removeWeapon(int id);
-
-        /* Elimina el arma de la vista */
-		void eraseWeapon(int id);
 
 		/* Actualiza la posicion y la vida del worm */
         void updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding);

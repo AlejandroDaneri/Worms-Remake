@@ -4,15 +4,11 @@
 #include <vector>
 #include <gdkmm/pixbuf.h>
 #include "Thread.h"
-
-class ViewsList;
-class BulletView;
+#include "BulletView.h"
 
 class ExplosionView {
 	private:
-		BulletView& bulletView;
-		ViewsList& viewList;
-		int id;
+		BulletView bulletView;
 		std::vector<Glib::RefPtr<Gdk::Pixbuf>> animation_vector;
 		Glib::RefPtr<Gdk::Pixbuf> animation;
         std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter;
@@ -20,7 +16,7 @@ class ExplosionView {
         bool startCallBack();
 
 	public:
-		ExplosionView(BulletView& bullet, ViewsList& viewList, int id);
+		ExplosionView(BulletView&& bullet);
 		~ExplosionView();
         ExplosionView(ExplosionView&& other);
 

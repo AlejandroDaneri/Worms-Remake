@@ -1,11 +1,8 @@
 #include "ExplosionView.h"
 #include <gtkmm/image.h>
 #include <glibmm/main.h>
-#include "BulletView.h"
-#include "ViewsList.h"
 
-ExplosionView::ExplosionView(BulletView& bullet, ViewsList& viewList, int id) : bulletView(bullet),
-	viewList(viewList), id(id) {
+ExplosionView::ExplosionView(BulletView&& bullet) : bulletView(std::move(bullet)){
 	this->animation = Gdk::Pixbuf::create_from_file("resources/images/animations/explosion.png");
     int width = this->animation->get_width();
     int height = this->animation->get_height();
@@ -19,7 +16,7 @@ ExplosionView::ExplosionView(BulletView& bullet, ViewsList& viewList, int id) : 
 ExplosionView::~ExplosionView() {}
 
 ExplosionView::ExplosionView(ExplosionView&& other) :
-        bulletView(other.bulletView), viewList(other.viewList), id(other.id) {
+        bulletView(std::move(other.bulletView)){
     this->animation_vector = other.animation_vector;
     this->animation = other.animation;
     this->iter = this->animation_vector.begin();
@@ -30,7 +27,7 @@ bool ExplosionView::startCallBack() {
 	image.set(*(this->iter));
 	this->iter++;
 	if (this->iter == this->animation_vector.end()) {
-        this->viewList.eraseWeapon(this->id);
+        this->bulletView.explode();
         return false;
     }
     return true;

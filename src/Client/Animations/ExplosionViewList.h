@@ -1,12 +1,12 @@
 #ifndef WORMS_EXPLOSIONVIEWLIST_H
 #define WORMS_EXPLOSIONVIEWLIST_H
 
-#include <unordered_map>
+#include <list>
 #include "ExplosionView.h"
 
 class ExplosionViewList {
     private:
-        std::unordered_map<int, ExplosionView> animations;
+        std::list<ExplosionView> animations;
 
         void check();
 
@@ -14,9 +14,8 @@ class ExplosionViewList {
         ExplosionViewList();
         ~ExplosionViewList();
 
-        void add(int id, ExplosionView&& animation);
+        void addAndStart(ExplosionView&& animation);
 
-        ExplosionView& at(int id);
 };
 
 
