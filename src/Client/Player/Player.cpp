@@ -22,22 +22,17 @@ Player::Player(ClientProtocol protocol, const std::string& name, MusicPlayer& mu
 
 Player::~Player() {
 	std::cout << "destruyo" << std::endl;
-	//this->turn->stop();
-	//this->turn->join();
 	this->data_receiver.stop();
 	this->data_receiver.join();
 }
 
 void Player::startTurn(int worm_id, int player_id){
 	this->view_list.setCurrentWorm(worm_id);
-	//this->turn->join();
-	//this->turn.reset(new Turn(*this, this->turn_label));
 	const std::string& current_player = this->players_list.getPlayer(player_id);
 	if (current_player == this->name){
 	    this->musicPlayer.playStartTurnSound();
 		//Es mi turno
 		this->handlers.enable_all();
-		// mandar arma
 		this->change_weapon(this->weapons.get_actual_weapon().getName());
 		std::cout << "key event = " << this->weapons.get_actual_weapon().getName() << std::endl;
 		this->turn_label.beginTurn();
@@ -61,7 +56,7 @@ void Player::damageReceived(){
 void Player::shootWeapon() {
 	this->turn.reduceTime();
 	this->weapons.get_actual_weapon().shoot();
-    if (this->weapons.get_actual_weapon().getName() == "Teleportation") {
+    if (this->weapons.get_actual_weapon().getName() == "Teleportation") { ////////////////esto no va aca, sino solo lo escucha un jugador
         this->musicPlayer.playTeleportSound();
     } else if (this->weapons.get_actual_weapon().getName() == "Bat") {
         this->musicPlayer.playBatSound();
@@ -99,7 +94,6 @@ void Player::play_tick_time() {
 }
 
 void Player::shoot(int angle, int power, int time) {
-	// Elimino los handlers de disparo
 	printf("shoot\n");
 	this->shootWeapon();
 	if (!this->weapons.get_actual_weapon().isTimed()) {
