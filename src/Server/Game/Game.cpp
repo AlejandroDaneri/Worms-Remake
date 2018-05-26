@@ -101,6 +101,11 @@ Worm& Game::getCurrentWorm(){
 	return this->turn.getCurrentPlayer().getCurrentWorm();
 }
 
+void Game::weaponChanged(const std::string& weapon){
+	this->getCurrentWorm().changeWeapon(weapon);
+	this->data_sender->send_weapon_changed(weapon);
+}
+
 void Game::endTurn(){
 	this->player_turn_active = false;
 }

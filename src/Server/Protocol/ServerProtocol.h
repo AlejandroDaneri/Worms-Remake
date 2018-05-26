@@ -33,6 +33,8 @@ class ServerProtocol : public Protocol{
 		void sendGirder(physical_object_ptr& girder);
 
 		void sendWeaponAmmo(const std::string& weapon_name, int ammo);
+
+		void send_weapon_changed(const std::string& weapon);
 };
 
 #endif

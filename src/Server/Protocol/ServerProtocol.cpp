@@ -107,16 +107,8 @@ void ServerProtocol::receive(Game& game) {
 			char move = buffer[offset++];
 			game.getCurrentWorm().move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
-		    ////////////////////////////////////////////// Mejorar por algo mas simple//////////////////////////
 			std::string weapon(this->receive_string_buffer(buffer, offset));
-			game.getCurrentWorm().changeWeapon(weapon);
-			/////////////////////////////////////////////////////////////////
-			char weapon_buffer[MAX_BUF_LEN];
-			size_t aux = 0;
-            weapon_buffer[aux++] = CHANGE_WEAPON_ACTION;
-			this->send_string_buffer(weapon_buffer, aux, weapon);
-			this->send_buffer(weapon_buffer, aux);
-			////////////////////////////////////////////////////////////////
+			game.weaponChanged(weapon);
 		} else if (worm_action == SHOOT_WEAPON) {
 			int angle = this->receive_int_buffer(buffer, offset);
 			int power = this->receive_int_buffer(buffer, offset);
@@ -162,6 +154,16 @@ void ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
 
 	this->send_string_buffer(buffer, offset, weapon_name);
     this->send_int_buffer(buffer, offset, ammo);
+
+	this->send_buffer(buffer, offset);
+}
+
+void ServerProtocol::send_weapon_changed(const std::string& weapon){
+	char buffer[MAX_BUF_LEN];
+	size_t offset = 0;
+
+	buffer[offset++] = CHANGE_WEAPON_ACTION;
+	this->send_string_buffer(buffer, offset, weapon);
 
 	this->send_buffer(buffer, offset);
 }

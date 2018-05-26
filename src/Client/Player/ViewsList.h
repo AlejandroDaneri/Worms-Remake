@@ -27,6 +27,8 @@ class ViewsList{
         ExplosionViewList animation;
         MusicPlayer& musicPlayer;
 
+        void removeWormFocus();
+
 	public:
         /* Constructor */
 		ViewsList(WorldView& world, Player& player, PlayersList& players_list, MusicPlayer& musicPlayer);

@@ -45,7 +45,6 @@ void WormView::updateData(int new_life, char new_dir, const Position& new_pos, b
 
 void WormView::kill(){
 	this->removeFromWorld();
-	////////////////////////////////////////Hacer sonido de gusano muerto
 }
 
 void WormView::changeWeapon(const std::string& weapon) {
@@ -87,6 +86,10 @@ void WormView::setStaticImage(bool dir_changed){
 	if (dir_changed){
 		this->image.set(Gdk::Pixbuf::create_subpixbuf(this->queue.back(), IMAGE_WIDTH + this->dir * IMAGE_WIDTH, 0, IMAGE_WIDTH, IMAGE_WIDTH));
 	}
+}
+
+void WormView::removeWeaponImage(){
+	this->setStaticImage(true);
 }
 
 Gtk::Widget& WormView::getWidget(){

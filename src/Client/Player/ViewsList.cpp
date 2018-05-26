@@ -3,8 +3,6 @@
 #include "ObjectSizes.h"
 #include "Player.h"
 
-#include <iostream>
-
 ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list, MusicPlayer& musicPlayer):
 	world(world), player(player), players_list(players_list), musicPlayer(musicPlayer) {
 
@@ -38,21 +36,18 @@ bool ViewsList::removeWeaponCallBack(int id){
         this->weapon_focused = -1;
     }
     auto it = this->weapons.find(id);
-    if (it != this->weapons.end()){
-        ExplosionView explotion(it->second, *this, id);
-        this->animation.add(id, std::move(explotion));
-        std::cout << "Id del misil = " << id << std::endl;
-        this->animation.at(id).start();
-    }
+    ExplosionView explotion(it->second, *this, id);
+    this->animation.add(id, std::move(explotion));
+    this->animation.at(id).start();
     return false;
 }
 
 void ViewsList::removeWeapon(int id){
     if (this->weapons.find(id) != this->weapons.end()) {
         this->musicPlayer.playExplosionSound();
+        sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::removeWeaponCallBack), id);
+        Glib::signal_idle().connect(my_slot);
     }
-    sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::removeWeaponCallBack), id);
-    Glib::signal_idle().connect(my_slot);
 }
 
 bool ViewsList::eraseWeaponCallBack(int id) {
@@ -107,10 +102,7 @@ bool ViewsList::updateWeaponDataCallBack(int id, const std::string& weapon_name,
             this->weapons.at(weapon_focused).setFocus(false);
         }
         this->weapon_focused = id;
-        auto it = this->worms.find(this->current_worm_id);
-        if (it != this->worms.end()){
-            it->second.setFocus(false);
-        }
+        this->removeWormFocus();
         this->weapons.insert(std::make_pair(id, std::move(weapon)));
     } else {
         //Weapon existe
@@ -173,10 +165,7 @@ void ViewsList::addGirder(size_t size, int pos_x, int pos_y, int rotation){
 }
 
 bool ViewsList::setCurrentWormCallBack(int id){
-    auto it = this->worms.find(this->current_worm_id);
-    if (it != this->worms.end()){
-        it->second.setFocus(false);
-    }
+    this->removeWormFocus();
     this->current_worm_id = id;
     this->weapon_focused = -1;
     WormView& worm = this->worms.at(id);
@@ -188,4 +177,12 @@ bool ViewsList::setCurrentWormCallBack(int id){
 void ViewsList::setCurrentWorm(int id){
     sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::setCurrentWormCallBack), id);
     Glib::signal_idle().connect(my_slot);
+}
+
+void ViewsList::removeWormFocus(){
+    auto it = this->worms.find(this->current_worm_id);
+    if (it != this->worms.end()){
+        it->second.setFocus(false);
+        it->second.removeWeaponImage();
+    }
 }

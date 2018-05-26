@@ -57,6 +57,9 @@ class WormView: public Viewable {
 		/* Elimina al worm del WorldView */
 		void kill();
 
+		/* Elimina la imagen del arma del worm */
+		void removeWeaponImage();
+
 		/* Devuelve la vida del worm */
 		int getLife() const;
 

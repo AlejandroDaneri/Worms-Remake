@@ -9,7 +9,7 @@ DataSender::~DataSender(){}
 void DataSender::run(){
 	while(this->running){
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		std::lock_guard<std::mutex> lock(this->mutex);///////////////////////////////ver poner ahi o adentro del otro while
+		std::lock_guard<std::mutex> lock(this->mutex);
 		this->active = false;
 		auto it = this->objects.begin();
 
@@ -82,6 +82,14 @@ void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
 			for (auto it = weapons.begin(); it != weapons.end(); ++it){
 				player->getProtocol().sendWeaponAmmo(it->first, it->second);
 			}
+		} catch(const SocketException& e){}
+	}
+}
+
+void DataSender::send_weapon_changed(const std::string& weapon){
+	for (auto player = this->players.begin(); player != this->players.end(); ++player){
+		try{
+			player->getProtocol().send_weapon_changed(weapon);
 		} catch(const SocketException& e){}
 	}
 }

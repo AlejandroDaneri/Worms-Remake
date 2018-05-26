@@ -5,7 +5,7 @@
 #include <mutex>
 #include "Socket.h"
 
-#define MAX_BUF_LEN 1024
+#define MAX_BUF_LEN 200
 
 #define MOVING_OBJECT 0
 #define DEAD_OBJECT 1
