@@ -73,4 +73,8 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
     }
 }
 
+void MapController::changeBackground() {
+    this->view.changeBackground();
+}
+
 

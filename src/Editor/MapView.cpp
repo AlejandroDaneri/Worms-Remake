@@ -6,9 +6,13 @@
 
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
-        : Gtk::Layout(cobject){
+        : Gtk::Layout(cobject),
+          actual_bg(0)
+{
+    bg_paths.emplace_back("resources/images/editor_toolbox/background1.png");
+    bg_paths.emplace_back("resources/images/editor_toolbox/bac.jpg");
+    setBackground(bg_paths[actual_bg]);
 
-    setBackground("resources/images/editor_toolbox/background1.png");
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
             sigc::mem_fun(*this, &MapView::on_button_clicked));
@@ -98,6 +102,12 @@ void MapView::setBackground(std::string name) {
             back.push_back(std::move(asd));
         }
     }
+}
+
+void MapView::changeBackground() {
+    back.clear();
+    actual_bg=(actual_bg+1)%bg_paths.size();
+    setBackground(bg_paths[actual_bg]);
 }
 
 

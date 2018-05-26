@@ -18,8 +18,9 @@ private:
 
     std::vector<Gtk::Image> back;
 
+    int actual_bg;
     void setBackground(std::string name);
-
+    std::vector<std::string> bg_paths;
 
 public:
     MapView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
@@ -38,6 +39,9 @@ public:
     void moveLast(const double &x, const double &y);
 
     void turnLast(const unsigned int &id, const int &angle);
+
+    void changeBackground();
+
 
 
 };
