@@ -3,12 +3,6 @@
 #include <gtkmm/adjustment.h>
 #include <gdk/gdkkeysyms.h>
 
-//const int LEFT_ARROW = 0xff51;
-//const int UP_ARROW = 0xff52;
-//const int RIGHT_ARROW = 0xff53;
-//const int DOWN_ARROW = 0xff54;
-//const int ENTER = 0xff0d;
-//const int BACK = 0xff08;
 const char SPACE = ' ';
 const int WEAPONS_TIME = 5;
 const char ASCII_OFFSET = 48;
@@ -118,8 +112,6 @@ bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 			printf("se solto la barra\n");
 			printf("Timer stop\n");
 			this->timer.stop();
-		} else if (key_event->keyval == GDK_KEY_Left || key_event->keyval == GDK_KEY_Right) {
-			/////////////////////////////ANIMACION DE SACAR EL ARMA
 		}
 	}
 	return true;
