@@ -1,9 +1,10 @@
 #include "ExplosionView.h"
 #include <gtkmm/image.h>
 #include <glibmm/main.h>
+#include "Path.h"
 
 ExplosionView::ExplosionView(BulletView&& bullet) : bulletView(std::move(bullet)){
-	this->animation = Gdk::Pixbuf::create_from_file("resources/images/animations/explosion.png");
+	this->animation = Gdk::Pixbuf::create_from_file(ANIMATIONS_PATH + "explosion.png");
     int width = this->animation->get_width();
     int height = this->animation->get_height();
     for (int i = 0; i < height/width; i++) {

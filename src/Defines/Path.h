@@ -17,4 +17,8 @@ const std::string BULLETS_PATH(IMAGES_PATH + "bullets/");
 
 const std::string WORMS_PATH(IMAGES_PATH + "worms/");
 
+const std::string ANIMATIONS_PATH(IMAGES_PATH + "animations/");
+
+const std::string SOUNDS_PATH(RESOURCES + "Sounds/");
+
 #endif

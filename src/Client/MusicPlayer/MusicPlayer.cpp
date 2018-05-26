@@ -1,18 +1,19 @@
 #include "MusicPlayer.h"
 #include <iostream>
 #include "MusicPlayerException.h"
+#include "Path.h"
 
-const std::string BACKGROUND_MUSIC = "resources/Sounds/menu principal/music.mp3"; ///////////////// cambiar
-const std::string START_TURN_SOUND = "resources/Sounds/misc/StartRound.wav";
-const std::string TICK_SOUND = "resources/Sounds/misc/TIMERTICK.WAV";
-const std::string WALK_SOUND = "resources/Sounds/misc/Walk-Expand.wav";
-const std::string BORING_SOUND = "resources/Sounds/Worms/BORING.WAV";
-const std::string RUN_AWAY_SOUND = "resources/Sounds/Worms/RUNAWAY.WAV";
-const std::string DEATH_SOUND = "resources/Sounds/Worms/NOOO.WAV";
-const std::string EXPLOSION_SOUND = "resources/Sounds/Weapons/Explosion1.wav";
-const std::string TELEPORT_SOUND = "resources/Sounds/Weapons/TELEPORT.WAV";
-const std::string BAT_SOUND = "resources/Sounds/Weapons/BaseballSound.wav";
-const std::string HOLY_GRENADE_SOUND = "resources/Sounds/Weapons/HOLYGRENADE.WAV";
+const std::string BACKGROUND_MUSIC = SOUNDS_PATH + "menu/music.mp3"; ///////////////// cambiar
+const std::string START_TURN_SOUND = SOUNDS_PATH + "misc/StartRound.wav";
+const std::string TICK_SOUND = SOUNDS_PATH + "misc/TIMERTICK.WAV";
+const std::string WALK_SOUND = SOUNDS_PATH + "misc/Walk-Expand.wav";
+const std::string BORING_SOUND = SOUNDS_PATH + "Worms/BORING.WAV";
+const std::string RUN_AWAY_SOUND = SOUNDS_PATH + "Worms/RUNAWAY.WAV";
+const std::string DEATH_SOUND = SOUNDS_PATH + "Worms/NOOO.WAV";
+const std::string EXPLOSION_SOUND = SOUNDS_PATH + "Weapons/Explosion1.wav";
+const std::string TELEPORT_SOUND = SOUNDS_PATH + "Weapons/TELEPORT.WAV";
+const std::string BAT_SOUND = SOUNDS_PATH + "Weapons/BaseballSound.wav";
+const std::string HOLY_GRENADE_SOUND = SOUNDS_PATH + "Weapons/HOLYGRENADE.WAV";
 
 MusicPlayer::MusicPlayer() {
     this->music = NULL;
