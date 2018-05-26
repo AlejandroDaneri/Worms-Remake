@@ -5,9 +5,8 @@ mkdir build
 
 cd build
 
-cmake ..
+cmake -DROOT=/home/mati/Desktop/worms .. && make install  (para instalar en otra carpeta, con el otro cmakelists.txt) 
 
-(no me borren mi makefile)
 
 ### Lista de tareas
 https://trello.com/b/77GBgtcb/worms
@@ -25,10 +24,6 @@ https://www.gtk.org/tutorial1.2/gtk_tut.html#toc10
 https://developer.gnome.org/gnome-devel-demos/stable/c.html.es
 
 ### Instalar Sdl:
-
-sudo apt-get install libsdl2-2.0 (creo que no es necesario este)
-
-sudo apt-get install libsdl2-dev
 
 sudo apt-get install libsdl2-mixer-dev (para el sonido)
 
