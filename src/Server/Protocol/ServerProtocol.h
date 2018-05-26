@@ -20,9 +20,9 @@ class ServerProtocol : public Protocol{
 		ServerProtocol(ServerProtocol&& other);
 		~ServerProtocol();
 
-		void sendObject(physical_object_ptr& object);
+		Buffer sendObject(physical_object_ptr& object);
 
-		void sendDeadObject(physical_object_ptr& object);
+		Buffer sendDeadObject(physical_object_ptr& object);
 
 		void receive(Game& game);
 

@@ -2,26 +2,37 @@
 
 DataSender::DataSender(World& world, std::vector<Player>& players): 
 	objects(world.getObjectsList()), girders(world.getGirdersList()), 
-	players(players), mutex(world.getMutex()){}
+	players(players), mutex(world.getMutex()), active(false){
 
-DataSender::~DataSender(){}
+		for (size_t i = 0; i < this->players.size(); i++){
+			std::unique_ptr<PlayerDataSender> sender(new PlayerDataSender(this->players[i]));
+			this->players_data_senders.push_back(std::move(sender));
+			this->players_data_senders[i]->start();
+		}
+	}
+
+DataSender::~DataSender(){
+	for (size_t i = 0; i < this->players.size(); i++){
+		this->players_data_senders[i]->stop();
+		this->players_data_senders[i]->notify();
+		this->players_data_senders[i]->join();
+	}
+}
 
 void DataSender::run(){
 	while(this->running){
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		std::lock_guard<std::mutex> lock(this->mutex);
 		this->active = false;
 		auto it = this->objects.begin();
 
 		while(it != this->objects.end()){
 			if ((*it)->isDead()){
+				Buffer data = this->players[0].getProtocol().sendDeadObject(*it);
+
 				for (size_t i = 0; i < this->players.size(); i++){
-					try{
-						if (this->players[i].isConnected()){
-							this->players[i].getProtocol().sendDeadObject(*it);
-						}
-					} catch(const SocketException& e){
-						this->players[i].disconnect();
+					if (this->players[i].isConnected()){
+						this->players_data_senders[i]->sendData(data);
 					}
 				}
 				it = this->objects.erase(it);
@@ -29,18 +40,21 @@ void DataSender::run(){
 			}
 
 			if ((*it)->isMoving()){
+				Buffer data = this->players[0].getProtocol().sendObject(*it);
 				for (size_t i = 0; i < this->players.size(); i++){
-					try{
-						if (this->players[i].isConnected()){
-							this->players[i].getProtocol().sendObject(*it);
-						}
-					} catch(const SocketException& e){
-						this->players[i].disconnect();
+					if (this->players[i].isConnected()){
+						this->players_data_senders[i]->sendData(data);
 					}
 					this->active = true;
 				}
 			}
 			++it;
+		}
+
+		for (size_t i = 0; i < this->players.size(); i++){
+			if (this->players[i].isConnected()){
+				this->players_data_senders[i]->notify();
+			}
 		}
 	}
 }

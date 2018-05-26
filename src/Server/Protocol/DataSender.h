@@ -6,13 +6,16 @@
 #include "PhysicalObject.h"
 #include "Player.h"
 #include "ServerProtocol.h"
+#include "PlayerDataSender.h"
 #include <list>
+#include <memory>
 
 class DataSender: public Thread{
 	private:
 		std::list<physical_object_ptr>& objects;
 		std::list<physical_object_ptr>& girders;
 		std::vector<Player>& players;
+		std::vector<std::unique_ptr<PlayerDataSender>> players_data_senders;
 		std::mutex& mutex;
 		bool active;
 

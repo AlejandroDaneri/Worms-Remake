@@ -12,7 +12,7 @@ ServerProtocol::ServerProtocol(ServerProtocol&& other): Protocol(std::move(other
 
 ServerProtocol::~ServerProtocol(){}
 
-void ServerProtocol::sendObject(physical_object_ptr& object){
+Buffer ServerProtocol::sendObject(physical_object_ptr& object){
 	Buffer buffer;
 	buffer.setNext(MOVING_OBJECT);
 
@@ -22,9 +22,10 @@ void ServerProtocol::sendObject(physical_object_ptr& object){
 	} else if (type == TYPE_WEAPON){
 		this->send_weapon(object, buffer);
 	}
+	return std::move(buffer);
 }
 
-void ServerProtocol::sendDeadObject(physical_object_ptr& object){
+Buffer ServerProtocol::sendDeadObject(physical_object_ptr& object){
 	Buffer buffer;
 	buffer.setNext(DEAD_OBJECT);
 
@@ -38,7 +39,7 @@ void ServerProtocol::sendDeadObject(physical_object_ptr& object){
 	uint32_t id = object->getId();
     this->send_int_buffer(buffer, id);
 
-	this->send_buffer(buffer);
+	return std::move(buffer);
 }
 
 void ServerProtocol::send_worm(physical_object_ptr& object, Buffer& buffer){
@@ -55,8 +56,6 @@ void ServerProtocol::send_worm(physical_object_ptr& object, Buffer& buffer){
     this->send_int_buffer(buffer, worm->getLife());
 	buffer.setNext(worm->getDir());
 	buffer.setNext(worm->isColliding());
-	
-	this->send_buffer(buffer);
 }
 
 void ServerProtocol::send_weapon(physical_object_ptr& object, Buffer& buffer){
@@ -72,8 +71,6 @@ void ServerProtocol::send_weapon(physical_object_ptr& object, Buffer& buffer){
 
     this->send_int_buffer(buffer, position.x * UNIT_TO_SEND);
     this->send_int_buffer(buffer, position.y * UNIT_TO_SEND);
-
-	this->send_buffer(buffer);
 }
 
 void ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_player_id){
