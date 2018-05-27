@@ -27,8 +27,9 @@ int Map::turnCCWLast() {
     return object.turnCCW();
 }
 
-int Map::turnCWLast() {
-    MapObject &object = objects.back().second;
+int Map::turnCWLast(int index, unsigned int &id) {
+    MapObject &object = objects[index].second;
+    id = objects[index].first;
     return object.turnCW();
 }
 

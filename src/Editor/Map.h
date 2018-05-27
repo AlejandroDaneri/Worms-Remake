@@ -27,7 +27,8 @@ public:
     void getObjects(std::vector<std::vector<double>> &worms,
                     std::vector<std::vector<double>> &girders) const;
 
-    int turnCWLast();
+
+    int turnCWLast(int index, unsigned int &id);
 };
 
 

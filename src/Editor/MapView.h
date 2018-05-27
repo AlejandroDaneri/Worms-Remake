@@ -22,6 +22,8 @@ private:
     void setBackground(std::string name);
     std::vector<std::string> bg_paths;
 
+    //bool isIsolated(const double &x, const double &y, const unsigned int &id);
+
 public:
     MapView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 
@@ -38,12 +40,14 @@ public:
 
     void moveLast(const double &x, const double &y);
 
-    void turnLast(const unsigned int &id, const int &angle);
+    void turnLast(unsigned int id, int angle, int index);
 
     void changeBackground();
 
+    int select(const double &x, const double &y);
+    bool isIsolated(const double &x, double y, const unsigned int &id);
 
-
+    size_t actual_selected;
 };
 
 

@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <ObjectSizes.h>
 #include "yaml-cpp/yaml.h"
 #include "MapView.h"
 
@@ -45,11 +46,19 @@ void MapView::add(unsigned int id, const double &x, const double &y,
                   const int &angle) {
     Gtk::Image new_image(pallete[id - id / 2 - 1][0]);
     const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
-    put(new_image, x - img->get_width() / 2, y - img->get_height() / 2);
-    new_image.show();
-    objects.push_back(std::move(new_image));
-    if (angle > 0)
-        turnLast(id, angle);
+    int width= img->get_width();
+    int height= img->get_height();
+    double x_bound = x - width / 2;
+    double y_bound = y - height / 2;
+
+    //if(isIsolated(x_bound,y_bound,id)){ //verifica que no haya colisiones
+        put(new_image, x_bound, y_bound);
+        new_image.show();
+        objects.push_back(std::move(new_image));
+        if (angle > 0)
+            turnLast(id, angle, 0);
+    //}
+
 }
 
 void MapView::moveLast(const double &x, const double &y) {
@@ -62,9 +71,9 @@ void MapView::moveLast(const double &x, const double &y) {
 }
 
 //TODO: no usar mas el id
-void MapView::turnLast(const unsigned int &id, const int &angle) {
+void MapView::turnLast(unsigned int id, int angle, int index) {
     if (!objects.empty()) {
-        Gtk::Image &image = objects.back();
+        Gtk::Image &image = objects[index];
         image.set(pallete[id - id / 2 - 1][angle / 10]);
     }
 }
@@ -108,6 +117,42 @@ void MapView::changeBackground() {
     back.clear();
     actual_bg=(actual_bg+1)%bg_paths.size();
     setBackground(bg_paths[actual_bg]);
+}
+
+bool
+MapView::isIsolated(const double &x, double y, const unsigned int &id) {
+    int width,height;
+    if (id==1){
+        height=width=WORM_IMAGE_WIDTH;
+    } else {
+        y+=78; // espacio en blanco que tiene la imagen, 0 grados
+        height = girder_height * SCALE_FACTOR;
+        width=180 * ((id-1)/2); //180 es el largo
+    }
+    std::cout<< x<<"  "<<y <<std::endl;
+    Gdk::Rectangle new_object(x,y,width,height);
+    bool isolated= true;
+    for(size_t i =0;(i<objects.size())&&(isolated);i++){
+        const Gtk::Allocation &asd = objects.back().get_allocation();
+        int h = asd.get_height();
+        int w = asd.get_width();
+        if(h>w);
+        isolated=!objects[i].intersect(new_object);
+    }
+    return isolated;
+}
+
+int MapView::select(const double &x, const double &y) {
+    Gdk::Rectangle new_object(x,y,1,1);
+    bool isolated= true;
+    for(size_t i=0;(i<objects.size())&&(isolated);i++){
+        isolated=!objects[i].intersect(new_object);
+        if (!isolated){
+            this->actual_selected=i;
+        }
+    }
+
+    return isolated? -1:actual_selected;
 }
 
 

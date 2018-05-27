@@ -3,14 +3,16 @@
 
 #define ADD_CMD_ID 0
 #define MOVE_CMD_ID 1
+#define SELECTION 2
 
 
 MapController::MapController(const Map &model, MapView &view) : model(
-        model), view(view), actual_item_selected(1), actual_action_id(0) {
+        model), view(view), actual_item_selected(1), actual_action_id(0),actual_mode(0) {
     view.linkController(this);
 }
 
 void MapController::itemSelectedSignal(unsigned int id) {
+    this->actual_action_id = ADD_CMD_ID;
     this->actual_item_selected = id;
 }
 
@@ -32,14 +34,15 @@ void MapController::moveSignal() {
 void MapController::turnCCWSignal() {
     if (model.lastIsGirder()) {
         int new_angle = this->model.turnCCWLast();
-        this->view.turnLast(last_item_added, new_angle);
+        this->view.turnLast(last_item_added, new_angle, actual_index);
     }
 }
 
 void MapController::turnCWSignal() {
-    if (model.lastIsGirder()) {
-        int new_angle = this->model.turnCWLast();
-        this->view.turnLast(last_item_added, new_angle);
+    if (model.lastIsGirder()) { //cambiar
+        unsigned int id;
+        int new_angle = this->model.turnCWLast(actual_index,id);
+        this->view.turnLast(id, new_angle, actual_index);
     }
 }
 
@@ -48,6 +51,8 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
         this->model.moveLast(event_button->x, event_button->y);
         this->view.moveLast(event_button->x, event_button->y);
         actual_action_id = ADD_CMD_ID;
+    } else if(actual_action_id==SELECTION){
+        this->actual_index=view.select(event_button->x, event_button->y);
     } else {
         last_item_added = actual_item_selected;
         this->model.add(actual_item_selected, event_button->x, event_button->y);
@@ -77,4 +82,6 @@ void MapController::changeBackground() {
     this->view.changeBackground();
 }
 
-
+void MapController::changeModeSignal() {
+    this->actual_action_id = SELECTION;
+}

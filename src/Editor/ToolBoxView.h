@@ -6,6 +6,7 @@
 #include <gtkmm/button.h>
 #include <gtkmm/layout.h>
 #include <gtkmm/togglebutton.h>
+#include <gtkmm/switch.h>
 #include "MapView.h"
 #include "MapController.h"
 
@@ -27,6 +28,7 @@ private:
     Gtk::Button *turnccw;
     Gtk::Button *turncw;
     Gtk::Button *change_bg;
+    Gtk::Button *mode;
 
 public:
     ToolBoxView(BaseObjectType *cobject,

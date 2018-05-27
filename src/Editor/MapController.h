@@ -14,6 +14,8 @@ class MapController {
     unsigned int actual_item_selected;
     unsigned int actual_action_id;
     unsigned int last_item_added;
+    unsigned int actual_mode;
+
 
 public:
     MapController(const Map &model, MapView &view);
@@ -41,6 +43,10 @@ public:
     void changeBackground();
 
 
+    void changeModeSignal();
+
+
+    int actual_index;
 };
 
 

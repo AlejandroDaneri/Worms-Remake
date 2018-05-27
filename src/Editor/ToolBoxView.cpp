@@ -18,6 +18,7 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
     turnccw->set_sensitive(false);
     turncw->set_sensitive(false);
     builder->get_widget("btn_bg",change_bg);
+    builder->get_widget("btn_mode",mode);
 
 
     worm->signal_clicked().connect(sigc::bind<int>
@@ -55,6 +56,11 @@ void ToolBoxView::linkController(std::shared_ptr<MapController> controller) {
 
     change_bg->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::changeBackground));
+
+    mode->signal_clicked().connect(
+            sigc::mem_fun(*map_controller, &MapController::changeModeSignal));
+
+
 
 }
 
