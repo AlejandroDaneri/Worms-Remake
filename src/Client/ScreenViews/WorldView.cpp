@@ -5,6 +5,7 @@
 #include <gtkmm/adjustment.h>
 
 WorldView::WorldView(){
+	this->world.set_size(10000, 10000);
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
 	this->window.override_background_color(Gdk::RGBA("lightgreen"));////////////// Reemplazar por fondo de pantalla
