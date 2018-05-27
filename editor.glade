@@ -940,12 +940,12 @@
                     <child>
                       <object class="GtkButton" id="btn_turn_ccw">
                         <property name="visible">True</property>
+                        <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Girar en sentido antihorario</property>
                         <property name="image">counterclockwise_arrow</property>
                         <property name="relief">none</property>
-                        <property name="xalign">0.49000000953674316</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -956,6 +956,7 @@
                     <child>
                       <object class="GtkButton" id="btn_turn_cw">
                         <property name="visible">True</property>
+                        <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Girar en sentido horario</property>
@@ -972,6 +973,7 @@
                     <child>
                       <object class="GtkButton" id="btn_move">
                         <property name="visible">True</property>
+                        <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
                         <property name="tooltip_text" translatable="yes">Mover</property>

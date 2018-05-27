@@ -34,7 +34,7 @@ int Map::turnCWLast(unsigned int index, unsigned int &id) {
     return object.turnCW();
 }
 
-bool Map::isGirder(unsigned int &index) {
+bool Map::isGirder(int &index) {
     return (objects[index].first > 1);
 }
 

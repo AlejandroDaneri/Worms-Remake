@@ -19,8 +19,6 @@ public:
              const int &angle = 0);
 
 
-    bool isGirder(unsigned int &index);
-
     void getObjects(std::vector<std::vector<double>> &worms,
                     std::vector<std::vector<double>> &girders) const;
 
@@ -30,6 +28,8 @@ public:
     int turnCCWLast(unsigned int index, unsigned int &id);
 
     void move(unsigned int index, double &x, double &y);
+
+    bool isGirder(int &index);
 };
 
 

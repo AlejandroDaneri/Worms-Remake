@@ -15,15 +15,17 @@
 #define GIRDER_3_BUTTON_ID 3
 #define GIRDER_6_BUTTON_ID 6
 
+class MapController;
+
 class ToolBoxView : public Gtk::Grid {
 private:
     Gtk::Button *btn_clean;
-    Gtk::Button *erase; //pasar a toggle
-    std::shared_ptr<MapController> map_controller;
+    Gtk::Button *erase;
+    MapController* map_controller;
     Gtk::ToggleButton *worm;
     Gtk::ToggleButton *girder_3m;
     Gtk::ToggleButton *girder_6m;
-    Gtk::Button *move;// pasar a toggle
+    Gtk::Button *move;
 
     Gtk::Button *turnccw;
     Gtk::Button *turncw;
@@ -34,10 +36,11 @@ public:
     ToolBoxView(BaseObjectType *cobject,
                 const Glib::RefPtr<Gtk::Builder> &builder);
 
-    void linkController(std::shared_ptr<MapController> controller);
-
     void on_button_clicked(unsigned int id);
 
+    void enableMovingItems();
+
+    void linkController(MapController *controller);
 };
 
 

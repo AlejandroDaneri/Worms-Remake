@@ -5,21 +5,23 @@
 
 #include "MapView.h"
 #include "Map.h"
+#include "ToolBoxView.h"
 
 class MapView;
+class ToolBoxView;
 
 class MapController {
     Map model;
-    MapView &view;
+    MapView* view;
+    ToolBoxView * toolBox;
     unsigned int actual_item_selected;
     unsigned int actual_action_id;
-    unsigned int last_item_added;
     unsigned int actual_mode;
-    unsigned int actual_index;
+    int actual_object_selected;
 
 
 public:
-    MapController(const Map &model, MapView &view);
+    MapController(Map model,const Glib::RefPtr<Gtk::Builder> &builder);
 
     void itemSelectedSignal(unsigned int id);
 
