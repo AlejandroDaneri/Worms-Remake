@@ -99,6 +99,9 @@ void ServerProtocol::receive(Game& game) {
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
 			std::string weapon(this->receive_string_buffer(buffer));
 			game.weaponChanged(weapon);
+		} else if(worm_action == MOVE_SCOPE) {
+			//int angle = this->receive_int_buffer(buffer);
+			//game.updateScope(angle);
 		} else if (worm_action == SHOOT_WEAPON) {
 			int angle = this->receive_int_buffer(buffer);
 			int power = this->receive_int_buffer(buffer);

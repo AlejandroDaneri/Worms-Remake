@@ -110,6 +110,11 @@ void Game::weaponChanged(const std::string& weapon){
 	this->data_sender->send_weapon_changed(weapon);
 }
 
+/*void Game::updateScope(int angle) {
+    this->data_sender->sendUpdateScope(angle);
+}*/
+
+
 void Game::endTurn(){
 	this->player_turn_active = false;
 }

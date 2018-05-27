@@ -12,9 +12,11 @@
 
 const std::string RESOURCES(std::string(ROOT_PATH) + "/resources/");
 
-const std::string IMAGES_PATH(RESOURCES + "images/");
+const std::string IMAGES_PATH(RESOURCES + "Images/");
 
 const std::string SOUNDS_PATH(RESOURCES + "Sounds/");
+
+const std::string GLADE_PATH(RESOURCES + "Glade/");
 
 const std::string ANIMATIONS_PATH(IMAGES_PATH + "animations/");
 

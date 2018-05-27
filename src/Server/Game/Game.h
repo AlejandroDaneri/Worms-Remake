@@ -41,6 +41,8 @@ class Game: public Thread{
 
 		void weaponChanged(const std::string& weapon);
 
+		//void updateScope(int angle);
+
 		void endTurn();
 };
 
