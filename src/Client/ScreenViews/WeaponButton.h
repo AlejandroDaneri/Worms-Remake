@@ -7,6 +7,8 @@
 
 class Player;
 
+/* Clase que se encarga de mostrar el boton de un arma 
+ * junto con la informacion correspondiente al arma */
 class WeaponButton {
 	private:
 		std::string weapon_name;

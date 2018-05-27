@@ -27,6 +27,7 @@ class Timer {
 		   de la clase Handler con este tiempo */
 		void start();
 
+		/* Detiene el contador */
 		void stop();
 };
 

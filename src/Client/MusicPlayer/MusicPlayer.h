@@ -6,6 +6,8 @@
 #include <map>
 #include <string>
 
+/* Clase que se enecarga de reproducir musica y efectos
+ * de sonido */
 class MusicPlayer {
 	private:
 		Mix_Music* music; // Musica de fondo
