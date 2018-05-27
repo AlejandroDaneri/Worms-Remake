@@ -1,13 +1,14 @@
 #ifndef __WORMVIEW_H__
 #define __WORMVIEW_H__
 
-#include "Viewable.h"
 #include <gtkmm/widget.h>
 #include <gtkmm/image.h>
 #include <gtkmm/grid.h>
 #include <gdkmm/pixbuf.h>
-#include "WormLifeView.h"
 #include <queue>
+#include <vector>
+#include "Viewable.h"
+#include "WormLifeView.h"
 
 #define DIR_RIGHT 1
 #define DIR_LEFT -1
@@ -23,8 +24,11 @@ class WormView: public Viewable {
 		WormLifeView label;
 		Gtk::Image image;
 		Gtk::Grid worm;
-		std::queue<Glib::RefPtr<Gdk::Pixbuf>> queue;
-		Glib::RefPtr<Gdk::Pixbuf> full_image;
+		std::queue<Glib::RefPtr<Gdk::Pixbuf>> walk_queue;
+		Glib::RefPtr<Gdk::Pixbuf> walk_image;
+	    std::vector<Glib::RefPtr<Gdk::Pixbuf>> scope_vector;
+	    Glib::RefPtr<Gdk::Pixbuf> scope_image;
+	    int angle;
 
 		void setNewImage(bool dir_changed, bool moved, bool colliding, bool is_current_worm);
 
@@ -47,6 +51,9 @@ class WormView: public Viewable {
 
 		/* Actualiza la posicion y vida del worm */
 		void updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm);
+
+		/* Actualiza la imagen del arma con el angulo actual */
+		void updateScope(int angle);
 
         /* Actualiza el arma del worm y cambia la imagen */
 		void changeWeapon(const std::string &weapon);

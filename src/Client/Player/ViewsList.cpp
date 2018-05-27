@@ -123,6 +123,7 @@ bool ViewsList::updateScopeCallBack(int angle) {
         angle = 180 - angle;
     this->world.moveScope(this->scope, worm.getWidget(), angle);
     this->scope.show();
+    worm.updateScope(angle);
     return false;
 }
 

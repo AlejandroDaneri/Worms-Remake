@@ -10,7 +10,7 @@ const char ASCII_OFFSET = 48;
 const char ASCII_1 = 49;
 const char ASCII_5 = 53;
 const int MAX_TIME = 5000;
-const int DEFAULT_ANGLE = 45;
+const int DEFAULT_ANGLE = 48;
 const int MAX_ANGLE = 90;
 const int MIN_ANGLE = -90;
 
@@ -61,14 +61,14 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 	this->movement_key_press_handler(key_event);
 	if (key_event->keyval == GDK_KEY_Up) {
 		if (this->current_angle < MAX_ANGLE) {
-			this->current_angle += 5;
+			this->current_angle += 6;
 		}
 		if (this->weapons.get_current_weapon().hasScope()) {
 			this->view_list.updateScope(this->current_angle);
 		}
 	} else if (key_event->keyval == GDK_KEY_Down) {
 		if (this->current_angle > MIN_ANGLE) {
-			this->current_angle -= 5;
+			this->current_angle -= 6;
 		}
 		if (this->weapons.get_current_weapon().hasScope()) {
 			this->view_list.updateScope(this->current_angle);
