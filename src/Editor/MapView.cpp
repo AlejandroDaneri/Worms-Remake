@@ -56,22 +56,22 @@ void MapView::add(unsigned int id, const double &x, const double &y,
         new_image.show();
         objects.push_back(std::move(new_image));
         if (angle > 0)
-            turnLast(id, angle, 0);
+            turn(id, angle, 0);
     //}
 
 }
 
-void MapView::moveLast(const double &x, const double &y) {
+void MapView::move(const int index, const double &x, const double &y) {
     if (!objects.empty()) {
-        Gtk::Image &actual_object = objects.back();
-        move(actual_object, x - actual_object.get_width() / 2,
+        Gtk::Image &actual_object = objects[index];
+        Gtk::Layout::move(actual_object, x - actual_object.get_width() / 2,
              y - actual_object.get_height() / 2);
         actual_object.show();
     }
 }
 
 //TODO: no usar mas el id
-void MapView::turnLast(unsigned int id, int angle, int index) {
+void MapView::turn(unsigned int id, int angle, int index) {
     if (!objects.empty()) {
         Gtk::Image &image = objects[index];
         image.set(pallete[id - id / 2 - 1][angle / 10]);

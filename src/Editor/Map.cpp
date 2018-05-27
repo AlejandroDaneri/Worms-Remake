@@ -17,24 +17,25 @@ Map::add(unsigned int id, const double &x, const double &y, const int &angle) {
     objects.emplace_back(std::make_pair(id, new_object));
 }
 
-void Map::moveLast(double &x, double &y) {
-    MapObject &object = objects.back().second;
+void Map::move(unsigned int index, double &x, double &y) {
+    MapObject &object = objects[index].second;
     object.updatePosition(x, y);
 }
 
-int Map::turnCCWLast() {
-    MapObject &object = objects.back().second;
+int Map::turnCCWLast(unsigned int index, unsigned int& id) {
+    MapObject &object = objects[index].second;
+    id = objects[index].first;
     return object.turnCCW();
 }
 
-int Map::turnCWLast(int index, unsigned int &id) {
+int Map::turnCWLast(unsigned int index, unsigned int &id) {
     MapObject &object = objects[index].second;
     id = objects[index].first;
     return object.turnCW();
 }
 
-bool Map::lastIsGirder() {
-    return (objects.back().first > 1);
+bool Map::isGirder(int &index) {
+    return (objects[index].first > 1);
 }
 
 void Map::getObjects(std::vector<std::vector<double>> &worms,
