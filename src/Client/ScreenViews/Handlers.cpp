@@ -60,18 +60,20 @@ bool Handlers::movement_key_press_handler(GdkEventKey* key_event) {
 bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 	this->movement_key_press_handler(key_event);
 	if (key_event->keyval == GDK_KEY_Up) {
+        if (!this->weapons.get_current_weapon().hasScope()) {
+            return true;
+        }
 		if (this->current_angle < MAX_ANGLE) {
 			this->current_angle += 6;
-		}
-		if (this->weapons.get_current_weapon().hasScope()) {
-			this->view_list.updateScope(this->current_angle);
+			this->player.getProtocol().updateScope(this->current_angle);
 		}
 	} else if (key_event->keyval == GDK_KEY_Down) {
+		if (!this->weapons.get_current_weapon().hasScope()) {
+		    return true;
+		}
 		if (this->current_angle > MIN_ANGLE) {
 			this->current_angle -= 6;
-		}
-		if (this->weapons.get_current_weapon().hasScope()) {
-			this->view_list.updateScope(this->current_angle);
+			this->player.getProtocol().updateScope(this->current_angle);
 		}
 	} else if (key_event->keyval >= ASCII_1 && key_event->keyval <= ASCII_5) {
 		this->weapons_time = key_event->keyval - ASCII_OFFSET;

@@ -36,6 +36,9 @@ class ClientProtocol: public Protocol {
 		 * la posicion del disparo */
 		void send_weapon_self_directed_shoot(const Position& pos);
 
+		/* Envia un mesaje que indica el cambio del angulo del scope */
+		void updateScope(int angle);
+
 		/* Envia un mensaje de finalizacion de turno */
 		void send_end_turn();
 
