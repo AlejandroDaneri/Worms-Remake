@@ -58,8 +58,6 @@ void Player::shootWeapon() {
         this->musicPlayer.playTeleportSound();
     } else if (this->weapons.get_current_weapon().getName() == "Bat") {
         this->musicPlayer.playBatSound();
-    } else if (this->weapons.get_current_weapon().getName() == "Dynamite") {
-        this->musicPlayer.playRunAway();
     }
 }
 

@@ -90,6 +90,10 @@ bool ViewsList::updateWeaponDataCallBack(int id, const std::string& weapon_name,
         this->weapon_focused = id;
         this->removeWormFocus();
         this->weapons.insert(std::make_pair(id, std::move(weapon)));
+
+        if (weapon_name == "Dynamite") {
+            this->musicPlayer.playRunAway();
+        }
     } else {
         //Weapon existe
         it->second.updateData(pos);
