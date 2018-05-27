@@ -46,6 +46,16 @@ void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
 	this->send_buffer(buffer);
 }
 
+void ClientProtocol::updateScope(int angle) {
+    Buffer buffer;
+    buffer.setNext(ACTION);
+    buffer.setNext(MOVE_SCOPE);
+
+    this->send_int_buffer(buffer, angle);
+
+    this->send_buffer(buffer);
+}
+
 void ClientProtocol::send_end_turn(){
 	Buffer buffer;
 	buffer.setNext(END_TURN);
@@ -63,7 +73,10 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 	} else if (action == CHANGE_WEAPON_ACTION) {
         std::string weapon(this->receive_string_buffer(buffer));
         viewsList.changeWeapon(weapon);
-    } else if (action == MOVING_OBJECT) {
+    } else if (action == MOVE_SCOPE) {
+	    int angle = this->receive_int_buffer(buffer);
+	    viewsList.updateScope(angle);
+	} else if (action == MOVING_OBJECT) {
 		char type = buffer.getNext();
 		int id = this->receive_int_buffer(buffer);
 

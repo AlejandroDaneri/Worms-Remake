@@ -4,8 +4,6 @@
 #include "WeaponNames.h"
 #include "GamePlayers.h"
 
-#include <iostream> ////////////////////////
-
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id):
 	Viewable(worldView), player_id(player_id), life(life), dir(dir),
 	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)), label(life, colors[player_id]),
@@ -86,7 +84,6 @@ void WormView::setNewImage(bool dir_changed, bool moved, bool colliding, bool is
 }
 
 void WormView::setWeaponImage(){
-    std::cout << "angulo = " << this->angle << std::endl;
     int angle = this->angle;
     if (angle > 90) {
         angle = 180 - this->angle;
