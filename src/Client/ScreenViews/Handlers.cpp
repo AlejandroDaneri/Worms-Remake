@@ -2,6 +2,7 @@
 #include "Player.h"
 #include <gtkmm/adjustment.h>
 #include <gdk/gdkkeysyms.h>
+#include "ViewTransformer.h"
 
 const char SPACE = ' ';
 const int WEAPONS_TIME = 5;
@@ -128,9 +129,10 @@ bool Handlers::on_button_press_event(GdkEventButton* event) {
 		int y = (int)event->y;
 		x += this->world.getWindow().get_hadjustment()->get_value();
 		y += this->world.getWindow().get_vadjustment()->get_value();
-		this->has_shoot = true;
 		Position position(x, y);
-		this->player.shoot(position);
+		Position newPosition = ViewTransformer(this->world.getLayout()).transformToPosition(position);
+		this->has_shoot = true;
+		this->player.shoot(newPosition);
 	}
 	return true;
 }

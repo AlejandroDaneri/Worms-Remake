@@ -1,15 +1,15 @@
 #include "ViewTransformer.h"
 #include "ObjectSizes.h"
 
-ViewTransformer::ViewTransformer() {
-	this->screen = Gdk::Screen::get_default();
-}
+ViewTransformer::ViewTransformer(Gtk::Layout& layout): layout(layout){}
 
 ViewTransformer::~ViewTransformer() {}
 
 Position ViewTransformer::transformToScreen(const Position& position) {
+	guint width, height;
+	this->layout.get_size(width, height);
 	float x = SCALE_FACTOR * position.getX();
-	float y = this->screen->get_height() - SCALE_FACTOR * position.getY();
+	float y = height - SCALE_FACTOR * position.getY();
 	return Position(x, y);
 }
 
@@ -20,7 +20,9 @@ Position ViewTransformer::transformToScreenAndMove(const Position& position, flo
 }
 
 Position ViewTransformer::transformToPosition(const Position& position) {
+	guint width, height;
+	this->layout.get_size(width, height);
 	float x = position.getX() / SCALE_FACTOR;
-	float y = (this->screen->get_height() - position.getY()) / (SCALE_FACTOR);
+	float y = (height - position.getY()) / (SCALE_FACTOR);
 	return Position(x, y);
 }
