@@ -79,6 +79,9 @@ class Player {
 
 		/* Devuelve el protocolo */
 		ClientProtocol& getProtocol();
+
+		/* Devuelve el music player */
+        MusicPlayer& getMusicPlayer();
 };
 
 #endif

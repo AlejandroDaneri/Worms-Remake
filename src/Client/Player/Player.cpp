@@ -112,3 +112,7 @@ ViewsList& Player::getViewList() {
 ClientProtocol& Player::getProtocol(){
 	return this->protocol;
 }
+
+MusicPlayer& Player::getMusicPlayer() {
+    return this->musicPlayer;
+}
