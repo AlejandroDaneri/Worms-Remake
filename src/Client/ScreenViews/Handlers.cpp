@@ -108,7 +108,8 @@ bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 				return true;
 			}
 			if (!this->weapons.get_current_weapon().hasAmmo()) {
-				return true;
+                this->player.getMusicPlayer().playNoAmmo();
+                return true;
 			}
 			this->timer.stop();
 		}

@@ -42,6 +42,7 @@ class MusicPlayer {
         /* Reproduce el sonido de run away del worm */
         void playRunAway();
 
+        /* Reproduce el sonido de muerte de un worm */
         void playDeathSound();
 
         /* Reproduce el sonido de la explosion */
@@ -55,6 +56,9 @@ class MusicPlayer {
 
         /* Reproduce el sonido de la granada santa */
         void playHolyGrenadeSound();
+
+        /* Reproduce el sonido de arma descargada */
+		void playNoAmmo();
 
         /* Detiene la reproduccion de la musica de fondo */
 		void stop();

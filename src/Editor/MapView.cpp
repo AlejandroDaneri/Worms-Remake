@@ -84,9 +84,11 @@ bool MapView::on_button_clicked(GdkEventButton *button_event) {
     return true;
 }
 
-void MapView::undo() {
-    if (!objects.empty())
-        objects.pop_back();
+void MapView::undo(int index) {
+    if (!objects.empty()) {
+        objects[index].hide();
+        objects.erase(objects.begin() + index);
+    }
 }
 
 void MapView::clean() {

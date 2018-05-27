@@ -14,6 +14,7 @@ const std::string EXPLOSION_SOUND = SOUNDS_PATH + "Weapons/Explosion1.wav";
 const std::string TELEPORT_SOUND = SOUNDS_PATH + "Weapons/TELEPORT.WAV";
 const std::string BAT_SOUND = SOUNDS_PATH + "Weapons/BaseballSound.wav";
 const std::string HOLY_GRENADE_SOUND = SOUNDS_PATH + "Weapons/HOLYGRENADE.WAV";
+const std::string NO_AMMO_SOUND = SOUNDS_PATH + "misc/no_ammo.wav";
 
 MusicPlayer::MusicPlayer() {
     this->music = NULL;
@@ -134,6 +135,10 @@ void MusicPlayer::playBatSound() {
 
 void MusicPlayer::playHolyGrenadeSound() {
     this->addEffect(HOLY_GRENADE_SOUND);
+}
+
+void MusicPlayer::playNoAmmo() {
+    this->addEffect(NO_AMMO_SOUND);
 }
 
 void MusicPlayer::stop() {
