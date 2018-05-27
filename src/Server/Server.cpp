@@ -23,16 +23,7 @@ void Server::run(){
 			t->start();
 			this->clients.push_back(std::move(t));
 
-			//Elimino threads que ya terminaron
-			auto it = this->clients.begin();
-			while (it != this->clients.end()){
-				if (!(*it)->isRunning()){
-					(*it)->join();
-					it = this->clients.erase(it); 
-				} else {
-					++it;
-				}
-			}
+			this->check();
 		} catch(const std::exception& e){
 			if (this->running){
 				throw e;
@@ -44,4 +35,19 @@ void Server::run(){
 void Server::stop(){
 	this->running = false;
 	this->socket.stop();
+}
+
+void Server::check(){
+	//Elimino threads que ya terminaron
+	auto it = this->clients.begin();
+	while (it != this->clients.end()){
+		if (!(*it)->isRunning()){
+			(*it)->join();
+			it = this->clients.erase(it); 
+		} else {
+			++it;
+		}
+	}
+
+	this->games_list.checkGames();
 }

@@ -20,6 +20,8 @@ const std::string ANIMATIONS_PATH(IMAGES_PATH + "animations/");
 
 const std::string CONFIG_PATH(std::string(ROOT_PATH) + "/config/");
 
+const std::string MAPS_PATH(std::string(CONFIG_PATH) + "/Maps/");
+
 //client
 
 const std::string GIRDER_PATH(IMAGES_PATH + "Girder_client/girder_");

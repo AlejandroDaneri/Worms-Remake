@@ -15,7 +15,7 @@ int main(int argc, char* argv[]){
 	//Socket client2 = socket.accept_client();
 	//Player player2(std::move(client2));
 
-	Game game(1, CONFIG_PATH + "server_config.yaml", CONFIG_PATH + "config_editor_rotated.yaml");
+	Game game(1, CONFIG_PATH + "server_config.yaml", MAPS_PATH + "rotated.yaml");
 
 	try{
 
@@ -35,3 +35,4 @@ int main(int argc, char* argv[]){
 }
 
 ////*/
+

@@ -14,6 +14,8 @@ class Server: public Thread{
 		std::list<std::unique_ptr<Thread>> clients;
 		GamesList games_list;
 
+		void check();
+
 	public:
 		//Crea el server y lo asocia al puerto indicado
 		Server(const std::string& service);

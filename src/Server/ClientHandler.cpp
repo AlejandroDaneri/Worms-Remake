@@ -1,4 +1,5 @@
 #include "ClientHandler.h"
+#include "MapsList.h"
 
 ClientHandler::ClientHandler(Socket&& client, GamesList& games):
 	client(std::move(client)), games(games){}
@@ -27,9 +28,36 @@ void ClientHandler::stop(){
 }
 
 void ClientHandler::createGame(const std::string& player_name){
+	maps_list_t maps_list = MapsList::getAllMaps();
 
+	size_t size = maps_list.size();
+	this->client.send_length(size);
+
+	for (size_t i = 0; i < size; i++){
+		this->client.send_string(maps_list[i]);
+	}
+
+	std::string map = this->client.receive_string();
+	std::string game_name = this->client.receive_string();
+	int max_players = this->client.receive_length();
+
+	bool result = this->games.addGame(game_name, map, max_players, player_name);
+
+	this->client.send_char(result);
 }
 
 void ClientHandler::joinGame(const std::string& player_name){
-	
+	games_list_t games_list = this->games.getJoinableGames(player_name);
+
+	size_t size = games_list.size();
+	this->client.send_length(size);
+
+	for (size_t i = 0; i < size; i++){
+		this->client.send_string(games_list[i]);
+	}
+
+	std::string game_name = this->client.receive_string();
+
+	bool result = this->games.addPlayer(game_name, player_name);
+	this->client.send_char(result);
 }
