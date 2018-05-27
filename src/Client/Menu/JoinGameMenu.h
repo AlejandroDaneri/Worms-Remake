@@ -18,7 +18,7 @@ class JoinGameMenu{
 		Gtk::Label* error;
 
 	public:
-		JoinGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name);
+		JoinGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity);
 
 		~JoinGameMenu();
 };

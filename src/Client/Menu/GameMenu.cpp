@@ -26,14 +26,26 @@ GameMenu::~GameMenu(){}
 void GameMenu::create_button_pressed(){
 	if (this->select_action(CREATE_GAME_ACTION)){
 		std::string name(this->player_name->get_text());
-		this->create_menu = std::unique_ptr<CreateGameMenu>(new CreateGameMenu(this->window, std::move(this->protocol), std::move(name)));
+		int quantity = this->protocol.receive_length();
+		if (quantity == 0){
+			this->error->set_label("No hay mapas para crear una partida");
+			this->show_error();
+		} else {
+			this->create_menu = std::unique_ptr<CreateGameMenu>(new CreateGameMenu(this->window, std::move(this->protocol), std::move(name), quantity));
+		}
 	}
 }
 
 void GameMenu::join_button_pressed(){
 	if (this->select_action(JOIN_GAME_ACTION)){
 		std::string name(this->player_name->get_text());
-		this->join_menu = std::unique_ptr<JoinGameMenu>(new JoinGameMenu(this->window, std::move(this->protocol), std::move(name)));
+		int quantity = this->protocol.receive_length();
+		if (quantity == 0){
+			this->error->set_label("No hay partidas disponibles");
+			this->show_error();
+		} else {
+			this->join_menu = std::unique_ptr<JoinGameMenu>(new JoinGameMenu(this->window, std::move(this->protocol), std::move(name), quantity));
+		}
 	}
 }
 
@@ -50,6 +62,12 @@ bool GameMenu::select_action(char action){
 		return true;
 	} catch (const SocketException& e){
 		this->error->set_label("Ocurrio un error");
+		this->show_error();
 		return false;
 	}
+}
+
+void GameMenu::show_error(){
+	this->window.remove();
+	this->window.add(*this->error);
 }

@@ -3,14 +3,15 @@
 
 const int NO_ANGLE = 500;
 
-Player::Player(ClientProtocol protocol, const std::string& name, MusicPlayer& musicPlayer):
+Player::Player(ClientProtocol protocol, const std::string& name):
 	protocol(std::move(protocol)), name(name),
 	screen(*this, this->weapons, this->turn_label, this->players_list),
     turn(*this, this->turn_label),
 	view_list(this->screen.getWorld(), *this, this->players_list, musicPlayer),
 	data_receiver(this->view_list, *this, this->protocol),
-	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()),
-	musicPlayer(musicPlayer) {
+	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()){
+
+	this->musicPlayer.playMusic();
 
 	this->protocol.receivePlayers(this->players_list);
 	this->protocol.receiveGirders(this->view_list);

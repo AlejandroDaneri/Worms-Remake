@@ -26,6 +26,8 @@ class GameMenu{
 
 		bool select_action(char action);
 
+		void show_error();
+
 	public:
 		GameMenu(Gtk::Window& window, ClientProtocol&& protocol);
 

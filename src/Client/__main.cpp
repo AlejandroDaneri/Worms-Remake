@@ -8,20 +8,19 @@
 #include <iostream>
 
 
-
+/*
 int main(int argc, char* argv[]){
 
 	auto app = Gtk::Application::create(argc, argv);
     Gtk::Window window;
     window.resize(1280, 720);
 	try {
-	    MusicPlayer musicPlayer;
 
     	Socket socket(Socket::Client("127.0.0.1", "7777"));
     
 		ClientProtocol protocol(std::move(socket));
 
-		Player player(std::move(protocol), "Pepe", musicPlayer);////////por ahora agrego el nombre asi
+		Player player(std::move(protocol), "Pepe");////////por ahora agrego el nombre asi
 
 		window.add(player.getWindow());
 		window.show_all();

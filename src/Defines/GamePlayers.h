@@ -1,8 +1,11 @@
-#ifndef __GAMEPLAYERS_H__
-#define __GAMEPLAYERS_H__
+#ifndef __GAMEPLAYERSDEF_H__
+#define __GAMEPLAYERSDEF_H__
 
+#include <vector>
+
+const int min_players = 1; //////////////////////////////////////////////////////por ahora despues 2
 const int max_players = 5;
 
-const char* colors[max_players] = {"black", "blue", "green", "red", "orange"};
+const std::vector<std::string> colors = {"black", "blue", "green", "red", "orange"};
 
 #endif
