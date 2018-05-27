@@ -3,7 +3,11 @@
 
 GamesList::GamesList(){}
 
-GamesList::~GamesList(){}
+GamesList::~GamesList(){
+	for (auto it = this->games.begin(); it != this->games.end(); ++it){
+		it->second->join();
+	}
+}
 
 bool GamesList::addGame(const std::string& game_name, const std::string& map, int max_players, Player& player){
 	std::lock_guard<std::mutex> lock(this->mutex);
