@@ -32,16 +32,14 @@ sudo apt-get install libsdl2-mixer-dev (para el sonido)
 Si no funciona con esto probar con lo que dice esta pagina:
 https://gist.github.com/BoredBored/3187339a99f7786c25075d4d9c80fad5
 
-(No estoy seguro cual de todos fue el que me funciono)
-
 Ejemplos: http://lazyfoo.net/tutorials/SDL/index.php
-
-### valgrind  (es incorrible igual)
-
-valgrind --leak-check=full --show-reachable=yes --error-limit=no --suppressions=gtk_valgrind.sup ./client
 
 ### Animations
 http://www.gsarchives.net/index2.php?category=sprites&system=computer&game=worms_armageddon&type=sprites&level0=
 
 ### Sound effects
 https://www.sounds-resource.com/pc_computer/wormsarmageddon/
+
+### para ver la ip
+
+hostname -I
