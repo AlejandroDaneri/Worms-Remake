@@ -28,7 +28,10 @@ void CreateGameMenu::configure(int quantity){
 		try{
 			std::string map = this->protocol.receive_string();
 			this->addMap(map);
-		}catch (const SocketException& e){}
+		}catch (const SocketException& e){
+			this->error->set_label("Ocurrio un error");
+			this->show_error();
+		}
 	}
 }
 
@@ -65,6 +68,7 @@ void CreateGameMenu::select_button_pressed(Glib::ustring map_name){
 		} else {
 			this->window.remove();
 			this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name));
+			this->window.add(this->player->getWindow());
 		}
 	} catch (const SocketException& e){
 		this->error->set_label("Ocurrio un error");
