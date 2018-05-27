@@ -49,7 +49,6 @@ void ClientHandler::createGame(const std::string& player_name){
 		player.getProtocol().send_char(result);
 	}
 
-	/////////////////////////////////////this->client.send_char(result);
 }
 
 void ClientHandler::joinGame(const std::string& player_name){
@@ -67,7 +66,6 @@ void ClientHandler::joinGame(const std::string& player_name){
 	Player player(std::move(this->client), player_name);
 
 	bool result = this->games.addPlayer(game_name, player);
-	
 
 	if (!result){
 		player.getProtocol().send_char(result);

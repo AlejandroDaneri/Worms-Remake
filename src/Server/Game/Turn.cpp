@@ -4,9 +4,23 @@ Turn::Turn(): current(0){}
 
 Turn::~Turn(){}
 
-void Turn::addPlayer(Player&& player){
+bool Turn::addPlayer(Player&& player){
+	if (!this->playerCanJoin(player.getName())){
+		return false;
+	}
 	player.setId(this->players.size());
+	////////////////////////////////////////////player.getProtocol().send_char(true);
 	this->players.push_back(std::move(player));
+	return true;
+}
+
+bool Turn::playerCanJoin(const std::string& player_name){
+	for (auto it = this->players.begin(); it != this->players.end(); ++it){
+		if (it->getName() == player_name){
+			return false;
+		}
+	}
+	return true;
 }
 
 size_t Turn::get_players_size() const{

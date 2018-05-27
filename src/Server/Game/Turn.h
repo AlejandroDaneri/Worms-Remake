@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include <vector>
+#include <string>
 
 class Turn{
 	private:
@@ -15,7 +16,9 @@ class Turn{
 		Turn();
 		~Turn();
 
-		void addPlayer(Player&& player);
+		bool addPlayer(Player&& player);
+
+		bool playerCanJoin(const std::string& player_name);
 
 		size_t get_players_size() const;
 

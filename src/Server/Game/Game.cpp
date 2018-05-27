@@ -19,8 +19,7 @@ bool Game::addPlayer(Player&& player){
 		return false;
 	}
 
-	this->turn.addPlayer(std::move(player));
-	return true;
+	return this->turn.addPlayer(std::move(player));
 }
 
 bool Game::isFull(){
@@ -31,7 +30,7 @@ bool Game::playerCanJoin(const std::string& player_name){
 	if (this->isFull()){
 		return false;
 	}
-	return true;//////////////////////////////////////////////////////////////////
+	return this->turn.playerCanJoin(player_name);
 }
 
 
