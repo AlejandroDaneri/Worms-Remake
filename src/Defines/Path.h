@@ -34,4 +34,8 @@ const std::string WEAPONS_PATH(IMAGES_PATH + "Weapons_icons/");
 
 const std::string SCOPE_IMAGE(IMAGES_PATH + "scope/scope.png");
 
+//server
+
+const std::string SERVER_CONFIG_FILE(CONFIG_PATH + "server_config.yaml");
+
 #endif

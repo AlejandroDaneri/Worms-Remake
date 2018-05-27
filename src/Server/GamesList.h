@@ -4,25 +4,29 @@
 #include "Game.h"
 #include <vector>
 #include <string>
+#include <unordered_map>
+#include <memory>
+#include <mutex>
 
 typedef std::vector<std::string> games_list_t;
 
 class GamesList{
 	private:
-		
+		std::unordered_map<std::string, std::unique_ptr<Game>> games;
+		std::mutex mutex;
 
 	public:
-		
+		GamesList();
 
-		bool addGame(const std::string& game_name, const std::string& map, int max_players, const std::string& player_name){return true;}///////////////////////////
+		~GamesList();
 
-		games_list_t getJoinableGames(const std::string& player_name){ return games_list_t();}
+		bool addGame(const std::string& game_name, const std::string& map, int max_players, Player& player);
 
-		bool addPlayer(const std::string& game_name, const std::string& player_name){return true;}
+		games_list_t getJoinableGames(const std::string& player_name);
 
-		void checkGames(){}
+		bool addPlayer(const std::string& game_name, Player& player);
 
-
+		void checkGames();
 };
 
 #endif

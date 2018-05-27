@@ -6,7 +6,6 @@
 #include "Thread.h"
 #include "Player.h"
 #include "Worm.h"
-#include <mutex>
 #include <vector>
 #include <memory>
 #include "World.h"
@@ -20,7 +19,6 @@ class Game: public Thread{
 		GameParameters parameters;
 		World world;
 		Turn turn;
-		std::mutex mutex;
 		std::unique_ptr<DataSender> data_sender;
 		bool player_turn_active;
 
@@ -28,12 +26,14 @@ class Game: public Thread{
 		void wait_to_world();
 
 	public:
-		Game(size_t players, const std::string& config_file, const std::string& config_editor);
+		Game(size_t players, const std::string& config_file, const std::string& map);
 		~Game();
 
 		bool addPlayer(Player&& player);
 
 		bool isFull();
+
+		bool playerCanJoin(const std::string& player_name);
 
 		void run() override;
 

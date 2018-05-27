@@ -2,7 +2,6 @@
 #define __PLAYER_H__
 
 #include "WormsList.h"
-#include "Socket.h"
 #include "ServerProtocol.h"
 #include "Worm.h"
 #include "World.h"
@@ -18,7 +17,7 @@ class Player{
 		bool connected;
 
 	public:
-		Player(Socket&& socket, const std::string& name);
+		Player(ServerProtocol&& protocol, const std::string& name);
 
 		Player(Player&& other);
 

@@ -41,9 +41,15 @@ void ClientHandler::createGame(const std::string& player_name){
 	std::string game_name = this->client.receive_string();
 	int max_players = this->client.receive_length();
 
-	bool result = this->games.addGame(game_name, map, max_players, player_name);
+	Player player(std::move(this->client), player_name);
 
-	this->client.send_char(result);
+	bool result = this->games.addGame(game_name, map, max_players, player);
+
+	if (!result){
+		player.getProtocol().send_char(result);
+	}
+
+	/////////////////////////////////////this->client.send_char(result);
 }
 
 void ClientHandler::joinGame(const std::string& player_name){
@@ -58,6 +64,12 @@ void ClientHandler::joinGame(const std::string& player_name){
 
 	std::string game_name = this->client.receive_string();
 
-	bool result = this->games.addPlayer(game_name, player_name);
-	this->client.send_char(result);
+	Player player(std::move(this->client), player_name);
+
+	bool result = this->games.addPlayer(game_name, player);
+	
+
+	if (!result){
+		player.getProtocol().send_char(result);
+	}
 }
