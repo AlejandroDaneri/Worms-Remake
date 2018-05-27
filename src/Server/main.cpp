@@ -1,35 +1,26 @@
-#include "Game.h"
-#include "Socket.h"
-#include "Path.h"
+#include "Server.h"
 #include <iostream>
+#include <memory>
+#include "Thread.h"
 
 #define EXIT_CHAR 'q'
 
-int main(int argc, char* argv[]){
-
-	Socket socket(Socket::Server("7777", 10));
-
-	Socket client = socket.accept_client();
-	Player player(std::move(client), "Pepe");
-
-	//Socket client2 = socket.accept_client();
-	//Player player2(std::move(client2));
-
-	Game game(1, CONFIG_PATH + "server_config.yaml", CONFIG_PATH + "config_editor_rotated.yaml");
-
+/*
+int main(int argc, const char* argv[]){
+	std::unique_ptr<Thread> thread;
 	try{
-
-		game.addPlayer(std::move(player));
-		//game.addPlayer(std::move(player2));
-		game.start();
+		thread = std::unique_ptr<Thread>(new Server("7777"));
+		thread->start();
 		while (std::cin.get() != EXIT_CHAR){}
-	}catch (const std::exception& e){}
+	} catch(const std::exception& e){
+		std::cerr << e.what() << std::endl;
+	}
 
-	try{
-		game.stop();
-	}catch (const std::exception& e){}
-
-	game.join();
-
+	if (thread){
+		thread->stop();
+		thread->join();
+	}
 	return 0;
 }
+
+////*/

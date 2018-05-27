@@ -6,6 +6,11 @@
 #include "Buffer.h"
 #include "Socket.h"
 
+#define MAX_STRING_SIZE 200
+
+#define CREATE_GAME_ACTION 0
+#define JOIN_GAME_ACTION 1
+
 #define MOVING_OBJECT 0
 #define DEAD_OBJECT 1
 #define ACTION 2
@@ -49,6 +54,18 @@ class Protocol {
 		size_t receive_length();
 		
 		void stop();
+
+		//Envia un char
+		void send_char(unsigned char c);
+
+		//Recibe un char
+		unsigned char receive_char();
+
+		//Envia un string
+		void send_string(const std::string& string);
+
+		//Recibe un string
+		std::string receive_string();
 };
 
 #endif

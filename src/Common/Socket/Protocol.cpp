@@ -67,3 +67,27 @@ size_t Protocol::receive_length(){
 void Protocol::stop(){
 	this->socket.stop();
 }
+
+void Protocol::send_string(const std::string& string){
+	size_t string_length = string.size();
+	this->send_length(string_length);
+	this->socket.send_data(string.c_str(), string_length);
+}
+
+std::string Protocol::receive_string(){
+	uint32_t length = this->receive_length();
+	char buffer [MAX_STRING_SIZE + 1];
+	this->socket.receive(buffer, length);
+	buffer[length] = '\0';
+	return std::move(std::string(buffer));
+}
+
+void Protocol::send_char(unsigned char c){
+	this->socket.send_data(&c, sizeof(unsigned char));
+}
+
+unsigned char Protocol::receive_char(){
+	unsigned char c;
+	this->socket.receive(&c, sizeof(unsigned char));
+	return c;
+}
