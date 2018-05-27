@@ -32,24 +32,25 @@ void MapController::moveSignal() {
 }
 
 void MapController::turnCCWSignal() {
-    if (model.lastIsGirder()) {
-        int new_angle = this->model.turnCCWLast();
-        this->view.turnLast(last_item_added, new_angle, actual_index);
+    if (model.isGirder(actual_index)) {
+        unsigned int id;
+        int new_angle = this->model.turnCCWLast(actual_index, id);
+        this->view.turn(id, new_angle, actual_index);
     }
 }
 
 void MapController::turnCWSignal() {
-    if (model.lastIsGirder()) { //cambiar
+    if (model.isGirder(actual_index)) {
         unsigned int id;
         int new_angle = this->model.turnCWLast(actual_index,id);
-        this->view.turnLast(id, new_angle, actual_index);
+        this->view.turn(id, new_angle, actual_index);
     }
 }
 
 void MapController::mapClickedSignal(GdkEventButton *event_button) {
     if (actual_action_id == MOVE_CMD_ID) {
-        this->model.moveLast(event_button->x, event_button->y);
-        this->view.moveLast(event_button->x, event_button->y);
+        this->model.move(actual_index, event_button->x, event_button->y);
+        this->view.move(actual_index, event_button->x, event_button->y);
         actual_action_id = ADD_CMD_ID;
     } else if(actual_action_id==SELECTION){
         this->actual_index=view.select(event_button->x, event_button->y);

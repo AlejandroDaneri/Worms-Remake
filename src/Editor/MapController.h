@@ -15,6 +15,7 @@ class MapController {
     unsigned int actual_action_id;
     unsigned int last_item_added;
     unsigned int actual_mode;
+    unsigned int actual_index;
 
 
 public:
@@ -46,7 +47,7 @@ public:
     void changeModeSignal();
 
 
-    int actual_index;
+
 };
 
 

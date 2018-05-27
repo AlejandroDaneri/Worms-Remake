@@ -18,17 +18,18 @@ public:
     void add(unsigned int id, const double &x, const double &y,
              const int &angle = 0);
 
-    void moveLast(double &x, double &y);
 
-    int turnCCWLast();
-
-    bool lastIsGirder();
+    bool isGirder(unsigned int &index);
 
     void getObjects(std::vector<std::vector<double>> &worms,
                     std::vector<std::vector<double>> &girders) const;
 
 
-    int turnCWLast(int index, unsigned int &id);
+    int turnCWLast(unsigned int index, unsigned int &id);
+
+    int turnCCWLast(unsigned int index, unsigned int &id);
+
+    void move(unsigned int index, double &x, double &y);
 };
 
 

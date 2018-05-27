@@ -40,7 +40,7 @@ public:
 
     void moveLast(const double &x, const double &y);
 
-    void turnLast(unsigned int id, int angle, int index);
+    void turn(unsigned int id, int angle, int index);
 
     void changeBackground();
 
@@ -48,6 +48,8 @@ public:
     bool isIsolated(const double &x, double y, const unsigned int &id);
 
     size_t actual_selected;
+
+    void move(const int index, const double &x, const double &y);
 };
 
 
