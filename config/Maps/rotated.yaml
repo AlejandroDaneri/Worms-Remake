@@ -1,0 +1,54 @@
+worms_life: 200
+weapon_ammo:
+  Bazooka: 99999
+  Mortar: 999
+  GreenGrenade: 99999
+  RedGrenade: 999
+  Banana: 5
+  HolyGrenade: 2
+  Dynamite: 5
+  Bat: 99999
+  AirAttack: 100
+  Teleportation: 99999
+worms:
+  -
+    - 4
+    - 10
+  -
+    - 10
+    - 10
+  -
+    - 16
+    - 10
+  -
+    - 19
+    - 15
+  -
+    - 50
+    - 15
+girders:
+  -
+    - 6
+    - 4
+    - 8
+    - 10
+  -
+    - 6
+    - 10
+    - 8
+    - 20
+  -
+    - 6
+    - 16
+    - 8
+    - 30
+  -
+    - 6
+    - 19
+    - 8
+    - 40
+  -
+    - 6
+    - 50
+    - 8
+    - 0

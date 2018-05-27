@@ -2,6 +2,7 @@
 #include "Player.h"
 #include <gtkmm/adjustment.h>
 #include <gdk/gdkkeysyms.h>
+#include "ViewTransformer.h"
 
 const char SPACE = ' ';
 const int WEAPONS_TIME = 5;
@@ -9,7 +10,7 @@ const char ASCII_OFFSET = 48;
 const char ASCII_1 = 49;
 const char ASCII_5 = 53;
 const int MAX_TIME = 5000;
-const int DEFAULT_ANGLE = 45;
+const int DEFAULT_ANGLE = 48;
 const int MAX_ANGLE = 90;
 const int MIN_ANGLE = -90;
 
@@ -60,14 +61,14 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 	this->movement_key_press_handler(key_event);
 	if (key_event->keyval == GDK_KEY_Up) {
 		if (this->current_angle < MAX_ANGLE) {
-			this->current_angle += 5;
+			this->current_angle += 6;
 		}
 		if (this->weapons.get_current_weapon().hasScope()) {
 			this->view_list.updateScope(this->current_angle);
 		}
 	} else if (key_event->keyval == GDK_KEY_Down) {
 		if (this->current_angle > MIN_ANGLE) {
-			this->current_angle -= 5;
+			this->current_angle -= 6;
 		}
 		if (this->weapons.get_current_weapon().hasScope()) {
 			this->view_list.updateScope(this->current_angle);
@@ -128,9 +129,10 @@ bool Handlers::on_button_press_event(GdkEventButton* event) {
 		int y = (int)event->y;
 		x += this->world.getWindow().get_hadjustment()->get_value();
 		y += this->world.getWindow().get_vadjustment()->get_value();
-		this->has_shoot = true;
 		Position position(x, y);
-		this->player.shoot(position);
+		Position newPosition = ViewTransformer(this->world.getLayout()).transformToPosition(position);
+		this->has_shoot = true;
+		this->player.shoot(newPosition);
 	}
 	return true;
 }

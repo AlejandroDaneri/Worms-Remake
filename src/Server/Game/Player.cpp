@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player(Socket&& socket, const std::string& name): protocol(std::move(socket)),
+Player::Player(ServerProtocol&& protocol, const std::string& name): protocol(std::move(protocol)),
 	name(name), id(-1), connected(true){}
 
 Player::Player(Player&& other): 

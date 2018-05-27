@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "ViewTransformer.h"
 #include <iostream> ///////////////////////////////////////////////////////////////////
 
 const int NO_ANGLE = 500;
@@ -58,8 +57,6 @@ void Player::shootWeapon() {
         this->musicPlayer.playTeleportSound();
     } else if (this->weapons.get_current_weapon().getName() == "Bat") {
         this->musicPlayer.playBatSound();
-    } else if (this->weapons.get_current_weapon().getName() == "Dynamite") {
-        this->musicPlayer.playRunAway();
     }
 }
 
@@ -75,8 +72,7 @@ void Player::change_weapon(std::string weapon) {
 
 void Player::shoot(Position position) {
 	this->shootWeapon();
-	Position newPosition = ViewTransformer().transformToPosition(position);
-	this->protocol.send_weapon_self_directed_shoot(newPosition);
+	this->protocol.send_weapon_self_directed_shoot(position);
 	this->screen.getWeaponsView().updateAmmo(this->weapons.get_current_weapon());
 }
 

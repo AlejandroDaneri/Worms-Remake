@@ -3,8 +3,8 @@
 #include "WeaponFactory.h"
 
 
-Game::Game(size_t players, const std::string& config_file, const std::string& config_editor):
-	players(players), parameters(config_file, config_editor), world(this->parameters){}
+Game::Game(size_t players, const std::string& config_file, const std::string& map):
+	players(players), parameters(config_file, map), world(this->parameters){}
 
 Game::~Game(){
 	this->world.stop();
@@ -15,18 +15,22 @@ Game::~Game(){
 }
 
 bool Game::addPlayer(Player&& player){
-	std::lock_guard<std::mutex> lock(this->mutex);
-
 	if (this->isFull()){
 		return false;
 	}
 
-	this->turn.addPlayer(std::move(player));
-	return true;
+	return this->turn.addPlayer(std::move(player));
 }
 
 bool Game::isFull(){
 	return this->players <= this->turn.get_players_size();
+}
+
+bool Game::playerCanJoin(const std::string& player_name){
+	if (this->isFull()){
+		return false;
+	}
+	return this->turn.playerCanJoin(player_name);
 }
 
 
@@ -61,6 +65,7 @@ void Game::run(){
 
 	}
 	std::cout <<"termino el juego\n";
+	this->running = false;
 
 }
 
@@ -111,6 +116,6 @@ void Game::endTurn(){
 
 void Game::wait_to_world(){
 	while (this->world.isActive() || this->data_sender->isActive()){
-		std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		std::this_thread::sleep_for(std::chrono::milliseconds(80));
 	}
 }

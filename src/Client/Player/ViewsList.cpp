@@ -6,7 +6,7 @@
 ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list, MusicPlayer& musicPlayer):
 	world(world), player(player), players_list(players_list), musicPlayer(musicPlayer) {
 
-	this->scope.set("resources/images/scope/scope.png");
+	this->scope.set(SCOPE_IMAGE);
 	this->world.addElement(this->scope, Position(0,500), 0, 0);
 	this->scope.hide();
 	this->current_worm_id = -1;
@@ -90,6 +90,10 @@ bool ViewsList::updateWeaponDataCallBack(int id, const std::string& weapon_name,
         this->weapon_focused = id;
         this->removeWormFocus();
         this->weapons.insert(std::make_pair(id, std::move(weapon)));
+
+        if (weapon_name == "Dynamite") {
+            this->musicPlayer.playRunAway();
+        }
     } else {
         //Weapon existe
         it->second.updateData(pos);
@@ -119,6 +123,7 @@ bool ViewsList::updateScopeCallBack(int angle) {
         angle = 180 - angle;
     this->world.moveScope(this->scope, worm.getWidget(), angle);
     this->scope.show();
+    worm.updateScope(angle);
     return false;
 }
 

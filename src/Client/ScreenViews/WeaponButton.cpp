@@ -1,12 +1,11 @@
 #include "WeaponButton.h"
 #include "Player.h"
-
-#define IMAGE_PATH "resources/images/Weapons_icons/"
+#include "Path.h"
 
 WeaponButton::WeaponButton(const std::string& weapon_name, unsigned int ammo, Player& player) :
 	weapon_name(weapon_name), player(player) {
 	this->setLabel(ammo);
-	std::string path = IMAGE_PATH;
+	std::string path = WEAPONS_PATH;
 	path += weapon_name + ".png";
 	this->image.set(path);
 	this->button.set_image(this->image);

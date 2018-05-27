@@ -5,6 +5,7 @@
 #include <gtkmm/adjustment.h>
 
 WorldView::WorldView(){
+	this->world.set_size(10000, 10000);
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
 	this->window.override_background_color(Gdk::RGBA("lightgreen"));////////////// Reemplazar por fondo de pantalla
@@ -13,7 +14,7 @@ WorldView::WorldView(){
 WorldView::~WorldView(){}
 
 void WorldView::moveElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus){
-	Position newPosition = ViewTransformer().transformToScreenAndMove(position, width, height);
+	Position newPosition = ViewTransformer(this->world).transformToScreenAndMove(position, width, height);
 	this->world.move(element, newPosition.getX(), newPosition.getY());
 	if (focus){
 		this->setFocus(element);
@@ -34,7 +35,7 @@ void WorldView::removeElement(Gtk::Widget& element){
 }
 
 void WorldView::addElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus){
-	Position newPosition = ViewTransformer().transformToScreenAndMove(position, width, height);
+	Position newPosition = ViewTransformer(this->world).transformToScreenAndMove(position, width, height);
 	this->world.put(element, newPosition.getX(), newPosition.getY());
 	element.show_all();
 	if (focus){
@@ -44,6 +45,10 @@ void WorldView::addElement(Gtk::Widget& element, const Position& position, float
 
 Gtk::ScrolledWindow& WorldView::getWindow(){
 	return this->window;
+}
+
+Gtk::Layout& WorldView::getLayout(){
+	return this->world;
 }
 
 void WorldView::setFocus(Gtk::Widget& element){

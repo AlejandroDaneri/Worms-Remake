@@ -1,15 +1,15 @@
 #ifndef __VIEWTRANSFORMER_H__
 #define __VIEWTRANSFORMER_H__
 
-#include <gdkmm/screen.h>
+#include <gtkmm/layout.h>
 #include "Position.h"
 
 class ViewTransformer{
 	private:
-		Glib::RefPtr<Gdk::Screen> screen;
+		Gtk::Layout& layout;
 
 	public:
-		ViewTransformer();
+		ViewTransformer(Gtk::Layout& layout);
 		~ViewTransformer();
 
 		Position transformToScreen(const Position& position);
