@@ -35,6 +35,8 @@ class ServerProtocol : public Protocol{
 		void sendWeaponAmmo(const std::string& weapon_name, int ammo);
 
 		void send_weapon_changed(const std::string& weapon);
+
+		void sendUpdateScope(int angle);
 };
 
 #endif

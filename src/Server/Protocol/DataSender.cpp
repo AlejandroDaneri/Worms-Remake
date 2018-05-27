@@ -108,6 +108,14 @@ void DataSender::send_weapon_changed(const std::string& weapon){
 	}
 }
 
+void DataSender::sendUpdateScope(int angle) {
+    for (auto player = this->players.begin(); player != this->players.end(); ++player){
+        try{
+            player->getProtocol().sendUpdateScope(angle);
+        } catch(const SocketException& e){}
+    }
+}
+
 bool DataSender::isActive(){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	return this->active;

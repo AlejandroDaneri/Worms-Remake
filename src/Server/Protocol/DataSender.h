@@ -29,7 +29,7 @@ class DataSender: public Thread{
 		void sendGirders();
 		void sendWeaponsAmmo(std::map<std::string, int>& weapons);
 		void send_weapon_changed(const std::string& weapon);
-		//void sendUpdateScope(int angle);
+		void sendUpdateScope(int angle);
 
 		void send_start_turn(int worm_id, int player_id);
 

@@ -15,8 +15,6 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
     builder->get_widget("btn_move", move);
     builder->get_widget("btn_turn_ccw", turnccw);
     builder->get_widget("btn_turn_cw", turncw);
-    turnccw->set_sensitive(false);
-    turncw->set_sensitive(false);
     builder->get_widget("btn_bg",change_bg);
     builder->get_widget("btn_mode",mode);
 
@@ -36,8 +34,8 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                                                  GIRDER_6_BUTTON_ID));
 }
 
-void ToolBoxView::linkController(std::shared_ptr<MapController> controller) {
-    this->map_controller = std::move(controller);
+void ToolBoxView::linkController(MapController* controller) {
+    this->map_controller = controller;
 
     erase->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::undo));
@@ -69,21 +67,27 @@ void ToolBoxView::on_button_clicked(unsigned id) {
         if (worm->get_active()) {
             girder_3m->set_active(false);
             girder_6m->set_active(false);
-            turnccw->set_sensitive(false);
-            turncw->set_sensitive(false);
         }
     } else if (id == GIRDER_3_BUTTON_ID) {
         if (girder_3m->get_active()) {
             worm->set_active(false);
             girder_6m->set_active(false);
-            turnccw->set_sensitive(true);
-            turncw->set_sensitive(true);
         }
     } else {
         girder_3m->set_active(false);
         worm->set_active(false);
-        turnccw->set_sensitive(true);
-        turncw->set_sensitive(true);
     }
+    turncw->set_sensitive(false);
+    turnccw->set_sensitive(false);
+    move->set_sensitive(false);
     map_controller->itemSelectedSignal(id);
+}
+
+void ToolBoxView::enableMovingItems() {
+    worm->set_active(false);
+    girder_3m->set_active(false);
+    girder_6m->set_active(false);
+    turncw->set_sensitive(true);
+    turnccw->set_sensitive(true);
+    move->set_sensitive(true);
 }
