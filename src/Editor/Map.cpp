@@ -2,9 +2,9 @@
 #include <yaml.h>
 #include "Map.h"
 
-void Map::undo() {
+void Map::undo(int index) {
     if (!objects.empty())
-        this->objects.pop_back();
+        this->objects.erase(objects.begin()+index);
 }
 
 void Map::clean() {
@@ -17,7 +17,7 @@ Map::add(unsigned int id, const double &x, const double &y, const int &angle) {
     objects.emplace_back(std::make_pair(id, new_object));
 }
 
-void Map::move(unsigned int index, double &x, double &y) {
+void Map::move(int index, double &x, double &y) {
     MapObject &object = objects[index].second;
     object.updatePosition(x, y);
 }

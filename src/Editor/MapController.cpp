@@ -23,14 +23,13 @@ void MapController::itemSelectedSignal(unsigned int id) {
 }
 
 void MapController::undo() {
-    model.undo();
-    view->undo();
+    model.undo(actual_object_selected);
+    view->undo(actual_object_selected);
 }
 
 void MapController::clean() {
     model.clean();
     view->clean();
-
 }
 
 void MapController::moveSignal() {
@@ -57,7 +56,6 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
     if (actual_action_id == MOVE_CMD_ID) {
         this->model.move(actual_object_selected, event_button->x, event_button->y);
         this->view->move(actual_object_selected, event_button->x, event_button->y);
-        actual_action_id = ADD_CMD_ID;
     } else if(actual_action_id==SELECTION){
         this->actual_object_selected=view->select(event_button->x, event_button->y);
         if(actual_object_selected>-1){

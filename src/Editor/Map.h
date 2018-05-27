@@ -11,7 +11,7 @@ class Map {
     std::vector<std::pair<int, MapObject>> objects;
 
 public:
-    void undo();
+    void undo(int index);
 
     void clean();
 
@@ -27,7 +27,7 @@ public:
 
     int turnCCWLast(unsigned int index, unsigned int &id);
 
-    void move(unsigned int index, double &x, double &y);
+    void move(int index, double &x, double &y);
 
     bool isGirder(int &index);
 };

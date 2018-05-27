@@ -57,9 +57,6 @@ void ToolBoxView::linkController(MapController* controller) {
 
     mode->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::changeModeSignal));
-
-
-
 }
 
 void ToolBoxView::on_button_clicked(unsigned id) {
@@ -80,6 +77,7 @@ void ToolBoxView::on_button_clicked(unsigned id) {
     turncw->set_sensitive(false);
     turnccw->set_sensitive(false);
     move->set_sensitive(false);
+    erase->set_sensitive(false);
     map_controller->itemSelectedSignal(id);
 }
 
@@ -90,4 +88,5 @@ void ToolBoxView::enableMovingItems() {
     turncw->set_sensitive(true);
     turnccw->set_sensitive(true);
     move->set_sensitive(true);
+    erase->set_sensitive(true);
 }
