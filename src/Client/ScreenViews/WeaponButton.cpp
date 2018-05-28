@@ -16,7 +16,7 @@ WeaponButton::WeaponButton(const std::string& weapon_name, unsigned int ammo, Pl
 WeaponButton::~WeaponButton() {}
 
 void WeaponButton::onClickedButton() {
-	this->player.change_weapon(weapon_name);
+	this->player.changeWeapon(weapon_name);
 }
 
 Gtk::Widget& WeaponButton::getButton() {

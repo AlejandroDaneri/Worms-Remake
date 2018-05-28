@@ -1,8 +1,8 @@
 #include "WorldView.h"
+#include <gtkmm/adjustment.h>
 #include "ViewTransformer.h"
 #include "Player.h"
 #include "math_utils.h"
-#include <gtkmm/adjustment.h>
 
 WorldView::WorldView(){
 	this->world.set_size(10000, 10000);

@@ -1,8 +1,8 @@
 #ifndef __CLIENTWEAPONSFACTORY_H__
 #define __CLIENTWEAPONSFACTORY_H__
 
-#include "Weapon.h"
 #include <memory>
+#include "Weapon.h"
 
 typedef std::unique_ptr<Weapon> weapon_ptr;
 

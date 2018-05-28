@@ -36,7 +36,7 @@ void Player::startTurn(int worm_id, int player_id){
 	    this->musicPlayer.playStartTurnSound();
 		//Es mi turno
         this->handlers.enableAll();
-		this->change_weapon(this->weapons.getCurrentWeapon().getName());
+        this->changeWeapon(this->weapons.getCurrentWeapon().getName());
 		this->turn_label.beginTurn();
 		this->turn.start();
 	} else {
@@ -65,7 +65,7 @@ void Player::shootWeapon() {
     }
 }
 
-void Player::change_weapon(std::string weapon) {
+void Player::changeWeapon(std::string weapon) {
     this->weapons.changeWeapon(weapon);
     this->protocol.sendChangeWeapon(weapon);
 	if (this->weapons.getCurrentWeapon().hasScope()) {

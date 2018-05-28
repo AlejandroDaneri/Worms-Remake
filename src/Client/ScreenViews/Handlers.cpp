@@ -1,7 +1,7 @@
 #include "Handlers.h"
-#include "Player.h"
 #include <gtkmm/adjustment.h>
 #include <gdk/gdkkeysyms.h>
+#include "Player.h"
 #include "ViewTransformer.h"
 
 const char SPACE = ' ';

@@ -1,9 +1,9 @@
 #ifndef __VIEWABLE_H__
 #define __VIEWABLE_H__
 
+#include <gtkmm/widget.h>
 #include "WorldView.h"
 #include "Position.h"
-#include <gtkmm/widget.h>
 #include "Path.h"
 
 /* Clase que se encarga de controlar los objetos visuales */

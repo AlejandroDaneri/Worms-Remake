@@ -1,8 +1,8 @@
 #ifndef __HANDLERS__H__
 #define __HANDLERS__H__
 
-#include "Timer.h"
 #include <gdk/gdk.h>
+#include "Timer.h"
 
 class Player;
 class ViewsList;

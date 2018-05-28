@@ -1,10 +1,10 @@
 #ifndef __GIRDERVIEW_H__
 #define __GIRDERVIEW_H__
 
-#include "Viewable.h"
 #include <gtkmm/widget.h>
 #include <gtkmm/image.h>
 #include <string>
+#include "Viewable.h"
 
 /* Clase que se encaga de controlar la vista de las vigas */
 class GirderView: public Viewable{

@@ -2,6 +2,7 @@
 #define __CLIENTPLAYER_H__
 
 #include <memory>
+#include <gtkmm/window.h>
 #include "ClientProtocol.h"
 #include "WorldView.h"
 #include "Turn.h"
@@ -17,7 +18,6 @@
 #include "PlayersList.h"
 #include "TurnLabel.h"
 #include "MusicPlayer.h"
-#include <gtkmm/window.h>
 
 class Player {
 	private:
@@ -56,7 +56,7 @@ class Player {
 		void damageReceived();
 
 		/* Cambia el arma actual por la espeificada */
-		void change_weapon(std::string weapon);
+		void changeWeapon(std::string weapon);
 		
 		/* Realiza el disparo del arma con el angulo, potencia 
 		   y tiempo pasados */

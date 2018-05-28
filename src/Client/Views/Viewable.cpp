@@ -1,7 +1,5 @@
 #include "Viewable.h"
 
-#include <iostream>
-
 Viewable::Viewable(WorldView& worldView): worldView(worldView), has_focus(false){}
 
 Viewable::~Viewable(){}

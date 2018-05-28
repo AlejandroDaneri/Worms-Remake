@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <gdkmm/pixbuf.h>
-#include "Thread.h"
 #include "BulletView.h"
 
 /* Clase que se encarga de reproducir la animacion de una explosion */

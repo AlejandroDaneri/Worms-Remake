@@ -3,8 +3,8 @@
 
 #include <map>
 #include <string>
-#include "PlayerLifeLabel.h"
 #include <gtkmm/hvbox.h>
+#include "PlayerLifeLabel.h"
 
 /* Clase que se encarga de almacenar los nombres y las vidas
  * de todos los jugadores */
