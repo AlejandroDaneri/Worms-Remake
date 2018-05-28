@@ -37,8 +37,6 @@ bool Game::playerCanJoin(const std::string& player_name){
 	return this->turn.playerCanJoin(player_name);
 }
 
-
-#include <iostream>/////////////////////////////////
 void Game::run(){
 	this->configure();
 	this->world.start();
@@ -48,7 +46,6 @@ void Game::run(){
 	this->wait_to_world();
 
 	while (!this->turn.gameEnded(this->world.getMutex())){
-		std::cout <<"empezo el turno\n";
 		this->player_turn_active = true;
 		this->turn.begin_turn();
 		int worm_id = this->turn.getCurrentPlayer().getCurrentWorm().getId();
@@ -57,7 +54,7 @@ void Game::run(){
 
 		while (this->player_turn_active){
 			try{
-				this->turn.getCurrentPlayer().getProtocol().receive(*this);
+				this->turn.getCurrentPlayer().getProtocol().receive(*this, *this->data_sender);
 			} catch (const SocketException& e){
 				this->player_turn_active = false;
 				this->turn.getCurrentPlayer().disconnect();
@@ -68,9 +65,7 @@ void Game::run(){
 		this->world.update();
 
 	}
-	std::cout <<"termino el juego\n";
 	this->running = false;
-
 }
 
 void Game::configure(){
@@ -108,15 +103,6 @@ void Game::configure(){
 
 Worm& Game::getCurrentWorm(){
 	return this->turn.getCurrentPlayer().getCurrentWorm();
-}
-
-void Game::weaponChanged(const std::string& weapon){
-	this->getCurrentWorm().changeWeapon(weapon);
-	this->data_sender->send_weapon_changed(weapon);
-}
-
-void Game::updateScope(int angle) {
-    this->data_sender->sendUpdateScope(angle);
 }
 
 void Game::endTurn(){

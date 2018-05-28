@@ -4,6 +4,7 @@
 #include "Girder.h"
 #include "ObjectSizes.h"
 #include "Player.h"
+#include "DataSender.h"
 #include <string>
 
 ServerProtocol::ServerProtocol(Socket&& socket): Protocol(std::move(socket)){}
@@ -83,7 +84,7 @@ void ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_pl
     this->sendBuffer(buffer);
 }
 
-void ServerProtocol::receive(Game& game) {
+void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 
 	Buffer buffer = std::move(this->receiveBuffer());
 
@@ -98,10 +99,11 @@ void ServerProtocol::receive(Game& game) {
 			game.getCurrentWorm().move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
 			std::string weapon(this->receiveStringBuffer(buffer));
-			game.weaponChanged(weapon);
+			game.getCurrentWorm().changeWeapon(weapon);
+			data_sender.send_weapon_changed(weapon);
 		} else if(worm_action == MOVE_SCOPE) {
             int32_t angle = this->receiveIntBuffer(buffer);
-			game.updateScope(angle);
+			data_sender.sendUpdateScope(angle);
 		} else if (worm_action == SHOOT_WEAPON) {
 			int angle = this->receiveIntBuffer(buffer);
 			int power = this->receiveIntBuffer(buffer);

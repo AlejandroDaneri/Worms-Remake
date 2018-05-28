@@ -22,7 +22,7 @@ class Game: public Thread{
 		std::unique_ptr<DataSender> data_sender;
 		bool player_turn_active;
 
-		/* Realiza la configuracion de la partida */
+		/* Realiza la configuracion inicial de la partida */
 		void configure();
 
 		/* Espera a que los objetos dejen de moverse */
@@ -49,12 +49,6 @@ class Game: public Thread{
 
 		/* Devuelve el worm actual */
 		Worm& getCurrentWorm();
-
-		/* Cambia el arma actual por la indicada */
-		void weaponChanged(const std::string& weapon);
-
-		/* Actualiza el angulo de la mira del arma */
-		void updateScope(int angle);
 
 		/* Finaliza el turno */
 		void endTurn();

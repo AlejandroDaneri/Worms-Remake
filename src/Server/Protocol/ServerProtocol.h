@@ -8,6 +8,7 @@
 
 class Game;
 class Player;
+class DataSender;
 
 class ServerProtocol : public Protocol{
 	private:
@@ -24,7 +25,7 @@ class ServerProtocol : public Protocol{
 
 		Buffer sendDeadObject(physical_object_ptr& object);
 
-		void receive(Game& game);
+		void receive(Game& game, DataSender& data_sender);
 
 		void send_start_turn(int32_t current_worm_id, int32_t current_player_id);
 
