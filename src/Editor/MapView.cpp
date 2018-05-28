@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <ObjectSizes.h>
+#include <Path.h>
 #include "yaml-cpp/yaml.h"
 #include "MapView.h"
 
@@ -9,8 +10,8 @@ MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),
           actual_bg(0) {
-    bg_paths.emplace_back("resources/Images/editor_toolbox/background1.png");
-    bg_paths.emplace_back("resources/Images/editor_toolbox/bac.jpg");
+    bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/background1.png");
+    bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/bac.jpg");
     setBackground(bg_paths[actual_bg]);
 
     add_events(Gdk::BUTTON_PRESS_MASK);
@@ -18,15 +19,15 @@ MapView::MapView(BaseObjectType *cobject,
             sigc::mem_fun(*this, &MapView::on_button_clicked));
 
     std::vector<std::string> worms_imgs;
-    worms_imgs.emplace_back("resources/Images/right_worm.png");
-    worms_imgs.emplace_back("resources/Images/left_worm.png");
+    worms_imgs.emplace_back(IMAGES_PATH + "/right_worm.png");
+    worms_imgs.emplace_back(IMAGES_PATH + "/left_worm.png");
     pallete.push_back(worms_imgs);
 
 
     std::vector<std::string> girder_3_imgs;
     for (int i = 0; i < 180; i = i + 10) {
         girder_3_imgs.emplace_back(
-                "resources/Images/Girder/girder_3_" + std::to_string(i) +
+                IMAGES_PATH + "/Girder/girder_3_" + std::to_string(i) +
                 ".png");
     }
     pallete.push_back(girder_3_imgs);
@@ -34,7 +35,7 @@ MapView::MapView(BaseObjectType *cobject,
     std::vector<std::string> girder_6_imgs;
     for (int i = 0; i < 180; i = i + 10) {
         girder_6_imgs.push_back(
-                "resources/Images/Girder/girder_6_" + std::to_string(i) +
+                IMAGES_PATH + "/Girder/girder_6_" + std::to_string(i) +
                 ".png");
     }
     pallete.push_back(girder_6_imgs);
