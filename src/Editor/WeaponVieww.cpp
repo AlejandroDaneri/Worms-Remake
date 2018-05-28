@@ -30,9 +30,9 @@ void WeaponView::on_checkbox_clicked() {
 }
 
 void WeaponView::resetAmmo() {
-    infinite->set_active(default_checkbox_state);
     ammo_selector->set_sensitive(!default_checkbox_state);
     ammo_selector->set_value(default_ammo_selector_value);
+    infinite->set_active(default_checkbox_state);
 }
 
 void WeaponView::linkController(WeaponController *controller) {
