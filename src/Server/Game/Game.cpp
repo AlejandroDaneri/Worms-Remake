@@ -76,6 +76,7 @@ void Game::run(){
 void Game::configure(){
 	this->data_sender.reset(new DataSender(this->world, this->turn.getPlayers()));
 
+	this->data_sender->send_start_game();
 	this->data_sender->send_players_id();
 
 	//Asignacion de gusanos

@@ -10,6 +10,7 @@
 
 #define CREATE_GAME_ACTION 0
 #define JOIN_GAME_ACTION 1
+#define START_GAME_ACTION 1
 
 #define MOVING_OBJECT 0
 #define DEAD_OBJECT 1

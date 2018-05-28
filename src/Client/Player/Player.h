@@ -17,7 +17,7 @@
 #include "PlayersList.h"
 #include "TurnLabel.h"
 #include "MusicPlayer.h"
-
+#include <gtkmm/window.h>
 
 class Player {
 	private:
@@ -38,7 +38,7 @@ class Player {
 
 	public:
 		/* Constructor */
-		Player(ClientProtocol protocol, const std::string& name);
+		Player(ClientProtocol protocol, const std::string& name, Gtk::Window& window);
 		
 		/* Destructor */
 		~Player();
@@ -67,9 +67,6 @@ class Player {
 		
 		/* Reproduce el sonido de falta de tiempo */
 		void playTickTime();
-		
-		/* Devuelve la ventana donde se encuentra la vista completa */
-		Gtk::Container& getWindow();
 		
 		/* Devuelve el contenedor del mapa */
 		WorldView& getWorld();

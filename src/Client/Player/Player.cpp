@@ -3,7 +3,7 @@
 
 const int NO_ANGLE = 500;
 
-Player::Player(ClientProtocol protocol, const std::string& name):
+Player::Player(ClientProtocol protocol, const std::string& name, Gtk::Window& window):
 	protocol(std::move(protocol)), name(name),
 	screen(*this, this->weapons, this->turn_label, this->players_list),
     turn(*this, this->turn_label),
@@ -11,12 +11,17 @@ Player::Player(ClientProtocol protocol, const std::string& name):
 	data_receiver(this->view_list, *this, this->protocol),
 	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()){
 
+	this->protocol.receive_char();
 	this->musicPlayer.playMusic();
 	this->protocol.receivePlayers(this->players_list);
 	this->protocol.receiveGirders(this->view_list);
 	this->protocol.receiveWeaponsAmmo(this->weapons);
 	this->screen.getWeaponsView().update();
 	this->data_receiver.start();
+
+	window.remove();
+	window.add(this->screen.getWindow());
+	window.show_all();
 }
 
 Player::~Player() {
@@ -91,12 +96,6 @@ void Player::shoot(int angle, int power, int time) {
     this->protocol.sendWeaponShoot(angle, power, time);
 	this->view_list.removeScopeVisibility();
 	this->screen.getWeaponsView().updateAmmo(this->weapons.getCurrentWeapon());
-}
-
-
-
-Gtk::Container& Player::getWindow() {
-	return this->screen.getWindow();
 }
 
 WorldView& Player::getWorld() {

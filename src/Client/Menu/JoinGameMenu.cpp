@@ -1,9 +1,11 @@
 #include "JoinGameMenu.h"
 #include "Path.h"
+#include "WaitingLabel.h"
 #include <gtkmm/builder.h>
+#include <glibmm/main.h>
 
 JoinGameMenu::JoinGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity):
-	window(window), protocol(std::move(protocol)), player_name(std::move(player_name)){
+	window(window), protocol(std::move(protocol)), player_name(std::move(name)){
 
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_JoinGameMenu.glade");
 
@@ -50,9 +52,10 @@ void JoinGameMenu::select_button_pressed(Glib::ustring game_name){
 			this->show_error();
 		} else {
 			this->window.remove();
-			this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name));
-			this->window.add(this->player->getWindow());
+			this->window.add(this->waiting_label.getWidget());
 			this->window.show_all();
+			sigc::slot<bool> my_slot = sigc::mem_fun(*this, &JoinGameMenu::createPlayer);
+			Glib::signal_idle().connect(my_slot);
 		}
 	} catch (const SocketException& e){
 		this->error->set_label("Ocurrio un error");
@@ -64,4 +67,9 @@ void JoinGameMenu::show_error(){
 	this->menu->remove(*this->error);
 	this->window.remove();
 	this->window.add(*this->error);
+}
+
+bool JoinGameMenu::createPlayer(){
+	this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name, this->window));
+	return false;
 }

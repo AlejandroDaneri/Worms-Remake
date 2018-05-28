@@ -9,6 +9,7 @@
 #include <gtkmm/spinbutton.h>
 #include "ClientProtocol.h"
 #include "GameMenuField.h"
+#include "WaitingLabel.h"
 #include "Player.h"
 #include <string>
 #include <memory>
@@ -26,6 +27,7 @@ class CreateGameMenu{
 		Gtk::Box* menu;
 		std::vector<GameMenuField> maps;
 		std::unique_ptr<Player> player;
+		WaitingLabel waiting_label;
 
 		void configure(int quantity);
 
@@ -34,6 +36,8 @@ class CreateGameMenu{
 		void select_button_pressed(Glib::ustring map_name);
 
 		void show_error();
+
+		bool createPlayer();
 
 	public:
 		CreateGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity);

@@ -59,6 +59,14 @@ void DataSender::run(){
 	}
 }
 
+void DataSender::send_start_game(){
+	for (auto player = this->players.begin(); player != this->players.end(); ++player){
+		try{
+			player->getProtocol().send_char(START_GAME_ACTION);
+		} catch(const SocketException& e){}
+	}
+}
+
 void DataSender::send_start_turn(int worm_id, int player_id){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
 		try{

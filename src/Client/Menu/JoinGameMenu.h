@@ -7,6 +7,7 @@
 #include <gtkmm/window.h>
 #include "ClientProtocol.h"
 #include "GameMenuField.h"
+#include "WaitingLabel.h"
 #include "Player.h"
 #include <string>
 #include <memory>
@@ -22,6 +23,7 @@ class JoinGameMenu{
 		std::vector<GameMenuField> game_fields;
 		std::unique_ptr<Player> player;
 		Gtk::Box* menu;
+		WaitingLabel waiting_label;
 
 		void configure(int quantity);
 
@@ -30,6 +32,8 @@ class JoinGameMenu{
 		void select_button_pressed(Glib::ustring game_name);
 
 		void show_error();
+
+		bool createPlayer();
 
 	public:
 		JoinGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity);
