@@ -42,7 +42,7 @@ MapView::MapView(BaseObjectType *cobject,
 }
 
 
-void MapView::add(unsigned int id, const double &x, const double &y,
+void MapView::add(const unsigned int &id, const double &x, const double &y,
                   const int &angle) {
     Gtk::Image new_image(pallete[id - id / 2 - 1][0]);
     const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
@@ -61,7 +61,7 @@ void MapView::add(unsigned int id, const double &x, const double &y,
 
 }
 
-void MapView::move(const int index, const double &x, const double &y) {
+void MapView::move(const int &index, const double &x, const double &y) {
     if (!objects.empty()) {
         Gtk::Image &actual_object = objects[index];
         Gtk::Layout::move(actual_object, x - actual_object.get_width() / 2,
@@ -71,7 +71,7 @@ void MapView::move(const int index, const double &x, const double &y) {
 }
 
 //TODO: no usar mas el id
-void MapView::turn(unsigned int id, int angle, int index) {
+void MapView::turn(const unsigned int &id, const int &angle, const int &index) {
     if (!objects.empty()) {
         Gtk::Image &image = objects[index];
         image.set(pallete[id - id / 2 - 1][angle / 10]);
@@ -84,7 +84,7 @@ bool MapView::on_button_clicked(GdkEventButton *button_event) {
     return true;
 }
 
-void MapView::undo(int index) {
+void MapView::undo(const int &index) {
     if (!objects.empty()) {
         objects[index].hide();
         objects.erase(objects.begin() + index);
@@ -99,7 +99,7 @@ void MapView::linkController(MapController *pController) {
     this->controller = pController;
 }
 
-void MapView::setBackground(std::string name) {
+void MapView::setBackground(const std::string &name) {
     Gtk::Image bg(name);
     int width = bg.get_pixbuf()->get_width();
     int heigth = bg.get_pixbuf()->get_height();
@@ -110,13 +110,13 @@ void MapView::setBackground(std::string name) {
             Gtk::Image image(name);
             image.show();
             put(image, x, y);
-            back.push_back(std::move(image));
+            background.push_back(std::move(image));
         }
     }
 }
 
 void MapView::changeBackground() {
-    back.clear();
+    background.clear();
     actual_bg = (actual_bg + 1) % bg_paths.size();
     setBackground(bg_paths[actual_bg]);
 }
