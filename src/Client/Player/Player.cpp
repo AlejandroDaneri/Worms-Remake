@@ -11,7 +11,7 @@ Player::Player(ClientProtocol protocol, const std::string& name, Gtk::Window& wi
 	data_receiver(this->view_list, *this, this->protocol),
 	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()){
 
-	this->protocol.receive_char();
+	this->protocol.receiveChar();
 	this->musicPlayer.playMusic();
 	this->protocol.receivePlayers(this->players_list);
 	this->protocol.receiveGirders(this->view_list);

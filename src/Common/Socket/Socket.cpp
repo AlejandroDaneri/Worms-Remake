@@ -7,14 +7,14 @@
 
 Socket::Socket(Socket::Client client){
 	Addrinfo addrinfo(client.getHost(), client.getService(), 0);
-	*this = addrinfo.connect_or_bind(CLIENT);
+	*this = addrinfo.connectOrBind(CLIENT);
 }
 
 Socket::Socket(Socket::Server server){
 	char* host = NULL; //ANY
 	int flag = AI_PASSIVE;
 	Addrinfo addrinfo(host, server.getService(), flag);
-	Socket sckt = addrinfo.connect_or_bind(SERVER);
+	Socket sckt = addrinfo.connectOrBind(SERVER);
 
 	if ((listen(sckt.fd, server.getMaxClientWait())) == -1){
 		throw SocketException("Error en listen");
@@ -25,7 +25,7 @@ Socket::Socket(Socket::Server server){
 
 Socket::Socket(int fd): fd(fd){}
 
-int Socket::send_data(const void* data, size_t size){
+int Socket::sendData(const void *data, size_t size){
 	size_t total_send = 0;
 	int actual_send;
 
@@ -61,7 +61,7 @@ int Socket::receive(void* buffer, size_t size){
 	return total_recv;
 }
 
-Socket Socket::accept_client(){
+Socket Socket::acceptClient(){
 	int client = accept(this->fd, NULL, NULL);
 	if (client == -1){
 		throw SocketException("Error en accept");
@@ -104,7 +104,7 @@ Socket::Addrinfo::Addrinfo(const char* host, const char* service, int flag){
 	}
 }
 
-Socket Socket::Addrinfo::connect_or_bind(int action) const{
+Socket Socket::Addrinfo::connectOrBind(int action) const{
 	int conection = -1;
 	struct addrinfo* res = this->addrinfo;
 

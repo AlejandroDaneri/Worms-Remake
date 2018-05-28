@@ -44,31 +44,31 @@ class Protocol {
 		Protocol(Protocol&& other);
 		~Protocol();
 		
-		void send_buffer(Buffer& buffer);
-		Buffer receive_buffer();
+		void sendBuffer(Buffer &buffer);
+		Buffer receiveBuffer();
 		
-		void send_int_buffer(Buffer& buffer, int32_t value);
-		int receive_int_buffer(Buffer& buffer);
+		void sendIntBuffer(Buffer &buffer, int32_t value);
+		int receiveIntBuffer(Buffer &buffer);
 		
-		void send_string_buffer(Buffer& buffer, const std::string &string);
-		std::string receive_string_buffer(Buffer& buffer);
+		void sendStringBuffer(Buffer &buffer, const std::string &string);
+		std::string receiveStringBuffer(Buffer &buffer);
 
-		void send_length(uint32_t length);
-		size_t receive_length();
+		void sendLength(uint32_t length);
+		size_t receiveLength();
 		
 		void stop();
 
 		//Envia un char
-		void send_char(unsigned char c);
+		void sendChar(unsigned char c);
 
 		//Recibe un char
-		unsigned char receive_char();
+		unsigned char receiveChar();
 
 		//Envia un string
-		void send_string(const std::string& string);
+		void sendString(const std::string &string);
 
 		//Recibe un string
-		std::string receive_string();
+		std::string receiveString();
 };
 
 #endif

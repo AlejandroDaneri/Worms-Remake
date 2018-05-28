@@ -1,5 +1,5 @@
-#include <cmath>
 #include "Position.h"
+#include <cmath>
 
 Position::Position(float x, float y): x(x), y(y){}
 		

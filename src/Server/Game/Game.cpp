@@ -19,7 +19,7 @@ Game::~Game(){
 
 void Game::addPlayer(Player&& player){
 	if (this->isFull()){
-		player.getProtocol().send_char(false);
+        player.getProtocol().sendChar(false);
 		return;
 	}
 

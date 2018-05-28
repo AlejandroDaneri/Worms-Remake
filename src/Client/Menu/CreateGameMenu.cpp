@@ -26,7 +26,7 @@ CreateGameMenu::~CreateGameMenu(){}
 void CreateGameMenu::configure(int quantity){
 	try{
 		for (int i = 0; i < quantity; i++){
-			std::string map = this->protocol.receive_string();
+			std::string map = this->protocol.receiveString();
 			this->addMap(map);
 		}
 	}catch (const SocketException& e){
@@ -62,10 +62,10 @@ void CreateGameMenu::select_button_pressed(Glib::ustring map_name){
 	}
 
 	try{
-		this->protocol.send_string(map_name);
-		this->protocol.send_string(name);
-		this->protocol.send_length(players);
-		bool result = this->protocol.receive_char();
+		this->protocol.sendString(map_name);
+		this->protocol.sendString(name);
+        this->protocol.sendLength(players);
+		bool result = this->protocol.receiveChar();
 		if (!result){
 			this->error->set_label("Ocurrio un error al crear la partida");
 			this->show_error();

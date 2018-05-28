@@ -1,20 +1,20 @@
-#include "math_utils.h"
+#include "Math.h"
 #include <cmath>
 
 const float PI = 3.14159265;
 
-float Math::degrees_to_radians(int angle){
+float Math::degreesToRadians(int angle){
 	return angle * PI / 180;
 }
 
-int Math::radians_to_degrees(float angle){
+int Math::radiansToDegrees(float angle){
 	return angle * 180 / PI;
 }
 
-float Math::cos_degrees(int angle){
-	return cos(Math::degrees_to_radians(angle));
+float Math::cosDegrees(int angle){
+	return cos(Math::degreesToRadians(angle));
 }
 
-float Math::sin_degrees(int angle){
-	return sin(Math::degrees_to_radians(angle));
+float Math::sinDegrees(int angle){
+	return sin(Math::degreesToRadians(angle));
 }

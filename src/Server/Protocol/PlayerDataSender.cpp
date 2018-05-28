@@ -15,7 +15,7 @@ void PlayerDataSender::run(){
 			break;
 		}
 		try{
-			this->player.getProtocol().send_buffer(this->queue.front());
+            this->player.getProtocol().sendBuffer(this->queue.front());
 			this->queue.pop();
 		} catch(const SocketException& e){
 			this->player.disconnect();

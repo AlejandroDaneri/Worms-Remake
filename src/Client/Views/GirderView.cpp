@@ -1,6 +1,6 @@
 #include "GirderView.h"
 #include "ObjectSizes.h"
-#include "math_utils.h"
+#include "Math.h"
 
 GirderView::GirderView(WorldView& worldView, size_t size, Position pos, int rotation):
 	Viewable(worldView), size(size), rotation(rotation){
@@ -28,7 +28,7 @@ float GirderView::getHeight(){
 	if (angle > 90){
 		angle = 180 - angle;
 	}
-	return Math::sin_degrees(angle) * this->size + Math::cos_degrees(angle) * girder_height;
+	return Math::sinDegrees(angle) * this->size + Math::cosDegrees(angle) * girder_height;
 }
 
 float GirderView::getWidth(){
@@ -36,5 +36,5 @@ float GirderView::getWidth(){
 	if (angle > 90){
 		angle = 180 - angle;
 	}
-	return Math::cos_degrees(angle) * this->size + Math::sin_degrees(angle) * girder_height;
+	return Math::cosDegrees(angle) * this->size + Math::sinDegrees(angle) * girder_height;
 }

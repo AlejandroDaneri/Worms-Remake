@@ -24,7 +24,7 @@ JoinGameMenu::~JoinGameMenu(){}
 void JoinGameMenu::configure(int quantity){
 	try{
 		for (int i = 0; i < quantity; i++){
-			std::string game = this->protocol.receive_string();
+			std::string game = this->protocol.receiveString();
 			this->addGame(game);
 		}
 	}catch (const SocketException& e){
@@ -45,8 +45,8 @@ void JoinGameMenu::addGame(const std::string& game_name){
 
 void JoinGameMenu::select_button_pressed(Glib::ustring game_name){
 	try{
-		this->protocol.send_string(game_name);
-		bool result = this->protocol.receive_char();
+		this->protocol.sendString(game_name);
+		bool result = this->protocol.receiveChar();
 		if (!result){
 			this->error->set_label("Ocurrio un error al unirse a la partida");
 			this->show_error();

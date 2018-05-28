@@ -6,11 +6,11 @@ Turn::~Turn(){}
 
 void Turn::addPlayer(Player&& player){
 	if (!this->playerCanJoin(player.getName())){
-		player.getProtocol().send_char(false);
+        player.getProtocol().sendChar(false);
 		return;
 	}
 	player.setId(this->players.size());
-	player.getProtocol().send_char(true);
+    player.getProtocol().sendChar(true);
 	this->players.push_back(std::move(player));
 }
 

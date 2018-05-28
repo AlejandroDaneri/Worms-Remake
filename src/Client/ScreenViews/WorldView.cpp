@@ -2,7 +2,7 @@
 #include <gtkmm/adjustment.h>
 #include "ViewTransformer.h"
 #include "Player.h"
-#include "math_utils.h"
+#include "Math.h"
 
 WorldView::WorldView(){
 	this->world.set_size(10000, 10000);
@@ -24,8 +24,8 @@ void WorldView::moveElement(Gtk::Widget& element, const Position& position, floa
 void WorldView::moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle) {
 	float pos_x = this->world.child_property_x(worm).get_value();
 	float pos_y = this->world.child_property_y(worm).get_value();
-	pos_x += 50 * Math::cos_degrees(angle);
-	pos_y -= 50 * Math::sin_degrees(angle);
+	pos_x += 50 * Math::cosDegrees(angle);
+	pos_y -= 50 * Math::sinDegrees(angle);
 	pos_x -= worm.get_width() / 2; // Para que quede referenciado a la mitad de la imagen
 	this->world.move(scope, pos_x, pos_y);
 }

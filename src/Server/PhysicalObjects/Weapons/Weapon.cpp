@@ -3,7 +3,7 @@
 #include "b2CircleShape.h"
 #include "CollisionData.h"
 #include "Worm.h"
-#include "math_utils.h"
+#include "Math.h"
 
 int Weapon::weapon_id = 1;
 
@@ -56,7 +56,7 @@ void Weapon::setInitialVelocity(){
 		if (this->power != -1){
 			 velocity *= this->power / 1000;
 		}
-		b2Vec2 linear_velocity(velocity * Math::cos_degrees(this->angle), velocity * Math::sin_degrees(this->angle));
+		b2Vec2 linear_velocity(velocity * Math::cosDegrees(this->angle), velocity * Math::sinDegrees(this->angle));
 		this->body->SetLinearVelocity(linear_velocity);
 	}
 	this->waiting_to_explode = true;
@@ -77,7 +77,7 @@ void Weapon::explode(){
 }
 
 void Weapon::attackWormExplosion(const b2Vec2& center, int angle){
-	b2Vec2 end = center + this->radius * b2Vec2(Math::cos_degrees(angle), Math::sin_degrees(angle));
+	b2Vec2 end = center + this->radius * b2Vec2(Math::cosDegrees(angle), Math::sinDegrees(angle));
 	b2Body* closest_body = this->world.getClosestObject(&this->explosion, center, end);
 	if (closest_body){
 		Worm* worm = (Worm*)((CollisionData*)closest_body->GetUserData())->getObject();

@@ -37,7 +37,7 @@ class Socket{
 		// Envia todos los datos del buffer data a traves del socket
 		//Devuelve la cantidad de datos que se pudieron enviar
 		//Lanza SocketException en caso de error
-		int send_data(const void* data, size_t size);
+		int sendData(const void *data, size_t size);
 
 		// Recibe datos del socket hasta alcanzar el max 
 		// o hasta que se cierra la conexion
@@ -46,7 +46,7 @@ class Socket{
 		int receive(void* buffer, size_t size);
 
 		// Establece una conexion con un cliente
-		Socket accept_client();
+		Socket acceptClient();
 
 		//Interrumpe las conexiones del socket
 		void stop();
@@ -73,7 +73,7 @@ class Socket::Addrinfo{
 		//Crea el socket y lo conecta o bindea segun correponda
 		//Devuelve el socket creado 
 		//y lanza una excepcion si no pudo crearse
-		Socket connect_or_bind(int action) const;
+		Socket connectOrBind(int action) const;
 
 		~Addrinfo();
 };

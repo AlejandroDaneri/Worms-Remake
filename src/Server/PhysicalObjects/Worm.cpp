@@ -4,7 +4,7 @@
 #include "Protocol.h"
 #include "WeaponFactory.h"
 #include "Girder.h"
-#include "math_utils.h"
+#include "Math.h"
 #include <algorithm>
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
@@ -100,8 +100,8 @@ void Worm::shoot(int angle, int power, int time){
 	if (angle > 500){
 		angle = this->angle;
 	}
-	pos.x += (worm_size * Math::cos_degrees(angle) * this->dir);
-	pos.y += (worm_size * Math::sin_degrees(angle));
+	pos.x += (worm_size * Math::cosDegrees(angle) * this->dir);
+	pos.y += (worm_size * Math::sinDegrees(angle));
 
 	this->world.addObject(this->weapon, pos);
 }

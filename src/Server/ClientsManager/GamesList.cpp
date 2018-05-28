@@ -13,7 +13,7 @@ void GamesList::addGame(const std::string& game_name, const std::string& map, in
 	std::lock_guard<std::mutex> lock(this->mutex);
 	auto it = this->games.find(game_name);
 	if (it != this->games.end()){
-		player.getProtocol().send_char(false);
+        player.getProtocol().sendChar(false);
 		return;
 	}
 

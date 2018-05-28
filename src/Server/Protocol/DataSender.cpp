@@ -62,7 +62,7 @@ void DataSender::run(){
 void DataSender::send_start_game(){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
 		try{
-			player->getProtocol().send_char(START_GAME_ACTION);
+			player->getProtocol().sendChar(START_GAME_ACTION);
 		} catch(const SocketException& e){}
 	}
 }
@@ -78,7 +78,7 @@ void DataSender::send_start_turn(int worm_id, int player_id){
 void DataSender::send_players_id(){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
 		try{
-			player->getProtocol().send_length(this->players.size());
+            player->getProtocol().sendLength(this->players.size());
 			for (auto it = this->players.begin(); it != this->players.end(); ++it){
 				player->getProtocol().sendPlayerId(*it);
 			}
@@ -89,7 +89,7 @@ void DataSender::send_players_id(){
 void DataSender::sendGirders(){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
 		try{
-			player->getProtocol().send_length(this->girders.size());
+            player->getProtocol().sendLength(this->girders.size());
 			for (auto it = this->girders.begin(); it != this->girders.end(); ++it){
 				player->getProtocol().sendGirder(*it);
 			}
@@ -100,7 +100,7 @@ void DataSender::sendGirders(){
 void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
 		try{
-			player->getProtocol().send_length(weapons.size());
+            player->getProtocol().sendLength(weapons.size());
 			for (auto it = weapons.begin(); it != weapons.end(); ++it){
 				player->getProtocol().sendWeaponAmmo(it->first, it->second);
 			}

@@ -8,8 +8,8 @@ ClientHandler::~ClientHandler(){}
 
 void ClientHandler::run(){
 	try{
-		char action = this->client.receive_char();
-		std::string player_name = this->client.receive_string();
+		char action = this->client.receiveChar();
+		std::string player_name = this->client.receiveString();
 		if (action == CREATE_GAME_ACTION){
 			this->createGame(player_name);
 		} else if (action == JOIN_GAME_ACTION){
@@ -31,15 +31,15 @@ void ClientHandler::createGame(const std::string& player_name){
 	maps_list_t maps_list = MapsList::getAllMaps();
 
 	size_t size = maps_list.size();
-	this->client.send_length(size);
+    this->client.sendLength(size);
 
 	for (size_t i = 0; i < size; i++){
-		this->client.send_string(maps_list[i]);
+		this->client.sendString(maps_list[i]);
 	}
 
-	std::string map = this->client.receive_string();
-	std::string game_name = this->client.receive_string();
-	int max_players = this->client.receive_length();
+	std::string map = this->client.receiveString();
+	std::string game_name = this->client.receiveString();
+	int max_players = this->client.receiveLength();
 
 	Player player(std::move(this->client), player_name);
 
@@ -51,13 +51,13 @@ void ClientHandler::joinGame(const std::string& player_name){
 	games_list_t games_list = this->games.getJoinableGames(player_name);
 
 	size_t size = games_list.size();
-	this->client.send_length(size);
+    this->client.sendLength(size);
 
 	for (size_t i = 0; i < size; i++){
-		this->client.send_string(games_list[i]);
+		this->client.sendString(games_list[i]);
 	}
 
-	std::string game_name = this->client.receive_string();
+	std::string game_name = this->client.receiveString();
 
 	Player player(std::move(this->client), player_name);
 

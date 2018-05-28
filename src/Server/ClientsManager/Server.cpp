@@ -18,7 +18,7 @@ Server::~Server(){
 void Server::run(){
 	while (this->running){
 		try{
-			Socket client = this->socket.accept_client();
+			Socket client = this->socket.acceptClient();
 			std::unique_ptr<Thread> t(new ClientHandler(std::move(client), this->games_list));
 			t->start();
 			this->clients.push_back(std::move(t));
