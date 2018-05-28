@@ -30,11 +30,7 @@ void JoinGameMenu::selectButtonPressed(Glib::ustring game_name){
 			this->error->set_label("Ocurrio un error al unirse a la partida");
             this->showError();
 		} else {
-			this->window.remove();
-			this->window.add(this->waiting_label.getWidget());
-			this->window.show_all();
-			sigc::slot<bool> my_slot = sigc::mem_fun(*this, &JoinGameMenu::createPlayer);
-			Glib::signal_idle().connect(my_slot);
+			this->waitToPlayers();
 		}
 	} catch (const SocketException& e){
 		this->error->set_label("Ocurrio un error");

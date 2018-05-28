@@ -33,6 +33,9 @@ class SelectableListMenu: public MenuView{
 		/* Handler del boton de seleccion */
 		virtual void selectButtonPressed(Glib::ustring field_name) = 0;
 
+		/* Muestra el mensaje esperando jugadores */
+		void waitToPlayers();
+
 	public:
 		/* Constructor */
 		SelectableListMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name);

@@ -29,8 +29,15 @@ void SelectableListMenu::addField(const std::string& field_name){
                                                                                                    &SelectableListMenu::selectButtonPressed), field_name));
 }
 
-
 bool SelectableListMenu::createPlayer(){
 	this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name, this->window));
 	return false;
+}
+
+void SelectableListMenu::waitToPlayers(){
+	this->window.remove();
+	this->window.add(this->waiting_label.getWidget());
+	this->window.show_all();
+	sigc::slot<bool> my_slot = sigc::mem_fun(*this, &SelectableListMenu::createPlayer);
+	Glib::signal_idle().connect(my_slot);
 }
