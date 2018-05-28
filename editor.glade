@@ -190,7 +190,7 @@
   <object class="GtkImage" id="undo">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">resources/Images/editor_toolbox/undo.png</property>
+    <property name="pixbuf">resources/Images/editor_toolbox/delete.png</property>
   </object>
   <object class="GtkWindow" id="main_window">
     <property name="height_request">500</property>
@@ -1055,7 +1055,6 @@
                         <property name="tooltip_text" translatable="yes">Borrar seleccionado</property>
                         <property name="image">undo</property>
                         <property name="relief">none</property>
-                        <property name="yalign">0.50999999046325684</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>

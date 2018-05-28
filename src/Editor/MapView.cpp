@@ -123,14 +123,14 @@ void MapView::changeBackground() {
 
 int MapView::select(const double &x, const double &y) {
     Gdk::Rectangle new_object(x, y, 1, 1);
-    bool isolated = true;
-    for (size_t i = 0; (i < objects.size()) && (isolated); i++) {
-        isolated = !objects[i].intersect(new_object);
-        if (!isolated) {
+    bool collision = false;
+    for (size_t i = 0; (i < objects.size()) && (!collision); i++) {
+        collision = objects[i].intersect(new_object);
+        if (collision) {
             this->actual_selected = i;
         }
     }
-    return isolated ? -1 : actual_selected;
+    return collision ? actual_selected:-1;
 }
 
 bool
