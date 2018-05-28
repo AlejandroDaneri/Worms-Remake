@@ -11,7 +11,7 @@ class FileBoxController {
 private:
     WeaponsAndLifeController &weapons_controller;
     std::shared_ptr<MapController> map_controller;
-    
+
 public:
     FileBoxController(WeaponsAndLifeController &wep_controller,
                       std::shared_ptr<MapController> map_controller);

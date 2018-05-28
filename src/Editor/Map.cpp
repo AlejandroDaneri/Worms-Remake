@@ -40,7 +40,6 @@ bool Map::isGirder(int &index) {
 
 void Map::getObjects(std::vector<std::vector<double>> &worms,
                      std::vector<std::vector<double>> &girders) const {
-    //gusanos
     for (auto &object : objects) {
         double x, y;
         object.second.getPosition(x, y);
@@ -58,7 +57,6 @@ void Map::getObjects(std::vector<std::vector<double>> &worms,
             girders.push_back(data);
         }
     }
-
 }
 
 

@@ -1,4 +1,5 @@
 
+#include <gtkmm/messagedialog.h>
 #include "MapController.h"
 
 #define ADD_CMD_ID 0
@@ -74,6 +75,18 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
 void MapController::getObjects(std::vector<std::vector<double>> &worms,
                                std::vector<std::vector<double>> &girders) const {
     model.getObjects(worms, girders);
+    if (worms.empty()){//excepcion
+        Gtk::MessageDialog dialog("Error al guardar archivo",false,Gtk::MESSAGE_WARNING);
+        dialog.set_secondary_text(
+                "El mapa actual no contiene worms");
+        dialog.run();
+    }
+    if (girders.empty()){//execpcion
+        Gtk::MessageDialog dialog("Error al guardar archivo",false,Gtk::MESSAGE_WARNING);
+        dialog.set_secondary_text(
+                "El mapa actual no contiene vigas");
+        dialog.run();
+    }
 }
 
 void MapController::loadObjects(std::vector<std::vector<double>> &worms,
