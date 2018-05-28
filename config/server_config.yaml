@@ -6,8 +6,8 @@ worm_rollback_velocity: 1.4
 worm_jump_height: 5
 worm_rollback_height: 3
 weapons_velocity: 7
-wind_min_velocity: 0.2
-wind_max_velocity: 4.0
+wind_min_velocity: 0.1
+wind_max_velocity: 0.5
 gravity: -10
 worm_height_to_damage: 2
 worm_max_height_damage: 25

@@ -70,15 +70,15 @@ Socket Socket::acceptClient(){
 }
 
 void Socket::stop(){
-	shutdown(this->fd, SHUT_RDWR);
-	close(this->fd);
-	this->fd = -1;
+	if (this->fd != -1){
+		shutdown(this->fd, SHUT_RDWR);
+		close(this->fd);
+		this->fd = -1;
+	}
 }
 
 Socket::~Socket(){
-	if (this->fd != -1){
-		this->stop();
-	}
+	this->stop();
 }
 
 Socket::Socket(Socket&& other): fd(other.fd){

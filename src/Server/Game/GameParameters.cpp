@@ -8,7 +8,7 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 			
 	this->world_max_height = 999999;
 }
-	
+
 GameParameters::~GameParameters(){}
 
 int GameParameters::getWormLife(){
@@ -30,7 +30,7 @@ std::vector<b2Vec2> GameParameters::getWorms(){
 	std::random_device rd;
     std::mt19937 random(rd());
  
-    //std::shuffle(worms.begin(), worms.end(), random);////////////////////////////////////////para probar cosas saco el random
+    std::shuffle(worms.begin(), worms.end(), random);
 	return worms;
 }
 
