@@ -2,8 +2,6 @@
 #include <gtkmm/window.h>
 #include "ServerMenu.h"
 
-
-/*
 int main(int argc, char* argv[]){
 
 	auto app = Gtk::Application::create(argc, argv);
@@ -17,5 +15,3 @@ int main(int argc, char* argv[]){
 
 	return 0;
 }
-
-//*/

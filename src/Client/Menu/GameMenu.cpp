@@ -8,10 +8,9 @@ GameMenu::GameMenu(Gtk::Window& window, ClientProtocol&& protocol): window(windo
 	builder->get_widget("error", this->error);
 	builder->get_widget("player_name", this->player_name);
 
-	Gtk::Box* menu;
-	builder->get_widget("game_menu", menu);
-	this->window.add(*menu);
-	menu->show();
+	builder->get_widget("game_menu", this->menu);
+	this->window.add(*this->menu);
+	this->menu->show();
 
 
 	Gtk::Button *create_game, *join_game;
@@ -68,6 +67,7 @@ bool GameMenu::select_action(char action){
 }
 
 void GameMenu::show_error(){
+	this->menu->remove(*this->error);
 	this->window.remove();
 	this->window.add(*this->error);
 }

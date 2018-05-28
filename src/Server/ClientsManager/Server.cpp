@@ -10,8 +10,8 @@ Server::Server(const std::string& service):
 
 Server::~Server(){
 	for (auto it = this->clients.begin(); it != this->clients.end(); ++it){
-		(*it) -> stop();
-		(*it) -> join();
+		(*it)->stop();
+		(*it)->join();
 	}
 }
 

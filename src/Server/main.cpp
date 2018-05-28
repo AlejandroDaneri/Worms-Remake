@@ -5,7 +5,6 @@
 
 #define EXIT_CHAR 'q'
 
-/*
 int main(int argc, const char* argv[]){
 	std::unique_ptr<Thread> thread;
 	try{
@@ -22,5 +21,3 @@ int main(int argc, const char* argv[]){
 	}
 	return 0;
 }
-
-////*/

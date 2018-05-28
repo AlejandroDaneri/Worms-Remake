@@ -22,7 +22,6 @@ CreateGameMenu::CreateGameMenu(Gtk::Window& window, ClientProtocol&& protocol, s
 
 CreateGameMenu::~CreateGameMenu(){}
 
-#include <iostream>
 void CreateGameMenu::configure(int quantity){
 	try{
 		for (int i = 0; i < quantity; i++){
@@ -65,21 +64,17 @@ void CreateGameMenu::select_button_pressed(Glib::ustring map_name){
 		this->protocol.send_string(map_name);
 		this->protocol.send_string(name);
 		this->protocol.send_length(players);
-		std::cout <<"antes del result\n";
 		bool result = this->protocol.receive_char();
-		std::cout <<"despues del result\n"<<std::endl;
 		if (!result){
 			this->error->set_label("Ocurrio un error al crear la partida");
 			this->show_error();
 		} else {
-			std::cout <<"antes del create player\n";
 			this->window.remove();
 			this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name));
 			this->window.add(this->player->getWindow());
 			this->window.show_all();
 		}
 	} catch (const SocketException& e){
-		std::cout <<e.what()<<std::endl;
 		this->error->set_label("Ocurrio un error");
 		this->show_error();
 	}

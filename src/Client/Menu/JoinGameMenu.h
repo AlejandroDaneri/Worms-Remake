@@ -21,6 +21,7 @@ class JoinGameMenu{
 		Gtk::Box* games;
 		std::vector<GameMenuField> game_fields;
 		std::unique_ptr<Player> player;
+		Gtk::Box* menu;
 
 		void configure(int quantity);
 

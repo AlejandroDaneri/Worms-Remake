@@ -12,11 +12,10 @@ JoinGameMenu::JoinGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::
 
 	this->configure(quantity);
 
-	Gtk::Box* menu;
-	builder->get_widget("join_game_menu", menu);
-	this->window.add(*menu);
-	menu->show();
-	}
+	builder->get_widget("join_game_menu", this->menu);
+	this->window.add(*this->menu);
+	this->window.show_all();
+}
 
 JoinGameMenu::~JoinGameMenu(){}
 
@@ -30,12 +29,15 @@ void JoinGameMenu::configure(int quantity){
 		this->error->set_label("Ocurrio un error");
 		this->show_error();
 	}
+	for (auto it = this->game_fields.begin(); it != this->game_fields.end(); ++it){
+		this->games->pack_start(it->getContainer());
+	}
+	this->games->show();
 }
 
 void JoinGameMenu::addGame(const std::string& game_name){
 	GameMenuField game(game_name);
 	this->game_fields.push_back(std::move(game));
-	this->games->pack_start(this->game_fields.back().getContainer());
 	this->game_fields.back().getButton().signal_clicked().connect(sigc::bind<Glib::ustring>(sigc::mem_fun(*this, &JoinGameMenu::select_button_pressed), game_name));
 }
 
@@ -50,6 +52,7 @@ void JoinGameMenu::select_button_pressed(Glib::ustring game_name){
 			this->window.remove();
 			this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name));
 			this->window.add(this->player->getWindow());
+			this->window.show_all();
 		}
 	} catch (const SocketException& e){
 		this->error->set_label("Ocurrio un error");
@@ -58,6 +61,7 @@ void JoinGameMenu::select_button_pressed(Glib::ustring game_name){
 }
 
 void JoinGameMenu::show_error(){
+	this->menu->remove(*this->error);
 	this->window.remove();
 	this->window.add(*this->error);
 }

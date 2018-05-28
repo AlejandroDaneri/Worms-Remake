@@ -20,6 +20,7 @@ class GameMenu{
 		Gtk::Entry* player_name;
 		std::unique_ptr<CreateGameMenu> create_menu;
 		std::unique_ptr<JoinGameMenu> join_menu;
+		Gtk::Box* menu;
 
 		void create_button_pressed();
 		void join_button_pressed();

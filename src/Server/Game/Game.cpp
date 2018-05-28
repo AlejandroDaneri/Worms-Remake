@@ -4,14 +4,17 @@
 
 
 Game::Game(size_t players, const std::string& config_file, const std::string& map):
-	players(players), parameters(config_file, map), world(this->parameters){}
+	players(players), parameters(config_file, map), world(this->parameters){
+		this->running = true;
+	}
 
 Game::~Game(){
 	this->world.stop();
 	this->world.join();
-	this->data_sender->stop();
-	this->data_sender->join();
-	
+	if (data_sender){
+		this->data_sender->stop();
+		this->data_sender->join();
+	}
 }
 
 void Game::addPlayer(Player&& player){
