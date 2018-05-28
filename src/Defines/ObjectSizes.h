@@ -15,4 +15,10 @@ const float girder_height = 0.4;
 
 const int WORM_IMAGE_WIDTH = 30;
 
+// map size
+
+const int map_height = 5000;
+
+const int map_width = 20000;
+
 #endif

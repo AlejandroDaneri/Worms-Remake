@@ -3,9 +3,10 @@
 #include "ViewTransformer.h"
 #include "Player.h"
 #include "Math.h"
+#include "ObjectSizes.h"
 
 WorldView::WorldView(){
-	this->world.set_size(10000, 10000);
+	this->world.set_size(map_width, map_height);
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
 	this->window.override_background_color(Gdk::RGBA("lightgreen"));////////////// Reemplazar por fondo de pantalla
