@@ -20,11 +20,11 @@ class GamesList{
 
 		~GamesList();
 
-		bool addGame(const std::string& game_name, const std::string& map, int max_players, Player& player);
+		void addGame(const std::string& game_name, const std::string& map, int max_players, Player&& player);
 
 		games_list_t getJoinableGames(const std::string& player_name);
 
-		bool addPlayer(const std::string& game_name, Player& player);
+		void addPlayer(const std::string& game_name, Player&& player);
 
 		void checkGames();
 };

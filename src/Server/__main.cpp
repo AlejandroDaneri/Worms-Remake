@@ -5,6 +5,7 @@
 
 #define EXIT_CHAR 'q'
 
+
 int main(int argc, char* argv[]){
 
 	Socket socket(Socket::Server("7777", 10));

@@ -21,14 +21,14 @@ JoinGameMenu::JoinGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::
 JoinGameMenu::~JoinGameMenu(){}
 
 void JoinGameMenu::configure(int quantity){
-	for (int i = 0; i < quantity; i++){
-		try{
+	try{
+		for (int i = 0; i < quantity; i++){
 			std::string game = this->protocol.receive_string();
 			this->addGame(game);
-		}catch (const SocketException& e){
-			this->error->set_label("Ocurrio un error");
-			this->show_error();
 		}
+	}catch (const SocketException& e){
+		this->error->set_label("Ocurrio un error");
+		this->show_error();
 	}
 }
 

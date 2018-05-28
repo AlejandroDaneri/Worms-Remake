@@ -23,6 +23,7 @@ class CreateGameMenu{
 		Gtk::Entry* game_name;
 		Gtk::SpinButton* players_number;
 		Gtk::Box* games;
+		Gtk::Box* menu;
 		std::vector<GameMenuField> maps;
 		std::unique_ptr<Player> player;
 

@@ -9,16 +9,22 @@ GamesList::~GamesList(){
 	}
 }
 
-bool GamesList::addGame(const std::string& game_name, const std::string& map, int max_players, Player& player){
+void GamesList::addGame(const std::string& game_name, const std::string& map, int max_players, Player&& player){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	auto it = this->games.find(game_name);
 	if (it != this->games.end()){
-		return false;
+		player.getProtocol().send_char(false);
+		return;
 	}
 
-	std::unique_ptr<Game> game(new Game(max_players, SERVER_CONFIG_FILE, map));
+	std::unique_ptr<Game> game(new Game(max_players, SERVER_CONFIG_FILE, MAPS_PATH + map));
 	this->games[game_name] = std::move(game);
-	return this->games[game_name]->addPlayer(std::move(player));
+	this->games[game_name]->addPlayer(std::move(player));
+
+
+	if (this->games[game_name]->isFull()){
+		this->games[game_name]->start();
+	}//////////////////////////////////////////////por ahora, mientras se permita un player
 }
 
 games_list_t GamesList::getJoinableGames(const std::string& player_name){
@@ -33,9 +39,12 @@ games_list_t GamesList::getJoinableGames(const std::string& player_name){
 	return std::move(joinables);
 }
 
-bool GamesList::addPlayer(const std::string& game_name, Player& player){
+void GamesList::addPlayer(const std::string& game_name, Player&& player){
 	std::lock_guard<std::mutex> lock(this->mutex);
-	return this->games[game_name]->addPlayer(std::move(player));
+	this->games[game_name]->addPlayer(std::move(player));
+	if (this->games[game_name]->isFull()){
+		this->games[game_name]->start();
+	}
 }
 
 void GamesList::checkGames(){

@@ -16,7 +16,7 @@ class Turn{
 		Turn();
 		~Turn();
 
-		bool addPlayer(Player&& player);
+		void addPlayer(Player&& player);
 
 		bool playerCanJoin(const std::string& player_name);
 

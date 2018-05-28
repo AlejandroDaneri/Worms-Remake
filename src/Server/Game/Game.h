@@ -29,7 +29,7 @@ class Game: public Thread{
 		Game(size_t players, const std::string& config_file, const std::string& map);
 		~Game();
 
-		bool addPlayer(Player&& player);
+		void addPlayer(Player&& player);
 
 		bool isFull();
 

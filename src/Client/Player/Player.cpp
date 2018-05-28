@@ -12,7 +12,6 @@ Player::Player(ClientProtocol protocol, const std::string& name):
 	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()){
 
 	this->musicPlayer.playMusic();
-
 	this->protocol.receivePlayers(this->players_list);
 	this->protocol.receiveGirders(this->view_list);
 	this->protocol.receiveWeaponsAmmo(this->weapons);

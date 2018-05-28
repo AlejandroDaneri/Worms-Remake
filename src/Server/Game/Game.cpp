@@ -14,12 +14,13 @@ Game::~Game(){
 	
 }
 
-bool Game::addPlayer(Player&& player){
+void Game::addPlayer(Player&& player){
 	if (this->isFull()){
-		return false;
+		player.getProtocol().send_char(false);
+		return;
 	}
 
-	return this->turn.addPlayer(std::move(player));
+	this->turn.addPlayer(std::move(player));
 }
 
 bool Game::isFull(){

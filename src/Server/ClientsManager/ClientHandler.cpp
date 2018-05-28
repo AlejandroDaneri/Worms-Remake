@@ -43,11 +43,7 @@ void ClientHandler::createGame(const std::string& player_name){
 
 	Player player(std::move(this->client), player_name);
 
-	bool result = this->games.addGame(game_name, map, max_players, player);
-
-	if (!result){
-		player.getProtocol().send_char(result);
-	}
+	this->games.addGame(game_name, map, max_players, std::move(player));
 
 }
 
@@ -65,9 +61,5 @@ void ClientHandler::joinGame(const std::string& player_name){
 
 	Player player(std::move(this->client), player_name);
 
-	bool result = this->games.addPlayer(game_name, player);
-
-	if (!result){
-		player.getProtocol().send_char(result);
-	}
+	this->games.addPlayer(game_name, std::move(player));
 }

@@ -4,14 +4,14 @@ Turn::Turn(): current(0){}
 
 Turn::~Turn(){}
 
-bool Turn::addPlayer(Player&& player){
+void Turn::addPlayer(Player&& player){
 	if (!this->playerCanJoin(player.getName())){
-		return false;
+		player.getProtocol().send_char(false);
+		return;
 	}
 	player.setId(this->players.size());
-	////////////////////////////////////////////player.getProtocol().send_char(true);
+	player.getProtocol().send_char(true);
 	this->players.push_back(std::move(player));
-	return true;
 }
 
 bool Turn::playerCanJoin(const std::string& player_name){
