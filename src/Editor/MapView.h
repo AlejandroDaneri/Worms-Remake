@@ -46,7 +46,6 @@ public:
 
     bool isIsolated(const double &x, double y, const unsigned int &id);
 
-
     void move(const int& index, const double &x, const double &y);
 };
 

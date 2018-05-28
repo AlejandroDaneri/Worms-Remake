@@ -101,12 +101,12 @@ void MapView::linkController(MapController *pController) {
 
 void MapView::setBackground(const std::string &name) {
     Gtk::Image bg(name);
-    int width = bg.get_pixbuf()->get_width();
-    int heigth = bg.get_pixbuf()->get_height();
-    guint winw, winh;
-    this->get_size(winw, winh);
-    for (size_t x = 0; x < winw; x += width) {
-        for (size_t y = 0; y < winh; y += heigth) {
+    int img_width = bg.get_pixbuf()->get_width();
+    int img_height = bg.get_pixbuf()->get_height();
+    guint window_width, window_height;
+    this->get_size(window_width, window_height);
+    for (size_t x = 0; x < window_width; x += img_width) {
+        for (size_t y = 0; y < window_height; y += img_height) {
             Gtk::Image image(name);
             image.show();
             put(image, x, y);
@@ -119,6 +119,18 @@ void MapView::changeBackground() {
     background.clear();
     actual_bg = (actual_bg + 1) % bg_paths.size();
     setBackground(bg_paths[actual_bg]);
+}
+
+int MapView::select(const double &x, const double &y) {
+    Gdk::Rectangle new_object(x, y, 1, 1);
+    bool isolated = true;
+    for (size_t i = 0; (i < objects.size()) && (isolated); i++) {
+        isolated = !objects[i].intersect(new_object);
+        if (!isolated) {
+            this->actual_selected = i;
+        }
+    }
+    return isolated ? -1 : actual_selected;
 }
 
 bool
@@ -142,16 +154,4 @@ MapView::isIsolated(const double &x, double y, const unsigned int &id) {
         isolated = !objects[i].intersect(new_object);
     }
     return isolated;
-}
-
-int MapView::select(const double &x, const double &y) {
-    Gdk::Rectangle new_object(x, y, 1, 1);
-    bool isolated = true;
-    for (size_t i = 0; (i < objects.size()) && (isolated); i++) {
-        isolated = !objects[i].intersect(new_object);
-        if (!isolated) {
-            this->actual_selected = i;
-        }
-    }
-    return isolated ? -1 : actual_selected;
 }
