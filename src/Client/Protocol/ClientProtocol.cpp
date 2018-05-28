@@ -72,6 +72,7 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 		player.startTurn(worm_id, player_id);
 	} else if (action == CHANGE_WEAPON_ACTION) {
         std::string weapon(this->receive_string_buffer(buffer));
+        viewsList.removeScopeVisibility();
         viewsList.changeWeapon(weapon);
     } else if (action == MOVE_SCOPE) {
 	    int angle = this->receive_int_buffer(buffer);
@@ -88,6 +89,7 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 			char dir = buffer.getNext();
 			bool colliding = buffer.getNext();
 			viewsList.updateWormData(id, player_id, pos_x, pos_y, life, dir, colliding);
+			viewsList.removeScopeVisibility();
 		} else if (type == WEAPON_TYPE){
 			std::string weapon(this->receive_string_buffer(buffer));
 

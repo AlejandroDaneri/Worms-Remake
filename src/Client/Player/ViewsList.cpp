@@ -136,7 +136,9 @@ void ViewsList::updateScope(int angle) {
 }
 
 bool ViewsList::removeScopeVisibilityCallBack() {
-    this->scope.hide();
+    if (this->scope.is_visible()) {
+        this->scope.hide();
+    }
     return false;
 }
 
