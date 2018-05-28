@@ -10,6 +10,7 @@
 #include <memory>
 #include "ClientProtocol.h"
 #include "GameMenu.h"
+#include "MenuView.h"
 
 class ServerMenu{
 	private:
@@ -18,7 +19,7 @@ class ServerMenu{
 		Gtk::Entry* service;
 		Gtk::Button* connect;
 		Gtk::Window& window;
-		std::unique_ptr<GameMenu> game_menu;
+		std::unique_ptr<MenuView> next_menu;
 
 		/* Handler del boton de conexion */
 		void connectButtonPressed();

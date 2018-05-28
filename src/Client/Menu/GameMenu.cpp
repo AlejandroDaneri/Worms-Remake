@@ -1,8 +1,10 @@
 #include "GameMenu.h"
 #include <gtkmm/builder.h>
 #include "Path.h"
+#include "CreateGameMenu.h"
+#include "JoinGameMenu.h"
 
-GameMenu::GameMenu(Gtk::Window& window, ClientProtocol&& protocol): window(window), protocol(std::move(protocol)){
+GameMenu::GameMenu(Gtk::Window& window, ClientProtocol&& protocol): MenuView(window, std::move(protocol)){
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_GameMenu.glade");
 
 	builder->get_widget("error", this->error);
@@ -30,7 +32,7 @@ void GameMenu::createButtonPressed(){
 			this->error->set_label("No hay mapas para crear una partida");
 			this->showError();
 		} else {
-			this->create_menu = std::unique_ptr<CreateGameMenu>(new CreateGameMenu(this->window, std::move(this->protocol), std::move(name), quantity));
+			this->next_menu = std::unique_ptr<MenuView>(new CreateGameMenu(this->window, std::move(this->protocol), std::move(name), quantity));
 		}
 	}
 }
@@ -43,7 +45,7 @@ void GameMenu::joinButtonPressed(){
 			this->error->set_label("No hay partidas disponibles");
 			this->showError();
 		} else {
-			this->join_menu = std::unique_ptr<JoinGameMenu>(new JoinGameMenu(this->window, std::move(this->protocol), std::move(name), quantity));
+			this->next_menu = std::unique_ptr<MenuView>(new JoinGameMenu(this->window, std::move(this->protocol), std::move(name), quantity));
 		}
 	}
 }
@@ -64,10 +66,4 @@ bool GameMenu::selectAction(char action){
 		this->showError();
 		return false;
 	}
-}
-
-void GameMenu::showError(){
-	this->menu->remove(*this->error);
-	this->window.remove();
-	this->window.add(*this->error);
 }

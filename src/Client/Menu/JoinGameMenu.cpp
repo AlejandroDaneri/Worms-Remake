@@ -5,7 +5,7 @@
 #include "WaitingLabel.h"
 
 JoinGameMenu::JoinGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity):
-	window(window), protocol(std::move(protocol)), player_name(std::move(name)){
+	SelectableListMenu(window, std::move(protocol), std::move(name)){
 
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_JoinGameMenu.glade");
 
@@ -21,28 +21,6 @@ JoinGameMenu::JoinGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::
 
 JoinGameMenu::~JoinGameMenu(){}
 
-void JoinGameMenu::configure(int quantity){
-	try{
-		for (int i = 0; i < quantity; i++){
-			std::string game = this->protocol.receiveString();
-			this->addGame(game);
-		}
-	}catch (const SocketException& e){
-		this->error->set_label("Ocurrio un error");
-        this->showError();
-	}
-	for (auto it = this->game_fields.begin(); it != this->game_fields.end(); ++it){
-		this->games->pack_start(it->getContainer());
-	}
-	this->games->show();
-}
-
-void JoinGameMenu::addGame(const std::string& game_name){
-	GameMenuField game(game_name);
-	this->game_fields.push_back(std::move(game));
-	this->game_fields.back().getButton().signal_clicked().connect(sigc::bind<Glib::ustring>(sigc::mem_fun(*this,
-                                                                                                          &JoinGameMenu::selectButtonPressed), game_name));
-}
 
 void JoinGameMenu::selectButtonPressed(Glib::ustring game_name){
 	try{
@@ -62,15 +40,4 @@ void JoinGameMenu::selectButtonPressed(Glib::ustring game_name){
 		this->error->set_label("Ocurrio un error");
         this->showError();
 	}
-}
-
-void JoinGameMenu::showError(){
-	this->menu->remove(*this->error);
-	this->window.remove();
-	this->window.add(*this->error);
-}
-
-bool JoinGameMenu::createPlayer(){
-	this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name, this->window));
-	return false;
 }

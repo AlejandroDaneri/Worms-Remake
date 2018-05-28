@@ -5,7 +5,7 @@
 #include "GamePlayers.h"
 
 CreateGameMenu::CreateGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity):
-	window(window), protocol(std::move(protocol)), player_name(std::move(name)){
+	SelectableListMenu(window, std::move(protocol), std::move(name)){
 
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_CreateGameMenu.glade");
 
@@ -22,30 +22,6 @@ CreateGameMenu::CreateGameMenu(Gtk::Window& window, ClientProtocol&& protocol, s
 }
 
 CreateGameMenu::~CreateGameMenu(){}
-
-void CreateGameMenu::configure(int quantity){
-	try{
-		for (int i = 0; i < quantity; i++){
-			std::string map = this->protocol.receiveString();
-			this->addMap(map);
-		}
-	}catch (const SocketException& e){
-		this->error->set_label("Ocurrio un error");
-        this->showError();
-	}
-
-	for (auto it = this->maps.begin(); it != this->maps.end(); ++it){
-		this->games->pack_start(it->getContainer());
-	}
-	this->games->show();
-}
-
-void CreateGameMenu::addMap(const std::string& map_name){
-	GameMenuField map(map_name);
-	this->maps.push_back(std::move(map));
-	this->maps.back().getButton().signal_clicked().connect(sigc::bind<Glib::ustring>(sigc::mem_fun(*this,
-                                                                                                   &CreateGameMenu::selectButtonPressed), map_name));
-}
 
 void CreateGameMenu::selectButtonPressed(Glib::ustring map_name){
 	std::string name(this->game_name->get_text());
@@ -81,15 +57,4 @@ void CreateGameMenu::selectButtonPressed(Glib::ustring map_name){
 		this->error->set_label("Ocurrio un error");
         this->showError();
 	}
-}
-
-void CreateGameMenu::showError(){
-	this->menu->remove(*this->error);
-	this->window.remove();
-	this->window.add(*this->error);
-}
-
-bool CreateGameMenu::createPlayer(){
-	this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name, this->window));
-	return false;
 }
