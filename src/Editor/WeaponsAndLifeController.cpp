@@ -2,7 +2,7 @@
 #include "WeaponsAndLifeController.h"
 
 WeaponsAndLifeController::WeaponsAndLifeController(
-        const Glib::RefPtr<Gtk::Builder> &builder){
+        const Glib::RefPtr<Gtk::Builder> &builder) {
     builder->get_widget("btn_reset", reset_button);
     reset_button->signal_clicked().connect(
             sigc::mem_fun(*this,
@@ -34,7 +34,7 @@ void WeaponsAndLifeController::on_reset_clicked() {
 }
 
 void WeaponsAndLifeController::getWeapons(std::vector<int> &weps_ammo,
-                                       unsigned int &life) const {
+                                          unsigned int &life) const {
     life = life_spin->get_value();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         weps_ammo.push_back(actual_controller->getAmmo());
@@ -42,7 +42,7 @@ void WeaponsAndLifeController::getWeapons(std::vector<int> &weps_ammo,
 }
 
 void WeaponsAndLifeController::loadWeapons(std::vector<int> &weps_ammo,
-                                        const unsigned int &life) const {
+                                           const unsigned int &life) const {
     int i = 0;
     for (const std::shared_ptr<WeaponController> &actual_controller
             :wep_controllers) {

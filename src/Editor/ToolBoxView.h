@@ -21,7 +21,7 @@ class ToolBoxView : public Gtk::Grid {
 private:
     Gtk::Button *btn_clean;
     Gtk::Button *erase;
-    MapController* map_controller;
+    MapController *map_controller;
     Gtk::ToggleButton *worm;
     Gtk::ToggleButton *girder_3m;
     Gtk::ToggleButton *girder_6m;
@@ -41,6 +41,8 @@ public:
     void enableMovingItems();
 
     void linkController(MapController *controller);
+
+    void disableMovingItems();
 };
 
 

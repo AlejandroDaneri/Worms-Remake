@@ -26,6 +26,7 @@ private:
 
     //bool isIsolated(const double &x, const double &y, const unsigned int &id);
     void setBackground(std::string name);
+
 public:
     MapView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 
@@ -45,8 +46,8 @@ public:
     void changeBackground();
 
     int select(const double &x, const double &y);
-    bool isIsolated(const double &x, double y, const unsigned int &id);
 
+    bool isIsolated(const double &x, double y, const unsigned int &id);
 
 
     void move(const int index, const double &x, const double &y);

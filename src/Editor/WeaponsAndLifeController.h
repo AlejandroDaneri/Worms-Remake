@@ -18,7 +18,8 @@ private:
     std::vector<std::shared_ptr<WeaponView>> weapons_view;
     std::vector<std::shared_ptr<WeaponController> > wep_controllers;
 public:
-    explicit WeaponsAndLifeController(const Glib::RefPtr<Gtk::Builder> &builder);
+    explicit WeaponsAndLifeController(
+            const Glib::RefPtr<Gtk::Builder> &builder);
 
     void on_reset_clicked();
 

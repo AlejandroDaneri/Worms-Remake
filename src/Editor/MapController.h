@@ -8,12 +8,13 @@
 #include "ToolBoxView.h"
 
 class MapView;
+
 class ToolBoxView;
 
 class MapController {
     Map model;
-    MapView* view;
-    ToolBoxView * toolBox;
+    MapView *view;
+    ToolBoxView *toolBox;
     unsigned int actual_item_selected;
     unsigned int actual_action_id;
     unsigned int actual_mode;
@@ -21,9 +22,9 @@ class MapController {
 
 
 public:
-    MapController(Map model,const Glib::RefPtr<Gtk::Builder> &builder);
+    MapController(Map model, const Glib::RefPtr<Gtk::Builder> &builder);
 
-    void itemSelectedSignal(unsigned int id);
+    void addModeSignal(unsigned int id);
 
     void undo();
 
@@ -47,7 +48,6 @@ public:
 
 
     void changeModeSignal();
-
 
 
 };

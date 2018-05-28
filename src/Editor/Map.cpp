@@ -4,7 +4,7 @@
 
 void Map::undo(int index) {
     if (!objects.empty())
-        this->objects.erase(objects.begin()+index);
+        this->objects.erase(objects.begin() + index);
 }
 
 void Map::clean() {
@@ -22,7 +22,7 @@ void Map::move(int index, double &x, double &y) {
     object.updatePosition(x, y);
 }
 
-int Map::turnCCWLast(unsigned int index, unsigned int& id) {
+int Map::turnCCWLast(unsigned int index, unsigned int &id) {
     MapObject &object = objects[index].second;
     id = objects[index].first;
     return object.turnCCW();

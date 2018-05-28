@@ -15,8 +15,8 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
     builder->get_widget("btn_move", move);
     builder->get_widget("btn_turn_ccw", turnccw);
     builder->get_widget("btn_turn_cw", turncw);
-    builder->get_widget("btn_bg",change_bg);
-    builder->get_widget("btn_mode",mode);
+    builder->get_widget("btn_bg", change_bg);
+    builder->get_widget("btn_mode", mode);
 
 
     worm->signal_clicked().connect(sigc::bind<int>
@@ -34,7 +34,7 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                                                  GIRDER_6_BUTTON_ID));
 }
 
-void ToolBoxView::linkController(MapController* controller) {
+void ToolBoxView::linkController(MapController *controller) {
     this->map_controller = controller;
 
     erase->signal_clicked().connect(
@@ -78,7 +78,7 @@ void ToolBoxView::on_button_clicked(unsigned id) {
     turnccw->set_sensitive(false);
     move->set_sensitive(false);
     erase->set_sensitive(false);
-    map_controller->itemSelectedSignal(id);
+    map_controller->addModeSignal(id);
 }
 
 void ToolBoxView::enableMovingItems() {
@@ -89,4 +89,11 @@ void ToolBoxView::enableMovingItems() {
     turnccw->set_sensitive(true);
     move->set_sensitive(true);
     erase->set_sensitive(true);
+}
+
+void ToolBoxView::disableMovingItems() {
+    turncw->set_sensitive(false);
+    turnccw->set_sensitive(false);
+    move->set_sensitive(false);
+    erase->set_sensitive(false);
 }

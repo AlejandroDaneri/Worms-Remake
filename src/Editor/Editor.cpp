@@ -9,7 +9,6 @@ Editor::Editor(BaseObjectType *cobject,
     builder->get_widget("map_window", map_window);
     map_window->override_background_color(Gdk::RGBA("lightgreen"));
 
-
     std::shared_ptr<MapController> map_controller
             (new MapController(map_model, builder));
 

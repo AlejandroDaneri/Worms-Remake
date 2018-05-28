@@ -9,7 +9,7 @@ FileWriter::FileWriter(const std::string &filename)
 void FileWriter::save(std::vector<int> weapons,
                       const std::vector<std::vector<double>> &worms,
                       const std::vector<std::vector<double>> &girders,
-                      unsigned int worm_life) {
+                      const unsigned int &worm_life) {
     YAML::Emitter out;
 
     out << YAML::BeginMap;

@@ -1,14 +1,13 @@
 
 #include "MapController.h"
-#include <utility>
-#include "ToolBoxView.h"
 
 #define ADD_CMD_ID 0
 #define MOVE_CMD_ID 1
 #define SELECTION 2
 
 
-MapController::MapController(Map model, const Glib::RefPtr<Gtk::Builder> &builder)
+MapController::MapController(Map model,
+                             const Glib::RefPtr<Gtk::Builder> &builder)
         : model(std::move(
         model)), actual_item_selected(1), actual_action_id(0), actual_mode(0) {
     builder->get_widget_derived("map", view);
@@ -17,7 +16,7 @@ MapController::MapController(Map model, const Glib::RefPtr<Gtk::Builder> &builde
     toolBox->linkController(this);
 }
 
-void MapController::itemSelectedSignal(unsigned int id) {
+void MapController::addModeSignal(unsigned int id) {
     this->actual_action_id = ADD_CMD_ID;
     this->actual_item_selected = id;
 }
@@ -25,11 +24,13 @@ void MapController::itemSelectedSignal(unsigned int id) {
 void MapController::undo() {
     model.undo(actual_object_selected);
     view->undo(actual_object_selected);
+    toolBox->disableMovingItems();
 }
 
 void MapController::clean() {
     model.clean();
     view->clean();
+    toolBox->disableMovingItems();
 }
 
 void MapController::moveSignal() {
@@ -47,18 +48,21 @@ void MapController::turnCCWSignal() {
 void MapController::turnCWSignal() {
     if (model.isGirder(actual_object_selected)) {
         unsigned int id;
-        int new_angle = this->model.turnCWLast(actual_object_selected,id);
+        int new_angle = this->model.turnCWLast(actual_object_selected, id);
         this->view->turn(id, new_angle, actual_object_selected);
     }
 }
 
 void MapController::mapClickedSignal(GdkEventButton *event_button) {
     if (actual_action_id == MOVE_CMD_ID) {
-        this->model.move(actual_object_selected, event_button->x, event_button->y);
-        this->view->move(actual_object_selected, event_button->x, event_button->y);
-    } else if(actual_action_id==SELECTION){
-        this->actual_object_selected=view->select(event_button->x, event_button->y);
-        if(actual_object_selected>-1){
+        this->model.move(actual_object_selected, event_button->x,
+                         event_button->y);
+        this->view->move(actual_object_selected, event_button->x,
+                         event_button->y);
+    } else if (actual_action_id == SELECTION) {
+        this->actual_object_selected = view->select(event_button->x,
+                                                    event_button->y);
+        if (actual_object_selected > -1) {
             toolBox->enableMovingItems();
         }
     } else {
