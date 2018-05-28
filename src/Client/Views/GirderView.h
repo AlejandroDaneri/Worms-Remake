@@ -6,20 +6,31 @@
 #include <gtkmm/image.h>
 #include <string>
 
+/* Clase que se encaga de controlar la vista de las vigas */
 class GirderView: public Viewable{
 	private:
 		Gtk::Image image;
 		int size;
 		int rotation;
 
+		/* Devuelve el ancho de la imagen de la viga */
 		float getWidth();
+
+		/* Devuelve el alto de la imagen de la viga */
 		float getHeight();
 
 	public:
+	    /* Constructor */
 		GirderView(WorldView& worldView, size_t size, Position pos, int rotation);
+
+		/* Destructor */
 		~GirderView();
+
+		/* Constructor por movimiento */
 		GirderView(GirderView&& other);
-		
+
+
+		/* Devuelve el contenedor de la viga */
 		Gtk::Widget& getWidget() override;
 };
 

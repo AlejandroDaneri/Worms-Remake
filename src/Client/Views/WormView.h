@@ -13,7 +13,7 @@
 #define DIR_RIGHT 1
 #define DIR_LEFT -1
 
-
+/* Clase que se encarga de controlar la vista de los worms */
 class WormView: public Viewable {
 	private:
 		int player_id;
@@ -30,12 +30,17 @@ class WormView: public Viewable {
 	    Glib::RefPtr<Gdk::Pixbuf> scope_image;
 	    int angle;
 
+	    /* Actualiza la imagen del worm a la correspondiente segun las
+	     * condiciones en las que se encuentra este */
 		void setNewImage(bool dir_changed, bool moved, bool colliding, bool is_current_worm);
 
+		/* Cambia la imagen actual por la del arma actual */
 		void setWeaponImage();
 
+		/* Cambia la imagen actual por la siguiente imagen del worm caminando */
 		void setMovementImage();
 
+		/* Cambia la imagen actual por la imagen del worm caminando */
 		void setStaticImage(bool dir_changed);
 
 	public:
