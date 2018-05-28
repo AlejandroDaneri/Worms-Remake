@@ -1,5 +1,5 @@
 #include "Player.h"
-#include <iostream> ///////////////////////////////////////////////////////////////////
+#include "WeaponNames.h"
 
 const int NO_ANGLE = 500;
 
@@ -53,9 +53,9 @@ void Player::damageReceived(){
 void Player::shootWeapon() {
 	this->turn.reduceTime();
     this->weapons.getCurrentWeapon().shoot();
-    if (this->weapons.getCurrentWeapon().getName() == "Teleportation") { ////////////////esto no va aca, sino solo lo escucha un jugador
+    if (this->weapons.getCurrentWeapon().getName() == TELEPORT_NAME) { ////////////////esto no va aca, sino solo lo escucha un jugador
         this->musicPlayer.playTeleportSound();
-    } else if (this->weapons.getCurrentWeapon().getName() == "Bat") {
+    } else if (this->weapons.getCurrentWeapon().getName() == BAT_NAME) {
         this->musicPlayer.playBatSound();
     }
 }
@@ -77,9 +77,7 @@ void Player::shoot(Position position) {
 }
 
 void Player::play_tick_time() {
-	std::cout <<"Tick\n";
 	this->musicPlayer.playTickSound();
-	///////////////////////////////////// Reproducir sonido de falta de tiempo
 }
 
 void Player::shoot(int angle, int power, int time) {
