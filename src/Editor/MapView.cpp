@@ -155,11 +155,3 @@ int MapView::select(const double &x, const double &y) {
     }
     return isolated ? -1 : actual_selected;
 }
-
-
-
-
-
-
-
-

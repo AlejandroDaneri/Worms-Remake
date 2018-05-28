@@ -182,6 +182,11 @@
     <property name="can_focus">False</property>
     <property name="pixbuf">resources/Images/editor_toolbox/move_arrows.png</property>
   </object>
+  <object class="GtkImage" id="select_img">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/Images/editor_toolbox/select.png</property>
+  </object>
   <object class="GtkImage" id="undo">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -242,7 +247,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">5</property>
+                    <property name="top_attach">6</property>
                   </packing>
                 </child>
                 <child>
@@ -929,7 +934,7 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">7</property>
+                    <property name="top_attach">8</property>
                   </packing>
                 </child>
                 <child>
@@ -1027,12 +1032,12 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="btn_clean">
+                      <object class="GtkButton" id="btn_mode">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">Nuevo mapa</property>
-                        <property name="image">img_new</property>
+                        <property name="tooltip_text" translatable="yes">Seleccionar</property>
+                        <property name="image">select_img</property>
                         <property name="relief">none</property>
                       </object>
                       <packing>
@@ -1122,20 +1127,11 @@
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
-                    <property name="top_attach">6</property>
+                    <property name="top_attach">7</property>
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkButton" id="btn_mode">
-                    <property name="label" translatable="yes">SELECCIONAR</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">8</property>
-                  </packing>
+                  <placeholder/>
                 </child>
               </object>
               <packing>
@@ -1161,21 +1157,6 @@
                 <property name="can_focus">False</property>
                 <property name="homogeneous">True</property>
                 <child>
-                  <object class="GtkButton" id="btn_save">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Guardar</property>
-                    <property name="image">image4</property>
-                    <property name="relief">none</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
                   <object class="GtkButton" id="btn_load">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
@@ -1187,7 +1168,37 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_clean">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Nuevo mapa</property>
+                    <property name="image">img_new</property>
+                    <property name="relief">none</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
                     <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="btn_save">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Guardar</property>
+                    <property name="image">image4</property>
+                    <property name="relief">none</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
