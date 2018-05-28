@@ -29,7 +29,7 @@ void JoinGameMenu::configure(int quantity){
 		}
 	}catch (const SocketException& e){
 		this->error->set_label("Ocurrio un error");
-		this->show_error();
+        this->showError();
 	}
 	for (auto it = this->game_fields.begin(); it != this->game_fields.end(); ++it){
 		this->games->pack_start(it->getContainer());
@@ -40,16 +40,17 @@ void JoinGameMenu::configure(int quantity){
 void JoinGameMenu::addGame(const std::string& game_name){
 	GameMenuField game(game_name);
 	this->game_fields.push_back(std::move(game));
-	this->game_fields.back().getButton().signal_clicked().connect(sigc::bind<Glib::ustring>(sigc::mem_fun(*this, &JoinGameMenu::select_button_pressed), game_name));
+	this->game_fields.back().getButton().signal_clicked().connect(sigc::bind<Glib::ustring>(sigc::mem_fun(*this,
+                                                                                                          &JoinGameMenu::selectButtonPressed), game_name));
 }
 
-void JoinGameMenu::select_button_pressed(Glib::ustring game_name){
+void JoinGameMenu::selectButtonPressed(Glib::ustring game_name){
 	try{
 		this->protocol.sendString(game_name);
 		bool result = this->protocol.receiveChar();
 		if (!result){
 			this->error->set_label("Ocurrio un error al unirse a la partida");
-			this->show_error();
+            this->showError();
 		} else {
 			this->window.remove();
 			this->window.add(this->waiting_label.getWidget());
@@ -59,11 +60,11 @@ void JoinGameMenu::select_button_pressed(Glib::ustring game_name){
 		}
 	} catch (const SocketException& e){
 		this->error->set_label("Ocurrio un error");
-		this->show_error();
+        this->showError();
 	}
 }
 
-void JoinGameMenu::show_error(){
+void JoinGameMenu::showError(){
 	this->menu->remove(*this->error);
 	this->window.remove();
 	this->window.add(*this->error);

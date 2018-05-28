@@ -24,16 +24,16 @@ class GameMenu{
 		Gtk::Box* menu;
 
 		/* Crea el boton de creacion de partida */
-		void create_button_pressed();
+		void createButtonPressed();
 
 		/* Crea el boton de unirse a partida */
-		void join_button_pressed();
+		void joinButtonPressed();
 
 		/* Envia la accion implementada */
-		bool select_action(char action);
+		bool selectAction(char action);
 
 		/* Muestra un mensaje de error */
-		void show_error();
+		void showError();
 
 	public:
 		/* Constructor */

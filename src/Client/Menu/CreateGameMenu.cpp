@@ -31,7 +31,7 @@ void CreateGameMenu::configure(int quantity){
 		}
 	}catch (const SocketException& e){
 		this->error->set_label("Ocurrio un error");
-		this->show_error();
+        this->showError();
 	}
 
 	for (auto it = this->maps.begin(); it != this->maps.end(); ++it){
@@ -43,10 +43,11 @@ void CreateGameMenu::configure(int quantity){
 void CreateGameMenu::addMap(const std::string& map_name){
 	GameMenuField map(map_name);
 	this->maps.push_back(std::move(map));
-	this->maps.back().getButton().signal_clicked().connect(sigc::bind<Glib::ustring>(sigc::mem_fun(*this, &CreateGameMenu::select_button_pressed), map_name));
+	this->maps.back().getButton().signal_clicked().connect(sigc::bind<Glib::ustring>(sigc::mem_fun(*this,
+                                                                                                   &CreateGameMenu::selectButtonPressed), map_name));
 }
 
-void CreateGameMenu::select_button_pressed(Glib::ustring map_name){
+void CreateGameMenu::selectButtonPressed(Glib::ustring map_name){
 	std::string name(this->game_name->get_text());
 	if (name.empty()){
 		this->error->set_label("Debe ingresar el nombre de la partida");
@@ -68,7 +69,7 @@ void CreateGameMenu::select_button_pressed(Glib::ustring map_name){
 		bool result = this->protocol.receiveChar();
 		if (!result){
 			this->error->set_label("Ocurrio un error al crear la partida");
-			this->show_error();
+            this->showError();
 		} else {
 			this->window.remove();
 			this->window.add(this->waiting_label.getWidget());
@@ -78,11 +79,11 @@ void CreateGameMenu::select_button_pressed(Glib::ustring map_name){
 		}
 	} catch (const SocketException& e){
 		this->error->set_label("Ocurrio un error");
-		this->show_error();
+        this->showError();
 	}
 }
 
-void CreateGameMenu::show_error(){
+void CreateGameMenu::showError(){
 	this->menu->remove(*this->error);
 	this->window.remove();
 	this->window.add(*this->error);
