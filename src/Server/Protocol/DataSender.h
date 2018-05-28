@@ -19,6 +19,9 @@ class DataSender: public Thread{
 		std::mutex& mutex;
 		bool active;
 
+		void sendBuffer(const Buffer& buffer);
+		void notifyAll();
+
 	public:
 		DataSender(World& world, std::vector<Player>& players);
 		~DataSender();

@@ -27,7 +27,7 @@ class ServerProtocol : public Protocol{
 
 		void receive(Game& game, DataSender& data_sender);
 
-		void send_start_turn(int32_t current_worm_id, int32_t current_player_id);
+		Buffer send_start_turn(int32_t current_worm_id, int32_t current_player_id);
 
 		void sendPlayerId(const Player& player);
 
@@ -35,11 +35,11 @@ class ServerProtocol : public Protocol{
 
 		void sendWeaponAmmo(const std::string& weapon_name, int ammo);
 
-		void send_weapon_changed(const std::string& weapon);
+		Buffer send_weapon_changed(const std::string& weapon);
 
-		void sendUpdateScope(int angle);
+		Buffer sendUpdateScope(int angle);
 
-		void sendEndGame(const std::string& winner);
+		Buffer sendEndGame(const std::string& winner);
 };
 
 #endif

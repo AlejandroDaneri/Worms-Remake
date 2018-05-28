@@ -74,14 +74,14 @@ void ServerProtocol::send_weapon(physical_object_ptr& object, Buffer& buffer){
 	this->sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
 }
 
-void ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_player_id){
+Buffer ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_player_id){
 	Buffer buffer;
 	buffer.setNext(START_TURN);
 
 	this->sendIntBuffer(buffer, current_worm_id);
 	this->sendIntBuffer(buffer, current_player_id);
 
-    this->sendBuffer(buffer);
+    return buffer;
 }
 
 void ServerProtocol::receive(Game& game, DataSender& data_sender) {
@@ -149,29 +149,29 @@ void ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
     this->sendBuffer(buffer);
 }
 
-void ServerProtocol::send_weapon_changed(const std::string& weapon){
+Buffer ServerProtocol::send_weapon_changed(const std::string& weapon){
 	Buffer buffer;
 
 	buffer.setNext(CHANGE_WEAPON_ACTION);
 	this->sendStringBuffer(buffer, weapon);
 
-    this->sendBuffer(buffer);
+    return buffer;
 }
 
-void ServerProtocol::sendUpdateScope(int angle) {
+Buffer ServerProtocol::sendUpdateScope(int angle) {
     Buffer buffer;
 
     buffer.setNext(MOVE_SCOPE);
 	this->sendIntBuffer(buffer, angle);
 
-    this->sendBuffer(buffer);
+    return buffer;
 }
 
-void ServerProtocol::sendEndGame(const std::string& winner){
+Buffer ServerProtocol::sendEndGame(const std::string& winner){
 	Buffer buffer;
 
     buffer.setNext(END_GAME);
 	this->sendStringBuffer(buffer, winner);
 
-    this->sendBuffer(buffer);
+    return buffer;
 }

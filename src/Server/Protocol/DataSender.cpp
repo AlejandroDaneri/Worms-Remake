@@ -29,32 +29,20 @@ void DataSender::run(){
 			if ((*it)->isDead()){
 				Buffer data = this->players[0].getProtocol().sendDeadObject(*it);
 
-				for (size_t i = 0; i < this->players.size(); i++){
-					if (this->players[i].isConnected()){
-						this->players_data_senders[i]->sendData(data);
-					}
-				}
+				this->sendBuffer(data);
 				it = this->objects.erase(it);
 				continue;
 			}
 
 			if ((*it)->isMoving()){
 				Buffer data = this->players[0].getProtocol().sendObject(*it);
-				for (size_t i = 0; i < this->players.size(); i++){
-					if (this->players[i].isConnected()){
-						this->players_data_senders[i]->sendData(data);
-					}
-					this->active = true;
-				}
+				this->sendBuffer(data);
+				this->active = true;
 			}
 			++it;
 		}
 
-		for (size_t i = 0; i < this->players.size(); i++){
-			if (this->players[i].isConnected()){
-				this->players_data_senders[i]->notify();
-			}
-		}
+		this->notifyAll();
 	}
 }
 
@@ -62,14 +50,6 @@ void DataSender::send_start_game(){
 	for (auto player = this->players.begin(); player != this->players.end(); ++player){
 		try{
 			player->getProtocol().sendChar(START_GAME_ACTION);
-		} catch(const SocketException& e){}
-	}
-}
-
-void DataSender::send_start_turn(int worm_id, int player_id){
-	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		try{
-			player->getProtocol().send_start_turn(worm_id, player_id);
 		} catch(const SocketException& e){}
 	}
 }
@@ -107,20 +87,28 @@ void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
 	}
 }
 
+void DataSender::send_start_turn(int worm_id, int player_id){
+	Buffer data = this->players[0].getProtocol().send_start_turn(worm_id, player_id);
+	this->sendBuffer(data);
+	this->notifyAll();
+}
+
 void DataSender::send_weapon_changed(const std::string& weapon){
-	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		try{
-			player->getProtocol().send_weapon_changed(weapon);
-		} catch(const SocketException& e){}
-	}
+	Buffer data = this->players[0].getProtocol().send_weapon_changed(weapon);
+	this->sendBuffer(data);
+	this->notifyAll();
 }
 
 void DataSender::sendUpdateScope(int angle) {
-    for (auto player = this->players.begin(); player != this->players.end(); ++player){
-        try{
-            player->getProtocol().sendUpdateScope(angle);
-        } catch(const SocketException& e){}
-    }
+	Buffer data = this->players[0].getProtocol().sendUpdateScope(angle);
+	this->sendBuffer(data);
+	this->notifyAll();
+}
+
+void DataSender::sendEndGame(const std::string& winner){
+	Buffer data = this->players[0].getProtocol().sendEndGame(winner);
+	this->sendBuffer(data);
+	this->notifyAll();
 }
 
 bool DataSender::isActive(){
@@ -128,10 +116,18 @@ bool DataSender::isActive(){
 	return this->active;
 }
 
-void DataSender::sendEndGame(const std::string& winner){
-	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-        try{
-            player->getProtocol().sendEndGame(winner);
-        } catch(const SocketException& e){}
-    }
+void DataSender::sendBuffer(const Buffer& buffer){
+	for (size_t i = 0; i < this->players.size(); i++){
+		if (this->players[i].isConnected()){
+			this->players_data_senders[i]->sendData(buffer);
+		}
+	}
+}
+
+void DataSender::notifyAll(){
+	for (size_t i = 0; i < this->players.size(); i++){
+		if (this->players[i].isConnected()){
+			this->players_data_senders[i]->notify();
+		}
+	}
 }
