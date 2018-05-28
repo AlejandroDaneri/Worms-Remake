@@ -106,10 +106,10 @@ void MapView::setBackground(std::string name) {
     this->get_size(winw, winh);
     for (size_t x = 0; x < winw; x += width) {
         for (size_t y = 0; y < winh; y += heigth) {
-            Gtk::Image asd(name);
-            asd.show();
-            put(asd, x, y);
-            back.push_back(std::move(asd));
+            Gtk::Image image(name);
+            image.show();
+            put(image, x, y);
+            back.push_back(std::move(image));
         }
     }
 }
@@ -152,7 +152,6 @@ int MapView::select(const double &x, const double &y) {
             this->actual_selected = i;
         }
     }
-
     return isolated ? -1 : actual_selected;
 }
 
