@@ -128,3 +128,11 @@ bool DataSender::isActive(){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	return this->active;
 }
+
+void DataSender::sendEndGame(const std::string& winner){
+	for (auto player = this->players.begin(); player != this->players.end(); ++player){
+        try{
+            player->getProtocol().sendEndGame(winner);
+        } catch(const SocketException& e){}
+    }
+}

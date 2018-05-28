@@ -34,6 +34,11 @@ void TurnLabel::endTurn() {
 void TurnLabel::setTime(int time) {
 	this->time.set_markup(begining + std::to_string(time) + ending);
 }
+
+void TurnLabel::setWinner(const std::string& winner){
+	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &TurnLabel::setWinnerCallback), winner);
+    Glib::signal_idle().connect(my_slot);
+}
 		
 Gtk::Container& TurnLabel::getWindow() {
 	return this->label;
@@ -41,5 +46,17 @@ Gtk::Container& TurnLabel::getWindow() {
 
 bool TurnLabel::setLabelCallback(std::string text){
 	this->message.set_markup(text);
+	return false;
+}
+
+bool TurnLabel::setWinnerCallback(std::string winner){
+	this->message.set_markup(begining + "Termino el juego" + ending);
+	std::string winner_message;
+	if (winner.empty()){
+		winner_message = "Empate";
+	} else {
+		winner_message = "Ganador: " + winner;
+	}
+	this->time.set_markup(begining + winner_message + ending);
 	return false;
 }

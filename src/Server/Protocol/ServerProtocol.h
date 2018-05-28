@@ -38,6 +38,8 @@ class ServerProtocol : public Protocol{
 		void send_weapon_changed(const std::string& weapon);
 
 		void sendUpdateScope(int angle);
+
+		void sendEndGame(const std::string& winner);
 };
 
 #endif

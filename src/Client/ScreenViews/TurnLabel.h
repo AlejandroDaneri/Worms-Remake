@@ -14,6 +14,8 @@ class TurnLabel{
 
 		bool setLabelCallback(std::string text);
 
+		bool setWinnerCallback(std::string winner);
+
 	public:
 	    /* Constructor */
 		TurnLabel();
@@ -31,6 +33,9 @@ class TurnLabel{
 
 		/* Cambia el label indicando que finalizo el turno del jugador */
 		void endTurn();
+
+		/* Cambia el label mostrando al ganador */
+		void setWinner(const std::string& winner);
 
 		/* Cambia el label de tiempo al tiempo pasado por parametro */
 		void setTime(int time);

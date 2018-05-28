@@ -8,6 +8,7 @@
 class Turn{
 	private:
 		std::vector<Player> players;
+		std::string winner;
 		size_t current;
 
 		void advanceCurrent();
@@ -33,6 +34,8 @@ class Turn{
 		void distributeWorms(size_t size, int life_to_add);
 
 		bool gameEnded(std::mutex& mutex);
+
+		const std::string& getWinner();
 
 };
 

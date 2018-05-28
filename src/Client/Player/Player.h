@@ -52,6 +52,9 @@ class Player {
 		/* Finaliza el turno del jugador actual */
 		void endTurn();
 
+		/* Finaliza el juego */
+		void endGame(const std::string& winner);
+
 		/* El jugador actual recibio danio */
 		void damageReceived();
 

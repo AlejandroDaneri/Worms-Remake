@@ -33,6 +33,7 @@ class DataSender: public Thread{
 
 		void send_start_game();
 		void send_start_turn(int worm_id, int player_id);
+		void sendEndGame(const std::string& winner);
 
 		bool isActive();
 

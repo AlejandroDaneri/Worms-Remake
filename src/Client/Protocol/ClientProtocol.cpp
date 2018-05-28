@@ -70,6 +70,9 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 		int worm_id = this->receiveIntBuffer(buffer);
 		int player_id = this->receiveIntBuffer(buffer);
 		player.startTurn(worm_id, player_id);
+	} else if (action == END_GAME){
+		std::string winner = this->receiveStringBuffer(buffer);
+		player.endGame(winner);
 	} else if (action == CHANGE_WEAPON_ACTION) {
         std::string weapon(this->receiveStringBuffer(buffer));
         viewsList.removeScopeVisibility();

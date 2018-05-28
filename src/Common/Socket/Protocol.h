@@ -25,6 +25,8 @@
 #define SHOOT_SELF_DIRECTED 8
 #define MOVE_SCOPE 9
 
+#define END_GAME 10
+
 
 #define MOVE_RIGHT 1
 #define MOVE_LEFT -1

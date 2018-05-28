@@ -166,3 +166,12 @@ void ServerProtocol::sendUpdateScope(int angle) {
 
     this->sendBuffer(buffer);
 }
+
+void ServerProtocol::sendEndGame(const std::string& winner){
+	Buffer buffer;
+
+    buffer.setNext(END_GAME);
+	this->sendStringBuffer(buffer, winner);
+
+    this->sendBuffer(buffer);
+}

@@ -63,8 +63,8 @@ void Game::run(){
 
 		this->wait_to_world();
 		this->world.update();
-
 	}
+	this->data_sender->sendEndGame(this->turn.getWinner());
 	this->running = false;
 }
 

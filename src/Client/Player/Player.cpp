@@ -51,6 +51,12 @@ void Player::endTurn() {
     this->protocol.sendEndTurn();
 }
 
+void Player::endGame(const std::string& winner){
+	this->data_receiver.stop();
+	this->turn_label.setWinner(winner);
+	/////////////////////////////////////////////////////////////Hacer sonido de fin de juego
+}
+
 void Player::damageReceived(){
 	this->turn.stop();
 }
