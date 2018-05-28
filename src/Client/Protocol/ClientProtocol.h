@@ -10,6 +10,8 @@
 class Player;
 class WeaponList;
 
+/* Clase que se encarga de enviar y recibir mensajes del socket
+ * con un formato determinado */
 class ClientProtocol: public Protocol {
 	public:
 		/* Constructor */

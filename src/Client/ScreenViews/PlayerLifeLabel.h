@@ -3,6 +3,7 @@
 
 #include <gtkmm/label.h>
 
+/* Clase que se encarga de controlar el indicador de vida del jugador */
 class PlayerLifeLabel{
 	private:
 		std::string player_name;

@@ -13,6 +13,7 @@
 #include "ExplosionViewList.h"
 #include "MusicPlayer.h"
 
+/* Clase que se encarga de almacenar los objetos visibles */
 class ViewsList{
 	private:
 		WorldView& world;
@@ -27,6 +28,7 @@ class ViewsList{
         ExplosionViewList animation;
         MusicPlayer& musicPlayer;
 
+        /* Elimina el focus sobre el worm */
         void removeWormFocus();
 
         /* CallBacks */

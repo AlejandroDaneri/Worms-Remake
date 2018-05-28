@@ -6,6 +6,8 @@
 #include "PlayerLifeLabel.h"
 #include <gtkmm/hvbox.h>
 
+/* Clase que se encarga de almacenar los nombres y las vidas
+ * de todos los jugadores */
 class PlayersList{
 	private:
 		std::map<int, std::string> players;

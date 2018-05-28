@@ -8,6 +8,8 @@
 #include "TurnLabel.h"
 #include "PlayersList.h"
 
+/* Clase que se encarga de almacenar los contenedores principales
+ * de la vista y mostrar su contenido */
 class ScreenView {
 	private:
 		Gtk::VBox screen;

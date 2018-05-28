@@ -3,10 +3,16 @@
 
 #include "DistanceWeapon.h"
 
+/* Clase que representa al arma Bazooka */
 class Bazooka: public DistanceWeapon {
 	public:
+        /* Constructor */
 		Bazooka(int ammo);
+
+		/* Destructor */
 		~Bazooka();
+
+		/* Constructor por movimiento */
 		Bazooka(Bazooka&& other);
 };
 

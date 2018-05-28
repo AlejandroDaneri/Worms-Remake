@@ -7,6 +7,7 @@
 
 class Player;
 
+/* Clase que se encarga de recibir los mensajes enviados por el servidor */
 class DataReceiver: public Thread{
 	private:
 		ViewsList& views;
@@ -14,11 +15,17 @@ class DataReceiver: public Thread{
 		ClientProtocol& protocol;
 
 	public:
+		/* Constructor */
 		DataReceiver(ViewsList& views, Player& player, ClientProtocol& protocol);
+
+		/* Destructor */
 		~DataReceiver();
 
+
+		/* Comienza a recibir mensajes del protocolo */
 		void run() override;
 
+		/* Detiene el proceso de recibir mensajes */
 		void stop() override;
 
 };
