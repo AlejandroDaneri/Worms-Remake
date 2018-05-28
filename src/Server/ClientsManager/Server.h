@@ -14,19 +14,21 @@ class Server: public Thread{
 		std::list<std::unique_ptr<Thread>> clients;
 		GamesList games_list;
 
+		/* Elimina los clientes que terminaron su comunicacion
+		 * de la lista */
 		void check();
 
 	public:
-		//Crea el server y lo asocia al puerto indicado
+		/* Crea el server y lo asocia al puerto indicado */
 		Server(const std::string& service);
 
-		//Desconecta el server
+		/* Desconecta el server */
 		~Server();
 
-		//Ejecuta el server
+		/* Ejecuta el server */
 		void run();
 
-		//Avisa al server que debe dejar de ejecutarse
+		/* Avisa al server que debe dejar de ejecutarse */
 		void stop();
 };
 

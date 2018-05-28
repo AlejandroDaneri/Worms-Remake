@@ -119,7 +119,6 @@ void Game::updateScope(int angle) {
     this->data_sender->sendUpdateScope(angle);
 }
 
-
 void Game::endTurn(){
 	this->player_turn_active = false;
 }
