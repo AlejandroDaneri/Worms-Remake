@@ -10,12 +10,12 @@ WeaponButton::WeaponButton(const std::string& weapon_name, unsigned int ammo, Pl
 	this->image.set(path);
 	this->button.set_image(this->image);
 	this->button.set_always_show_image(true);
-	this->button.signal_clicked().connect(sigc::mem_fun(*this, &WeaponButton::on_clicked_button));
+	this->button.signal_clicked().connect(sigc::mem_fun(*this, &WeaponButton::onClickedButton));
 }
 
 WeaponButton::~WeaponButton() {}
 
-void WeaponButton::on_clicked_button() {
+void WeaponButton::onClickedButton() {
 	this->player.change_weapon(weapon_name);
 }
 

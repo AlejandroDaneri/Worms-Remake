@@ -14,7 +14,7 @@ Turn::~Turn() {}
 bool Turn::startCallBack() {
     this->time_label.setTime(this->actual_time);
     if (this->actual_time <= LIMIT_TIME){
-        this->player.play_tick_time();
+        this->player.playTickTime();
     }
     if (this->actual_time == 0) {
         this->player.endTurn();

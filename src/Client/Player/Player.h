@@ -66,7 +66,7 @@ class Player {
 		void shoot(Position position);
 		
 		/* Reproduce el sonido de falta de tiempo */
-		void play_tick_time();
+		void playTickTime();
 		
 		/* Devuelve la ventana donde se encuentra la vista completa */
 		Gtk::Container& getWindow();

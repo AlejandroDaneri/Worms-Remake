@@ -33,35 +33,35 @@ class Handlers{
 		~Handlers();
 
 		/* Handler de movimiento. Establece cuales son teclas de movimiento */
-		bool movement_key_press_handler(GdkEventKey* key_event);
+		bool movementKeyPressHandler(GdkEventKey *key_event);
 
 		/* Handler completo para el presionado de teclas. Indica
 		   los pasos que se deben realizar al presionar una tecla
 		   especifica */
-		bool complete_key_press_handler(GdkEventKey* key_event);
+		bool completeKeyPressHandler(GdkEventKey *key_event);
 
 		/* Handler completo para la liberación de teclas. Indica
 		   los pasos que se deben realizar al liberar una tecla
 		   especifica */
-		bool complete_key_release_handler(GdkEventKey* key_event);
+		bool completeKeyReleaseHandler(GdkEventKey *key_event);
 
 		/* Handler del mouse. Indica los pasos que se deben realizar
 		   al utilizar el mouse */
-		bool on_button_press_event(GdkEventButton* event);
+		bool onButtonPressEvent(GdkEventButton *event);
 
 		/* Handler inactivo de las teclas. Indica que no se debe
 		   realizar ninguna accion al producirse un evento */
-		bool inactive_key_handler(GdkEventKey* key_event);
+		bool inactiveKeyHandler(GdkEventKey *key_event);
 
 		/* Handler inactivo del mouse. Indica que no se debe
 		   realizar ninguna accion al producirse un evento */
-		bool inactive_button_handler(GdkEventButton *event);
+		bool inactiveButtonHandler(GdkEventButton *event);
 
 		/* Habilita todos los handlers */
-		void enable_all();
+		void enableAll();
 
 		/* Deshabilita todos los handlers */
-		void disable_all();
+		void disableAll();
 
 		/* Realiza el shoot del player */
 		void timerStopped(int power);

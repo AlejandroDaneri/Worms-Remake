@@ -30,7 +30,7 @@ void Player::startTurn(int worm_id, int player_id){
 	if (current_player == this->name){
 	    this->musicPlayer.playStartTurnSound();
 		//Es mi turno
-		this->handlers.enable_all();
+        this->handlers.enableAll();
 		this->change_weapon(this->weapons.getCurrentWeapon().getName());
 		this->turn_label.beginTurn();
 		this->turn.start();
@@ -41,9 +41,9 @@ void Player::startTurn(int worm_id, int player_id){
 
 void Player::endTurn() {
 	this->turn_label.endTurn();
-	this->handlers.disable_all();
+    this->handlers.disableAll();
 	this->view_list.removeScopeVisibility();
-	this->protocol.send_end_turn();
+    this->protocol.sendEndTurn();
 }
 
 void Player::damageReceived(){
@@ -62,7 +62,7 @@ void Player::shootWeapon() {
 
 void Player::change_weapon(std::string weapon) {
     this->weapons.changeWeapon(weapon);
-	this->protocol.send_change_weapon(weapon);
+    this->protocol.sendChangeWeapon(weapon);
 	if (this->weapons.getCurrentWeapon().hasScope()) {
 		this->view_list.updateScope(this->handlers.getCurrentAngle());
 	} else {
@@ -72,11 +72,11 @@ void Player::change_weapon(std::string weapon) {
 
 void Player::shoot(Position position) {
 	this->shootWeapon();
-	this->protocol.send_weapon_self_directed_shoot(position);
+    this->protocol.sendWeaponSelfDirectedShoot(position);
 	this->screen.getWeaponsView().updateAmmo(this->weapons.getCurrentWeapon());
 }
 
-void Player::play_tick_time() {
+void Player::playTickTime() {
 	this->musicPlayer.playTickSound();
 }
 
@@ -88,7 +88,7 @@ void Player::shoot(int angle, int power, int time) {
 	if (!this->weapons.getCurrentWeapon().hasScope()) {
 		angle = NO_ANGLE;
 	}
-	this->protocol.send_weapon_shoot(angle, power, time);
+    this->protocol.sendWeaponShoot(angle, power, time);
 	this->view_list.removeScopeVisibility();
 	this->screen.getWeaponsView().updateAmmo(this->weapons.getCurrentWeapon());
 }

@@ -20,45 +20,49 @@ Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons, Wo
 
 Handlers::~Handlers() {}
 
-void Handlers::enable_all(){
+void Handlers::enableAll(){
 	this->weapons_time = WEAPONS_TIME;
 	this->current_angle = DEFAULT_ANGLE;
 	this->has_shoot = false;
 
-	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::complete_key_press_handler));
-	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::complete_key_release_handler));
-	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::on_button_press_event));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this,
+                                                                                                       &Handlers::completeKeyPressHandler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this,
+                                                                                                         &Handlers::completeKeyReleaseHandler));
+	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::onButtonPressEvent));
 }
 
-void Handlers::disable_all() {
-	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::inactive_key_handler));
-	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::inactive_key_handler));
-	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::inactive_button_handler));
+void Handlers::disableAll() {
+	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this,
+                                                                                                       &Handlers::inactiveKeyHandler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this,
+                                                                                                         &Handlers::inactiveKeyHandler));
+	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::inactiveButtonHandler));
 }
 
 void Handlers::timerStopped(int power){
 	this->player.shoot(this->current_angle, power, this->weapons_time);
 }
 
-bool Handlers::movement_key_press_handler(GdkEventKey* key_event) {
+bool Handlers::movementKeyPressHandler(GdkEventKey *key_event) {
 	if (key_event->keyval == GDK_KEY_Left) {
-		this->player.getProtocol().send_move_action(MOVE_LEFT);
+        this->player.getProtocol().sendMoveAction(MOVE_LEFT);
 		this->view_list.removeScopeVisibility();
 	} else if (key_event->keyval == GDK_KEY_Right) {
-		this->player.getProtocol().send_move_action(MOVE_RIGHT);
+        this->player.getProtocol().sendMoveAction(MOVE_RIGHT);
 		this->view_list.removeScopeVisibility();
 	} else if (key_event->keyval == GDK_KEY_Return) {
-		this->player.getProtocol().send_move_action(JUMP);
+        this->player.getProtocol().sendMoveAction(JUMP);
 		this->view_list.removeScopeVisibility();
 	} else if (key_event->keyval == GDK_KEY_BackSpace) {
-		this->player.getProtocol().send_move_action(ROLLBACK);
+        this->player.getProtocol().sendMoveAction(ROLLBACK);
 		this->view_list.removeScopeVisibility();
 	}
 	return true;
 }
 
-bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
-	this->movement_key_press_handler(key_event);
+bool Handlers::completeKeyPressHandler(GdkEventKey *key_event) {
+    this->movementKeyPressHandler(key_event);
 	if (key_event->keyval == GDK_KEY_Up) {
         if (!this->weapons.getCurrentWeapon().hasScope()) {
             return true;
@@ -98,7 +102,7 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 	return true;
 }
 
-bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
+bool Handlers::completeKeyReleaseHandler(GdkEventKey *key_event) {
 	if (key_event->type == GDK_KEY_RELEASE) {
 		if (key_event->keyval == SPACE) {
 			if (this->weapons.getCurrentWeapon().isSelfDirected()) {
@@ -117,7 +121,7 @@ bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 	return true;
 }
 
-bool Handlers::on_button_press_event(GdkEventButton* event) {
+bool Handlers::onButtonPressEvent(GdkEventButton *event) {
 	if (!this->weapons.getCurrentWeapon().isSelfDirected()) {
 		return true;
 	}
@@ -140,11 +144,11 @@ bool Handlers::on_button_press_event(GdkEventButton* event) {
 	return true;
 }
 
-bool Handlers::inactive_key_handler(GdkEventKey* key_event) {
+bool Handlers::inactiveKeyHandler(GdkEventKey *key_event) {
 	return true;
 }
 
-bool Handlers::inactive_button_handler(GdkEventButton *event) {
+bool Handlers::inactiveButtonHandler(GdkEventButton *event) {
 	return true;
 }
 

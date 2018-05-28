@@ -24,25 +24,25 @@ class ClientProtocol: public Protocol {
 		~ClientProtocol();
 
 		/* Envia un mensaje que indica una accion de movimiento */
-		void send_move_action(char action);
+		void sendMoveAction(char action);
 
 		/* Envia un mensaje que indica una accion de cambio de arma
 		 * con el nombre del arma */
-		void send_change_weapon(const std::string& weapon);
+		void sendChangeWeapon(const std::string &weapon);
 
 		/* Envia un mensaje de accion de disparo, con el angulo, la potencia
 		 * y el tiempo de explosion */
-		void send_weapon_shoot(int32_t angle, int32_t power, int32_t time);
+		void sendWeaponShoot(int32_t angle, int32_t power, int32_t time);
 
 		/* Envia un mensaje de accion de disparo teledirigido con
 		 * la posicion del disparo */
-		void send_weapon_self_directed_shoot(const Position& pos);
+		void sendWeaponSelfDirectedShoot(const Position &pos);
 
 		/* Envia un mesaje que indica el cambio del angulo del scope */
 		void updateScope(int angle);
 
 		/* Envia un mensaje de finalizacion de turno */
-		void send_end_turn();
+		void sendEndTurn();
 
 		/* Recibe un mensaje que le indica que accion realizar */
 		void receive(Player& player, ViewsList& viewsList);

@@ -31,7 +31,7 @@ class WeaponButton {
 		void setLabel(unsigned int ammo);
 
 		/* Handler del boton al ser clickeado */
-		void on_clicked_button();
+		void onClickedButton();
 };
 
 

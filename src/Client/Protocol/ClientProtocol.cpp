@@ -9,7 +9,7 @@ ClientProtocol::ClientProtocol(ClientProtocol&& other): Protocol(std::move(other
 
 ClientProtocol::~ClientProtocol(){}
 
-void ClientProtocol::send_move_action(char action){
+void ClientProtocol::sendMoveAction(char action){
 	Buffer buffer;
 	buffer.setNext(ACTION);
 	buffer.setNext(MOVE_ACTION);
@@ -17,7 +17,7 @@ void ClientProtocol::send_move_action(char action){
 	this->send_buffer(buffer);
 }
 
-void ClientProtocol::send_change_weapon(const std::string& weapon){
+void ClientProtocol::sendChangeWeapon(const std::string &weapon){
 	Buffer buffer;
 	buffer.setNext(ACTION);
 	buffer.setNext(CHANGE_WEAPON_ACTION);
@@ -25,7 +25,7 @@ void ClientProtocol::send_change_weapon(const std::string& weapon){
 	this->send_buffer(buffer);
 }
 
-void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t time){
+void ClientProtocol::sendWeaponShoot(int32_t angle, int32_t power, int32_t time){
 	Buffer buffer;
 	buffer.setNext(ACTION);
 	buffer.setNext(SHOOT_WEAPON);
@@ -35,7 +35,7 @@ void ClientProtocol::send_weapon_shoot(int32_t angle, int32_t power, int32_t tim
 	this->send_buffer(buffer);
 }
 
-void ClientProtocol::send_weapon_self_directed_shoot(const Position& pos) {
+void ClientProtocol::sendWeaponSelfDirectedShoot(const Position &pos) {
 	Buffer buffer;
 	buffer.setNext(ACTION);
 	buffer.setNext(SHOOT_SELF_DIRECTED);
@@ -56,7 +56,7 @@ void ClientProtocol::updateScope(int angle) {
     this->send_buffer(buffer);
 }
 
-void ClientProtocol::send_end_turn(){
+void ClientProtocol::sendEndTurn(){
 	Buffer buffer;
 	buffer.setNext(END_TURN);
 	this->send_buffer(buffer);
