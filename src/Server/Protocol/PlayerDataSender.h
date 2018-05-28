@@ -26,6 +26,8 @@ class PlayerDataSender: public Thread{
 
 		void notify();
 
+		void stop() override;
+
 };
 
 #endif

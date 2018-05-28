@@ -14,7 +14,6 @@ DataSender::DataSender(World& world, std::vector<Player>& players):
 DataSender::~DataSender(){
 	for (size_t i = 0; i < this->players.size(); i++){
 		this->players_data_senders[i]->stop();
-		this->players_data_senders[i]->notify();
 		this->players_data_senders[i]->join();
 	}
 }

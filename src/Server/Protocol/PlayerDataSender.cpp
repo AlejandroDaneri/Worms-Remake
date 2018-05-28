@@ -31,3 +31,8 @@ void PlayerDataSender::sendData(Buffer buffer){
 void PlayerDataSender::notify(){
 	this->condition_variable.notify_one();
 }
+
+void PlayerDataSender::stop(){
+	Thread::stop();
+	this->notify();
+}
