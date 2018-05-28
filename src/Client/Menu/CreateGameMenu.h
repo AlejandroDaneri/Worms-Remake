@@ -38,10 +38,10 @@ class CreateGameMenu{
 		void addMap(const std::string& map_name);
 
 		/* Handler del boton de seleccion */
-		void select_button_pressed(Glib::ustring map_name);
+		void selectButtonPressed(Glib::ustring map_name);
 
 		/* Muestra un mensaje de error */
-		void show_error();
+		void showError();
 
 		/* Crea un nuevo jugador */
 		bool createPlayer();

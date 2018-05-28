@@ -1,8 +1,8 @@
 #ifndef __WORMSLIST_H__
 #define __WORMSLIST_H__
 
-#include "Worm.h"
 #include <vector>
+#include "Worm.h"
 
 class WormsList{
 	private:
@@ -10,24 +10,33 @@ class WormsList{
 		size_t current;
 
 	public:
+        /* Constructor */
 		WormsList();
 
+		/* Destructor */
 		~WormsList();
 
+		/* Devuelve el worm actual */
 		Worm& getCurrentWorm();
 
+		/* Comienza el turno */
 		void begin_turn();
 
+		/* Agrega un worm a la lista */
 		void add(physical_object_ptr worm);
 
+		/* Constructor por movimiento */
 		WormsList(WormsList&& other);
 
+		/* Aumenta la vida de los worms si la cantidad de
+		 * worms es menor que max */
 		void distribute(size_t max, int life_to_add);
 
+		/* Devuelve true si todos los worms estan muertos */
 		bool isEmpty();
 
+		/* Mata a todos los worms */
 		void kill();
-
 };
 
 #endif

@@ -15,12 +15,12 @@ ServerMenu::ServerMenu(Gtk::Window& window): window(window){
 	this->window.add(*menu);
 	menu->show();
 
-	this->connect->signal_clicked().connect(sigc::mem_fun(*this, &ServerMenu::connect_button_pressed));
+	this->connect->signal_clicked().connect(sigc::mem_fun(*this, &ServerMenu::connectButtonPressed));
 }
 
 ServerMenu::~ServerMenu(){}
 
-void ServerMenu::connect_button_pressed(){
+void ServerMenu::connectButtonPressed(){
 	std::string host(this->host->get_text());
 	if (host.empty()){
 		this->error->set_label("Debe ingresar un host");
@@ -33,10 +33,10 @@ void ServerMenu::connect_button_pressed(){
 		return;
 	}
 
-	this->connect_to_server(host, service);
+    this->connectToServer(host, service);
 }
 
-void ServerMenu::connect_to_server(const std::string& host, const std::string& service){
+void ServerMenu::connectToServer(const std::string &host, const std::string &service){
 	try{
 		Socket socket(Socket::Client(host.c_str(), service.c_str()));
 		ClientProtocol protocol(std::move(socket));

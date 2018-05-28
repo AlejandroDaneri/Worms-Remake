@@ -34,10 +34,10 @@ class JoinGameMenu{
 		void addGame(const std::string& game_name);
 
 		/* Handler del boton de unirse a partida */
-		void select_button_pressed(Glib::ustring game_name);
+		void selectButtonPressed(Glib::ustring game_name);
 
 		/* Muestra un mensaje de error */
-		void show_error();
+		void showError();
 
 		/* Crea un nuevo jugador */
 		bool createPlayer();

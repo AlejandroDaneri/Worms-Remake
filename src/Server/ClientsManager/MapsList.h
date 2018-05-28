@@ -9,8 +9,8 @@ typedef std::vector<std::string> maps_list_t;
 
 class MapsList{
 	public:
+		/* Devuelve una lista con todos los mapas */
 		static maps_list_t getAllMaps();
-
 };
 
 #endif
