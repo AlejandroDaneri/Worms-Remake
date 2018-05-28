@@ -11,31 +11,40 @@ class Thread{
 		bool running;
 
 	public:
+		/* Constructor */
 		Thread();
+
+		/* Destructor */
 		virtual ~Thread();
 
-		//Inicia la ejecucion del thread
+		/* Constructor por copia */
+        Thread(const Thread&) = delete;
+
+        /* Operador = por copia */
+        Thread& operator=(const Thread&) = delete;
+
+        /* Constructor por movimiento */
+        Thread(Thread&& other) = delete;
+
+        /* Operador = por movimiento */
+        Thread& operator=(Thread&& other) = delete;
+
+
+		/* Inicia la ejecucion del thread */
 		void start();
 
-		//Hace join con el thread
+		/* Hace join con el thread */
 		void join();
 
-		//Devuelve true si el thread esta ejecutandose, 
-		// false si ya termino
+		/* Devuelve true si el thread esta ejecutandose,
+		 * false si ya termino*/
 		bool isRunning() const;
 
-		//Metodo de ejecucion del thread
+		/* Metodo de ejecucion del thread */
 		virtual void run() = 0;
 
-		//Termina abruptamente la ejecucion del thread
+		/* Termina abruptamente la ejecucion del thread */
 		virtual void stop();
-
-
-		Thread(const Thread&) = delete;
-		Thread& operator=(const Thread&) = delete;
-
-		Thread(Thread&& other) = delete;
-		Thread& operator=(Thread&& other) = delete;
 };
 
 #endif
