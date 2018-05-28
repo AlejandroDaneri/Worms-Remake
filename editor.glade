@@ -1228,7 +1228,7 @@
                 <property name="hexpand">True</property>
                 <property name="border_width">0</property>
                 <property name="hscroll_policy">natural</property>
-                <property name="width">20000</property>
+                <property name="width">10000</property>
                 <property name="height">5000</property>
               </object>
             </child>

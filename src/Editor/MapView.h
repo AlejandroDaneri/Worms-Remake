@@ -13,7 +13,7 @@ class MapController;
 class MapView : public Gtk::Layout {
 private:
     std::vector<Gtk::Image> objects;
-    std::vector<std::vector<std::string>> pallete;
+    std::vector<std::vector<std::string>> objects_pallete;
     MapController *controller;
     std::vector<std::string> bg_paths;
     std::vector<Gtk::Image> background;

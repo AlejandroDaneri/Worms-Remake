@@ -21,30 +21,32 @@ MapView::MapView(BaseObjectType *cobject,
     std::vector<std::string> worms_imgs;
     worms_imgs.emplace_back(IMAGES_PATH + "/right_worm.png");
     worms_imgs.emplace_back(IMAGES_PATH + "/left_worm.png");
-    pallete.push_back(worms_imgs);
-
+    objects_pallete.push_back(worms_imgs);
 
     std::vector<std::string> girder_3_imgs;
+    std::vector<std::string> girder_6_imgs;
+
     for (int i = 0; i < 180; i = i + 10) {
         girder_3_imgs.emplace_back(
                 IMAGES_PATH + "/Girder/girder_3_" + std::to_string(i) +
                 ".png");
-    }
-    pallete.push_back(girder_3_imgs);
-
-    std::vector<std::string> girder_6_imgs;
-    for (int i = 0; i < 180; i = i + 10) {
         girder_6_imgs.push_back(
                 IMAGES_PATH + "/Girder/girder_6_" + std::to_string(i) +
                 ".png");
     }
-    pallete.push_back(girder_6_imgs);
+    objects_pallete.push_back(girder_3_imgs);
+    objects_pallete.push_back(girder_6_imgs);
 }
 
 
+bool MapView::on_button_clicked(GdkEventButton *button_event) {
+    controller->mapClickedSignal(button_event);
+    return true;
+}
+
 void MapView::add(const unsigned int &id, const double &x, const double &y,
                   const int &angle) {
-    Gtk::Image new_image(pallete[id - id / 2 - 1][0]);
+    Gtk::Image new_image(objects_pallete[id - id / 2 - 1][0]);
     const Glib::RefPtr<Gdk::Pixbuf> &img = new_image.get_pixbuf();
     int width = img->get_width();
     int height = img->get_height();
@@ -56,7 +58,7 @@ void MapView::add(const unsigned int &id, const double &x, const double &y,
     new_image.show();
     objects.push_back(std::move(new_image));
     if (angle > 0)
-        turn(id, angle, 0);
+        turn(id, angle, objects.size()-1);
     //}
 
 }
@@ -70,18 +72,13 @@ void MapView::move(const int &index, const double &x, const double &y) {
     }
 }
 
+
 //TODO: no usar mas el id
 void MapView::turn(const unsigned int &id, const int &angle, const int &index) {
     if (!objects.empty()) {
         Gtk::Image &image = objects[index];
-        image.set(pallete[id - id / 2 - 1][angle / 10]);
+        image.set(objects_pallete[id - id / 2 - 1][angle / 10]);
     }
-}
-
-
-bool MapView::on_button_clicked(GdkEventButton *button_event) {
-    controller->mapClickedSignal(button_event);
-    return true;
 }
 
 void MapView::undo(const int &index) {
