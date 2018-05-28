@@ -9,16 +9,18 @@
 
 class FileBoxController {
 private:
-    const WeaponsAndLifeController &weapons_controller;
+    WeaponsAndLifeController &weapons_controller;
     std::shared_ptr<MapController> map_controller;
+    
 public:
-    FileBoxController(const WeaponsAndLifeController &controller,
-                      std::shared_ptr<MapController> ptr);
+    FileBoxController(WeaponsAndLifeController &wep_controller,
+                      std::shared_ptr<MapController> map_controller);
 
     void onSaveClicked() const;
 
     void onLoadClicked() const;
 
+    void onNewClicked() const;
 };
 
 

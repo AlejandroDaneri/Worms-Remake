@@ -7,7 +7,6 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Grid(cobject) {
     builder->get_widget("btn_undo", erase);
-    builder->get_widget("btn_clean", btn_clean);
     builder->get_widget("tbtn_worm", worm);
     worm->set_active(true);
     builder->get_widget("tbtn_grd", girder_3m);
@@ -39,9 +38,6 @@ void ToolBoxView::linkController(MapController *controller) {
 
     erase->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::undo));
-
-    btn_clean->signal_clicked().connect(
-            sigc::mem_fun(*map_controller, &MapController::clean));
 
     move->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::moveSignal));

@@ -4,7 +4,7 @@
 #include "FileReader.h"
 
 FileBoxController::FileBoxController(
-        const WeaponsAndLifeController &wep_controller,
+        WeaponsAndLifeController &wep_controller,
         std::shared_ptr<MapController> map_controller)
         : weapons_controller(wep_controller),
           map_controller(std::move(map_controller)) {
@@ -37,4 +37,9 @@ void FileBoxController::onLoadClicked() const {
     map_controller->loadObjects(worms, girders);
 }
 
+
+void FileBoxController::onNewClicked() const {
+    weapons_controller.on_reset_clicked();
+    map_controller->clean();
+}
 

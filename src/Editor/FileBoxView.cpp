@@ -6,6 +6,7 @@ FileBoxView::FileBoxView(BaseObjectType *cobject,
         : Gtk::HBox(cobject) {
     builder->get_widget("btn_save", save);
     builder->get_widget("btn_load", load);
+    builder->get_widget("btn_clean", new_map);
 }
 
 void FileBoxView::linkControler(std::shared_ptr<FileBoxController> controller) {
@@ -17,4 +18,8 @@ void FileBoxView::linkControler(std::shared_ptr<FileBoxController> controller) {
     load->signal_clicked().connect(
             sigc::mem_fun(*file_box_controller,
                           &FileBoxController::onLoadClicked));
+
+    new_map->signal_clicked().connect(
+            sigc::mem_fun(*file_box_controller,
+                          &FileBoxController::onNewClicked));
 }

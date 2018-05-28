@@ -14,6 +14,7 @@ class FileBoxView : public Gtk::HBox {
 private:
     Gtk::Button *save;
     Gtk::Button *load;
+    Gtk::Button *new_map;
     std::shared_ptr<FileBoxController> file_box_controller;
 public:
     FileBoxView(BaseObjectType *cobject,

@@ -19,7 +19,6 @@ class MapController;
 
 class ToolBoxView : public Gtk::Grid {
 private:
-    Gtk::Button *btn_clean;
     Gtk::Button *erase;
     MapController *map_controller;
     Gtk::ToggleButton *worm;
