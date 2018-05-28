@@ -1,6 +1,7 @@
 #include "ViewsList.h"
 #include <glibmm/main.h>
 #include "ObjectSizes.h"
+#include "WeaponNames.h"
 #include "Player.h"
 
 ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list, MusicPlayer& musicPlayer):
@@ -35,6 +36,7 @@ bool ViewsList::removeWeaponCallBack(int id){
     if (this->weapon_focused == id){
         this->weapon_focused = -1;
     }
+    this->musicPlayer.playExplosionSound();
     auto it = this->weapons.find(id);
     ExplosionView explotion(std::move(it->second));
     this->animation.addAndStart(std::move(explotion));
@@ -44,7 +46,6 @@ bool ViewsList::removeWeaponCallBack(int id){
 
 void ViewsList::removeWeapon(int id){
     if (this->weapons.find(id) != this->weapons.end()) {
-        this->musicPlayer.playExplosionSound();
         sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::removeWeaponCallBack), id);
         Glib::signal_idle().connect(my_slot);
     }
@@ -91,7 +92,7 @@ bool ViewsList::updateWeaponDataCallBack(int id, const std::string& weapon_name,
         this->removeWormFocus();
         this->weapons.insert(std::make_pair(id, std::move(weapon)));
 
-        if (weapon_name == "Dynamite") {
+        if (weapon_name == DYNAMITE_NAME) {
             this->musicPlayer.playRunAway();
         }
     } else {
