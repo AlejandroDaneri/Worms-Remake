@@ -17,7 +17,7 @@ WeaponsFactory::WeaponsFactory() {}
 
 WeaponsFactory::~WeaponsFactory() {}
 		
-weapon_ptr WeaponsFactory::create_weapon(std::string weapon, int ammo) {
+weapon_ptr WeaponsFactory::createWeapon(std::string weapon, int ammo) {
 	if (weapon == AIR_ATTACK_NAME)	
 		return weapon_ptr(new AirAttack(ammo));
 	else if (weapon == BANANA_NAME)

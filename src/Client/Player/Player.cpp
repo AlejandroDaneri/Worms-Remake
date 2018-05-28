@@ -32,7 +32,7 @@ void Player::startTurn(int worm_id, int player_id){
 	    this->musicPlayer.playStartTurnSound();
 		//Es mi turno
 		this->handlers.enable_all();
-		this->change_weapon(this->weapons.get_current_weapon().getName());
+		this->change_weapon(this->weapons.getCurrentWeapon().getName());
 		this->turn_label.beginTurn();
 		this->turn.start();
 	} else {
@@ -53,18 +53,18 @@ void Player::damageReceived(){
 
 void Player::shootWeapon() {
 	this->turn.reduceTime();
-	this->weapons.get_current_weapon().shoot();
-    if (this->weapons.get_current_weapon().getName() == "Teleportation") { ////////////////esto no va aca, sino solo lo escucha un jugador
+    this->weapons.getCurrentWeapon().shoot();
+    if (this->weapons.getCurrentWeapon().getName() == "Teleportation") { ////////////////esto no va aca, sino solo lo escucha un jugador
         this->musicPlayer.playTeleportSound();
-    } else if (this->weapons.get_current_weapon().getName() == "Bat") {
+    } else if (this->weapons.getCurrentWeapon().getName() == "Bat") {
         this->musicPlayer.playBatSound();
     }
 }
 
 void Player::change_weapon(std::string weapon) {
-	this->weapons.change_weapon(weapon);
+    this->weapons.changeWeapon(weapon);
 	this->protocol.send_change_weapon(weapon);
-	if (this->weapons.get_current_weapon().hasScope()) {
+	if (this->weapons.getCurrentWeapon().hasScope()) {
 		this->view_list.updateScope(this->handlers.getCurrentAngle());
 	} else {
 		this->view_list.removeScopeVisibility();
@@ -74,7 +74,7 @@ void Player::change_weapon(std::string weapon) {
 void Player::shoot(Position position) {
 	this->shootWeapon();
 	this->protocol.send_weapon_self_directed_shoot(position);
-	this->screen.getWeaponsView().updateAmmo(this->weapons.get_current_weapon());
+	this->screen.getWeaponsView().updateAmmo(this->weapons.getCurrentWeapon());
 }
 
 void Player::play_tick_time() {
@@ -85,15 +85,15 @@ void Player::play_tick_time() {
 
 void Player::shoot(int angle, int power, int time) {
 	this->shootWeapon();
-	if (!this->weapons.get_current_weapon().isTimed()) {
+	if (!this->weapons.getCurrentWeapon().isTimed()) {
 		time = -1;
 	}
-	if (!this->weapons.get_current_weapon().hasScope()) {
+	if (!this->weapons.getCurrentWeapon().hasScope()) {
 		angle = NO_ANGLE;
 	}
 	this->protocol.send_weapon_shoot(angle, power, time);
 	this->view_list.removeScopeVisibility();
-	this->screen.getWeaponsView().updateAmmo(this->weapons.get_current_weapon());
+	this->screen.getWeaponsView().updateAmmo(this->weapons.getCurrentWeapon());
 }
 
 

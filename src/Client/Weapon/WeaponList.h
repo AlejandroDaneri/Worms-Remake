@@ -24,10 +24,10 @@ class WeaponList {
 		void add(std::string weapon, int ammo);
 
 		/* Devuelve el arma actual */
-		Weapon& get_current_weapon();
+		Weapon& getCurrentWeapon();
 		
 		/* Cambia el arma actual por la especificada */
-		void change_weapon(std::string weapon);
+		void changeWeapon(std::string weapon);
 
 		typedef WeaponsList::iterator iterator;
 		typedef WeaponsList::const_iterator const_iterator;

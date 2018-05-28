@@ -60,7 +60,7 @@ bool Handlers::movement_key_press_handler(GdkEventKey* key_event) {
 bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 	this->movement_key_press_handler(key_event);
 	if (key_event->keyval == GDK_KEY_Up) {
-        if (!this->weapons.get_current_weapon().hasScope()) {
+        if (!this->weapons.getCurrentWeapon().hasScope()) {
             return true;
         }
 		if (this->current_angle < MAX_ANGLE) {
@@ -68,7 +68,7 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 			this->player.getProtocol().updateScope(this->current_angle);
 		}
 	} else if (key_event->keyval == GDK_KEY_Down) {
-		if (!this->weapons.get_current_weapon().hasScope()) {
+		if (!this->weapons.getCurrentWeapon().hasScope()) {
 		    return true;
 		}
 		if (this->current_angle > MIN_ANGLE) {
@@ -78,10 +78,10 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 	} else if (key_event->keyval >= ASCII_1 && key_event->keyval <= ASCII_5) {
 		this->weapons_time = key_event->keyval - ASCII_OFFSET;
 	} else if (key_event->keyval == SPACE && key_event->type == GDK_KEY_PRESS) {
-		if (this->weapons.get_current_weapon().isSelfDirected()) {
+		if (this->weapons.getCurrentWeapon().isSelfDirected()) {
 			return true;
 		}
-		if (!this->weapons.get_current_weapon().hasAmmo()) {
+		if (!this->weapons.getCurrentWeapon().hasAmmo()) {
 			///////////////////////// Hacer sonido u otra cosa
 			return true;
 		}
@@ -89,7 +89,7 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 			return true;
 		}
 		this->has_shoot = true;
-		if (!this->weapons.get_current_weapon().hasVariablePower()) {
+		if (!this->weapons.getCurrentWeapon().hasVariablePower()) {
 			this->player.shoot(this->current_angle, -1, this->weapons_time);
 		} else {
 			this->timer.start();
@@ -101,13 +101,13 @@ bool Handlers::complete_key_press_handler(GdkEventKey* key_event) {
 bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 	if (key_event->type == GDK_KEY_RELEASE) {
 		if (key_event->keyval == SPACE) {
-			if (this->weapons.get_current_weapon().isSelfDirected()) {
+			if (this->weapons.getCurrentWeapon().isSelfDirected()) {
 				return true;
 			}
-			if (!this->weapons.get_current_weapon().hasVariablePower()) {
+			if (!this->weapons.getCurrentWeapon().hasVariablePower()) {
 				return true;
 			}
-			if (!this->weapons.get_current_weapon().hasAmmo()) {
+			if (!this->weapons.getCurrentWeapon().hasAmmo()) {
                 this->player.getMusicPlayer().playNoAmmo();
                 return true;
 			}
@@ -118,10 +118,10 @@ bool Handlers::complete_key_release_handler(GdkEventKey* key_event) {
 }
 
 bool Handlers::on_button_press_event(GdkEventButton* event) {
-	if (!this->weapons.get_current_weapon().isSelfDirected()) {
+	if (!this->weapons.getCurrentWeapon().isSelfDirected()) {
 		return true;
 	}
-	if (!this->weapons.get_current_weapon().hasAmmo()) {
+	if (!this->weapons.getCurrentWeapon().hasAmmo()) {
 		return true;
 	}
 	if (this->has_shoot) {

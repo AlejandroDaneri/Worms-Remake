@@ -6,12 +6,18 @@
 
 typedef std::unique_ptr<Weapon> weapon_ptr;
 
+/* Clase que se encarga de crear las armas del juego */
 class WeaponsFactory {
 	public:
+		/* Constructor */
 		WeaponsFactory();
+
+		/* Destructor */
 		~WeaponsFactory();
-		
-		weapon_ptr create_weapon(std::string, int ammo);
+
+
+		/* Crea el arma especificada con las municiones especificadas */
+		weapon_ptr createWeapon(std::string weapon, int ammo);
 };
 
 
