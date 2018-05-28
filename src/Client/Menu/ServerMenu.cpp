@@ -1,6 +1,6 @@
 #include "ServerMenu.h"
-#include "Path.h"
 #include <gtkmm/builder.h>
+#include "Path.h"
 
 ServerMenu::ServerMenu(Gtk::Window& window): window(window){
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_ServerMenu.glade");

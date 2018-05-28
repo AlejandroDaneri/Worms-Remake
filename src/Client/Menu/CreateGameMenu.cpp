@@ -1,8 +1,8 @@
 #include "CreateGameMenu.h"
-#include "Path.h"
-#include "GamePlayers.h"
 #include <gtkmm/builder.h>
 #include <glibmm/main.h>
+#include "Path.h"
+#include "GamePlayers.h"
 
 CreateGameMenu::CreateGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity):
 	window(window), protocol(std::move(protocol)), player_name(std::move(name)){
