@@ -13,13 +13,20 @@ class GameMenuField{
 		Gtk::HBox container;
 
 	public:
+		/* Constructor */
 		GameMenuField(const std::string& title);
+
+		/* Destructor */
 		~GameMenuField();
 
+		/* Constructor por movimiento */
 		GameMenuField(GameMenuField&& other);
 
+
+		/* Devuelve el contenedor del menu */
 		Gtk::Container& getContainer();
 
+		/* Devuelve el boton del menu */
 		Gtk::Button& getButton();
 };
 

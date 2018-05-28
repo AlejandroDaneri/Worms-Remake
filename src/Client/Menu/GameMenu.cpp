@@ -1,6 +1,6 @@
 #include "GameMenu.h"
-#include "Path.h"
 #include <gtkmm/builder.h>
+#include "Path.h"
 
 GameMenu::GameMenu(Gtk::Window& window, ClientProtocol&& protocol): window(window), protocol(std::move(protocol)){
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_GameMenu.glade");
