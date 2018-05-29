@@ -79,10 +79,7 @@ void ToolBoxView::on_button_clicked(unsigned id) {
         girder_3m->set_active(false);
         worm->set_active(false);
     }
-    turncw->set_sensitive(false);
-    turnccw->set_sensitive(false);
-    move->set_sensitive(false);
-    erase->set_sensitive(false);
+    disableMovingItems();
     map_controller->addModeSignal(id);
 }
 

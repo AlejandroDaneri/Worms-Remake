@@ -5,7 +5,7 @@
 
 #define ADD_CMD_ID 0
 #define MOVE_CMD_ID 1
-#define SELECTION 2
+#define SELECT_CMD_ID 2
 
 
 MapController::MapController(Map model,
@@ -39,6 +39,10 @@ void MapController::moveSignal() {
     this->actual_action_id = MOVE_CMD_ID;
 }
 
+void MapController::changeModeSignal() {
+    this->actual_action_id = SELECT_CMD_ID;
+}
+
 void MapController::turnCCWSignal() {
     if (model.isGirder(actual_object_selected)) {
         unsigned int id;
@@ -61,12 +65,13 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
                          event_button->y);
         this->view->move(actual_object_selected, event_button->x,
                          event_button->y);
-    } else if (actual_action_id == SELECTION) {
+    } else if (actual_action_id == SELECT_CMD_ID) {
         this->actual_object_selected = view->select(event_button->x,
                                                     event_button->y);
         if (actual_object_selected > -1) {
             toolBox->enableMovingItems();
-        }
+        } else toolBox->disableMovingItems();
+        actual_action_id = SELECT_CMD_ID; //cambio de estado del toolbox llama a add mode
     } else {
         this->model.add(actual_item_selected, event_button->x, event_button->y);
         this->view->add(actual_item_selected, event_button->x, event_button->y);
@@ -99,8 +104,4 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
 
 void MapController::changeBackground() {
     this->view->changeBackground();
-}
-
-void MapController::changeModeSignal() {
-    this->actual_action_id = SELECTION;
 }
