@@ -76,7 +76,7 @@ bool Turn::gameEnded(std::mutex& mutex){
 		}
 	}
 	///////////////////////////////////////////////return players_alive <= 1;
-	return players_alive == 0;////por ahora con un solo jugador
+	return players_alive == 1;////por ahora con un solo jugador
 }
 
 const std::string& Turn::getWinner(){
