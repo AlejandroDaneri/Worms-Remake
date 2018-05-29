@@ -2,6 +2,7 @@
 #include "FileBoxController.h"
 #include "FileWriter.h"
 #include "FileReader.h"
+#include "InvalidMapError.h"
 
 FileBoxController::FileBoxController(
         WeaponsAndLifeController &wep_controller,
@@ -11,19 +12,23 @@ FileBoxController::FileBoxController(
 }
 
 void FileBoxController::onSaveClicked() const {
+    try {
 
-    std::vector<std::vector<double>> worms;
-    std::vector<std::vector<double>> girders;
+        std::vector<std::vector<double>> worms;
+        std::vector<std::vector<double>> girders;
 
-    map_controller->getObjects(worms, girders);
+        map_controller->getObjects(worms, girders);
 
-    std::vector<int> weapons_ammo;
-    unsigned int life;
-    weapons_controller.getWeapons(weapons_ammo, life);
+        std::vector<int> weapons_ammo;
+        unsigned int life;
+        weapons_controller.getWeapons(weapons_ammo, life);
 
-    FileWriter file("config_editor.yaml");
-    file.save(weapons_ammo, worms,
-              girders, life);
+        FileWriter file("config_editor.yaml");
+        file.save(weapons_ammo, worms,
+                  girders, life);
+    } catch(const InvalidMapError &e){
+        e.what();
+    }
 }
 
 void FileBoxController::onLoadClicked() const {
