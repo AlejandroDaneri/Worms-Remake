@@ -36,8 +36,9 @@ bool ViewsList::removeWeaponCallBack(int id){
     if (this->weapon_focused == id){
         this->weapon_focused = -1;
     }
-    this->musicPlayer.playExplosionSound();
+
     auto it = this->weapons.find(id);
+    this->musicPlayer.playExplosionSound(it->second.getName());
     ExplosionView explotion(std::move(it->second));
     this->animation.addAndStart(std::move(explotion));
     this->weapons.erase(it);
@@ -179,4 +180,16 @@ void ViewsList::removeWormFocus(){
         it->second.setFocus(false);
         it->second.removeWeaponImage();
     }
+}
+
+bool ViewsList::setVictoryCallBack() {
+    std::unordered_map<int, WormView>::iterator iter;
+    for (iter = this->worms.begin(); iter != this->worms.end(); iter++) {
+        iter->second.setVictory();
+    }
+    return false;
+}
+
+void ViewsList::setVictory() {
+    Glib::signal_idle().connect(sigc::mem_fun(*this, &ViewsList::setVictoryCallBack));
 }

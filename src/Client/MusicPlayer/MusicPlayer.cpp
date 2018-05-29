@@ -15,6 +15,7 @@ const std::string TELEPORT_SOUND = SOUNDS_PATH + "Weapons/TELEPORT.WAV";
 const std::string BAT_SOUND = SOUNDS_PATH + "Weapons/BaseballSound.wav";
 const std::string HOLY_GRENADE_SOUND = SOUNDS_PATH + "Weapons/HOLYGRENADE.WAV";
 const std::string NO_AMMO_SOUND = SOUNDS_PATH + "misc/no_ammo.wav";
+const std::string VICTORY_SOUND = SOUNDS_PATH + "Worms/VICTORY.WAV";
 
 MusicPlayer::MusicPlayer() {
     this->music = NULL;
@@ -120,8 +121,12 @@ void MusicPlayer::playDeathSound() {
     this->addEffect(DEATH_SOUND);
 }
 
-void MusicPlayer::playExplosionSound() {
-    this->addEffect(EXPLOSION_SOUND);
+void MusicPlayer::playExplosionSound(const std::string& weapon) {
+    if (weapon == "HolyGrenade") {
+        this->playHolyGrenadeSound();
+    } else {
+        this->addEffect(EXPLOSION_SOUND);
+    }
 }
 
 void MusicPlayer::playTeleportSound() {
@@ -132,9 +137,12 @@ void MusicPlayer::playBatSound() {
     this->addEffect(BAT_SOUND);
 }
 
-
 void MusicPlayer::playHolyGrenadeSound() {
     this->addEffect(HOLY_GRENADE_SOUND);
+}
+
+void MusicPlayer::playVictory() {
+    this->addEffect(VICTORY_SOUND);
 }
 
 void MusicPlayer::playNoAmmo() {

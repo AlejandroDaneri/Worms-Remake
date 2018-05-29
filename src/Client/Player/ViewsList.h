@@ -40,6 +40,7 @@ class ViewsList{
         bool removeScopeVisibilityCallBack();
         bool addGirderCallBack(size_t size, int pos_x, int pos_y, int rotation);
         bool setCurrentWormCallBack(int id);
+        bool setVictoryCallBack();
 
 	public:
         /* Constructor */
@@ -62,6 +63,7 @@ class ViewsList{
 
         /* CallBack de changeWeapon */
         bool changeWeaponCallBack(const std::string &weapon_name);
+
 		/* Actualiza la vista del worm con el arma nueva */
         void changeWeapon(const std::string &weapon_name);
 
@@ -77,6 +79,8 @@ class ViewsList{
 
 		/* Actualiza el worm actual y hace focus en este */
         void setCurrentWorm(int id);
+
+        void setVictory();
 };
 
 

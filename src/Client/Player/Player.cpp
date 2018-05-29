@@ -54,6 +54,10 @@ void Player::endTurn() {
 void Player::endGame(const std::string& winner){
 	this->data_receiver.stop();
 	this->turn_label.setWinner(winner);
+	if (winner != "") {
+        this->musicPlayer.playVictory();
+        this->view_list.setVictory();
+    }
 	/////////////////////////////////////////////////////////////Hacer sonido de fin de juego
 }
 

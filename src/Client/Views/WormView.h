@@ -29,7 +29,7 @@ class WormView: public Viewable {
 		Glib::RefPtr<Gdk::Pixbuf> walk_image;
 	    std::vector<Glib::RefPtr<Gdk::Pixbuf>> scope_vector;
 	    Glib::RefPtr<Gdk::Pixbuf> scope_image;
-        WeaponAnimation weapon_animation;
+        //WeaponAnimation weapon_animation;
 	    int angle;
 
 	    /* Actualiza la imagen del worm a la correspondiente segun las
@@ -84,6 +84,8 @@ class WormView: public Viewable {
 		Gtk::Widget& getWidget() override;
 
 		Gtk::Image& getImage();
+
+		void setVictory();
 };
 
 

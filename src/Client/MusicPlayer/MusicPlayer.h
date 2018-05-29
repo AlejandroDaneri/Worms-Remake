@@ -48,7 +48,7 @@ class MusicPlayer {
         void playDeathSound();
 
         /* Reproduce el sonido de la explosion */
-        void playExplosionSound();
+        void playExplosionSound(const std::string& weapon);
 
         /* Reproduce el sonido de la teletransportacion */
         void playTeleportSound();
@@ -58,6 +58,8 @@ class MusicPlayer {
 
         /* Reproduce el sonido de la granada santa */
         void playHolyGrenadeSound();
+
+        void playVictory();
 
         /* Reproduce el sonido de arma descargada */
 		void playNoAmmo();

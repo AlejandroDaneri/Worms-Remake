@@ -7,7 +7,7 @@
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id):
 	Viewable(worldView), player_id(player_id), life(life), dir(dir),
 	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)), label(life, colors[player_id]),
-	weapon_animation(*this, DEFAULT_WEAPON), angle(48) {
+	angle(48) {
 	    this->walk_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + "walk.png");
 	    int width = walk_image->get_width();
 	    int height = walk_image->get_height();
@@ -34,8 +34,7 @@ WormView::WormView(WormView&& other): Viewable(std::move(other)), player_id(othe
 	label(std::move(other.label)), image(std::move(other.image)),
     worm(std::move(other.worm)), walk_queue(std::move(other.walk_queue)),
     walk_image(std::move(other.walk_image)), scope_vector(std::move(other.scope_vector)),
-    scope_image(std::move(other.scope_image)),
-    weapon_animation(std::move(other.weapon_animation)), angle(other.angle) {}
+    scope_image(std::move(other.scope_image)), angle(other.angle) {}
 
 void WormView::updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm){
 	if (new_life != this->life){
@@ -61,7 +60,7 @@ void WormView::kill(){
 
 void WormView::changeWeapon(const std::string& weapon) {
     this->weapon = weapon;
-    this->weapon_animation.changeWeapon(weapon);
+    //this->weapon_animation.changeWeapon(weapon);
     this->scope_vector.clear();
     this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
     int width = this->scope_image->get_width();
@@ -137,4 +136,8 @@ char WormView::getDir() const {
 
 int WormView::getPlayerId() const{
 	return this->player_id;
+}
+
+void WormView::setVictory() {
+    this->image.set(ANIMATIONS_PATH + "victory.gif");
 }
