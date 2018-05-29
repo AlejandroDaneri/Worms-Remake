@@ -10,7 +10,6 @@
 #include "MapView.h"
 #include "MapController.h"
 
-
 #define WORM_BUTTON_ID 1
 #define GIRDER_3_BUTTON_ID 3
 #define GIRDER_6_BUTTON_ID 6
@@ -42,6 +41,7 @@ public:
     void linkController(MapController *controller);
 
     void disableMovingItems();
+
 };
 
 

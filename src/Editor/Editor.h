@@ -15,11 +15,10 @@
 
 class Editor : public Gtk::Window {
     Gtk::ScrolledWindow *map_window;
-    MapView *map;
     Map map_model;
     WeaponsAndLifeController weps_list_controller;
-
     FileBoxView *filebox;
+
 public:
     Editor(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 

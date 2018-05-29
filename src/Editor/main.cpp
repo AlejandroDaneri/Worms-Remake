@@ -6,8 +6,8 @@
 #include <gtkmm/window.h>
 #include "Editor.h"
 
-int main(int argc, char *argv[]) {
-    Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv);
+int main() {
+    Glib::RefPtr<Gtk::Application> app = Gtk::Application::create();
     Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
     try {
         refBuilder->add_from_file("editor.glade");
@@ -27,7 +27,9 @@ int main(int argc, char *argv[]) {
 
     Editor *mainWindow = nullptr;
     refBuilder->get_widget_derived("main_window", mainWindow);
-    app->run(*mainWindow);
-
+    if (mainWindow) {
+        app->run(*mainWindow);
+        delete mainWindow;
+    }
     return 0;
 }

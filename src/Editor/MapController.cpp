@@ -81,7 +81,7 @@ void MapController::getObjects(std::vector<std::vector<double>> &worms,
                 "El mapa actual no contiene worms");
         dialog.run();
     }
-    if (girders.empty()){//execpcion
+    if (girders.empty()){//excepcion
         Gtk::MessageDialog dialog("Error al guardar archivo",false,Gtk::MESSAGE_WARNING);
         dialog.set_secondary_text(
                 "El mapa actual no contiene vigas");

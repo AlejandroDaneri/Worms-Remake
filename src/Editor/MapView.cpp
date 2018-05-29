@@ -152,3 +152,4 @@ MapView::isIsolated(const double &x, double y, const unsigned int &id) {
     }
     return isolated;
 }
+

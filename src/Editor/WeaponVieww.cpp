@@ -3,7 +3,9 @@
 WeaponView::WeaponView(const Glib::RefPtr<Gtk::Builder> &builder,
                        const unsigned int &id) {
     builder->get_widget("sc_wep" + std::to_string(id), ammo_selector);
+    Gtk::manage(ammo_selector);
     builder->get_widget("cb_wep" + std::to_string(id), infinite);
+    Gtk::manage(infinite);
 
     default_checkbox_state = infinite->get_active();
     default_ammo_selector_value = ammo_selector->get_value();
@@ -53,4 +55,9 @@ void WeaponView::setAmmo(const int &ammo) {
         ammo_selector->set_value(ammo);
     }
 
+}
+
+WeaponView::~WeaponView() {
+    //delete ammo_selector;
+    //delete infinite;
 }
