@@ -14,6 +14,8 @@ class PlayersList{
 		std::map<int, PlayerLifeLabel> labels;
 		Gtk::VBox container;
 
+		bool addPLayerCallBack(int id, std::string name);
+
 	public:
 		/* Constructor */
 		PlayersList();
