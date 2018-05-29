@@ -40,11 +40,12 @@ class WormView: public Viewable {
 		void setWeaponImage();
 
 		/* Cambia la imagen actual por la siguiente imagen del worm caminando */
-		void setMovementImage();
+		void setMovementImage(bool dir_changed);
 
 		/* Cambia la imagen actual por la imagen del worm caminando */
 		void setStaticImage(bool dir_changed);
 
+		/*  */
 		void updateWeaponImage();
 
 	public:

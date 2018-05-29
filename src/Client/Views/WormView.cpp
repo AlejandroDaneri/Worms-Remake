@@ -9,10 +9,10 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)), label(life, colors[player_id]),
 	angle(48) {
 	    this->walk_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + "walk.png");
-	    int width = walk_image->get_width();
-	    int height = walk_image->get_height();
-	    for (int i = 0; i < height/WORM_IMAGE_WIDTH -1; i++) {
-			walk_queue.push(Gdk::Pixbuf::create_subpixbuf(walk_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
+	    int width = this->walk_image->get_width();
+	    int height = this->walk_image->get_height();
+	    for (int i = 0; i < height/WORM_IMAGE_WIDTH; i++) {
+			walk_queue.push(Gdk::Pixbuf::create_subpixbuf(this->walk_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
 		}
 		this->worm.attach(this->label.getWidget(), 0, 0, 1, 1);
 		this->worm.attach(this->image, 0, 1, 1, 1);
@@ -62,7 +62,6 @@ void WormView::kill(){
 void WormView::changeWeapon(const std::string& weapon) {
     this->weapon = weapon;
     //this->weapon_animation.changeWeapon(weapon);
-    this->scope_vector.clear();
 
     this->updateWeaponImage();
    /* this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
@@ -82,7 +81,7 @@ void WormView::setNewImage(bool dir_changed, bool moved, bool colliding, bool is
            // while(!this->weapon_animation.hasFinished()) {}
             this->setWeaponImage();
 		} else if (colliding){
-			this->setMovementImage();
+			this->setMovementImage(dir_changed);
 		}
 		return;
 	}
@@ -106,10 +105,12 @@ void WormView::setWeaponImage(){
     this->image.set(path);*/
 }
 
-void WormView::setMovementImage(){
+void WormView::setMovementImage(bool dir_changed){
 	this->setStaticImage(true);
-	this->walk_queue.push(std::move(this->walk_queue.front()));
-	this->walk_queue.pop();
+	if (!dir_changed) {
+        this->walk_queue.push(std::move(this->walk_queue.front()));
+        this->walk_queue.pop();
+    }
 }
 
 void WormView::setStaticImage(bool dir_changed){
@@ -119,6 +120,7 @@ void WormView::setStaticImage(bool dir_changed){
 }
 
 void WormView::updateWeaponImage() {
+    this->scope_vector.clear();
     this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
     int width = this->scope_image->get_width();
     int height = this->scope_image->get_height();
