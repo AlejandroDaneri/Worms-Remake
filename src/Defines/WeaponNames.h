@@ -34,4 +34,8 @@ const std::string FRAGMENT("Fragment");
 
 const std::string DEFAULT_WEAPON(BAZOOKA_NAME);
 
+const int MAX_WEAPON_ANGLE = 90;
+
+const int MIN_WEAPON_ANGLE = -90;
+
 #endif

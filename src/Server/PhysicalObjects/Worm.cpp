@@ -52,7 +52,6 @@ void Worm::addLife(int life){
 }
 
 void Worm::reduce_life(int damage){
-	std::lock_guard<std::mutex> lock(this->mutex);
 	this->life -= damage;
 	if (this->life <= 0){
 		this->life = 0;
@@ -97,7 +96,7 @@ void Worm::changeWeapon(const std::string& weapon){
 void Worm::shoot(int angle, int power, int time){
 	((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time);
 	b2Vec2 pos = this->getPosition();
-	if (angle > 500){
+	if (angle > MAX_WEAPON_ANGLE){
 		angle = this->angle;
 	}
 	pos.x += (worm_size * Math::cosDegrees(angle) * this->dir);
@@ -121,7 +120,7 @@ void Worm::receive_weapon_damage(int damage, const b2Vec2& epicenter){
 
 void Worm::collide_with_something(CollisionData* other){
 	if (other->getType() == TYPE_BORDER){
-		this->reduce_life(this->life * 2);
+		this->kill();
 	} else if(other->getType() == TYPE_GIRDER){
 		int min_height = parameters.getWormHeightToDamage();
 		float current_height = this->body->GetPosition().y;

@@ -12,7 +12,6 @@
 #include "Position.h"
 #include "DataReceiver.h"
 #include "Handlers.h"
-#include "PlayersList.h"
 #include "MusicPlayer.h"
 
 class Player {

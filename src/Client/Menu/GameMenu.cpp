@@ -29,8 +29,7 @@ void GameMenu::createButtonPressed(){
 		std::string name(this->player_name->get_text());
 		int quantity = this->protocol.receiveLength();
 		if (quantity == 0){
-			this->error->set_label("No hay mapas para crear una partida");
-			this->showError();
+			this->showError("No hay mapas para crear una partida");
 		} else {
 			this->next_menu = std::unique_ptr<MenuView>(new CreateGameMenu(this->window, std::move(this->protocol), std::move(name), quantity));
 		}
@@ -42,8 +41,7 @@ void GameMenu::joinButtonPressed(){
 		std::string name(this->player_name->get_text());
 		int quantity = this->protocol.receiveLength();
 		if (quantity == 0){
-			this->error->set_label("No hay partidas disponibles");
-			this->showError();
+			this->showError("No hay partidas disponibles");
 		} else {
 			this->next_menu = std::unique_ptr<MenuView>(new JoinGameMenu(this->window, std::move(this->protocol), std::move(name), quantity));
 		}
@@ -62,7 +60,6 @@ bool GameMenu::selectAction(char action){
 		this->window.remove();
 		return true;
 	} catch (const SocketException& e){
-		this->error->set_label("Ocurrio un error");
 		this->showError();
 		return false;
 	}

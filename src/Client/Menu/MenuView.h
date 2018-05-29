@@ -16,7 +16,7 @@ class MenuView{
 		Gtk::Box* menu;
 
 		/* Muestra un mensaje de error */
-		void showError();
+		void showError(const std::string& error = "Ocurrio un error.");
 
 	public:
 		/* Constructor */

@@ -55,6 +55,10 @@ bool PhysicalObject::isWindAffected(){
 	return false;
 }
 
+void PhysicalObject::kill(){
+	this->is_dead = true;
+}
+
 int PhysicalObject::getId(){
 	return this->id;
 }

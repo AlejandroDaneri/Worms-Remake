@@ -5,7 +5,8 @@ MenuView::MenuView(Gtk::Window& window, ClientProtocol&& protocol):
 
 MenuView::~MenuView(){}
 
-void MenuView::showError(){
+void MenuView::showError(const std::string& error){
+	this->error->set_label(error);
 	this->menu->remove(*this->error);
 	this->window.remove();
 	this->window.add(*this->error);

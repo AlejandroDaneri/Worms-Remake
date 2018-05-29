@@ -26,9 +26,6 @@ class MusicPlayer {
 		/* Reproduce la musica de fondo */
 		void playMusic();
 
-		//////////// Ver de cambiar a un unico metodo y que se le pase el path
-		//void playEffect(std::string audio);
-
 		/* Reproduce el sonido de inicio de turno */
 		void playStartTurnSound();
 

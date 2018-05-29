@@ -1,9 +1,9 @@
 #include "MusicPlayer.h"
-#include <iostream>
 #include "MusicPlayerException.h"
+#include "WeaponNames.h"
 #include "Path.h"
 
-const std::string BACKGROUND_MUSIC = SOUNDS_PATH + "menu/music.mp3"; ///////////////// cambiar
+const std::string BACKGROUND_MUSIC = SOUNDS_PATH + "menu/music.mp3";
 const std::string START_TURN_SOUND = SOUNDS_PATH + "misc/StartRound.wav";
 const std::string TICK_SOUND = SOUNDS_PATH + "misc/TIMERTICK.WAV";
 const std::string WALK_SOUND = SOUNDS_PATH + "misc/Walk-Expand.wav";
@@ -32,7 +32,6 @@ MusicPlayer::MusicPlayer() {
     // Load background music
     this->music = Mix_LoadMUS(BACKGROUND_MUSIC.c_str());
     if (this->music == NULL) {
-        std::cout << "Error al cargar el audio" << std::endl;
     }
 }
 
@@ -74,11 +73,9 @@ void MusicPlayer::addEffect(std::string audio) {
     Mix_Chunk* effect = NULL;
     effect = Mix_LoadWAV(audio.c_str());
     if (effect == NULL) {
-        std::cout << "Error al cargar el audio" << std::endl;
         return;
     }
     if ((channel = Mix_PlayChannel(-1, effect, 0)) == -1) {
-        std::cout << "Error al reproducir el audio" << std::endl;
         Mix_FreeChunk(effect);
         return;
     }
@@ -87,15 +84,9 @@ void MusicPlayer::addEffect(std::string audio) {
 }
 
 void MusicPlayer::playMusic() {
-	if (Mix_PlayMusic(this->music, -1) == -1) {
-        std::cout << "Error al reproducir el audio" << std::endl;
-    }
+	Mix_PlayMusic(this->music, -1);
     Mix_VolumeMusic(MIX_MAX_VOLUME / 4);
 }
-
-/*void playEffect(std::string audio) {
-    this->addEffect(audio);
-}*/
 
 void MusicPlayer::playStartTurnSound() {
     this->addEffect(START_TURN_SOUND);
@@ -122,7 +113,7 @@ void MusicPlayer::playDeathSound() {
 }
 
 void MusicPlayer::playExplosionSound(const std::string& weapon) {
-    if (weapon == "HolyGrenade") {
+    if (weapon == HOLY_GRENADE_NAME) {
         this->playHolyGrenadeSound();
     } else {
         this->addEffect(EXPLOSION_SOUND);

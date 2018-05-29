@@ -3,6 +3,7 @@
 #include <gdk/gdkkeysyms.h>
 #include "Player.h"
 #include "ViewTransformer.h"
+#include "WeaponNames.h"
 
 const char SPACE = ' ';
 const int WEAPONS_TIME = 5;
@@ -11,8 +12,7 @@ const char ASCII_1 = 49;
 const char ASCII_5 = 53;
 const int MAX_TIME = 5000;
 const int DEFAULT_ANGLE = 48;
-const int MAX_ANGLE = 90;
-const int MIN_ANGLE = -90;
+const int ANGLE_STEP = 6;
 
 Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons, WorldView& world):
 	player(player), view_list(view_list), weapons(weapons), world(world),
@@ -67,16 +67,16 @@ bool Handlers::completeKeyPressHandler(GdkEventKey *key_event) {
         if (!this->weapons.getCurrentWeapon().hasScope()) {
             return true;
         }
-		if (this->current_angle < MAX_ANGLE) {
-			this->current_angle += 6;
+		if (this->current_angle < MAX_WEAPON_ANGLE) {
+			this->current_angle += ANGLE_STEP;
 			this->player.getProtocol().updateScope(this->current_angle);
 		}
 	} else if (key_event->keyval == GDK_KEY_Down) {
 		if (!this->weapons.getCurrentWeapon().hasScope()) {
 		    return true;
 		}
-		if (this->current_angle > MIN_ANGLE) {
-			this->current_angle -= 6;
+		if (this->current_angle > MIN_WEAPON_ANGLE) {
+			this->current_angle -= ANGLE_STEP;
 			this->player.getProtocol().updateScope(this->current_angle);
 		}
 	} else if (key_event->keyval >= ASCII_1 && key_event->keyval <= ASCII_5) {
@@ -86,7 +86,7 @@ bool Handlers::completeKeyPressHandler(GdkEventKey *key_event) {
 			return true;
 		}
 		if (!this->weapons.getCurrentWeapon().hasAmmo()) {
-			///////////////////////// Hacer sonido u otra cosa
+			///////////////////////////////////////////////////////////// Hacer sonido u otra cosa
 			return true;
 		}
 		if (this->has_shoot) {

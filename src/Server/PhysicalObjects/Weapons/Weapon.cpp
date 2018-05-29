@@ -10,7 +10,7 @@ int Weapon::weapon_id = 1;
 Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius): 
 	PhysicalObject(world, Weapon::weapon_id++, TYPE_WEAPON), parameters(parameters), 
 	damage(damage), radius(radius), 
-	waiting_to_explode(false), time_to_explode(-1), angle(500), power(-1),
+	waiting_to_explode(false), time_to_explode(-1), angle(MAX_WEAPON_ANGLE + 1), power(-1),
 	explode_time(world, *this){}
 
 Weapon::~Weapon(){
@@ -51,7 +51,7 @@ void Weapon::createFixtures(){
 }
 
 void Weapon::setInitialVelocity(){
-	if (this->angle < 500){
+	if (this->angle <= MAX_WEAPON_ANGLE){
 		int velocity = this->parameters.getWeaponsVelocity();
 		if (this->power != -1){
 			 velocity *= this->power / 1000;

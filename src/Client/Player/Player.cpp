@@ -1,8 +1,6 @@
 #include "Player.h"
 #include "WeaponNames.h"
 
-const int NO_ANGLE = 500;
-
 Player::Player(ClientProtocol protocol, const std::string& name, Gtk::Window& window):
 	protocol(std::move(protocol)), name(name),
 	screen(window, *this, this->weapons),
@@ -88,7 +86,7 @@ void Player::shoot(int angle, int power, int time) {
 		time = -1;
 	}
 	if (!this->weapons.getCurrentWeapon().hasScope()) {
-		angle = NO_ANGLE;
+		angle = MAX_WEAPON_ANGLE + 1;
 	}
     this->protocol.sendWeaponShoot(angle, power, time);
 	this->view_list.removeScopeVisibility();
