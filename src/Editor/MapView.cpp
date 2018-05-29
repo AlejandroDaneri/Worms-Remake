@@ -11,7 +11,7 @@ MapView::MapView(BaseObjectType *cobject,
         : Gtk::Layout(cobject),
           actual_bg(0) {
     bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/background1.png");
-    bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/bac.jpg");
+    bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/background2.jpg");
     setBackground(bg_paths[actual_bg]);
 
     add_events(Gdk::BUTTON_PRESS_MASK);
