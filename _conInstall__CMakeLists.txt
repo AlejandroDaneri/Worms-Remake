@@ -7,6 +7,9 @@ endif(NOT ROOT)
 
 set (CMAKE_INSTALL_PREFIX ${ROOT})
 
+#reemplazar resources/  por @ROOT@/resources/
+#configure_file(${PROJECT_SOURCE_DIR}/editor.glade ${PROJECT_SOURCE_DIR}/resources/Glade/editor.glade)
+
 message("[INFO] Librerias necesarias: \n")
 message("-Gtkmm version 3.0:")
 message("sudo apt-get install libgtkmm-3.0-dev\n")

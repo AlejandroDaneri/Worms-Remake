@@ -24,7 +24,6 @@ link_directories(${GTKMM_LIBRARY_DIRS})
 include_directories(${SDL2_INCLUDE_DIR})
 include_directories(${SDL2MIXER_INCLUDE_DIR})
 
-
 MACRO(HEADER_DIRECTORIES src_dir return_list)
     FILE(GLOB_RECURSE new_list RELATIVE ${PROJECT_SOURCE_DIR} ${src_dir}/*.h)
     SET(dir_list "")
