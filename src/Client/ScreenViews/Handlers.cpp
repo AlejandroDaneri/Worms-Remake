@@ -2,7 +2,7 @@
 #include <gtkmm/adjustment.h>
 #include <gdk/gdkkeysyms.h>
 #include "Player.h"
-#include "ViewTransformer.h"
+#include "ViewPositionTransformer.h"
 #include "WeaponNames.h"
 
 const char SPACE = ' ';
@@ -133,7 +133,7 @@ bool Handlers::onButtonPressEvent(GdkEventButton *event) {
 		x += this->world.getWindow().get_hadjustment()->get_value();
 		y += this->world.getWindow().get_vadjustment()->get_value();
 		Position position(x, y);
-		Position newPosition = ViewTransformer(this->world.getLayout()).transformToPosition(position);
+		Position newPosition = ViewPositionTransformer(this->world.getLayout()).transformToPosition(position);
 		this->has_shoot = true;
 		this->player.shoot(newPosition);
 	}

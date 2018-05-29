@@ -6,16 +6,16 @@
 
 /* Clase que se encarga de transformar posiciones de la pantalla
  * en posiciones en metros */
-class ViewTransformer{
+class ViewPositionTransformer{
 	private:
 		Gtk::Layout& layout;
 
 	public:
 		/* Constructor */
-		ViewTransformer(Gtk::Layout& layout);
+		ViewPositionTransformer(Gtk::Layout& layout);
 
 		/* Destructor */
-		~ViewTransformer();
+		~ViewPositionTransformer();
 
 
 		/* Dada una posicion en metros, devuelve una posicion en

@@ -26,6 +26,12 @@ const std::string CONFIG_PATH(std::string(ROOT_PATH) + "/config/");
 
 const std::string MAPS_PATH(std::string(CONFIG_PATH) + "Maps/");
 
+const std::string CLIENT_WINDOW_NAME("Worms - Client");
+
+const std::string EDITOR_WINDOW_NAME("Worms - Editor");
+
+const std::strin ICON_PATH(IMAGES_PATH + "icon.png");
+
 //client
 
 const std::string GIRDER_PATH(IMAGES_PATH + "Girder_client/girder_");

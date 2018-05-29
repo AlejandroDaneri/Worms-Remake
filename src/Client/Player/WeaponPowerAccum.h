@@ -6,7 +6,7 @@
 class Handlers;
 
 /* Clase que simula a un contador */
-class Timer {
+class WeaponPowerAccum {
 	private:
 		int actual_time;
 		int max_time;
@@ -18,10 +18,10 @@ class Timer {
 
 	public:
 		/* Constructor */
-		Timer(Handlers& handlers, int time);
+		WeaponPowerAccum(Handlers& handlers, int time);
 
 		/* Destructor */
-		~Timer();
+		~WeaponPowerAccum();
 
 		/* Cuenta el tiempo transcurrido y llama al metodo timerStopped
 		   de la clase Handler con este tiempo */

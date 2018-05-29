@@ -9,7 +9,6 @@
 #include <vector>
 #include "Viewable.h"
 #include "WormLifeView.h"
-#include "WeaponAnimation.h"
 
 #define DIR_RIGHT 1
 #define DIR_LEFT -1
@@ -29,7 +28,6 @@ class WormView: public Viewable {
 		Glib::RefPtr<Gdk::Pixbuf> walk_image;
 	    std::vector<Glib::RefPtr<Gdk::Pixbuf>> scope_vector;
 	    Glib::RefPtr<Gdk::Pixbuf> scope_image;
-        //WeaponAnimation weapon_animation;
 	    int angle;
 
 	    /* Actualiza la imagen del worm a la correspondiente segun las

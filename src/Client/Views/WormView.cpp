@@ -55,18 +55,14 @@ void WormView::kill(){
 
 void WormView::changeWeapon(const std::string& weapon) {
     this->weapon = weapon;
-    //this->weapon_animation.changeWeapon(weapon);
 
     this->updateWeaponImage();
-    //this->weapon_animation.start(this->dir);
     this->setWeaponImage();
 }
 
 void WormView::setNewImage(bool dir_changed, bool moved, bool colliding, bool is_current_worm){
 	if (is_current_worm){
 		if (!moved){
-           // this->weapon_animation.start(this->dir);
-           // while(!this->weapon_animation.hasFinished()) {}
             this->setWeaponImage();
 		} else if (colliding){
 			this->setMovementImage(dir_changed);

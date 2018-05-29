@@ -1,6 +1,6 @@
 #include "WorldView.h"
 #include <gtkmm/adjustment.h>
-#include "ViewTransformer.h"
+#include "ViewPositionTransformer.h"
 #include "Player.h"
 #include "Math.h"
 #include "ObjectSizes.h"
@@ -15,7 +15,7 @@ WorldView::WorldView(){
 WorldView::~WorldView(){}
 
 void WorldView::moveElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus){
-	Position newPosition = ViewTransformer(this->world).transformToScreenAndMove(position, width, height);
+	Position newPosition = ViewPositionTransformer(this->world).transformToScreenAndMove(position, width, height);
 	this->world.move(element, newPosition.getX(), newPosition.getY());
 	if (focus){
 		this->setFocus(element);
@@ -36,7 +36,7 @@ void WorldView::removeElement(Gtk::Widget& element){
 }
 
 void WorldView::addElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus){
-	Position newPosition = ViewTransformer(this->world).transformToScreenAndMove(position, width, height);
+	Position newPosition = ViewPositionTransformer(this->world).transformToScreenAndMove(position, width, height);
 	this->world.put(element, newPosition.getX(), newPosition.getY());
 	element.show_all();
 	if (focus){

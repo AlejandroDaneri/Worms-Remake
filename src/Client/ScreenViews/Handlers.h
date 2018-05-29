@@ -2,7 +2,7 @@
 #define __HANDLERS__H__
 
 #include <gdk/gdk.h>
-#include "Timer.h"
+#include "WeaponPowerAccum.h"
 
 class Player;
 class ViewsList;
@@ -22,7 +22,7 @@ class Handlers{
 		int current_angle;
 		int weapons_time;
 
-		Timer timer;
+		WeaponPowerAccum timer;
 
 
 	public:
