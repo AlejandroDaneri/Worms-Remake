@@ -47,16 +47,12 @@ void Handlers::timerStopped(int power){
 bool Handlers::movementKeyPressHandler(GdkEventKey *key_event) {
 	if (key_event->keyval == GDK_KEY_Left) {
         this->player.getProtocol().sendMoveAction(MOVE_LEFT);
-		//this->view_list.removeScopeVisibility();
 	} else if (key_event->keyval == GDK_KEY_Right) {
         this->player.getProtocol().sendMoveAction(MOVE_RIGHT);
-		//this->view_list.removeScopeVisibility();
 	} else if (key_event->keyval == GDK_KEY_Return) {
         this->player.getProtocol().sendMoveAction(JUMP);
-		//this->view_list.removeScopeVisibility();
 	} else if (key_event->keyval == GDK_KEY_BackSpace) {
         this->player.getProtocol().sendMoveAction(ROLLBACK);
-		//this->view_list.removeScopeVisibility();
 	}
 	return true;
 }
@@ -86,7 +82,6 @@ bool Handlers::completeKeyPressHandler(GdkEventKey *key_event) {
 			return true;
 		}
 		if (!this->weapons.getCurrentWeapon().hasAmmo()) {
-			///////////////////////////////////////////////////////////// Hacer sonido u otra cosa
 			return true;
 		}
 		if (this->has_shoot) {
@@ -126,6 +121,7 @@ bool Handlers::onButtonPressEvent(GdkEventButton *event) {
 		return true;
 	}
 	if (!this->weapons.getCurrentWeapon().hasAmmo()) {
+		this->player.getMusicPlayer().playNoAmmo();
 		return true;
 	}
 	if (this->has_shoot) {

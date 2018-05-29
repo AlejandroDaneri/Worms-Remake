@@ -22,8 +22,8 @@ void Player::startTurn(int worm_id, int player_id){
 	this->view_list.setCurrentWorm(worm_id);
 	const std::string& current_player = this->screen.getPlayersView().getPlayer(player_id);
 	if (current_player == this->name){
-	    this->musicPlayer.playStartTurnSound();
 		//Es mi turno
+	    this->musicPlayer.playStartTurnSound();
         this->handlers.enableAll();
         this->changeWeapon(this->weapons.getCurrentWeapon().getName());
 		this->screen.getTurnLabel().beginTurn();

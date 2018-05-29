@@ -2,7 +2,7 @@ worms_life: 200
 weapon_ammo:
   Bazooka: 99999
   Mortar: 999
-  GreenGrenade: 99999
+  GreenGrenade: 0
   RedGrenade: 999
   Banana: 5
   HolyGrenade: 2

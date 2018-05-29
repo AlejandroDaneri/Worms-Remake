@@ -1,4 +1,5 @@
 #include "MusicPlayer.h"
+#include <glibmm/main.h>
 #include "MusicPlayerException.h"
 #include "WeaponNames.h"
 #include "Path.h"
@@ -68,19 +69,26 @@ void MusicPlayer::check(int channel) {
     }
 }
 
-void MusicPlayer::addEffect(std::string audio) {
+
+bool MusicPlayer::addEffectCallBack(std::string audio){
     int channel;
     Mix_Chunk* effect = NULL;
     effect = Mix_LoadWAV(audio.c_str());
     if (effect == NULL) {
-        return;
+        return false;
     }
     if ((channel = Mix_PlayChannel(-1, effect, 0)) == -1) {
         Mix_FreeChunk(effect);
-        return;
+        return false;
     }
     this->check(channel);
     this->effects.insert(std::make_pair(channel, effect));
+    return false;
+}
+
+void MusicPlayer::addEffect(const std::string& audio) {
+    sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &MusicPlayer::addEffectCallBack), audio);
+    Glib::signal_idle().connect(my_slot);
 }
 
 void MusicPlayer::playMusic() {

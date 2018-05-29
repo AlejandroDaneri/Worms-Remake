@@ -14,7 +14,9 @@ class MusicPlayer {
         std::map<int, Mix_Chunk*> effects;
 
         void check(int channel);
-        void addEffect(std::string audio);
+        void addEffect(const std::string& audio);
+
+        bool addEffectCallBack(std::string audio);
 
 	public:
 		/* Constructor */
@@ -56,6 +58,7 @@ class MusicPlayer {
         /* Reproduce el sonido de la granada santa */
         void playHolyGrenadeSound();
 
+        /* Reproduce el sonido de victoria */
         void playVictory();
 
         /* Reproduce el sonido de arma descargada */
