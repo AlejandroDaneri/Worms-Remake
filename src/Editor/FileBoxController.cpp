@@ -13,7 +13,6 @@ FileBoxController::FileBoxController(
 
 void FileBoxController::onSaveClicked() const {
     try {
-
         std::vector<std::vector<double>> worms;
         std::vector<std::vector<double>> girders;
 
@@ -26,8 +25,8 @@ void FileBoxController::onSaveClicked() const {
         FileWriter file("config_editor.yaml");
         file.save(weapons_ammo, worms,
                   girders, life);
-    } catch(const InvalidMapError &e){
-        e.what();
+    } catch(const InvalidMapError &error){
+        error.what();
     }
 }
 
