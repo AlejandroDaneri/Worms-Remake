@@ -29,6 +29,7 @@ private:
     Gtk::Button *turncw;
     Gtk::Button *change_bg;
     Gtk::ToggleButton *mode;
+    bool running;
 
 public:
     ToolBoxView(BaseObjectType *cobject,
@@ -43,6 +44,8 @@ public:
     void disableMovingItems();
 
     void changeModeSignal();
+
+    void leaveConsistent();
 };
 
 

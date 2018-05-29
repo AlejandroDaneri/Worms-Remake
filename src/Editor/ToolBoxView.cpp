@@ -6,6 +6,7 @@
 ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Grid(cobject) {
+    running=false;
     builder->get_widget("btn_undo", erase);
     Gtk::manage(erase);
     builder->get_widget("tbtn_worm", worm);
@@ -64,23 +65,28 @@ void ToolBoxView::linkController(MapController *controller) {
 }
 
 void ToolBoxView::onNewObjectClicked(unsigned id) {
-    if (id == WORM_BUTTON_ID) {
-        if (worm->get_active()) {
+    if (!running) {
+        running=true;
+        if (id == WORM_BUTTON_ID) {
+            if (worm->get_active()) {
+                girder_3m->set_active(false);
+                girder_6m->set_active(false);
+            }
+        } else if (id == GIRDER_3_BUTTON_ID) {
+            if (girder_3m->get_active()) {
+                worm->set_active(false);
+                girder_6m->set_active(false);
+            }
+        } else {
             girder_3m->set_active(false);
-            girder_6m->set_active(false);
-        }
-    } else if (id == GIRDER_3_BUTTON_ID) {
-        if (girder_3m->get_active()) {
             worm->set_active(false);
-            girder_6m->set_active(false);
         }
-    } else {
-        girder_3m->set_active(false);
-        worm->set_active(false);
+        disableMovingItems();
+        mode->set_active(false);
+        map_controller->addModeSignal(id);
+        leaveConsistent();
+        running=false;
     }
-    disableMovingItems();
-    mode->set_active(false);
-    map_controller->addModeSignal(id);
 }
 
 void ToolBoxView::enableMovingItems() {
@@ -106,4 +112,12 @@ void ToolBoxView::changeModeSignal() {
     }
     map_controller->changeModeSignal();
 
+}
+
+void ToolBoxView::leaveConsistent() {
+    if (!worm->get_active() && !girder_6m->get_active() && !girder_3m->get_active()){
+        running=true;
+        worm->set_active(true);
+        map_controller->addModeSignal(WORM_BUTTON_ID);
+    }
 }
