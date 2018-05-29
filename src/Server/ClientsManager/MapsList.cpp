@@ -12,7 +12,7 @@ maps_list_t MapsList::getAllMaps(){
 
 	while((entry = readdir(dir))){
 		std::string file(entry->d_name);
-		if (file != "." && file != ".."){
+		if (file.rfind(YAML_EXTENSION) != std::string::npos){
 			maps_list.push_back(file);
 		}
 	}

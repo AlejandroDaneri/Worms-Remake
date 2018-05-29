@@ -7,6 +7,8 @@
 #define ROOT_PATH "."
 #endif
 
+const std::string YAML_EXTENSION(".yaml");
+
 
 //general
 
