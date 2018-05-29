@@ -33,6 +33,8 @@ const std::string WIND_MAX_VELOCITY("wind_max_velocity");
 
 const std::string GRAVITY("gravity");
 
+const std::string AIR_MISSILES_SEPARATION("air_missiles_separation");
+
 const std::string WORM_HEIGHT_TO_DAMAGE("worm_height_to_damage");
 
 const std::string WORM_MAX_HEIGHT_DAMAGE("worm_max_height_damage");

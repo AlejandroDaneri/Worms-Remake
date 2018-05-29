@@ -4,6 +4,9 @@
 #include "Weapon.h"
 
 class AirAttack: public Weapon{
+	private:
+		float missiles_separation;
+		
 	public:
 
 		AirAttack(World& world, GameParameters& parameters);

@@ -9,6 +9,7 @@ weapons_velocity: 7
 wind_min_velocity: 0.1
 wind_max_velocity: 0.5
 gravity: -10
+air_missiles_separation: 1
 worm_height_to_damage: 2
 worm_max_height_damage: 25
 max_girder_rotation_friction: 45

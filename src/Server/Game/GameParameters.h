@@ -48,6 +48,7 @@ class GameParameters{
 		float getWindMinVelocity();
 		float getWindMaxVelocity();
 		float getGravity();
+		float getAirMissilesSeparation();
 
 		int getMaxGirderRotationToFriction();
 		void setMaxHeight(int height);

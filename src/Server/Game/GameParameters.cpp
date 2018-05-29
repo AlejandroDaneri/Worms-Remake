@@ -109,6 +109,10 @@ float GameParameters::getGravity(){
 	return this->config[GRAVITY].as<float>();
 }
 
+float GameParameters::getAirMissilesSeparation(){
+	return this->config[AIR_MISSILES_SEPARATION].as<float>();
+}
+
 int GameParameters::getMaxGirderRotationToFriction(){
 	return this->config[MAX_GIRDER_ROTATION_FRICTION].as<int>();
 }
