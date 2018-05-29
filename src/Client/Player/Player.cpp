@@ -45,10 +45,7 @@ void Player::endTurn() {
 void Player::endGame(const std::string& winner){
 	this->data_receiver.stop();
 	this->screen.getTurnLabel().setWinner(winner);
-	if (winner != "") {
-        this->musicPlayer.playVictory();
-        this->view_list.setVictory();
-    }
+    this->view_list.setVictory();
 }
 
 void Player::damageReceived(){
