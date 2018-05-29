@@ -5,6 +5,8 @@
 
 //config del server
 
+const std::string SERVER_PORT("port");
+
 const std::string WORMS_LIFE_TO_ADD("worms_life_to_add");
 
 const std::string WORM_VELOCITY("worm_velocity");

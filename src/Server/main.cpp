@@ -1,12 +1,15 @@
 #include "Server.h"
+#include "yaml.h"
+#include "ConfigFields.h"
+#include "Path.h"
 #include <iostream>
-#include <memory>
 
 #define EXIT_CHAR 'q'
 
 int main(int argc, const char* argv[]){
 	try{
-		Server server("7777");
+		YAML::Node config(YAML::LoadFile(SERVER_CONFIG_FILE));
+		Server server(config[SERVER_PORT].as<std::string>());
 		server.start();
 		while (std::cin.get() != EXIT_CHAR){}
 		server.stop();
