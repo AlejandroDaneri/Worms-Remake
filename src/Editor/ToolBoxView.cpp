@@ -6,7 +6,7 @@
 ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Grid(cobject) {
-    running=false;
+    processing=false;
     builder->get_widget("btn_undo", erase);
     Gtk::manage(erase);
     builder->get_widget("tbtn_worm", worm);
@@ -65,8 +65,8 @@ void ToolBoxView::linkController(MapController *controller) {
 }
 
 void ToolBoxView::onNewObjectClicked(unsigned id) {
-    if (!running) {
-        running=true;
+    if (!processing) {
+        processing=true;
         if (id == WORM_BUTTON_ID) {
             if (worm->get_active()) {
                 girder_3m->set_active(false);
@@ -85,7 +85,7 @@ void ToolBoxView::onNewObjectClicked(unsigned id) {
         mode->set_active(false);
         map_controller->addModeSignal(id);
         leaveConsistent();
-        running=false;
+        processing=false;
     }
 }
 
@@ -116,7 +116,7 @@ void ToolBoxView::changeModeSignal() {
 
 void ToolBoxView::leaveConsistent() {
     if (!worm->get_active() && !girder_6m->get_active() && !girder_3m->get_active()){
-        running=true;
+        processing=true;
         worm->set_active(true);
         map_controller->addModeSignal(WORM_BUTTON_ID);
     }

@@ -27,6 +27,8 @@ public:
 
     void
     loadWeapons(std::vector<int> &weps_ammo, const unsigned int &life) const;
+
+    bool isValidWeaponSet(std::vector<int> &ammo_vector) const;
 };
 
 

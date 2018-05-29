@@ -10,7 +10,7 @@ const char *InvalidMapError::what() const noexcept{
     Gtk::MessageDialog dialog("Error al guardar archivo",false,Gtk::MESSAGE_WARNING);
     dialog.set_secondary_text(message);
     dialog.run();
-    return exception::what();
+    return message;
 }
 
 InvalidMapError::~InvalidMapError() {

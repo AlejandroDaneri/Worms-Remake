@@ -1,5 +1,6 @@
 
 #include "WeaponsAndLifeController.h"
+#include "InvalidMapError.h"
 
 WeaponsAndLifeController::WeaponsAndLifeController(
         const Glib::RefPtr<Gtk::Builder> &builder) {
@@ -41,6 +42,9 @@ void WeaponsAndLifeController::getWeapons(std::vector<int> &weps_ammo,
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         weps_ammo.push_back(actual_controller->getAmmo());
     }
+    if (!isValidWeaponSet(weps_ammo)){
+        throw InvalidMapError("Ningún arma tiene munición");
+    }
 }
 
 void WeaponsAndLifeController::loadWeapons(std::vector<int> &weps_ammo,
@@ -52,4 +56,13 @@ void WeaponsAndLifeController::loadWeapons(std::vector<int> &weps_ammo,
         i++;
     }
     life_spin->update(life);
+}
+
+bool
+WeaponsAndLifeController::isValidWeaponSet(std::vector<int> &ammo_vector) const {
+    bool valid_set= true;
+    for (size_t i = 0; i<ammo_vector.size() && valid_set;i++) {
+        valid_set=(ammo_vector[i]!=0);
+    }
+    return valid_set;
 }

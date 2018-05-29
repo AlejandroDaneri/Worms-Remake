@@ -29,7 +29,7 @@ private:
     Gtk::Button *turncw;
     Gtk::Button *change_bg;
     Gtk::ToggleButton *mode;
-    bool running;
+    bool processing;
 
 public:
     ToolBoxView(BaseObjectType *cobject,
