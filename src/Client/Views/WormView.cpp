@@ -130,5 +130,5 @@ int WormView::getPlayerId() const{
 }
 
 void WormView::setVictory() {
-    this->image.set(ANIMATIONS_PATH + "victory.gif");
+    this->image.set(VICTORY_ANIMATION);
 }

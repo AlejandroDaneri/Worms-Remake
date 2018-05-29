@@ -39,8 +39,8 @@ bool ViewsList::removeWeaponCallBack(int id){
 
     auto it = this->weapons.find(id);
     this->musicPlayer.playExplosionSound(it->second.getName());
-    ExplosionView explotion(std::move(it->second));
-    this->animation.addAndStart(std::move(explotion));
+    ExplosionView explosion(std::move(it->second));
+    this->animation.addAndStart(std::move(explosion));
     this->weapons.erase(it);
     return false;
 }

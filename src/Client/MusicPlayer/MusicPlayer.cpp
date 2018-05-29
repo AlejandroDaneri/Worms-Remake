@@ -4,19 +4,17 @@
 #include "WeaponNames.h"
 #include "Path.h"
 
-const std::string BACKGROUND_MUSIC = SOUNDS_PATH + "menu/music.mp3";
-const std::string START_TURN_SOUND = SOUNDS_PATH + "misc/StartRound.wav";
-const std::string TICK_SOUND = SOUNDS_PATH + "misc/TIMERTICK.WAV";
-const std::string WALK_SOUND = SOUNDS_PATH + "misc/Walk-Expand.wav";
-const std::string BORING_SOUND = SOUNDS_PATH + "Worms/BORING.WAV";
-const std::string RUN_AWAY_SOUND = SOUNDS_PATH + "Worms/RUNAWAY.WAV";
-const std::string DEATH_SOUND = SOUNDS_PATH + "Worms/NOOO.WAV";
-const std::string EXPLOSION_SOUND = SOUNDS_PATH + "Weapons/Explosion1.wav";
-const std::string TELEPORT_SOUND = SOUNDS_PATH + "Weapons/TELEPORT.WAV";
+const std::string BACKGROUND_MUSIC = SOUNDS_PATH + "BackgroundMusic.mp3";
+const std::string START_TURN_SOUND = SOUNDS_PATH + "Misc/StartRound.wav";
+const std::string TICK_SOUND = SOUNDS_PATH + "Misc/TimerTick.wav";
+const std::string RUN_AWAY_SOUND = SOUNDS_PATH + "Worms/RunAway.wav";
+const std::string DEATH_SOUND = SOUNDS_PATH + "Worms/Death.wav";
+const std::string EXPLOSION_SOUND = SOUNDS_PATH + "Weapons/Explosion.wav";
+const std::string TELEPORT_SOUND = SOUNDS_PATH + "Weapons/Teleportation.wav";
 const std::string BAT_SOUND = SOUNDS_PATH + "Weapons/BaseballSound.wav";
-const std::string HOLY_GRENADE_SOUND = SOUNDS_PATH + "Weapons/HOLYGRENADE.WAV";
-const std::string NO_AMMO_SOUND = SOUNDS_PATH + "misc/no_ammo.wav";
-const std::string VICTORY_SOUND = SOUNDS_PATH + "Worms/VICTORY.WAV";
+const std::string HOLY_GRENADE_SOUND = SOUNDS_PATH + "Weapons/HollyGrenade.wav";
+const std::string NO_AMMO_SOUND = SOUNDS_PATH + "Misc/NoAmmo.wav";
+const std::string VICTORY_SOUND = SOUNDS_PATH + "Worms/Victory.WAV";
 
 MusicPlayer::MusicPlayer() {
     this->music = NULL;
@@ -104,28 +102,16 @@ void MusicPlayer::playTickSound() {
     this->addEffect(TICK_SOUND);
 }
 
-void MusicPlayer::playWalkSound() {
-    this->addEffect(WALK_SOUND);
-}
-
-void MusicPlayer::playBoring() {
-    this->addEffect(BORING_SOUND);
-}
-
 void MusicPlayer::playDeathSound() {
     this->addEffect(DEATH_SOUND);
 }
 
 void MusicPlayer::playExplosionSound(const std::string& weapon) {
     if (weapon == HOLY_GRENADE_NAME) {
-        this->playHolyGrenadeSound();
+        this->addEffect(HOLY_GRENADE_SOUND);
     } else {
         this->addEffect(EXPLOSION_SOUND);
     }
-}
-
-void MusicPlayer::playHolyGrenadeSound() {
-    this->addEffect(HOLY_GRENADE_SOUND);
 }
 
 void MusicPlayer::playVictory() {
@@ -138,10 +124,6 @@ void MusicPlayer::playNoAmmo() {
 
 void MusicPlayer::stop() {
     Mix_HaltMusic();
-}
-
-bool MusicPlayer::isPlaying() {
-    return Mix_PlayingMusic() == 1;
 }
 
 void MusicPlayer::playWeaponShotSound(const std::string& weapon){
