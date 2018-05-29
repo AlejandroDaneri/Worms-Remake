@@ -45,7 +45,7 @@ class WormView: public Viewable {
 		/* Cambia la imagen actual por la imagen del worm caminando */
 		void setStaticImage(bool dir_changed);
 
-		/*  */
+		/* Actualiza las imagenes de las armas */
 		void updateWeaponImage();
 
 	public:
@@ -86,8 +86,11 @@ class WormView: public Viewable {
 		/* Devuelve el contenedor donde se encuentra la vista del worm */
 		Gtk::Widget& getWidget() override;
 
+		/* Devuelve la imagen que contiene al worm */
 		Gtk::Image& getImage();
 
+		/* Cambia la imagen del worm por la animacion del worm
+		 * festejando la victoria */
 		void setVictory();
 };
 

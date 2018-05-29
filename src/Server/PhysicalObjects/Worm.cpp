@@ -18,7 +18,6 @@ Worm::~Worm(){}
 void Worm::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 	body_def.type = b2_dynamicBody;
 	body_def.position.Set(pos.x, pos.y);
-	//body_def.fixedRotation = true;
 }
 
 void Worm::createFixtures(){
@@ -63,7 +62,6 @@ void Worm::move(char action){
 	if (!this->colliding_with_girder){
 		return;
 	}
-	this->body->SetGravityScale(1);
 	if (action == MOVE_RIGHT){
 		this->dir = action;
 		b2Vec2 velocity(parameters.getWormVelocity(), 0);
