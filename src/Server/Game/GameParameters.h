@@ -12,21 +12,25 @@ class GameParameters{
 		class GirderParams;
 
 	private:
-		YAML::Node config;
-		YAML::Node config_editor;
+		std::map<std::string, float> float_parameters;
+		std::map<std::string, int> weapon_radius;
+		std::map<std::string, int> weapon_ammo;
+		std::map<std::string, int> weapon_damage;
+		std::map<std::string, int> weapon_fragments;
 
-		int world_max_height;
+		std::vector<b2Vec2> worms;
+		std::vector<GirderParams> girders;
 
 	public:
-		GameParameters(const std::string& config_file, const std::string& config_editor);
+		GameParameters(const std::string& config_file, const std::string& config_editor_file);
 		~GameParameters();
 
 		int getWormLife();
 		int get_worms_life_to_add();
 
-		std::vector<b2Vec2> getWorms();
-		std::vector<GirderParams> getGirders();
-		std::map<std::string, int> getWeaponsAmmo();
+		std::vector<b2Vec2>& getWorms();
+		std::vector<GirderParams>& getGirders();
+		std::map<std::string, int>& getWeaponsAmmo();
 
 
 		float getWormVelocity();

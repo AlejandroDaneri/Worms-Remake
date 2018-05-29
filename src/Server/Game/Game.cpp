@@ -64,6 +64,7 @@ void Game::run(){
 		this->wait_to_world();
 		this->world.update();
 	}
+	std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	this->data_sender->sendEndGame(this->turn.getWinner());
 	this->running = false;
 }
@@ -75,7 +76,7 @@ void Game::configure(){
 	this->data_sender->send_players_id();
 
 	//Asignacion de gusanos
-	std::vector<b2Vec2> worms_list = this->parameters.getWorms();
+	std::vector<b2Vec2>& worms_list = this->parameters.getWorms();
 	size_t size = worms_list.size();
 	for (size_t i = 0; i < size; i++){
 		this->turn.addWorm(this->world, this->parameters, worms_list[i], i);
@@ -84,7 +85,7 @@ void Game::configure(){
 
 	//Creacion de vigas
 	int max_height = 0;
-	std::vector<GirderParams> girders_list = this->parameters.getGirders();
+	std::vector<GirderParams>& girders_list = this->parameters.getGirders();
 	size = girders_list.size();
 	for (size_t i = 0; i < size; i++){
 		physical_object_ptr girder(new Girder(this->world, this->parameters, girders_list[i].len, girders_list[i].rotation));
@@ -97,7 +98,7 @@ void Game::configure(){
 	this->data_sender->sendGirders();
 
 	//Municion de las armas
-	std::map<std::string, int> ammo = this->parameters.getWeaponsAmmo();
+	std::map<std::string, int>& ammo = this->parameters.getWeaponsAmmo();
 	this->data_sender->sendWeaponsAmmo(ammo);
 }
 

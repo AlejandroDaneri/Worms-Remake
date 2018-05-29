@@ -3,126 +3,148 @@
 #include <algorithm>
 #include <random>
 
-GameParameters::GameParameters(const std::string& config_file, const std::string& config_editor):
-	config(YAML::LoadFile(config_file)), config_editor(YAML::LoadFile(config_editor)){
-			
-	this->world_max_height = 999999;
+#define WORLD_MAX_HEIGHT "world_max_height"
+
+GameParameters::GameParameters(const std::string& config_file, const std::string& config_editor_file){
+
+	//Compruebo que existan todos los parametros necesarios
+	YAML::Node config(YAML::LoadFile(config_file));
+	YAML::Node config_editor(YAML::LoadFile(config_editor_file));
+
+	this->float_parameters[WORMS_LIFE] = config_editor[WORMS_LIFE].as<float>();
+	this->float_parameters[WORMS_LIFE_TO_ADD] = config[WORMS_LIFE_TO_ADD].as<float>();
+	this->float_parameters[WORM_VELOCITY] = config[WORM_VELOCITY].as<float>();
+	this->float_parameters[WORM_EXPLOSION_VELOCITY] = config[WORM_EXPLOSION_VELOCITY].as<float>();
+	this->float_parameters[WORM_JUMP_VELOCITY] = config[WORM_JUMP_VELOCITY].as<float>();
+	this->float_parameters[WORM_ROLLBACK_VELOCITY] = config[WORM_ROLLBACK_VELOCITY].as<float>();
+	this->float_parameters[WORM_JUMP_HEIGHT] = config[WORM_JUMP_HEIGHT].as<float>();
+	this->float_parameters[WORM_ROLLBACK_HEIGHT] = config[WORM_ROLLBACK_HEIGHT].as<float>();
+	this->float_parameters[WORM_HEIGHT_TO_DAMAGE] = config[WORM_HEIGHT_TO_DAMAGE].as<float>();
+	this->float_parameters[WORM_MAX_HEIGHT_DAMAGE] = config[WORM_MAX_HEIGHT_DAMAGE].as<float>();
+	this->float_parameters[WEAPONS_VELOCITY] = config[WEAPONS_VELOCITY].as<float>();
+	this->float_parameters[WIND_MIN_VELOCITY] = config[WIND_MIN_VELOCITY].as<float>();
+	this->float_parameters[WIND_MAX_VELOCITY] = config[WIND_MAX_VELOCITY].as<float>();
+	this->float_parameters[GRAVITY] = config[GRAVITY].as<float>();
+	this->float_parameters[AIR_MISSILES_SEPARATION] = config[AIR_MISSILES_SEPARATION].as<float>();
+	this->float_parameters[MAX_GIRDER_ROTATION_FRICTION] = config[MAX_GIRDER_ROTATION_FRICTION].as<float>();
+	this->float_parameters[WORLD_MAX_HEIGHT] = 99999;
+
+	this->weapon_radius = config[WEAPON_RADIUS].as<std::map<std::string, int>>();
+	this->weapon_ammo = config_editor[WEAPON_AMMO].as<std::map<std::string, int>>();
+	this->weapon_damage = config[WEAPON_DAMAGE].as<std::map<std::string, int>>();
+	this->weapon_fragments = config[WEAPON_FRAGMENTS].as<std::map<std::string, int>>();
+
+	std::vector<std::vector<int>> worms_file = config_editor[WORMS_DATA].as<std::vector<std::vector<int>>>();
+	for (auto it = worms_file.begin(); it != worms_file.end(); ++it){
+		this->worms.push_back(b2Vec2((*it)[0], (*it)[1]));
+	}
+
+	std::vector<std::vector<int>> girders_file = config_editor[GIRDERS_DATA].as<std::vector<std::vector<int>>>();
+	for (auto it = girders_file.begin(); it != girders_file.end(); ++it){
+		this->girders.push_back(GirderParams((*it)[0], (*it)[1], (*it)[2], (*it)[3]));
+	}
 }
 
 GameParameters::~GameParameters(){}
 
 int GameParameters::getWormLife(){
-	return this->config_editor[WORMS_LIFE].as<int>();
+	return this->float_parameters[WORMS_LIFE];
 }
 
 int GameParameters::get_worms_life_to_add(){
-	return this->config[WORMS_LIFE_TO_ADD].as<int>();
+	return this->float_parameters[WORMS_LIFE_TO_ADD];
 }
 
-std::vector<b2Vec2> GameParameters::getWorms(){
-	std::vector<b2Vec2> worms;
-	std::vector<std::vector<int>> worms_file = config_editor[WORMS_DATA].as<std::vector<std::vector<int>>>();
-
-	for (auto it = worms_file.begin(); it != worms_file.end(); ++it){
-		worms.push_back(b2Vec2((*it)[0], (*it)[1]));
-	}
-
+std::vector<b2Vec2>& GameParameters::getWorms(){
 	std::random_device rd;
     std::mt19937 random(rd());
  
-    std::shuffle(worms.begin(), worms.end(), random);
-	return worms;
+    std::shuffle(this->worms.begin(), this->worms.end(), random);
+	return this->worms;
 }
 
-std::vector<GirderParams> GameParameters::getGirders(){
-	std::vector<GirderParams> girders;
-	std::vector<std::vector<int>> girders_file = config_editor[GIRDERS_DATA].as<std::vector<std::vector<int>>>();
-
-	for (auto it = girders_file.begin(); it != girders_file.end(); ++it){
-		girders.push_back(GirderParams((*it)[0], (*it)[1], (*it)[2], (*it)[3]));
-	}
-	return girders;
+std::vector<GirderParams>& GameParameters::getGirders(){
+	return this->girders;
 }
 
-std::map<std::string, int> GameParameters::getWeaponsAmmo(){
-	std::map<std::string, int> ammo = config_editor[WEAPON_AMMO].as<std::map<std::string, int>>();
-	return ammo;
+std::map<std::string, int>& GameParameters::getWeaponsAmmo(){
+	return this->weapon_ammo;
 }
 
 float GameParameters::getWormVelocity(){
-	return this->config[WORM_VELOCITY].as<float>();
+	return this->float_parameters[WORM_VELOCITY];
 }
 
 float GameParameters::getWormExplosionVelocity(){
-	return this->config[WORM_EXPLOSION_VELOCITY].as<float>();
+	return this->float_parameters[WORM_EXPLOSION_VELOCITY];
 }
 
 float GameParameters::getWormJumpVelocity(){
-	return this->config[WORM_JUMP_VELOCITY].as<float>();
+	return this->float_parameters[WORM_JUMP_VELOCITY];
 }
 
 float GameParameters::getWormRollbackVelocity(){
-	return this->config[WORM_ROLLBACK_VELOCITY].as<float>();
+	return this->float_parameters[WORM_ROLLBACK_VELOCITY];
 }
 
 float GameParameters::getWormJumpHeight(){
-	return this->config[WORM_JUMP_HEIGHT].as<float>();
+	return this->float_parameters[WORM_JUMP_HEIGHT];
 }
 
 float GameParameters::getWormRollbackHeight(){
-	return this->config[WORM_ROLLBACK_HEIGHT].as<float>();
+	return this->float_parameters[WORM_ROLLBACK_HEIGHT];
 }
 
 int GameParameters::getWormHeightToDamage(){
-	return this->config[WORM_HEIGHT_TO_DAMAGE].as<int>();
+	return this->float_parameters[WORM_HEIGHT_TO_DAMAGE];
 }
 
 int GameParameters::getWormMaxHeightDamage(){
-	return this->config[WORM_MAX_HEIGHT_DAMAGE].as<int>();
+	return this->float_parameters[WORM_MAX_HEIGHT_DAMAGE];
 }
 
 float GameParameters::getWeaponsVelocity(){
-	return this->config[WEAPONS_VELOCITY].as<float>();
+	return this->float_parameters[WEAPONS_VELOCITY];
 }
 
 int GameParameters::getWeaponDamage(const std::string& weapon){
-	return this->config[WEAPON_DAMAGE][weapon].as<int>();
+	return this->weapon_damage[weapon];
 }
 
 int GameParameters::getWeaponRadius(const std::string& weapon){
-	return this->config[WEAPON_RADIUS][weapon].as<int>();
+	return this->weapon_radius[weapon];
 }
 
 int GameParameters::getWeaponFragments(const std::string& weapon){
-	return this->config[WEAPON_FRAGMENTS][weapon].as<int>();
+	return this->weapon_fragments[weapon];
 }
 
 float GameParameters::getWindMinVelocity(){
-	return this->config[WIND_MIN_VELOCITY].as<float>();
+	return this->float_parameters[WIND_MIN_VELOCITY];
 }
 
 float GameParameters::getWindMaxVelocity(){
-	return this->config[WIND_MAX_VELOCITY].as<float>();
+	return this->float_parameters[WIND_MAX_VELOCITY];
 }
 
 float GameParameters::getGravity(){
-	return this->config[GRAVITY].as<float>();
+	return this->float_parameters[GRAVITY];
 }
 
 float GameParameters::getAirMissilesSeparation(){
-	return this->config[AIR_MISSILES_SEPARATION].as<float>();
+	return this->float_parameters[AIR_MISSILES_SEPARATION];
 }
 
 int GameParameters::getMaxGirderRotationToFriction(){
-	return this->config[MAX_GIRDER_ROTATION_FRICTION].as<int>();
+	return this->float_parameters[MAX_GIRDER_ROTATION_FRICTION];
 }
 
 void GameParameters::setMaxHeight(int height){
-	this->world_max_height = height + 15;
+	this->float_parameters[WORLD_MAX_HEIGHT] = height + 15;
 }
 
 int GameParameters::getMaxHeight(){
-	return this->world_max_height;
+	return this->float_parameters[WORLD_MAX_HEIGHT];
 }
 
 GameParameters::GirderParams::GirderParams(size_t len, int pos_x, int pos_y, int rotation):
