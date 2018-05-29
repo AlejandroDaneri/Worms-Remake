@@ -45,7 +45,7 @@ class ClientProtocol: public Protocol {
 		void sendEndTurn();
 
 		/* Recibe un mensaje que le indica que accion realizar */
-		void receive(Player& player, ViewsList& viewsList);
+		void receive(Player& player);
 
 		/* Recibe los jugadores de la partida junto con su
 		 * id y su nombre */

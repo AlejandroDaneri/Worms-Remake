@@ -45,6 +45,8 @@ class WormView: public Viewable {
 		/* Cambia la imagen actual por la imagen del worm caminando */
 		void setStaticImage(bool dir_changed);
 
+		void updateWeaponImage();
+
 	public:
 	    /* Constructor */
 		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id);

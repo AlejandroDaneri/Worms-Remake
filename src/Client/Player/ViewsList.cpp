@@ -183,13 +183,17 @@ void ViewsList::removeWormFocus(){
 }
 
 bool ViewsList::setVictoryCallBack() {
-    std::unordered_map<int, WormView>::iterator iter;
-    for (iter = this->worms.begin(); iter != this->worms.end(); iter++) {
+    if (this->worms.empty()){
+        return false;
+    }
+    for (auto iter = this->worms.begin(); iter != this->worms.end(); iter++) {
+        this->musicPlayer.playVictory();
         iter->second.setVictory();
+        this->world.setFocus(iter->second.getWidget());
     }
     return false;
 }
 
 void ViewsList::setVictory() {
-    Glib::signal_idle().connect(sigc::mem_fun(*this, &ViewsList::setVictoryCallBack));
+    Glib::signal_timeout().connect(sigc::mem_fun(*this, &ViewsList::setVictoryCallBack), 100);
 }

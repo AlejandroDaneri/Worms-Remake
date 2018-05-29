@@ -3,6 +3,7 @@
 
 #include <gtkmm/hvbox.h>
 #include <gtkmm/label.h>
+#include <gtkmm/window.h>
 #include "WorldView.h"
 #include "WeaponView.h"
 #include "TurnLabel.h"
@@ -12,28 +13,42 @@
  * de la vista y mostrar su contenido */
 class ScreenView {
 	private:
-		Gtk::VBox screen;
-		Gtk::HBox world_box;
+        	Gtk::VBox screen;
+        	Gtk::HBox world_box;
+                Gtk::Window& window;
 
-        WorldView world;
-        WeaponView weapons_view;
+                WorldView world;
+                WeaponView weapons_view;
+                TurnLabel turn_label;
+                PlayersList players;
+
+                bool showCallBack();
+                bool closeCallBack();
 
 	public:
-        /* Constructor */
-		ScreenView(Player& player, WeaponList& weapons,TurnLabel& label, PlayersList& players);
+                /* Constructor */
+        	ScreenView(Gtk::Window& window, Player& player, WeaponList& weapons);
 
-        /* Destructor */
-        ~ScreenView();
+                /* Destructor */
+                ~ScreenView();
 
+                /* Muestra la pantalla en la ventana */
+                void show();
 
-        /* Devuelve el contenedor de la vista */
-		Gtk::Container& getWindow();
+                /* Cierra la ventana completamente */
+                void close();
 
-        /* Devuelve el WorldView */
-        WorldView& getWorld();
+                /* Devuelve el WorldView */
+                WorldView& getWorld();
 
-        /* Devuelve el WeaponView */
-        WeaponView& getWeaponsView();
+                /* Devuelve el WeaponView */
+                WeaponView& getWeaponsView();
+
+                /* Devuelve el TurnLabel */
+                TurnLabel& getTurnLabel();
+
+                /* Devuelve el Players view */
+                PlayersList& getPlayersView();
 };
 
 #endif

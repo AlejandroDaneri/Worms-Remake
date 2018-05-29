@@ -19,12 +19,13 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 		this->setStaticImage(true);
 		this->addToWorld(pos, worm_size, worm_size + 0.5);
 
-        this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
+		this->updateWeaponImage();
+        /* this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
         width = this->scope_image->get_width();
         height = this->scope_image->get_height();
-        for (int i = 0; i < height/WORM_IMAGE_WIDTH; i++) {
-            this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
-        }
+        for (int i = 0; i < height/(width / 3); i++) {
+            this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * width / 3, width, width / 3));
+        } */
 }
 
 WormView::~WormView(){}
@@ -62,12 +63,14 @@ void WormView::changeWeapon(const std::string& weapon) {
     this->weapon = weapon;
     //this->weapon_animation.changeWeapon(weapon);
     this->scope_vector.clear();
-    this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
+
+    this->updateWeaponImage();
+   /* this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
     int width = this->scope_image->get_width();
     int height = this->scope_image->get_height();
     for (int i = 0; i < height/WORM_IMAGE_WIDTH; i++) {
         this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
-    }
+    }*/
     //this->weapon_animation.start(this->dir);
     this->setWeaponImage();
 }
@@ -91,7 +94,8 @@ void WormView::setWeaponImage(){
     if (angle > 90) {
         angle = 180 - this->angle;
     }
-    this->image.set(Gdk::Pixbuf::create_subpixbuf(this->scope_vector[(90 + angle) / 6], WORM_IMAGE_WIDTH + this->dir * WORM_IMAGE_WIDTH, 0, WORM_IMAGE_WIDTH, WORM_IMAGE_WIDTH));
+    int width = this->scope_vector[(90 + angle) / 6]->get_width() / 3;
+    this->image.set(Gdk::Pixbuf::create_subpixbuf(this->scope_vector[(90 + angle) / 6], width + this->dir * width, 0, width, width));
     /*std::string path(WORMS_PATH);
     path += this->weapon;
     if (this->dir == DIR_RIGHT){
@@ -112,6 +116,15 @@ void WormView::setStaticImage(bool dir_changed){
 	if (dir_changed){
 		this->image.set(Gdk::Pixbuf::create_subpixbuf(this->walk_queue.back(), WORM_IMAGE_WIDTH + this->dir * WORM_IMAGE_WIDTH, 0, WORM_IMAGE_WIDTH, WORM_IMAGE_WIDTH));
 	}
+}
+
+void WormView::updateWeaponImage() {
+    this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
+    int width = this->scope_image->get_width();
+    int height = this->scope_image->get_height();
+    for (int i = 0; i < height/(width / 3); i++) {
+        this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * width / 3, width, width / 3));
+    }
 }
 
 void WormView::removeWeaponImage(){

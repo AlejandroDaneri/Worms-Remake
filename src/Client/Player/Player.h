@@ -4,19 +4,15 @@
 #include <memory>
 #include <gtkmm/window.h>
 #include "ClientProtocol.h"
-#include "WorldView.h"
 #include "Turn.h"
 #include "Weapon.h"
 #include "WeaponList.h"
-#include "WorldView.h"
-#include "WeaponView.h"
 #include "ScreenView.h"
 #include "ViewsList.h"
 #include "Position.h"
 #include "DataReceiver.h"
 #include "Handlers.h"
 #include "PlayersList.h"
-#include "TurnLabel.h"
 #include "MusicPlayer.h"
 
 class Player {
@@ -24,8 +20,6 @@ class Player {
 		ClientProtocol protocol;
 		std::string name;
 		WeaponList weapons;
-		TurnLabel turn_label;
-		PlayersList players_list;
 		ScreenView screen;
 		Turn turn;
 		ViewsList view_list;
@@ -71,11 +65,14 @@ class Player {
 		/* Reproduce el sonido de falta de tiempo */
 		void playTickTime();
 		
-		/* Devuelve el contenedor del mapa */
-		WorldView& getWorld();
-		
 		/* Devuelve la lista de los elementos presentes en la vista */
-		ViewsList& getViewList();
+		ViewsList& getViewsList();
+
+		/* Devuelve la vista */
+		ScreenView& getScreen();
+
+		/* Devuelve la lista de armas */
+		WeaponList& getWeapons();
 
 		/* Devuelve el protocolo */
 		ClientProtocol& getProtocol();
