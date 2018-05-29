@@ -108,6 +108,11 @@
     <property name="valign">baseline</property>
     <property name="pixbuf">resources/Images/Girder/girder_3_6.png</property>
   </object>
+  <object class="GtkImage" id="img_mode">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixbuf">resources/Images/editor_toolbox/select.png</property>
+  </object>
   <object class="GtkImage" id="img_new">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -181,11 +186,6 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="pixbuf">resources/Images/editor_toolbox/move_arrows.png</property>
-  </object>
-  <object class="GtkImage" id="select_img">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="pixbuf">resources/Images/editor_toolbox/select.png</property>
   </object>
   <object class="GtkImage" id="undo">
     <property name="visible">True</property>
@@ -1032,12 +1032,12 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="btn_mode">
+                      <object class="GtkToggleButton" id="btn_mode">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="tooltip_text" translatable="yes">Seleccionar</property>
-                        <property name="image">select_img</property>
+                        <property name="tooltip_text" translatable="yes">Modo selección</property>
+                        <property name="image">img_mode</property>
                         <property name="relief">none</property>
                       </object>
                       <packing>

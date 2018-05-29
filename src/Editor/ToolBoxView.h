@@ -28,13 +28,13 @@ private:
     Gtk::Button *turnccw;
     Gtk::Button *turncw;
     Gtk::Button *change_bg;
-    Gtk::Button *mode;
+    Gtk::ToggleButton *mode;
 
 public:
     ToolBoxView(BaseObjectType *cobject,
                 const Glib::RefPtr<Gtk::Builder> &builder);
 
-    void on_button_clicked(unsigned int id);
+    void onNewObjectClicked(unsigned int id);
 
     void enableMovingItems();
 
@@ -42,6 +42,7 @@ public:
 
     void disableMovingItems();
 
+    void changeModeSignal();
 };
 
 
