@@ -62,7 +62,7 @@ void ClientProtocol::sendEndTurn(){
     this->sendBuffer(buffer);
 }
 
-void ClientProtocol::receive(Player& player, ViewsList& viewsList){
+void ClientProtocol::receive(Player& player){
 	Buffer buffer = std::move(this->receiveBuffer());
 	char action = buffer.getNext();
 
@@ -75,11 +75,11 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 		player.endGame(winner);
 	} else if (action == CHANGE_WEAPON_ACTION) {
         std::string weapon(this->receiveStringBuffer(buffer));
-        viewsList.removeScopeVisibility();
-        viewsList.changeWeapon(weapon);
+        player.getViewsList().removeScopeVisibility();
+        player.getViewsList().changeWeapon(weapon);
     } else if (action == MOVE_SCOPE) {
 	    int angle = this->receiveIntBuffer(buffer);
-	    viewsList.updateScope(angle);
+	    player.getViewsList().updateScope(angle);
 	} else if (action == MOVING_OBJECT) {
 		char type = buffer.getNext();
 		int id = this->receiveIntBuffer(buffer);
@@ -91,22 +91,22 @@ void ClientProtocol::receive(Player& player, ViewsList& viewsList){
 			int life = this->receiveIntBuffer(buffer);
 			char dir = buffer.getNext();
 			bool colliding = buffer.getNext();
-			viewsList.updateWormData(id, player_id, pos_x, pos_y, life, dir, colliding);
-			viewsList.removeScopeVisibility();
+			player.getViewsList().updateWormData(id, player_id, pos_x, pos_y, life, dir, colliding);
+			player.getViewsList().removeScopeVisibility();
 		} else if (type == WEAPON_TYPE){
 			std::string weapon(this->receiveStringBuffer(buffer));
 
 			int pos_x = this->receiveIntBuffer(buffer);
 			int pos_y = this->receiveIntBuffer(buffer);
-			viewsList.updateWeaponData(id, weapon, pos_x, pos_y);
+			player.getViewsList().updateWeaponData(id, weapon, pos_x, pos_y);
 		}
 	} else if (action == DEAD_OBJECT){
 		char type = buffer.getNext();
 		int id = this->receiveIntBuffer(buffer);
 		if (type == WORM_TYPE){
-			viewsList.removeWorm(id);
+			player.getViewsList().removeWorm(id);
 		} else if (type == WEAPON_TYPE){
-			viewsList.removeWeapon(id);
+			player.getViewsList().removeWeapon(id);
 		}
 	}
 }

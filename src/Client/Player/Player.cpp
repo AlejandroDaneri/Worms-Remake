@@ -8,18 +8,11 @@ Player::Player(ClientProtocol protocol, const std::string& name, Gtk::Window& wi
 	screen(window, *this, this->weapons),
     turn(*this, this->screen.getTurnLabel()),
 	view_list(this->screen.getWorld(), *this, this->screen.getPlayersView(), musicPlayer),
-	data_receiver(this->view_list, *this, this->protocol),
+	data_receiver(*this),
 	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()){
 
-	this->protocol.receiveChar();
 	this->musicPlayer.playMusic();
-	this->protocol.receivePlayers(this->screen.getPlayersView());
-	this->protocol.receiveGirders(this->view_list);
-	this->protocol.receiveWeaponsAmmo(this->weapons);
-	this->data_receiver.start();
-
-	this->screen.show();
-	
+	this->data_receiver.start();	
 }
 
 Player::~Player() {
@@ -105,12 +98,16 @@ void Player::shoot(int angle, int power, int time) {
 	this->screen.getWeaponsView().updateAmmo(this->weapons.getCurrentWeapon());
 }
 
-WorldView& Player::getWorld() {
-	return this->screen.getWorld();
+ViewsList& Player::getViewsList() {
+	return this->view_list;
 }
 
-ViewsList& Player::getViewList() {
-	return this->view_list;
+ScreenView& Player::getScreen(){
+	return this->screen;
+}
+
+WeaponList& Player::getWeapons(){
+	return this->weapons;
 }
 
 ClientProtocol& Player::getProtocol(){

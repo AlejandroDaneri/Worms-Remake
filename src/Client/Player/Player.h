@@ -65,11 +65,14 @@ class Player {
 		/* Reproduce el sonido de falta de tiempo */
 		void playTickTime();
 		
-		/* Devuelve el contenedor del mapa */
-		WorldView& getWorld();
-		
 		/* Devuelve la lista de los elementos presentes en la vista */
-		ViewsList& getViewList();
+		ViewsList& getViewsList();
+
+		/* Devuelve la vista */
+		ScreenView& getScreen();
+
+		/* Devuelve la lista de armas */
+		WeaponList& getWeapons();
 
 		/* Devuelve el protocolo */
 		ClientProtocol& getProtocol();

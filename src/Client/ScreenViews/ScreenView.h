@@ -23,6 +23,7 @@ class ScreenView {
                 PlayersList players;
 
                 bool showCallBack();
+                bool closeCallBack();
 
 	public:
                 /* Constructor */
@@ -33,6 +34,9 @@ class ScreenView {
 
                 /* Muestra la pantalla en la ventana */
                 void show();
+
+                /* Cierra la ventana completamente */
+                void close();
 
                 /* Devuelve el WorldView */
                 WorldView& getWorld();

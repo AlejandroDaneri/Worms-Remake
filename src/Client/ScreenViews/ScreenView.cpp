@@ -26,6 +26,16 @@ bool ScreenView::showCallBack(){
 	return false;
 }
 
+void ScreenView::close(){
+	sigc::slot<bool> my_slot = sigc::mem_fun(*this, &ScreenView::closeCallBack);
+    Glib::signal_idle().connect(my_slot);
+}
+
+bool ScreenView::closeCallBack(){
+	this->window.close();
+	return false;
+}
+
 WorldView& ScreenView::getWorld() {
     return this->world;
 }
