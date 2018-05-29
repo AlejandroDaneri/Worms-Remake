@@ -80,6 +80,8 @@ class ViewsList{
 		/* Actualiza el worm actual y hace focus en este */
         void setCurrentWorm(int id);
 
+        /* Actualiza la imagen de los worms ganadores por la animacion
+         * de los worms festejando */
         void setVictory();
 };
 
