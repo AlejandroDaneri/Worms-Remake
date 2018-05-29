@@ -11,7 +11,7 @@ MapView::MapView(BaseObjectType *cobject,
         : Gtk::Layout(cobject),
           actual_bg(0) {
     bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/background1.png");
-    bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/bac.jpg");
+    bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/background2.jpg");
     setBackground(bg_paths[actual_bg]);
 
     add_events(Gdk::BUTTON_PRESS_MASK);
@@ -72,8 +72,6 @@ void MapView::move(const int &index, const double &x, const double &y) {
     }
 }
 
-
-//TODO: no usar mas el id
 void MapView::turn(const unsigned int &id, const int &angle, const int &index) {
     if (!objects.empty()) {
         Gtk::Image &image = objects[index];

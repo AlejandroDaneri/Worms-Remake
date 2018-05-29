@@ -24,6 +24,7 @@ void FileReader::read(std::vector<std::vector<double>> &worms,
     weps_ammo.push_back(ammo[BANANA_NAME]);
     weps_ammo.push_back(ammo[AIR_ATTACK_NAME]);
     weps_ammo.push_back(ammo[BAT_NAME]);
+    weps_ammo.push_back(ammo[TELEPORT_NAME]);
     weps_ammo.push_back(ammo[DYNAMITE_NAME]);
     weps_ammo.push_back(ammo[HOLY_GRENADE_NAME]);
 

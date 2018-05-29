@@ -1,16 +1,17 @@
 
 #include <gtkmm/messagedialog.h>
 #include "MapController.h"
+#include "InvalidMapError.h"
 
-#define ADD_CMD_ID 0
+#define ADD_MODE_ID 0
 #define MOVE_CMD_ID 1
-#define SELECTION 2
+#define SELECT_MODE_ID 2
 
 
 MapController::MapController(Map model,
                              const Glib::RefPtr<Gtk::Builder> &builder)
         : model(std::move(
-        model)), actual_item_selected(1), actual_action_id(0), actual_mode(0) {
+        model)), actual_item_selected(1), actual_mode(ADD_MODE_ID) {
     builder->get_widget_derived("map", view);
     builder->get_widget_derived("toolbox", toolBox);
     view->linkController(this);
@@ -18,7 +19,7 @@ MapController::MapController(Map model,
 }
 
 void MapController::addModeSignal(unsigned int id) {
-    this->actual_action_id = ADD_CMD_ID;
+    this->actual_mode = ADD_MODE_ID;
     this->actual_item_selected = id;
 }
 
@@ -35,7 +36,11 @@ void MapController::clean() {
 }
 
 void MapController::moveSignal() {
-    this->actual_action_id = MOVE_CMD_ID;
+    this->actual_mode = MOVE_CMD_ID;
+}
+
+void MapController::changeModeSignal() {
+    this->actual_mode = (actual_mode==ADD_MODE_ID? SELECT_MODE_ID:ADD_MODE_ID);
 }
 
 void MapController::turnCCWSignal() {
@@ -55,17 +60,18 @@ void MapController::turnCWSignal() {
 }
 
 void MapController::mapClickedSignal(GdkEventButton *event_button) {
-    if (actual_action_id == MOVE_CMD_ID) {
+    if (actual_mode == MOVE_CMD_ID) {
         this->model.move(actual_object_selected, event_button->x,
                          event_button->y);
         this->view->move(actual_object_selected, event_button->x,
                          event_button->y);
-    } else if (actual_action_id == SELECTION) {
+    } else if (actual_mode == SELECT_MODE_ID) {
         this->actual_object_selected = view->select(event_button->x,
                                                     event_button->y);
         if (actual_object_selected > -1) {
             toolBox->enableMovingItems();
-        }
+        } else toolBox->disableMovingItems();
+        actual_mode = SELECT_MODE_ID; //cambio de estado del toolbox llama a add mode
     } else {
         this->model.add(actual_item_selected, event_button->x, event_button->y);
         this->view->add(actual_item_selected, event_button->x, event_button->y);
@@ -75,17 +81,11 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
 void MapController::getObjects(std::vector<std::vector<double>> &worms,
                                std::vector<std::vector<double>> &girders) const {
     model.getObjects(worms, girders);
-    if (worms.empty()){//excepcion
-        Gtk::MessageDialog dialog("Error al guardar archivo",false,Gtk::MESSAGE_WARNING);
-        dialog.set_secondary_text(
-                "El mapa actual no contiene worms");
-        dialog.run();
+    if (worms.empty()){
+        throw InvalidMapError("El mapa actual no contiene worms");
     }
-    if (girders.empty()){//excepcion
-        Gtk::MessageDialog dialog("Error al guardar archivo",false,Gtk::MESSAGE_WARNING);
-        dialog.set_secondary_text(
-                "El mapa actual no contiene vigas");
-        dialog.run();
+    if (girders.empty()){
+        throw InvalidMapError("El mapa actual no contiene vigas");
     }
 }
 
@@ -104,8 +104,4 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
 
 void MapController::changeBackground() {
     this->view->changeBackground();
-}
-
-void MapController::changeModeSignal() {
-    this->actual_action_id = SELECTION;
 }

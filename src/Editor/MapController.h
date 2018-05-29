@@ -16,7 +16,6 @@ class MapController {
     MapView *view;
     ToolBoxView *toolBox;
     unsigned int actual_item_selected;
-    unsigned int actual_action_id;
     unsigned int actual_mode;
     int actual_object_selected;
 
@@ -46,10 +45,7 @@ public:
 
     void changeBackground();
 
-
     void changeModeSignal();
-
-
 };
 
 
