@@ -13,42 +13,43 @@
  * de la vista y mostrar su contenido */
 class ScreenView {
 	private:
-        	Gtk::VBox screen;
-        	Gtk::HBox world_box;
-                Gtk::Window& window;
+        Gtk::VBox screen;
+        Gtk::HBox world_box;
+        Gtk::Window& window;
 
-                WorldView world;
-                WeaponView weapons_view;
-                TurnLabel turn_label;
-                PlayersList players;
+        WorldView world;
+        WeaponView weapons_view;
+        TurnLabel turn_label;
+        PlayersList players;
 
-                bool showCallBack();
-                bool closeCallBack();
+        /* CallBacks */
+        bool showCallBack();
+        bool closeCallBack();
 
 	public:
-                /* Constructor */
-        	ScreenView(Gtk::Window& window, Player& player, WeaponList& weapons);
+        /* Constructor */
+        ScreenView(Gtk::Window& window, Player& player, WeaponList& weapons);
 
-                /* Destructor */
-                ~ScreenView();
+        /* Destructor */
+        ~ScreenView();
 
-                /* Muestra la pantalla en la ventana */
-                void show();
+        /* Muestra la pantalla en la ventana */
+        void show();
 
-                /* Cierra la ventana completamente */
-                void close();
+        /* Cierra la ventana completamente */
+        void close();
 
-                /* Devuelve el WorldView */
-                WorldView& getWorld();
+        /* Devuelve el WorldView */
+        WorldView& getWorld();
 
-                /* Devuelve el WeaponView */
-                WeaponView& getWeaponsView();
+        /* Devuelve el WeaponView */
+        WeaponView& getWeaponsView();
 
-                /* Devuelve el TurnLabel */
-                TurnLabel& getTurnLabel();
+        /* Devuelve el TurnLabel */
+        TurnLabel& getTurnLabel();
 
-                /* Devuelve el Players view */
-                PlayersList& getPlayersView();
+        /* Devuelve el Players view */
+        PlayersList& getPlayersView();
 };
 
 #endif
