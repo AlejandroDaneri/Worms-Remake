@@ -99,6 +99,12 @@ void DataSender::send_weapon_changed(const std::string& weapon){
 	this->notifyAll();
 }
 
+void DataSender::sendWeaponShot(const std::string& weapon){
+	Buffer data = this->players[0].getProtocol().send_weapon_shot(weapon);
+	this->sendBuffer(data);
+	this->notifyAll();
+}
+
 void DataSender::sendUpdateScope(int angle) {
 	Buffer data = this->players[0].getProtocol().sendUpdateScope(angle);
 	this->sendBuffer(data);

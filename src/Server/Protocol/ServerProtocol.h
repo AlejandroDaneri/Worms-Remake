@@ -37,6 +37,8 @@ class ServerProtocol : public Protocol{
 
 		Buffer send_weapon_changed(const std::string& weapon);
 
+		Buffer send_weapon_shot(const std::string& weapon);
+
 		Buffer sendUpdateScope(int angle);
 
 		Buffer sendEndGame(const std::string& winner);

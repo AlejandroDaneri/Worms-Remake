@@ -80,6 +80,10 @@ void ClientProtocol::receive(Player& player){
     } else if (action == MOVE_SCOPE) {
 	    int angle = this->receiveIntBuffer(buffer);
 	    player.getViewsList().updateScope(angle);
+	} else if (action == SHOOT_WEAPON_ACTION) {
+	    std::string weapon(this->receiveStringBuffer(buffer));
+	    player.getViewsList().removeScopeVisibility();
+	    player.getMusicPlayer().playWeaponShotSound(weapon);
 	} else if (action == MOVING_OBJECT) {
 		char type = buffer.getNext();
 		int id = this->receiveIntBuffer(buffer);

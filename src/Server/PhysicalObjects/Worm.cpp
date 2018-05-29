@@ -46,6 +46,10 @@ bool Worm::isColliding() const{
 	return this->colliding_with_girder > 0;
 }
 
+const std::string& Worm::getCurrentWeapon() const{
+	return ((Weapon*)weapon.get())->getName();
+}
+
 void Worm::addLife(int life){
 	this->life += life;
 }

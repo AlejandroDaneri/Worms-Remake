@@ -112,10 +112,6 @@ void MusicPlayer::playBoring() {
     this->addEffect(BORING_SOUND);
 }
 
-void MusicPlayer::playRunAway() {
-    this->addEffect(RUN_AWAY_SOUND);
-}
-
 void MusicPlayer::playDeathSound() {
     this->addEffect(DEATH_SOUND);
 }
@@ -126,14 +122,6 @@ void MusicPlayer::playExplosionSound(const std::string& weapon) {
     } else {
         this->addEffect(EXPLOSION_SOUND);
     }
-}
-
-void MusicPlayer::playTeleportSound() {
-    this->addEffect(TELEPORT_SOUND);
-}
-
-void MusicPlayer::playBatSound() {
-    this->addEffect(BAT_SOUND);
 }
 
 void MusicPlayer::playHolyGrenadeSound() {
@@ -154,4 +142,14 @@ void MusicPlayer::stop() {
 
 bool MusicPlayer::isPlaying() {
     return Mix_PlayingMusic() == 1;
+}
+
+void MusicPlayer::playWeaponShotSound(const std::string& weapon){
+    if (weapon == TELEPORT_NAME) { 
+        this->addEffect(TELEPORT_SOUND);
+    } else if (weapon == BAT_NAME) {
+        this->addEffect(BAT_SOUND);
+    } else if (weapon == DYNAMITE_NAME) {
+        this->addEffect(RUN_AWAY_SOUND);
+    }
 }

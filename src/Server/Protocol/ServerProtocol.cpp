@@ -108,10 +108,12 @@ void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 			int angle = this->receiveIntBuffer(buffer);
 			int power = this->receiveIntBuffer(buffer);
 			int time = this->receiveIntBuffer(buffer);
+			data_sender.sendWeaponShot(game.getCurrentWorm().getCurrentWeapon());
 			game.getCurrentWorm().shoot(angle, power, time);
 		} else if(worm_action == SHOOT_SELF_DIRECTED) {
 			int pos_x = this->receiveIntBuffer(buffer);
 			int pos_y = this->receiveIntBuffer(buffer);
+			data_sender.sendWeaponShot(game.getCurrentWorm().getCurrentWeapon());
 			game.getCurrentWorm().shoot(b2Vec2(pos_x, pos_y));
 		}
 	}
@@ -153,6 +155,15 @@ Buffer ServerProtocol::send_weapon_changed(const std::string& weapon){
 	Buffer buffer;
 
 	buffer.setNext(CHANGE_WEAPON_ACTION);
+	this->sendStringBuffer(buffer, weapon);
+
+    return buffer;
+}
+
+Buffer ServerProtocol::send_weapon_shot(const std::string& weapon){
+	Buffer buffer;
+
+	buffer.setNext(SHOOT_WEAPON_ACTION);
 	this->sendStringBuffer(buffer, weapon);
 
     return buffer;

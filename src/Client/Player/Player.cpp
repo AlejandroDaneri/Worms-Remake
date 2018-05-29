@@ -53,11 +53,6 @@ void Player::damageReceived(){
 void Player::shootWeapon() {
 	this->turn.reduceTime();
     this->weapons.getCurrentWeapon().shoot();
-    if (this->weapons.getCurrentWeapon().getName() == TELEPORT_NAME) { ////////////////esto no va aca, sino solo lo escucha un jugador
-        this->musicPlayer.playTeleportSound();
-    } else if (this->weapons.getCurrentWeapon().getName() == BAT_NAME) {
-        this->musicPlayer.playBatSound();
-    }
 }
 
 void Player::changeWeapon(std::string weapon) {

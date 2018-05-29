@@ -21,11 +21,12 @@
 #define END_TURN 4
 #define MOVE_ACTION 5
 #define CHANGE_WEAPON_ACTION 6
-#define SHOOT_WEAPON 7
-#define SHOOT_SELF_DIRECTED 8
-#define MOVE_SCOPE 9
+#define SHOOT_WEAPON_ACTION 7
+#define SHOOT_WEAPON 8
+#define SHOOT_SELF_DIRECTED 9
+#define MOVE_SCOPE 10
 
-#define END_GAME 10
+#define END_GAME 11
 
 
 #define MOVE_RIGHT 1
