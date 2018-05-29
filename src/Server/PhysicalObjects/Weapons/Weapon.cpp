@@ -22,7 +22,7 @@ bool Weapon::isActive(){
 }
 
 void Weapon::shoot(char dir, int angle, int power, int time){
-	if (dir == -1){
+	if (dir == -1 && angle <= MAX_WEAPON_ANGLE){
 		angle = 180 - angle;
 	}
 	this->time_to_explode = time;
@@ -51,7 +51,7 @@ void Weapon::createFixtures(){
 }
 
 void Weapon::setInitialVelocity(){
-	if (this->angle <= MAX_WEAPON_ANGLE){
+	if (this->angle <= 180){
 		int velocity = this->parameters.getWeaponsVelocity();
 		if (this->power != -1){
 			 velocity *= this->power / 1000;

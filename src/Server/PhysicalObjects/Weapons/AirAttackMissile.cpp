@@ -10,5 +10,5 @@ const std::string& AirAttackMissile::getName(){
 }
 
 bool AirAttackMissile::isWindAffected(){
-	return false;
+	return true;
 }
