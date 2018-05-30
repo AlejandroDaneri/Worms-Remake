@@ -94,6 +94,12 @@ void MapView::linkController(MapController *pController) {
     this->controller = pController;
 }
 
+void MapView::changeBackground() {
+    background.clear();
+    actual_bg = (actual_bg + 1) % bg_paths.size();
+    setBackground(bg_paths[actual_bg]);
+}
+
 void MapView::setBackground(const std::string &name) {
     Gtk::Image bg(name);
     int img_width = bg.get_pixbuf()->get_width();
@@ -108,12 +114,16 @@ void MapView::setBackground(const std::string &name) {
             background.push_back(std::move(image));
         }
     }
+    redraw_map();
 }
 
-void MapView::changeBackground() {
-    background.clear();
-    actual_bg = (actual_bg + 1) % bg_paths.size();
-    setBackground(bg_paths[actual_bg]);
+void MapView::redraw_map() {
+    for(Gtk::Image &object : objects){
+        const Gtk::Allocation &alloc = object.get_allocation();
+        remove(object);
+        put(object,alloc.get_x(),alloc.get_y());
+    }
+    
 }
 
 int MapView::select(const double &x, const double &y) {
