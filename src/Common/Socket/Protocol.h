@@ -52,9 +52,8 @@ class Protocol {
 		/* Destructor */
 		~Protocol();
 
-
 		/* Envia el contenido del buffer */
-		void sendBuffer(Buffer &buffer);
+		virtual void sendBuffer(Buffer &buffer);
 
 		/* Recibe un mensaje, lo almacena en un buffer y lo retorna */
 		Buffer receiveBuffer();

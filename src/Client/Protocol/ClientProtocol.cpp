@@ -1,12 +1,13 @@
 #include "ClientProtocol.h"
 #include <string>
+#include <iostream>
 #include "Player.h"
 #include "WeaponList.h"
 #include "ObjectSizes.h"
 
-ClientProtocol::ClientProtocol(Socket&& socket): Protocol(std::move(socket)) {}
+ClientProtocol::ClientProtocol(Socket&& socket, Gtk::Window& window): Protocol(std::move(socket)), window(window){}
 
-ClientProtocol::ClientProtocol(ClientProtocol&& other): Protocol(std::move(other)) {}
+ClientProtocol::ClientProtocol(ClientProtocol&& other): Protocol(std::move(other)), window(other.window) {}
 
 ClientProtocol::~ClientProtocol(){}
 
@@ -160,5 +161,14 @@ void ClientProtocol::receiveWeaponsAmmo(WeaponList& weapon_list){
 		std::string name = this->receiveStringBuffer(buffer);
 		int ammo = this->receiveIntBuffer(buffer);
 		weapon_list.add(name, ammo);
+	}
+}
+
+void ClientProtocol::sendBuffer(Buffer &buffer){
+	try{
+		Protocol::sendBuffer(buffer);
+	} catch (const std::exception& e){
+		std::cerr << "Ocurrio un error: " << e.what() << std::endl;
+		this->window.close();
 	}
 }
