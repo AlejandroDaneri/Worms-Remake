@@ -2,7 +2,6 @@
 #define __PROTOCOL_H__
 
 #include <string>
-#include <mutex>
 #include "Buffer.h"
 #include "Socket.h"
 
@@ -43,7 +42,6 @@
 class Protocol {
 	private:
 		Socket socket;
-		std::mutex mutex_send;
 	public:
 		/* Constructor */
 		Protocol(Socket&& socket);
