@@ -9,7 +9,6 @@ Protocol::~Protocol() {}
 
 void Protocol::sendBuffer(Buffer &buffer) {
 	uint32_t len_converted = htonl(buffer.getSize());
-	std::lock_guard<std::mutex> lock(this->mutex_send);
 	this->socket.sendData(&len_converted, sizeof len_converted);
 	this->socket.sendData(buffer.getPointer(), buffer.getSize());
 }
