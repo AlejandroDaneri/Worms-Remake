@@ -8,24 +8,15 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
         : Gtk::Grid(cobject) {
     processing=false;
     builder->get_widget("btn_undo", erase);
-    Gtk::manage(erase);
     builder->get_widget("tbtn_worm", worm);
-    Gtk::manage(worm);
     worm->set_active(true);
     builder->get_widget("tbtn_grd", girder_3m);
-    Gtk::manage(girder_3m);
     builder->get_widget("tbtn_grd6", girder_6m);
-    Gtk::manage(girder_6m);
     builder->get_widget("btn_move", move);
-    Gtk::manage(move);
     builder->get_widget("btn_turn_ccw", turnccw);
-    Gtk::manage(turnccw);
     builder->get_widget("btn_turn_cw", turncw);
-    Gtk::manage(turncw);
     builder->get_widget("btn_bg", change_bg);
-    Gtk::manage(change_bg);
     builder->get_widget("btn_mode", mode);
-    Gtk::manage(mode);
 
     worm->signal_clicked().connect(sigc::bind<int>
                                            (sigc::mem_fun(*this,

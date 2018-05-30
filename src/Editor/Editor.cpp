@@ -8,7 +8,6 @@ Editor::Editor(BaseObjectType *cobject,
 
     maximize();
     builder->get_widget("map_window", map_window);
-    Gtk::manage(map_window);
 
     std::shared_ptr<MapController> map_controller
             (new MapController(map_model, builder));
@@ -17,7 +16,6 @@ Editor::Editor(BaseObjectType *cobject,
     std::shared_ptr<FileBoxController> filebox_controller(
             new FileBoxController(weps_list_controller, map_controller));
     filebox->linkControler(filebox_controller);
-    Gtk::manage(filebox);
 
     show_all_children();
 }

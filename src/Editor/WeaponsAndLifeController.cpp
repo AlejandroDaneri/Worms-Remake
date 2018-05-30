@@ -5,13 +5,11 @@
 WeaponsAndLifeController::WeaponsAndLifeController(
         const Glib::RefPtr<Gtk::Builder> &builder) {
     builder->get_widget("btn_reset", reset_button);
-    Gtk::manage(reset_button);
     reset_button->signal_clicked().connect(
             sigc::mem_fun(*this,
                           &WeaponsAndLifeController::on_reset_clicked));
 
     builder->get_widget_derived("life", life_spin);
-    Gtk::manage(life_spin);
 
     for (size_t i = 1; i <= 10; ++i) {
         std::shared_ptr<WeaponView> weapon_view(new WeaponView(builder, i));
