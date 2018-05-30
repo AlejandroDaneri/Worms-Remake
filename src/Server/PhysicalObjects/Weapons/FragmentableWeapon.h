@@ -12,6 +12,7 @@ class FragmentableWeapon: public Weapon{
 		FragmentableWeapon(World& world, GameParameters& parameters, int damage, int fragments, int radius);
 		virtual ~FragmentableWeapon();
 
+		//Explota el arma y lanza fragmentos
 		void explode();
 };
 

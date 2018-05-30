@@ -3,6 +3,7 @@
 
 #include "PhysicalObject.h"
 
+//Determina el borde inferior del mundo
 class BottomBorder: public PhysicalObject{
 	private:
 		std::string type;
@@ -14,8 +15,6 @@ class BottomBorder: public PhysicalObject{
 	public:
 		BottomBorder(World& world);
 		~BottomBorder();
-
-		//virtual void collide_with_something(CollisionData other) = 0;
 
 };
 

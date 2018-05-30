@@ -19,6 +19,7 @@ class ServerMenu{
 		Gtk::Entry* service;
 		Gtk::Button* connect;
 		Gtk::Window& window;
+		Gtk::Box* menu;
 		std::unique_ptr<MenuView> next_menu;
 
 		/* Handler del boton de conexion */

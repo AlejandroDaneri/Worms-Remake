@@ -104,7 +104,7 @@ void World::removeObject(physical_object_ptr object){
 
 void World::initialize(){
 	physical_object_ptr bottom_border(new BottomBorder(*this));
-	this->addObject(bottom_border, b2Vec2(-50000, 4));
+	this->addObject(bottom_border, b2Vec2(0, 0));
 }
 
 b2Vec2 World::getObjectPosition(PhysicalObject& object){
@@ -122,6 +122,10 @@ void World::setLinearVelocity(PhysicalObject& object, b2Vec2& velocity){
 b2Body* World::getClosestObject(RayCastWeaponExploded* callback, b2Vec2 center, b2Vec2 end){
 	this->world.RayCast(callback, center, end);
 	return callback->getClosestWorm();
+}
+
+float World::getWind() const{
+	return this->wind.getVelocity();
 }
 
 std::list<physical_object_ptr>& World::getObjectsList(){

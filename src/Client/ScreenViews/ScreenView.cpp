@@ -2,8 +2,10 @@
 #include <glibmm/main.h>
 
 ScreenView::ScreenView(Gtk::Window& window, Player& player, WeaponList& weapons) :
-	window(window), weapons_view(weapons, player) {
-	this->world_box.pack_start(this->players.getWindow(), Gtk::PACK_SHRINK);
+	left_view(false, 12), window(window), weapons_view(weapons, player) {
+	this->left_view.pack_start(this->wind_view.getWindow(), Gtk::PACK_SHRINK);
+	this->left_view.pack_start(this->players.getWindow(), Gtk::PACK_SHRINK);
+	this->world_box.pack_start(this->left_view, Gtk::PACK_SHRINK);
 	this->world_box.pack_start(this->world.getWindow());
 	this->world_box.pack_end(this->weapons_view.getWindow(), Gtk::PACK_SHRINK);
 
@@ -50,4 +52,8 @@ TurnLabel& ScreenView::getTurnLabel(){
 
 PlayersList& ScreenView::getPlayersView(){
 	return this->players;
+}
+
+WindView& ScreenView::getWindView(){
+	return this->wind_view;
 }

@@ -1,5 +1,6 @@
 #include "ClientHandler.h"
 #include "MapsList.h"
+#include <iostream>
 
 ClientHandler::ClientHandler(Socket&& client, GamesList& games):
 	client(std::move(client)), games(games){}
@@ -19,6 +20,7 @@ void ClientHandler::run(){
 	} catch(const std::exception& e){
 		//Ocurrio un error con la conexion del cliente
 		//No corta la ejecucion del servidor
+		std::cout << "[ERROR] Error con un cliente: " << e.what() << std::endl;
 	}
 	this->running = false;
 }

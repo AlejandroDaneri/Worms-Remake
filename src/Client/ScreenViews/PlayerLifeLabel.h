@@ -6,9 +6,10 @@
 /* Clase que se encarga de controlar el indicador de vida del jugador */
 class PlayerLifeLabel{
 	private:
+		int id;
 		std::string player_name;
-		Gtk::Label label;
 		int life;
+		Gtk::Label label;
 
 		/* Actualiza la informacion del label */
 		void updateLabel();
@@ -22,7 +23,7 @@ class PlayerLifeLabel{
 
 
 		/* Establece el nombre del jugador */
-		void setPlayerName(const std::string& player_name);
+		void setPlayerName(int id, const std::string& player_name);
 
 		/* Agrega la vida al label */
 		void addLife(int life);

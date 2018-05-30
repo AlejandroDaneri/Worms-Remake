@@ -16,7 +16,7 @@ class GamesList{
 		std::mutex mutex;
 
 	public:
-        /* Constructor */
+        	/* Constructor */
 		GamesList();
 
 		/* Destructor */
@@ -25,14 +25,14 @@ class GamesList{
 		/* Agrega una patida nueva a la lista */
 		void addGame(const std::string& game_name, const std::string& map, int max_players, Player&& player);
 
-		/* Devuelve una lista con las partidas a las cuales se pueden
-		 * unir mas jugadores */
+		/* Devuelve una lista con las partidas a las cuales se puede
+		 * unir el jugador */
 		games_list_t getJoinableGames(const std::string& player_name);
 
 		/* Agrega un jugador a la partida */
 		void addPlayer(const std::string& game_name, Player&& player);
 
-		/* Verifica si una partida termino */
+		/* Verifica las partidas que terminaron */
 		void checkGames();
 };
 

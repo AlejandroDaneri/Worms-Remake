@@ -18,8 +18,9 @@ Player::~Player() {
 	this->data_receiver.join();
 }
 
-void Player::startTurn(int worm_id, int player_id){
+void Player::startTurn(int worm_id, int player_id, float wind){
 	this->view_list.setCurrentWorm(worm_id);
+	this->screen.getWindView().update(wind);
 	const std::string& current_player = this->screen.getPlayersView().getPlayer(player_id);
 	if (current_player == this->name){
 		//Es mi turno

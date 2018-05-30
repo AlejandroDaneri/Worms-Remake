@@ -15,10 +15,12 @@ class RayCastWeaponExploded: public b2RayCastCallback{
 		RayCastWeaponExploded();
 		~RayCastWeaponExploded();
 
+		//Devuelve el gusano mas cercano a la explosion, si hay
 		b2Body* getClosestWorm();
 
+		//Busca al objeto mas cercano a la explosion
 		float32 ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) override;
 };
 
-
 #endif
+

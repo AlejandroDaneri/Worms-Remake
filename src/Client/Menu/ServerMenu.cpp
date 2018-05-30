@@ -10,15 +10,16 @@ ServerMenu::ServerMenu(Gtk::Window& window): window(window){
 	builder->get_widget("service", this->service);
 	builder->get_widget("connect", this->connect);
 
-	Gtk::Box* menu;
-	builder->get_widget("server_menu", menu);
-	this->window.add(*menu);
-	menu->show();
+	builder->get_widget("server_menu", this->menu);
+	this->window.add(*this->menu);
+	this->menu->show();
 
 	this->connect->signal_clicked().connect(sigc::mem_fun(*this, &ServerMenu::connectButtonPressed));
 }
 
-ServerMenu::~ServerMenu(){}
+ServerMenu::~ServerMenu(){
+	delete this->menu;
+}
 
 void ServerMenu::connectButtonPressed(){
 	std::string host(this->host->get_text());

@@ -10,12 +10,14 @@ int main(int argc, const char* argv[]){
 	try{
 		YAML::Node config(YAML::LoadFile(SERVER_CONFIG_FILE));
 		Server server(config[SERVER_PORT].as<std::string>());
+		std::cout << "[LOG] Server iniciado." << std::endl;
 		server.start();
 		while (std::cin.get() != EXIT_CHAR){}
+		std::cout << "[LOG] Comenzando el cierre del servidor." << std::endl;
 		server.stop();
 		server.join();
 	} catch(const std::exception& e){
-		std::cerr << e.what() << std::endl;
+		std::cout << "[ERROR] " << e.what() << std::endl;
 	}
 	return 0;
 }

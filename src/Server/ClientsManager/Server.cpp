@@ -1,5 +1,6 @@
 #include <string>
 #include <memory>
+#include <iostream>
 #include "Server.h"
 #include "ClientHandler.h"
 
@@ -19,6 +20,7 @@ void Server::run(){
 	while (this->running){
 		try{
 			Socket client = this->socket.acceptClient();
+			std::cout << "[INFO] Nuevo cliente conectado." << std::endl;
 			std::unique_ptr<Thread> t(new ClientHandler(std::move(client), this->games_list));
 			t->start();
 			this->clients.push_back(std::move(t));

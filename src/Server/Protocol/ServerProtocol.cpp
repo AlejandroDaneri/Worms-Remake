@@ -69,17 +69,17 @@ void ServerProtocol::send_weapon(physical_object_ptr& object, Buffer& buffer){
 	std::string name = weapon->getName();
 
 	this->sendStringBuffer(buffer, name);
-
 	this->sendIntBuffer(buffer, position.x * UNIT_TO_SEND);
 	this->sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
 }
 
-Buffer ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_player_id){
+Buffer ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_player_id, float wind){
 	Buffer buffer;
 	buffer.setNext(START_TURN);
 
 	this->sendIntBuffer(buffer, current_worm_id);
 	this->sendIntBuffer(buffer, current_player_id);
+	this->sendIntBuffer(buffer, wind * UNIT_TO_SEND);
 
     return buffer;
 }

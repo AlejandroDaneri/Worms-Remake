@@ -18,10 +18,16 @@ class Girder: public PhysicalObject{
 		Girder(World& world, GameParameters& parameters, size_t size, int rotation);
 		~Girder();
 
+		//Devuelve la longitud de la viga
 		size_t getSize();
+
+		//Devuelve la rotacion de la viga
 		int getRotation();
 
+		//Devuelve true si la viga tiene friccion
 		bool has_friction();
+
+		//Devuelve la rotacion normalizada
 		int getAngle();
 
 };

@@ -40,7 +40,7 @@ class Player {
 		/* Comienza el turno. Si es el turno del jugador entonces,
 		   habilita los handlers, sino muestra los movimientos realizados
 		   por el otro jugador */
-		void startTurn(int worm_id, int player_id);
+		void startTurn(int worm_id, int player_id, float wind);
 		
 		/* Finaliza el turno del jugador actual */
 		void endTurn();

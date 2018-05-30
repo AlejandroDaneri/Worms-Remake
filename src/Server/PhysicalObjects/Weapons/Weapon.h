@@ -34,6 +34,7 @@ class Weapon: public PhysicalObject{
 		Weapon(World& world, GameParameters& parameters, int damage, int radius = 0);
 		virtual ~Weapon();
 
+		//Devuelve true si el arma esta en movimiento o esperando para explotar
 		bool isActive() override;
 
 		virtual void shoot(char dir, int angle, int power, int time);

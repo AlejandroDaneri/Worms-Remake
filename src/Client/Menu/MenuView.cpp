@@ -3,7 +3,9 @@
 MenuView::MenuView(Gtk::Window& window, ClientProtocol&& protocol):
 	window(window), protocol(std::move(protocol)){}
 
-MenuView::~MenuView(){}
+MenuView::~MenuView(){
+	delete this->menu;
+}
 
 void MenuView::showError(const std::string& error){
 	this->error->set_label(error);

@@ -13,7 +13,10 @@ class Wind{
 		Wind(GameParameters& parameters);
 		~Wind();
 
+		//Devuelve la velocidad del viento
 		float getVelocity() const;
+
+		//Actualiza la velocidad del viento
 		void update();
 
 };

@@ -6,6 +6,7 @@
 #include <gtkmm/hvbox.h>
 #include <gtkmm/scrolledwindow.h>
 #include "Position.h"
+#include "Water.h"
 
 class Player;
 
@@ -15,6 +16,7 @@ class WorldView{
 	private:
 		Gtk::Layout world;
 		Gtk::ScrolledWindow window;
+		Water water;
 
 	public:
 	    /* Constructor */

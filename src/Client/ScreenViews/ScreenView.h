@@ -8,6 +8,7 @@
 #include "WeaponView.h"
 #include "TurnLabel.h"
 #include "PlayersList.h"
+#include "WindView.h"
 
 /* Clase que se encarga de almacenar los contenedores principales
  * de la vista y mostrar su contenido */
@@ -15,12 +16,14 @@ class ScreenView {
 	private:
         Gtk::VBox screen;
         Gtk::HBox world_box;
+	Gtk::VBox left_view;
         Gtk::Window& window;
 
         WorldView world;
         WeaponView weapons_view;
         TurnLabel turn_label;
         PlayersList players;
+	WindView wind_view;
 
         /* CallBacks */
         bool showCallBack();
@@ -50,6 +53,9 @@ class ScreenView {
 
         /* Devuelve el Players view */
         PlayersList& getPlayersView();
+
+	/* Devuelve el wind view */
+        WindView& getWindView();
 };
 
 #endif

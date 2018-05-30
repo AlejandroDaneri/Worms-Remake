@@ -26,19 +26,37 @@ class DataSender: public Thread{
 		DataSender(World& world, std::vector<Player>& players);
 		~DataSender();
 
+		//Envia constantemente los datos de los objetos
 		void run() override;
 
+		//Envia los datos de los jugadores
 		void send_players_id();
+
+		//Envia los datos de las vigas
 		void sendGirders();
+
+		//Envia las municiones de las armas
 		void sendWeaponsAmmo(std::map<std::string, int>& weapons);
+
+		//Envia que el jugador cambio de arma
 		void send_weapon_changed(const std::string& weapon);
+
+		//Envia que el jugador cambio el angulo de la mira
 		void sendUpdateScope(int angle);
+
+		//Envia que el jugador disparo un arma
 		void sendWeaponShot(const std::string& weapon);
 
+		//Envia la senial de comienzo del juego
 		void send_start_game();
-		void send_start_turn(int worm_id, int player_id);
+
+		//Envia la senial de que inicia un nuevo turno
+		void send_start_turn(int worm_id, int player_id, float wind);
+
+		//Envia la senial de que el juego termino
 		void sendEndGame(const std::string& winner);
 
+		//Devuelve true si sigue enviando datos
 		bool isActive();
 
 };

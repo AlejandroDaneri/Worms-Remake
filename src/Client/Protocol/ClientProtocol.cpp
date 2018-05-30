@@ -2,6 +2,7 @@
 #include <string>
 #include "Player.h"
 #include "WeaponList.h"
+#include "ObjectSizes.h"
 
 ClientProtocol::ClientProtocol(Socket&& socket): Protocol(std::move(socket)) {}
 
@@ -69,7 +70,8 @@ void ClientProtocol::receive(Player& player){
 	if (action == START_TURN){
 		int worm_id = this->receiveIntBuffer(buffer);
 		int player_id = this->receiveIntBuffer(buffer);
-		player.startTurn(worm_id, player_id);
+		float wind = this->receiveIntBuffer(buffer) / UNIT_TO_SEND;
+		player.startTurn(worm_id, player_id, wind);
 	} else if (action == END_GAME){
 		std::string winner = this->receiveStringBuffer(buffer);
 		player.endGame(winner);

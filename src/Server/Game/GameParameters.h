@@ -22,6 +22,7 @@ class GameParameters{
 		std::vector<GirderParams> girders;
 
 	public:
+		//Inicializa todos los parametros necesarios para la partida
 		GameParameters(const std::string& config_file, const std::string& config_editor_file);
 		~GameParameters();
 

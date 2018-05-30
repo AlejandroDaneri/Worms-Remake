@@ -1,7 +1,11 @@
 #include "PlayersList.h"
 #include <glibmm/main.h>
 
-PlayersList::PlayersList(){}
+PlayersList::PlayersList(): container(false, 10){
+	this->title.set_use_markup(true);
+	this->title.set_markup("<span><b><u>Jugadores</u></b></span>");
+	this->container.pack_start(this->title, Gtk::PACK_SHRINK);
+}
 
 PlayersList::~PlayersList(){}
 
@@ -12,8 +16,8 @@ void PlayersList::addPlayer(int id, const std::string& name){
 
 bool PlayersList::addPLayerCallBack(int id, std::string name){
 	this->players[id] = name;
-	this->labels[id].setPlayerName(name);
-	this->container.add(this->labels[id].getLabel());
+	this->labels[id].setPlayerName(id, name);
+	this->container.pack_start(this->labels[id].getLabel(), Gtk::PACK_SHRINK);
 	return false;
 }
 

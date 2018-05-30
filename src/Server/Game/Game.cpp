@@ -50,7 +50,7 @@ void Game::run(){
 		this->turn.begin_turn();
 		int worm_id = this->turn.getCurrentPlayer().getCurrentWorm().getId();
 		int player_id = this->turn.getCurrentPlayer().getId();
-		this->data_sender->send_start_turn(worm_id, player_id);
+		this->data_sender->send_start_turn(worm_id, player_id, this->world.getWind());
 
 		while (this->player_turn_active){
 			try{

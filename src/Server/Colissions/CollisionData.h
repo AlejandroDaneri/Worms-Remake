@@ -6,6 +6,7 @@
 
 class PhysicalObject;
 
+//Datos de un objeto para determinar colisiones
 class CollisionData{
 	private:
 		std::string type;

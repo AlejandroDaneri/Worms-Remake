@@ -10,6 +10,7 @@ WorldView::WorldView(){
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
 	this->window.override_background_color(Gdk::RGBA("lightgreen"));////////////// Reemplazar por fondo de pantalla
+	this->water.show(this->world);
 }
 
 WorldView::~WorldView(){}

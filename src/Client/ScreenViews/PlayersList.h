@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <gtkmm/hvbox.h>
+#include <gtkmm/label.h>
 #include "PlayerLifeLabel.h"
 
 /* Clase que se encarga de almacenar los nombres y las vidas
@@ -13,6 +14,7 @@ class PlayersList{
 		std::map<int, std::string> players;
 		std::map<int, PlayerLifeLabel> labels;
 		Gtk::VBox container;
+		Gtk::Label title;
 
 		bool addPLayerCallBack(int id, std::string name);
 

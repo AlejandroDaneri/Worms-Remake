@@ -21,4 +21,8 @@ const int map_height = 5000;
 
 const int map_width = 20000;
 
+const int water_length = 180;
+
+const int water_height = 30;
+
 #endif

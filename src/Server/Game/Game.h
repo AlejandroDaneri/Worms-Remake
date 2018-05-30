@@ -29,7 +29,7 @@ class Game: public Thread{
 		void wait_to_world();
 
 	public:
-        /* Constructor */
+        	/* Constructor */
 		Game(size_t players, const std::string& config_file, const std::string& map);
 
 		/* Destructor */

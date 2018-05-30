@@ -1,16 +1,18 @@
 #include "PlayerLifeLabel.h"
+#include "GamePlayers.h"
 
-const std::string begining("<span size='13000'>  ");
+const std::string begining("<span color='");
+const std::string middle("'>");
 const std::string ending("</span>");
-const std::string empty_name(" ");
 
-PlayerLifeLabel::PlayerLifeLabel(): player_name(empty_name), life(0){
+PlayerLifeLabel::PlayerLifeLabel(): id(0), player_name(""), life(0){
 	this->label.set_use_markup(true);
 }
 
 PlayerLifeLabel::~PlayerLifeLabel(){}
 
-void PlayerLifeLabel::setPlayerName(const std::string& player_name){
+void PlayerLifeLabel::setPlayerName(int id, const std::string& player_name){
+	this->id = id;
 	this->player_name = player_name;
 	this->updateLabel();
 }
@@ -30,5 +32,8 @@ Gtk::Label& PlayerLifeLabel::getLabel(){
 }
 
 void PlayerLifeLabel::updateLabel(){
-	this->label.set_markup(begining + this->player_name + "\nVida total: " + std::to_string(this->life) + ending);
+	std::string message = begining + colors[this->id] + middle;
+	message += std::to_string(this->id) + "- " + this->player_name;
+	message += ": " + std::to_string(this->life) + ending;
+	this->label.set_markup(message);
 }

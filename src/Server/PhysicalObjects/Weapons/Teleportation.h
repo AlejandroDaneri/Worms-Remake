@@ -13,6 +13,7 @@ class Teleportation: public Weapon{
 
 		void shoot(char dir, int angle, int power, int time) override;
 
+		//Teletransporta al gusano
 		void shoot(Worm& shooter, b2Vec2 pos) override;
 
 };

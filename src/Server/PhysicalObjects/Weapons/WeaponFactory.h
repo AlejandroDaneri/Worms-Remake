@@ -13,6 +13,7 @@ class WeaponFactory{
 		WeaponFactory(World& world, GameParameters& parameters);
 		~WeaponFactory();
 
+		//Devuelve el arma pedida
 		physical_object_ptr getWeapon(const std::string& name);
 
 };

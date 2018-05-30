@@ -19,6 +19,7 @@ class WeaponExplodeTime: public Thread{
 
 		void setTime(int time);
 
+		//Cuenta el tiempo que falta para que el arma explote
 		void run() override;
 
 };

@@ -87,8 +87,8 @@ void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
 	}
 }
 
-void DataSender::send_start_turn(int worm_id, int player_id){
-	Buffer data = this->players[0].getProtocol().send_start_turn(worm_id, player_id);
+void DataSender::send_start_turn(int worm_id, int player_id, float wind){
+	Buffer data = this->players[0].getProtocol().send_start_turn(worm_id, player_id, wind);
 	this->sendBuffer(data);
 	this->notifyAll();
 }
