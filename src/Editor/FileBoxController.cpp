@@ -37,7 +37,8 @@ void FileBoxController::onSaveClicked() const {
         save_dialog->set_current_folder(MAPS_PATH);
         int result = save_dialog->run();
         if (result==Gtk::RESPONSE_OK){
-            FileWriter file("config_editor.yaml");
+            std::string filename = save_dialog->get_filename(); //revisar extension archivo
+            FileWriter file(filename);
             file.save(weapons_ammo, worms,
                       girders, life);
         }
@@ -52,7 +53,8 @@ void FileBoxController::onLoadClicked() const {
     open_dialog->set_current_folder(MAPS_PATH);
     int result = open_dialog->run();
     if (result==Gtk::RESPONSE_OK) {
-        FileReader file("config_editor.yaml");
+        std::string filename = open_dialog->get_filename();
+        FileReader file(filename);
         std::vector<std::vector<double>> worms;
         std::vector<std::vector<double>> girders;
         std::vector<int> weps_ammo;
