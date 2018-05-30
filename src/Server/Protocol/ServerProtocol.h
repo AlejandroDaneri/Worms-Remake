@@ -32,17 +32,20 @@ class ServerProtocol : public Protocol{
 		//Recibe datos de un cliente
 		void receive(Game& game, DataSender& data_sender);
 
+		//Carga la informacion de comienzo de juego
+		Buffer sendStartGame();
+
 		//Carga la informacion de nuevo turno en el buffer
 		Buffer send_start_turn(int32_t current_worm_id, int32_t current_player_id, float wind);
 
 		//Carga la informacion de un nuevo jugador en el buffer
-		void sendPlayerId(const Player& player);
+		Buffer sendPlayerId(const Player& player);
 
 		//Carga la informacion de una viga en el buffer
-		void sendGirder(physical_object_ptr& girder);
+		Buffer sendGirder(physical_object_ptr& girder);
 
 		//Carga la informacion de un arma en el buffer
-		void sendWeaponAmmo(const std::string& weapon_name, int ammo);
+		Buffer sendWeaponAmmo(const std::string& weapon_name, int ammo);
 
 		//Carga la informacion de cambio de arma en el buffer
 		Buffer send_weapon_changed(const std::string& weapon);

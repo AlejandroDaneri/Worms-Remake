@@ -117,8 +117,13 @@ void ClientProtocol::receive(Player& player){
 	}
 }
 
+void ClientProtocol::receiveStartGame(){
+	Buffer buffer = std::move(this->receiveBuffer());
+}
+
 void ClientProtocol::receivePlayers(PlayersList& players_list){
-	int quantity = this->receiveLength();
+	Buffer buffer = std::move(this->receiveBuffer());
+	int quantity = this->receiveIntBuffer(buffer);
 
 	for (int i = 0; i < quantity; i++){
 		Buffer buffer = std::move(this->receiveBuffer());
@@ -131,7 +136,8 @@ void ClientProtocol::receivePlayers(PlayersList& players_list){
 }
 
 void ClientProtocol::receiveGirders(ViewsList& viewsList){
-	int quantity = this->receiveLength();
+	Buffer buffer = std::move(this->receiveBuffer());
+	int quantity = this->receiveIntBuffer(buffer);
 
 	for (int i = 0; i < quantity; i++){
 		Buffer buffer = std::move(this->receiveBuffer());;
@@ -145,7 +151,8 @@ void ClientProtocol::receiveGirders(ViewsList& viewsList){
 }
 
 void ClientProtocol::receiveWeaponsAmmo(WeaponList& weapon_list){
-	int quantity = this->receiveLength();
+	Buffer buffer = std::move(this->receiveBuffer());
+	int quantity = this->receiveIntBuffer(buffer);
 
 	for (int i = 0; i < quantity; i++){
 		Buffer buffer = std::move(this->receiveBuffer());

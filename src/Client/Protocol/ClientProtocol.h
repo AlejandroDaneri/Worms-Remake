@@ -47,6 +47,9 @@ class ClientProtocol: public Protocol {
 		/* Recibe un mensaje que le indica que accion realizar */
 		void receive(Player& player);
 
+		/* Recibe el comienzo del juego */
+		void receiveStartGame();
+
 		/* Recibe los jugadores de la partida junto con su
 		 * id y su nombre */
 		void receivePlayers(PlayersList& players_list);
