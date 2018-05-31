@@ -6,7 +6,7 @@
 /* Clase que representa las armas teledirigidas */
 class SelfDirectedWeapon: public Weapon{
 	public:
-	    /* Constructor */
+		/* Constructor */
 		SelfDirectedWeapon(std::string name, int ammo);
 
 		/* Destructor */

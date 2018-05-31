@@ -32,12 +32,12 @@ class WeaponView {
 		void update();
 
 		/* Callback de updateAmmo */
-        bool updateAmmoCallBack(const std::string& weapon_name, unsigned int ammo);
+		bool updateAmmoCallBack(const std::string& weapon_name, unsigned int ammo);
 
-        /* Actualiza la informacion de la municion del arma especifica */
-        void updateAmmo(const Weapon& weapon);
+		/* Actualiza la informacion de la municion del arma especifica */
+		void updateAmmo(const Weapon& weapon);
 
-        /* Devuelve el contenedor de la vista */
+		/* Devuelve el contenedor de la vista */
 		Gtk::Grid& getWindow();
 };
 

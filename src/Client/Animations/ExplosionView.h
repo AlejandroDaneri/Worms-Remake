@@ -11,10 +11,10 @@ class ExplosionView {
 		BulletView bulletView;
 		std::vector<Glib::RefPtr<Gdk::Pixbuf>> animation_vector;
 		Glib::RefPtr<Gdk::Pixbuf> animation;
-        std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter;
+		std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter;
 
-        /* Callback de start */
-        bool startCallBack();
+		/* Callback de start */
+		bool startCallBack();
 
 	public:
 		/* Constructor */
@@ -24,10 +24,10 @@ class ExplosionView {
 		~ExplosionView();
 
 		/* Constructor por movimiento */
-        ExplosionView(ExplosionView&& other);
+		ExplosionView(ExplosionView&& other);
 
 
-        /* Realiza la animacion de la explosion */
+		/* Realiza la animacion de la explosion */
 		void start();
 
 		/* Devuelve true si la animacion de la explosion finalizo */

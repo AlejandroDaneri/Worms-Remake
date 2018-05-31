@@ -20,7 +20,7 @@ class WorldView{
 		Water water;
 
 	public:
-	    /* Constructor */
+		/* Constructor */
 		WorldView();
 
 		/* Destructor */

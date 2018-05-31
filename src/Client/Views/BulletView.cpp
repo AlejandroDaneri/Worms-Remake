@@ -25,6 +25,6 @@ Gtk::Widget& BulletView::getWidget(){
 }
 
 std::string BulletView::getName() {
-    return this->weapon_name;
+	return this->weapon_name;
 }
 

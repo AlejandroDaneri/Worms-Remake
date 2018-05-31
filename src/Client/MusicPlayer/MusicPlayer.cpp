@@ -8,6 +8,7 @@ const std::string START_TURN_SOUND = SOUNDS_PATH + "Misc/StartRound.wav";
 const std::string TICK_SOUND = SOUNDS_PATH + "Misc/TimerTick.wav";
 const std::string RUN_AWAY_SOUND = SOUNDS_PATH + "Worms/RunAway.wav";
 const std::string DEATH_SOUND = SOUNDS_PATH + "Worms/Death.wav";
+const std::string DAMAGE_RECEIVE_SOUND = SOUNDS_PATH + "Worms/DamageReceive.wav";
 const std::string EXPLOSION_SOUND = SOUNDS_PATH + "Weapons/Explosion.wav";
 const std::string TELEPORT_SOUND = SOUNDS_PATH + "Weapons/Teleportation.wav";
 const std::string BAT_SOUND = SOUNDS_PATH + "Weapons/BaseballSound.wav";
@@ -101,6 +102,10 @@ void MusicPlayer::playTickSound() {
 
 void MusicPlayer::playDeathSound() {
 	this->addEffect(DEATH_SOUND);
+}
+
+void MusicPlayer::playDamageReceiveSound() {
+	this->addEffect(DAMAGE_RECEIVE_SOUND);
 }
 
 void MusicPlayer::playExplosionSound(const std::string& weapon) {

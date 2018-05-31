@@ -23,7 +23,7 @@ class Handlers{
 		int weapons_time;
 		bool enabled;
 
-		WeaponPowerAccum timer;
+		WeaponPowerAccum power_accumulator;
 
 
 	public:

@@ -6,7 +6,7 @@
 /* Clase que representa al arma Teletransportador */
 class Teleportation: public SelfDirectedWeapon {
 	public:
-        /* Constructor */
+		/* Constructor */
 		Teleportation(int ammo);
 
 		/* Destructor */

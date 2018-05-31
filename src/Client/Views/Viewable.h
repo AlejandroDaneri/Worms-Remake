@@ -13,14 +13,14 @@ class Viewable{
 		bool has_focus;
 
 	protected:
-        /* Agrega al objeto visual a la vista */
+		/* Agrega al objeto visual a la vista */
 		void addToWorld(const Position& pos, float width, float height);
 
 		/* Mueve al objeto visual a la posicion especificada */
 		void move(const Position& pos, float width, float height);
 
 	public:
-	    /* Constructor */
+		/* Constructor */
 		Viewable(WorldView& worldView);
 
 		/* Destructor */

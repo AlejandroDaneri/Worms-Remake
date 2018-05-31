@@ -11,6 +11,7 @@ ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list
 	this->world.addElement(this->scope, Position(0,500), 0, 0);
 	this->scope.hide();
 	this->current_worm_id = -1;
+	this->angle = 48;
 }
 
 ViewsList::~ViewsList(){}
@@ -56,6 +57,7 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, 
 		if (current_life != life){
 			this->players_list.reducePlayerLife(player_id, current_life - life);
 			if (id == this->current_worm_id){
+				this->musicPlayer.playDamageReceiveSound();
 				this->player.endTurnEarly();
 			}
 		}
@@ -82,22 +84,25 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float p
 	}
 }
 
-void ViewsList::changeWeapon(const std::string &weapon_name) {
-	this->musicPlayer.playSelectWeaponSound();
+void ViewsList::changeWeapon(const std::string& weapon_name) {
 	this->worms.at(this->current_worm_id).changeWeapon(weapon_name);
+	if (WeaponsFactory().createWeapon(weapon_name, 1)->hasScope()) {
+		this->updateScope(angle);
+	}
 }
 
 void ViewsList::updateScope(int angle) {
 	if (this->worms.find(this->current_worm_id) == this->worms.end()) {
 		return;
 	}
+	this->angle = angle;
 	WormView& worm = this->worms.at(this->current_worm_id);
 	const char dir = worm.getDir();
 	if (dir == -1)
 		angle = 180 - angle;
 	this->world.moveScope(this->scope, worm.getWidget(), angle);
 	this->scope.show();
-	worm.updateScope(angle);
+	worm.updateScope(this->angle);
 }
 
 void ViewsList::removeScopeVisibility() {

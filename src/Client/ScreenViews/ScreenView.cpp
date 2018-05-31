@@ -17,7 +17,7 @@ ScreenView::~ScreenView() {}
 
 void ScreenView::show(){
 	sigc::slot<bool> my_slot = sigc::mem_fun(*this, &ScreenView::showCallBack);
-    Glib::signal_idle().connect(my_slot);
+	Glib::signal_idle().connect(my_slot);
 }
 
 bool ScreenView::showCallBack(){
@@ -30,7 +30,7 @@ bool ScreenView::showCallBack(){
 
 void ScreenView::close(){
 	sigc::slot<bool> my_slot = sigc::mem_fun(*this, &ScreenView::closeCallBack);
-    Glib::signal_idle().connect(my_slot);
+	Glib::signal_idle().connect(my_slot);
 }
 
 bool ScreenView::closeCallBack(){
@@ -39,11 +39,11 @@ bool ScreenView::closeCallBack(){
 }
 
 WorldView& ScreenView::getWorld() {
-    return this->world;
+	return this->world;
 }
 
 WeaponView& ScreenView::getWeaponsView() {
-    return this->weapons_view;
+	return this->weapons_view;
 }
 
 TurnLabel& ScreenView::getTurnLabel(){

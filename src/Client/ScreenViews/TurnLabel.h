@@ -13,7 +13,7 @@ class TurnLabel{
 		Gtk::HBox label;
 
 	public:
-	    /* Constructor */
+		/* Constructor */
 		TurnLabel();
 
 		/* Destructor */
@@ -31,7 +31,7 @@ class TurnLabel{
 		void endTurn();
 
 		/* Cambia el label mostrando al ganador */
-		void setWinner(const std::string& winner);
+		void setWinner(const std::string& winner, bool i_win);
 
 		/* Cambia el label de tiempo al tiempo pasado por parametro */
 		void setTime(int time);

@@ -6,7 +6,7 @@
 /* Clase que representa al arma Bat de baseball */
 class Bat: public MeleeWeapon {
 	public:
-        /* Constructor */
+		/* Constructor */
 		Bat(int ammo);
 
 		/* Destructor */

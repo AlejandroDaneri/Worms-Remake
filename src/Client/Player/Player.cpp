@@ -44,7 +44,7 @@ void Player::endTurn() {
 void Player::endGame(const std::string& winner){
 	this->data_receiver.stop();
 	this->handlers.disableAll();
-	this->screen.getTurnLabel().setWinner(winner);
+	this->screen.getTurnLabel().setWinner(winner, this->name == winner);
     this->view_list.setVictory();
 }
 
@@ -58,7 +58,8 @@ void Player::shootWeapon() {
 }
 
 void Player::changeWeapon(std::string weapon) {
-    this->weapons.changeWeapon(weapon);
+	this->musicPlayer.playSelectWeaponSound();
+	this->weapons.changeWeapon(weapon);
     if (this->handlers.isEnabled()){
     	this->protocol.sendChangeWeapon(weapon);
     }

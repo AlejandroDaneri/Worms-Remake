@@ -31,7 +31,7 @@ WormView::WormView(WormView&& other): Viewable(std::move(other)), player_id(othe
     walk_image(std::move(other.walk_image)), scope_vector(std::move(other.scope_vector)),
     scope_image(std::move(other.scope_image)), angle(other.angle) {}
 
-void WormView::updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm){
+void WormView::updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm) {
 	if (new_life != this->life){
 		this->label.updateLife(new_life);
 	}
@@ -68,11 +68,7 @@ void WormView::setNewImage(bool dir_changed, bool moved, bool colliding, bool is
 	this->setStaticImage(dir_changed);
 }
 
-void WormView::setWeaponImage(){
-    int angle = this->angle;
-    if (angle > 90) {
-        angle = 180 - this->angle;
-    }
+void WormView::setWeaponImage() {
     int width = this->scope_vector[(90 + angle) / 6]->get_width() / 3;
     int height = this->scope_vector[(90 + angle) / 6]->get_height();
     this->image.set(Gdk::Pixbuf::create_subpixbuf(this->scope_vector[(90 + angle) / 6], width + this->dir * width, 0, width, height));

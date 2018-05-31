@@ -11,11 +11,9 @@ class BulletView: public Viewable{
 	private:
 		Gtk::Image image;
 		std::string weapon_name;
-		//std::vector<Glib::RefPtr<Gdk::Pixbuf>> animation_vector;
-		//Glib::RefPtr<Gdk::Pixbuf> animation;
 
 	public:
-	    /* Constructor */
+		/* Constructor */
 		BulletView(WorldView& worldView, std::string weapon, Position pos);
 
 		/* Destructor */

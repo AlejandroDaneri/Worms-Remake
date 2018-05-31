@@ -6,7 +6,7 @@
 /* Clase que representa al arma Granada verde */
 class GreenGrenade: public DistanceWeapon {
 	public:
-        /* Constructor */
+		/* Constructor */
 		GreenGrenade(int ammo);
 
 		/* Destructor */

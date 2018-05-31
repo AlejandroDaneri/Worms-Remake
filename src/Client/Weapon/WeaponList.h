@@ -8,7 +8,7 @@
 /* Clase que se encarga de almacenar las armas del juego */
 class WeaponList {
 	private:
-	    typedef std::map<std::string, weapon_ptr> WeaponsList;
+		typedef std::map<std::string, weapon_ptr> WeaponsList;
 		WeaponsList weapons;
 		std::string current_weapon;
 

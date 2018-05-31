@@ -15,7 +15,7 @@ void DataReceiver::run(){
 		while(this->running){
 			Buffer data = this->protocol.receiveBuffer();
 			sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &DataReceiver::analizeReceivedData), data);
-    		Glib::signal_idle().connect(my_slot);
+			Glib::signal_idle().connect(my_slot);
 		}
 
 	} catch (const std::exception& e){
@@ -53,16 +53,16 @@ bool DataReceiver::analizeReceivedData(Buffer buffer){
 	} else if (action == END_TURN){
 		this->player.endTurnEarly();
 	} else if (action == CHANGE_WEAPON_ACTION) {
-        std::string weapon(Protocol::receiveStringBuffer(buffer));
-        this->player.getViewsList().removeScopeVisibility();
-        this->player.getViewsList().changeWeapon(weapon);
-    } else if (action == MOVE_SCOPE) {
-	    int angle = Protocol::receiveIntBuffer(buffer);
-	    this->player.getViewsList().updateScope(angle);
+		std::string weapon(Protocol::receiveStringBuffer(buffer));
+		this->player.getViewsList().removeScopeVisibility();
+		this->player.getViewsList().changeWeapon(weapon);
+	} else if (action == MOVE_SCOPE) {
+		int angle = Protocol::receiveIntBuffer(buffer);
+		this->player.getViewsList().updateScope(angle);
 	} else if (action == SHOOT_WEAPON_ACTION) {
-	    std::string weapon(Protocol::receiveStringBuffer(buffer));
-	    this->player.getViewsList().removeScopeVisibility();
-	    this->player.getMusicPlayer().playWeaponShotSound(weapon);
+		std::string weapon(Protocol::receiveStringBuffer(buffer));
+		this->player.getViewsList().removeScopeVisibility();
+		this->player.getMusicPlayer().playWeaponShotSound(weapon);
 	} else if (action == MOVING_OBJECT) {
 		char type = buffer.getNext();
 		int id = Protocol::receiveIntBuffer(buffer);

@@ -10,11 +10,12 @@ class WeaponPowerAccum {
 	private:
 		int actual_time;
 		int max_time;
+		int power;
 		Handlers& handlers;
-        sigc::connection my_connection;
+		sigc::connection my_connection;
 
-        /* Callback de start */
-        bool startCallBack();
+		/* Callback de start */
+		bool startCallBack();
 
 	public:
 		/* Constructor */

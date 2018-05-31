@@ -6,7 +6,7 @@
 /* Clase que representa al arma Granada santa */
 class HolyGrenade: public DistanceWeapon {
 	public:
-        /* Constructor */
+		/* Constructor */
 		HolyGrenade(int ammo);
 
 		/* Destructor */

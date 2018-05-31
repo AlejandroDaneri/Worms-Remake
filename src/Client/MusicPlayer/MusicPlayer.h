@@ -35,16 +35,19 @@ class MusicPlayer {
 		/* Reproduce el sonido de muerte de un worm */
 		void playDeathSound();
 
+		/* Reproduce el sonido de daño recibido */
+		void playDamageReceiveSound();
+
 		/* Reproduce el sonido de la explosion */
 		void playExplosionSound(const std::string& weapon);
 
 		/* Reproduce el sonido de arma disparada */
 		void playWeaponShotSound(const std::string& weapon);
 
-		/* Reproduce el sonido de arma disparada */
+		/* Reproduce el sonido de salto o rollback */
 		void playJumpSound(int dir);
 
-		/* Reproduce el sonido de arma disparada */
+		/* Reproduce el sonido de arma seleccionada */
 		void playSelectWeaponSound();
 
 		/* Reproduce el sonido de victoria */

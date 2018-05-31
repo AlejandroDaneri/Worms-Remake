@@ -24,7 +24,7 @@ class WeaponButton {
 		~WeaponButton();
 		//WeaponButton(WeaponButton&& other);
 
-        /* Devuelve el wiget del boton */
+		/* Devuelve el wiget del boton */
 		Gtk::Widget& getButton();
 
 		/* Setea el label del boton */
