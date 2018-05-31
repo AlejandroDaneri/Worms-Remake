@@ -34,7 +34,7 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 	this->weapon_damage = config[WEAPON_DAMAGE].as<std::map<std::string, int>>();
 	this->weapon_fragments = config[WEAPON_FRAGMENTS].as<std::map<std::string, int>>();
 
-	std::vector<std::vector<int>> worms_file = config_editor[WORMS_DATA].as<std::vector<std::vector<int>>>();
+	std::vector<std::vector<float>> worms_file = config_editor[WORMS_DATA].as<std::vector<std::vector<float>>>();
 	for (auto it = worms_file.begin(); it != worms_file.end(); ++it){
 		this->worms.push_back(b2Vec2((*it)[0], (*it)[1]));
 	}
