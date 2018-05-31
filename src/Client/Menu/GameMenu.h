@@ -25,7 +25,7 @@ class GameMenu: public MenuView{
 
 	public:
 		/* Constructor */
-		GameMenu(Gtk::Window& window, ClientProtocol& protocol, Glib::RefPtr<Gtk::Application> app);
+		GameMenu(Gtk::Window& window, ClientProtocol& protocol);
 
 		/* Destructor */
 		~GameMenu();

@@ -15,7 +15,7 @@ class JoinGameMenu: public SelectableListMenu{
 
 	public:
 		/* Constructor */
-		JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity, Glib::RefPtr<Gtk::Application> app);
+		JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity);
 
 		/* Destructor */
 		~JoinGameMenu();

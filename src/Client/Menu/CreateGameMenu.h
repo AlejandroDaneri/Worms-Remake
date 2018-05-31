@@ -19,7 +19,7 @@ class CreateGameMenu: public SelectableListMenu{
 
 	public:
         /* Constructor */
-		CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity, Glib::RefPtr<Gtk::Application> app);
+		CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity);
 
 		/* Destructor */
 		~CreateGameMenu();

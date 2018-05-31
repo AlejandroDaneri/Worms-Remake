@@ -12,7 +12,7 @@ int main(int argc, char* argv[]){
 
 	window.set_icon_from_file(ICON_PATH);
 
-	ServerMenu server_menu(window, app);
+	ServerMenu server_menu(window);
 
 	app->run(window);
 

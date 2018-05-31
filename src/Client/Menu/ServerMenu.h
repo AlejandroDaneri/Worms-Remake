@@ -24,7 +24,6 @@ class ServerMenu{
 		Gtk::Box* menu;
 		std::unique_ptr<MenuView> next_menu;
 		std::unique_ptr<ClientProtocol> protocol;
-		Glib::RefPtr<Gtk::Application> app;
 
 		/* Handler del boton de conexion */
 		void connectButtonPressed();
@@ -37,7 +36,7 @@ class ServerMenu{
 
 	public:
         /* Constructor */
-		ServerMenu(Gtk::Window& window, Glib::RefPtr<Gtk::Application> app);
+		ServerMenu(Gtk::Window& window);
 
 		/* Destructor */
 		~ServerMenu();

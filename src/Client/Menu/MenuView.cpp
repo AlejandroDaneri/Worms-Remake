@@ -1,7 +1,7 @@
 #include "MenuView.h"
 
-MenuView::MenuView(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, Glib::RefPtr<Gtk::Application> app):
-	window(window), protocol(protocol), first_menu(first_menu), app(app) {
+MenuView::MenuView(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol):
+	window(window), protocol(protocol), first_menu(first_menu) {
 
 	Glib::RefPtr<Gdk::Pixbuf> aux = Gdk::Pixbuf::create_from_file(BACKGROUND_MENU_IMAGE);
 	this->background.set(aux);
@@ -34,7 +34,7 @@ void MenuView::showError(const std::string& error){
 }
 
 void MenuView::quitButtonPressed() {
-	this->app->quit();
+	this->window.close();
 }
 
 void MenuView::addMenu(int width, int height) {

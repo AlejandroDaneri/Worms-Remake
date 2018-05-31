@@ -21,7 +21,6 @@ class MenuView{
 		std::unique_ptr<MenuView> next_menu;
 		MenuView& first_menu;
 		Gtk::Box* menu;
-		Glib::RefPtr<Gtk::Application> app;
 
 		Gtk::Layout world;
 		Gtk::Image background;
@@ -38,7 +37,7 @@ class MenuView{
 
 	public:
 		/* Constructor */
-		MenuView(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, Glib::RefPtr<Gtk::Application> app);
+		MenuView(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol);
 
 		/* Destructor */
 		virtual ~MenuView();
