@@ -114,6 +114,15 @@ void DataSender::sendWeaponShot(const std::string& weapon){
 	this->notifyAll();
 }
 
+void DataSender::sendMoveAction(char action){
+	if (action == MOVE_RIGHT || action == MOVE_LEFT){
+		return;
+	}
+	Buffer data = this->players[0].getProtocol().sendMoveAction(action);
+	this->sendBuffer(data);
+	this->notifyAll();
+}
+
 void DataSender::sendUpdateScope(int angle) {
 	Buffer data = this->players[0].getProtocol().sendUpdateScope(angle);
 	this->sendBuffer(data);

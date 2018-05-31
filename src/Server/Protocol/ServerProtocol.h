@@ -56,6 +56,9 @@ class ServerProtocol : public Protocol{
 		//Carga la informacion de arma disparada en el buffer
 		Buffer send_weapon_shot(const std::string& weapon);
 
+		//Carga la informacion de que el gusano salto
+		Buffer sendMoveAction(char action);
+
 		//Carga la informacion de cambio de angulo en el buffer
 		Buffer sendUpdateScope(int angle);
 

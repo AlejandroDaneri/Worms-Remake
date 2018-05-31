@@ -45,7 +45,7 @@ class MusicPlayer {
 		void playWeaponShotSound(const std::string& weapon);
 
 		/* Reproduce el sonido de salto o rollback */
-		void playJumpSound(int dir);
+		void playJumpSound(char action);
 
 		/* Reproduce el sonido de arma seleccionada */
 		void playSelectWeaponSound();

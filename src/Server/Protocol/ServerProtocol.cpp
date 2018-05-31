@@ -109,6 +109,7 @@ void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 		if (worm_action == MOVE_ACTION){
 			char move = buffer.getNext();
 			game.getCurrentWorm().move(move);
+			data_sender.sendMoveAction(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
 			std::string weapon(this->receiveStringBuffer(buffer));
 			game.getCurrentWorm().changeWeapon(weapon);
@@ -160,7 +161,6 @@ Buffer ServerProtocol::sendGirder(physical_object_ptr& object){
 
 Buffer ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
 	Buffer buffer;
-
 	this->sendStringBuffer(buffer, weapon_name);
 	this->sendIntBuffer(buffer, ammo);
 	return buffer;
@@ -168,36 +168,35 @@ Buffer ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
 
 Buffer ServerProtocol::send_weapon_changed(const std::string& weapon){
 	Buffer buffer;
-
 	buffer.setNext(CHANGE_WEAPON_ACTION);
 	this->sendStringBuffer(buffer, weapon);
-
     return buffer;
 }
 
 Buffer ServerProtocol::send_weapon_shot(const std::string& weapon){
 	Buffer buffer;
-
 	buffer.setNext(SHOOT_WEAPON_ACTION);
 	this->sendStringBuffer(buffer, weapon);
+    return buffer;
+}
 
+Buffer ServerProtocol::sendMoveAction(char action){
+	Buffer buffer;
+	buffer.setNext(MOVE_ACTION);
+	buffer.setNext(action);
     return buffer;
 }
 
 Buffer ServerProtocol::sendUpdateScope(int angle) {
     Buffer buffer;
-
     buffer.setNext(MOVE_SCOPE);
 	this->sendIntBuffer(buffer, angle);
-
     return buffer;
 }
 
 Buffer ServerProtocol::sendEndGame(const std::string& winner){
 	Buffer buffer;
-
     buffer.setNext(END_GAME);
 	this->sendStringBuffer(buffer, winner);
-
     return buffer;
 }

@@ -92,6 +92,9 @@ bool DataReceiver::analizeReceivedData(Buffer buffer){
 		} else if (type == WEAPON_TYPE){
 			this->player.getViewsList().removeWeapon(id);
 		}
+	} else if (action == MOVE_ACTION){
+		char movement = buffer.getNext();
+		this->player.getMusicPlayer().playJumpSound(movement);
 	}
 	return false;
 }
