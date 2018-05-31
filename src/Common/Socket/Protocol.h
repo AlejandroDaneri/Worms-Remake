@@ -60,17 +60,17 @@ class Protocol {
 
 
 		/* Agrega el valor al buffer cumpliendo las caracteristicas del protocolo */
-		void sendIntBuffer(Buffer &buffer, int32_t value);
+		static void sendIntBuffer(Buffer &buffer, int32_t value);
 
 		/* Retorna el valor del entero recibido almacenado en el buffer */
-		int receiveIntBuffer(Buffer &buffer);
+		static int receiveIntBuffer(Buffer &buffer);
 
 
 		/* Almacena el string en el buffer  */
-		void sendStringBuffer(Buffer &buffer, const std::string &string);
+		static void sendStringBuffer(Buffer &buffer, const std::string &string);
 
 		/* Retorna el string recibido que se encuentra almacenado en el buffer */
-		std::string receiveStringBuffer(Buffer &buffer);
+		static std::string receiveStringBuffer(Buffer &buffer);
 
 
 		/* Envia la longitud */
@@ -81,7 +81,6 @@ class Protocol {
 
 		/* Recibe la longitud y la retorna */
 		size_t receiveLength();
-
 
 		/* Cierra la comunicacion */
 		void stop();

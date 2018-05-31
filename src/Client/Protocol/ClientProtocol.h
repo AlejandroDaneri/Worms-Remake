@@ -48,9 +48,6 @@ class ClientProtocol: public Protocol {
 		/* Envia un mensaje de finalizacion de turno */
 		void sendEndTurn();
 
-		/* Recibe un mensaje que le indica que accion realizar */
-		void receive(Player& player);
-
 		/* Recibe el comienzo del juego */
 		void receiveStartGame();
 

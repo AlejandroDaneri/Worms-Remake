@@ -11,7 +11,7 @@ Buffer::~Buffer(){
 }
 
 Buffer::Buffer(const Buffer& other): buffer(new char[MAX_BUF_LEN]){
-	for (size_t i = 0; i < other.offset; i++){
+	for (size_t i = 0; i < MAX_BUF_LEN; i++){
 		this->buffer[i] = other.buffer[i];
 	}
 	this->offset = other.offset;
