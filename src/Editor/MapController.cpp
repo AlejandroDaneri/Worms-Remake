@@ -137,3 +137,7 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
 void MapController::changeBackground() {
     this->view->changeBackground();
 }
+
+const std::string MapController::getBackgroundName() const{
+    return view->getBackgroundName();
+}

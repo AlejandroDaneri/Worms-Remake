@@ -150,3 +150,7 @@ int MapView::select(const double &x, const double &y) {
     return collision ? actual_selected:-1;
 }
 
+const std::string MapView::getBackgroundName() const {
+    return "background"+std::to_string(actual_bg)+".png";
+}
+

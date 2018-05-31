@@ -46,6 +46,8 @@ public:
     void changeBackground();
 
     void changeModeSignal();
+
+    const std::string getBackgroundName() const;
 };
 
 

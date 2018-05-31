@@ -51,6 +51,8 @@ public:
     void move(const int& index, const double &x, const double &y);
 
     void redraw_map();
+
+    const std::string getBackgroundName() const;
 };
 
 

@@ -29,7 +29,9 @@ void FileBoxController::onSaveClicked() const {
         std::vector<std::vector<double>> worms;
         std::vector<std::vector<double>> girders;
 
+
         map_controller->getObjects(worms, girders);
+        std::string background= map_controller->getBackgroundName();
 
         std::vector<int> weapons_ammo;
         unsigned int life;
@@ -43,7 +45,7 @@ void FileBoxController::onSaveClicked() const {
             map_name->set_label(save_dialog->get_current_name());
             FileWriter file(filename);
             file.save(weapons_ammo, worms,
-                      girders, life);
+                      girders, life,background);
         }
         save_dialog->hide();
 
