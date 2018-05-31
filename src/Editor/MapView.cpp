@@ -20,7 +20,7 @@ MapView::MapView(BaseObjectType *cobject,
     ((Gtk::ScrolledWindow*)this->get_parent())->get_hadjustment()->set_value(width / 2);
 	((Gtk::ScrolledWindow*)this->get_parent())->get_vadjustment()->set_value(height);
 
-	for (size_t i = 1; i <= BACKGROUND_QUANTITY; i++){
+	for (size_t i = 0; i < BACKGROUND_QUANTITY; i++){
 		bg_paths.emplace_back(BACKGROUND_PATH + "background" + std::to_string(i) + ".jpg");
 	}
     setBackground(bg_paths[actual_bg]);
@@ -151,10 +151,11 @@ int MapView::select(const double &x, const double &y) {
 }
 
 const std::string MapView::getBackgroundName() const {
-    return "background"+std::to_string(actual_bg)+".png";
+    return "background"+std::to_string(actual_bg)+".jpg";
 }
 
 void MapView::loadBackground(const std::string &name) {
+    background.clear();
     setBackground(BACKGROUND_PATH+name);
 }
 
