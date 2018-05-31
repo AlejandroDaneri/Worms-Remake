@@ -5,13 +5,11 @@
 #include "Player.h"
 
 ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list, MusicPlayer& musicPlayer):
-	world(world), player(player), players_list(players_list), musicPlayer(musicPlayer) {
+	world(world), player(player), players_list(players_list), scope(world), musicPlayer(musicPlayer) {
 
-	this->scope.set(SCOPE_IMAGE);
-	this->world.addElement(this->scope, Position(0,500), 0, 0);
-	this->scope.hide();
 	this->current_worm_id = -1;
-	this->angle = 48;
+	this->weapon_focused = -1;
+	this->worm_focused = -1;
 }
 
 ViewsList::~ViewsList(){}
@@ -45,7 +43,6 @@ void ViewsList::removeWeapon(int id){
 	}
 }
 
-
 void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding){
 	auto it = this->worms.find(id);
 	Position pos(pos_x / UNIT_TO_SEND, pos_y / UNIT_TO_SEND);
@@ -64,7 +61,7 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, 
 				this->player.endTurnEarly();
 			}
 		}
-		it->second.updateData(life, dir, pos, colliding, id == this->current_worm_id);
+		it->second.updateData(life, dir, pos, colliding, id == this->current_worm_id, this->weapon_focused != -1);
 		this->checkMovingWorms();
 	}
 }
@@ -90,30 +87,23 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float p
 }
 
 void ViewsList::changeWeapon(const std::string& weapon_name) {
-	this->worms.at(this->current_worm_id).changeWeapon(weapon_name);
+	auto it = this->worms.find(this->current_worm_id);
+	it->second.changeWeapon(weapon_name);
 	if (WeaponsFactory().createWeapon(weapon_name, 1)->hasScope()) {
-		this->updateScope(angle);
+		this->scope.update(it->second);
 	}
 }
 
 void ViewsList::updateScope(int angle) {
-	if (this->worms.find(this->current_worm_id) == this->worms.end()) {
+	auto it = this->worms.find(this->current_worm_id);
+	if (it == this->worms.end()) {
 		return;
 	}
-	this->angle = angle;
-	WormView& worm = this->worms.at(this->current_worm_id);
-	const char dir = worm.getDir();
-	if (dir == -1)
-		angle = 180 - angle;
-	this->world.moveScope(this->scope, worm.getWidget(), angle);
-	this->scope.show();
-	worm.updateScope(this->angle);
+	this->scope.update(angle, it->second);
 }
 
 void ViewsList::removeScopeVisibility() {
-	if (this->scope.is_visible()) {
-		this->scope.hide();
-	}
+	this->scope.hide();
 }
 
 bool ViewsList::addGirderCallBack(size_t size, Position pos, int rotation){

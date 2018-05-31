@@ -33,7 +33,7 @@ class WormView: public Viewable {
 
 		/* Actualiza la imagen del worm a la correspondiente segun las
 		 * condiciones en las que se encuentra este */
-		void setNewImage(bool dir_changed, bool colliding, bool is_current_worm);
+		void setNewImage(bool dir_changed, bool colliding, bool is_current_worm, bool has_shot);
 
 		/* Cambia la imagen actual por la del arma actual */
 		void setWeaponImage();
@@ -59,7 +59,7 @@ class WormView: public Viewable {
 
 
 		/* Actualiza la posicion y vida del worm */
-		void updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm);
+		void updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm, bool has_shot);
 
 		/* Actualiza la imagen del arma con el angulo actual */
 		void updateScope(int angle);
