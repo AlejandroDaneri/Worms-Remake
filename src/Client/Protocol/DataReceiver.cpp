@@ -29,7 +29,7 @@ void DataReceiver::stop(){
 }
 
 void DataReceiver::initialConfig(){
-	this->protocol.receiveChar();
+	this->protocol.receiveStartGame();
 	this->protocol.receivePlayers(this->player.getScreen().getPlayersView());
 	this->protocol.receiveGirders(this->player.getViewsList());
 	this->protocol.receiveWeaponsAmmo(this->player.getWeapons());

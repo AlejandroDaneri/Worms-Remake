@@ -21,6 +21,7 @@ class Handlers{
 		bool has_shoot;
 		int current_angle;
 		int weapons_time;
+		bool enabled;
 
 		WeaponPowerAccum timer;
 
@@ -68,6 +69,9 @@ class Handlers{
 
 		/* Devuelve el angulo actual del scope */
 		int getCurrentAngle() const;
+
+		/* Devuelve true si estan habilitados los handlers */
+		bool isEnabled();
 };
 
 #endif

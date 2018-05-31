@@ -73,6 +73,12 @@ void ServerProtocol::send_weapon(physical_object_ptr& object, Buffer& buffer){
 	this->sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
 }
 
+Buffer ServerProtocol::sendStartGame(){
+	Buffer buffer;
+	buffer.setNext(START_GAME_ACTION);
+	return buffer;
+}
+
 Buffer ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_player_id, float wind){
 	Buffer buffer;
 	buffer.setNext(START_TURN);
@@ -119,16 +125,15 @@ void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 	}
 }
 
-void ServerProtocol::sendPlayerId(const Player& player){
+Buffer ServerProtocol::sendPlayerId(const Player& player){
 	Buffer buffer;
 
 	this->sendIntBuffer(buffer, player.getId());
 	this->sendStringBuffer(buffer, player.getName());
-
-    this->sendBuffer(buffer);
+	return buffer;
 }
 
-void ServerProtocol::sendGirder(physical_object_ptr& object){
+Buffer ServerProtocol::sendGirder(physical_object_ptr& object){
 	Girder* girder = (Girder*)object.get();
 
 	Buffer buffer;
@@ -138,17 +143,15 @@ void ServerProtocol::sendGirder(physical_object_ptr& object){
 	this->sendIntBuffer(buffer, position.x);
 	this->sendIntBuffer(buffer, position.y);
 	this->sendIntBuffer(buffer, girder->getRotation());
-
-    this->sendBuffer(buffer);
+	return buffer;
 }
 
-void ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
+Buffer ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
 	Buffer buffer;
 
 	this->sendStringBuffer(buffer, weapon_name);
 	this->sendIntBuffer(buffer, ammo);
-
-    this->sendBuffer(buffer);
+	return buffer;
 }
 
 Buffer ServerProtocol::send_weapon_changed(const std::string& weapon){

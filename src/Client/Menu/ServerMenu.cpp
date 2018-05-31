@@ -40,7 +40,7 @@ void ServerMenu::connectButtonPressed(){
 void ServerMenu::connectToServer(const std::string &host, const std::string &service){
 	try{
 		Socket socket(Socket::Client(host.c_str(), service.c_str()));
-		ClientProtocol protocol(std::move(socket));
+		ClientProtocol protocol(std::move(socket), this->window);
 		this->window.remove();
 		this->next_menu = std::unique_ptr<MenuView>(new GameMenu(this->window, std::move(protocol)));
 	} catch (const SocketException& e){

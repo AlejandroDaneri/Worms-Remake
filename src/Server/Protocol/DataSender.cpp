@@ -47,44 +47,39 @@ void DataSender::run(){
 }
 
 void DataSender::send_start_game(){
-	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		try{
-			player->getProtocol().sendChar(START_GAME_ACTION);
-		} catch(const SocketException& e){}
-	}
+	Buffer data = this->players[0].getProtocol().sendStartGame();
+	this->sendBuffer(data);
+	this->notifyAll();
 }
 
 void DataSender::send_players_id(){
-	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		try{
-            player->getProtocol().sendLength(this->players.size());
-			for (auto it = this->players.begin(); it != this->players.end(); ++it){
-				player->getProtocol().sendPlayerId(*it);
-			}
-		} catch(const SocketException& e){}
+	Buffer length = this->players[0].getProtocol().sendLengthBuffer(this->players.size());
+	this->sendBuffer(length);
+	for (auto it = this->players.begin(); it != this->players.end(); ++it){
+		Buffer data = this->players[0].getProtocol().sendPlayerId(*it);
+		this->sendBuffer(data);
 	}
+    this->notifyAll();
 }
 
 void DataSender::sendGirders(){
-	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		try{
-            player->getProtocol().sendLength(this->girders.size());
-			for (auto it = this->girders.begin(); it != this->girders.end(); ++it){
-				player->getProtocol().sendGirder(*it);
-			}
-		} catch(const SocketException& e){}
+	Buffer length = this->players[0].getProtocol().sendLengthBuffer(this->girders.size());
+	this->sendBuffer(length);
+	for (auto it = this->girders.begin(); it != this->girders.end(); ++it){
+		Buffer data = this->players[0].getProtocol().sendGirder(*it);
+		this->sendBuffer(data);
 	}
+    this->notifyAll();
 }
 
 void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
-	for (auto player = this->players.begin(); player != this->players.end(); ++player){
-		try{
-            player->getProtocol().sendLength(weapons.size());
-			for (auto it = weapons.begin(); it != weapons.end(); ++it){
-				player->getProtocol().sendWeaponAmmo(it->first, it->second);
-			}
-		} catch(const SocketException& e){}
+	Buffer length = this->players[0].getProtocol().sendLengthBuffer(weapons.size());
+	this->sendBuffer(length);
+	for (auto it = weapons.begin(); it != weapons.end(); ++it){
+		Buffer data = this->players[0].getProtocol().sendWeaponAmmo(it->first, it->second);
+		this->sendBuffer(data);
 	}
+    this->notifyAll();
 }
 
 void DataSender::send_start_turn(int worm_id, int player_id, float wind){

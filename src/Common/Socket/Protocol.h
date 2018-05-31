@@ -9,7 +9,7 @@
 
 #define CREATE_GAME_ACTION 0
 #define JOIN_GAME_ACTION 1
-#define START_GAME_ACTION 1
+#define START_GAME_ACTION 2
 
 #define MOVING_OBJECT 0
 #define DEAD_OBJECT 1
@@ -52,9 +52,8 @@ class Protocol {
 		/* Destructor */
 		~Protocol();
 
-
 		/* Envia el contenido del buffer */
-		void sendBuffer(Buffer &buffer);
+		virtual void sendBuffer(Buffer &buffer);
 
 		/* Recibe un mensaje, lo almacena en un buffer y lo retorna */
 		Buffer receiveBuffer();
@@ -76,6 +75,9 @@ class Protocol {
 
 		/* Envia la longitud */
 		void sendLength(uint32_t length);
+
+		/* Envia la longitud */
+		Buffer sendLengthBuffer(uint32_t length);
 
 		/* Recibe la longitud y la retorna */
 		size_t receiveLength();

@@ -6,6 +6,7 @@
 #include "Position.h"
 #include "ViewsList.h"
 #include "PlayersList.h"
+#include <gtkmm/window.h>
 
 class Player;
 class WeaponList;
@@ -13,9 +14,12 @@ class WeaponList;
 /* Clase que se encarga de enviar y recibir mensajes del socket
  * con un formato determinado */
 class ClientProtocol: public Protocol {
+	private:
+		Gtk::Window& window;
+
 	public:
 		/* Constructor */
-		ClientProtocol(Socket&& socket);
+		ClientProtocol(Socket&& socket, Gtk::Window& window);
 
 		/* Constructor por movimiento */
 		ClientProtocol(ClientProtocol&& other);
@@ -47,6 +51,9 @@ class ClientProtocol: public Protocol {
 		/* Recibe un mensaje que le indica que accion realizar */
 		void receive(Player& player);
 
+		/* Recibe el comienzo del juego */
+		void receiveStartGame();
+
 		/* Recibe los jugadores de la partida junto con su
 		 * id y su nombre */
 		void receivePlayers(PlayersList& players_list);
@@ -58,6 +65,9 @@ class ClientProtocol: public Protocol {
 		/* Recibe las armas presentes en el juego junto con
 		 * su municion */
 		void receiveWeaponsAmmo(WeaponList& weapon_list);
+
+		/* Envia el contenido del buffer */
+		void sendBuffer(Buffer &buffer) override;
 };
 
 #endif

@@ -57,6 +57,12 @@ void Protocol::sendLength(uint32_t length){
 	this->socket.sendData(&converted, sizeof(uint32_t));
 }
 
+Buffer Protocol::sendLengthBuffer(uint32_t length){
+	Buffer buffer;
+	this->sendIntBuffer(buffer, length);
+	return buffer;
+}
+
 size_t Protocol::receiveLength(){
 	int32_t length;
 	this->socket.receive(&length, sizeof(int32_t));
