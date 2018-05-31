@@ -14,7 +14,6 @@ Server::~Server(){
 		(*it)->stop();
 		(*it)->join();
 	}
-	std::cout << "[LOG] Servidor cerrado." << std::endl;
 }
 
 void Server::run(){

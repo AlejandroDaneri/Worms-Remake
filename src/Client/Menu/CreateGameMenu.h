@@ -18,7 +18,7 @@ class CreateGameMenu: public SelectableListMenu{
 
 	public:
         /* Constructor */
-		CreateGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity);
+		CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity);
 
 		/* Destructor */
 		~CreateGameMenu();

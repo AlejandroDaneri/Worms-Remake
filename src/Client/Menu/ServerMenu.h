@@ -21,6 +21,7 @@ class ServerMenu{
 		Gtk::Window& window;
 		Gtk::Box* menu;
 		std::unique_ptr<MenuView> next_menu;
+		std::unique_ptr<ClientProtocol> protocol;
 
 		/* Handler del boton de conexion */
 		void connectButtonPressed();

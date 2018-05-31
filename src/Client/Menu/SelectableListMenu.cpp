@@ -1,7 +1,7 @@
 #include "SelectableListMenu.h"
 
-SelectableListMenu::SelectableListMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name):
-	MenuView(window, std::move(protocol)), player_name(std::move(name)){}
+SelectableListMenu::SelectableListMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name):
+	MenuView(window, first_menu, protocol), player_name(std::move(name)){}
 
 SelectableListMenu::~SelectableListMenu(){}
 

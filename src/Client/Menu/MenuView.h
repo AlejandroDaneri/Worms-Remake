@@ -10,9 +10,10 @@
 class MenuView{
 	protected:
 		Gtk::Window& window;
-		ClientProtocol protocol;
+		ClientProtocol& protocol;
 		Gtk::Label* error;
 		std::unique_ptr<MenuView> next_menu;
+		MenuView& first_menu;
 		Gtk::Box* menu;
 
 		/* Muestra un mensaje de error */
@@ -20,7 +21,7 @@ class MenuView{
 
 	public:
 		/* Constructor */
-		MenuView(Gtk::Window& window, ClientProtocol&& protocol);
+		MenuView(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol);
 
 		/* Destructor */
 		virtual ~MenuView();

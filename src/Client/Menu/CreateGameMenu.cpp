@@ -4,8 +4,8 @@
 #include "Path.h"
 #include "GamePlayers.h"
 
-CreateGameMenu::CreateGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity):
-	SelectableListMenu(window, std::move(protocol), std::move(name)){
+CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity):
+	SelectableListMenu(window, first_menu, protocol, std::move(name)){
 
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_CreateGameMenu.glade");
 

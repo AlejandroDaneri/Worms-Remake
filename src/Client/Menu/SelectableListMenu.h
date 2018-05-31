@@ -38,7 +38,7 @@ class SelectableListMenu: public MenuView{
 
 	public:
 		/* Constructor */
-		SelectableListMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name);
+		SelectableListMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name);
 
 		/* Destructor */
 		~SelectableListMenu();

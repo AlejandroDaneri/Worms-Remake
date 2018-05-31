@@ -13,7 +13,7 @@ class JoinGameMenu: public SelectableListMenu{
 
 	public:
 		/* Constructor */
-		JoinGameMenu(Gtk::Window& window, ClientProtocol&& protocol, std::string&& name, int quantity);
+		JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity);
 
 		/* Destructor */
 		~JoinGameMenu();
