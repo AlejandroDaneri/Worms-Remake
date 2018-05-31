@@ -6,7 +6,7 @@
 #include "WeaponNames.h"
 
 const char SPACE = ' ';
-const int WEAPONS_TIME = 5;
+const int WEAPONS_DEFAULT_TIME = 5;
 const char ASCII_OFFSET = 48;
 const char ASCII_1 = 49;
 const char ASCII_5 = 53;
@@ -16,12 +16,17 @@ const int ANGLE_STEP = 6;
 
 Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons, WorldView& world):
 	player(player), view_list(view_list), weapons(weapons), world(world),
-	timer(*this, MAX_TIME) {}
+	timer(*this, MAX_TIME) {
+		this->has_shoot = false;
+		this->current_angle = DEFAULT_ANGLE;
+		this->weapons_time = WEAPONS_DEFAULT_TIME;
+		this->enabled = false;
+	}
 
 Handlers::~Handlers() {}
 
 void Handlers::enableAll(){
-	this->weapons_time = WEAPONS_TIME;
+	this->weapons_time = WEAPONS_DEFAULT_TIME;
 	this->current_angle = DEFAULT_ANGLE;
 	this->has_shoot = false;
 
@@ -30,6 +35,8 @@ void Handlers::enableAll(){
 	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this,
                                                                                                          &Handlers::completeKeyReleaseHandler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::onButtonPressEvent));
+
+	this->enabled = true;
 }
 
 void Handlers::disableAll() {
@@ -38,6 +45,8 @@ void Handlers::disableAll() {
 	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this,
                                                                                                          &Handlers::inactiveKeyHandler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::inactiveButtonHandler));
+
+	this->enabled = false;
 }
 
 void Handlers::timerStopped(int power){
@@ -65,16 +74,16 @@ bool Handlers::completeKeyPressHandler(GdkEventKey *key_event) {
         }
 		if (this->current_angle < MAX_WEAPON_ANGLE) {
 			this->current_angle += ANGLE_STEP;
-			this->player.getProtocol().updateScope(this->current_angle);
 		}
+		this->player.getProtocol().updateScope(this->current_angle);
 	} else if (key_event->keyval == GDK_KEY_Down) {
 		if (!this->weapons.getCurrentWeapon().hasScope()) {
 		    return true;
 		}
 		if (this->current_angle > MIN_WEAPON_ANGLE) {
 			this->current_angle -= ANGLE_STEP;
-			this->player.getProtocol().updateScope(this->current_angle);
 		}
+		this->player.getProtocol().updateScope(this->current_angle);
 	} else if (key_event->keyval >= ASCII_1 && key_event->keyval <= ASCII_5) {
 		this->weapons_time = key_event->keyval - ASCII_OFFSET;
 	} else if (key_event->keyval == SPACE && key_event->type == GDK_KEY_PRESS) {
@@ -150,4 +159,8 @@ bool Handlers::inactiveButtonHandler(GdkEventButton *event) {
 
 int Handlers::getCurrentAngle() const{
 	return this->current_angle;
+}
+
+bool Handlers::isEnabled(){
+	return this->enabled;
 }

@@ -43,6 +43,7 @@ void Player::endTurn() {
 
 void Player::endGame(const std::string& winner){
 	this->data_receiver.stop();
+	this->handlers.disableAll();
 	this->screen.getTurnLabel().setWinner(winner);
     this->view_list.setVictory();
 }
@@ -58,12 +59,9 @@ void Player::shootWeapon() {
 
 void Player::changeWeapon(std::string weapon) {
     this->weapons.changeWeapon(weapon);
-    this->protocol.sendChangeWeapon(weapon);
-	if (this->weapons.getCurrentWeapon().hasScope()) {
-		this->view_list.updateScope(this->handlers.getCurrentAngle());
-	} else {
-		this->view_list.removeScopeVisibility();
-	}
+    if (this->handlers.isEnabled()){
+    	this->protocol.sendChangeWeapon(weapon);
+    }
 }
 
 void Player::shoot(Position position) {
