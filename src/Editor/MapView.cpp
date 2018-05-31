@@ -131,7 +131,7 @@ void MapView::redraw_map() {
         remove(object);
         put(object,alloc.get_x(),alloc.get_y());
     }
-    
+    this->water.show(*this);
 }
 
 int MapView::select(const double &x, const double &y) {

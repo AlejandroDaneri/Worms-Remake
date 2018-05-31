@@ -6,6 +6,7 @@
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
 #include "MapController.h"
+#include "Water.h"
 
 
 class MapController;
@@ -17,6 +18,7 @@ private:
     MapController *controller;
     std::vector<std::string> bg_paths;
     std::vector<Gtk::Image> background;
+    Water water;
 
     int actual_bg;
     size_t actual_selected;
