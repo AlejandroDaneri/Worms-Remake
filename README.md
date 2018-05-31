@@ -13,6 +13,8 @@ cmake -DCMAKE_INSTALL_PREFIX=/home/mati/Desktop/worms .. && make install
 
 elegir la ruta (para instalar en otra carpeta, con el otro cmakelists.txt) 
 
+### Documentacion
+https://drive.google.com/drive/folders/1RUEW83Uai-po4p9HDC2TunAWcXvwODsv?usp=sharing
 
 ### Lista de tareas
 https://trello.com/b/77GBgtcb/worms
