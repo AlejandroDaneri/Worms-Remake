@@ -13,9 +13,9 @@ WorldView::WorldView() {
 	this->window.add(this->world);
 
 	/////////////////////////// Cambiar a que se reciba por parametro
-	std::string background_name(BACKGROUND_PATH + "background2.png");
+	std::string background_name(BACKGROUND_PATH + "background2.jpg");
 
-	/*Gtk::Image aux(background_name);
+	Gtk::Image aux(background_name);
 	int img_width = aux.get_pixbuf()->get_width();
 	int img_height = aux.get_pixbuf()->get_height();
 	for (size_t x = 0; x < map_width; x += img_width) {
@@ -25,7 +25,7 @@ WorldView::WorldView() {
 			this->world.put(background_image, x, y);
 			this->background.push_back(std::move(background_image));
 		}
-	}*/
+	}
 	this->water.show(this->world);
 
 	this->window.get_hadjustment()->set_value(map_width / 2);

@@ -2,6 +2,7 @@
 #include <gtkmm/adjustment.h>
 #include <glibmm/main.h>
 
+#define OUT_OF_WINDOW 2
 #define SPACE_TO_SCROLL 20
 #define SCROLL_INCREMENT 10
 
@@ -22,10 +23,10 @@ bool ScrollHandler::scroll(){
 	int window_width = window.get_hadjustment()->get_page_size();
 	int window_height = window.get_vadjustment()->get_page_size();
 
-	if (last_mouse_position.getX() < 1 ||
-		last_mouse_position.getX() > window_width - 1 ||
-		last_mouse_position.getY() < 1 ||
-		last_mouse_position.getY() > window_height - 1){
+	if (last_mouse_position.getX() < OUT_OF_WINDOW ||
+		last_mouse_position.getX() > window_width - OUT_OF_WINDOW ||
+		last_mouse_position.getY() < OUT_OF_WINDOW ||
+		last_mouse_position.getY() > window_height - OUT_OF_WINDOW){
 		//El mouse esta fuera de la pantalla
 		return true;
 	}
