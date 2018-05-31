@@ -36,7 +36,7 @@ void FileBoxController::onSaveClicked() const {
         weapons_controller.getWeapons(weapons_ammo, life);
 
         save_dialog->set_current_folder(MAPS_PATH);
-        save_dialog->set_current_name("Sin titulo.yaml");
+        save_dialog->set_current_name(NEW_FILE_NAME);
         int result = save_dialog->run();
         if (result==Gtk::RESPONSE_OK){
             std::string filename = save_dialog->get_filename(); //revisar extension archivo
@@ -70,11 +70,11 @@ void FileBoxController::onLoadClicked() const {
         map_controller->loadObjects(worms, girders);
     }
     open_dialog->hide();
-
 }
 
 
 void FileBoxController::onNewClicked() const {
+    map_name->set_label(NEW_FILE_NAME);
     weapons_controller.on_reset_clicked();
     map_controller->clean();
 }

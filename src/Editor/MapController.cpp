@@ -11,8 +11,9 @@
 
 MapController::MapController(Map model,
                              const Glib::RefPtr<Gtk::Builder> &builder)
-        : model(std::move(
-        model)), actual_item_selected(1), actual_mode(ADD_MODE_ID) {
+        : model(std::move(model)), actual_item_selected(1),
+          actual_mode(ADD_MODE_ID)
+{
     builder->get_widget_derived("map", view);
     builder->get_widget_derived("toolbox", toolBox);
     view->linkController(this);
