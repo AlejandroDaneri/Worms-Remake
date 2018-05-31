@@ -26,7 +26,7 @@ void MenuView::showFatalError(const std::string& error){
 void MenuView::showErrorAndRestart(const std::string& error){
 	this->window.remove();
 	this->first_menu.showError(error);
-	this->window.add(*this->first_menu.menu);
+	this->window.add(this->first_menu.world);
 }
 
 void MenuView::showError(const std::string& error){
