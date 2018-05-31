@@ -3,14 +3,15 @@
 #include <iostream>
 #include "FileReader.h"
 
-FileReader::FileReader(const std::string &filename) : file(filename,
-                                                           std::fstream::in) {}
+FileReader::FileReader(const std::string &filename)
+        : file(filename, std::fstream::in),
+          filename(filename) {}
 
 void FileReader::read(std::vector<std::vector<double>> &worms,
                       std::vector<std::vector<double>> &girders,
                       std::vector<int> &weps_ammo,
                       unsigned int &worms_life) {
-    YAML::Node config = YAML::LoadFile("config_editor.yaml");
+    YAML::Node config = YAML::LoadFile(filename);
 
     worms_life = config[WORMS_LIFE].as<unsigned int>();
 
