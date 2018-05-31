@@ -19,12 +19,7 @@ JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProt
 
 	builder->get_widget("join_game_menu", this->menu);
 
-	Glib::RefPtr<Gdk::Screen> screen = this->window.get_screen();
-
-	this->world.put(*this->menu, screen->get_width() / 2 - MENU_WIDTH/2, screen->get_height() / 2 - MENU_HEIGHT/2);
-
-	this->window.add(this->world);
-	this->window.show_all();
+	this->addMenu(MENU_WIDTH/2, MENU_HEIGHT/2);
 }
 
 JoinGameMenu::~JoinGameMenu(){}

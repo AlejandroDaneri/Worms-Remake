@@ -31,6 +31,8 @@ class MenuView{
 		/* Muestra un mensaje de error y reinicia */
 		void showErrorAndRestart(const std::string& error);
 
+		void addMenu(int width, int height);
+
 	public:
 		/* Constructor */
 		MenuView(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol);

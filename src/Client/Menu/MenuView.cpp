@@ -32,3 +32,10 @@ void MenuView::showErrorAndRestart(const std::string& error){
 void MenuView::showError(const std::string& error){
 	this->error->set_label(error);
 }
+
+void MenuView::addMenu(int width, int height) {
+	Glib::RefPtr<Gdk::Screen> screen = this->window.get_screen();
+	this->world.put(*this->menu, screen->get_width() / 2 - width, screen->get_height() / 2 - height);
+	this->window.add(this->world);
+	this->window.show_all();
+}

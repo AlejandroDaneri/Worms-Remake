@@ -14,16 +14,8 @@ GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol): MenuView(wind
 	builder->get_widget("player_name", this->player_name);
 
 	builder->get_widget("game_menu", this->menu);
-	//this->window.add(*this->menu);
-	//this->menu->show();
 
-	Glib::RefPtr<Gdk::Screen> screen = this->window.get_screen();
-
-	this->world.put(*this->menu, screen->get_width() / 2 - MENU_WIDTH/2, screen->get_height() / 2 - MENU_HEIGHT/2);
-
-	this->window.add(this->world);
-	this->window.show_all();
-
+	this->addMenu(MENU_WIDTH/2, MENU_HEIGHT/2);
 
 	Gtk::Button *create_game, *join_game, *quit_game;
 
