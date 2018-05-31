@@ -18,7 +18,7 @@ class Turn{
 		~Turn();
 
 		//Agrega un nuevo jugador
-		void addPlayer(Player&& player);
+		bool addPlayer(Player& player);
 
 		//Devuelve true si el jugador se puede unir a la partida
 		bool playerCanJoin(const std::string& player_name);

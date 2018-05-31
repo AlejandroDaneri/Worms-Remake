@@ -3,18 +3,21 @@
 #include <iostream>
 
 ClientHandler::ClientHandler(Socket&& client, GamesList& games):
-	client(std::move(client)), games(games){}
+	client(std::move(ServerProtocol(std::move(client)))), games(games), connected(false){}
 
 ClientHandler::~ClientHandler(){}
 
 void ClientHandler::run(){
 	try{
-		char action = this->client.receiveChar();
-		std::string player_name = this->client.receiveString();
-		if (action == CREATE_GAME_ACTION){
-			this->createGame(player_name);
-		} else if (action == JOIN_GAME_ACTION){
-			this->joinGame(player_name);
+		while(!this->connected){
+			char action = this->client.getProtocol().receiveChar();
+			std::string player_name = this->client.getProtocol().receiveString();
+			this->client.setName(player_name);
+			if (action == CREATE_GAME_ACTION){
+				this->createGame();
+			} else if (action == JOIN_GAME_ACTION){
+				this->joinGame();
+			}
 		}
 		
 	} catch(const std::exception& e){
@@ -26,42 +29,57 @@ void ClientHandler::run(){
 }
 
 void ClientHandler::stop(){
-	this->client.stop();
+	this->client.getProtocol().stop();
 }
 
-void ClientHandler::createGame(const std::string& player_name){
+void ClientHandler::createGame(){
 	maps_list_t maps_list = MapsList::getAllMaps();
 
 	size_t size = maps_list.size();
-    this->client.sendLength(size);
+    this->client.getProtocol().sendLength(size);
 
 	for (size_t i = 0; i < size; i++){
-		this->client.sendString(maps_list[i]);
+		this->client.getProtocol().sendString(maps_list[i]);
 	}
 
-	std::string map = this->client.receiveString();
-	std::string game_name = this->client.receiveString();
-	int max_players = this->client.receiveLength();
+	if (size == 0){
+		return;
+	}
 
-	Player player(std::move(this->client), player_name);
+	std::string map = this->client.getProtocol().receiveString();
+	std::string game_name = this->client.getProtocol().receiveString();
+	int max_players = this->client.getProtocol().receiveLength();
 
-	this->games.addGame(game_name, map, max_players, std::move(player));
+	bool result = this->games.addGame(game_name, map, max_players, this->client);
+	if (!result){
+		this->client.getProtocol().sendChar(false);
+	} else {
+		this->connected = true;
+	}
 
 }
 
-void ClientHandler::joinGame(const std::string& player_name){
-	games_list_t games_list = this->games.getJoinableGames(player_name);
+void ClientHandler::joinGame(){
+	games_list_t games_list = this->games.getJoinableGames(this->client.getName());
 
 	size_t size = games_list.size();
-    this->client.sendLength(size);
+    this->client.getProtocol().sendLength(size);
 
 	for (size_t i = 0; i < size; i++){
-		this->client.sendString(games_list[i]);
+		this->client.getProtocol().sendString(games_list[i]);
 	}
 
-	std::string game_name = this->client.receiveString();
+	if (size == 0){
+		return;
+	}
 
-	Player player(std::move(this->client), player_name);
+	std::string game_name = this->client.getProtocol().receiveString();
 
-	this->games.addPlayer(game_name, std::move(player));
+	bool result = this->games.addPlayer(game_name, this->client);
+
+	if (!result){
+		this->client.getProtocol().sendChar(false);
+	} else {
+		this->connected = true;
+	}
 }

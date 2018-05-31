@@ -1,7 +1,7 @@
 #include "Player.h"
 
-Player::Player(ServerProtocol&& protocol, const std::string& name): protocol(std::move(protocol)),
-	name(name), id(-1), connected(true){}
+Player::Player(ServerProtocol&& protocol): protocol(std::move(protocol)),
+	id(-1), connected(true){}
 
 Player::Player(Player&& other): 
 	protocol(std::move(other.protocol)), name(std::move(other.name)),
@@ -41,6 +41,10 @@ bool Player::isDead(){
 
 ServerProtocol& Player::getProtocol(){
 	return this->protocol;
+}
+
+void Player::setName(const std::string& name){
+	this->name = name;
 }
 
 const std::string& Player::getName() const{

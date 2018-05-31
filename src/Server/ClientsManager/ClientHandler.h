@@ -4,19 +4,20 @@
 #include "Socket.h"
 #include "Server.h"
 #include "Thread.h"
-#include "ServerProtocol.h"
+#include "Player.h"
 #include "GamesList.h"
 
 class ClientHandler: public Thread{
 	private:
-		ServerProtocol client;
+		Player client;
 		GamesList& games;
+		bool connected;
 
 		/* Crea una partida nueva */
-		void createGame(const std::string& player_name);
+		void createGame();
 
 		/* Agrega un jugador a una partida */
-		void joinGame(const std::string& player_name);
+		void joinGame();
 
 	public:
 		/* Constructor */
