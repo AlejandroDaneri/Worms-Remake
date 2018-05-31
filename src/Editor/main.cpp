@@ -5,6 +5,7 @@
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/window.h>
 #include "Editor.h"
+#include "Path.h"
 
 int main() {
     Glib::RefPtr<Gtk::Application> app = Gtk::Application::create();
@@ -28,6 +29,8 @@ int main() {
     Editor *mainWindow = nullptr;
     refBuilder->get_widget_derived("main_window", mainWindow);
     if (mainWindow) {
+        mainWindow->set_title(EDITOR_WINDOW_NAME);
+        mainWindow->set_icon_from_file(ICON_PATH);
         app->run(*mainWindow);
         delete mainWindow;
     }
