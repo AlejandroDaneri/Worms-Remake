@@ -6,11 +6,12 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/hvbox.h>
 #include <gtkmm/button.h>
+#include <gtkmm/grid.h>
 #include "FileBoxController.h"
 
 class FileBoxController;
 
-class FileBoxView : public Gtk::HBox {
+class FileBoxView : public Gtk::Grid {
 private:
     Gtk::Button *save;
     Gtk::Button *load;
