@@ -27,20 +27,21 @@ void ViewsList::removeWorm(int id){
 		it->second.removeFromWorld();
 		this->worms.erase(it);
 		this->musicPlayer.playDeathSound();
+		this->checkMovingWorms();
 	}
 }
 
 void ViewsList::removeWeapon(int id){
 	auto it = this->weapons.find(id);
 	if (it != this->weapons.end()) {
-		if (this->weapon_focused == id){
-			this->weapon_focused = -1;
-		}
-
 		this->musicPlayer.playExplosionSound(it->second.getName());
 		ExplosionView explosion(std::move(it->second));
 		this->animation.addAndStart(std::move(explosion));
 		this->weapons.erase(it);
+
+		if (this->weapon_focused == id){
+			this->checkMovingWorms();
+		}
 	}
 }
 
@@ -64,6 +65,7 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, 
 			}
 		}
 		it->second.updateData(life, dir, pos, colliding, id == this->current_worm_id);
+		this->checkMovingWorms();
 	}
 }
 
@@ -127,6 +129,7 @@ void ViewsList::addGirder(size_t size, float pos_x, float pos_y, int rotation){
 void ViewsList::setCurrentWorm(int id){
 	this->removeWormFocus();
 	this->current_worm_id = id;
+	this->worm_focused = id;
 	this->weapon_focused = -1;
 	WormView& worm = this->worms.at(id);
 	this->world.setFocus(worm.getWidget());
@@ -134,11 +137,31 @@ void ViewsList::setCurrentWorm(int id){
 }
 
 void ViewsList::removeWormFocus(){
-	auto it = this->worms.find(this->current_worm_id);
+	auto it = this->worms.find(this->worm_focused);
 	if (it != this->worms.end()){
 		it->second.setFocus(false);
 		it->second.removeWeaponImage();
 	}
+	this->worm_focused = -1;
+}
+
+void ViewsList::checkMovingWorms(){
+	if (this->weapon_focused == -1){
+		return;
+	}
+
+	auto it = this->worms.find(this->worm_focused);
+	if (it == this->worms.end() || !it->second.isMoving()){
+		this->removeWormFocus();
+		for (auto it = this->worms.begin(); it != this->worms.end(); ++it){
+			if (it->second.isMoving()){
+				this->worm_focused = it->first;
+				it->second.setFocus(true);
+				this->world.setFocus(it->second.getWidget());
+			}
+		}
+	}
+
 }
 
 void ViewsList::setVictory() {

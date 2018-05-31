@@ -25,6 +25,7 @@ class ViewsList{
 		Gtk::Image scope;
 		int current_worm_id;
 		int weapon_focused;
+		int worm_focused;
 		ExplosionViewList animation;
 		MusicPlayer& musicPlayer;
 		int angle;
@@ -76,6 +77,10 @@ class ViewsList{
 		/* Actualiza la imagen de los worms ganadores por la animacion
 		 * de los worms festejando */
 		void setVictory();
+
+		/* Chequea si el gusano actual se esta moviendo, caso contario
+		le da el focus a otro */
+		void checkMovingWorms();
 };
 
 

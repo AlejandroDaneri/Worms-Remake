@@ -37,10 +37,10 @@ void WormView::updateData(int new_life, char new_dir, const Position& new_pos, b
 	}
 	this->life = new_life;
 	bool dir_changed = this->dir != new_dir;
-	bool moved = !(this->last_position == new_pos);
+	this->is_moving = !(this->last_position == new_pos);
 	this->dir = new_dir;
 	this->last_position = new_pos;
-	this->setNewImage(dir_changed, moved, colliding, is_current_worm);
+	this->setNewImage(dir_changed, colliding, is_current_worm);
 	this->move(new_pos, worm_size, worm_size + 0.5);
 }
 
@@ -56,9 +56,9 @@ void WormView::changeWeapon(const std::string& weapon) {
     this->setWeaponImage();
 }
 
-void WormView::setNewImage(bool dir_changed, bool moved, bool colliding, bool is_current_worm){
+void WormView::setNewImage(bool dir_changed, bool colliding, bool is_current_worm){
 	if (is_current_worm){
-		if (!moved){
+		if (!this->is_moving){
             this->setWeaponImage();
 		} else if (colliding){
 			this->setMovementImage(dir_changed);
@@ -120,6 +120,10 @@ char WormView::getDir() const {
 
 int WormView::getPlayerId() const{
 	return this->player_id;
+}
+
+bool WormView::isMoving() const{
+	return this->is_moving;
 }
 
 void WormView::setVictory() {
