@@ -16,8 +16,6 @@ class MusicPlayer {
         void check(int channel);
         void addEffect(const std::string& audio);
 
-        bool addEffectCallBack(std::string audio);
-
 	public:
 		/* Constructor */
 		MusicPlayer();

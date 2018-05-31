@@ -11,8 +11,6 @@ class WindView{
 		Gtk::Label velocity;
 		Gtk::Image direction;
 		
-		bool updateCallback(float wind);
-		
 	public:
 		WindView();
 		~WindView();

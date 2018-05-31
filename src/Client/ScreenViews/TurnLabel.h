@@ -12,10 +12,6 @@ class TurnLabel{
 		Gtk::Label time;
 		Gtk::HBox label;
 
-		bool setLabelCallback(std::string text);
-
-		bool setWinnerCallback(std::string winner);
-
 	public:
 	    /* Constructor */
 		TurnLabel();
