@@ -30,6 +30,7 @@ private:
     Gtk::Button *turncw;
     Gtk::Button *change_bg;
     Gtk::ToggleButton *mode;
+    Gtk::Image* selected;
     bool processing;
 
 public:
@@ -47,6 +48,10 @@ public:
     void changeModeSignal();
 
     void leaveConsistent();
+
+    void showSelected(int id);
+
+    void hideSelected();
 };
 
 

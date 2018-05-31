@@ -64,13 +64,12 @@ void MapView::add(const unsigned int &id, const double &x, const double &y,
     double x_bound = x - width / 2;
     double y_bound = y - height / 2;
 
-    //if(isIsolated(x_bound,y_bound,id)){ //verifica que no haya colisiones
     put(new_image, x_bound, y_bound);
     new_image.show();
     objects.push_back(std::move(new_image));
     if (angle > 0)
         turn(id, angle, objects.size()-1);
-    //}
+
 
 }
 
@@ -106,9 +105,11 @@ void MapView::linkController(MapController *pController) {
 }
 
 void MapView::changeBackground() {
+
     background.clear();
     actual_bg = (actual_bg + 1) % bg_paths.size();
     setBackground(bg_paths[actual_bg]);
+
 }
 
 void MapView::setBackground(const std::string &name) {
@@ -147,28 +148,5 @@ int MapView::select(const double &x, const double &y) {
         }
     }
     return collision ? actual_selected:-1;
-}
-
-bool
-MapView::isIsolated(const double &x, double y, const unsigned int &id) {
-    int width, height;
-    if (id == 1) {
-        height = width = WORM_IMAGE_WIDTH;
-    } else {
-        y += 78; // espacio en blanco que tiene la imagen, 0 grados
-        height = girder_height * SCALE_FACTOR;
-        width = 180 * ((id - 1) / 2); //180 es el largo
-    }
-    std::cout << x << "  " << y << std::endl;
-    Gdk::Rectangle new_object(x, y, width, height);
-    bool isolated = true;
-    for (size_t i = 0; (i < objects.size()) && (isolated); i++) {
-        const Gtk::Allocation &asd = objects.back().get_allocation();
-        int h = asd.get_height();
-        int w = asd.get_width();
-        if (h > w);
-        isolated = !objects[i].intersect(new_object);
-    }
-    return isolated;
 }
 

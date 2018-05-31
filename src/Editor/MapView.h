@@ -5,6 +5,8 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
+#include <gtkmm/spinner.h>
+#include <gtkmm/statusbar.h>
 #include "MapController.h"
 #include "Water.h"
 
@@ -20,10 +22,10 @@ private:
     std::vector<Gtk::Image> background;
     Water water;
 
+
     int actual_bg;
     size_t actual_selected;
 
-    //bool isIsolated(const double &x, const double &y, const unsigned int &id);
     void setBackground(const std::string &name);
 
 public:
@@ -45,8 +47,6 @@ public:
     void changeBackground();
 
     int select(const double &x, const double &y);
-
-    bool isIsolated(const double &x, double y, const unsigned int &id);
 
     void move(const int& index, const double &x, const double &y);
 

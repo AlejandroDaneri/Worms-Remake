@@ -43,6 +43,7 @@ void MapController::moveSignal() {
 
 void MapController::changeModeSignal() {
     this->actual_mode = (actual_mode==ADD_MODE_ID? SELECT_MODE_ID:ADD_MODE_ID);
+    if (actual_mode==ADD_MODE_ID) toolBox->hideSelected();
 }
 
 void MapController::turnCCWSignal() {
@@ -72,7 +73,13 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
                                                     event_button->y);
         if (actual_object_selected > -1) {
             toolBox->enableMovingItems();
-        } else toolBox->disableMovingItems();
+            toolBox->showSelected(actual_item_selected);
+        } else {
+            toolBox->disableMovingItems();
+            toolBox->showSelected(actual_object_selected);
+        }
+
+
         actual_mode = SELECT_MODE_ID; //cambio de estado del toolbox llama a add mode
     } else {
         this->model.add(actual_item_selected, event_button->x, event_button->y);
@@ -90,7 +97,7 @@ void MapController::getObjects(std::vector<std::vector<double>> &worms,
         throw InvalidMapError("El mapa actual no contiene vigas");
     }
 
-    ViewPositionTransformer transformer(*view); ////revisar
+    ViewPositionTransformer transformer(*view);
     for (std::vector<double> &worm : worms){
         Position position(worm[0],worm[1]);
         Position new_pos = transformer.transformToPosition(position);

@@ -1,7 +1,7 @@
 
 #include <gtkmm/builder.h>
+#include <Path.h>
 #include "ToolBoxView.h"
-
 
 ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
@@ -17,6 +17,7 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
     builder->get_widget("btn_turn_cw", turncw);
     builder->get_widget("btn_bg", change_bg);
     builder->get_widget("btn_mode", mode);
+    builder->get_widget("img_selected",selected);
 
     worm->signal_clicked().connect(sigc::bind<int>
                                            (sigc::mem_fun(*this,
@@ -111,4 +112,29 @@ void ToolBoxView::leaveConsistent() {
         worm->set_active(true);
         map_controller->addModeSignal(WORM_BUTTON_ID);
     }
+}
+
+void ToolBoxView::showSelected(int id) {
+    switch (id){
+        case WORM_BUTTON_ID:
+            selected->set(IMAGES_PATH+"/right_worm.png");
+            selected->show();
+            break;
+        case GIRDER_3_BUTTON_ID:
+            selected->set(IMAGES_PATH+"Girder/girder_3_selected.png");
+            selected->show();
+            break;
+        case GIRDER_6_BUTTON_ID:
+            selected->set(IMAGES_PATH+"Girder/girder_6_selected.png");
+            selected->show();
+            break;
+        default:
+            hideSelected();
+            break;
+    }
+
+}
+
+void ToolBoxView::hideSelected() {
+    selected->hide();
 }
