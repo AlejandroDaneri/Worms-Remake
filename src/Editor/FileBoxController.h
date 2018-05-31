@@ -14,6 +14,7 @@ private:
     std::shared_ptr<MapController> map_controller;
     Gtk::FileChooserDialog* save_dialog;
     Gtk::FileChooserDialog* open_dialog;
+    Gtk::Label* map_name;
 
 public:
     FileBoxController(WeaponsAndLifeController &wep_controller,

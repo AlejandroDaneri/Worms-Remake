@@ -12,6 +12,7 @@ FileBoxController::FileBoxController(WeaponsAndLifeController &wep_controller,
           map_controller(std::move(map_controller))
 {
     builder->get_widget("save_dialog",save_dialog);
+    builder->get_widget("map_name",map_name);
 
     save_dialog->add_button("Cancelar", Gtk::RESPONSE_CANCEL);
     save_dialog->add_button("Guardar", Gtk::RESPONSE_OK);
@@ -35,9 +36,11 @@ void FileBoxController::onSaveClicked() const {
         weapons_controller.getWeapons(weapons_ammo, life);
 
         save_dialog->set_current_folder(MAPS_PATH);
+        save_dialog->set_current_name("Sin titulo.yaml");
         int result = save_dialog->run();
         if (result==Gtk::RESPONSE_OK){
             std::string filename = save_dialog->get_filename(); //revisar extension archivo
+            map_name->set_label(save_dialog->get_current_name());
             FileWriter file(filename);
             file.save(weapons_ammo, worms,
                       girders, life);
@@ -54,6 +57,8 @@ void FileBoxController::onLoadClicked() const {
     int result = open_dialog->run();
     if (result==Gtk::RESPONSE_OK) {
         std::string filename = open_dialog->get_filename();
+        map_name->set_label(open_dialog->get_current_name());
+
         FileReader file(filename);
         std::vector<std::vector<double>> worms;
         std::vector<std::vector<double>> girders;
