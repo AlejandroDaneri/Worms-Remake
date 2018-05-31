@@ -29,7 +29,6 @@ class GirderView: public Viewable{
 		/* Constructor por movimiento */
 		GirderView(GirderView&& other);
 
-
 		/* Devuelve el contenedor de la viga */
 		Gtk::Widget& getWidget() override;
 };

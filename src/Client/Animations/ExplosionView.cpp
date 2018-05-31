@@ -28,7 +28,7 @@ bool ExplosionView::startCallBack() {
 	image.set(*(this->iter));
 	this->iter++;
 	if (this->iter == this->animation_vector.end()) {
-        this->bulletView.explode();
+        this->bulletView.removeFromWorld();
         return false;
     }
     return true;

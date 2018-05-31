@@ -32,15 +32,7 @@ class ViewsList{
         void removeWormFocus();
 
         /* CallBacks */
-        bool removeWormCallBack(int id);
-        bool removeWeaponCallBack(int id);
-        bool updateWormDataCallBack(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding);
-        bool updateWeaponDataCallBack(int id, const std::string& weapon_name, float pos_x, float pos_y);
-        bool updateScopeCallBack(int angle);
-        bool removeScopeVisibilityCallBack();
         bool addGirderCallBack(size_t size, int pos_x, int pos_y, int rotation);
-        bool setCurrentWormCallBack(int id);
-        bool setVictoryCallBack();
 
 	public:
         /* Constructor */

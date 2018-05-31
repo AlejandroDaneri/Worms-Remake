@@ -27,9 +27,6 @@ class BulletView: public Viewable{
 		/* Actualiza la posicion de la bala en la vista */
 		void updateData(const Position& new_pos);
 
-		/* Remueve la bala de la vista */
-		void explode();
-
 		/* Devuelve el contenedor de la bala */
 		Gtk::Widget& getWidget() override;
 

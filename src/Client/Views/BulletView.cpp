@@ -20,10 +20,6 @@ void BulletView::updateData(const Position& new_pos){
 	this->move(new_pos, weapon_size, weapon_size);
 }
 
-void BulletView::explode(){
-	this->removeFromWorld();
-}
-
 Gtk::Widget& BulletView::getWidget(){
 	return this->image;
 }
