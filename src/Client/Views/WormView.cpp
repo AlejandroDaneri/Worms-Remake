@@ -7,7 +7,7 @@
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id):
 	Viewable(worldView), player_id(player_id), life(life), dir(dir), is_moving(false),
 	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)), label(life, colors[player_id]),
-	angle(48) {
+	angle(DEFAULT_ANGLE) {
 	    this->walk_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + "walk.png");
 	    int width = this->walk_image->get_width();
 	    int height = this->walk_image->get_height();

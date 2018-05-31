@@ -11,7 +11,6 @@ const char ASCII_OFFSET = 48;
 const char ASCII_1 = 49;
 const char ASCII_5 = 53;
 const int MAX_TIME = 3000;
-const int DEFAULT_ANGLE = 48;
 const int ANGLE_STEP = 6;
 
 Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons, WorldView& world):

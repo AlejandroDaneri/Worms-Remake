@@ -38,4 +38,6 @@ const int MAX_WEAPON_ANGLE = 90;
 
 const int MIN_WEAPON_ANGLE = -90;
 
+const int DEFAULT_ANGLE = 48;
+
 #endif

@@ -1,7 +1,6 @@
 #include "Scope.h"
 #include "Path.h"
-
-const int DEFAULT_ANGLE = 48;
+#include "WeaponNames.h"
 
 Scope::Scope(WorldView& world): world(world){
 	this->in_world = false;
