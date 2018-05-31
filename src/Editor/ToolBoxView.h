@@ -54,6 +54,8 @@ public:
     void hideSelected();
 
     void closeSelectionMode();
+
+    void setMoveMode();
 };
 
 

@@ -28,7 +28,7 @@ void MapController::addModeSignal(unsigned int id) {
 void MapController::erase() {
     model.erase(actual_object_selected);
     view->erase(actual_object_selected);
-    changeModeSignal();
+    toolBox->hideSelected();
     toolBox->disableMovingItems();
 }
 
@@ -69,6 +69,7 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
                          event_button->y);
         this->view->move(actual_object_selected, event_button->x,
                          event_button->y);
+        actual_mode = SELECT_MODE_ID;
     } else if (actual_mode == SELECT_MODE_ID) {
         this->actual_object_selected = view->select(event_button->x,
                                                     event_button->y);

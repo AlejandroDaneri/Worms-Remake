@@ -143,3 +143,4 @@ void ToolBoxView::closeSelectionMode() {
     hideSelected();
     mode->set_active(false);
 }
+
