@@ -8,7 +8,7 @@
 #include "yaml-cpp/yaml.h"
 #include "MapView.h"
 
-#define BACKGROUND_QUANTITY 2
+#define BACKGROUND_QUANTITY 8
 
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
