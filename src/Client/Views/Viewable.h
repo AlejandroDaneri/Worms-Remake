@@ -16,9 +16,6 @@ class Viewable{
         /* Agrega al objeto visual a la vista */
 		void addToWorld(const Position& pos, float width, float height);
 
-		/* Remueve al objeto visual de la vista */
-		void removeFromWorld();
-
 		/* Mueve al objeto visual a la posicion especificada */
 		void move(const Position& pos, float width, float height);
 
@@ -34,6 +31,9 @@ class Viewable{
 
 		/* Devuelve el contenedor del objeto visual */
 		virtual Gtk::Widget& getWidget() = 0;
+
+		/* Remueve al objeto visual de la vista */
+		void removeFromWorld();
 
 		/* Establece si al objeto visual se le puede hacer focus o no */
 		void setFocus(bool focus);

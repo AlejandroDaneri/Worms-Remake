@@ -12,7 +12,11 @@ class DataReceiver: public Thread{
 		Player& player;
 		ClientProtocol& protocol;
 
+		/* Recibe los datos de la configuracion inicial */
 		void initialConfig();
+
+		/* Analiza los datos recibidos */
+		bool analizeReceivedData(Buffer buffer);
 
 	public:
 		/* Constructor */

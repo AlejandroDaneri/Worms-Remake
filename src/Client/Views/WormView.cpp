@@ -49,10 +49,6 @@ void WormView::updateScope(int angle) {
     this->setWeaponImage();
 }
 
-void WormView::kill(){
-	this->removeFromWorld();
-}
-
 void WormView::changeWeapon(const std::string& weapon) {
     this->weapon = weapon;
 

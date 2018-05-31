@@ -64,60 +64,6 @@ void ClientProtocol::sendEndTurn(){
     this->sendBuffer(buffer);
 }
 
-void ClientProtocol::receive(Player& player){
-	Buffer buffer = std::move(this->receiveBuffer());
-	char action = buffer.getNext();
-
-	if (action == START_TURN){
-		int worm_id = this->receiveIntBuffer(buffer);
-		int player_id = this->receiveIntBuffer(buffer);
-		float wind = this->receiveIntBuffer(buffer) / UNIT_TO_SEND;
-		player.startTurn(worm_id, player_id, wind);
-	} else if (action == END_GAME){
-		std::string winner = this->receiveStringBuffer(buffer);
-		player.endGame(winner);
-	} else if (action == CHANGE_WEAPON_ACTION) {
-        std::string weapon(this->receiveStringBuffer(buffer));
-        player.getViewsList().removeScopeVisibility();
-        player.getViewsList().changeWeapon(weapon);
-    } else if (action == MOVE_SCOPE) {
-	    int angle = this->receiveIntBuffer(buffer);
-	    player.getViewsList().updateScope(angle);
-	} else if (action == SHOOT_WEAPON_ACTION) {
-	    std::string weapon(this->receiveStringBuffer(buffer));
-	    player.getViewsList().removeScopeVisibility();
-	    player.getMusicPlayer().playWeaponShotSound(weapon);
-	} else if (action == MOVING_OBJECT) {
-		char type = buffer.getNext();
-		int id = this->receiveIntBuffer(buffer);
-
-		if (type == WORM_TYPE){
-			int player_id = this->receiveIntBuffer(buffer);
-			int pos_x = this->receiveIntBuffer(buffer);
-			int pos_y = this->receiveIntBuffer(buffer);
-			int life = this->receiveIntBuffer(buffer);
-			char dir = buffer.getNext();
-			bool colliding = buffer.getNext();
-			player.getViewsList().updateWormData(id, player_id, pos_x, pos_y, life, dir, colliding);
-			player.getViewsList().removeScopeVisibility();
-		} else if (type == WEAPON_TYPE){
-			std::string weapon(this->receiveStringBuffer(buffer));
-
-			int pos_x = this->receiveIntBuffer(buffer);
-			int pos_y = this->receiveIntBuffer(buffer);
-			player.getViewsList().updateWeaponData(id, weapon, pos_x, pos_y);
-		}
-	} else if (action == DEAD_OBJECT){
-		char type = buffer.getNext();
-		int id = this->receiveIntBuffer(buffer);
-		if (type == WORM_TYPE){
-			player.getViewsList().removeWorm(id);
-		} else if (type == WEAPON_TYPE){
-			player.getViewsList().removeWeapon(id);
-		}
-	}
-}
-
 void ClientProtocol::receiveStartGame(){
 	Buffer buffer = std::move(this->receiveBuffer());
 }
