@@ -12,7 +12,7 @@ void SelectableListMenu::configure(int quantity){
 			this->addField(field);
 		}
 	}catch (const SocketException& e){
-        this->showError();
+        this->showFatalError();
 	}
 
 	for (auto it = this->fields.begin(); it != this->fields.end(); ++it){
@@ -32,7 +32,7 @@ bool SelectableListMenu::createPlayer(){
 	try{
 		this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name, this->window));
 	} catch (const std::exception& e){
-        this->showError();
+        this->showFatalError();
 	}
 	return false;
 }

@@ -8,6 +8,10 @@
 #include "ClientProtocol.h"
 
 class MenuView{
+	private:
+		/* Muestra un mensaje de error */
+		void showError(const std::string& error);
+
 	protected:
 		Gtk::Window& window;
 		ClientProtocol& protocol;
@@ -16,8 +20,11 @@ class MenuView{
 		MenuView& first_menu;
 		Gtk::Box* menu;
 
-		/* Muestra un mensaje de error */
-		void showError(const std::string& error = "Ocurrio un error.");
+		/* Muestra un mensaje de error y no permite continuar */
+		void showFatalError(const std::string& error = "Ocurrio un error.");
+
+		/* Muestra un mensaje de error y reinicia */
+		void showErrorAndRestart(const std::string& error);
 
 	public:
 		/* Constructor */

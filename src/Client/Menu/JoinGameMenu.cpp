@@ -27,11 +27,11 @@ void JoinGameMenu::selectButtonPressed(Glib::ustring game_name){
 		this->protocol.sendString(game_name);
 		bool result = this->protocol.receiveChar();
 		if (!result){
-            this->showError("Ocurrio un error al unirse a la partida");
+            this->showErrorAndRestart("Ocurrio un error al unirse a la partida");
 		} else {
 			this->waitToPlayers();
 		}
 	} catch (const SocketException& e){
-        this->showError();
+        this->showFatalError();
 	}
 }

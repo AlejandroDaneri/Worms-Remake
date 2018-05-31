@@ -44,11 +44,11 @@ void CreateGameMenu::selectButtonPressed(Glib::ustring map_name){
         this->protocol.sendLength(players);
 		bool result = this->protocol.receiveChar();
 		if (!result){
-            this->showError("Ocurrio un error al crear la partida");
+            this->showErrorAndRestart("Ocurrio un error al crear la partida");
 		} else {
 			this->waitToPlayers();
 		}
 	} catch (const SocketException& e){
-        this->showError();
+        this->showFatalError();
 	}
 }
