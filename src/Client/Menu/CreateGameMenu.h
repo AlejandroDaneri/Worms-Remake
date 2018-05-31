@@ -12,13 +12,14 @@ class CreateGameMenu: public SelectableListMenu{
 	private:
 		Gtk::Entry* game_name;
 		Gtk::SpinButton* players_number;
+		Gtk::Button* quit_game;
 
 		/* Handler del boton de seleccion */
 		void selectButtonPressed(Glib::ustring map_name) override;
 
 	public:
         /* Constructor */
-		CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity);
+		CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity, Glib::RefPtr<Gtk::Application> app);
 
 		/* Destructor */
 		~CreateGameMenu();

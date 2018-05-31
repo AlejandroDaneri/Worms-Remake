@@ -7,7 +7,8 @@
 #define MENU_WIDTH 918
 #define MENU_HEIGHT 570
 
-GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol): MenuView(window, *this, protocol){
+GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol, Glib::RefPtr<Gtk::Application> app):
+	MenuView(window, *this, protocol, app){
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_GameMenu.glade");
 
 	builder->get_widget("error", this->error);
@@ -25,6 +26,7 @@ GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol): MenuView(wind
 
 	create_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::createButtonPressed));
 	join_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::joinButtonPressed));
+	quit_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::quitButtonPressed));
 }
 
 GameMenu::~GameMenu(){}
@@ -36,7 +38,7 @@ void GameMenu::createButtonPressed(){
 		if (quantity == 0){
 			this->showErrorAndRestart("No hay mapas para crear una partida");
 		} else {
-			this->next_menu = std::unique_ptr<MenuView>(new CreateGameMenu(this->window, *this, this->protocol, std::move(name), quantity));
+			this->next_menu = std::unique_ptr<MenuView>(new CreateGameMenu(this->window, *this, this->protocol, std::move(name), quantity, std::move(app)));
 		}
 	}
 }
@@ -48,7 +50,7 @@ void GameMenu::joinButtonPressed(){
 		if (quantity == 0){
 			this->showErrorAndRestart("No hay partidas disponibles");
 		} else {
-			this->next_menu = std::unique_ptr<MenuView>(new JoinGameMenu(this->window, *this, this->protocol, std::move(name), quantity));
+			this->next_menu = std::unique_ptr<MenuView>(new JoinGameMenu(this->window, *this, this->protocol, std::move(name), quantity, std::move(app)));
 		}
 	}
 }

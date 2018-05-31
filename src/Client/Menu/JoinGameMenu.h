@@ -8,12 +8,14 @@
  * jugador se una a una partida */
 class JoinGameMenu: public SelectableListMenu{
 	private:
+		Gtk::Button* quit_game;
+
 		/* Handler del boton de unirse a partida */
 		void selectButtonPressed(Glib::ustring game_name) override;
 
 	public:
 		/* Constructor */
-		JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity);
+		JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity, Glib::RefPtr<Gtk::Application> app);
 
 		/* Destructor */
 		~JoinGameMenu();
