@@ -48,7 +48,7 @@ void Player::endGame(const std::string& winner){
     this->view_list.setVictory();
 }
 
-void Player::damageReceived(){
+void Player::endTurnEarly(){
 	this->turn.stop();
 }
 

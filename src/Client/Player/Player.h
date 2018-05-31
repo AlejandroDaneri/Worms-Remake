@@ -48,8 +48,8 @@ class Player {
 		/* Finaliza el juego */
 		void endGame(const std::string& winner);
 
-		/* El jugador actual recibio danio */
-		void damageReceived();
+		/* El jugador debe terminar su turno antes */
+		void endTurnEarly();
 
 		/* Cambia el arma actual por la espeificada */
 		void changeWeapon(std::string weapon);

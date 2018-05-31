@@ -50,6 +50,8 @@ bool DataReceiver::analizeReceivedData(Buffer buffer){
 	} else if (action == END_GAME){
 		std::string winner = Protocol::receiveStringBuffer(buffer);
 		this->player.endGame(winner);
+	} else if (action == END_TURN){
+		this->player.endTurnEarly();
 	} else if (action == CHANGE_WEAPON_ACTION) {
         std::string weapon(Protocol::receiveStringBuffer(buffer));
         this->player.getViewsList().removeScopeVisibility();

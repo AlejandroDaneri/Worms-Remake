@@ -27,6 +27,8 @@
 
 #define END_GAME 11
 
+#define NO_SEND_DATA 100
+
 
 #define MOVE_RIGHT 1
 #define MOVE_LEFT -1

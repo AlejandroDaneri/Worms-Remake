@@ -58,6 +58,9 @@ class ServerProtocol : public Protocol{
 
 		//Carga la informacion de fin del juego en el buffer
 		Buffer sendEndGame(const std::string& winner);
+
+		//Carga la informacion de fin del turno
+		Buffer sendEndTurn();
 };
 
 #endif

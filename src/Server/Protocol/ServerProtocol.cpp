@@ -79,6 +79,12 @@ Buffer ServerProtocol::sendStartGame(){
 	return buffer;
 }
 
+Buffer ServerProtocol::sendEndTurn(){
+	Buffer buffer;
+	buffer.setNext(END_TURN);
+	return buffer;
+}
+
 Buffer ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_player_id, float wind){
 	Buffer buffer;
 	buffer.setNext(START_TURN);

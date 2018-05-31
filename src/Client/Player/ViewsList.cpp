@@ -20,7 +20,7 @@ void ViewsList::removeWorm(int id){
     auto it = this->worms.find(id);
     this->players_list.reducePlayerLife(it->second.getPlayerId(), it->second.getLife());
     if (id == this->current_worm_id){
-        this->player.damageReceived();
+        this->player.endTurnEarly();
     }
     it->second.removeFromWorld();
     this->worms.erase(it);
@@ -56,7 +56,7 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, 
         if (current_life != life){
             this->players_list.reducePlayerLife(player_id, current_life - life);
             if (id == this->current_worm_id){
-                this->player.damageReceived();
+                this->player.endTurnEarly();
             }
         }
         it->second.updateData(life, dir, pos, colliding, id == this->current_worm_id);
