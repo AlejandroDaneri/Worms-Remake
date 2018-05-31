@@ -33,6 +33,7 @@ void DataReceiver::stop(){
 
 void DataReceiver::initialConfig(){
 	this->protocol.receiveStartGame();
+	this->protocol.receiveBackgroundImage(this->player.getScreen().getWorld());
 	this->protocol.receivePlayers(this->player.getScreen().getPlayersView());
 	this->protocol.receiveGirders(this->player.getViewsList());
 	this->protocol.receiveWeaponsAmmo(this->player.getWeapons());

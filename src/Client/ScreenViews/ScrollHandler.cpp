@@ -8,6 +8,7 @@
 
 ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window): window(window), last_mouse_position(0,0){
 	this->window.signal_motion_notify_event().connect(sigc::mem_fun(*this, &ScrollHandler::mouseMotionEvent));
+	this->window.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_NEVER);
 
 	Glib::signal_timeout().connect(sigc::mem_fun(*this, &ScrollHandler::scroll), 50);
 }

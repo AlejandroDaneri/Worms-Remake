@@ -54,6 +54,12 @@ void DataSender::run(){
 	}
 }
 
+void DataSender::sendBackgroundImage(const std::string& image){
+	Buffer data = this->players[0].getProtocol().sendBackgroundImage(image);
+	this->sendBuffer(data);
+	this->notifyAll();
+}
+
 void DataSender::send_start_game(){
 	Buffer data = this->players[0].getProtocol().sendStartGame();
 	this->sendBuffer(data);

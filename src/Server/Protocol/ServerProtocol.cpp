@@ -131,6 +131,12 @@ void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 	}
 }
 
+Buffer ServerProtocol::sendBackgroundImage(const std::string& image){
+	Buffer buffer;
+	this->sendStringBuffer(buffer, image);
+	return buffer;
+}
+
 Buffer ServerProtocol::sendPlayerId(const Player& player){
 	Buffer buffer;
 
