@@ -9,6 +9,7 @@
 WorldView::WorldView() {
 	this->world.set_size(map_width, map_height);
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
+	this->window.add_events(Gdk::POINTER_MOTION_MASK);
 	this->window.add(this->world);
 
 	/////////////////////////// Cambiar a que se reciba por parametro
@@ -29,6 +30,7 @@ WorldView::WorldView() {
 
 	this->window.get_hadjustment()->set_value(map_width / 2);
 	this->window.get_vadjustment()->set_value(map_height);
+	this->window.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_NEVER);
 }
 
 WorldView::~WorldView() {}

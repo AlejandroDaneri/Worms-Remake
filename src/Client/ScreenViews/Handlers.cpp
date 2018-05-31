@@ -16,7 +16,7 @@ const int ANGLE_STEP = 6;
 
 Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons, WorldView& world):
 	player(player), view_list(view_list), weapons(weapons), world(world),
-	power_accumulator(*this, MAX_TIME) {
+	scroll_handler(world.getWindow()), power_accumulator(*this, MAX_TIME){
 		this->has_shoot = false;
 		this->current_angle = DEFAULT_ANGLE;
 		this->weapons_time = WEAPONS_DEFAULT_TIME;
