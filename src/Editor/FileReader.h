@@ -11,6 +11,7 @@
 class FileReader{
 private:
 	std::fstream file;
+	std::string filename;
 public:
 
     explicit FileReader(const std::string &filename);
