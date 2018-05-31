@@ -3,7 +3,7 @@
 #include <iostream>
 #include "FileReader.h"
 
-FileReader::FileReader(const std::string &filename) : File(filename,
+FileReader::FileReader(const std::string &filename) : file(filename,
                                                            std::fstream::in) {}
 
 void FileReader::read(std::vector<std::vector<double>> &worms,

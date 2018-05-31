@@ -42,8 +42,8 @@ void ClientProtocol::sendWeaponSelfDirectedShoot(const Position &pos) {
 	buffer.setNext(ACTION);
 	buffer.setNext(SHOOT_SELF_DIRECTED);
 
-    this->sendIntBuffer(buffer, pos.getX());
-    this->sendIntBuffer(buffer, pos.getY());
+    this->sendIntBuffer(buffer, pos.getX() * UNIT_TO_SEND);
+    this->sendIntBuffer(buffer, pos.getY() * UNIT_TO_SEND);
 
     this->sendBuffer(buffer);
 }

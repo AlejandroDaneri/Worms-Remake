@@ -19,22 +19,24 @@ ViewsList::~ViewsList(){}
 
 void ViewsList::removeWorm(int id){
 	auto it = this->worms.find(id);
-	this->players_list.reducePlayerLife(it->second.getPlayerId(), it->second.getLife());
-	if (id == this->current_worm_id){
-		this->player.endTurnEarly();
+	if (it != this->worms.end()) {
+		this->players_list.reducePlayerLife(it->second.getPlayerId(), it->second.getLife());
+		if (id == this->current_worm_id){
+			this->player.endTurnEarly();
+		}
+		it->second.removeFromWorld();
+		this->worms.erase(it);
+		this->musicPlayer.playDeathSound();
 	}
-	it->second.removeFromWorld();
-	this->worms.erase(it);
-	this->musicPlayer.playDeathSound();
 }
 
 void ViewsList::removeWeapon(int id){
-	if (this->weapons.find(id) != this->weapons.end()) {
+	auto it = this->weapons.find(id);
+	if (it != this->weapons.end()) {
 		if (this->weapon_focused == id){
 			this->weapon_focused = -1;
 		}
 
-		auto it = this->weapons.find(id);
 		this->musicPlayer.playExplosionSound(it->second.getName());
 		ExplosionView explosion(std::move(it->second));
 		this->animation.addAndStart(std::move(explosion));

@@ -3,7 +3,7 @@
 #include "FileWriter.h"
 
 FileWriter::FileWriter(const std::string &filename)
-        : File(filename, std::fstream::out | std::ios_base::trunc) {}
+        : file(filename, std::fstream::out | std::ios_base::trunc) {}
 
 
 void FileWriter::save(std::vector<int> weapons,

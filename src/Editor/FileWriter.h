@@ -2,10 +2,15 @@
 #ifndef WORMS_FILEWRITER_H
 #define WORMS_FILEWRITER_H
 
+#include <fstream>
+#include "MapObject.h"
+#include <yaml.h>
+#include <WeaponNames.h>
+#include <ConfigFields.h>
 
-#include "File.h"
-
-class FileWriter : public File {
+class FileWriter{
+private:
+	std::fstream file;
 public:
     explicit FileWriter(const std::string &filename);
 

@@ -56,6 +56,8 @@ const std::string WORLD_MAX_HEIGHT("world_max_height");
 
 //config del editor
 
+const std::string BACKGROUND_IMAGE("background_image");
+
 const std::string WORMS_LIFE("worms_life");
 
 const std::string WORMS_DATA("worms");

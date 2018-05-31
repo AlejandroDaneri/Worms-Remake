@@ -20,6 +20,8 @@ const std::string SOUNDS_PATH(RESOURCES + "Sounds/");
 
 const std::string GLADE_PATH(RESOURCES + "Glade/");
 
+const std::string BACKGROUND_PATH(RESOURCES + "Background/");
+
 const std::string ANIMATIONS_PATH(IMAGES_PATH + "Animations/");
 
 const std::string CONFIG_PATH(std::string(ROOT_PATH) + "/config/");

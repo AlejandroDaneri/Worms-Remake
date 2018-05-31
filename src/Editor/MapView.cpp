@@ -3,15 +3,26 @@
 #include <fstream>
 #include <ObjectSizes.h>
 #include <Path.h>
+#include <gtkmm/adjustment.h>
+#include <gtkmm/scrolledwindow.h>
 #include "yaml-cpp/yaml.h"
 #include "MapView.h"
+
+#define BACKGROUND_QUANTITY 2
 
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),
           actual_bg(0) {
-    bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/background1.png");
-    bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/background2.jpg");
+
+    guint width, height;
+    this->get_size(width, height);
+    ((Gtk::ScrolledWindow*)this->get_parent())->get_hadjustment()->set_value(width / 2);
+	((Gtk::ScrolledWindow*)this->get_parent())->get_vadjustment()->set_value(height);
+
+	for (size_t i = 1; i <= BACKGROUND_QUANTITY; i++){
+		bg_paths.emplace_back(BACKGROUND_PATH + "background" + std::to_string(i) + ".png");
+	}
     setBackground(bg_paths[actual_bg]);
 
     add_events(Gdk::BUTTON_PRESS_MASK);
@@ -123,7 +134,7 @@ void MapView::redraw_map() {
         remove(object);
         put(object,alloc.get_x(),alloc.get_y());
     }
-    
+    this->water.show(*this);
 }
 
 int MapView::select(const double &x, const double &y) {
