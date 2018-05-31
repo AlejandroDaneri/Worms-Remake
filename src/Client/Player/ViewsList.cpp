@@ -113,14 +113,14 @@ void ViewsList::removeScopeVisibility() {
 	}
 }
 
-bool ViewsList::addGirderCallBack(size_t size, int pos_x, int pos_y, int rotation){
-	GirderView girder(this->world, size, Position(pos_x, pos_y), rotation);
+bool ViewsList::addGirderCallBack(size_t size, Position pos, int rotation){
+	GirderView girder(this->world, size, pos, rotation);
 	this->girders.push_back(std::move(girder));
 	return false;
 }
 
-void ViewsList::addGirder(size_t size, int pos_x, int pos_y, int rotation){
-	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::addGirderCallBack), size, pos_x, pos_y, rotation);
+void ViewsList::addGirder(size_t size, float pos_x, float pos_y, int rotation){
+	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::addGirderCallBack), size, Position(pos_x, pos_y), rotation);
 	Glib::signal_idle().connect(my_slot);
 }
 

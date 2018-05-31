@@ -90,8 +90,8 @@ void ClientProtocol::receiveGirders(ViewsList& viewsList){
 		Buffer buffer = std::move(this->receiveBuffer());;
 
 		int size = this->receiveIntBuffer(buffer);
-		int pos_x = this->receiveIntBuffer(buffer);
-		int pos_y = this->receiveIntBuffer(buffer);
+		float pos_x = this->receiveIntBuffer(buffer) / UNIT_TO_SEND;
+		float pos_y = this->receiveIntBuffer(buffer) / UNIT_TO_SEND;
 		int rotation = this->receiveIntBuffer(buffer);
 		viewsList.addGirder(size, pos_x, pos_y, rotation);
 	}
