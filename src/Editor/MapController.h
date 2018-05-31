@@ -15,7 +15,7 @@ class MapController {
     Map model;
     MapView *view;
     ToolBoxView *toolBox;
-    unsigned int actual_item_selected;
+    unsigned int item_id_to_add;
     unsigned int actual_mode;
     int actual_object_selected;
 
@@ -25,7 +25,7 @@ public:
 
     void addModeSignal(unsigned int id);
 
-    void undo();
+    void erase();
 
     void clean();
 

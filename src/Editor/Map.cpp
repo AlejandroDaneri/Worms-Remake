@@ -2,7 +2,7 @@
 #include <yaml.h>
 #include "Map.h"
 
-void Map::undo(int index) {
+void Map::erase(int index) {
     if (!objects.empty())
         this->objects.erase(objects.begin() + index);
 }
@@ -43,20 +43,24 @@ void Map::getObjects(std::vector<std::vector<double>> &worms,
     for (auto &object : objects) {
         double x, y;
         object.second.getPosition(x, y);
-        if (object.first == 1) {//worm
+        if (object.first == 1) {
             std::vector<double> position;
-            position.push_back(x); //pos x
-            position.push_back(y); //pos_y
+            position.push_back(x);
+            position.push_back(y);
             worms.push_back(position);
-        } else { //viga
+        } else {
             std::vector<double> data;
-            data.push_back(object.first); //len
-            data.push_back(x); //pos_x
-            data.push_back(y); //pos_y
-            data.push_back(object.second.getAngle()); //rotation
+            data.push_back(object.first);
+            data.push_back(x);
+            data.push_back(y);
+            data.push_back(object.second.getAngle());
             girders.push_back(data);
         }
     }
+}
+
+int Map::getItemID(const int &index) {
+    return objects[index].first ;
 }
 
 

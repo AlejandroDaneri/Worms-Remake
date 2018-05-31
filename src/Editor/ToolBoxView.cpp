@@ -38,7 +38,7 @@ void ToolBoxView::linkController(MapController *controller) {
     this->map_controller = controller;
 
     erase->signal_clicked().connect(
-            sigc::mem_fun(*map_controller, &MapController::undo));
+            sigc::mem_fun(*map_controller, &MapController::erase));
 
     move->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::moveSignal));
@@ -132,9 +132,13 @@ void ToolBoxView::showSelected(int id) {
             hideSelected();
             break;
     }
-
 }
 
 void ToolBoxView::hideSelected() {
     selected->hide();
+}
+
+void ToolBoxView::closeSelectionMode() {
+    hideSelected();
+    mode->set_active(false);
 }

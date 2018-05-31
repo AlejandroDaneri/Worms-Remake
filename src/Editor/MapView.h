@@ -33,7 +33,7 @@ public:
 
     bool on_button_clicked(GdkEventButton *button_event);
 
-    void undo(const int &index);
+    void erase(const int &index);
 
     void clean();
 

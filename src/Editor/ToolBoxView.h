@@ -52,6 +52,8 @@ public:
     void showSelected(int id);
 
     void hideSelected();
+
+    void closeSelectionMode();
 };
 
 

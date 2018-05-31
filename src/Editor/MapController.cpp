@@ -11,7 +11,7 @@
 
 MapController::MapController(Map model,
                              const Glib::RefPtr<Gtk::Builder> &builder)
-        : model(std::move(model)), actual_item_selected(1),
+        : model(std::move(model)), item_id_to_add(1),
           actual_mode(ADD_MODE_ID)
 {
     builder->get_widget_derived("map", view);
@@ -22,12 +22,13 @@ MapController::MapController(Map model,
 
 void MapController::addModeSignal(unsigned int id) {
     this->actual_mode = ADD_MODE_ID;
-    this->actual_item_selected = id;
+    this->item_id_to_add = id;
 }
 
-void MapController::undo() {
-    model.undo(actual_object_selected);
-    view->undo(actual_object_selected);
+void MapController::erase() {
+    model.erase(actual_object_selected);
+    view->erase(actual_object_selected);
+    changeModeSignal();
     toolBox->disableMovingItems();
 }
 
@@ -43,7 +44,7 @@ void MapController::moveSignal() {
 
 void MapController::changeModeSignal() {
     this->actual_mode = (actual_mode==ADD_MODE_ID? SELECT_MODE_ID:ADD_MODE_ID);
-    if (actual_mode==ADD_MODE_ID) toolBox->hideSelected();
+    if (actual_mode==ADD_MODE_ID) toolBox->closeSelectionMode();
 }
 
 void MapController::turnCCWSignal() {
@@ -73,17 +74,15 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
                                                     event_button->y);
         if (actual_object_selected > -1) {
             toolBox->enableMovingItems();
-            toolBox->showSelected(actual_item_selected);
+            toolBox->showSelected(model.getItemID(actual_object_selected));
         } else {
             toolBox->disableMovingItems();
-            toolBox->showSelected(actual_object_selected);
+            toolBox->hideSelected();
         }
-
-
         actual_mode = SELECT_MODE_ID; //cambio de estado del toolbox llama a add mode
     } else {
-        this->model.add(actual_item_selected, event_button->x, event_button->y);
-        this->view->add(actual_item_selected, event_button->x, event_button->y);
+        this->model.add(item_id_to_add, event_button->x, event_button->y);
+        this->view->add(item_id_to_add, event_button->x, event_button->y);
     }
 }
 
@@ -115,7 +114,7 @@ void MapController::getObjects(std::vector<std::vector<double>> &worms,
 void MapController::loadObjects(std::vector<std::vector<double>> &worms,
                                 std::vector<std::vector<double>> &girders) {
     clean();
-    ViewPositionTransformer transformer(*view); ////revisar
+    ViewPositionTransformer transformer(*view);
     for (std::vector<double> &worm:worms) {
         Position position(worm[0],worm[1]);
         Position new_pos = transformer.transformToScreen(position);

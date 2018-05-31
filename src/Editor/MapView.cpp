@@ -89,7 +89,7 @@ void MapView::turn(const unsigned int &id, const int &angle, const int &index) {
     }
 }
 
-void MapView::undo(const int &index) {
+void MapView::erase(const int &index) {
     if (!objects.empty()) {
         objects[index].hide();
         objects.erase(objects.begin() + index);

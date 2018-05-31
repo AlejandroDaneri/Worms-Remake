@@ -11,7 +11,7 @@ class Map {
     std::vector<std::pair<int, MapObject>> objects;
 
 public:
-    void undo(int index);
+    void erase(int index);
 
     void clean();
 
@@ -30,6 +30,8 @@ public:
     void move(int index, double &x, double &y);
 
     bool isGirder(int &index);
+
+    int getItemID(const int &index);
 };
 
 
