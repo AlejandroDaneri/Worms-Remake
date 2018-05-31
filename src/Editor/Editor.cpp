@@ -14,7 +14,7 @@ Editor::Editor(BaseObjectType *cobject,
 
     builder->get_widget_derived("filebox", filebox);
     std::shared_ptr<FileBoxController> filebox_controller(
-            new FileBoxController(weps_list_controller, map_controller));
+            new FileBoxController(weps_list_controller, map_controller,builder));
     filebox->linkControler(filebox_controller);
 
     show_all_children();
