@@ -58,6 +58,11 @@ class GameParameters{
 		int getMaxGirderRotationToFriction();
 		void setMaxHeight(int height);
 		int getMaxHeight();
+
+		int getDataSenderSleep();
+		int getGameWaitingWorldSleep();
+		int getWorldSleepAfterStep();
+		float getWorldTimeStep();
 };
 
 class GameParameters::GirderParams{

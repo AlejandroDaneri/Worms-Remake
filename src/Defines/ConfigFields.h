@@ -7,6 +7,15 @@
 
 const std::string SERVER_PORT("port");
 
+const std::string DATA_SENDER_SLEEP("data_sender_sleep");
+
+const std::string GAME_WAITING_WORLD_SLEEP("game_waiting_world_sleep");
+
+const std::string WORLD_SLEEP_AFTER_STEP("world_sleep_after_step");
+
+const std::string WORLD_TIME_STEP("world_time_step");
+
+
 const std::string WORMS_LIFE_TO_ADD("worms_life_to_add");
 
 const std::string WORM_VELOCITY("worm_velocity");

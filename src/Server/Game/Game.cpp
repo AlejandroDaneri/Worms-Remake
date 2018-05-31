@@ -72,7 +72,7 @@ void Game::run(){
 }
 
 void Game::configure(){
-	this->data_sender.reset(new DataSender(this->world, this->turn.getPlayers()));
+	this->data_sender.reset(new DataSender(this->world, this->turn.getPlayers(), this->parameters));
 
 	this->data_sender->send_start_game();
 	this->data_sender->send_players_id();
@@ -114,6 +114,6 @@ void Game::endTurn(){
 
 void Game::wait_to_world(){
 	while (this->world.isActive() || this->data_sender->isActive()){
-		std::this_thread::sleep_for(std::chrono::milliseconds(80));
+		std::this_thread::sleep_for(std::chrono::milliseconds(this->parameters.getGameWaitingWorldSleep()));
 	}
 }

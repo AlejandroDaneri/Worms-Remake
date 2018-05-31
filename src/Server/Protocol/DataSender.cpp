@@ -1,8 +1,8 @@
 #include "DataSender.h"
 
-DataSender::DataSender(World& world, std::vector<Player>& players): 
+DataSender::DataSender(World& world, std::vector<Player>& players, GameParameters& parameters): 
 	objects(world.getObjectsList()), girders(world.getGirdersList()), 
-	players(players), mutex(world.getMutex()), active(false){
+	players(players), mutex(world.getMutex()), active(false), sleep_time(parameters.getDataSenderSleep()){
 
 		for (size_t i = 0; i < this->players.size(); i++){
 			std::unique_ptr<PlayerDataSender> sender(new PlayerDataSender(this->players[i]));
@@ -20,7 +20,7 @@ DataSender::~DataSender(){
 
 void DataSender::run(){
 	while(this->running){
-		std::this_thread::sleep_for(std::chrono::milliseconds(50));
+		std::this_thread::sleep_for(std::chrono::milliseconds(this->sleep_time));
 		std::lock_guard<std::mutex> lock(this->mutex);
 		this->active = false;
 		auto it = this->objects.begin();
@@ -148,7 +148,7 @@ void DataSender::checkPlayers(){
 			players_connected++;
 		}
 	}
-	if (players_connected <= 1){
+	if (players_connected <= 1 && this->players.size() > 1){ //////////////////////////////Eliminar playersize>1 por ahora que hay un solo jugador
 		Buffer data = this->players[0].getProtocol().sendEndTurn();
 		this->sendBuffer(data);
 		this->notifyAll();

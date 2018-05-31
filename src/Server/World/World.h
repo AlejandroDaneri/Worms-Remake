@@ -23,6 +23,8 @@ class World: public Thread{
 		std::list<physical_object_ptr> girders;
 		std::list<physical_object_ptr> fragments_to_add;
 		bool is_active;
+		int sleep_time;
+		float time_step;
 
 		//Inicializa el mundo
 		void initialize();

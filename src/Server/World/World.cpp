@@ -5,7 +5,9 @@
 #include "Fragment.h"
 
 World::World(GameParameters& parameters): world(b2Vec2(0, parameters.getGravity())),
-	wind(parameters), is_active(false){
+	wind(parameters), is_active(true),
+	sleep_time(parameters.getWorldSleepAfterStep()), time_step(parameters.getWorldTimeStep()){
+
 	this->world.SetAllowSleeping(true);
 	this->world.SetContinuousPhysics(true);
 	this->world.SetContactListener(&this->collision_listener);
@@ -16,18 +18,17 @@ World::World(GameParameters& parameters): world(b2Vec2(0, parameters.getGravity(
 World::~World(){}
 
 void World::run(){
-	float32 timeStep = 1/20.0;      //the length of time passed to simulate (seconds)
 	int32 velocityIterations = 8;   //how strongly to correct velocity
 	int32 positionIterations = 3;   //how strongly to correct position
 
 	while(this->running){
-		std::this_thread::sleep_for(std::chrono::milliseconds(60));
+		std::this_thread::sleep_for(std::chrono::milliseconds(this->sleep_time));
 
 		this->add_all_fragments();
 
 		std::lock_guard<std::mutex> lock(this->mutex);
 
-		this->world.Step(timeStep, velocityIterations, positionIterations);
+		this->world.Step(this->time_step, velocityIterations, positionIterations);
 
 		this->is_active = false;
 		for (auto it = this->objects.begin(); it != this->objects.end(); it++){

@@ -11,6 +11,11 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 	YAML::Node config(YAML::LoadFile(config_file));
 	YAML::Node config_editor(YAML::LoadFile(config_editor_file));
 
+	this->float_parameters[DATA_SENDER_SLEEP] = config[DATA_SENDER_SLEEP].as<float>();
+	this->float_parameters[GAME_WAITING_WORLD_SLEEP] = config[GAME_WAITING_WORLD_SLEEP].as<float>();
+	this->float_parameters[WORLD_SLEEP_AFTER_STEP] = config[WORLD_SLEEP_AFTER_STEP].as<float>();
+	this->float_parameters[WORLD_TIME_STEP] = config[WORLD_TIME_STEP].as<float>();
+
 	this->float_parameters[WORMS_LIFE] = config_editor[WORMS_LIFE].as<float>();
 	this->float_parameters[WORMS_LIFE_TO_ADD] = config[WORMS_LIFE_TO_ADD].as<float>();
 	this->float_parameters[WORM_VELOCITY] = config[WORM_VELOCITY].as<float>();
@@ -145,6 +150,22 @@ void GameParameters::setMaxHeight(int height){
 
 int GameParameters::getMaxHeight(){
 	return this->float_parameters[WORLD_MAX_HEIGHT];
+}
+
+int GameParameters::getDataSenderSleep(){
+	return this->float_parameters[DATA_SENDER_SLEEP];
+}
+
+int GameParameters::getGameWaitingWorldSleep(){
+	return this->float_parameters[GAME_WAITING_WORLD_SLEEP];
+}
+
+int GameParameters::getWorldSleepAfterStep(){
+	return this->float_parameters[WORLD_SLEEP_AFTER_STEP];
+}
+
+float GameParameters::getWorldTimeStep(){
+	return this->float_parameters[WORLD_TIME_STEP];
 }
 
 GameParameters::GirderParams::GirderParams(size_t len, int pos_x, int pos_y, int rotation):

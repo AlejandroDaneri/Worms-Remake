@@ -18,12 +18,13 @@ class DataSender: public Thread{
 		std::vector<std::unique_ptr<PlayerDataSender>> players_data_senders;
 		std::mutex& mutex;
 		bool active;
+		int sleep_time;
 
 		void sendBuffer(const Buffer& buffer);
 		void notifyAll();
 
 	public:
-		DataSender(World& world, std::vector<Player>& players);
+		DataSender(World& world, std::vector<Player>& players, GameParameters& parameters);
 		~DataSender();
 
 		//Envia constantemente los datos de los objetos
