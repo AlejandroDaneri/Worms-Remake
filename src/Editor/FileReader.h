@@ -2,10 +2,15 @@
 #ifndef WORMS_FILEREADER_H
 #define WORMS_FILEREADER_H
 
+#include <fstream>
+#include "MapObject.h"
+#include <yaml.h>
+#include <WeaponNames.h>
+#include <ConfigFields.h>
 
-#include "File.h"
-
-class FileReader : public File {
+class FileReader{
+private:
+	std::fstream file;
 public:
 
     explicit FileReader(const std::string &filename);
