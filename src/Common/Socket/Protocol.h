@@ -79,7 +79,7 @@ class Protocol {
 		void sendLength(uint32_t length);
 
 		/* Envia la longitud */
-		Buffer sendLengthBuffer(uint32_t length);
+		static Buffer sendLengthBuffer(uint32_t length);
 
 		/* Recibe la longitud y la retorna */
 		size_t receiveLength();

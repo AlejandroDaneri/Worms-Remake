@@ -59,7 +59,7 @@ void Protocol::sendLength(uint32_t length){
 
 Buffer Protocol::sendLengthBuffer(uint32_t length){
 	Buffer buffer;
-	this->sendIntBuffer(buffer, length);
+	Protocol::sendIntBuffer(buffer, length);
 	return buffer;
 }
 
