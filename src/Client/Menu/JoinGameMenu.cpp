@@ -7,8 +7,8 @@
 #define MENU_WIDTH 144
 #define MENU_HEIGHT 142
 
-JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity, Glib::RefPtr<Gtk::Application> app):
-	SelectableListMenu(window, first_menu, protocol, std::move(name), app){
+JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity):
+	SelectableListMenu(window, first_menu, protocol, std::move(name)){
 
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_JoinGameMenu.glade");
 

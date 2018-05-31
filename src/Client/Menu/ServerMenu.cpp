@@ -2,8 +2,7 @@
 #include <gtkmm/builder.h>
 #include "Path.h"
 
-ServerMenu::ServerMenu(Gtk::Window& window, Glib::RefPtr<Gtk::Application> app): window(window),
-	app(app) {
+ServerMenu::ServerMenu(Gtk::Window& window): window(window) {
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_ServerMenu.glade");
 
 	builder->get_widget("error", this->error);
@@ -41,7 +40,7 @@ void ServerMenu::connectButtonPressed(){
 }
 
 void ServerMenu::quitButtonPressed() {
-	this->app->quit();
+	this->window.close();
 }
 
 void ServerMenu::connectToServer(const std::string &host, const std::string &service){
@@ -49,7 +48,7 @@ void ServerMenu::connectToServer(const std::string &host, const std::string &ser
 		Socket socket(Socket::Client(host.c_str(), service.c_str()));
 		this->protocol.reset(new ClientProtocol(std::move(socket), this->window));
 		this->window.remove();
-		this->next_menu = std::unique_ptr<MenuView>(new GameMenu(this->window, *this->protocol, std::move(this->app)));
+		this->next_menu = std::unique_ptr<MenuView>(new GameMenu(this->window, *this->protocol));
 	} catch (const SocketException& e){
 		this->error->set_label("No pudo conectarse al servidor");
 	}
