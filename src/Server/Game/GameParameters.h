@@ -68,11 +68,11 @@ class GameParameters{
 class GameParameters::GirderParams{
 	public:
 		size_t len;
-		int pos_x;
-		int pos_y;
+		float pos_x;
+		float pos_y;
 		int rotation;
 
-		GirderParams(size_t len, int pos_x, int pos_y, int rotation);
+		GirderParams(size_t len, float pos_x, float pos_y, int rotation);
 };
 
 typedef GameParameters::GirderParams GirderParams;

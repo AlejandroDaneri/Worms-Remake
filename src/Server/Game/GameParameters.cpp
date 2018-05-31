@@ -44,7 +44,7 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 		this->worms.push_back(b2Vec2((*it)[0], (*it)[1]));
 	}
 
-	std::vector<std::vector<int>> girders_file = config_editor[GIRDERS_DATA].as<std::vector<std::vector<int>>>();
+	std::vector<std::vector<float>> girders_file = config_editor[GIRDERS_DATA].as<std::vector<std::vector<float>>>();
 	for (auto it = girders_file.begin(); it != girders_file.end(); ++it){
 		this->girders.push_back(GirderParams((*it)[0], (*it)[1], (*it)[2], (*it)[3]));
 	}
@@ -168,5 +168,5 @@ float GameParameters::getWorldTimeStep(){
 	return this->float_parameters[WORLD_TIME_STEP];
 }
 
-GameParameters::GirderParams::GirderParams(size_t len, int pos_x, int pos_y, int rotation):
+GameParameters::GirderParams::GirderParams(size_t len, float pos_x, float pos_y, int rotation):
 	len(len), pos_x(pos_x), pos_y(pos_y), rotation(rotation){}
