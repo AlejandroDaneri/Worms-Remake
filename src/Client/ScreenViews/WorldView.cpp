@@ -5,15 +5,29 @@
 #include "Math.h"
 #include "ObjectSizes.h"
 
-WorldView::WorldView(){
+WorldView::WorldView() {
 	this->world.set_size(map_width, map_height);
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
-	this->window.override_background_color(Gdk::RGBA("lightgreen"));////////////// Reemplazar por fondo de pantalla
+
+	/////////////////////////// Cambiar a que se reciba por parametro
+	std::string background_name("resources/Images/editor_toolbox/background2.jpg");
+
+	Gtk::Image aux(background_name);
+	int img_width = aux.get_pixbuf()->get_width();
+	int img_height = aux.get_pixbuf()->get_height();
+	for (size_t x = 0; x < map_width; x += img_width) {
+		for (size_t y = 0; y < map_height; y += img_height) {
+			Gtk::Image background_image(background_name);
+			background_image.show();
+			this->world.put(background_image, x, y);
+			this->background.push_back(std::move(background_image));
+		}
+	}
 	this->water.show(this->world);
 }
 
-WorldView::~WorldView(){}
+WorldView::~WorldView() {}
 
 void WorldView::moveElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus){
 	Position newPosition = ViewPositionTransformer(this->world).transformToScreenAndMove(position, width, height);

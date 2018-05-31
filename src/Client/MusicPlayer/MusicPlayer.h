@@ -11,10 +11,10 @@
 class MusicPlayer {
 	private:
 		Mix_Music* music; // Musica de fondo
-        std::map<int, Mix_Chunk*> effects;
+		std::map<int, Mix_Chunk*> effects;
 
-        void check(int channel);
-        void addEffect(const std::string& audio);
+		void check(int channel);
+		void addEffect(const std::string& audio);
 
 	public:
 		/* Constructor */
@@ -40,6 +40,12 @@ class MusicPlayer {
 
 		/* Reproduce el sonido de arma disparada */
 		void playWeaponShotSound(const std::string& weapon);
+
+		/* Reproduce el sonido de arma disparada */
+		void playJumpSound(int dir);
+
+		/* Reproduce el sonido de arma disparada */
+		void playSelectWeaponSound();
 
 		/* Reproduce el sonido de victoria */
 		void playVictory();

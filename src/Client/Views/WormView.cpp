@@ -74,7 +74,8 @@ void WormView::setWeaponImage(){
         angle = 180 - this->angle;
     }
     int width = this->scope_vector[(90 + angle) / 6]->get_width() / 3;
-    this->image.set(Gdk::Pixbuf::create_subpixbuf(this->scope_vector[(90 + angle) / 6], width + this->dir * width, 0, width, width));
+    int height = this->scope_vector[(90 + angle) / 6]->get_height();
+    this->image.set(Gdk::Pixbuf::create_subpixbuf(this->scope_vector[(90 + angle) / 6], width + this->dir * width, 0, width, height));
 }
 
 void WormView::setMovementImage(bool dir_changed){
@@ -96,8 +97,8 @@ void WormView::updateWeaponImage() {
     this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
     int width = this->scope_image->get_width();
     int height = this->scope_image->get_height();
-    for (int i = 0; i < height/(width / 3); i++) {
-        this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * width / 3, width, width / 3));
+    for (int i = 0; i < height / WORM_IMAGE_WIDTH; i++) {
+        this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
     }
 }
 

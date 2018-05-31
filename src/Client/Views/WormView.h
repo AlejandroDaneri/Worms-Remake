@@ -26,12 +26,12 @@ class WormView: public Viewable {
 		Gtk::Grid worm;
 		std::queue<Glib::RefPtr<Gdk::Pixbuf>> walk_queue;
 		Glib::RefPtr<Gdk::Pixbuf> walk_image;
-	    std::vector<Glib::RefPtr<Gdk::Pixbuf>> scope_vector;
-	    Glib::RefPtr<Gdk::Pixbuf> scope_image;
-	    int angle;
+		std::vector<Glib::RefPtr<Gdk::Pixbuf>> scope_vector;
+		Glib::RefPtr<Gdk::Pixbuf> scope_image;
+		int angle;
 
-	    /* Actualiza la imagen del worm a la correspondiente segun las
-	     * condiciones en las que se encuentra este */
+		/* Actualiza la imagen del worm a la correspondiente segun las
+		 * condiciones en las que se encuentra este */
 		void setNewImage(bool dir_changed, bool moved, bool colliding, bool is_current_worm);
 
 		/* Cambia la imagen actual por la del arma actual */
@@ -47,7 +47,7 @@ class WormView: public Viewable {
 		void updateWeaponImage();
 
 	public:
-	    /* Constructor */
+		/* Constructor */
 		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id);
 
 		/* Destructor */
@@ -63,7 +63,7 @@ class WormView: public Viewable {
 		/* Actualiza la imagen del arma con el angulo actual */
 		void updateScope(int angle);
 
-        /* Actualiza el arma del worm y cambia la imagen */
+		/* Actualiza el arma del worm y cambia la imagen */
 		void changeWeapon(const std::string &weapon);
 
 		/* Devuelve la direccion del worm */

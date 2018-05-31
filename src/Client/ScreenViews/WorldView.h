@@ -16,6 +16,7 @@ class WorldView{
 	private:
 		Gtk::Layout world;
 		Gtk::ScrolledWindow window;
+		std::vector<Gtk::Image> background;
 		Water water;
 
 	public:
