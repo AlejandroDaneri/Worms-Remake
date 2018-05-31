@@ -70,9 +70,9 @@ void FileBoxController::onLoadClicked() const {
         unsigned int life;
         file.read(worms, girders,
                   weps_ammo, life, background);
+        map_controller->loadBackground(background);
         weapons_controller.loadWeapons(weps_ammo, life);
         map_controller->loadObjects(worms, girders);
-        map_controller->loadBackground(background);
     }
     open_dialog->hide();
 }
