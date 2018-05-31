@@ -4,6 +4,9 @@
 #include "CreateGameMenu.h"
 #include "JoinGameMenu.h"
 
+#define MENU_WIDTH 918
+#define MENU_HEIGHT 570
+
 GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol): MenuView(window, *this, protocol){
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_GameMenu.glade");
 
@@ -11,13 +14,23 @@ GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol): MenuView(wind
 	builder->get_widget("player_name", this->player_name);
 
 	builder->get_widget("game_menu", this->menu);
-	this->window.add(*this->menu);
-	this->menu->show();
+	//this->window.add(*this->menu);
+	//this->menu->show();
+
+	Glib::RefPtr<Gdk::Screen> screen = this->window.get_screen();
+
+	this->world.put(*this->menu, screen->get_width() / 2 - MENU_WIDTH/2, screen->get_height() / 2 - MENU_HEIGHT/2);
+
+	this->window.add(this->world);
+	this->window.show_all();
 
 
-	Gtk::Button *create_game, *join_game;
+	Gtk::Button *create_game, *join_game, *quit_game;
+
 	builder->get_widget("create_game", create_game);
 	builder->get_widget("join_game", join_game);
+	builder->get_widget("quit_game", quit_game);
+
 	create_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::createButtonPressed));
 	join_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::joinButtonPressed));
 }

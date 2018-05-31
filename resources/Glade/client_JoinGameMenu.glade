@@ -3,31 +3,18 @@
 <interface>
   <requires lib="gtk+" version="3.12"/>
   <object class="GtkBox" id="join_game_menu">
+    <property name="width_request">144</property>
+    <property name="height_request">142</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
-    <child>
-      <object class="GtkLabel" id="title">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">WORMS</property>
-        <attributes>
-          <attribute name="underline" value="True"/>
-          <attribute name="size" value="20000"/>
-        </attributes>
-      </object>
-      <packing>
-        <property name="expand">False</property>
-        <property name="fill">False</property>
-        <property name="position">0</property>
-      </packing>
-    </child>
     <child>
       <object class="GtkLabel" id="error">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <attributes>
           <attribute name="foreground" value="#cccc00000000"/>
+          <attribute name="background" value="#ffffffffffff"/>
           <attribute name="size" value="15000"/>
         </attributes>
       </object>
@@ -35,6 +22,30 @@
         <property name="expand">False</property>
         <property name="fill">False</property>
         <property name="position">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkAspectFrame" id="aspectframe4">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label_xalign">0</property>
+        <property name="shadow_type">none</property>
+        <child>
+          <object class="GtkButton" id="quit_game">
+            <property name="label" translatable="yes">Salir</property>
+            <property name="width_request">80</property>
+            <property name="height_request">50</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="yalign">0.4699999988079071</property>
+          </object>
+        </child>
+      </object>
+      <packing>
+        <property name="expand">False</property>
+        <property name="fill">True</property>
+        <property name="position">2</property>
       </packing>
     </child>
     <child>
@@ -55,6 +66,9 @@
                 <property name="label" translatable="yes">Partidas Disponibles</property>
                 <attributes>
                   <attribute name="underline" value="True"/>
+                  <attribute name="foreground" value="#000000000000"/>
+                  <attribute name="background" value="#ffffffffffff"/>
+                  <attribute name="underline-color" value="#000000000000"/>
                   <attribute name="size" value="12000"/>
                 </attributes>
               </object>

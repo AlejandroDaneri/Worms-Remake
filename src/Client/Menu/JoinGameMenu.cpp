@@ -4,6 +4,9 @@
 #include "Path.h"
 #include "WaitingLabel.h"
 
+#define MENU_WIDTH 144
+#define MENU_HEIGHT 142
+
 JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity):
 	SelectableListMenu(window, first_menu, protocol, std::move(name)){
 
@@ -15,7 +18,12 @@ JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProt
 	this->configure(quantity);
 
 	builder->get_widget("join_game_menu", this->menu);
-	this->window.add(*this->menu);
+
+	Glib::RefPtr<Gdk::Screen> screen = this->window.get_screen();
+
+	this->world.put(*this->menu, screen->get_width() / 2 - MENU_WIDTH/2, screen->get_height() / 2 - MENU_HEIGHT/2);
+
+	this->window.add(this->world);
 	this->window.show_all();
 }
 

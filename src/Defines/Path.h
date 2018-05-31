@@ -50,6 +50,8 @@ const std::string VICTORY_ANIMATION(ANIMATIONS_PATH + "Victory.gif");
 
 const std::string EXPLOSION_ANIMATION(ANIMATIONS_PATH + "Explosion.png");
 
+const std::string BACKGROUND_MENU_IMAGE(BACKGROUND_PATH + "background.png");
+
 
 //server
 
