@@ -4,8 +4,11 @@
 #include "Path.h"
 #include "GamePlayers.h"
 
-CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity):
-	SelectableListMenu(window, first_menu, protocol, std::move(name)){
+#define MENU_WIDTH 936
+#define MENU_HEIGHT 386
+
+CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity, Glib::RefPtr<Gtk::Application> app):
+	SelectableListMenu(window, first_menu, protocol, std::move(name), app){
 
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_CreateGameMenu.glade");
 
@@ -13,12 +16,14 @@ CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu, Client
 	builder->get_widget("game_name", this->game_name);
 	builder->get_widget("players_number", this->players_number);
 	builder->get_widget("games", this->games);
+	builder->get_widget("quit_game", this->quit_game);
 
 	this->configure(quantity);
 
 	builder->get_widget("create_game_menu", this->menu);
-	this->window.add(*this->menu);
-	this->window.show_all();
+
+	this->addMenu(MENU_WIDTH/2, MENU_HEIGHT/2);
+	this->quit_game->signal_clicked().connect(sigc::mem_fun(*this, &CreateGameMenu::quitButtonPressed));
 }
 
 CreateGameMenu::~CreateGameMenu(){}

@@ -33,6 +33,7 @@ void DataReceiver::stop(){
 
 void DataReceiver::initialConfig(){
 	this->protocol.receiveStartGame();
+	this->protocol.receiveBackgroundImage(this->player.getScreen().getWorld());
 	this->protocol.receivePlayers(this->player.getScreen().getPlayersView());
 	this->protocol.receiveGirders(this->player.getViewsList());
 	this->protocol.receiveWeaponsAmmo(this->player.getWeapons());
@@ -91,6 +92,9 @@ bool DataReceiver::analizeReceivedData(Buffer buffer){
 		} else if (type == WEAPON_TYPE){
 			this->player.getViewsList().removeWeapon(id);
 		}
+	} else if (action == MOVE_ACTION){
+		char movement = buffer.getNext();
+		this->player.getMusicPlayer().playJumpSound(movement);
 	}
 	return false;
 }

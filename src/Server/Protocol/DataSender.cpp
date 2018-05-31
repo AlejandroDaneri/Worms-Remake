@@ -27,7 +27,7 @@ void DataSender::run(){
 
 		while(it != this->objects.end()){
 			if ((*it)->isDead()){
-				Buffer data = this->players[0].getProtocol().sendDeadObject(*it);
+				Buffer data = ServerProtocol::sendDeadObject(*it);
 
 				this->sendBuffer(data);
 				it = this->objects.erase(it);
@@ -35,7 +35,7 @@ void DataSender::run(){
 			}
 
 			if ((*it)->isMoving()){
-				Buffer data = this->players[0].getProtocol().sendObject(*it);
+				Buffer data = ServerProtocol::sendObject(*it);
 				this->sendBuffer(data);
 				this->active = true;
 			}
@@ -54,68 +54,83 @@ void DataSender::run(){
 	}
 }
 
+void DataSender::sendBackgroundImage(const std::string& image){
+	Buffer data = ServerProtocol::sendBackgroundImage(image);
+	this->sendBuffer(data);
+	this->notifyAll();
+}
+
 void DataSender::send_start_game(){
-	Buffer data = this->players[0].getProtocol().sendStartGame();
+	Buffer data = ServerProtocol::sendStartGame();
 	this->sendBuffer(data);
 	this->notifyAll();
 }
 
 void DataSender::send_players_id(){
-	Buffer length = this->players[0].getProtocol().sendLengthBuffer(this->players.size());
+	Buffer length = ServerProtocol::sendLengthBuffer(this->players.size());
 	this->sendBuffer(length);
 	for (auto it = this->players.begin(); it != this->players.end(); ++it){
-		Buffer data = this->players[0].getProtocol().sendPlayerId(*it);
+		Buffer data = ServerProtocol::sendPlayerId(*it);
 		this->sendBuffer(data);
 	}
     this->notifyAll();
 }
 
 void DataSender::sendGirders(){
-	Buffer length = this->players[0].getProtocol().sendLengthBuffer(this->girders.size());
+	Buffer length = ServerProtocol::sendLengthBuffer(this->girders.size());
 	this->sendBuffer(length);
 	for (auto it = this->girders.begin(); it != this->girders.end(); ++it){
-		Buffer data = this->players[0].getProtocol().sendGirder(*it);
+		Buffer data = ServerProtocol::sendGirder(*it);
 		this->sendBuffer(data);
 	}
     this->notifyAll();
 }
 
 void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
-	Buffer length = this->players[0].getProtocol().sendLengthBuffer(weapons.size());
+	Buffer length = ServerProtocol::sendLengthBuffer(weapons.size());
 	this->sendBuffer(length);
 	for (auto it = weapons.begin(); it != weapons.end(); ++it){
-		Buffer data = this->players[0].getProtocol().sendWeaponAmmo(it->first, it->second);
+		Buffer data = ServerProtocol::sendWeaponAmmo(it->first, it->second);
 		this->sendBuffer(data);
 	}
     this->notifyAll();
 }
 
 void DataSender::send_start_turn(int worm_id, int player_id, float wind){
-	Buffer data = this->players[0].getProtocol().send_start_turn(worm_id, player_id, wind);
+	Buffer data = ServerProtocol::send_start_turn(worm_id, player_id, wind);
 	this->sendBuffer(data);
 	this->notifyAll();
 }
 
 void DataSender::send_weapon_changed(const std::string& weapon){
-	Buffer data = this->players[0].getProtocol().send_weapon_changed(weapon);
+	Buffer data = ServerProtocol::send_weapon_changed(weapon);
 	this->sendBuffer(data);
 	this->notifyAll();
 }
 
 void DataSender::sendWeaponShot(const std::string& weapon){
-	Buffer data = this->players[0].getProtocol().send_weapon_shot(weapon);
+	Buffer data = ServerProtocol::send_weapon_shot(weapon);
+	this->sendBuffer(data);
+	this->notifyAll();
+}
+
+void DataSender::sendMoveAction(char action){
+	if (action == MOVE_RIGHT || action == MOVE_LEFT){
+		return;
+	}
+	Buffer data = ServerProtocol::sendMoveAction(action);
 	this->sendBuffer(data);
 	this->notifyAll();
 }
 
 void DataSender::sendUpdateScope(int angle) {
-	Buffer data = this->players[0].getProtocol().sendUpdateScope(angle);
+	Buffer data = ServerProtocol::sendUpdateScope(angle);
 	this->sendBuffer(data);
 	this->notifyAll();
 }
 
 void DataSender::sendEndGame(const std::string& winner){
-	Buffer data = this->players[0].getProtocol().sendEndGame(winner);
+	Buffer data = ServerProtocol::sendEndGame(winner);
 	this->sendBuffer(data);
 	this->notifyAll();
 }

@@ -1,7 +1,7 @@
 #include "SelectableListMenu.h"
 
-SelectableListMenu::SelectableListMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name):
-	MenuView(window, first_menu, protocol), player_name(std::move(name)){}
+SelectableListMenu::SelectableListMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, Glib::RefPtr<Gtk::Application> app):
+	MenuView(window, first_menu, protocol, app), player_name(std::move(name)){}
 
 SelectableListMenu::~SelectableListMenu(){}
 
@@ -39,6 +39,7 @@ bool SelectableListMenu::createPlayer(){
 
 void SelectableListMenu::waitToPlayers(){
 	this->window.remove();
+	this->world.remove(*this->menu);
 	this->window.add(this->waiting_label.getWidget());
 	this->window.show_all();
 	sigc::slot<bool> my_slot = sigc::mem_fun(*this, &SelectableListMenu::createPlayer);

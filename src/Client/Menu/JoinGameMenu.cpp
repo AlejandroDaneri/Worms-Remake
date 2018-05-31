@@ -4,19 +4,26 @@
 #include "Path.h"
 #include "WaitingLabel.h"
 
-JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity):
-	SelectableListMenu(window, first_menu, protocol, std::move(name)){
+#define MENU_WIDTH 144
+#define MENU_HEIGHT 142
+
+JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity, Glib::RefPtr<Gtk::Application> app):
+	SelectableListMenu(window, first_menu, protocol, std::move(name), app){
 
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_JoinGameMenu.glade");
 
 	builder->get_widget("error", this->error);
 	builder->get_widget("game", this->games);
+	builder->get_widget("quit_game", this->quit_game);
 
 	this->configure(quantity);
 
 	builder->get_widget("join_game_menu", this->menu);
-	this->window.add(*this->menu);
-	this->window.show_all();
+
+	this->addMenu(MENU_WIDTH/2, MENU_HEIGHT/2);
+
+	quit_game->signal_clicked().connect(sigc::mem_fun(*this, &JoinGameMenu::quitButtonPressed));
+
 }
 
 JoinGameMenu::~JoinGameMenu(){}

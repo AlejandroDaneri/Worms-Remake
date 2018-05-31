@@ -51,6 +51,9 @@ class ClientProtocol: public Protocol {
 		/* Recibe el comienzo del juego */
 		void receiveStartGame();
 
+		/* Recibe y setea la imagen de fondo */
+		void receiveBackgroundImage(WorldView& world);
+
 		/* Recibe los jugadores de la partida junto con su
 		 * id y su nombre */
 		void receivePlayers(PlayersList& players_list);

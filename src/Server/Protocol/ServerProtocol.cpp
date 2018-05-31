@@ -19,9 +19,9 @@ Buffer ServerProtocol::sendObject(physical_object_ptr& object){
 
 	const std::string& type = object->getType();
 	if (type == TYPE_WORM){
-		this->send_worm(object, buffer);
+		ServerProtocol::send_worm(object, buffer);
 	} else if (type == TYPE_WEAPON){
-		this->send_weapon(object, buffer);
+		ServerProtocol::send_weapon(object, buffer);
 	}
 	return std::move(buffer);
 }
@@ -38,7 +38,7 @@ Buffer ServerProtocol::sendDeadObject(physical_object_ptr& object){
 	}
 
 	uint32_t id = object->getId();
-	this->sendIntBuffer(buffer, id);
+	ServerProtocol::sendIntBuffer(buffer, id);
 
 	return std::move(buffer);
 }
@@ -50,27 +50,27 @@ void ServerProtocol::send_worm(physical_object_ptr& object, Buffer& buffer){
 
 	b2Vec2 position = worm->getPosition();
 
-	this->sendIntBuffer(buffer, id);
-	this->sendIntBuffer(buffer, worm->getPlayerId());
-	this->sendIntBuffer(buffer, position.x * UNIT_TO_SEND);
-	this->sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
-	this->sendIntBuffer(buffer, worm->getLife());
+	ServerProtocol::sendIntBuffer(buffer, id);
+	ServerProtocol::sendIntBuffer(buffer, worm->getPlayerId());
+	ServerProtocol::sendIntBuffer(buffer, position.x * UNIT_TO_SEND);
+	ServerProtocol::sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
+	ServerProtocol::sendIntBuffer(buffer, worm->getLife());
 	buffer.setNext(worm->getDir());
 	buffer.setNext(worm->isColliding());
 }
 
 void ServerProtocol::send_weapon(physical_object_ptr& object, Buffer& buffer){
 	buffer.setNext(WEAPON_TYPE);
-	this->sendIntBuffer(buffer, object->getId());
+	ServerProtocol::sendIntBuffer(buffer, object->getId());
 
 
 	b2Vec2 position = object->getPosition();
 	Weapon* weapon = (Weapon*)object.get();
 	std::string name = weapon->getName();
 
-	this->sendStringBuffer(buffer, name);
-	this->sendIntBuffer(buffer, position.x * UNIT_TO_SEND);
-	this->sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
+	ServerProtocol::sendStringBuffer(buffer, name);
+	ServerProtocol::sendIntBuffer(buffer, position.x * UNIT_TO_SEND);
+	ServerProtocol::sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
 }
 
 Buffer ServerProtocol::sendStartGame(){
@@ -89,9 +89,9 @@ Buffer ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_
 	Buffer buffer;
 	buffer.setNext(START_TURN);
 
-	this->sendIntBuffer(buffer, current_worm_id);
-	this->sendIntBuffer(buffer, current_player_id);
-	this->sendIntBuffer(buffer, wind * UNIT_TO_SEND);
+	ServerProtocol::sendIntBuffer(buffer, current_worm_id);
+	ServerProtocol::sendIntBuffer(buffer, current_player_id);
+	ServerProtocol::sendIntBuffer(buffer, wind * UNIT_TO_SEND);
 
     return buffer;
 }
@@ -108,11 +108,12 @@ void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 		char worm_action = buffer.getNext();
 		if (worm_action == MOVE_ACTION){
 			char move = buffer.getNext();
+			data_sender.sendMoveAction(move);
 			game.getCurrentWorm().move(move);
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
 			std::string weapon(this->receiveStringBuffer(buffer));
-			game.getCurrentWorm().changeWeapon(weapon);
 			data_sender.send_weapon_changed(weapon);
+			game.getCurrentWorm().changeWeapon(weapon);
 		} else if(worm_action == MOVE_SCOPE) {
             int32_t angle = this->receiveIntBuffer(buffer);
 			data_sender.sendUpdateScope(angle);
@@ -131,11 +132,16 @@ void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 	}
 }
 
+Buffer ServerProtocol::sendBackgroundImage(const std::string& image){
+	Buffer buffer;
+	ServerProtocol::sendStringBuffer(buffer, image);
+	return buffer;
+}
+
 Buffer ServerProtocol::sendPlayerId(const Player& player){
 	Buffer buffer;
-
-	this->sendIntBuffer(buffer, player.getId());
-	this->sendStringBuffer(buffer, player.getName());
+	ServerProtocol::sendIntBuffer(buffer, player.getId());
+	ServerProtocol::sendStringBuffer(buffer, player.getName());
 	return buffer;
 }
 
@@ -143,55 +149,53 @@ Buffer ServerProtocol::sendGirder(physical_object_ptr& object){
 	Girder* girder = (Girder*)object.get();
 
 	Buffer buffer;
-	this->sendIntBuffer(buffer, girder->getSize());
+	ServerProtocol::sendIntBuffer(buffer, girder->getSize());
 
 	b2Vec2 position = object->getPosition();
-	this->sendIntBuffer(buffer, position.x * UNIT_TO_SEND);
-	this->sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
-	this->sendIntBuffer(buffer, girder->getRotation());
+	ServerProtocol::sendIntBuffer(buffer, position.x * UNIT_TO_SEND);
+	ServerProtocol::sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
+	ServerProtocol::sendIntBuffer(buffer, girder->getRotation());
 	return buffer;
 }
 
 Buffer ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
 	Buffer buffer;
-
-	this->sendStringBuffer(buffer, weapon_name);
-	this->sendIntBuffer(buffer, ammo);
+	ServerProtocol::sendStringBuffer(buffer, weapon_name);
+	ServerProtocol::sendIntBuffer(buffer, ammo);
 	return buffer;
 }
 
 Buffer ServerProtocol::send_weapon_changed(const std::string& weapon){
 	Buffer buffer;
-
 	buffer.setNext(CHANGE_WEAPON_ACTION);
-	this->sendStringBuffer(buffer, weapon);
-
+	ServerProtocol::sendStringBuffer(buffer, weapon);
     return buffer;
 }
 
 Buffer ServerProtocol::send_weapon_shot(const std::string& weapon){
 	Buffer buffer;
-
 	buffer.setNext(SHOOT_WEAPON_ACTION);
-	this->sendStringBuffer(buffer, weapon);
+	ServerProtocol::sendStringBuffer(buffer, weapon);
+    return buffer;
+}
 
+Buffer ServerProtocol::sendMoveAction(char action){
+	Buffer buffer;
+	buffer.setNext(MOVE_ACTION);
+	buffer.setNext(action);
     return buffer;
 }
 
 Buffer ServerProtocol::sendUpdateScope(int angle) {
     Buffer buffer;
-
     buffer.setNext(MOVE_SCOPE);
-	this->sendIntBuffer(buffer, angle);
-
+	ServerProtocol::sendIntBuffer(buffer, angle);
     return buffer;
 }
 
 Buffer ServerProtocol::sendEndGame(const std::string& winner){
 	Buffer buffer;
-
     buffer.setNext(END_GAME);
-	this->sendStringBuffer(buffer, winner);
-
+	ServerProtocol::sendStringBuffer(buffer, winner);
     return buffer;
 }

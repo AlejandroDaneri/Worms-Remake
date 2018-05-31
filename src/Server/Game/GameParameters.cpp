@@ -48,6 +48,8 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 	for (auto it = girders_file.begin(); it != girders_file.end(); ++it){
 		this->girders.push_back(GirderParams((*it)[0], (*it)[1], (*it)[2], (*it)[3]));
 	}
+
+	this->background_image = config_editor[BACKGROUND_IMAGE].as<std::string>();
 }
 
 GameParameters::~GameParameters(){}
@@ -166,6 +168,10 @@ int GameParameters::getWorldSleepAfterStep(){
 
 float GameParameters::getWorldTimeStep(){
 	return this->float_parameters[WORLD_TIME_STEP];
+}
+
+const std::string& GameParameters::getBackgroundImage(){
+	return this->background_image;
 }
 
 GameParameters::GirderParams::GirderParams(size_t len, float pos_x, float pos_y, int rotation):

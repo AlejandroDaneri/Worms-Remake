@@ -1,6 +1,7 @@
 #include "MusicPlayer.h"
 #include "MusicPlayerException.h"
 #include "WeaponNames.h"
+#include "Protocol.h"
 #include "Path.h"
 
 const std::string BACKGROUND_MUSIC = SOUNDS_PATH + "BackgroundMusic.mp3";
@@ -142,10 +143,10 @@ void MusicPlayer::playWeaponShotSound(const std::string& weapon){
 	}
 }
 
-void MusicPlayer::playJumpSound(int dir) {
-	if (dir == -1) {
+void MusicPlayer::playJumpSound(char action) {
+	if (action == ROLLBACK) {
 		this->addEffect(ROLLBACK_SOUND);
-	} else {
+	} else if (action == JUMP){
 		this->addEffect(JUMP_SOUND);
 	}
 }

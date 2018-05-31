@@ -19,6 +19,7 @@ class WormView: public Viewable {
 		int player_id;
 		int life;
 		char dir;
+		bool is_moving;
 		std::string weapon;
 		Position last_position;
 		WormLifeView label;
@@ -32,7 +33,7 @@ class WormView: public Viewable {
 
 		/* Actualiza la imagen del worm a la correspondiente segun las
 		 * condiciones en las que se encuentra este */
-		void setNewImage(bool dir_changed, bool moved, bool colliding, bool is_current_worm);
+		void setNewImage(bool dir_changed, bool colliding, bool is_current_worm, bool has_shot);
 
 		/* Cambia la imagen actual por la del arma actual */
 		void setWeaponImage();
@@ -58,7 +59,7 @@ class WormView: public Viewable {
 
 
 		/* Actualiza la posicion y vida del worm */
-		void updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm);
+		void updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm, bool has_shot);
 
 		/* Actualiza la imagen del arma con el angulo actual */
 		void updateScope(int angle);
@@ -87,6 +88,9 @@ class WormView: public Viewable {
 		/* Cambia la imagen del worm por la animacion del worm
 		 * festejando la victoria */
 		void setVictory();
+
+		/* Devuelve true si el gusano se esta moviendo */
+		bool isMoving() const;
 };
 
 

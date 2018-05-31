@@ -20,6 +20,7 @@ class GameParameters{
 
 		std::vector<b2Vec2> worms;
 		std::vector<GirderParams> girders;
+		std::string background_image;
 
 	public:
 		//Inicializa todos los parametros necesarios para la partida
@@ -63,6 +64,8 @@ class GameParameters{
 		int getGameWaitingWorldSleep();
 		int getWorldSleepAfterStep();
 		float getWorldTimeStep();
+
+		const std::string& getBackgroundImage();
 };
 
 class GameParameters::GirderParams{

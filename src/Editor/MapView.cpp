@@ -8,7 +8,7 @@
 #include "yaml-cpp/yaml.h"
 #include "MapView.h"
 
-#define BACKGROUND_QUANTITY 2
+#define BACKGROUND_QUANTITY 8
 
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
@@ -21,7 +21,7 @@ MapView::MapView(BaseObjectType *cobject,
 	((Gtk::ScrolledWindow*)this->get_parent())->get_vadjustment()->set_value(height);
 
 	for (size_t i = 1; i <= BACKGROUND_QUANTITY; i++){
-		bg_paths.emplace_back(BACKGROUND_PATH + "background" + std::to_string(i) + ".png");
+		bg_paths.emplace_back(BACKGROUND_PATH + "background" + std::to_string(i) + ".jpg");
 	}
     setBackground(bg_paths[actual_bg]);
 

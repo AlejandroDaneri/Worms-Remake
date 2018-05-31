@@ -10,7 +10,7 @@ Player::Player(ClientProtocol protocol, const std::string& name, Gtk::Window& wi
 	handlers(*this, this->view_list, this->weapons, this->screen.getWorld()){
 
 	this->musicPlayer.playMusic();
-	this->data_receiver.start();	
+	this->data_receiver.start();
 }
 
 Player::~Player() {

@@ -3,6 +3,7 @@
 
 #include <gdk/gdk.h>
 #include "WeaponPowerAccum.h"
+#include "ScrollHandler.h"
 
 class Player;
 class ViewsList;
@@ -17,6 +18,7 @@ class Handlers{
 		ViewsList& view_list;
 		WeaponList& weapons;
 		WorldView& world;
+		ScrollHandler scroll_handler;
 
 		bool has_shoot;
 		int current_angle;

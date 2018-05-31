@@ -30,6 +30,9 @@ class DataSender: public Thread{
 		//Envia constantemente los datos de los objetos
 		void run() override;
 
+		//Envia la imagen de fondo
+		void sendBackgroundImage(const std::string& image);
+
 		//Envia los datos de los jugadores
 		void send_players_id();
 
@@ -41,6 +44,9 @@ class DataSender: public Thread{
 
 		//Envia que el jugador cambio de arma
 		void send_weapon_changed(const std::string& weapon);
+
+		//Envia que el gusano actual salto
+		void sendMoveAction(char action);
 
 		//Envia que el jugador cambio el angulo de la mira
 		void sendUpdateScope(int angle);

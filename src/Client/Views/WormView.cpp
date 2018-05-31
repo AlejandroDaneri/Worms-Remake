@@ -5,9 +5,9 @@
 #include "GamePlayers.h"
 
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id):
-	Viewable(worldView), player_id(player_id), life(life), dir(dir),
+	Viewable(worldView), player_id(player_id), life(life), dir(dir), is_moving(false),
 	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)), label(life, colors[player_id]),
-	angle(48) {
+	angle(DEFAULT_ANGLE) {
 	    this->walk_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + "walk.png");
 	    int width = this->walk_image->get_width();
 	    int height = this->walk_image->get_height();
@@ -31,16 +31,16 @@ WormView::WormView(WormView&& other): Viewable(std::move(other)), player_id(othe
     walk_image(std::move(other.walk_image)), scope_vector(std::move(other.scope_vector)),
     scope_image(std::move(other.scope_image)), angle(other.angle) {}
 
-void WormView::updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm) {
+void WormView::updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm, bool has_shot) {
 	if (new_life != this->life){
 		this->label.updateLife(new_life);
 	}
 	this->life = new_life;
 	bool dir_changed = this->dir != new_dir;
-	bool moved = !(this->last_position == new_pos);
+	this->is_moving = !(this->last_position == new_pos);
 	this->dir = new_dir;
 	this->last_position = new_pos;
-	this->setNewImage(dir_changed, moved, colliding, is_current_worm);
+	this->setNewImage(dir_changed, colliding, is_current_worm, has_shot);
 	this->move(new_pos, worm_size, worm_size + 0.5);
 }
 
@@ -56,9 +56,9 @@ void WormView::changeWeapon(const std::string& weapon) {
     this->setWeaponImage();
 }
 
-void WormView::setNewImage(bool dir_changed, bool moved, bool colliding, bool is_current_worm){
+void WormView::setNewImage(bool dir_changed, bool colliding, bool is_current_worm, bool has_shot){
 	if (is_current_worm){
-		if (!moved){
+		if (!this->is_moving && !has_shot){
             this->setWeaponImage();
 		} else if (colliding){
 			this->setMovementImage(dir_changed);
@@ -120,6 +120,10 @@ char WormView::getDir() const {
 
 int WormView::getPlayerId() const{
 	return this->player_id;
+}
+
+bool WormView::isMoving() const{
+	return this->is_moving;
 }
 
 void WormView::setVictory() {

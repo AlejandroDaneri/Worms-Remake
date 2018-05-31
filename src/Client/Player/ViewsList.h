@@ -12,6 +12,7 @@
 #include "ExplosionView.h"
 #include "ExplosionViewList.h"
 #include "MusicPlayer.h"
+#include "Scope.h"
 
 /* Clase que se encarga de almacenar los objetos visibles */
 class ViewsList{
@@ -22,12 +23,12 @@ class ViewsList{
 		std::unordered_map<int, WormView> worms;
 		std::unordered_map<int, BulletView> weapons;
 		std::vector<GirderView> girders;
-		Gtk::Image scope;
 		int current_worm_id;
 		int weapon_focused;
+		int worm_focused;
 		ExplosionViewList animation;
+		Scope scope;
 		MusicPlayer& musicPlayer;
-		int angle;
 
 		/* Elimina el focus sobre el worm */
 		void removeWormFocus();
@@ -76,6 +77,10 @@ class ViewsList{
 		/* Actualiza la imagen de los worms ganadores por la animacion
 		 * de los worms festejando */
 		void setVictory();
+
+		/* Chequea si el gusano actual se esta moviendo, caso contario
+		le da el focus a otro */
+		void checkMovingWorms();
 };
 
 

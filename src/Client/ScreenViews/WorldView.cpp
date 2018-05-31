@@ -1,5 +1,6 @@
 #include "WorldView.h"
 #include <gtkmm/adjustment.h>
+#include <glibmm/main.h>
 #include "ViewPositionTransformer.h"
 #include "Player.h"
 #include "Math.h"
@@ -9,23 +10,8 @@
 WorldView::WorldView() {
 	this->world.set_size(map_width, map_height);
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
+	this->window.add_events(Gdk::POINTER_MOTION_MASK);
 	this->window.add(this->world);
-
-	/////////////////////////// Cambiar a que se reciba por parametro
-	std::string background_name(BACKGROUND_PATH + "background2.png");
-
-	/*Gtk::Image aux(background_name);
-	int img_width = aux.get_pixbuf()->get_width();
-	int img_height = aux.get_pixbuf()->get_height();
-	for (size_t x = 0; x < map_width; x += img_width) {
-		for (size_t y = 0; y < map_height; y += img_height) {
-			Gtk::Image background_image(background_name);
-			background_image.show();
-			this->world.put(background_image, x, y);
-			this->background.push_back(std::move(background_image));
-		}
-	}*/
-	this->water.show(this->world);
 
 	this->window.get_hadjustment()->set_value(map_width / 2);
 	this->window.get_vadjustment()->set_value(map_height);
@@ -74,4 +60,27 @@ Gtk::Layout& WorldView::getLayout(){
 void WorldView::setFocus(Gtk::Widget& element){
 	this->window.get_hadjustment()->set_value(element.get_allocation().get_x() - this->window.get_hadjustment()->get_page_size() / 2);
 	this->window.get_vadjustment()->set_value(element.get_allocation().get_y() - this->window.get_vadjustment()->get_page_size() / 2);
+}
+
+void WorldView::setBackgroundImage(const std::string& image){
+	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WorldView::setBackgroundImageCallBack), image);
+    Glib::signal_idle().connect(my_slot);
+}
+
+bool WorldView::setBackgroundImageCallBack(std::string image){
+	image.insert(0, BACKGROUND_PATH);
+
+	Gtk::Image aux(image);
+	int img_width = aux.get_pixbuf()->get_width();
+	int img_height = aux.get_pixbuf()->get_height();
+	for (size_t x = 0; x < map_width; x += img_width) {
+		for (size_t y = 0; y < map_height; y += img_height) {
+			Gtk::Image background_image(image);
+			background_image.show();
+			this->world.put(background_image, x, y);
+			this->background.push_back(std::move(background_image));
+		}
+	}
+	this->water.show(this->world);
+	return false;
 }

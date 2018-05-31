@@ -4,6 +4,8 @@
 #include <gtkmm/hvbox.h>
 #include <gtkmm/label.h>
 #include <gtkmm/window.h>
+#include <gtkmm/layout.h>
+#include <gtkmm/image.h>
 #include <memory>
 #include "ClientProtocol.h"
 
@@ -19,6 +21,10 @@ class MenuView{
 		std::unique_ptr<MenuView> next_menu;
 		MenuView& first_menu;
 		Gtk::Box* menu;
+		Glib::RefPtr<Gtk::Application> app;
+
+		Gtk::Layout world;
+		Gtk::Image background;
 
 		/* Muestra un mensaje de error y no permite continuar */
 		void showFatalError(const std::string& error = "Ocurrio un error.");
@@ -26,9 +32,13 @@ class MenuView{
 		/* Muestra un mensaje de error y reinicia */
 		void showErrorAndRestart(const std::string& error);
 
+		void addMenu(int width, int height);
+
+		void quitButtonPressed();
+
 	public:
 		/* Constructor */
-		MenuView(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol);
+		MenuView(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, Glib::RefPtr<Gtk::Application> app);
 
 		/* Destructor */
 		virtual ~MenuView();

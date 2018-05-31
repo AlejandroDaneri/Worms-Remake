@@ -68,6 +68,12 @@ void ClientProtocol::receiveStartGame(){
 	Buffer buffer = std::move(this->receiveBuffer());
 }
 
+void ClientProtocol::receiveBackgroundImage(WorldView& world){
+	Buffer buffer = std::move(this->receiveBuffer());
+	std::string image = this->receiveStringBuffer(buffer);
+	world.setBackgroundImage(image);
+}
+
 void ClientProtocol::receivePlayers(PlayersList& players_list){
 	Buffer buffer = std::move(this->receiveBuffer());
 	int quantity = this->receiveIntBuffer(buffer);
