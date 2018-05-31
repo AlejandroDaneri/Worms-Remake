@@ -141,3 +141,7 @@ void MapController::changeBackground() {
 const std::string MapController::getBackgroundName() const{
     return view->getBackgroundName();
 }
+
+void MapController::loadBackground(const std::string &background) {
+    view->loadBackground(background);
+}

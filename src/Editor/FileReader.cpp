@@ -10,8 +10,10 @@ FileReader::FileReader(const std::string &filename)
 void FileReader::read(std::vector<std::vector<double>> &worms,
                       std::vector<std::vector<double>> &girders,
                       std::vector<int> &weps_ammo,
-                      unsigned int &worms_life) {
+                      unsigned int &worms_life, std::string& background) {
     YAML::Node config = YAML::LoadFile(filename);
+
+    background = config[BACKGROUND_IMAGE].as<std::string>();
 
     worms_life = config[WORMS_LIFE].as<unsigned int>();
 

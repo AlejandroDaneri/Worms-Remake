@@ -61,15 +61,18 @@ void FileBoxController::onLoadClicked() const {
         std::string filename = open_dialog->get_filename();
         map_name->set_label(open_dialog->get_current_name());
 
+        std::string background;
+
         FileReader file(filename);
         std::vector<std::vector<double>> worms;
         std::vector<std::vector<double>> girders;
         std::vector<int> weps_ammo;
         unsigned int life;
         file.read(worms, girders,
-                  weps_ammo, life);
+                  weps_ammo, life, background);
         weapons_controller.loadWeapons(weps_ammo, life);
         map_controller->loadObjects(worms, girders);
+        map_controller->loadBackground(background);
     }
     open_dialog->hide();
 }

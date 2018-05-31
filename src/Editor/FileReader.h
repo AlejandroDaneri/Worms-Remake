@@ -10,17 +10,17 @@
 
 class FileReader{
 private:
-	std::fstream file;
+    std::fstream file;
 	std::string filename;
 public:
 
-    explicit FileReader(const std::string &filename);
+	explicit FileReader(const std::string &filename);
 
 
     void read(std::vector<std::vector<double>> &worms,
               std::vector<std::vector<double>> &girders,
               std::vector<int> &weps_ammo,
-              unsigned int &worm_life);
+              unsigned int &worm_life, std::string& background);
 };
 
 

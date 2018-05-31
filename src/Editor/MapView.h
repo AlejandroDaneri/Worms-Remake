@@ -53,6 +53,8 @@ public:
     void redraw_map();
 
     const std::string getBackgroundName() const;
+
+    void loadBackground(const std::string &name);
 };
 
 

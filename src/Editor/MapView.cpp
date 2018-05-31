@@ -154,3 +154,7 @@ const std::string MapView::getBackgroundName() const {
     return "background"+std::to_string(actual_bg)+".png";
 }
 
+void MapView::loadBackground(const std::string &name) {
+    setBackground(BACKGROUND_PATH+name);
+}
+

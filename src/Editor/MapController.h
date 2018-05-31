@@ -48,6 +48,8 @@ public:
     void changeModeSignal();
 
     const std::string getBackgroundName() const;
+
+    void loadBackground(const std::string &background);
 };
 
 
