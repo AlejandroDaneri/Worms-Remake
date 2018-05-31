@@ -3,6 +3,8 @@
 #define WORMS_FILECONTROLLER_H
 
 
+static const char *const NEW_FILE_NAME = "Sin titulo.yaml";
+
 #include <gtkmm/filechooserdialog.h>
 #include "FileBoxView.h"
 #include "WeaponsAndLifeController.h"
