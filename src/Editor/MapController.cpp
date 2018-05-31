@@ -35,7 +35,7 @@ void MapController::erase() {
 void MapController::clean() {
     model.clean();
     view->clean();
-    toolBox->disableMovingItems();
+    toolBox->closeSelectionMode();
 }
 
 void MapController::moveSignal() {

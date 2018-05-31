@@ -139,6 +139,7 @@ void ToolBoxView::hideSelected() {
 }
 
 void ToolBoxView::closeSelectionMode() {
+    disableMovingItems();
     hideSelected();
     mode->set_active(false);
 }
