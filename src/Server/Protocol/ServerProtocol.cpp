@@ -123,8 +123,8 @@ void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 			data_sender.sendWeaponShot(game.getCurrentWorm().getCurrentWeapon());
 			game.getCurrentWorm().shoot(angle, power, time);
 		} else if(worm_action == SHOOT_SELF_DIRECTED) {
-			int pos_x = this->receiveIntBuffer(buffer);
-			int pos_y = this->receiveIntBuffer(buffer);
+			int pos_x = this->receiveIntBuffer(buffer) / UNIT_TO_SEND;
+			int pos_y = this->receiveIntBuffer(buffer) / UNIT_TO_SEND;
 			data_sender.sendWeaponShot(game.getCurrentWorm().getCurrentWeapon());
 			game.getCurrentWorm().shoot(b2Vec2(pos_x, pos_y));
 		}
