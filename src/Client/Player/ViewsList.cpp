@@ -18,14 +18,16 @@ ViewsList::~ViewsList(){}
 
 
 void ViewsList::removeWorm(int id){
-	auto it = this->worms.find(id);
-	this->players_list.reducePlayerLife(it->second.getPlayerId(), it->second.getLife());
-	if (id == this->current_worm_id){
-		this->player.endTurnEarly();
+	if (this->worms.find(id) != this->worms.end()) {
+		auto it = this->worms.find(id);
+		this->players_list.reducePlayerLife(it->second.getPlayerId(), it->second.getLife());
+		if (id == this->current_worm_id){
+			this->player.endTurnEarly();
+		}
+		it->second.removeFromWorld();
+		this->worms.erase(it);
+		this->musicPlayer.playDeathSound();
 	}
-	it->second.removeFromWorld();
-	this->worms.erase(it);
-	this->musicPlayer.playDeathSound();
 }
 
 void ViewsList::removeWeapon(int id){

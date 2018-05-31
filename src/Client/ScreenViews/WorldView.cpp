@@ -3,6 +3,7 @@
 #include "ViewPositionTransformer.h"
 #include "Player.h"
 #include "Math.h"
+#include "Path.h"
 #include "ObjectSizes.h"
 
 WorldView::WorldView() {
@@ -10,8 +11,11 @@ WorldView::WorldView() {
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add(this->world);
 
+	this->window.get_hadjustment()->set_value(map_width / 2);
+	this->window.get_vadjustment()->set_value(map_height);
+
 	/////////////////////////// Cambiar a que se reciba por parametro
-	std::string background_name("resources/Images/editor_toolbox/background2.jpg");
+	std::string background_name(BACKGROUND_PATH + "background2.png");
 
 	Gtk::Image aux(background_name);
 	int img_width = aux.get_pixbuf()->get_width();
