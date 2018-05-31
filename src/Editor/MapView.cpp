@@ -3,6 +3,8 @@
 #include <fstream>
 #include <ObjectSizes.h>
 #include <Path.h>
+#include <gtkmm/adjustment.h>
+#include <gtkmm/scrolledwindow.h>
 #include "yaml-cpp/yaml.h"
 #include "MapView.h"
 
@@ -10,6 +12,12 @@ MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),
           actual_bg(0) {
+
+    guint width, height;
+    this->get_size(width, height);
+    ((Gtk::ScrolledWindow*)this->get_parent())->get_hadjustment()->set_value(width / 2);
+	((Gtk::ScrolledWindow*)this->get_parent())->get_vadjustment()->set_value(height);
+
     bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/background1.png");
     bg_paths.emplace_back(IMAGES_PATH + "/editor_toolbox/background2.jpg");
     setBackground(bg_paths[actual_bg]);
