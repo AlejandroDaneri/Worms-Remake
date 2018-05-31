@@ -5,7 +5,11 @@ mkdir build
 
 cd build
 
-cmake -DROOT=/home/mati/Desktop/worms .. && make install  
+cmake -DPATH=/home/mati/Desktop/worms .. && make install
+
+o
+
+cmake -DCMAKE_INSTALL_PREFIX=/home/mati/Desktop/worms .. && make install
 
 elegir la ruta (para instalar en otra carpeta, con el otro cmakelists.txt) 
 
