@@ -36,7 +36,7 @@ class Game: public Thread{
 		~Game();
 
 		/* Agrega un jugador a la partida */
-		void addPlayer(Player&& player);
+		bool addPlayer(Player& player);
 
 		/* Devuelve true si la partida esta llena */
 		bool isFull();

@@ -146,8 +146,8 @@ Buffer ServerProtocol::sendGirder(physical_object_ptr& object){
 	this->sendIntBuffer(buffer, girder->getSize());
 
 	b2Vec2 position = object->getPosition();
-	this->sendIntBuffer(buffer, position.x);
-	this->sendIntBuffer(buffer, position.y);
+	this->sendIntBuffer(buffer, position.x * UNIT_TO_SEND);
+	this->sendIntBuffer(buffer, position.y * UNIT_TO_SEND);
 	this->sendIntBuffer(buffer, girder->getRotation());
 	return buffer;
 }

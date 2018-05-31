@@ -17,7 +17,7 @@ class Player{
 		bool connected;
 
 	public:
-		Player(ServerProtocol&& protocol, const std::string& name);
+		Player(ServerProtocol&& protocol);
 
 		Player(Player&& other);
 
@@ -48,6 +48,8 @@ class Player{
 
 		//Desconecta al jugador
 		void disconnect();
+
+		void setName(const std::string& name);
 
 		const std::string& getName() const;
 

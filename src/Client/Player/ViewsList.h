@@ -33,7 +33,7 @@ class ViewsList{
 		void removeWormFocus();
 
 		/* CallBacks */
-		bool addGirderCallBack(size_t size, int pos_x, int pos_y, int rotation);
+		bool addGirderCallBack(size_t size, Position pos, int rotation);
 
 	public:
 		/* Constructor */
@@ -68,7 +68,7 @@ class ViewsList{
 
 		/* Agrega una viga a la vista en la posicion indicada y
 		 * con la rotacion indicada */
-		void addGirder(size_t size, int pos_x, int pos_y, int rotation);
+		void addGirder(size_t size, float pos_x, float pos_y, int rotation);
 
 		/* Actualiza el worm actual y hace focus en este */
 		void setCurrentWorm(int id);
