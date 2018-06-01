@@ -7,12 +7,12 @@
 
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id):
 	Viewable(worldView), player_id(player_id), life(life), dir(dir), is_moving(false),
-	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)), label(life, colors[player_id]),
-	angle(DEFAULT_ANGLE) {
+	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)),
+	label(life, colors[player_id]),	angle(DEFAULT_ANGLE) {
 	    this->walk_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + "walk.png");
 	    int width = this->walk_image->get_width();
 	    int height = this->walk_image->get_height();
-	    for (int i = 0; i < height/WORM_IMAGE_WIDTH; i++) {
+	    for (int i = 0; i < height / WORM_IMAGE_WIDTH; i++) {
 			walk_queue.push(Gdk::Pixbuf::create_subpixbuf(this->walk_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
 		}
 		this->worm.attach(this->label.getWidget(), 0, 0, 1, 1);
@@ -26,7 +26,8 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 WormView::~WormView(){}
 	
 WormView::WormView(WormView&& other): Viewable(std::move(other)), player_id(other.player_id),
-	life(other.life), dir(other.dir), weapon(std::move(other.weapon)), last_position(other.last_position), 
+	life(other.life), dir(other.dir), is_moving(other.is_moving),
+	weapon(std::move(other.weapon)), last_position(other.last_position),
 	label(std::move(other.label)), image(std::move(other.image)),
     worm(std::move(other.worm)), walk_queue(std::move(other.walk_queue)),
     walk_image(std::move(other.walk_image)), scope_vector(std::move(other.scope_vector)),
@@ -131,8 +132,8 @@ void WormView::setVictory() {
     this->image.set(VICTORY_ANIMATION);
 }
 
-bool WormView::batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int size) {
-	this->image.set(Gdk::Pixbuf::create_subpixbuf(*iter, size + this->dir * size, 0, size, size));
+bool WormView::batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int width) {
+	this->image.set(Gdk::Pixbuf::create_subpixbuf(*iter, width + this->dir * width, 0, width, WORM_IMAGE_WIDTH));
 	iter++;
 	if (iter == this->scope_vector.end()) {
 		this->changeWeapon(this->weapon);
@@ -146,11 +147,10 @@ void WormView::batHit() {
 	int width = this->scope_image->get_width();
 	int height = this->scope_image->get_height();
 	this->scope_vector.clear();
-	for (int i = 0; i < height * 3 / width; i++) {
-		this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * width / 3, width, width / 3));
+	for (int i = 0; i < height / WORM_IMAGE_WIDTH; i++) {
+		this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
 	}
 	std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter = this->scope_vector.begin();
-	//this->iter = this->scope_vector.begin();
 	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WormView::batHitCallBack), iter, width / 3);
 	Glib::signal_timeout().connect(my_slot, 5);
 }

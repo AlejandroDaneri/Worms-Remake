@@ -82,7 +82,7 @@ class ViewsList{
 		le da el focus a otro */
 		void checkMovingWorms();
 
-
+		/* Realiza la animacion de dist */
 		void shoot(const std::string& weapon);
 };
 

@@ -47,6 +47,9 @@ class WormView: public Viewable {
 		/* Actualiza las imagenes de las armas */
 		void updateWeaponImage();
 
+		/* Callback */
+		bool batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int width);
+
 	public:
 		/* Constructor */
 		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id);
@@ -92,8 +95,7 @@ class WormView: public Viewable {
 		/* Devuelve true si el gusano se esta moviendo */
 		bool isMoving() const;
 
-		bool batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int size);
-
+		/* Realiza la animacion del worm bateando */
 		void batHit();
 };
 
