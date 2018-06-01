@@ -23,15 +23,15 @@ public:
                     std::vector<std::vector<double>> &girders) const;
 
 
-    int turnCWLast(unsigned int index, unsigned int &id);
+    const int turnCWLast(const unsigned int &index, unsigned int &id);
 
-    int turnCCWLast(unsigned int index, unsigned int &id);
+    const int turnCCWLast(const unsigned int &index, unsigned int &id);
 
-    void move(int index, double &x, double &y);
+    void move(const int &index, const double &x, const double &y);
 
-    bool isGirder(int &index);
+    const bool isGirder(int &index) const;
 
-    int getItemID(const int &index);
+    const int getItemID(const int &index) const;
 };
 
 
