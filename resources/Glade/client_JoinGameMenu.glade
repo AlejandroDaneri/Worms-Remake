@@ -65,11 +65,11 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Partidas Disponibles</property>
                 <attributes>
+                  <attribute name="font-desc" value="Times New Roman, Bold 13"/>
                   <attribute name="underline" value="True"/>
                   <attribute name="foreground" value="#000000000000"/>
                   <attribute name="background" value="#ffffffffffff"/>
                   <attribute name="underline-color" value="#000000000000"/>
-                  <attribute name="size" value="12000"/>
                 </attributes>
               </object>
               <packing>

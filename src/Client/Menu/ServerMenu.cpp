@@ -1,6 +1,7 @@
 #include "ServerMenu.h"
 #include <gtkmm/builder.h>
 #include "Path.h"
+#include "ButtonBuilder.h"
 
 ServerMenu::ServerMenu(Gtk::Window& window): window(window) {
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_ServerMenu.glade");
@@ -10,6 +11,9 @@ ServerMenu::ServerMenu(Gtk::Window& window): window(window) {
 	builder->get_widget("service", this->service);
 	builder->get_widget("connect", this->connect);
 	builder->get_widget("quit_game", this->quit);
+
+	ButtonBuilder::buildButton(this->quit);
+	ButtonBuilder::buildButton(this->connect);
 
 	builder->get_widget("server_menu", this->menu);
 	this->window.add(*this->menu);

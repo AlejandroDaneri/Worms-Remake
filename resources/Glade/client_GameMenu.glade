@@ -153,11 +153,13 @@
             <property name="width_request">151</property>
             <property name="height_request">50</property>
             <property name="visible">True</property>
+            <property name="app_paintable">True</property>
             <property name="can_focus">True</property>
             <property name="receives_default">True</property>
             <property name="margin_top">15</property>
             <property name="margin_bottom">15</property>
             <property name="yalign">0.4699999988079071</property>
+            <property name="image_position">top</property>
           </object>
         </child>
       </object>

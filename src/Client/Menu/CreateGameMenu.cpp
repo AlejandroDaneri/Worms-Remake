@@ -3,6 +3,7 @@
 #include <glibmm/main.h>
 #include "Path.h"
 #include "GamePlayers.h"
+#include "ButtonBuilder.h"
 
 #define MENU_WIDTH 936
 #define MENU_HEIGHT 386
@@ -19,6 +20,8 @@ CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu, Client
 	builder->get_widget("quit_game", this->quit_game);
 
 	this->configure(quantity);
+
+	ButtonBuilder::buildButton(quit_game);
 
 	builder->get_widget("create_game_menu", this->menu);
 

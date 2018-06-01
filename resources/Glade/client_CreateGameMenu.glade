@@ -161,10 +161,10 @@
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Mapas Disponibles</property>
                 <attributes>
+                  <attribute name="font-desc" value="Times New Roman, Bold 14"/>
                   <attribute name="underline" value="True"/>
                   <attribute name="foreground" value="#000000000000"/>
                   <attribute name="background" value="#ffffffffffff"/>
-                  <attribute name="size" value="12000"/>
                 </attributes>
               </object>
               <packing>
