@@ -9,13 +9,13 @@ class MapObject {
 public:
     MapObject(const double &x, const double &y, const int &angle = 0);
 
-    void updatePosition(double x, double y);
+    void updatePosition(const double& x, const double& y);
 
     int turnCCW();
 
     void getPosition(double &x, double &y) const;
 
-    int getAngle() const;
+    const int getAngle() const;
 
     int turnCW();
 };

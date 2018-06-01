@@ -5,7 +5,7 @@
 MapObject::MapObject(const double &x, const double &y, const int &angle) :
         x(x), y(y), angle(angle) {}
 
-void MapObject::updatePosition(double x, double y) {
+void MapObject::updatePosition(const double &x, const double &y) {
     this->x = x;
     this->y = y;
 }
@@ -25,7 +25,7 @@ void MapObject::getPosition(double &x, double &y) const {
     y = this->y;
 }
 
-int MapObject::getAngle() const {
+const int MapObject::getAngle() const {
     return angle;
 }
 
