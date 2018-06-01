@@ -20,7 +20,7 @@ MapController::MapController(Map model,
     toolBox->linkController(this);
 }
 
-void MapController::addModeSignal(unsigned int id) {
+void MapController::addModeSignal(const unsigned int &id) {
     this->actual_mode = ADD_MODE_ID;
     this->item_id_to_add = id;
 }
@@ -47,7 +47,7 @@ void MapController::changeModeSignal() {
     if (actual_mode==ADD_MODE_ID) toolBox->closeSelectionMode();
 }
 
-void MapController::turnCCWSignal() {
+void MapController::turnCCWSignal()  {
     if (model.isGirder(actual_object_selected)) {
         unsigned int id;
         int new_angle = this->model.turnCCWLast(actual_object_selected, id);
@@ -55,7 +55,7 @@ void MapController::turnCCWSignal() {
     }
 }
 
-void MapController::turnCWSignal() {
+void MapController::turnCWSignal()  {
     if (model.isGirder(actual_object_selected)) {
         unsigned int id;
         int new_angle = this->model.turnCWLast(actual_object_selected, id);
@@ -134,7 +134,7 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
     }
 }
 
-void MapController::changeBackground() {
+void MapController::changeBackground() const {
     this->view->changeBackground();
 }
 
@@ -142,6 +142,6 @@ const std::string MapController::getBackgroundName() const{
     return view->getBackgroundName();
 }
 
-void MapController::loadBackground(const std::string &background) {
+void MapController::loadBackground(const std::string &background)  {
     view->loadBackground(background);
 }

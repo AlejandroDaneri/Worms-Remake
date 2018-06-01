@@ -23,7 +23,7 @@ class MapController {
 public:
     MapController(Map model, const Glib::RefPtr<Gtk::Builder> &builder);
 
-    void addModeSignal(unsigned int id);
+    void addModeSignal(const unsigned int &id);
 
     void erase();
 
@@ -43,13 +43,13 @@ public:
 
     void turnCWSignal();
 
-    void changeBackground();
+    void changeBackground() const;
 
     void changeModeSignal();
 
     const std::string getBackgroundName() const;
 
-    void loadBackground(const std::string &background);
+    void loadBackground(const std::string &background) ;
 };
 
 
