@@ -58,9 +58,10 @@ void WeaponsAndLifeController::loadWeapons(std::vector<int> &weps_ammo,
 
 bool
 WeaponsAndLifeController::isValidWeaponSet(std::vector<int> &ammo_vector) const {
-    bool valid_set= true;
-    for (size_t i = 0; i<ammo_vector.size() && valid_set;i++) {
-        valid_set=(ammo_vector[i]!=0);
+    int valid_weps_counter= 0;
+    for (int actual_ammo : ammo_vector) {
+        if(actual_ammo !=0)
+            valid_weps_counter++;
     }
-    return valid_set;
+    return valid_weps_counter>0;
 }
