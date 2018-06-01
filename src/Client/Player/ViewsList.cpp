@@ -165,3 +165,9 @@ void ViewsList::setVictory() {
 		this->world.setFocus(iter->second.getWidget());
 	}
 }
+
+void ViewsList::shoot(const std::string& weapon) {
+	if (weapon == BAT_NAME){
+		this->worms.at(this->current_worm_id).batHit();
+	}
+}

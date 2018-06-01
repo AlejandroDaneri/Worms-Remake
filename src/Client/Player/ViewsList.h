@@ -81,6 +81,9 @@ class ViewsList{
 		/* Chequea si el gusano actual se esta moviendo, caso contario
 		le da el focus a otro */
 		void checkMovingWorms();
+
+
+		void shoot(const std::string& weapon);
 };
 
 

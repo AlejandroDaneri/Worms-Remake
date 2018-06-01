@@ -63,6 +63,7 @@ bool DataReceiver::analizeReceivedData(Buffer buffer){
 	} else if (action == SHOOT_WEAPON_ACTION) {
 		std::string weapon(Protocol::receiveStringBuffer(buffer));
 		this->player.getViewsList().removeScopeVisibility();
+		this->player.getViewsList().shoot(weapon);
 		this->player.getMusicPlayer().playWeaponShotSound(weapon);
 	} else if (action == MOVING_OBJECT) {
 		char type = buffer.getNext();

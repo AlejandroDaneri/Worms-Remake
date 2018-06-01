@@ -1,5 +1,6 @@
 #include "WormView.h"
 #include <string>
+#include <glibmm/main.h>
 #include "ObjectSizes.h"
 #include "WeaponNames.h"
 #include "GamePlayers.h"
@@ -128,4 +129,28 @@ bool WormView::isMoving() const{
 
 void WormView::setVictory() {
     this->image.set(VICTORY_ANIMATION);
+}
+
+bool WormView::batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int size) {
+	this->image.set(Gdk::Pixbuf::create_subpixbuf(*iter, size + this->dir * size, 0, size, size));
+	iter++;
+	if (iter == this->scope_vector.end()) {
+		this->changeWeapon(this->weapon);
+		return false;
+	}
+	return true;
+}
+
+void WormView::batHit() {
+	this->scope_image = Gdk::Pixbuf::create_from_file(BAT_HIT_ANIMATION);
+	int width = this->scope_image->get_width();
+	int height = this->scope_image->get_height();
+	this->scope_vector.clear();
+	for (int i = 0; i < height * 3 / width; i++) {
+		this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * width / 3, width, width / 3));
+	}
+	std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter = this->scope_vector.begin();
+	//this->iter = this->scope_vector.begin();
+	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WormView::batHitCallBack), iter, width / 3);
+	Glib::signal_timeout().connect(my_slot, 5);
 }

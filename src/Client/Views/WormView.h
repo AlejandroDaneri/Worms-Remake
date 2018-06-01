@@ -91,6 +91,10 @@ class WormView: public Viewable {
 
 		/* Devuelve true si el gusano se esta moviendo */
 		bool isMoving() const;
+
+		bool batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int size);
+
+		void batHit();
 };
 
 
