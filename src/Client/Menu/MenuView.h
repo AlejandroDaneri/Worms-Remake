@@ -4,7 +4,7 @@
 #include <gtkmm/hvbox.h>
 #include <gtkmm/label.h>
 #include <gtkmm/window.h>
-#include <gtkmm/layout.h>
+#include <gtkmm/overlay.h>
 #include <gtkmm/image.h>
 #include <memory>
 #include "ClientProtocol.h"
@@ -19,10 +19,10 @@ class MenuView{
 		ClientProtocol& protocol;
 		Gtk::Label* error;
 		std::unique_ptr<MenuView> next_menu;
-		MenuView& first_menu;
+		MenuView& main_menu;
 		Gtk::Box* menu;
 
-		Gtk::Layout world;
+		Gtk::Overlay world;
 		Gtk::Image background;
 
 		/* Muestra un mensaje de error y cierra la aplicacion*/
@@ -37,7 +37,7 @@ class MenuView{
 
 	public:
 		/* Constructor */
-		MenuView(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol);
+		MenuView(Gtk::Window& window, MenuView& main_menu, ClientProtocol& protocol);
 
 		/* Destructor */
 		virtual ~MenuView();

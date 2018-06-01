@@ -39,7 +39,6 @@ bool SelectableListMenu::createPlayer(){
 
 void SelectableListMenu::waitToPlayers(){
 	this->window.remove();
-	this->world.remove(*this->menu);
 	this->window.add(this->waiting_label.getWidget());
 	this->window.show_all();
 	sigc::slot<bool> my_slot = sigc::mem_fun(*this, &SelectableListMenu::createPlayer);

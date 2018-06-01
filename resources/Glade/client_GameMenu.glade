@@ -65,11 +65,11 @@
                 <property name="opacity">0.96078431372549022</property>
                 <property name="margin_top">30</property>
                 <property name="margin_bottom">30</property>
-                <property name="max_length">10</property>
+                <property name="max_length">15</property>
                 <property name="width_chars">50</property>
-                <property name="max_width_chars">10</property>
+                <property name="max_width_chars">15</property>
                 <property name="xalign">0.05000000074505806</property>
-                <property name="placeholder_text" translatable="yes">Ingrese su nombre (maximo 10 caracteres)</property>
+                <property name="placeholder_text" translatable="yes">Ingrese su nombre (maximo 15 caracteres)</property>
               </object>
               <packing>
                 <property name="expand">False</property>

@@ -65,9 +65,9 @@
                 <property name="opacity">0.96078431372549022</property>
                 <property name="margin_top">30</property>
                 <property name="margin_bottom">30</property>
-                <property name="max_length">10</property>
+                <property name="max_length">100</property>
                 <property name="width_chars">50</property>
-                <property name="max_width_chars">50</property>
+                <property name="max_width_chars">100</property>
                 <property name="xalign">0.05000000074505806</property>
                 <property name="placeholder_text" translatable="yes">Ingrese el nombre de la partida</property>
               </object>
@@ -122,6 +122,8 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="max_length">5</property>
+                <property name="width_chars">10</property>
+                <property name="max_width_chars">10</property>
                 <property name="input_purpose">digits</property>
                 <property name="adjustment">adjustment1</property>
                 <property name="climb_rate">1</property>
@@ -130,7 +132,7 @@
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">True</property>
+                <property name="fill">False</property>
                 <property name="position">1</property>
               </packing>
             </child>
