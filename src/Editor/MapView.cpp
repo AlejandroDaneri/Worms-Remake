@@ -1,7 +1,5 @@
 
-#include <iostream>
 #include <fstream>
-#include <ObjectSizes.h>
 #include <Path.h>
 #include <gtkmm/adjustment.h>
 #include <gtkmm/scrolledwindow.h>
