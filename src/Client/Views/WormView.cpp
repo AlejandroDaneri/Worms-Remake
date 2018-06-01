@@ -137,6 +137,7 @@ bool WormView::batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& 
 	iter++;
 	if (iter == this->scope_vector.end()) {
 		this->changeWeapon(this->weapon);
+		this->setStaticImage(true);
 		return false;
 	}
 	return true;
@@ -152,5 +153,5 @@ void WormView::batHit() {
 	}
 	std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter = this->scope_vector.begin();
 	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WormView::batHitCallBack), iter, width / 3);
-	Glib::signal_timeout().connect(my_slot, 5);
+	Glib::signal_timeout().connect(my_slot, 12);
 }
