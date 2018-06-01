@@ -25,8 +25,8 @@ class MenuView{
 		Gtk::Layout world;
 		Gtk::Image background;
 
-		/* Muestra un mensaje de error y no permite continuar */
-		void showFatalError(const std::string& error = "Ocurrio un error.");
+		/* Muestra un mensaje de error y cierra la aplicacion*/
+		void showFatalError();
 
 		/* Muestra un mensaje de error y reinicia */
 		void showErrorAndRestart(const std::string& error);

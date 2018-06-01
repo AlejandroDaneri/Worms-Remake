@@ -1,9 +1,9 @@
 #include "ClientProtocol.h"
 #include <string>
-#include <iostream>
 #include "Player.h"
 #include "WeaponList.h"
 #include "ObjectSizes.h"
+#include "ServerFatalError.h"
 
 ClientProtocol::ClientProtocol(Socket&& socket, Gtk::Window& window): Protocol(std::move(socket)), window(window){}
 
@@ -120,7 +120,6 @@ void ClientProtocol::sendBuffer(Buffer &buffer){
 	try{
 		Protocol::sendBuffer(buffer);
 	} catch (const std::exception& e){
-		std::cerr << "Ocurrio un error: " << e.what() << std::endl;
-		this->window.close();
+		ServerFatalError error(this->window);
 	}
 }

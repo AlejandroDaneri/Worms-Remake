@@ -1,6 +1,5 @@
 #include "DataReceiver.h"
 #include "Player.h"
-#include <iostream>
 #include <glibmm/main.h>
 #include "ObjectSizes.h"
 
@@ -20,7 +19,6 @@ void DataReceiver::run(){
 
 	} catch (const std::exception& e){
 		if (this->running){
-			std::cerr << "Ocurrio un error: " << e.what() << std::endl;
 			this->player.getScreen().close();
 		}
 	}

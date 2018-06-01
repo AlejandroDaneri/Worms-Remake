@@ -1,4 +1,5 @@
 #include "ScreenView.h"
+#include "ServerFatalError.h"
 #include <glibmm/main.h>
 
 ScreenView::ScreenView(Gtk::Window& window, Player& player, WeaponList& weapons) :
@@ -34,7 +35,7 @@ void ScreenView::close(){
 }
 
 bool ScreenView::closeCallBack(){
-	this->window.close();
+	ServerFatalError error(this->window);
 	return false;
 }
 
