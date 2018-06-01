@@ -3,6 +3,7 @@
 #include <glibmm/main.h>
 #include "Path.h"
 #include "WaitingLabel.h"
+#include "ButtonBuilder.h"
 
 #define MENU_WIDTH 144
 #define MENU_HEIGHT 142
@@ -17,6 +18,8 @@ JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProt
 	builder->get_widget("quit_game", this->quit_game);
 
 	this->configure(quantity);
+
+	ButtonBuilder::buildButton(quit_game);
 
 	builder->get_widget("join_game_menu", this->menu);
 

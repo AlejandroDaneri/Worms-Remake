@@ -8,8 +8,8 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkBox" id="create_game_menu">
-    <property name="width_request">840</property>
-    <property name="height_request">354</property>
+    <property name="width_request">936</property>
+    <property name="height_request">385</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
@@ -41,19 +41,21 @@
             <property name="can_focus">False</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkAccelLabel" id="accellabel3">
+              <object class="GtkLabel" id="label1">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="xpad">68</property>
                 <property name="label" translatable="yes">Ingresa el nombre de la partida:</property>
                 <attributes>
                   <attribute name="font-desc" value="Times New Roman, Bold 18"/>
                   <attribute name="foreground" value="#000000000000"/>
+                  <attribute name="background" value="#ffffffffffff"/>
                 </attributes>
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
+                <property name="fill">False</property>
+                <property name="position">1</property>
               </packing>
             </child>
             <child>
@@ -98,19 +100,20 @@
             <property name="spacing">5</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkAccelLabel" id="accellabel2">
+              <object class="GtkLabel" id="label2">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="xpad">38</property>
                 <property name="label" translatable="yes">Ingresa la cantidad de jugadores:</property>
                 <attributes>
                   <attribute name="font-desc" value="Times New Roman, Bold 18"/>
                   <attribute name="foreground" value="#000000000000"/>
+                  <attribute name="background" value="#ffffffffffff"/>
                 </attributes>
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="fill">True</property>
+                <property name="fill">False</property>
+                <property name="padding">59</property>
                 <property name="position">0</property>
               </packing>
             </child>
@@ -153,19 +156,21 @@
             <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
             <child>
-              <object class="GtkAccelLabel" id="accellabel1">
+              <object class="GtkLabel" id="label4">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Mapas disponibles</property>
+                <property name="label" translatable="yes">Mapas Disponibles</property>
                 <attributes>
-                  <attribute name="font-desc" value="Times New Roman, Bold 12"/>
                   <attribute name="underline" value="True"/>
                   <attribute name="foreground" value="#000000000000"/>
+                  <attribute name="background" value="#ffffffffffff"/>
+                  <attribute name="size" value="12000"/>
                 </attributes>
               </object>
               <packing>
                 <property name="expand">False</property>
                 <property name="fill">True</property>
+                <property name="padding">15</property>
                 <property name="position">0</property>
               </packing>
             </child>

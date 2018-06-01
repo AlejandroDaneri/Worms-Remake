@@ -3,6 +3,7 @@
 #include "Path.h"
 #include "CreateGameMenu.h"
 #include "JoinGameMenu.h"
+#include "ButtonBuilder.h"
 
 #define MENU_WIDTH 918
 #define MENU_HEIGHT 570
@@ -23,6 +24,10 @@ GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol):
 	builder->get_widget("create_game", create_game);
 	builder->get_widget("join_game", join_game);
 	builder->get_widget("quit_game", quit_game);
+
+	ButtonBuilder::buildButton(create_game);
+	ButtonBuilder::buildButton(join_game);
+	ButtonBuilder::buildButton(quit_game);
 
 	create_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::createButtonPressed));
 	join_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::joinButtonPressed));
