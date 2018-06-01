@@ -2,8 +2,8 @@
 #include <gtkmm/adjustment.h>
 #include <glibmm/main.h>
 
-#define OUT_OF_WINDOW 2
-#define SPACE_TO_SCROLL 20
+#define OUT_OF_WINDOW 15
+#define SPACE_TO_SCROLL 35
 #define SCROLL_INCREMENT 10
 
 ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window): window(window), last_mouse_position(0,0){
