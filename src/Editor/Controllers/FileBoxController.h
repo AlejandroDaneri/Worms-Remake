@@ -4,7 +4,7 @@
 
 #include <gtkmm/filechooserdialog.h>
 #include "FileBoxView.h"
-#include "WeaponsAndLifeController.h"
+#include "UsablesController.h"
 #include "MapController.h"
 
 class FileBoxController {

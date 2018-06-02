@@ -8,7 +8,7 @@
 #include <gtkmm/spinbutton.h>
 #include "MapView.h"
 #include "ToolBoxView.h"
-#include "WeaponsAndLifeController.h"
+#include "UsablesController.h"
 #include "FileBoxController.h"
 #include "FileBoxView.h"
 

@@ -18,7 +18,6 @@ class MapController {
     int index_object_selected;
 
     void turn(const int &rotation);
-
 public:
     MapController(Map model, const Glib::RefPtr<Gtk::Builder> &builder);
 
@@ -48,7 +47,7 @@ public:
 
     const std::string getBackgroundName() const;
 
-    void loadBackground(const std::string &background) ;
+    void loadBackground(const std::string &background);
 };
 
 
