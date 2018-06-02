@@ -16,9 +16,17 @@ ServerMenu::ServerMenu(Gtk::Window& window): window(window) {
 	ButtonBuilder::buildButton(this->connect);
 
 	builder->get_widget("server_menu", this->menu);
-	this->window.add(*this->menu);
-	this->menu->show();
 
+	builder->get_widget("world", this->world);
+
+	builder->get_widget("background", this->background);
+	Glib::RefPtr<Gdk::Pixbuf> aux = Gdk::Pixbuf::create_from_file(BACKGROUND_MENU_IMAGE);
+	this->background->set(aux);
+
+	this->window.add(*this->world);
+	//this->menu->show();
+	this->window.show_all();
+	
 	this->connect->signal_clicked().connect(sigc::mem_fun(*this, &ServerMenu::connectButtonPressed));
 	this->quit->signal_clicked().connect(sigc::mem_fun(*this, &ServerMenu::quitButtonPressed));
 }
