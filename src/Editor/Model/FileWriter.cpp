@@ -53,7 +53,6 @@ void FileWriter::save(std::vector<int> weapons,
     out << YAML::Key << GIRDERS_DATA;
     out << girders;
 
-
     out << YAML::EndMap;
 
     file << out.c_str();

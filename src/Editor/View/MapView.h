@@ -5,12 +5,9 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
-#include <gtkmm/spinner.h>
-#include <gtkmm/statusbar.h>
-#include "Controllers/MapController.h"
+#include "MapController.h"
 #include "Water.h"
 #include "ScrollHandler.h"
-
 
 class MapController;
 
@@ -27,7 +24,15 @@ private:
     int actual_bg;
     size_t actual_selected;
 
+    void initializeWormsImages();
+
+    void initializeGirderImages();
+
     void setBackground(const std::string &name);
+
+    void initializeBackground();
+
+    void setInitialPosition();
 
 public:
     MapView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
@@ -56,7 +61,7 @@ public:
     const std::string getBackgroundName() const;
 
     void loadBackground(const std::string &name);
-};
 
+};
 
 #endif //WORMS_MAP_H

@@ -2,12 +2,11 @@
 #ifndef WORMS_FILEBOXVIEW_H
 #define WORMS_FILEBOXVIEW_H
 
-
 #include <gtkmm/builder.h>
 #include <gtkmm/hvbox.h>
 #include <gtkmm/button.h>
 #include <gtkmm/grid.h>
-#include "Controllers/FileBoxController.h"
+#include "FileBoxController.h"
 
 class FileBoxController;
 

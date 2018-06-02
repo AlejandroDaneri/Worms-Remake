@@ -1,9 +1,7 @@
 
-#include <fstream>
 #include <Path.h>
 #include <gtkmm/adjustment.h>
 #include <gtkmm/scrolledwindow.h>
-#include "yaml-cpp/yaml.h"
 #include "MapView.h"
 
 #define BACKGROUND_QUANTITY 8
@@ -13,25 +11,36 @@ MapView::MapView(BaseObjectType *cobject,
         : Gtk::Layout(cobject),
           scroll_handler(*(Gtk::ScrolledWindow*)this->get_parent()), actual_bg(0) {
 
-    guint width, height;
-    this->get_size(width, height);
-    ((Gtk::ScrolledWindow*)this->get_parent())->get_hadjustment()->set_value(width / 2);
-	((Gtk::ScrolledWindow*)this->get_parent())->get_vadjustment()->set_value(height);
-
-	for (size_t i = 0; i < BACKGROUND_QUANTITY; i++){
-		bg_paths.emplace_back(BACKGROUND_PATH + "background" + std::to_string(i) + ".jpg");
-	}
-    setBackground(bg_paths[actual_bg]);
-
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
             sigc::mem_fun(*this, &MapView::on_button_clicked));
 
-    std::vector<std::string> worms_imgs;
-    worms_imgs.emplace_back(IMAGES_PATH + "/right_worm.png");
-    worms_imgs.emplace_back(IMAGES_PATH + "/left_worm.png");
-    objects_pallete.push_back(worms_imgs);
+    setInitialPosition();
+    initializeBackground();
+    initializeWormsImages();
+    initializeGirderImages();
+}
 
+bool MapView::on_button_clicked(GdkEventButton *button_event) {
+    controller->mapClickedSignal(button_event);
+    return true;
+}
+
+void MapView::setInitialPosition() {
+    guint width, height;
+    get_size(width, height);
+    ((Gtk::ScrolledWindow*) get_parent())->get_hadjustment()->set_value(width / 2);
+    ((Gtk::ScrolledWindow*) get_parent())->get_vadjustment()->set_value(height);
+}
+
+void MapView::initializeBackground() {
+    for (size_t i = 0; i < BACKGROUND_QUANTITY; i++){
+		bg_paths.emplace_back(BACKGROUND_PATH + "background" + std::to_string(i) + ".jpg");
+	}
+    setBackground(bg_paths[actual_bg]);
+}
+
+void MapView::initializeGirderImages(){
     std::vector<std::string> girder_3_imgs;
     std::vector<std::string> girder_6_imgs;
 
@@ -47,10 +56,10 @@ MapView::MapView(BaseObjectType *cobject,
     objects_pallete.push_back(girder_6_imgs);
 }
 
-
-bool MapView::on_button_clicked(GdkEventButton *button_event) {
-    controller->mapClickedSignal(button_event);
-    return true;
+void MapView::initializeWormsImages()  {
+    std::vector<std::string> worms_imgs;
+    worms_imgs.emplace_back(IMAGES_PATH + "/right_worm.png");
+    objects_pallete.push_back(worms_imgs);
 }
 
 void MapView::add(const unsigned int &id, const double &x, const double &y,
@@ -67,8 +76,6 @@ void MapView::add(const unsigned int &id, const double &x, const double &y,
     objects.push_back(std::move(new_image));
     if (angle > 0)
         turn(id, angle, objects.size()-1);
-
-
 }
 
 void MapView::move(const int &index, const double &x, const double &y) {
@@ -103,11 +110,9 @@ void MapView::linkController(MapController *map_controller) {
 }
 
 void MapView::changeBackground() {
-
     background.clear();
     actual_bg = (actual_bg + 1) % bg_paths.size();
     setBackground(bg_paths[actual_bg]);
-
 }
 
 void MapView::setBackground(const std::string &name) {

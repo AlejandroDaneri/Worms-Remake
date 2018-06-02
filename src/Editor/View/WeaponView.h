@@ -7,7 +7,7 @@
 #include <gtkmm/scale.h>
 #include <gtkmm/checkbutton.h>
 #include <gtkmm/builder.h>
-#include "Controllers/WeaponController.h"
+#include "WeaponController.h"
 
 class WeaponController;
 
@@ -32,8 +32,6 @@ public:
     const int getInitialAmmo();
 
     void setAmmo(const int &ammo);
-
-    virtual ~WeaponView();
 };
 
 

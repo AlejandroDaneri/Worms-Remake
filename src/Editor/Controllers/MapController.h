@@ -2,13 +2,11 @@
 #ifndef WORMS_MAPCONTROLLER_H
 #define WORMS_MAPCONTROLLER_H
 
-
 #include "View/MapView.h"
 #include "Model/Map.h"
 #include "View/ToolBoxView.h"
 
 class MapView;
-
 class ToolBoxView;
 
 class MapController {
@@ -17,8 +15,9 @@ class MapController {
     ToolBoxView *toolBox;
     unsigned int item_id_to_add;
     unsigned int actual_mode;
-    int actual_object_selected;
+    int index_object_selected;
 
+    void turn(const int &rotation);
 
 public:
     MapController(Map model, const Glib::RefPtr<Gtk::Builder> &builder);

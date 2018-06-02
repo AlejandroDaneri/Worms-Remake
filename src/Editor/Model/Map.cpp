@@ -22,16 +22,10 @@ void Map::move(const int &index, const double &x,const double &y) {
     object.updatePosition(x, y);
 }
 
-const int Map::turnCCWLast(const unsigned int &index, unsigned int &id) {
+const int Map::turn(const unsigned int &index, unsigned int &id, const int &rotation) {
     MapObject &object = objects[index].second;
     id = objects[index].first;
-    return object.turnCCW();
-}
-
-const int Map::turnCWLast(const unsigned int &index, unsigned int &id) {
-    MapObject &object = objects[index].second;
-    id = objects[index].first;
-    return object.turnCW();
+    return object.turn(rotation);
 }
 
 const bool Map::isGirder(int &index) const {
@@ -41,7 +35,7 @@ const bool Map::isGirder(int &index) const {
 void Map::getObjects(std::vector<std::vector<double>> &worms,
                      std::vector<std::vector<double>> &girders) const {
     for (auto &object : objects) {
-        double x, y;
+        float x, y;
         object.second.getPosition(x, y);
         if (object.first == 1) {
             std::vector<double> position;

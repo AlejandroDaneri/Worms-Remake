@@ -14,8 +14,8 @@ WeaponsAndLifeController::WeaponsAndLifeController(
     for (size_t i = 1; i <= 10; ++i) {
         std::shared_ptr<WeaponView> weapon_view(new WeaponView(builder, i));
 
-        std::shared_ptr<WeaponModel> weapon
-                (new WeaponModel(weapon_view->getInitialAmmo()));
+        std::shared_ptr<Weapon> weapon
+                (new Weapon(weapon_view->getInitialAmmo()));
 
         weapons.push_back(weapon);
 

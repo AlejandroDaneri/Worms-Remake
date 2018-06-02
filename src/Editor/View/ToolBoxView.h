@@ -9,7 +9,7 @@
 #include <gtkmm/switch.h>
 #include <gtkmm/hvbox.h>
 #include "MapView.h"
-#include "Controllers/MapController.h"
+#include "MapController.h"
 
 #define WORM_BUTTON_ID 1
 #define GIRDER_3_BUTTON_ID 3

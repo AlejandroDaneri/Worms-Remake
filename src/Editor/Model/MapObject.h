@@ -2,22 +2,21 @@
 #ifndef WORMS_OBJECTMODEL_H
 #define WORMS_OBJECTMODEL_H
 
+#include <Position.h>
 
 class MapObject {
-    double x, y;
+    Position position;
     int angle;
 public:
-    MapObject(const double &x, const double &y, const int &angle = 0);
+    MapObject(const float &x, const float &y, const int &angle = 0);
 
-    void updatePosition(const double& x, const double& y);
+    void updatePosition(const float &x, const float &y);
 
-    int turnCCW();
-
-    void getPosition(double &x, double &y) const;
+    void getPosition(float &x, float &y) const;
 
     const int getAngle() const;
 
-    int turnCW();
+    int turn(const int &rotation);
 };
 
 

@@ -32,5 +32,4 @@ void FileReader::read(std::vector<std::vector<double>> &worms,
     worms = config[WORMS_DATA].as<std::vector<std::vector<double>>>();
 
     girders = config[GIRDERS_DATA].as<std::vector<std::vector<double>>>();
-
 }

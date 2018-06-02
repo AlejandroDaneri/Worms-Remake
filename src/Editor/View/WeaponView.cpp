@@ -1,4 +1,4 @@
-#include "WeaponVieww.h"
+#include "WeaponView.h"
 
 WeaponView::WeaponView(const Glib::RefPtr<Gtk::Builder> &builder,
                        const unsigned int &id) {
@@ -53,9 +53,4 @@ void WeaponView::setAmmo(const int &ammo) {
         ammo_selector->set_value(ammo);
     }
 
-}
-
-WeaponView::~WeaponView() {
-    //delete ammo_selector;
-    //delete infinite;
 }

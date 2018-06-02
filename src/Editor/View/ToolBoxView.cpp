@@ -7,12 +7,14 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
                          const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Grid(cobject) {
     processing=false;
-    builder->get_widget("btn_undo", erase);
+
     builder->get_widget("tbtn_worm", worm);
     worm->set_active(true);
     builder->get_widget("tbtn_grd", girder_3m);
     builder->get_widget("tbtn_grd6", girder_6m);
+
     builder->get_widget("btn_move", move);
+    builder->get_widget("btn_undo", erase);
     builder->get_widget("btn_turn_ccw", turnccw);
     builder->get_widget("btn_turn_cw", turncw);
     builder->get_widget("btn_bg", change_bg);
@@ -20,18 +22,15 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
     builder->get_widget("img_selected",selected);
 
     worm->signal_clicked().connect(sigc::bind<int>
-                                           (sigc::mem_fun(*this,
-                                                          &ToolBoxView::onNewObjectClicked),
-                                            WORM_BUTTON_ID));
+            (sigc::mem_fun(*this, &ToolBoxView::onNewObjectClicked),
+             WORM_BUTTON_ID));
     girder_3m->signal_clicked().connect(sigc::bind<int>
-                                                (sigc::mem_fun(*this,
-                                                               &ToolBoxView::onNewObjectClicked),
-                                                 GIRDER_3_BUTTON_ID));
+            (sigc::mem_fun(*this, &ToolBoxView::onNewObjectClicked),
+             GIRDER_3_BUTTON_ID));
 
     girder_6m->signal_clicked().connect(sigc::bind<int>
-                                                (sigc::mem_fun(*this,
-                                                               &ToolBoxView::onNewObjectClicked),
-                                                 GIRDER_6_BUTTON_ID));
+            (sigc::mem_fun(*this, &ToolBoxView::onNewObjectClicked),
+             GIRDER_6_BUTTON_ID));
 }
 
 void ToolBoxView::linkController(MapController *controller) {
