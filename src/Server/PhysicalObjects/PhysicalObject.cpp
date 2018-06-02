@@ -22,7 +22,7 @@ b2Vec2 PhysicalObject::getPosition(){
 	if (this->body){
 		return this->body->GetPosition();
 	}
-	return b2Vec2(0, 0);
+	return b2Vec2(-100, 0);
 }
 
 b2Body* PhysicalObject::getBody(){
