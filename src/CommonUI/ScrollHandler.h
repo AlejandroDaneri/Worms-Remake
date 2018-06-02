@@ -9,8 +9,11 @@ class ScrollHandler{
 	private:
 		Gtk::ScrolledWindow& window;
 		Position last_mouse_position;
+		bool mouse_in_window;
 
 		bool mouseMotionEvent(GdkEventMotion* motion_event);
+		bool mouseEntered(GdkEventCrossing* crossing_event);
+		bool mouseLeft(GdkEventCrossing* crossing_event);
 
 		bool scroll();
 

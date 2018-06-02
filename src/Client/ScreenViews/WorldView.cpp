@@ -11,7 +11,6 @@ WorldView::WorldView() {
 	this->container.add_overlay(this->background);
 	this->world.set_size(map_width, map_height);
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
-	this->window.add_events(Gdk::POINTER_MOTION_MASK);
 	this->window.add(this->world);
 	this->container.add_overlay(this->window);
 	

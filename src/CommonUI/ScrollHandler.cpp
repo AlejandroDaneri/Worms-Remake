@@ -2,14 +2,18 @@
 #include <gtkmm/adjustment.h>
 #include <glibmm/main.h>
 
-#define OUT_OF_WINDOW 10
-#define SPACE_TO_SCROLL 35
+#define SPACE_TO_SCROLL 30
 #define SCROLL_INCREMENT 10
 
-ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window): window(window), last_mouse_position(0,0){
+ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window): window(window), last_mouse_position(0,0), mouse_in_window(false){
+	this->window.add_events(Gdk::POINTER_MOTION_MASK);
+	this->window.add_events(Gdk::ENTER_NOTIFY_MASK);
+	this->window.add_events(Gdk::ENTER_NOTIFY_MASK);
 	this->window.signal_motion_notify_event().connect(sigc::mem_fun(*this, &ScrollHandler::mouseMotionEvent));
 	this->window.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_NEVER);
 
+	this->window.signal_enter_notify_event().connect(sigc::mem_fun(*this, &ScrollHandler::mouseEntered));
+	this->window.signal_leave_notify_event().connect(sigc::mem_fun(*this, &ScrollHandler::mouseLeft));
 	Glib::signal_timeout().connect(sigc::mem_fun(*this, &ScrollHandler::scroll), 50);
 }
 
@@ -20,14 +24,21 @@ bool ScrollHandler::mouseMotionEvent(GdkEventMotion* motion_event){
 	return true;
 }
 
+bool ScrollHandler::mouseEntered(GdkEventCrossing* crossing_event){
+	this->mouse_in_window = true;
+	return true;
+}
+
+bool ScrollHandler::mouseLeft(GdkEventCrossing* crossing_event){
+	this->mouse_in_window = false;
+	return true;
+}
+
 bool ScrollHandler::scroll(){
 	int window_width = window.get_hadjustment()->get_page_size();
 	int window_height = window.get_vadjustment()->get_page_size();
 
-	if (last_mouse_position.getX() < OUT_OF_WINDOW ||
-		last_mouse_position.getX() > window_width - OUT_OF_WINDOW ||
-		last_mouse_position.getY() < OUT_OF_WINDOW ||
-		last_mouse_position.getY() > window_height - OUT_OF_WINDOW){
+	if (!this->mouse_in_window){
 		//El mouse esta fuera de la pantalla
 		return true;
 	}
