@@ -35,9 +35,6 @@ class Handlers{
 		/* Destructor */
 		~Handlers();
 
-		/* Handler de movimiento. Establece cuales son teclas de movimiento */
-		bool movementKeyPressHandler(GdkEventKey *key_event);
-
 		/* Handler completo para el presionado de teclas. Indica
 		   los pasos que se deben realizar al presionar una tecla
 		   especifica */
