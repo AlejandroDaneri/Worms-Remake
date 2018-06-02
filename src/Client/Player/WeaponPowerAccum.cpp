@@ -16,8 +16,9 @@ bool WeaponPowerAccum::startCallBack() {
 
 	if (this->actual_time == this->max_time) {
 		this->handlers.timerStopped(this->power);
+		return false;
 	}
-	return this->actual_time < this->max_time;
+	return true;
 }
 
 void WeaponPowerAccum::start() {

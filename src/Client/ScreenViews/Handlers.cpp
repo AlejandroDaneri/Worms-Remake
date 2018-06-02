@@ -31,10 +31,8 @@ void Handlers::enableAll(){
 
 	this->player.getProtocol().updateScope(DEFAULT_ANGLE);
 
-	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this,
-																									   &Handlers::completeKeyPressHandler));
-	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this,
-																										 &Handlers::completeKeyReleaseHandler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::completeKeyPressHandler));
+	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::completeKeyReleaseHandler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::onButtonPressEvent));
 
 	this->enabled = true;
@@ -54,7 +52,7 @@ void Handlers::timerStopped(int power){
 	this->player.shoot(this->current_angle, power, this->weapons_time);
 }
 
-bool Handlers::movementKeyPressHandler(GdkEventKey *key_event) {
+bool Handlers::completeKeyPressHandler(GdkEventKey *key_event) {
 	if (key_event->keyval == GDK_KEY_Left) {
 		this->player.getProtocol().sendMoveAction(MOVE_LEFT);
 	} else if (key_event->keyval == GDK_KEY_Right) {
@@ -63,13 +61,7 @@ bool Handlers::movementKeyPressHandler(GdkEventKey *key_event) {
 		this->player.getProtocol().sendMoveAction(JUMP);
 	} else if (key_event->keyval == GDK_KEY_BackSpace) {
 		this->player.getProtocol().sendMoveAction(ROLLBACK);
-	}
-	return true;
-}
-
-bool Handlers::completeKeyPressHandler(GdkEventKey *key_event) {
-	this->movementKeyPressHandler(key_event);
-	if (key_event->keyval == GDK_KEY_Up) {
+	} else if (key_event->keyval == GDK_KEY_Up) {
 		if (!this->weapons.getCurrentWeapon().hasScope()) {
 			return true;
 		}
