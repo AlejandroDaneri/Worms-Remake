@@ -7,6 +7,8 @@
 #include <gtkmm/entry.h>
 #include <gtkmm/label.h>
 #include <gtkmm/window.h>
+#include <gtkmm/overlay.h>
+#include <gtkmm/image.h>
 #include <string>
 #include <memory>
 #include "ClientProtocol.h"
@@ -24,6 +26,9 @@ class ServerMenu{
 		Gtk::Box* menu;
 		std::unique_ptr<MenuView> next_menu;
 		std::unique_ptr<ClientProtocol> protocol;
+
+		Gtk::Overlay* world;
+		Gtk::Image* background;
 
 		/* Handler del boton de conexion */
 		void connectButtonPressed();
