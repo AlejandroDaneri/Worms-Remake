@@ -5,7 +5,7 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
-#include "Controllers/MapController.h"
+#include "MapController.h"
 #include "Water.h"
 #include "ScrollHandler.h"
 

@@ -5,7 +5,7 @@
 
 #include <utility>
 #include <vector>
-#include "Model/MapObject.h"
+#include "MapObject.h"
 
 class Map {
     std::vector<std::pair<int, MapObject>> objects;
