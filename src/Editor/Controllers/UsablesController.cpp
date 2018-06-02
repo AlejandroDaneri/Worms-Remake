@@ -2,12 +2,12 @@
 #include "UsablesController.h"
 #include "InvalidMapError.h"
 
-WeaponsAndLifeController::WeaponsAndLifeController(
+UsablesController::UsablesController(
         const Glib::RefPtr<Gtk::Builder> &builder) {
     builder->get_widget("btn_reset", reset_button);
     reset_button->signal_clicked().connect(
             sigc::mem_fun(*this,
-                          &WeaponsAndLifeController::on_reset_clicked));
+                          &UsablesController::on_reset_clicked));
 
     builder->get_widget_derived("life", life_spin);
 
@@ -27,14 +27,14 @@ WeaponsAndLifeController::WeaponsAndLifeController(
     }
 }
 
-void WeaponsAndLifeController::on_reset_clicked() {
+void UsablesController::on_reset_clicked() {
     life_spin->reset();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         actual_controller->resetAmmo();
     }
 }
 
-void WeaponsAndLifeController::getWeapons(std::vector<int> &weps_ammo,
+void UsablesController::getWeapons(std::vector<int> &weps_ammo,
                                           unsigned int &life) const {
     life = life_spin->get_value();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
@@ -45,7 +45,7 @@ void WeaponsAndLifeController::getWeapons(std::vector<int> &weps_ammo,
     }
 }
 
-void WeaponsAndLifeController::loadWeapons(std::vector<int> &weps_ammo,
+void UsablesController::loadWeapons(std::vector<int> &weps_ammo,
                                            const unsigned int &life) const {
     int i = 0;
     for (const std::shared_ptr<WeaponController> &actual_controller
@@ -57,7 +57,7 @@ void WeaponsAndLifeController::loadWeapons(std::vector<int> &weps_ammo,
 }
 
 bool
-WeaponsAndLifeController::isValidWeaponSet(std::vector<int> &ammo_vector) const {
+UsablesController::isValidWeaponSet(std::vector<int> &ammo_vector) const {
     int valid_weps_counter= 0;
     for (int actual_ammo : ammo_vector) {
         if(actual_ammo !=0)

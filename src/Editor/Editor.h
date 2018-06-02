@@ -16,7 +16,7 @@
 class Editor : public Gtk::Window {
     Gtk::ScrolledWindow *map_window;
     Map map_model;
-    WeaponsAndLifeController weps_list_controller;
+    UsablesController weps_list_controller;
     FileBoxView *filebox;
 
 public:

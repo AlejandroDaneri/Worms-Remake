@@ -9,7 +9,7 @@
 #include "WeaponView.h"
 #include "LifeView.h"
 
-class WeaponsAndLifeController {
+class UsablesController {
 private:
     LifeView *life_spin;
 
@@ -18,7 +18,7 @@ private:
     std::vector<std::shared_ptr<WeaponView>> weapons_view;
     std::vector<std::shared_ptr<WeaponController> > wep_controllers;
 public:
-    explicit WeaponsAndLifeController(
+    explicit UsablesController(
             const Glib::RefPtr<Gtk::Builder> &builder);
 
     void on_reset_clicked();

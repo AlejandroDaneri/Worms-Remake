@@ -7,7 +7,7 @@
 
 static const char *const NEW_FILE_NAME = "Sin titulo.yaml";
 
-FileBoxController::FileBoxController(WeaponsAndLifeController &wep_controller,
+FileBoxController::FileBoxController(UsablesController &wep_controller,
         std::shared_ptr<MapController> map_controller,
         const Glib::RefPtr<Gtk::Builder> &builder )
         : weapons_controller(wep_controller),

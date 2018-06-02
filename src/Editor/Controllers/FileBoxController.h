@@ -9,14 +9,14 @@
 
 class FileBoxController {
 private:
-    WeaponsAndLifeController &weapons_controller;
+    UsablesController &weapons_controller;
     std::shared_ptr<MapController> map_controller;
     Gtk::FileChooserDialog* save_dialog;
     Gtk::FileChooserDialog* open_dialog;
     Gtk::Label* map_name;
 
 public:
-    FileBoxController(WeaponsAndLifeController &wep_controller,
+    FileBoxController(UsablesController &wep_controller,
                       std::shared_ptr<MapController> map_controller,
                       const Glib::RefPtr<Gtk::Builder> &builder);
 
