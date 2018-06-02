@@ -6,7 +6,9 @@
 DataReceiver::DataReceiver(Player& player): 
 	player(player), protocol(player.getProtocol()){}
 
-DataReceiver::~DataReceiver(){}
+DataReceiver::~DataReceiver(){
+	this->protocol.stop();
+}
 
 void DataReceiver::run(){
 	try{
@@ -26,7 +28,6 @@ void DataReceiver::run(){
 
 void DataReceiver::stop(){
 	Thread::stop();
-	this->protocol.stop();
 }
 
 void DataReceiver::initialConfig(){

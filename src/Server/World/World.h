@@ -53,9 +53,6 @@ class World: public Thread{
 		//Elimina una arma del mundo
 		void removeTimedWeapon(Weapon& weapon);
 
-		//Devuelve la posicion de un objeto
-		b2Vec2 getObjectPosition(PhysicalObject& object);
-
 		//Setea la velocidad de un objeto
 		void setLinearVelocity(PhysicalObject& object, b2Vec2& velocity);
 

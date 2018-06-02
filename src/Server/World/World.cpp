@@ -36,8 +36,9 @@ void World::run(){
 				this->removeObject(*it);
 			} else if ((*it)->isActive()){
 				this->is_active = true;
-				if ((*it)->isWindAffected()){
-					(*it)->getBody()->ApplyForceToCenter(b2Vec2(this->wind.getVelocity(), 0), false);
+				b2Body* body = (*it)->getBody();
+				if (body && (*it)->isWindAffected()){
+					body->ApplyForceToCenter(b2Vec2(this->wind.getVelocity(), 0), false);
 				}
 			}
 		}
@@ -108,16 +109,13 @@ void World::initialize(){
 	this->addObject(bottom_border, b2Vec2(0, 0));
 }
 
-b2Vec2 World::getObjectPosition(PhysicalObject& object){
-	std::lock_guard<std::mutex> lock(this->mutex);
-	return object.getBody()->GetPosition();
-}
-
 void World::setLinearVelocity(PhysicalObject& object, b2Vec2& velocity){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	b2Body* body = object.getBody();
-	body->SetGravityScale(1);
-	body->SetLinearVelocity(velocity);
+	if (body){
+		body->SetGravityScale(1);
+		body->SetLinearVelocity(velocity);
+	}
 }
 
 b2Body* World::getClosestObject(RayCastWeaponExploded* callback, b2Vec2 center, b2Vec2 end){

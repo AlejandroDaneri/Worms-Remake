@@ -19,7 +19,10 @@ void PhysicalObject::destroyBody(){
 }
 
 b2Vec2 PhysicalObject::getPosition(){
-	return this->body->GetPosition();
+	if (this->body){
+		return this->body->GetPosition();
+	}
+	return b2Vec2(0, 0);
 }
 
 b2Body* PhysicalObject::getBody(){
@@ -27,6 +30,9 @@ b2Body* PhysicalObject::getBody(){
 }
 
 bool PhysicalObject::isMoving(){
+	if (!this->body){
+		return false;
+	}
 	b2Vec2 pos = this->body->GetPosition();
 	bool moved_x = (int)(pos.x * UNIT_TO_SEND) != (int)(this->last_position.x * UNIT_TO_SEND);
 	bool moved_y = (int)(pos.y * UNIT_TO_SEND) != (int)(this->last_position.y * UNIT_TO_SEND);
@@ -44,6 +50,9 @@ bool PhysicalObject::isMoving(){
 }
 
 bool PhysicalObject::isActive(){
+	if (!this->body){
+		return false;
+	}
 	return this->body->IsAwake();
 }
 
