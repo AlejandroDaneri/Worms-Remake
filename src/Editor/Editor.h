@@ -6,11 +6,11 @@
 #include <gtkmm/window.h>
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/spinbutton.h>
-#include "Vista/MapView.h"
-#include "Vista/ToolBoxView.h"
-#include "Controladores/WeaponsAndLifeController.h"
-#include "Controladores/FileBoxController.h"
-#include "Vista/FileBoxView.h"
+#include "View/MapView.h"
+#include "View/ToolBoxView.h"
+#include "Controllers/WeaponsAndLifeController.h"
+#include "Controllers/FileBoxController.h"
+#include "View/FileBoxView.h"
 
 
 class Editor : public Gtk::Window {

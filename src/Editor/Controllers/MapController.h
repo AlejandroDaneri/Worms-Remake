@@ -3,9 +3,9 @@
 #define WORMS_MAPCONTROLLER_H
 
 
-#include "Vista/MapView.h"
-#include "Modelo/Map.h"
-#include "Vista/ToolBoxView.h"
+#include "View/MapView.h"
+#include "Model/Map.h"
+#include "View/ToolBoxView.h"
 
 class MapView;
 

@@ -6,7 +6,7 @@
 static const char *const NEW_FILE_NAME = "Sin titulo.yaml";
 
 #include <gtkmm/filechooserdialog.h>
-#include "Vista/FileBoxView.h"
+#include "View/FileBoxView.h"
 #include "WeaponsAndLifeController.h"
 #include "MapController.h"
 

@@ -2,8 +2,8 @@
 #ifndef WORMS_WEAPONCONTROLLER_H
 #define WORMS_WEAPONCONTROLLER_H
 
-#include "Vista/WeaponVieww.h"
-#include "Modelo/WeaponModel.h"
+#include "View/WeaponVieww.h"
+#include "Model/WeaponModel.h"
 
 class WeaponView;
 

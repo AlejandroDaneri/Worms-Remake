@@ -1,6 +1,4 @@
 
-
-#include <iostream>
 #include "FileReader.h"
 
 FileReader::FileReader(const std::string &filename)

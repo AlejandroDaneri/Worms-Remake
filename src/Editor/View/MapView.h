@@ -7,7 +7,7 @@
 #include <gtkmm/image.h>
 #include <gtkmm/spinner.h>
 #include <gtkmm/statusbar.h>
-#include "Controladores/MapController.h"
+#include "Controllers/MapController.h"
 #include "Water.h"
 #include "ScrollHandler.h"
 
