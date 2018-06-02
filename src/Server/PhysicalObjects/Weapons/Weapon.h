@@ -20,12 +20,14 @@ class Weapon: public PhysicalObject{
 		int time_to_explode;
 		float angle;
 		float power;
+		int shooter_id;
 		WeaponExplodeTime explode_time;
 		RayCastWeaponExploded explosion;
 
 		virtual void createFixtures() override;
 		virtual void setInitialVelocity() override;
 
+		//Ataca a los gusanos en el radio de explosion
 		void attackWormExplosion(const b2Vec2& center, int angle);
 
 	public:
@@ -37,10 +39,13 @@ class Weapon: public PhysicalObject{
 		//Devuelve true si el arma esta en movimiento o esperando para explotar
 		bool isActive() override;
 
-		virtual void shoot(char dir, int angle, int power, int time);
+		//Carga los datos para disparar el arma
+		virtual void shoot(char dir, int angle, int power, int time, int shooter_id);
 
+		//Dispara un arma teledirigida
 		virtual void shoot(Worm& shooter, b2Vec2 pos);
 
+		//Explota el arma
 		virtual void explode();
 
 		virtual void collide_with_something(CollisionData* other) override;
@@ -48,6 +53,8 @@ class Weapon: public PhysicalObject{
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
 
 		virtual const std::string& getName() = 0;
+
+		int getShooterId() const;
 
 };
 

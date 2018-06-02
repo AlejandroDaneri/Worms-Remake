@@ -11,7 +11,7 @@ const std::string& Teleportation::getName(){
 	return TELEPORT_NAME;
 }
 
-void Teleportation::shoot(char dir, int angle, int power, int time){}
+void Teleportation::shoot(char dir, int angle, int power, int time, int shooter_id){}
 
 void Teleportation::shoot(Worm& shooter, b2Vec2 pos){
 	pos.y++;

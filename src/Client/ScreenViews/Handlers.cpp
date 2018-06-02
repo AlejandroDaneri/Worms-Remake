@@ -6,7 +6,7 @@
 #include "WeaponNames.h"
 
 const char SPACE = ' ';
-const int WEAPONS_DEFAULT_TIME = 5;
+const int WEAPONS_DEFAULT_TIME = 3;
 const char ASCII_OFFSET = 48;
 const char ASCII_1 = 49;
 const char ASCII_5 = 53;

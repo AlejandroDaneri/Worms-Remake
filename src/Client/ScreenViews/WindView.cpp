@@ -13,7 +13,9 @@ void WindView::update(float wind){
 	wind *= 10;
 	std::string message = "<span><b><u>Viento</u></b>\n\n";
 	std::string direction = "right";
-	if (wind < 0){
+	if (wind == 0){
+		direction = "no";
+	} else if (wind < 0){
 		wind *= -1;
 		direction = "left";
 	}

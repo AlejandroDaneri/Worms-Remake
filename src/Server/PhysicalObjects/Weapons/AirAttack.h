@@ -14,7 +14,7 @@ class AirAttack: public Weapon{
 
 		const std::string& getName() override;
 
-		void shoot(char dir, int angle, int power, int time) override;
+		void shoot(char dir, int angle, int power, int time, int shooter_id) override;
 
 		void shoot(Worm& shooter, b2Vec2 pos) override;
 

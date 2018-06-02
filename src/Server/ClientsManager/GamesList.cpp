@@ -34,7 +34,7 @@ bool GamesList::addGame(const std::string& game_name, const std::string& map, in
 	bool result = this->games[game_name]->addPlayer(player);
 	if (result){
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
-		std::cout << "[INFO] El jugador '" << player_name << "'' se unio a la partida ;" << game_name << "'" << std::endl;
+		std::cout << "[INFO] El jugador '" << player_name << "' se unio a la partida '" << game_name << "'" << std::endl;
 	}
 
 
@@ -64,7 +64,7 @@ bool GamesList::addPlayer(const std::string& game_name, Player& player){
 	bool result = this->games[game_name]->addPlayer(player);
 	if (result){
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
-		std::cout << "[INFO] El jugador '" << player_name << "'' se unio a la partida ;" << game_name << "'" << std::endl;
+		std::cout << "[INFO] El jugador '" << player_name << "' se unio a la partida '" << game_name << "'" << std::endl;
 	}
 	if (this->games[game_name]->isFull()){
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
