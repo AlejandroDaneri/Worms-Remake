@@ -22,16 +22,14 @@ public:
     void getObjects(std::vector<std::vector<double>> &worms,
                     std::vector<std::vector<double>> &girders) const;
 
-
-    const int turnCWLast(const unsigned int &index, unsigned int &id);
-
-    const int turnCCWLast(const unsigned int &index, unsigned int &id);
-
     void move(const int &index, const double &x, const double &y);
 
     const bool isGirder(int &index) const;
 
     const int getItemID(const int &index) const;
+
+    const int
+    turn(const unsigned int &index, unsigned int &id, const int &rotation);
 };
 
 

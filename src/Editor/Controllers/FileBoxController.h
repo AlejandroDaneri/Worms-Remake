@@ -2,8 +2,6 @@
 #ifndef WORMS_FILECONTROLLER_H
 #define WORMS_FILECONTROLLER_H
 
-
-
 #include <gtkmm/filechooserdialog.h>
 #include "View/FileBoxView.h"
 #include "WeaponsAndLifeController.h"

@@ -14,13 +14,12 @@ FileBoxController::FileBoxController(WeaponsAndLifeController &wep_controller,
           map_controller(std::move(map_controller))
 {
     builder->get_widget("save_dialog",save_dialog);
-    builder->get_widget("map_name",map_name);
-
     save_dialog->add_button("Cancelar", Gtk::RESPONSE_CANCEL);
     save_dialog->add_button("Guardar", Gtk::RESPONSE_OK);
 
-    builder->get_widget("open_dialog",open_dialog);
+    builder->get_widget("map_name",map_name);
 
+    builder->get_widget("open_dialog",open_dialog);
     open_dialog->add_button("Cancelar", Gtk::RESPONSE_CANCEL);
     open_dialog->add_button("Abrir", Gtk::RESPONSE_OK);
 
@@ -30,8 +29,6 @@ void FileBoxController::onSaveClicked() const {
     try {
         std::vector<std::vector<double>> worms;
         std::vector<std::vector<double>> girders;
-
-
         map_controller->getObjects(worms, girders);
         std::string background= map_controller->getBackgroundName();
 
@@ -43,7 +40,7 @@ void FileBoxController::onSaveClicked() const {
         save_dialog->set_current_name(NEW_FILE_NAME);
         int result = save_dialog->run();
         if (result==Gtk::RESPONSE_OK){
-            std::string filename = save_dialog->get_filename(); //revisar extension archivo
+            std::string filename = save_dialog->get_filename();
             map_name->set_label(save_dialog->get_current_name());
             FileWriter file(filename);
             file.save(weapons_ammo, worms,
@@ -63,15 +60,16 @@ void FileBoxController::onLoadClicked() const {
         std::string filename = open_dialog->get_filename();
         map_name->set_label(open_dialog->get_current_name());
 
-        std::string background;
-
-        FileReader file(filename);
         std::vector<std::vector<double>> worms;
         std::vector<std::vector<double>> girders;
         std::vector<int> weps_ammo;
         unsigned int life;
+        std::string background;
+
+        FileReader file(filename);
         file.read(worms, girders,
                   weps_ammo, life, background);
+
         map_controller->loadBackground(background);
         weapons_controller.loadWeapons(weps_ammo, life);
         map_controller->loadObjects(worms, girders);

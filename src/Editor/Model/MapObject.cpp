@@ -9,14 +9,10 @@ void MapObject::updatePosition(const float &x, const float &y) {
     position= Position(x,y);
 }
 
-int MapObject::turnCCW() {
-    return angle = (angle + 10) % 180;
-}
-
-int MapObject::turnCW() {
+int MapObject::turn(const int &rotation){
     if (angle == 0)
         angle = 180;
-    return angle = abs((angle - 10) % 180);
+    return angle = abs((angle+rotation)%180);
 }
 
 void MapObject::getPosition(float &x, float &y) const {

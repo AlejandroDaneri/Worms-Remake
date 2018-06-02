@@ -26,8 +26,8 @@ void MapController::addModeSignal(const unsigned int &id) {
 }
 
 void MapController::erase() {
-    model.erase(actual_object_selected);
-    view->erase(actual_object_selected);
+    model.erase(index_object_selected);
+    view->erase(index_object_selected);
     toolBox->hideSelected();
     toolBox->disableMovingItems();
 }
@@ -47,35 +47,35 @@ void MapController::changeModeSignal() {
     if (actual_mode==ADD_MODE_ID) toolBox->closeSelectionMode();
 }
 
-void MapController::turnCCWSignal()  {
-    if (model.isGirder(actual_object_selected)) {
+void MapController::turn(const int &rotation) {
+    if (model.isGirder(index_object_selected)) {
         unsigned int id;
-        int new_angle = this->model.turnCCWLast(actual_object_selected, id);
-        this->view->turn(id, new_angle, actual_object_selected);
+        int new_angle = this->model.turn(index_object_selected, id, rotation);
+        this->view->turn(id, new_angle, index_object_selected);
     }
 }
 
+void MapController::turnCCWSignal()  {
+    turn(10);
+}
+
 void MapController::turnCWSignal()  {
-    if (model.isGirder(actual_object_selected)) {
-        unsigned int id;
-        int new_angle = this->model.turnCWLast(actual_object_selected, id);
-        this->view->turn(id, new_angle, actual_object_selected);
-    }
+    turn(-10);
 }
 
 void MapController::mapClickedSignal(GdkEventButton *event_button) {
     if (actual_mode == MOVE_CMD_ID) {
-        this->model.move(actual_object_selected, event_button->x,
+        this->model.move(index_object_selected, event_button->x,
                          event_button->y);
-        this->view->move(actual_object_selected, event_button->x,
+        this->view->move(index_object_selected, event_button->x,
                          event_button->y);
         actual_mode = SELECT_MODE_ID;
     } else if (actual_mode == SELECT_MODE_ID) {
-        this->actual_object_selected = view->select(event_button->x,
+        this->index_object_selected = view->select(event_button->x,
                                                     event_button->y);
-        if (actual_object_selected > -1) {
+        if (index_object_selected > -1) {
             toolBox->enableMovingItems();
-            toolBox->showSelected(model.getItemID(actual_object_selected));
+            toolBox->showSelected(model.getItemID(index_object_selected));
         } else {
             toolBox->disableMovingItems();
             toolBox->hideSelected();

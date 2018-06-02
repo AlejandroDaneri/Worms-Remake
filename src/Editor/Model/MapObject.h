@@ -12,13 +12,11 @@ public:
 
     void updatePosition(const float &x, const float &y);
 
-    int turnCCW();
-
     void getPosition(float &x, float &y) const;
 
     const int getAngle() const;
 
-    int turnCW();
+    int turn(const int &rotation);
 };
 
 
