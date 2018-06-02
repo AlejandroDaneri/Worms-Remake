@@ -2,11 +2,12 @@
 #include "Path.h"
 #include <iostream>
 
-GamesList::GamesList(){}
+GamesList::GamesList(std::mutex& mutex_cout): mutex_cout(mutex_cout){}
 
 GamesList::~GamesList(){
 	for (auto it = this->games.begin(); it != this->games.end(); ++it){
 		it->second->join();
+		std::lock_guard<std::mutex> lock(this->mutex_cout);
 		std::cout << "[INFO] Partida terminada: " << it->first << std::endl;
 	}
 }
@@ -21,16 +22,22 @@ bool GamesList::addGame(const std::string& game_name, const std::string& map, in
 	try{
 		std::unique_ptr<Game> game(new Game(max_players, SERVER_CONFIG_FILE, MAPS_PATH + map));
 		this->games[game_name] = std::move(game);
+		std::lock_guard<std::mutex> lock(this->mutex_cout);
 		std::cout << "[INFO] Nueva partida creada: " << game_name << std::endl;
 	} catch (const std::exception& e){
+		std::lock_guard<std::mutex> lock(this->mutex_cout);
 		std::cout << "[ERROR] Error al crear partida: " << game_name << "-> " << e.what() << std::endl;
 		return false;
 	}
 
+	std::string player_name = player.getName();
 	bool result = this->games[game_name]->addPlayer(player);
 	if (result){
-		std::cout << "[INFO] Se unio un jugador a la partida: " << game_name << std::endl;
+		std::lock_guard<std::mutex> lock(this->mutex_cout);
+		std::cout << "[INFO] El jugador '" << player_name << "'' se unio a la partida ;" << game_name << "'" << std::endl;
 	}
+
+
 
 	if (this->games[game_name]->isFull()){
 		this->games[game_name]->start();
@@ -53,11 +60,14 @@ games_list_t GamesList::getJoinableGames(const std::string& player_name){
 
 bool GamesList::addPlayer(const std::string& game_name, Player& player){
 	std::lock_guard<std::mutex> lock(this->mutex);
+	std::string player_name = player.getName();
 	bool result = this->games[game_name]->addPlayer(player);
 	if (result){
-		std::cout << "[INFO] Se unio un jugador a la partida: " << game_name << std::endl;
+		std::lock_guard<std::mutex> lock(this->mutex_cout);
+		std::cout << "[INFO] El jugador '" << player_name << "'' se unio a la partida ;" << game_name << "'" << std::endl;
 	}
 	if (this->games[game_name]->isFull()){
+		std::lock_guard<std::mutex> lock(this->mutex_cout);
 		std::cout << "[INFO] Partida iniciada: " << game_name << std::endl;
 		this->games[game_name]->start();
 	}
@@ -69,8 +79,9 @@ void GamesList::checkGames(){
 	auto it = this->games.begin();
 	while (it != this->games.end()){
 		if (! it->second->isRunning()){
-			std::cout << "[INFO] Partida terminada: " << it->first << std::endl;
 			it->second->join();
+			std::lock_guard<std::mutex> lock(this->mutex_cout);
+			std::cout << "[INFO] Partida terminada: " << it->first << std::endl;
 			it = this->games.erase(it); 
 		} else {
 			++it;

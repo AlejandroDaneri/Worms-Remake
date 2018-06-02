@@ -6,12 +6,14 @@
 #include "Thread.h"
 #include "Player.h"
 #include "GamesList.h"
+#include <mutex>
 
 class ClientHandler: public Thread{
 	private:
 		Player client;
 		GamesList& games;
 		bool connected;
+		std::mutex& mutex_cout;
 
 		/* Crea una partida nueva */
 		void createGame();
@@ -21,7 +23,7 @@ class ClientHandler: public Thread{
 
 	public:
 		/* Constructor */
-		ClientHandler(Socket&& client, GamesList& games);
+		ClientHandler(Socket&& client, GamesList& games, std::mutex& mutex_cout);
 
 		/* Destructor */
 		~ClientHandler();

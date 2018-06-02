@@ -2,8 +2,9 @@
 #include "MapsList.h"
 #include <iostream>
 
-ClientHandler::ClientHandler(Socket&& client, GamesList& games):
-	client(std::move(ServerProtocol(std::move(client)))), games(games), connected(false){}
+ClientHandler::ClientHandler(Socket&& client, GamesList& games, std::mutex& mutex_cout):
+	client(std::move(ServerProtocol(std::move(client)))), games(games),
+	connected(false), mutex_cout(mutex_cout){}
 
 ClientHandler::~ClientHandler(){}
 
@@ -21,8 +22,7 @@ void ClientHandler::run(){
 		}
 		
 	} catch(const std::exception& e){
-		//Ocurrio un error con la conexion del cliente
-		//No corta la ejecucion del servidor
+		std::lock_guard<std::mutex> lock(this->mutex_cout);
 		std::cout << "[ERROR] Error con un cliente: " << e.what() << std::endl;
 	}
 	this->running = false;

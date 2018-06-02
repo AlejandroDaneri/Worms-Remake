@@ -14,10 +14,11 @@ class GamesList{
 	private:
 		std::unordered_map<std::string, std::unique_ptr<Game>> games;
 		std::mutex mutex;
+		std::mutex& mutex_cout;
 
 	public:
-        	/* Constructor */
-		GamesList();
+        /* Constructor */
+		GamesList(std::mutex& mutex_cout);
 
 		/* Destructor */
 		~GamesList();
