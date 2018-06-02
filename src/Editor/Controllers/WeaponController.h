@@ -2,18 +2,18 @@
 #ifndef WORMS_WEAPONCONTROLLER_H
 #define WORMS_WEAPONCONTROLLER_H
 
-#include "View/WeaponVieww.h"
-#include "Model/WeaponModel.h"
+#include "View/WeaponView.h"
+#include "Model/Weapon.h"
 
 class WeaponView;
 
 class WeaponController {
 private:
     std::shared_ptr<WeaponView> weapon_view;
-    std::shared_ptr<WeaponModel> weapon_model;
+    std::shared_ptr<Weapon> weapon_model;
 public:
     WeaponController(std::shared_ptr<WeaponView>,
-                     std::shared_ptr<WeaponModel>
+                     std::shared_ptr<Weapon>
                      model);
 
     void resetAmmo();

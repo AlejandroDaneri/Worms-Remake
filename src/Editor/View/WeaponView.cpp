@@ -1,4 +1,4 @@
-#include "WeaponVieww.h"
+#include "WeaponView.h"
 
 WeaponView::WeaponView(const Glib::RefPtr<Gtk::Builder> &builder,
                        const unsigned int &id) {
