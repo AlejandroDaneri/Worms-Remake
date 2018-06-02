@@ -38,7 +38,7 @@ class Worm: public PhysicalObject{
 		void reduce_life(int damage);
 
 		//Ejecuta una accion de movimiento del gusano
-		void move(char action);
+		bool move(char action);
 
 		//Cambia el arma del gusano
 		void changeWeapon(const std::string& weapon);

@@ -62,9 +62,9 @@ void Worm::reduce_life(int damage){
 	}
 }
 
-void Worm::move(char action){
+bool Worm::move(char action){
 	if (!this->colliding_with_girder){
-		return;
+		return false;
 	}
 	if (action == MOVE_RIGHT){
 		this->dir = action;
@@ -87,6 +87,7 @@ void Worm::move(char action){
 			this->world.setLinearVelocity(*this, velocity);
 		}
 	}
+	return true;
 }
 
 void Worm::changeWeapon(const std::string& weapon){

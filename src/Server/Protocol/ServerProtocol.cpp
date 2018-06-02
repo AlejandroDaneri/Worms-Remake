@@ -108,8 +108,9 @@ void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 		char worm_action = buffer.getNext();
 		if (worm_action == MOVE_ACTION){
 			char move = buffer.getNext();
-			data_sender.sendMoveAction(move);
-			game.getCurrentWorm().move(move);
+			if (game.getCurrentWorm().move(move)){
+				data_sender.sendMoveAction(move);
+			}
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
 			std::string weapon(this->receiveStringBuffer(buffer));
 			data_sender.send_weapon_changed(weapon);
