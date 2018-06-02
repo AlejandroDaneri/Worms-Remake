@@ -8,10 +8,16 @@
 #include "ObjectSizes.h"
 
 WorldView::WorldView() {
+	this->container.add_overlay(this->background);
 	this->world.set_size(map_width, map_height);
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add_events(Gdk::POINTER_MOTION_MASK);
 	this->window.add(this->world);
+	this->container.add_overlay(this->window);
+	
+	this->water.show(this->world);
+	this->window.get_hadjustment()->set_value(map_width / 2);
+	this->window.get_vadjustment()->set_value(map_height);
 }
 
 WorldView::~WorldView() {}
@@ -66,20 +72,23 @@ void WorldView::setBackgroundImage(const std::string& image){
 
 bool WorldView::setBackgroundImageCallBack(std::string image){
 	image.insert(0, BACKGROUND_PATH);
-
+	auto screen = this->container.get_screen();
+	size_t screen_width = screen->get_width();
+	size_t screen_height = screen->get_height();
 	Gtk::Image aux(image);
-	int img_width = aux.get_pixbuf()->get_width();
-	int img_height = aux.get_pixbuf()->get_height();
-	for (size_t x = 0; x < map_width; x += img_width) {
-		for (size_t y = 0; y < map_height; y += img_height) {
+	size_t img_width = aux.get_pixbuf()->get_width();
+	size_t img_height = aux.get_pixbuf()->get_height();
+	for (size_t x = 0; x < screen_width; x += img_width) {
+		for (size_t y = 0; y < screen_height; y += img_height) {
 			Gtk::Image background_image(image);
 			background_image.show();
-			this->world.put(background_image, x, y);
-			this->background.push_back(std::move(background_image));
+			this->background.put(background_image, x, y);
+			this->background_images.push_back(std::move(background_image));
 		}
 	}
-	this->water.show(this->world);
-	this->window.get_hadjustment()->set_value(map_width / 2);
-	this->window.get_vadjustment()->set_value(map_height);
 	return false;
+}
+
+Gtk::Container& WorldView::getContainer(){
+	return this->container;
 }

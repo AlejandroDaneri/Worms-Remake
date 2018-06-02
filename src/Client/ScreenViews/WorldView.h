@@ -5,6 +5,7 @@
 #include <gtkmm/layout.h>
 #include <gtkmm/hvbox.h>
 #include <gtkmm/scrolledwindow.h>
+#include <gtkmm/overlay.h>
 #include <string>
 #include "Position.h"
 #include "Water.h"
@@ -15,9 +16,11 @@ class Player;
  * especificas, moverlos y eliminarlos de la vista*/
 class WorldView{
 	private:
+		Gtk::Overlay container;
+		Gtk::Layout background;
 		Gtk::Layout world;
 		Gtk::ScrolledWindow window;
-		std::vector<Gtk::Image> background;
+		std::vector<Gtk::Image> background_images;
 		Water water;
 
 		bool setBackgroundImageCallBack(std::string image);
@@ -47,6 +50,9 @@ class WorldView{
 
 		/* Devuelve la vista del scrolledWindow */
 		Gtk::ScrolledWindow& getWindow();
+		
+		/* Devuelve el container */
+		Gtk::Container& getContainer();
 
 		/* Devuelve la vista del Layout */
 		Gtk::Layout& getLayout();

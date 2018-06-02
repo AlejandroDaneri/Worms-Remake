@@ -7,7 +7,7 @@ ScreenView::ScreenView(Gtk::Window& window, Player& player, WeaponList& weapons)
 	this->left_view.pack_start(this->wind_view.getWindow(), Gtk::PACK_SHRINK);
 	this->left_view.pack_start(this->players.getWindow(), Gtk::PACK_SHRINK);
 	this->world_box.pack_start(this->left_view, Gtk::PACK_SHRINK);
-	this->world_box.pack_start(this->world.getWindow());
+	this->world_box.pack_start(this->world.getContainer());
 	this->world_box.pack_end(this->weapons_view.getWindow(), Gtk::PACK_SHRINK);
 
 	this->screen.pack_start(this->turn_label.getWindow(), Gtk::PACK_SHRINK);
