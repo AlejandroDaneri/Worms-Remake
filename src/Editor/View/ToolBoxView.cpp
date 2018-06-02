@@ -33,7 +33,7 @@ ToolBoxView::ToolBoxView(BaseObjectType *cobject,
              GIRDER_6_BUTTON_ID));
 }
 
-void ToolBoxView::linkController(MapController *controller) {
+void ToolBoxView::bindController(MapController *controller) {
     this->map_controller = controller;
 
     erase->signal_clicked().connect(
@@ -53,7 +53,7 @@ void ToolBoxView::linkController(MapController *controller) {
                           &MapController::changeBackgroundSignal));
 
     mode->signal_toggled().connect(
-            sigc::mem_fun(*this, &ToolBoxView::changeModeSignal));
+            sigc::mem_fun(*this, &ToolBoxView::changeMode));
 }
 
 void ToolBoxView::onNewObjectClicked(unsigned id) {
@@ -95,7 +95,7 @@ void ToolBoxView::disableMovingItems() {
     erase->set_sensitive(false);
 }
 
-void ToolBoxView::changeModeSignal() {
+void ToolBoxView::changeMode() {
     worm->set_sensitive(!mode->get_active());
     girder_3m->set_sensitive(!mode->get_active());
     girder_6m->set_sensitive(!mode->get_active());

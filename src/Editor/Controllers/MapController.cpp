@@ -16,8 +16,8 @@ MapController::MapController(Map model,
 {
     builder->get_widget_derived("map", view);
     builder->get_widget_derived("toolbox", toolBox);
-    view->linkController(this);
-    toolBox->linkController(this);
+    view->bindController(this);
+    toolBox->bindController(this);
 }
 
 void MapController::addModeSignal(const unsigned int &id) {
