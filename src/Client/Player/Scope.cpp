@@ -3,18 +3,15 @@
 #include "WeaponNames.h"
 
 Scope::Scope(WorldView& world): world(world){
-	this->in_world = false;
 	this->scope.set(SCOPE_IMAGE);
 	this->angle = DEFAULT_ANGLE;
+	this->world.addElement(this->scope, Position(0,0), 0, 0);
 }
 
 Scope::~Scope(){}
 
 void Scope::update(int angle, WormView& worm){
 	this->angle = angle;
-	if (!this->in_world){
-		this->addScopeToWorld();
-	}
 	char dir = worm.getDir();
 	if (dir == -1)
 		angle = 180 - angle;
@@ -32,9 +29,4 @@ void Scope::hide(){
 	if (this->scope.is_visible()){
 		this->scope.hide();
 	}
-}
-
-void Scope::addScopeToWorld(){
-	this->world.addElement(this->scope, Position(0,0), 0, 0);
-	this->in_world = true;
 }
