@@ -1,6 +1,6 @@
 
 #include "WeaponsAndLifeController.h"
-#include "Model/InvalidMapError.h"
+#include "InvalidMapError.h"
 
 WeaponsAndLifeController::WeaponsAndLifeController(
         const Glib::RefPtr<Gtk::Builder> &builder) {

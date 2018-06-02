@@ -1,8 +1,8 @@
 
 #include <gtkmm/messagedialog.h>
 #include <ViewPositionTransformer.h>
-#include "Controllers/MapController.h"
-#include "Model/InvalidMapError.h"
+#include "MapController.h"
+#include "InvalidMapError.h"
 
 #define ADD_MODE_ID 0
 #define MOVE_CMD_ID 1

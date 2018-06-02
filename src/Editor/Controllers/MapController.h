@@ -2,9 +2,9 @@
 #ifndef WORMS_MAPCONTROLLER_H
 #define WORMS_MAPCONTROLLER_H
 
-#include "View/MapView.h"
-#include "Model/Map.h"
-#include "View/ToolBoxView.h"
+#include "MapView.h"
+#include "Map.h"
+#include "ToolBoxView.h"
 
 class MapView;
 class ToolBoxView;

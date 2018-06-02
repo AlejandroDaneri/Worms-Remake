@@ -1,9 +1,9 @@
 
 #include <Path.h>
-#include "Controllers/FileBoxController.h"
-#include "Model/FileWriter.h"
-#include "Model/FileReader.h"
-#include "Model/InvalidMapError.h"
+#include "FileBoxController.h"
+#include "FileWriter.h"
+#include "FileReader.h"
+#include "InvalidMapError.h"
 
 static const char *const NEW_FILE_NAME = "Sin titulo.yaml";
 
