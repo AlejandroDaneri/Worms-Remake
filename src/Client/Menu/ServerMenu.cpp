@@ -26,7 +26,7 @@ ServerMenu::ServerMenu(Gtk::Window& window): window(window) {
 	this->window.add(*this->world);
 	//this->menu->show();
 	this->window.show_all();
-	
+
 	this->connect->signal_clicked().connect(sigc::mem_fun(*this, &ServerMenu::connectButtonPressed));
 	this->quit->signal_clicked().connect(sigc::mem_fun(*this, &ServerMenu::quitButtonPressed));
 }
