@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "WeaponVieww.h"
+#include "Vista/WeaponVieww.h"
 #define MAX_AMMO 51
 #define CHANGE_AMMO_STEP 1
 

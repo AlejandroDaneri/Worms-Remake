@@ -98,8 +98,8 @@ void MapView::clean() {
     objects.clear();
 }
 
-void MapView::linkController(MapController *pController) {
-    this->controller = pController;
+void MapView::linkController(MapController *map_controller) {
+    this->controller = map_controller;
 }
 
 void MapView::changeBackground() {
@@ -124,10 +124,10 @@ void MapView::setBackground(const std::string &name) {
             background.push_back(std::move(image));
         }
     }
-    redraw_map();
+    redrawMap();
 }
 
-void MapView::redraw_map() {
+void MapView::redrawMap() {
     for(Gtk::Image &object : objects){
         const Gtk::Allocation &alloc = object.get_allocation();
         remove(object);

@@ -7,7 +7,7 @@
 #include <gtkmm/hvbox.h>
 #include <gtkmm/button.h>
 #include <gtkmm/grid.h>
-#include "FileBoxController.h"
+#include "Controladores/FileBoxController.h"
 
 class FileBoxController;
 

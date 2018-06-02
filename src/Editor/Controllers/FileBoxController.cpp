@@ -1,9 +1,9 @@
 
 #include <Path.h>
 #include "FileBoxController.h"
-#include "FileWriter.h"
-#include "FileReader.h"
-#include "InvalidMapError.h"
+#include "Modelo/FileWriter.h"
+#include "Modelo/FileReader.h"
+#include "Modelo/InvalidMapError.h"
 
 FileBoxController::FileBoxController(WeaponsAndLifeController &wep_controller,
         std::shared_ptr<MapController> map_controller,

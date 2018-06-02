@@ -7,7 +7,7 @@
 #include <gtkmm/image.h>
 #include <gtkmm/spinner.h>
 #include <gtkmm/statusbar.h>
-#include "MapController.h"
+#include "Controladores/MapController.h"
 #include "Water.h"
 #include "ScrollHandler.h"
 
@@ -24,7 +24,6 @@ private:
     Water water;
     ScrollHandler scroll_handler;
 
-
     int actual_bg;
     size_t actual_selected;
 
@@ -39,7 +38,7 @@ public:
 
     void clean();
 
-    void linkController(MapController *pController);
+    void linkController(MapController *map_controller);
 
     void add(const unsigned int &id, const double &x, const double &y,
              const int &angle = 0);
@@ -52,7 +51,7 @@ public:
 
     void move(const int& index, const double &x, const double &y);
 
-    void redraw_map();
+    void redrawMap();
 
     const std::string getBackgroundName() const;
 

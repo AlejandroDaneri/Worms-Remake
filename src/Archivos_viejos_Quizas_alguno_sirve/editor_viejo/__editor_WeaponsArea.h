@@ -5,7 +5,7 @@
 
 #include <gtkmm/grid.h>
 #include <gtkmm/button.h>
-#include "WeaponVieww.h"
+#include "Vista/WeaponVieww.h"
 
 class WeaponsArea : public Gtk::Grid{
     Gtk::Button back;

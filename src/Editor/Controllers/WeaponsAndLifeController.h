@@ -5,9 +5,9 @@
 
 #include <gtkmm/button.h>
 #include <gtkmm/spinbutton.h>
-#include "WeaponModel.h"
-#include "WeaponVieww.h"
-#include "LifeView.h"
+#include "Modelo/WeaponModel.h"
+#include "Vista/WeaponVieww.h"
+#include "Vista/LifeView.h"
 
 class WeaponsAndLifeController {
 private:

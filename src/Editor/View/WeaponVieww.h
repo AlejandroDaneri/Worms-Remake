@@ -7,7 +7,7 @@
 #include <gtkmm/scale.h>
 #include <gtkmm/checkbutton.h>
 #include <gtkmm/builder.h>
-#include "WeaponController.h"
+#include "Controladores/WeaponController.h"
 
 class WeaponController;
 
