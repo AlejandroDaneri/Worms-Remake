@@ -32,8 +32,6 @@ public:
     const int getInitialAmmo();
 
     void setAmmo(const int &ammo);
-
-    virtual ~WeaponView();
 };
 
 

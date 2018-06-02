@@ -11,6 +11,7 @@ FileBoxView::FileBoxView(BaseObjectType *cobject,
 
 void FileBoxView::linkControler(std::shared_ptr<FileBoxController> controller) {
     this->file_box_controller = std::move(controller);
+
     save->signal_clicked().connect(
             sigc::mem_fun(*file_box_controller,
                           &FileBoxController::onSaveClicked));

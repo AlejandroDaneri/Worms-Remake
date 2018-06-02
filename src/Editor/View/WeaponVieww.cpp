@@ -54,8 +54,3 @@ void WeaponView::setAmmo(const int &ammo) {
     }
 
 }
-
-WeaponView::~WeaponView() {
-    //delete ammo_selector;
-    //delete infinite;
-}
