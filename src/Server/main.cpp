@@ -16,7 +16,6 @@ int main(int argc, const char* argv[]){
 		std::cout << "[LOG] Comenzando el cierre del servidor." << std::endl;
 		server.stop();
 		server.join();
-		std::cout << "[LOG] Servidor cerrado." << std::endl;
 	} catch(const std::exception& e){
 		std::cout << "[ERROR] " << e.what() << std::endl;
 	}
