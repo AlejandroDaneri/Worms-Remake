@@ -12,9 +12,6 @@ WorldView::WorldView() {
 	this->window.add_events(Gdk::BUTTON_PRESS_MASK);
 	this->window.add_events(Gdk::POINTER_MOTION_MASK);
 	this->window.add(this->world);
-
-	this->window.get_hadjustment()->set_value(map_width / 2);
-	this->window.get_vadjustment()->set_value(map_height);
 }
 
 WorldView::~WorldView() {}
@@ -82,5 +79,7 @@ bool WorldView::setBackgroundImageCallBack(std::string image){
 		}
 	}
 	this->water.show(this->world);
+	this->window.get_hadjustment()->set_value(map_width / 2);
+	this->window.get_vadjustment()->set_value(map_height);
 	return false;
 }
