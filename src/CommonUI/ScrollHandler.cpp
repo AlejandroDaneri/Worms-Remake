@@ -2,7 +2,7 @@
 #include <gtkmm/adjustment.h>
 #include <glibmm/main.h>
 
-#define OUT_OF_WINDOW 15
+#define OUT_OF_WINDOW 10
 #define SPACE_TO_SCROLL 35
 #define SCROLL_INCREMENT 10
 

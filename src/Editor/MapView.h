@@ -9,6 +9,7 @@
 #include <gtkmm/statusbar.h>
 #include "MapController.h"
 #include "Water.h"
+#include "ScrollHandler.h"
 
 
 class MapController;
@@ -21,6 +22,7 @@ private:
     std::vector<std::string> bg_paths;
     std::vector<Gtk::Image> background;
     Water water;
+    ScrollHandler scroll_handler;
 
 
     int actual_bg;

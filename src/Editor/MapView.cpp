@@ -11,7 +11,7 @@
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),
-          actual_bg(0) {
+          scroll_handler(*(Gtk::ScrolledWindow*)this->get_parent()), actual_bg(0) {
 
     guint width, height;
     this->get_size(width, height);
