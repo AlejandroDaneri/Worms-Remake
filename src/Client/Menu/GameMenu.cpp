@@ -5,9 +5,6 @@
 #include "JoinGameMenu.h"
 #include "ButtonBuilder.h"
 
-#define MENU_WIDTH 918
-#define MENU_HEIGHT 570
-
 GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol):
 	MenuView(window, *this, protocol){
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_GameMenu.glade");
@@ -17,7 +14,7 @@ GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol):
 
 	builder->get_widget("game_menu", this->menu);
 
-	this->addMenu(MENU_WIDTH/2, MENU_HEIGHT/2);
+	this->addMenu();
 
 	Gtk::Button *create_game, *join_game, *quit_game;
 

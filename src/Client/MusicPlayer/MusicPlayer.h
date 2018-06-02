@@ -13,7 +13,12 @@ class MusicPlayer {
 		Mix_Music* music; // Musica de fondo
 		std::map<int, Mix_Chunk*> effects;
 
+		/* Verifica si algunos efectos de la lista finalizaon y los
+		 * libera. Además libera el efecto que se encuentre guardado
+		 * en la lista con clave channel */
 		void check(int channel);
+
+		/* Agrega un nuevo efecto a la lista y lo reproduce */
 		void addEffect(const std::string& audio);
 
 	public:

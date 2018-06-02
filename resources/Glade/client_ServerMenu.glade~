@@ -31,30 +31,13 @@
         <property name="orientation">vertical</property>
         <property name="spacing">7</property>
         <child>
-          <object class="GtkLabel" id="title">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="label" translatable="yes">WORMS</property>
-            <attributes>
-              <attribute name="font-desc" value="Comic Sans MS Bold Italic 10"/>
-              <attribute name="underline" value="True"/>
-              <attribute name="foreground" value="#000000000000"/>
-              <attribute name="background" value="#ffffffffffff"/>
-              <attribute name="size" value="25000"/>
-            </attributes>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkLabel" id="error">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="ypad">17</property>
             <attributes>
               <attribute name="foreground" value="#cccc00000000"/>
+              <attribute name="background" value="#ffffffffffff"/>
               <attribute name="size" value="15000"/>
             </attributes>
           </object>
@@ -141,7 +124,7 @@
                   <object class="GtkLabel" id="label3">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="label" translatable="yes">Servicio: </property>
+                    <property name="label" translatable="yes">Servicio:</property>
                     <attributes>
                       <attribute name="font-desc" value="Times New Roman, Bold 10"/>
                       <attribute name="foreground" value="#000000000000"/>
@@ -201,10 +184,11 @@
                 <child>
                   <object class="GtkButton" id="connect">
                     <property name="label" translatable="yes">Conectar</property>
+                    <property name="width_request">150</property>
+                    <property name="height_request">50</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="margin_bottom">39</property>
                     <property name="xalign">0.54000002145767212</property>
                     <property name="yalign">0.55000001192092896</property>
                   </object>
@@ -225,10 +209,11 @@
                 <child>
                   <object class="GtkButton" id="quit_game">
                     <property name="label" translatable="yes">Salir</property>
+                    <property name="width_request">150</property>
+                    <property name="height_request">50</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
-                    <property name="margin_bottom">39</property>
                     <property name="yalign">0.4699999988079071</property>
                   </object>
                 </child>

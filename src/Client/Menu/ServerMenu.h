@@ -15,6 +15,7 @@
 #include "GameMenu.h"
 #include "MenuView.h"
 
+/* Menu de conexion con el servidor */
 class ServerMenu{
 	private:
 		Gtk::Label* error;

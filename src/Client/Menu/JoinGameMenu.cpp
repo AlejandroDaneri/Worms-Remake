@@ -5,9 +5,6 @@
 #include "WaitingLabel.h"
 #include "ButtonBuilder.h"
 
-#define MENU_WIDTH 144
-#define MENU_HEIGHT 142
-
 JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity):
 	SelectableListMenu(window, first_menu, protocol, std::move(name)){
 
@@ -23,7 +20,7 @@ JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProt
 
 	builder->get_widget("join_game_menu", this->menu);
 
-	this->addMenu(MENU_WIDTH/2, MENU_HEIGHT/2);
+	this->addMenu();
 
 	quit_game->signal_clicked().connect(sigc::mem_fun(*this, &JoinGameMenu::quitButtonPressed));
 

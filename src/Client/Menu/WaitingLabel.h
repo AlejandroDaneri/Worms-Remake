@@ -3,6 +3,7 @@
 
 #include <gtkmm/label.h>
 
+/* Label de que indica la espera a otros jugadores */
 class WaitingLabel{
 	private:
 		Gtk::Label label;

@@ -31,7 +31,7 @@ void MenuView::quitButtonPressed() {
 	this->window.close();
 }
 
-void MenuView::addMenu(int width, int height) {
+void MenuView::addMenu() {
 	this->world.add_overlay(*this->menu);
 	this->window.add(this->world);
 	this->window.show_all();

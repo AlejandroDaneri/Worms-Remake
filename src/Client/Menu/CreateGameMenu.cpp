@@ -5,9 +5,6 @@
 #include "GamePlayers.h"
 #include "ButtonBuilder.h"
 
-#define MENU_WIDTH 936
-#define MENU_HEIGHT 386
-
 CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity):
 	SelectableListMenu(window, first_menu, protocol, std::move(name)){
 
@@ -25,7 +22,7 @@ CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu, Client
 
 	builder->get_widget("create_game_menu", this->menu);
 
-	this->addMenu(MENU_WIDTH/2, MENU_HEIGHT/2);
+	this->addMenu();
 	this->quit_game->signal_clicked().connect(sigc::mem_fun(*this, &CreateGameMenu::quitButtonPressed));
 }
 
