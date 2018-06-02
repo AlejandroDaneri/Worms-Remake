@@ -16,5 +16,4 @@ const char *InvalidMapError::what() const noexcept{
 }
 
 InvalidMapError::~InvalidMapError() {
-
 }

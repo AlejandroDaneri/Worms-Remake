@@ -2,7 +2,6 @@
 #ifndef WORMS_OBJECTMODEL_H
 #define WORMS_OBJECTMODEL_H
 
-
 class MapObject {
     double x, y;
     int angle;
