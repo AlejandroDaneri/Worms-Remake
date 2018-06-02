@@ -41,7 +41,7 @@ const bool Map::isGirder(int &index) const {
 void Map::getObjects(std::vector<std::vector<double>> &worms,
                      std::vector<std::vector<double>> &girders) const {
     for (auto &object : objects) {
-        double x, y;
+        float x, y;
         object.second.getPosition(x, y);
         if (object.first == 1) {
             std::vector<double> position;
