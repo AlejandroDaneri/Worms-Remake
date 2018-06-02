@@ -11,7 +11,7 @@ const std::string& AirAttack::getName(){
 	return AIR_ATTACK_NAME;
 }
 
-void AirAttack::shoot(char dir, int angle, int power, int time){}
+void AirAttack::shoot(char dir, int angle, int power, int time, int shooter_id){}
 
 void AirAttack::shoot(Worm& shooter, b2Vec2 pos){
 	int missiles = this->parameters.getWeaponFragments(AIR_ATTACK_NAME);

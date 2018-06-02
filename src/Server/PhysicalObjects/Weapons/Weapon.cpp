@@ -11,7 +11,7 @@ Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius)
 	PhysicalObject(world, Weapon::weapon_id++, TYPE_WEAPON), parameters(parameters), 
 	damage(damage), radius(radius), 
 	waiting_to_explode(false), time_to_explode(-1), angle(MAX_WEAPON_ANGLE + 1), power(-1),
-	explode_time(world, *this){}
+	shooter_id(-1), explode_time(world, *this){}
 
 Weapon::~Weapon(){
 	this->explode_time.join();
@@ -21,13 +21,14 @@ bool Weapon::isActive(){
 	return this->waiting_to_explode || PhysicalObject::isActive();
 }
 
-void Weapon::shoot(char dir, int angle, int power, int time){
+void Weapon::shoot(char dir, int angle, int power, int time, int shooter_id){
 	if (dir == -1 && angle <= MAX_WEAPON_ANGLE){
 		angle = 180 - angle;
 	}
 	this->time_to_explode = time;
 	this->angle = angle;
 	this->power = power;
+	this->shooter_id = shooter_id;
 }
 
 void Weapon::shoot(Worm& shooter, b2Vec2 pos){}
@@ -95,4 +96,8 @@ void Weapon::collide_with_something(CollisionData* other){
 		this->explode_time.stop();
 		this->is_dead = true;
 	}
+}
+
+int Weapon::getShooterId() const{
+	return this->shooter_id;
 }

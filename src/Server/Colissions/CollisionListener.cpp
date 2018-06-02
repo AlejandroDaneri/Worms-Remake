@@ -80,5 +80,15 @@ bool CollisionListener::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB){
 	if (dataA->getType() == TYPE_WEAPON && dataB->getType() == TYPE_WEAPON){
 		return false;
 	}
+	if (dataA->getType() == TYPE_WEAPON && dataB->getType() == TYPE_WORM){
+		int shooter_id = ((Weapon*)dataA->getObject())->getShooterId();
+		int worm_id = dataB->getObject()->getId();
+		return shooter_id != worm_id;
+	}
+	if (dataB->getType() == TYPE_WEAPON && dataA->getType() == TYPE_WORM){
+		int shooter_id = ((Weapon*)dataB->getObject())->getShooterId();
+		int worm_id = dataA->getObject()->getId();
+		return shooter_id != worm_id;
+	}
 	return true;
 }
