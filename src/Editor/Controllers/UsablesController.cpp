@@ -7,9 +7,9 @@ UsablesController::UsablesController(
     builder->get_widget("btn_reset", reset_button);
     reset_button->signal_clicked().connect(
             sigc::mem_fun(*this,
-                          &UsablesController::on_reset_clicked));
+                          &UsablesController::onResetSignal));
 
-    builder->get_widget_derived("life", life_spin);
+    builder->get_widget_derived("life", life_spinner);
 
     for (size_t i = 1; i <= 10; ++i) {
         std::shared_ptr<WeaponView> weapon_view(new WeaponView(builder, i));
@@ -27,8 +27,8 @@ UsablesController::UsablesController(
     }
 }
 
-void UsablesController::on_reset_clicked() {
-    life_spin->reset();
+void UsablesController::onResetSignal() {
+    life_spinner->reset();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         actual_controller->resetAmmo();
     }
@@ -36,7 +36,7 @@ void UsablesController::on_reset_clicked() {
 
 void UsablesController::getWeapons(std::vector<int> &weps_ammo,
                                           unsigned int &life) const {
-    life = life_spin->get_value();
+    life = life_spinner->get_value();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         weps_ammo.push_back(actual_controller->getAmmo());
     }
@@ -53,7 +53,7 @@ void UsablesController::loadWeapons(std::vector<int> &weps_ammo,
         actual_controller->updateAmmo(weps_ammo[i]);
         i++;
     }
-    life_spin->update(life);
+    life_spinner->update(life);
 }
 
 bool

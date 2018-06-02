@@ -9,7 +9,7 @@
 
 class FileBoxController {
 private:
-    UsablesController &weapons_controller;
+    UsablesController &usables_controller;
     std::shared_ptr<MapController> map_controller;
     Gtk::FileChooserDialog* save_dialog;
     Gtk::FileChooserDialog* open_dialog;

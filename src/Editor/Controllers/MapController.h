@@ -23,9 +23,9 @@ public:
 
     void addModeSignal(const unsigned int &id);
 
-    void erase();
+    void eraseSignal();
 
-    void clean();
+    void newMapSignal();
 
     void moveSignal();
 
@@ -41,7 +41,7 @@ public:
 
     void turnCWSignal();
 
-    void changeBackground() const;
+    void changeBackgroundSignal() const;
 
     void changeModeSignal();
 

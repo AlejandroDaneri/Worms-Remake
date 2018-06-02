@@ -37,7 +37,7 @@ void ToolBoxView::linkController(MapController *controller) {
     this->map_controller = controller;
 
     erase->signal_clicked().connect(
-            sigc::mem_fun(*map_controller, &MapController::erase));
+            sigc::mem_fun(*map_controller, &MapController::eraseSignal));
 
     move->signal_clicked().connect(
             sigc::mem_fun(*map_controller, &MapController::moveSignal));
@@ -49,7 +49,8 @@ void ToolBoxView::linkController(MapController *controller) {
             sigc::mem_fun(*map_controller, &MapController::turnCWSignal));
 
     change_bg->signal_clicked().connect(
-            sigc::mem_fun(*map_controller, &MapController::changeBackground));
+            sigc::mem_fun(*map_controller,
+                          &MapController::changeBackgroundSignal));
 
     mode->signal_toggled().connect(
             sigc::mem_fun(*this, &ToolBoxView::changeModeSignal));
