@@ -98,14 +98,23 @@ void Worm::changeWeapon(const std::string& weapon){
 
 void Worm::shoot(int angle, int power, int time){
 	b2Vec2 pos = this->getPosition();
+	int shooter_id = this->id;
+	float x_add = (worm_size * this->dir);;
+	float y_add = worm_size;
 	if (angle > MAX_WEAPON_ANGLE){
-		pos.x += (worm_size * Math::cosDegrees(this->angle) * this->dir);
-		pos.y += (worm_size * Math::sinDegrees(this->angle));
-		((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time, -1);
+		shooter_id = -1;
+		x_add *= Math::cosDegrees(this->angle);
+		y_add *= Math::sinDegrees(this->angle);
 	} else {
-		((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time, this->id);
+		float factor = (this->getCurrentWeapon() == BAT_NAME ? 0.3 : 0.7);
+		x_add *= Math::cosDegrees(angle) * factor;
+		y_add *= Math::sinDegrees(angle) * factor;
 	}
+	
+	pos.x += x_add;
+	pos.y += y_add;
 
+	((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time, shooter_id);
 	this->world.addObject(this->weapon, pos);
 }
 
