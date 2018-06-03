@@ -6,7 +6,7 @@ MenuView::MenuView(Gtk::Window& window, MenuView& main_menu, ClientProtocol& pro
 
 	Glib::RefPtr<Gdk::Pixbuf> aux = Gdk::Pixbuf::create_from_file(BACKGROUND_MENU_IMAGE);
 	this->background.set(aux);
-	this->world.add_overlay(this->background);
+	this->menu_container.add_overlay(this->background);
 }
 
 MenuView::~MenuView(){
@@ -20,7 +20,7 @@ void MenuView::showFatalError(){
 void MenuView::showErrorAndRestart(const std::string& error){
 	this->window.remove();
 	this->main_menu.showError(error);
-	this->window.add(this->main_menu.world);
+	this->window.add(this->main_menu.menu_container);
 }
 
 void MenuView::showError(const std::string& error){
@@ -32,7 +32,7 @@ void MenuView::quitButtonPressed() {
 }
 
 void MenuView::addMenu() {
-	this->world.add_overlay(*this->menu);
-	this->window.add(this->world);
+	this->menu_container.add_overlay(*this->menu);
+	this->window.add(this->menu_container);
 	this->window.show_all();
 }

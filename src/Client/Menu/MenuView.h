@@ -22,7 +22,7 @@ class MenuView{
 		MenuView& main_menu;
 		Gtk::Box* menu;
 
-		Gtk::Overlay world;
+		Gtk::Overlay menu_container;
 		Gtk::Image background;
 
 		/* Muestra un mensaje de error y cierra la aplicacion*/
