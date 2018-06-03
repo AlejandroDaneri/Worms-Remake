@@ -38,12 +38,12 @@ class Handlers{
 		/* Handler completo para el presionado de teclas. Indica
 		   los pasos que se deben realizar al presionar una tecla
 		   especifica */
-		bool KeyPressHandler(GdkEventKey *key_event);
+		bool keyPressHandler(GdkEventKey *key_event);
 
 		/* Handler completo para la liberación de teclas. Indica
 		   los pasos que se deben realizar al liberar una tecla
 		   especifica */
-		bool KeyReleaseHandler(GdkEventKey *key_event);
+		bool keyReleaseHandler(GdkEventKey *key_event);
 
 		/* Handler del mouse. Indica los pasos que se deben realizar
 		   al utilizar el mouse */

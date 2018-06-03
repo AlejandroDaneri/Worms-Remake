@@ -32,9 +32,9 @@ void Handlers::enableAll(){
 	this->player.getProtocol().updateScope(DEFAULT_ANGLE);
 
 	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this,
-																									   &Handlers::KeyPressHandler));
+																									   &Handlers::keyPressHandler));
 	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this,
-																										 &Handlers::KeyReleaseHandler));
+																										 &Handlers::keyReleaseHandler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::onButtonPressEvent));
 
 	this->enabled = true;
@@ -54,7 +54,7 @@ void Handlers::timerStopped(int power){
 	this->player.shoot(this->current_angle, power, this->weapons_time);
 }
 
-bool Handlers::KeyPressHandler(GdkEventKey *key_event) {
+bool Handlers::keyPressHandler(GdkEventKey *key_event) {
 	if (key_event->keyval == GDK_KEY_Left) {
 		this->player.getProtocol().sendMoveAction(MOVE_LEFT);
 	} else if (key_event->keyval == GDK_KEY_Right) {
@@ -101,7 +101,7 @@ bool Handlers::KeyPressHandler(GdkEventKey *key_event) {
 	return true;
 }
 
-bool Handlers::KeyReleaseHandler(GdkEventKey *key_event) {
+bool Handlers::keyReleaseHandler(GdkEventKey *key_event) {
 	if (key_event->type == GDK_KEY_RELEASE) {
 		if (key_event->keyval == SPACE) {
 			if (this->weapons.getCurrentWeapon().isSelfDirected()) {
