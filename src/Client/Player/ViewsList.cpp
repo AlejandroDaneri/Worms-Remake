@@ -167,6 +167,9 @@ void ViewsList::setVictory() {
 }
 
 void ViewsList::shoot(const std::string& weapon) {
+	if (this->weapon_focused == -1){
+		this->weapon_focused = -2;
+	}
 	if (weapon == BAT_NAME){
 		this->worms.at(this->current_worm_id).batHit();
 	}

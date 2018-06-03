@@ -1,5 +1,5 @@
 #include "Worm.h"
-#include "b2PolygonShape.h"
+#include "b2CircleShape.h"
 #include "b2Fixture.h"
 #include "Protocol.h"
 #include "WeaponFactory.h"
@@ -21,13 +21,15 @@ void Worm::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 }
 
 void Worm::createFixtures(){
-	b2PolygonShape boxShape;
-	boxShape.SetAsBox(worm_size / 2, worm_size / 2);
+	b2CircleShape circleShape;
+	circleShape.m_p.Set(0, 0);
+	circleShape.m_radius = worm_size / 2; 
 		  
 	b2FixtureDef boxFixtureDef;
-	boxFixtureDef.shape = &boxShape;
+	boxFixtureDef.shape = &circleShape;
 	boxFixtureDef.density = 10;
 	this->body->CreateFixture(&boxFixtureDef);
+	this->body->SetFixedRotation(true);
 }
 
 int Worm::getPlayerId() const{
