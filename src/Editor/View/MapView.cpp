@@ -9,7 +9,7 @@
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),
-          scroll_handler(*(Gtk::ScrolledWindow*)this->get_parent()), actual_bg(0) {
+          scroll_handler(*(Gtk::ScrolledWindow*)this->get_parent()), actual_background_index(0) {
 
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
@@ -37,7 +37,7 @@ void MapView::initializeBackground() {
     for (size_t i = 0; i < BACKGROUND_QUANTITY; i++){
 		bg_paths.emplace_back(BACKGROUND_PATH + "background" + std::to_string(i) + ".jpg");
 	}
-    setBackground(bg_paths[actual_bg]);
+    setBackground(bg_paths[actual_background_index]);
 }
 
 void MapView::initializeGirderImages(){
@@ -73,14 +73,14 @@ void MapView::add(const unsigned int &id, const double &x, const double &y,
 
     put(new_image, x_bound, y_bound);
     new_image.show();
-    objects.push_back(std::move(new_image));
+    contained_objects.push_back(std::move(new_image));
     if (angle > 0)
-        turn(id, angle, objects.size()-1);
+        turn(id, angle, contained_objects.size()-1);
 }
 
 void MapView::move(const int &index, const double &x, const double &y) {
-    if (!objects.empty()) {
-        Gtk::Image &actual_object = objects[index];
+    if (!contained_objects.empty()) {
+        Gtk::Image &actual_object = contained_objects[index];
         Gtk::Layout::move(actual_object, x - actual_object.get_width() / 2,
                           y - actual_object.get_height() / 2);
         actual_object.show();
@@ -88,31 +88,31 @@ void MapView::move(const int &index, const double &x, const double &y) {
 }
 
 void MapView::turn(const unsigned int &id, const int &angle, const int &index) {
-    if (!objects.empty()) {
-        Gtk::Image &image = objects[index];
+    if (!contained_objects.empty()) {
+        Gtk::Image &image = contained_objects[index];
         image.set(objects_pallete[id - id / 2 - 1][angle / 10]);
     }
 }
 
 void MapView::erase(const int &index) {
-    if (!objects.empty()) {
-        objects[index].hide();
-        objects.erase(objects.begin() + index);
+    if (!contained_objects.empty()) {
+        contained_objects[index].hide();
+        contained_objects.erase(contained_objects.begin() + index);
     }
 }
 
 void MapView::clean() {
-    objects.clear();
+    contained_objects.clear();
 }
 
-void MapView::linkController(MapController *map_controller) {
+void MapView::bindController(MapController *map_controller) {
     this->controller = map_controller;
 }
 
 void MapView::changeBackground() {
     background.clear();
-    actual_bg = (actual_bg + 1) % bg_paths.size();
-    setBackground(bg_paths[actual_bg]);
+    actual_background_index = (actual_background_index + 1) % bg_paths.size();
+    setBackground(bg_paths[actual_background_index]);
 }
 
 void MapView::setBackground(const std::string &name) {
@@ -133,7 +133,7 @@ void MapView::setBackground(const std::string &name) {
 }
 
 void MapView::redrawMap() {
-    for(Gtk::Image &object : objects){
+    for(Gtk::Image &object : contained_objects){
         const Gtk::Allocation &alloc = object.get_allocation();
         remove(object);
         put(object,alloc.get_x(),alloc.get_y());
@@ -144,17 +144,17 @@ void MapView::redrawMap() {
 int MapView::select(const double &x, const double &y) {
     Gdk::Rectangle new_object(x, y, 1, 1);
     bool collision = false;
-    for (size_t i = 0; (i < objects.size()) && (!collision); i++) {
-        collision = objects[i].intersect(new_object);
+    for (size_t i = 0; (i < contained_objects.size()) && (!collision); i++) {
+        collision = contained_objects[i].intersect(new_object);
         if (collision) {
-            this->actual_selected = i;
+            this->selected_object_index = i;
         }
     }
-    return collision ? actual_selected:-1;
+    return collision ? selected_object_index:-1;
 }
 
 const std::string MapView::getBackgroundName() const {
-    return "background"+std::to_string(actual_bg)+".jpg";
+    return "background"+std::to_string(actual_background_index)+".jpg";
 }
 
 void MapView::loadBackground(const std::string &name) {

@@ -5,30 +5,31 @@
 
 #include <gtkmm/button.h>
 #include <gtkmm/spinbutton.h>
-#include "Model/Weapon.h"
-#include "View/WeaponView.h"
-#include "View/LifeView.h"
+#include "Weapon.h"
+#include "WeaponView.h"
+#include "LifeView.h"
 
-class WeaponsAndLifeController {
+class UsablesController {
 private:
-    LifeView *life_spin;
-
+    LifeView *life_spinner;
     Gtk::Button *reset_button;
     std::vector<std::shared_ptr<Weapon>> weapons;
     std::vector<std::shared_ptr<WeaponView>> weapons_view;
     std::vector<std::shared_ptr<WeaponController> > wep_controllers;
+
+    bool isValidWeaponSet(std::vector<int> &ammo_vector) const;
 public:
-    explicit WeaponsAndLifeController(
+    explicit UsablesController(
             const Glib::RefPtr<Gtk::Builder> &builder);
 
-    void on_reset_clicked();
+    void onResetSignal();
 
     void getWeapons(std::vector<int> &weps_ammo, unsigned int &life) const;
 
     void
     loadWeapons(std::vector<int> &weps_ammo, const unsigned int &life) const;
 
-    bool isValidWeaponSet(std::vector<int> &ammo_vector) const;
+
 };
 
 

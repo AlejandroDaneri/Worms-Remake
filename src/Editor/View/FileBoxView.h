@@ -20,7 +20,7 @@ public:
     FileBoxView(BaseObjectType *cobject,
                 const Glib::RefPtr<Gtk::Builder> &builder);
 
-    void linkControler(std::shared_ptr<FileBoxController> controller);
+    void bindController(std::shared_ptr<FileBoxController> controller);
 };
 
 

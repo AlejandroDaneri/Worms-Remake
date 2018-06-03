@@ -1,16 +1,16 @@
 
 #include <Path.h>
-#include "Controllers/FileBoxController.h"
-#include "Model/FileWriter.h"
-#include "Model/FileReader.h"
-#include "Model/InvalidMapError.h"
+#include "FileBoxController.h"
+#include "FileWriter.h"
+#include "FileReader.h"
+#include "InvalidMapError.h"
 
 static const char *const NEW_FILE_NAME = "Sin titulo.yaml";
 
-FileBoxController::FileBoxController(WeaponsAndLifeController &wep_controller,
+FileBoxController::FileBoxController(UsablesController &wep_controller,
         std::shared_ptr<MapController> map_controller,
         const Glib::RefPtr<Gtk::Builder> &builder )
-        : weapons_controller(wep_controller),
+        : usables_controller(wep_controller),
           map_controller(std::move(map_controller))
 {
     builder->get_widget("save_dialog",save_dialog);
@@ -34,7 +34,7 @@ void FileBoxController::onSaveClicked() const {
 
         std::vector<int> weapons_ammo;
         unsigned int life;
-        weapons_controller.getWeapons(weapons_ammo, life);
+        usables_controller.getWeapons(weapons_ammo, life);
 
         save_dialog->set_current_folder(MAPS_PATH);
         save_dialog->set_current_name(NEW_FILE_NAME);
@@ -71,7 +71,7 @@ void FileBoxController::onLoadClicked() const {
                   weps_ammo, life, background);
 
         map_controller->loadBackground(background);
-        weapons_controller.loadWeapons(weps_ammo, life);
+        usables_controller.loadWeapons(weps_ammo, life);
         map_controller->loadObjects(worms, girders);
     }
     open_dialog->hide();
@@ -80,7 +80,7 @@ void FileBoxController::onLoadClicked() const {
 
 void FileBoxController::onNewClicked() const {
     map_name->set_label(NEW_FILE_NAME);
-    weapons_controller.on_reset_clicked();
-    map_controller->clean();
+    usables_controller.onResetSignal();
+    map_controller->newMapSignal();
 }
 

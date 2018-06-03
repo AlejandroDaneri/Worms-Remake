@@ -9,7 +9,7 @@ FileBoxView::FileBoxView(BaseObjectType *cobject,
     builder->get_widget("btn_clean", new_map);
 }
 
-void FileBoxView::linkControler(std::shared_ptr<FileBoxController> controller) {
+void FileBoxView::bindController(std::shared_ptr<FileBoxController> controller) {
     this->file_box_controller = std::move(controller);
 
     save->signal_clicked().connect(

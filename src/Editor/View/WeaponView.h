@@ -21,13 +21,13 @@ public:
     WeaponView(const Glib::RefPtr<Gtk::Builder> &builder,
                const unsigned int &id);
 
-    void on_ammo_value_change();
+    void onAmmoValueChanged();
 
-    void on_checkbox_clicked();
+    void onCheckboxClicked();
 
     void resetAmmo();
 
-    void linkController(WeaponController *controller);
+    void bindController(WeaponController *controller);
 
     const int getInitialAmmo();
 

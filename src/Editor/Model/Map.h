@@ -8,7 +8,7 @@
 #include "MapObject.h"
 
 class Map {
-    std::vector<std::pair<int, MapObject>> objects;
+    std::vector<std::pair<int, MapObject>> contained_objects;
 
 public:
     void erase(int index);

@@ -13,7 +13,7 @@ class MapController;
 
 class MapView : public Gtk::Layout {
 private:
-    std::vector<Gtk::Image> objects;
+    std::vector<Gtk::Image> contained_objects;
     std::vector<std::vector<std::string>> objects_pallete;
     MapController *controller;
     std::vector<std::string> bg_paths;
@@ -21,8 +21,8 @@ private:
     Water water;
     ScrollHandler scroll_handler;
 
-    int actual_bg;
-    size_t actual_selected;
+    int actual_background_index;
+    size_t selected_object_index;
 
     void initializeWormsImages();
 
@@ -43,7 +43,7 @@ public:
 
     void clean();
 
-    void linkController(MapController *map_controller);
+    void bindController(MapController *map_controller);
 
     void add(const unsigned int &id, const double &x, const double &y,
              const int &angle = 0);

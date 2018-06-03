@@ -33,6 +33,8 @@ private:
     Gtk::Image* selected;
     bool processing;
 
+    void leaveConsistent();
+
 public:
     ToolBoxView(BaseObjectType *cobject,
                 const Glib::RefPtr<Gtk::Builder> &builder);
@@ -41,21 +43,17 @@ public:
 
     void enableMovingItems();
 
-    void linkController(MapController *controller);
-
     void disableMovingItems();
 
-    void changeModeSignal();
+    void bindController(MapController *controller);
 
-    void leaveConsistent();
+    void changeMode();
 
     void showSelected(int id);
 
     void hideSelected();
 
     void closeSelectionMode();
-
-    void setMoveMode();
 };
 
 

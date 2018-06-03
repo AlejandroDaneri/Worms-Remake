@@ -2,9 +2,9 @@
 #ifndef WORMS_MAPCONTROLLER_H
 #define WORMS_MAPCONTROLLER_H
 
-#include "View/MapView.h"
-#include "Model/Map.h"
-#include "View/ToolBoxView.h"
+#include "MapView.h"
+#include "Map.h"
+#include "ToolBoxView.h"
 
 class MapView;
 class ToolBoxView;
@@ -18,15 +18,14 @@ class MapController {
     int index_object_selected;
 
     void turn(const int &rotation);
-
 public:
     MapController(Map model, const Glib::RefPtr<Gtk::Builder> &builder);
 
     void addModeSignal(const unsigned int &id);
 
-    void erase();
+    void eraseSignal();
 
-    void clean();
+    void newMapSignal();
 
     void moveSignal();
 
@@ -42,13 +41,13 @@ public:
 
     void turnCWSignal();
 
-    void changeBackground() const;
+    void changeBackgroundSignal() const;
 
     void changeModeSignal();
 
     const std::string getBackgroundName() const;
 
-    void loadBackground(const std::string &background) ;
+    void loadBackground(const std::string &background);
 };
 
 

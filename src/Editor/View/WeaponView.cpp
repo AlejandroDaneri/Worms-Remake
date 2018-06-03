@@ -11,17 +11,17 @@ WeaponView::WeaponView(const Glib::RefPtr<Gtk::Builder> &builder,
     ammo_selector->set_sensitive(!default_checkbox_state);
 
     ammo_selector->signal_value_changed().connect(
-            sigc::mem_fun(*this, &WeaponView::on_ammo_value_change));
+            sigc::mem_fun(*this, &WeaponView::onAmmoValueChanged));
 
     infinite->signal_clicked().connect(
-            sigc::mem_fun(*this, &WeaponView::on_checkbox_clicked));
+            sigc::mem_fun(*this, &WeaponView::onCheckboxClicked));
 }
 
-void WeaponView::on_ammo_value_change() {
+void WeaponView::onAmmoValueChanged() {
     controller->updateAmmo(ammo_selector->get_value());
 }
 
-void WeaponView::on_checkbox_clicked() {
+void WeaponView::onCheckboxClicked() {
     ammo_selector->set_sensitive(!infinite->get_active());
     if (infinite->get_active()) {
         controller->updateAmmo(-1);
@@ -35,7 +35,7 @@ void WeaponView::resetAmmo() {
     infinite->set_active(default_checkbox_state);
 }
 
-void WeaponView::linkController(WeaponController *controller) {
+void WeaponView::bindController(WeaponController *controller) {
     this->controller = controller;
 }
 

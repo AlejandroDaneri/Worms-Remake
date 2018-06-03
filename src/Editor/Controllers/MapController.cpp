@@ -1,8 +1,8 @@
 
 #include <gtkmm/messagedialog.h>
 #include <ViewPositionTransformer.h>
-#include "Controllers/MapController.h"
-#include "Model/InvalidMapError.h"
+#include "MapController.h"
+#include "InvalidMapError.h"
 
 #define ADD_MODE_ID 0
 #define MOVE_CMD_ID 1
@@ -16,8 +16,8 @@ MapController::MapController(Map model,
 {
     builder->get_widget_derived("map", view);
     builder->get_widget_derived("toolbox", toolBox);
-    view->linkController(this);
-    toolBox->linkController(this);
+    view->bindController(this);
+    toolBox->bindController(this);
 }
 
 void MapController::addModeSignal(const unsigned int &id) {
@@ -25,14 +25,14 @@ void MapController::addModeSignal(const unsigned int &id) {
     this->item_id_to_add = id;
 }
 
-void MapController::erase() {
+void MapController::eraseSignal() {
     model.erase(index_object_selected);
     view->erase(index_object_selected);
     toolBox->hideSelected();
     toolBox->disableMovingItems();
 }
 
-void MapController::clean() {
+void MapController::newMapSignal() {
     model.clean();
     view->clean();
     toolBox->closeSelectionMode();
@@ -114,7 +114,7 @@ void MapController::getObjects(std::vector<std::vector<double>> &worms,
 
 void MapController::loadObjects(std::vector<std::vector<double>> &worms,
                                 std::vector<std::vector<double>> &girders) {
-    clean();
+    newMapSignal();
     ViewPositionTransformer transformer(*view);
     for (std::vector<double> &worm:worms) {
         Position position(worm[0],worm[1]);
@@ -134,7 +134,7 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
     }
 }
 
-void MapController::changeBackground() const {
+void MapController::changeBackgroundSignal() const {
     this->view->changeBackground();
 }
 

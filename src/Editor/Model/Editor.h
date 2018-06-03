@@ -6,17 +6,17 @@
 #include <gtkmm/window.h>
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/spinbutton.h>
-#include "View/MapView.h"
-#include "View/ToolBoxView.h"
-#include "Controllers/WeaponsAndLifeController.h"
-#include "Controllers/FileBoxController.h"
-#include "View/FileBoxView.h"
+#include "MapView.h"
+#include "ToolBoxView.h"
+#include "UsablesController.h"
+#include "FileBoxController.h"
+#include "FileBoxView.h"
 
 
 class Editor : public Gtk::Window {
     Gtk::ScrolledWindow *map_window;
     Map map_model;
-    WeaponsAndLifeController weps_list_controller;
+    UsablesController weps_list_controller;
     FileBoxView *filebox;
 
 public:

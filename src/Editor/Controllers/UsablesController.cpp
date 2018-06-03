@@ -1,15 +1,15 @@
 
-#include "WeaponsAndLifeController.h"
-#include "Model/InvalidMapError.h"
+#include "UsablesController.h"
+#include "InvalidMapError.h"
 
-WeaponsAndLifeController::WeaponsAndLifeController(
+UsablesController::UsablesController(
         const Glib::RefPtr<Gtk::Builder> &builder) {
     builder->get_widget("btn_reset", reset_button);
     reset_button->signal_clicked().connect(
             sigc::mem_fun(*this,
-                          &WeaponsAndLifeController::on_reset_clicked));
+                          &UsablesController::onResetSignal));
 
-    builder->get_widget_derived("life", life_spin);
+    builder->get_widget_derived("life", life_spinner);
 
     for (size_t i = 1; i <= 10; ++i) {
         std::shared_ptr<WeaponView> weapon_view(new WeaponView(builder, i));
@@ -27,16 +27,16 @@ WeaponsAndLifeController::WeaponsAndLifeController(
     }
 }
 
-void WeaponsAndLifeController::on_reset_clicked() {
-    life_spin->reset();
+void UsablesController::onResetSignal() {
+    life_spinner->reset();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         actual_controller->resetAmmo();
     }
 }
 
-void WeaponsAndLifeController::getWeapons(std::vector<int> &weps_ammo,
+void UsablesController::getWeapons(std::vector<int> &weps_ammo,
                                           unsigned int &life) const {
-    life = life_spin->get_value();
+    life = life_spinner->get_value();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
         weps_ammo.push_back(actual_controller->getAmmo());
     }
@@ -45,7 +45,7 @@ void WeaponsAndLifeController::getWeapons(std::vector<int> &weps_ammo,
     }
 }
 
-void WeaponsAndLifeController::loadWeapons(std::vector<int> &weps_ammo,
+void UsablesController::loadWeapons(std::vector<int> &weps_ammo,
                                            const unsigned int &life) const {
     int i = 0;
     for (const std::shared_ptr<WeaponController> &actual_controller
@@ -53,11 +53,11 @@ void WeaponsAndLifeController::loadWeapons(std::vector<int> &weps_ammo,
         actual_controller->updateAmmo(weps_ammo[i]);
         i++;
     }
-    life_spin->update(life);
+    life_spinner->update(life);
 }
 
 bool
-WeaponsAndLifeController::isValidWeaponSet(std::vector<int> &ammo_vector) const {
+UsablesController::isValidWeaponSet(std::vector<int> &ammo_vector) const {
     int valid_weps_counter= 0;
     for (int actual_ammo : ammo_vector) {
         if(actual_ammo !=0)
