@@ -15,6 +15,8 @@ elegir la ruta (para instalar en otra carpeta, con el otro cmakelists.txt)
 
 ### Documentacion
 https://drive.google.com/drive/folders/1RUEW83Uai-po4p9HDC2TunAWcXvwODsv?usp=sharing
+
+
 https://www.lucidchart.com/invitations/accept/920113ea-4a8b-49ae-94a4-78b477b140c9
 
 ### Lista de tareas
