@@ -31,9 +31,6 @@ class WeaponView {
 		/* Actualiza la informacion de todos los botones */
 		void update();
 
-		/* Callback de updateAmmo */
-		bool updateAmmoCallBack(const std::string& weapon_name, unsigned int ammo);
-
 		/* Actualiza la informacion de la municion del arma especifica */
 		void updateAmmo(const Weapon& weapon);
 

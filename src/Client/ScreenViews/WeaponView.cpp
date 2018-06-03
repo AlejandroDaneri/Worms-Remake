@@ -24,12 +24,6 @@ Gtk::Grid& WeaponView::getWindow() {
 	return this->window;
 }
 
-bool WeaponView::updateAmmoCallBack(const std::string& weapon_name, unsigned int ammo){
-	this->buttons[weapon_name]->setLabel(ammo);
-	return false;
-}
-
 void WeaponView::updateAmmo(const Weapon& weapon){
-	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WeaponView::updateAmmoCallBack), weapon.getName(), weapon.getAmmo());
-	Glib::signal_idle().connect(my_slot);
+	this->buttons[weapon.getName()]->setLabel(weapon.getAmmo());
 }

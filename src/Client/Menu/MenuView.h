@@ -22,7 +22,7 @@ class MenuView{
 		MenuView& main_menu;
 		Gtk::Box* menu;
 
-		Gtk::Overlay world;
+		Gtk::Overlay menu_container;
 		Gtk::Image background;
 
 		/* Muestra un mensaje de error y cierra la aplicacion*/
@@ -31,8 +31,10 @@ class MenuView{
 		/* Muestra un mensaje de error y reinicia */
 		void showErrorAndRestart(const std::string& error);
 
-		void addMenu(int width, int height);
+		/* Agrega el menu al world y el world al window */
+		void addMenu();
 
+		/* Handler del boton de salir */
 		void quitButtonPressed();
 
 	public:

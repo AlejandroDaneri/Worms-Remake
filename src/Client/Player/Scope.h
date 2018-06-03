@@ -9,10 +9,7 @@ class Scope{
 	private:
 		Gtk::Image scope;
 		WorldView& world;
-		bool in_world;
 		int angle;
-
-		void addScopeToWorld();
 
 	public:
 		/* Constructor */

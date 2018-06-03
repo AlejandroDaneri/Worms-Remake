@@ -5,6 +5,7 @@
 
 class ButtonBuilder {
 	public:
+		/* Modifica la visualización del label del boton */
 		static void buildButton(Gtk::Button* button);
 };
 

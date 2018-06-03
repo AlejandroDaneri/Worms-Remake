@@ -15,6 +15,7 @@
 #include "GameMenu.h"
 #include "MenuView.h"
 
+/* Menu de conexion con el servidor */
 class ServerMenu{
 	private:
 		Gtk::Label* error;
@@ -27,7 +28,7 @@ class ServerMenu{
 		std::unique_ptr<MenuView> next_menu;
 		std::unique_ptr<ClientProtocol> protocol;
 
-		Gtk::Overlay* world;
+		Gtk::Overlay* menu_container;
 		Gtk::Image* background;
 
 		/* Handler del boton de conexion */
