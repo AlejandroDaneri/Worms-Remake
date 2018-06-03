@@ -58,10 +58,9 @@ void UsablesController::loadWeapons(std::vector<int> &weps_ammo,
 
 bool
 UsablesController::isValidWeaponSet(std::vector<int> &ammo_vector) const {
-    int valid_weps_counter= 0;
     for (int actual_ammo : ammo_vector) {
         if(actual_ammo !=0)
-            valid_weps_counter++;
+            return true;
     }
-    return valid_weps_counter>0;
+    return false;
 }

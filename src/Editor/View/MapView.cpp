@@ -143,14 +143,13 @@ void MapView::redrawMap() {
 
 int MapView::select(const double &x, const double &y) {
     Gdk::Rectangle new_object(x, y, 1, 1);
-    bool collision = false;
-    for (size_t i = 0; (i < contained_objects.size()) && (!collision); i++) {
-        collision = contained_objects[i].intersect(new_object);
+    for (ssize_t i = contained_objects.size() - 1; i >= 0; i--) {
+        bool collision = contained_objects[i].intersect(new_object);
         if (collision) {
-            this->selected_object_index = i;
+            return i;
         }
     }
-    return collision ? selected_object_index:-1;
+    return -1;
 }
 
 const std::string MapView::getBackgroundName() const {
