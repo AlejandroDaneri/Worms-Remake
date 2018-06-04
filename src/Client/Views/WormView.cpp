@@ -155,3 +155,8 @@ void WormView::batHit() {
 	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WormView::batHitCallBack), iter, width / 3);
 	Glib::signal_timeout().connect(my_slot, 12);
 }
+
+void WormView::reset(){
+	this->is_moving = false;
+	this->setFocus(false);
+}

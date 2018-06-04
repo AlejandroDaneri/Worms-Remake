@@ -97,6 +97,9 @@ class WormView: public Viewable {
 
 		/* Realiza la animacion del worm bateando */
 		void batHit();
+
+		/* Resetea el focus del gusano */
+		void reset();
 };
 
 
