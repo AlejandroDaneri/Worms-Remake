@@ -14,7 +14,8 @@ const std::string& Teleportation::getName(){
 void Teleportation::shoot(char dir, int angle, int power, int time, int shooter_id){}
 
 void Teleportation::shoot(Worm& shooter, b2Vec2 pos){
-	pos.y++;
+	pos.x += (worm_size / 2);
+	pos.y += (worm_size / 2);
 	std::lock_guard<std::mutex> lock(this->world.getMutex());
 	b2Body* body = shooter.getBody();
 	if (body){
