@@ -15,7 +15,7 @@ bool WeaponPowerAccum::startCallBack() {
 	this->power += POWER_STEP;
 
 	if (this->actual_time == this->max_time) {
-		this->handlers.timerStopped(this->power);
+		this->handlers.powerAccumStopped(this->power);
 		return false;
 	}
 	return true;
@@ -30,6 +30,6 @@ void WeaponPowerAccum::start() {
 void WeaponPowerAccum::stop() {
 	if (this->my_connection.connected()) {
 		this->my_connection.disconnect();
-		this->handlers.timerStopped(this->power);
+		this->handlers.powerAccumStopped(this->power);
 	}
 }

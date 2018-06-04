@@ -50,7 +50,7 @@ void Handlers::disableAll() {
 	this->enabled = false;
 }
 
-void Handlers::timerStopped(int power){
+void Handlers::powerAccumStopped(int power){
 	this->player.shoot(this->current_angle, power, this->weapons_time);
 }
 

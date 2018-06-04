@@ -64,7 +64,7 @@ class Handlers{
 		void disableAll();
 
 		/* Realiza el shoot del player */
-		void timerStopped(int power);
+		void powerAccumStopped(int power);
 
 		/* Devuelve el angulo actual del scope */
 		int getCurrentAngle() const;
