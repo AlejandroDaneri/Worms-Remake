@@ -13,7 +13,7 @@ Scope::~Scope(){}
 void Scope::update(int angle, WormView& worm){
 	this->angle = angle;
 	char dir = worm.getDir();
-	if (dir == -1)
+	if (dir == DIR_LEFT)
 		angle = 180 - angle;
 	this->world.moveScope(this->scope, worm.getWidget(), angle);
 	this->scope.show();
