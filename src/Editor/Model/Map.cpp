@@ -2,7 +2,7 @@
 #include <yaml.h>
 #include "Map.h"
 
-void Map::erase(int index) {
+void Map::erase(const int &index) {
     if (!contained_objects.empty())
         this->contained_objects.erase(contained_objects.begin() + index);
 }
@@ -12,7 +12,7 @@ void Map::clean() {
 }
 
 void
-Map::add(unsigned int id, const double &x, const double &y, const int &angle) {
+Map::add(const unsigned int &id, const double &x, const double &y, const int &angle) {
     MapObject new_object(x, y, angle);
     contained_objects.emplace_back(std::make_pair(id, new_object));
 }

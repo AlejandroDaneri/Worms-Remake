@@ -13,7 +13,7 @@ void WeaponController::resetAmmo() {
     weapon_model->resetAmmo();
 }
 
-void WeaponController::updateAmmo(int ammo) {
+void WeaponController::updateAmmo(const int &ammo) {
     weapon_model->setAmmo(ammo);
     weapon_view->setAmmo(ammo);
 }

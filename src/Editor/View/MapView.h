@@ -37,7 +37,7 @@ private:
 public:
     MapView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 
-    bool on_button_clicked(GdkEventButton *button_event);
+    bool onButtonClicked(GdkEventButton *button_event);
 
     void erase(const int &index);
 

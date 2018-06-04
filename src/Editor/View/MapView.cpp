@@ -13,7 +13,7 @@ MapView::MapView(BaseObjectType *cobject,
 
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
-            sigc::mem_fun(*this, &MapView::on_button_clicked));
+            sigc::mem_fun(*this, &MapView::onButtonClicked));
 
     setInitialPosition();
     initializeBackground();
@@ -21,7 +21,7 @@ MapView::MapView(BaseObjectType *cobject,
     initializeGirderImages();
 }
 
-bool MapView::on_button_clicked(GdkEventButton *button_event) {
+bool MapView::onButtonClicked(GdkEventButton *button_event) {
     controller->mapClickedSignal(button_event);
     return true;
 }
