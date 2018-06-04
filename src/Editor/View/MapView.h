@@ -22,7 +22,6 @@ private:
     ScrollHandler scroll_handler;
 
     int actual_background_index;
-    size_t selected_object_index;
 
     void initializeWormsImages();
 
@@ -33,6 +32,8 @@ private:
     void initializeBackground();
 
     void setInitialPosition();
+
+    void redrawMap();
 
 public:
     MapView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
@@ -55,8 +56,6 @@ public:
     int select(const double &x, const double &y);
 
     void move(const int& index, const double &x, const double &y);
-
-    void redrawMap();
 
     const std::string getBackgroundName() const;
 
