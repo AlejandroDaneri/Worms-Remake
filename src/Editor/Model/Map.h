@@ -11,11 +11,11 @@ class Map {
     std::vector<std::pair<int, MapObject>> contained_objects;
 
 public:
-    void erase(int index);
+    void erase(const int &index);
 
     void clean();
 
-    void add(unsigned int id, const double &x, const double &y,
+    void add(const unsigned int &id, const double &x, const double &y,
              const int &angle = 0);
 
 

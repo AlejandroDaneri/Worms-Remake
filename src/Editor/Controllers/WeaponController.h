@@ -18,7 +18,7 @@ public:
 
     void resetAmmo();
 
-    void updateAmmo(int ammo);
+    void updateAmmo(const int &ammo);
 
     int getAmmo();
 };
