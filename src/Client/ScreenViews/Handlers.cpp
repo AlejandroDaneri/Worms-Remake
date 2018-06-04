@@ -132,8 +132,8 @@ bool Handlers::onButtonPressEvent(GdkEventButton *event) {
 		return true;
 	}
 	if ((event->type == GDK_BUTTON_PRESS) && (event->button == 1)) {
-		int x = (int)event->x;
-		int y = (int)event->y;
+		float x = event->x;
+		float y = event->y;
 		x += this->world.getWindow().get_hadjustment()->get_value();
 		y += this->world.getWindow().get_vadjustment()->get_value();
 		Position position(x, y);
