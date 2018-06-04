@@ -49,10 +49,10 @@ void MapView::initializeGirderImages(){
 
     for (int i = 0; i < 180; i = i + 10) {
         girder_3_imgs.emplace_back(
-                IMAGES_PATH + "/Girder/girder_3_" + std::to_string(i) +
+                GIRDER_PATH + "3_" + std::to_string(i) +
                 ".png");
         girder_6_imgs.push_back(
-                IMAGES_PATH + "/Girder/girder_6_" + std::to_string(i) +
+                GIRDER_PATH + "6_" + std::to_string(i) +
                 ".png");
     }
     objects_pallete.push_back(girder_3_imgs);
