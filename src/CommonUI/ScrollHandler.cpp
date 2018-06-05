@@ -2,8 +2,8 @@
 #include <gtkmm/adjustment.h>
 #include <glibmm/main.h>
 
-#define SPACE_TO_SCROLL 30
-#define SCROLL_INCREMENT 50
+#define SPACE_TO_SCROLL 7
+#define SCROLL_INCREMENT 25
 
 ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window): window(window), last_mouse_position(SPACE_TO_SCROLL * 2, SPACE_TO_SCROLL * 2), mouse_in_window(false){
 	this->window.add_events(Gdk::POINTER_MOTION_MASK);
