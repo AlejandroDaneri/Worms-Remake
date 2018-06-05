@@ -27,10 +27,6 @@ class DataReceiver: public Thread{
 
 		/* Comienza a recibir mensajes del protocolo */
 		void run() override;
-
-		/* Detiene el proceso de recibir mensajes */
-		void stop() override;
-
 };
 
 

@@ -7,8 +7,8 @@
 
 #define DIR_RIGHT 1
 
-WeaponAnimation::WeaponAnimation(const std::string& weapon, WormView* wormView) :
-	wormView(wormView),	angle(DEFAULT_ANGLE) {
+WeaponAnimation::WeaponAnimation(const std::string& weapon, Gtk::Image* worm_image) :
+	worm_image(worm_image), angle(DEFAULT_ANGLE) {
 	this->updateWeaponImage(weapon);
 }
 
@@ -16,7 +16,8 @@ WeaponAnimation::~WeaponAnimation() {}
 
 WeaponAnimation::WeaponAnimation(WeaponAnimation&& other) :
 	scope_vector(std::move(other.scope_vector)),
-	scope_image(std::move(other.scope_image)), wormView(std::move(other.wormView)),
+	scope_image(std::move(other.scope_image)),
+	worm_image(other.worm_image),
 	angle(other.angle) {}
 
 void WeaponAnimation::updateWeaponImage(const std::string& weapon) {
@@ -29,32 +30,32 @@ void WeaponAnimation::updateWeaponImage(const std::string& weapon) {
 	}
 }
 
-void WeaponAnimation::changeWeapon(const std::string& weapon) {
+void WeaponAnimation::changeWeapon(const std::string& weapon, char dir) {
 	this->updateWeaponImage(weapon);
-	this->setWeaponImage();
+	this->setWeaponImage(dir);
 }
 
-void WeaponAnimation::setWeaponImage() {
-	Glib::RefPtr<Gdk::Pixbuf> aux = this->scope_vector[(90 + this->angle) / 6];
-	int width = aux->get_width() / 3;
-	int height = aux->get_height();
-	char dir = this->wormView->getDir();
-	this->wormView->getImage().set(Gdk::Pixbuf::create_subpixbuf(aux, width + dir * width, 0, width, height));
+void WeaponAnimation::setWeaponImage(char dir) {
+	int width = this->scope_vector[(90 + this->angle) / 6]->get_width() / 3;
+	int height = this->scope_vector[(90 + this->angle) / 6]->get_height();
+	this->worm_image->set(Gdk::Pixbuf::create_subpixbuf(this->scope_vector[(90 + this->angle) / 6], width + dir * width, 0, width, height));
 }
 
-bool WeaponAnimation::batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int width) {
-	this->wormView->getImage().set(Gdk::Pixbuf::create_subpixbuf(*iter, 0, 0, width, WORM_IMAGE_WIDTH));
-	iter++;
+bool WeaponAnimation::batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int width, char dir) {
+	this->worm_image->set(Gdk::Pixbuf::create_subpixbuf(*iter, 0, 0, width, WORM_IMAGE_WIDTH));
+	++iter;
 	if (iter == this->scope_vector.end()) {
-		this->changeWeapon(BAT_NAME);
-		this->wormView->setStaticImage();
+		this->updateWeaponImage(BAT_NAME);
+		this->setWeaponImage(dir);
 		return false;
 	}
 	return true;
 }
 
-void WeaponAnimation::batHit() {
-	char dir = this->wormView->getDir();
+void WeaponAnimation::weaponShootAnimation(const std::string &weapon, char dir) {
+	if (weapon != BAT_NAME) {
+		return;
+	}
 	this->scope_image = Gdk::Pixbuf::create_from_file(BAT_HIT_ANIMATION);
 	int width = this->scope_image->get_width() / 3;
 	int height = this->scope_image->get_height();
@@ -64,14 +65,15 @@ void WeaponAnimation::batHit() {
 		this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, pos_x, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
 	}
 	std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter = this->scope_vector.begin();
-	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WeaponAnimation::batHitCallBack), iter, width);
+	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WeaponAnimation::batHitCallBack), iter, width, dir);
 	Glib::signal_timeout().connect(my_slot, 12);
 }
 
-void WeaponAnimation::changeAngle(int angle) {
+void WeaponAnimation::changeAngle(int angle, char dir) {
 	this->angle = angle;
+	this->setWeaponImage(dir);
 }
 
-void WeaponAnimation::updateWormView(WormView* wormView) {
-	this->wormView = wormView;
+void WeaponAnimation::updateWormImage(Gtk::Image* worm_image) {
+	this->worm_image = worm_image;
 }

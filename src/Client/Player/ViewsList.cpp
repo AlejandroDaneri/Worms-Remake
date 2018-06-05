@@ -38,6 +38,7 @@ void ViewsList::removeWeapon(int id){
 		this->weapons.erase(it);
 
 		if (this->weapon_focused == id){
+			this->weapon_focused = -2;
 			this->checkMovingWorms();
 		}
 	}
@@ -133,14 +134,13 @@ void ViewsList::setCurrentWorm(int id){
 void ViewsList::removeWormFocus(){
 	auto it = this->worms.find(this->worm_focused);
 	if (it != this->worms.end()){
-		it->second.setFocus(false);
-		it->second.removeWeaponImage();
+		it->second.beginTurn();
 	}
 	this->worm_focused = -1;
 }
 
 void ViewsList::checkMovingWorms(){
-	if (this->weapon_focused == -1){
+	if (this->weapon_focused != -2){
 		return;
 	}
 
@@ -171,10 +171,5 @@ void ViewsList::setVictory() {
 }
 
 void ViewsList::shoot(const std::string& weapon) {
-	if (this->weapon_focused == -1){
-		this->weapon_focused = -2;
-	}
-	if (weapon == BAT_NAME){
-		this->worms.at(this->current_worm_id).batHit();
-	}
+	this->worms.at(this->current_worm_id).weaponShoot(weapon);
 }

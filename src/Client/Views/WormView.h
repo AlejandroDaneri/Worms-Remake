@@ -21,22 +21,16 @@ class WormView: public Viewable {
 		int life;
 		char dir;
 		bool is_moving;
-		std::string weapon;
 		Position last_position;
 		WormLifeView label;
 		Gtk::Image image;
 		Gtk::Grid worm;
 		WalkingAnimation walkingAnimation;
 		WeaponAnimation weaponAnimation;
-		//std::queue<Glib::RefPtr<Gdk::Pixbuf>> walk_queue;
-		//Glib::RefPtr<Gdk::Pixbuf> walk_image;
-		//std::vector<Glib::RefPtr<Gdk::Pixbuf>> scope_vector;
-		//Glib::RefPtr<Gdk::Pixbuf> scope_image;
-		//int angle;
 
 		/* Actualiza la imagen del worm a la correspondiente segun las
 		 * condiciones en las que se encuentra este */
-		void setNewImage(bool dir_changed, bool colliding, bool is_current_worm, bool has_shot);
+		void setNewImage(bool colliding, bool is_current_worm, bool has_shot);
 
 		/* Cambia la imagen actual por la del arma actual */
 		void setWeaponImage();
@@ -85,9 +79,6 @@ class WormView: public Viewable {
 		/* Devuelve la imagen que contiene al worm */
 		Gtk::Image& getImage();
 
-		/* Cambia la imagen actual por la imagen del worm caminando */
-		void setStaticImage();
-
 		/* Cambia la imagen del worm por la animacion del worm
 		 * festejando la victoria */
 		void setVictory();
@@ -95,8 +86,8 @@ class WormView: public Viewable {
 		/* Devuelve true si el gusano se esta moviendo */
 		bool isMoving() const;
 
-		/* Realiza la animacion del worm bateando */
-		void batHit();
+		/* Realiza la animacion del disparo del arma */
+		void weaponShoot(const std::string& weapon);
 
 		/* Resetea el focus del gusano */
 		void beginTurn();

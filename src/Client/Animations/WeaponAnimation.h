@@ -12,29 +12,30 @@ class WeaponAnimation {
 	private:
 		std::vector<Glib::RefPtr<Gdk::Pixbuf>> scope_vector;
 		Glib::RefPtr<Gdk::Pixbuf> scope_image;
-		WormView* wormView;
+		Gtk::Image* worm_image;
 		int angle;
+
 
 		void updateWeaponImage(const std::string& weapon);
 
 		/* Callback */
-		bool batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int width);
+		bool batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int width, char dir);
 
 	public:
-		WeaponAnimation(const std::string& weapon, WormView* wormView);
+		WeaponAnimation(const std::string& weapon, Gtk::Image* worm_image);
 		~WeaponAnimation();
 		WeaponAnimation(WeaponAnimation&& other);
 
-		void changeWeapon(const std::string& weapon);
+		void changeWeapon(const std::string& weapon, char dir);
 
-		void setWeaponImage();
+		void setWeaponImage(char dir);
 
 		/* Realiza la animacion del worm bateando */
-		void batHit();
+		void weaponShootAnimation(const std::string &weapon, char dir);
 
-		void changeAngle(int angle);
+		void changeAngle(int angle, char dir);
 
-		void updateWormView(WormView* wormView);
+		void updateWormImage(Gtk::Image* worm_image);
 };
 
 

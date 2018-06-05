@@ -26,10 +26,6 @@ void DataReceiver::run(){
 	}
 }
 
-void DataReceiver::stop(){
-	Thread::stop();
-}
-
 void DataReceiver::initialConfig(){
 	this->protocol.receiveStartGame();
 	this->protocol.receiveBackgroundImage(this->player.getScreen().getWorld());

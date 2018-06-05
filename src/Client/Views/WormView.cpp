@@ -7,25 +7,24 @@
 
 WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int player_id):
 	Viewable(worldView), player_id(player_id), life(life), dir(dir), is_moving(false),
-	weapon(DEFAULT_WEAPON), last_position(Position(-1, -1)),
-	label(life, colors[player_id]), walkingAnimation(), weaponAnimation(DEFAULT_WEAPON, this) {
+	last_position(Position(-1, -1)), label(life, colors[player_id]),
+	walkingAnimation(&this->image), weaponAnimation(DEFAULT_WEAPON, &this->image) {
 		this->worm.attach(this->label.getWidget(), 0, 0, 1, 1);
 		this->worm.attach(this->image, 0, 1, 1, 1);
-		this->walkingAnimation.setMovementImage(this->image, DIR_RIGHT);
+		this->walkingAnimation.setStaticImage();
 		this->addToWorld(pos, worm_size, worm_size + 0.5);
-
-		//this->updateWeaponImage();
 }
 
 WormView::~WormView(){}
 	
 WormView::WormView(WormView&& other): Viewable(std::move(other)), player_id(other.player_id),
 	life(other.life), dir(other.dir), is_moving(other.is_moving),
-	weapon(std::move(other.weapon)), last_position(other.last_position),
-	label(std::move(other.label)), image(std::move(other.image)),
+	last_position(other.last_position), label(std::move(other.label)),
+	image(std::move(other.image)),
     worm(std::move(other.worm)), walkingAnimation(std::move(other.walkingAnimation)),
     weaponAnimation(std::move(other.weaponAnimation)) {
-	this->weaponAnimation.updateWormView(this);
+	this->weaponAnimation.updateWormImage(&this->image);
+	this->walkingAnimation.updateWormImage(&this->image);
 }
 
 void WormView::updateData(int new_life, char new_dir, const Position& new_pos, bool colliding, bool is_current_worm, bool has_shot) {
@@ -33,62 +32,31 @@ void WormView::updateData(int new_life, char new_dir, const Position& new_pos, b
 		this->label.updateLife(new_life);
 	}
 	this->life = new_life;
-	bool dir_changed = this->dir != new_dir;
 	this->is_moving = !(this->last_position == new_pos);
 	this->dir = new_dir;
 	this->last_position = new_pos;
-	this->setNewImage(dir_changed, colliding, is_current_worm, has_shot);
+	this->setNewImage(colliding, is_current_worm, has_shot);
 	this->move(new_pos, worm_size, worm_size + 0.5);
 }
 
 void WormView::updateScope(int angle) {
-    this->weaponAnimation.changeAngle(angle);
-    this->weaponAnimation.setWeaponImage();
+    this->weaponAnimation.changeAngle(angle, this->dir);
 }
 
 void WormView::changeWeapon(const std::string& weapon) {
-	this->weaponAnimation.changeWeapon(weapon);
-    /*this->weapon = weapon;
-
-    this->updateWeaponImage();
-    this->setWeaponImage();*/
+	this->weaponAnimation.changeWeapon(weapon, this->dir);
 }
 
-void WormView::setNewImage(bool dir_changed, bool colliding, bool is_current_worm, bool has_shot){
+void WormView::setNewImage(bool colliding, bool is_current_worm, bool has_shot){
 	if (is_current_worm){
 		if (!this->is_moving && !has_shot){
-            //this->setWeaponImage();
-			this->weaponAnimation.setWeaponImage();
+			this->weaponAnimation.setWeaponImage(this->dir);
 		} else if (colliding){
-			this->walkingAnimation.setMovementImage(this->image, this->dir);
+			this->walkingAnimation.setMovementImage(this->dir);
 		}
 		return;
 	}
-	this->walkingAnimation.setStaticImage(this->image);
-}
-
-/*void WormView::setWeaponImage() {
-    int width = this->scope_vector[(90 + angle) / 6]->get_width() / 3;
-    int height = this->scope_vector[(90 + angle) / 6]->get_height();
-    this->image.set(Gdk::Pixbuf::create_subpixbuf(this->scope_vector[(90 + angle) / 6], width + this->dir * width, 0, width, height));
-}*/
-
-void WormView::setStaticImage(){
-	this->walkingAnimation.setStaticImage(this->image);
-}
-
-/*void WormView::updateWeaponImage() {
-    this->scope_vector.clear();
-    this->scope_image = Gdk::Pixbuf::create_from_file(WORMS_PATH + this->weapon + "_scope.png");
-    int width = this->scope_image->get_width();
-    int height = this->scope_image->get_height();
-    for (int i = 0; i < height / WORM_IMAGE_WIDTH; i++) {
-        this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
-    }
-}*/
-
-void WormView::removeWeaponImage(){
-	this->setStaticImage();
+	this->walkingAnimation.setStaticImage();
 }
 
 Gtk::Widget& WormView::getWidget(){
@@ -104,7 +72,7 @@ int WormView::getLife() const{
 }
 
 char WormView::getDir() const {
-	return this->walkingAnimation.getDir();
+	return this->dir;
 }
 
 int WormView::getPlayerId() const{
@@ -119,36 +87,12 @@ void WormView::setVictory() {
     this->image.set(VICTORY_ANIMATION);
 }
 
-/*bool WormView::batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int width) {
-	this->image.set(Gdk::Pixbuf::create_subpixbuf(*iter, width + this->dir * width, 0, width, WORM_IMAGE_WIDTH));
-	iter++;
-	if (iter == this->scope_vector.end()) {
-		this->changeWeapon(this->weapon);
-		this->setStaticImage();
-		return false;
-	}
-	return true;
-}
-
-void WormView::batHit() {
-	this->scope_image = Gdk::Pixbuf::create_from_file(BAT_HIT_ANIMATION);
-	int width = this->scope_image->get_width();
-	int height = this->scope_image->get_height();
-	this->scope_vector.clear();
-	for (int i = 0; i < height / WORM_IMAGE_WIDTH; i++) {
-		this->scope_vector.push_back(Gdk::Pixbuf::create_subpixbuf(scope_image, 0, i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
-	}
-	std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter = this->scope_vector.begin();
-	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WormView::batHitCallBack), iter, width / 3);
-	Glib::signal_timeout().connect(my_slot, 12);
-}*/
-
-void WormView::batHit() {
-	this->weaponAnimation.batHit();
+void WormView::weaponShoot(const std::string& weapon) {
+	this->weaponAnimation.weaponShootAnimation(weapon, this->dir);
 }
 
 void WormView::beginTurn(){
 	this->is_moving = false;
 	this->setFocus(false);
-	this->setStaticImage();
+	this->walkingAnimation.setStaticImage();
 }

@@ -9,17 +9,18 @@ class WalkingAnimation {
 	private:
 		std::queue<Glib::RefPtr<Gdk::Pixbuf>> walk_queue;
 		Glib::RefPtr<Gdk::Pixbuf> walk_image;
+		Gtk::Image* worm_image;
 		char dir;
 
 	public:
-		WalkingAnimation();
+		WalkingAnimation(Gtk::Image* worm_image);
 		~WalkingAnimation();
 		WalkingAnimation(WalkingAnimation&& other);
 
-		void setMovementImage(Gtk::Image& image, char new_dir);
-		void setStaticImage(Gtk::Image& image);
+		void setMovementImage(char new_dir);
+		void setStaticImage();
 
-		char getDir() const;
+		void updateWormImage(Gtk::Image* worm_image);
 };
 
 
