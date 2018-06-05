@@ -32,7 +32,7 @@ int Girder::getRotation(){
 	return this->rotation;
 }
 
-bool Girder::has_friction(){
+bool Girder::hasFriction(){
 	return this->getAngle() < this->max_rotation_to_friction;
 }
 

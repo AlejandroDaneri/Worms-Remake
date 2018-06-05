@@ -9,7 +9,7 @@ Worm& WormsList::getCurrentWorm(){
 	return *worm;
 }
 
-void WormsList::begin_turn(){
+void WormsList::beginTurn(){
 	do {
 		this->current++;
 		if (this->current >= this->list.size()){

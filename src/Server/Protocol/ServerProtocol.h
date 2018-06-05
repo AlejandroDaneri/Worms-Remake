@@ -36,7 +36,7 @@ class ServerProtocol : public Protocol{
 		static Buffer sendStartGame();
 
 		//Carga la informacion de nuevo turno en el buffer
-		static Buffer send_start_turn(int32_t current_worm_id, int32_t current_player_id, float wind);
+		static Buffer sendStartTurn(int32_t current_worm_id, int32_t current_player_id, float wind);
 
 		//Carga la informacion de la imagen de fondo en el buffer
 		static Buffer sendBackgroundImage(const std::string& image);
@@ -51,10 +51,10 @@ class ServerProtocol : public Protocol{
 		static Buffer sendWeaponAmmo(const std::string& weapon_name, int ammo);
 
 		//Carga la informacion de cambio de arma en el buffer
-		static Buffer send_weapon_changed(const std::string& weapon);
+		static Buffer sendWeaponChanged(const std::string &weapon);
 
 		//Carga la informacion de arma disparada en el buffer
-		static Buffer send_weapon_shot(const std::string& weapon);
+		static Buffer sendWeaponShot(const std::string &weapon);
 
 		//Carga la informacion de que el gusano salto
 		static Buffer sendMoveAction(char action);

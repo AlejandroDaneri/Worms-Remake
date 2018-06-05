@@ -20,7 +20,7 @@ class WormsList{
 		Worm& getCurrentWorm();
 
 		/* Comienza el turno, cambiando el gusano actual */
-		void begin_turn();
+		void beginTurn();
 
 		/* Agrega un worm a la lista */
 		void add(physical_object_ptr worm);

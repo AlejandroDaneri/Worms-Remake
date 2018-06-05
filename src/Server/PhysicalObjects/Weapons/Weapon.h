@@ -48,7 +48,7 @@ class Weapon: public PhysicalObject{
 		//Explota el arma
 		virtual void explode();
 
-		virtual void collide_with_something(CollisionData* other) override;
+		virtual void collideWithSomething(CollisionData *other) override;
 
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
 

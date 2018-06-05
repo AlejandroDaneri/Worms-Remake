@@ -31,7 +31,7 @@ class Player{
 		Worm& getCurrentWorm();
 
 		//Empieza el turno del jugador
-		void begin_turn();
+		void beginTurn();
 
 		//Agrega un nuevo gusano al jugador
 		void addWorm(World& world, GameParameters& parameters, const b2Vec2& position, int id);

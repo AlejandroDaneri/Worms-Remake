@@ -28,7 +28,7 @@ class GameParameters{
 		~GameParameters();
 
 		int getWormLife();
-		int get_worms_life_to_add();
+		int getWormsLifeToAdd();
 
 		std::vector<b2Vec2>& getWorms();
 		std::vector<GirderParams>& getGirders();

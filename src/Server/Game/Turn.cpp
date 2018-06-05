@@ -23,7 +23,7 @@ bool Turn::playerCanJoin(const std::string& player_name){
 	return true;
 }
 
-size_t Turn::get_players_size() const{
+size_t Turn::getPlayersSize() const{
 	return this->players.size();
 }
 
@@ -31,11 +31,11 @@ Player& Turn::getCurrentPlayer(){
 	return this->players.at(this->current);
 }
 
-void Turn::begin_turn(){
+void Turn::beginTurn(){
 	do {
 		this->advanceCurrent();
 	} while (this->getCurrentPlayer().isDead());
-	this->getCurrentPlayer().begin_turn();
+	this->getCurrentPlayer().beginTurn();
 }
 
 std::vector<Player>& Turn::getPlayers(){

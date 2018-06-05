@@ -24,7 +24,7 @@ class Turn{
 		bool playerCanJoin(const std::string& player_name);
 
 		//Devuelve la cantidad de jugadores
-		size_t get_players_size() const;
+		size_t getPlayersSize() const;
 
 		//Devuelve un vector con los jugadores
 		std::vector<Player>& getPlayers();
@@ -33,7 +33,7 @@ class Turn{
 		Player& getCurrentPlayer();
 
 		//Empieza un nuevo turno, cambiando el jugador actual
-		void begin_turn();
+		void beginTurn();
 
 		//Agrega un gusano al proximo jugador
 		void addWorm(World& world, GameParameters& parameters, b2Vec2 position, int id);

@@ -26,7 +26,7 @@ bool Game::addPlayer(Player& player){
 }
 
 bool Game::isFull(){
-	return this->players <= this->turn.get_players_size();
+	return this->players <= this->turn.getPlayersSize();
 }
 
 bool Game::playerCanJoin(const std::string& player_name){
@@ -42,14 +42,14 @@ void Game::run(){
 	this->data_sender->start();
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(100));
-	this->wait_to_world();
+	this->waitToWorld();
 
 	while (!this->turn.gameEnded(this->world.getMutex())){
 		this->player_turn_active = true;
-		this->turn.begin_turn();
+		this->turn.beginTurn();
 		int worm_id = this->turn.getCurrentPlayer().getCurrentWorm().getId();
 		int player_id = this->turn.getCurrentPlayer().getId();
-		this->data_sender->send_start_turn(worm_id, player_id, this->world.getWind());
+		this->data_sender->sendStartTurn(worm_id, player_id, this->world.getWind());
 
 		while (this->player_turn_active){
 			try{
@@ -60,7 +60,7 @@ void Game::run(){
 			}
 		}
 
-		this->wait_to_world();
+		this->waitToWorld();
 		this->world.update();
 	}
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
@@ -73,9 +73,9 @@ void Game::run(){
 void Game::configure(){
 	this->data_sender.reset(new DataSender(this->world, this->turn.getPlayers(), this->parameters));
 
-	this->data_sender->send_start_game();
+	this->data_sender->sendStartGame();
 	this->data_sender->sendBackgroundImage(this->parameters.getBackgroundImage());
-	this->data_sender->send_players_id();
+	this->data_sender->sendPlayersId();
 
 	//Asignacion de gusanos
 	std::vector<b2Vec2>& worms_list = this->parameters.getWorms();
@@ -83,7 +83,7 @@ void Game::configure(){
 	for (size_t i = 0; i < size; i++){
 		this->turn.addWorm(this->world, this->parameters, worms_list[i], i);
 	}
-	this->turn.distributeWorms(size, this->parameters.get_worms_life_to_add());
+	this->turn.distributeWorms(size, this->parameters.getWormsLifeToAdd());
 
 	//Creacion de vigas
 	int max_height = 0;
@@ -112,7 +112,7 @@ void Game::endTurn(){
 	this->player_turn_active = false;
 }
 
-void Game::wait_to_world(){
+void Game::waitToWorld(){
 	while (this->world.isActive() || this->data_sender->isActive()){
 		std::this_thread::sleep_for(std::chrono::milliseconds(this->parameters.getGameWaitingWorldSleep()));
 	}

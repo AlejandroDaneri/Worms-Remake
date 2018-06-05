@@ -16,9 +16,9 @@ void CollisionListener::BeginContact(b2Contact* contact){
 	}
 
 	if (dataA->getType() == TYPE_WEAPON){
-		dataA->getObject()->collide_with_something(dataB);
+		dataA->getObject()->collideWithSomething(dataB);
 	} else if (dataB->getType() == TYPE_WEAPON){
-		dataB->getObject()->collide_with_something(dataA);
+		dataB->getObject()->collideWithSomething(dataA);
 	}
 
 	b2WorldManifold manifold;
@@ -44,9 +44,9 @@ void CollisionListener::BeginContact(b2Contact* contact){
 	}
 
 	if (dataA->getType() == TYPE_WORM){
-		dataA->getObject()->collide_with_something(dataB);
+		dataA->getObject()->collideWithSomething(dataB);
 	} else if (dataB->getType() == TYPE_WORM){
-		dataB->getObject()->collide_with_something(dataA);
+		dataB->getObject()->collideWithSomething(dataA);
 	}
 }
 
@@ -62,11 +62,11 @@ void CollisionListener::EndContact(b2Contact* contact){
 	}
 
 	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_GIRDER){
-		bool friction = ((Girder*)dataB->getObject())->has_friction();
-		((Worm*)dataA->getObject())->end_collission_girder(friction);
+		bool friction = ((Girder *) dataB->getObject())->hasFriction();
+		((Worm *) dataA->getObject())->endCollissionGirder(friction);
 	} else if (dataB->getType() == TYPE_WORM && dataA->getType() == TYPE_GIRDER){
-		bool friction = ((Girder*)dataA->getObject())->has_friction();
-		((Worm*)dataB->getObject())->end_collission_girder(friction);
+		bool friction = ((Girder *) dataA->getObject())->hasFriction();
+		((Worm *) dataB->getObject())->endCollissionGirder(friction);
 	}
 }
 

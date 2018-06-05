@@ -36,7 +36,7 @@ class World: public Thread{
 		void initializeObject(physical_object_ptr object, b2BodyDef* body_def);
 
 		//Agrega todos los fragmentos de armas al mundo
-		void add_all_fragments();
+		void addAllFragments();
 
 	public:
 		World(GameParameters& parameters);
@@ -72,7 +72,6 @@ class World: public Thread{
 		std::list<physical_object_ptr>& getGirdersList();
 
 		std::mutex& getMutex();
-
 };
 
 

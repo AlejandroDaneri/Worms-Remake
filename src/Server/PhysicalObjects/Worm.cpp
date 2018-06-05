@@ -56,7 +56,7 @@ void Worm::addLife(int life){
 	this->life += life;
 }
 
-void Worm::reduce_life(int damage){
+void Worm::reduceLife(int damage){
 	this->life -= damage;
 	if (this->life <= 0){
 		this->life = 0;
@@ -124,8 +124,8 @@ void Worm::shoot(b2Vec2 pos){
 	((Weapon*)this->weapon.get())->shoot(*this, pos);
 }
 
-void Worm::receive_weapon_damage(int damage, const b2Vec2& epicenter){
-	this->reduce_life(damage);
+void Worm::receiveWeaponDamage(int damage, const b2Vec2 &epicenter){
+	this->reduceLife(damage);
 	b2Vec2 direction = this->body->GetPosition() - epicenter;
 	direction.Normalize();
 	this->body->SetGravityScale(1);
@@ -133,7 +133,7 @@ void Worm::receive_weapon_damage(int damage, const b2Vec2& epicenter){
 	this->body->SetLinearVelocity(damage * parameters.getWormExplosionVelocity() * direction);
 }
 
-void Worm::collide_with_something(CollisionData* other){
+void Worm::collideWithSomething(CollisionData *other){
 	if (other->getType() == TYPE_BORDER){
 		this->kill();
 	} else if(other->getType() == TYPE_GIRDER){
@@ -142,19 +142,19 @@ void Worm::collide_with_something(CollisionData* other){
 		this->max_height -= current_height;
 		
 		if (this->max_height >= min_height){
-			this->reduce_life(std::min((int)this->max_height - min_height, parameters.getWormMaxHeightDamage()));
+			this->reduceLife(std::min((int) this->max_height - min_height, parameters.getWormMaxHeightDamage()));
 		}
 		this->colliding_with_girder++;
 		this->max_height = 0;
 		Girder* girder = (Girder*)other->getObject();
 		this->angle = girder->getAngle();
-		if (girder->has_friction()){
+		if (girder->hasFriction()){
 			this->friction++;
 		}
 	}
 }
 
-void Worm::end_collission_girder(char has_friction){
+void Worm::endCollissionGirder(char has_friction){
 	this->colliding_with_girder--;
 	this->friction -= has_friction;
 	if (this->friction <= 0){

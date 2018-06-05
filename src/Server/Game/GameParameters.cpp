@@ -58,7 +58,7 @@ int GameParameters::getWormLife(){
 	return this->float_parameters[WORMS_LIFE];
 }
 
-int GameParameters::get_worms_life_to_add(){
+int GameParameters::getWormsLifeToAdd(){
 	return this->float_parameters[WORMS_LIFE_TO_ADD];
 }
 
