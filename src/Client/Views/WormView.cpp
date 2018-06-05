@@ -90,7 +90,7 @@ void WormView::weaponShoot(const std::string& weapon) {
 	this->weaponAnimation.weaponShootAnimation(weapon, this->getDir());
 }
 
-void WormView::beginTurn(){
+void WormView::resetFocus(){
 	this->is_moving = false;
 	this->setFocus(false);
 	this->walkingAnimation.setStaticImage();

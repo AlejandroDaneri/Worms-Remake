@@ -121,7 +121,7 @@ void ViewsList::addGirder(size_t size, float pos_x, float pos_y, int rotation){
 void ViewsList::setCurrentWorm(int id){
 	this->removeWormFocus();
 	for (auto it = this->worms.begin(); it != this->worms.end(); ++it){
-		it->second.beginTurn();
+		it->second.resetFocus();
 	}
 	this->current_worm_id = id;
 	this->worm_focused = id;
@@ -134,7 +134,7 @@ void ViewsList::setCurrentWorm(int id){
 void ViewsList::removeWormFocus(){
 	auto it = this->worms.find(this->worm_focused);
 	if (it != this->worms.end()){
-		it->second.beginTurn();
+		it->second.resetFocus();
 	}
 	this->worm_focused = -1;
 }

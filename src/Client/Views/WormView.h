@@ -89,7 +89,7 @@ class WormView: public Viewable {
 		void weaponShoot(const std::string& weapon);
 
 		/* Resetea el focus del gusano */
-		void beginTurn();
+		void resetFocus();
 };
 
 
