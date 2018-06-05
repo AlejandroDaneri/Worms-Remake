@@ -4,8 +4,7 @@
 #include <gtkmm/scrolledwindow.h>
 #include <glibmm/main.h>
 #include "MapView.h"
-#include "Math.h"
-#include "ObjectSizes.h"
+#include "GirderSize.h"
 
 #define BACKGROUND_QUANTITY 8
 
@@ -98,13 +97,9 @@ bool MapView::turn(const unsigned int &id, const int &angle, const int &index) {
         float x = child_property_x(image) + image.get_width() / 2;
         float y = child_property_y(image) + image.get_height() / 2;
         image.set(objects_pallete[id - id / 2 - 1][angle / 10]);
-        
-        int rotation = angle;
-        if (rotation > 90){
-			rotation = 180 - angle;
-		}
-        int height = SCALE_FACTOR * (Math::sinDegrees(rotation) * id + Math::cosDegrees(rotation) * girder_height);
-        int width = SCALE_FACTOR * (Math::cosDegrees(rotation) * id + Math::sinDegrees(rotation) * girder_height);
+
+        int height = GirderSize::getGirderHeightPixels(id, angle);
+        int width = GirderSize::getGirderWidthPixels(id, angle);
         Gtk::Layout::move(image, x - width / 2, y - height / 2);
     }
     return false;
