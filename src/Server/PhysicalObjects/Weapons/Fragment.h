@@ -12,8 +12,8 @@ class Fragment: public Weapon{
 		Fragment(World& world, GameParameters& parameters, int damage, int radius);
 		~Fragment();
 
-		void set_shoot_position(b2Vec2 pos);
-		b2Vec2 get_shoot_position();
+		void setShootPosition(b2Vec2 pos);
+		b2Vec2 getShootPosition();
 
 		void shoot(int angle, int time);
 

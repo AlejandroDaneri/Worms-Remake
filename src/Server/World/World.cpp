@@ -50,7 +50,7 @@ void World::addAllFragments(){
 
 	for (auto it = this->fragments_to_add.begin(); it != this->fragments_to_add.end(); it++){
 		b2BodyDef body_def;
-		b2Vec2 pos = ((Fragment*)it->get())->get_shoot_position();
+		b2Vec2 pos = ((Fragment *) it->get())->getShootPosition();
 		(*it)->getBodyDef(body_def, pos);
 		this->initializeObject(*it, &body_def);
 	}

@@ -5,11 +5,11 @@ Fragment::Fragment(World& world, GameParameters& parameters, int damage, int rad
 		
 Fragment::~Fragment(){}
 
-void Fragment::set_shoot_position(b2Vec2 pos){
+void Fragment::setShootPosition(b2Vec2 pos){
 	this->shoot_position = pos;
 }
 
-b2Vec2 Fragment::get_shoot_position(){
+b2Vec2 Fragment::getShootPosition(){
 	return this->shoot_position;
 }
 
