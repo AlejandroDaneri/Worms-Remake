@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.0)
 project(worms)
 
+if (PATH)
+set(CMAKE_INSTALL_PREFIX ${PATH})
+endif(PATH)
+
+configure_file(${PROJECT_SOURCE_DIR}/src/Editor/editor.glade ${PROJECT_SOURCE_DIR}/resources/Glade/editor.glade)
+
 message("[INFO] Librerias necesarias: \n")
 message("-Gtkmm version 3.0:")
 message("sudo apt-get install libgtkmm-3.0-dev\n")
@@ -17,12 +23,14 @@ find_package (SDL2 REQUIRED)
 find_package (SDL2_Mixer REQUIRED)
 
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Werror -pedantic -pedantic-errors -O0 -ggdb -DDEBUG -fno-inline -std=c++11" )
+add_definitions(-DROOT_PATH="${CMAKE_INSTALL_PREFIX}")
 
 include_directories(${GTKMM_INCLUDE_DIRS})
 link_directories(${GTKMM_LIBRARY_DIRS})
 
 include_directories(${SDL2_INCLUDE_DIR})
 include_directories(${SDL2MIXER_INCLUDE_DIR})
+
 
 MACRO(HEADER_DIRECTORIES src_dir return_list)
     FILE(GLOB_RECURSE new_list RELATIVE ${PROJECT_SOURCE_DIR} ${src_dir}/*.h)
@@ -76,8 +84,10 @@ target_link_libraries(client m commonui common ${GTKMM_LIBRARIES} ${CMAKE_THREAD
 target_link_libraries(editor m commonui common yaml ${GTKMM_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(server m common box2d yaml ${CMAKE_THREAD_LIBS_INIT})
 
-#install() aca se podria poner para instalar el gtkmm si no se tiene
+install(TARGETS client server editor DESTINATION .)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/resources DESTINATION .)
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/config DESTINATION .)
 
 
-set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
+#set(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR})
 
