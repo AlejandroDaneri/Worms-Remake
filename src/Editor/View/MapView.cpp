@@ -170,5 +170,7 @@ const std::string MapView::getBackgroundName() const {
 void MapView::loadBackground(const std::string &name) {
     background.clear();
     setBackground(BACKGROUND_PATH+name);
+    const char &number = *(name.end() - 5);
+    actual_background_index=atoi(&number);
 }
 
