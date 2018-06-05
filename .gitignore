@@ -4,7 +4,9 @@
 client
 server
 editor
-build
+build/*m*
+build/*M*
+build/*lib*
 Build
 .idea
 cmake-build-debug
