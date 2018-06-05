@@ -45,7 +45,7 @@ char Worm::getDir() const{
 }
 
 bool Worm::isColliding() const{
-	return this->friction > 0;
+	return this->colliding_with_girder > 0;
 }
 
 const std::string& Worm::getCurrentWeapon() const{
@@ -65,7 +65,7 @@ void Worm::reduceLife(int damage){
 }
 
 bool Worm::move(char action){
-	if (!this->friction){
+	if (!this->colliding_with_girder){
 		return false;
 	}
 	if (action == MOVE_RIGHT){

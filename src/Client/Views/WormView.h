@@ -19,7 +19,6 @@ class WormView: public Viewable {
 	private:
 		int player_id;
 		int life;
-		char dir;
 		bool is_moving;
 		Position last_position;
 		WormLifeView label;
@@ -30,7 +29,7 @@ class WormView: public Viewable {
 
 		/* Actualiza la imagen del worm a la correspondiente segun las
 		 * condiciones en las que se encuentra este */
-		void setNewImage(bool colliding, bool is_current_worm, bool has_shot);
+		void setNewImage(char dir, bool colliding, bool is_current_worm, bool has_shot);
 
 		/* Cambia la imagen actual por la del arma actual */
 		void setWeaponImage();

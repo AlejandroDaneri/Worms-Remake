@@ -16,6 +16,7 @@ void PhysicalObject::initializeBody(b2Body* body){
 
 void PhysicalObject::destroyBody(){
 	this->body = NULL;
+	this->is_dead = true;
 }
 
 b2Vec2 PhysicalObject::getPosition(){

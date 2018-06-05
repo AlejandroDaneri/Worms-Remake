@@ -20,6 +20,8 @@ class WalkingAnimation {
 		void setMovementImage(char new_dir);
 		void setStaticImage();
 
+		char getDir() const;
+
 		void updateWormImage(Gtk::Image* worm_image);
 };
 

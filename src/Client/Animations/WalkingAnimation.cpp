@@ -37,3 +37,7 @@ void WalkingAnimation::setStaticImage() {
 void WalkingAnimation::updateWormImage(Gtk::Image* worm_image) {
 	this->worm_image = worm_image;
 }
+
+char WalkingAnimation::getDir() const {
+	return this->dir;
+}

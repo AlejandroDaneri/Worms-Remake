@@ -26,7 +26,7 @@ void DataSender::run(){
 		auto it = this->objects.begin();
 
 		while(it != this->objects.end()){
-			if ((*it)->isDead()){
+			if ((*it)->isDead() && !(*it)->getBody()){
 				Buffer data = ServerProtocol::sendDeadObject(*it);
 
 				this->sendBuffer(data);
