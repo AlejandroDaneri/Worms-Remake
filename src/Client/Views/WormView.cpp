@@ -159,4 +159,5 @@ void WormView::batHit() {
 void WormView::reset(){
 	this->is_moving = false;
 	this->setFocus(false);
+	this->setStaticImage(true);
 }
