@@ -34,7 +34,7 @@ void UsablesController::onResetSignal() {
     }
 }
 
-void UsablesController::getWeapons(std::vector<int> &weps_ammo,
+void UsablesController::getWeaponsAndLife(std::vector<int> &weps_ammo,
                                           unsigned int &life) const {
     life = life_spinner->get_value();
     for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {

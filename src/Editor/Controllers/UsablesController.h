@@ -24,7 +24,7 @@ public:
 
     void onResetSignal();
 
-    void getWeapons(std::vector<int> &weps_ammo, unsigned int &life) const;
+    void getWeaponsAndLife(std::vector<int> &weps_ammo, unsigned int &life) const;
 
     void
     loadWeapons(std::vector<int> &weps_ammo, const unsigned int &life) const;

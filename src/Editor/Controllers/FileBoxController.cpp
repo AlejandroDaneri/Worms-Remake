@@ -34,7 +34,7 @@ void FileBoxController::onSaveClicked() const {
 
         std::vector<int> weapons_ammo;
         unsigned int life;
-        usables_controller.getWeapons(weapons_ammo, life);
+        usables_controller.getWeaponsAndLife(weapons_ammo, life);
 
         save_dialog->set_current_folder(MAPS_PATH);
         save_dialog->set_current_name(NEW_FILE_NAME);
