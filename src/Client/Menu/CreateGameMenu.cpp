@@ -35,7 +35,7 @@ void CreateGameMenu::selectButtonPressed(Glib::ustring map_name){
 		return;
 	}
 
-	int players = this->players_number->get_value_as_int();
+	size_t players = this->players_number->get_value_as_int();
 	if (players < min_players || players > max_players){
 		std::string message("El numero de jugadores debe estar entre ");
 		message += std::to_string(min_players) + std::string(" y ") + std::to_string(max_players);

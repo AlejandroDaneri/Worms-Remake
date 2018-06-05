@@ -22,7 +22,6 @@ class WeaponButton {
 
 		/* Destructor */
 		~WeaponButton();
-		//WeaponButton(WeaponButton&& other);
 
 		/* Devuelve el wiget del boton */
 		Gtk::Widget& getButton();

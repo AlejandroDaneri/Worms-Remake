@@ -10,7 +10,7 @@ class WormsList{
 		size_t current;
 
 	public:
-        	/* Constructor */
+        /* Constructor */
 		WormsList();
 
 		/* Destructor */

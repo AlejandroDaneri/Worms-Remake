@@ -7,6 +7,8 @@
 #include "b2Math.h"
 #include "yaml.h"
 
+// Clase que lee los archivos de configuracion 
+// y devuelve los parametros obtenidos
 class GameParameters{
 	public:
 		class GirderParams;
