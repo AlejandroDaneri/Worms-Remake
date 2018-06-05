@@ -20,7 +20,7 @@ class MenuView{
 		Gtk::Label* error;
 		std::unique_ptr<MenuView> next_menu;
 		MenuView& main_menu;
-		Gtk::Box* menu;
+		Gtk::Container* menu;
 
 		Gtk::Overlay menu_container;
 		Gtk::Image background;
