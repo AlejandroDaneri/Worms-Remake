@@ -25,8 +25,12 @@ Gtk::Widget& WeaponButton::getButton() {
 
 void WeaponButton::setLabel(unsigned int ammo){
 	std::string label = "Ammo:\n    ";
-	if (ammo > 100){
-		label += "inf";
+	if (!ammo){
+		label += "0";
+		button.set_sensitive(false);
+	}
+	else if (ammo > 100){
+		label += "∞";
 	} else {
 		label += std::to_string(ammo);
 	}

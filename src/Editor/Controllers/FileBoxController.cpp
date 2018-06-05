@@ -37,7 +37,7 @@ void FileBoxController::onSaveClicked() const {
         usables_controller.getWeaponsAndLife(weapons_ammo, life);
 
         save_dialog->set_current_folder(MAPS_PATH);
-        save_dialog->set_current_name(NEW_FILE_NAME);
+        save_dialog->set_current_name(map_name->get_text());
         int result = save_dialog->run();
         if (result==Gtk::RESPONSE_OK){
             std::string filename = save_dialog->get_filename();
