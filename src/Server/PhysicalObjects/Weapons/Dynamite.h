@@ -4,9 +4,7 @@
 #include "Weapon.h"
 
 class Dynamite: public Weapon{
-	protected:
-		void setInitialVelocity() override;
-		
+	
 	public:
 		Dynamite(World& world, GameParameters& parameters);
 		~Dynamite();

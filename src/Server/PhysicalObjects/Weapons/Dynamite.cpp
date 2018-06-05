@@ -8,9 +8,3 @@ Dynamite::~Dynamite(){}
 const std::string& Dynamite::getName(){
 	return DYNAMITE_NAME;
 }
-
-void Dynamite::setInitialVelocity(){
-	this->waiting_to_explode = true;
-	this->explode_time.setTime(this->time_to_explode);
-	this->explode_time.start();
-}

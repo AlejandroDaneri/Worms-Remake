@@ -14,7 +14,7 @@ const std::string& Banana::getName(){
 void Banana::createFixtures(){
 	b2CircleShape circleShape;
 	circleShape.m_p.Set(0, 0);
-	circleShape.m_radius = 0.5;
+	circleShape.m_radius = weapon_size / 2; 
 		  
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &circleShape;

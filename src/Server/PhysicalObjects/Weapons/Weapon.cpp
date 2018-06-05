@@ -52,7 +52,7 @@ void Weapon::createFixtures(){
 }
 
 void Weapon::setInitialVelocity(){
-	if (this->angle <= 180){
+	if (this->angle <= MAX_WEAPON_ANGLE * 2){
 		int velocity = this->parameters.getWeaponsVelocity();
 		if (this->power != -1){
 			 velocity *= this->power / 1000;

@@ -5,7 +5,7 @@ weapon_ammo:
   Mortar: 10
   GreenGrenade: -1
   RedGrenade: 10
-  Banana: 5
+  Banana: -1
   HolyGrenade: 2
   Dynamite: 5
   Bat: 22
