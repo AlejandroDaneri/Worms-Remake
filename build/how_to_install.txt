@@ -1,0 +1,10 @@
+Para instalar el programa debe situarse en la carpeta build del código fuente.
+Luego utilizando Cmake se debe ejecutar alguno de los siguientes comandos: 
+
+cmake .. && make install
+cmake -DPATH=’path’ .. && make install
+cmake -DCMAKE_INSTALL_PREFIX=’path’ .. && make install
+
+En el primer caso, se instalará en la carpeta por defecto, que es /usr/local.
+En los restantes se debe reemplazar ‘path’ por la ruta donde se desee instalar el programa.
+
