@@ -21,8 +21,8 @@ Worm& Player::getCurrentWorm(){
 	return this->worms.getCurrentWorm();
 }
 
-void Player::begin_turn(){
-	this->worms.begin_turn();
+void Player::beginTurn(){
+	this->worms.beginTurn();
 }
 
 void Player::addWorm(World& world, GameParameters& parameters, const b2Vec2& position, int id){

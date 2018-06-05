@@ -63,7 +63,7 @@ class PhysicalObject{
 		virtual void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) = 0;
 
 		//Colisiona con otro objeto
-		virtual void collide_with_something(CollisionData* other);
+		virtual void collideWithSomething(CollisionData *other);
 
 };
 

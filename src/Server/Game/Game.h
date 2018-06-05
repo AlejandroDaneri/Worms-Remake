@@ -26,7 +26,7 @@ class Game: public Thread{
 		void configure();
 
 		/* Espera a que los objetos dejen de moverse */
-		void wait_to_world();
+		void waitToWorld();
 
 	public:
         	/* Constructor */

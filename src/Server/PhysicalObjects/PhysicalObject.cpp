@@ -78,4 +78,4 @@ const std::string& PhysicalObject::getType(){
 
 void PhysicalObject::setInitialVelocity(){}
 
-void PhysicalObject::collide_with_something(CollisionData* other){}
+void PhysicalObject::collideWithSomething(CollisionData *other){}

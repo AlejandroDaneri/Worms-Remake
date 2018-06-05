@@ -13,14 +13,8 @@ class GirderView: public Viewable{
 		int size;
 		int rotation;
 
-		/* Devuelve el ancho de la imagen de la viga */
-		float getWidth();
-
-		/* Devuelve el alto de la imagen de la viga */
-		float getHeight();
-
 	public:
-	    /* Constructor */
+	    	/* Constructor */
 		GirderView(WorldView& worldView, size_t size, Position pos, int rotation);
 
 		/* Destructor */

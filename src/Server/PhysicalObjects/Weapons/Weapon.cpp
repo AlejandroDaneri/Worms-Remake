@@ -84,11 +84,11 @@ void Weapon::attackWormExplosion(const b2Vec2& center, int angle){
 		Worm* worm = (Worm*)((CollisionData*)closest_body->GetUserData())->getObject();
 		float distance = b2Distance(center, worm->getPosition());
 		int worm_damage = this->damage * (1 - distance / (2 * this->radius)); //Justo en el borde hace la mitad de danio
-		worm->receive_weapon_damage(worm_damage, center);
+		worm->receiveWeaponDamage(worm_damage, center);
 	}
 }
 
-void Weapon::collide_with_something(CollisionData* other){
+void Weapon::collideWithSomething(CollisionData *other){
 	if (this->time_to_explode == -1){
 		this->explode_time.stop();
 		this->explode();

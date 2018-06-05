@@ -24,7 +24,7 @@ void World::run(){
 	while(this->running){
 		std::this_thread::sleep_for(std::chrono::milliseconds(this->sleep_time));
 
-		this->add_all_fragments();
+		this->addAllFragments();
 
 		std::lock_guard<std::mutex> lock(this->mutex);
 
@@ -45,7 +45,7 @@ void World::run(){
 	}
 }
 
-void World::add_all_fragments(){
+void World::addAllFragments(){
 	std::lock_guard<std::mutex> lock(this->mutex);
 
 	for (auto it = this->fragments_to_add.begin(); it != this->fragments_to_add.end(); it++){

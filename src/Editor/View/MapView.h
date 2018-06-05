@@ -49,7 +49,7 @@ public:
     void add(const unsigned int &id, const double &x, const double &y,
              const int &angle = 0);
 
-    void turn(const unsigned int &id, const int &angle, const int &index);
+    bool turn(const unsigned int &id, const int &angle, const int &index);
 
     void changeBackground();
 

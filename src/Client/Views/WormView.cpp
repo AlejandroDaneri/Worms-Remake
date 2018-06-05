@@ -156,7 +156,8 @@ void WormView::batHit() {
 	Glib::signal_timeout().connect(my_slot, 12);
 }
 
-void WormView::reset(){
+void WormView::beginTurn(){
 	this->is_moving = false;
 	this->setFocus(false);
+	this->setStaticImage(true);
 }

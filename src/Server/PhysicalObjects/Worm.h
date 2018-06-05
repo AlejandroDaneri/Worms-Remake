@@ -35,7 +35,7 @@ class Worm: public PhysicalObject{
 		void addLife(int life);
 
 		//Reduce la vida del gusano
-		void reduce_life(int damage);
+		void reduceLife(int damage);
 
 		//Ejecuta una accion de movimiento del gusano
 		bool move(char action);
@@ -50,13 +50,13 @@ class Worm: public PhysicalObject{
 		void shoot(b2Vec2 pos);
 
 		//Analiza la colision con el objeto
-		void collide_with_something(CollisionData* other) override;
+		void collideWithSomething(CollisionData *other) override;
 
 		//Analiza el fin del contacto con una viga
-		void end_collission_girder(char friction);
+		void endCollissionGirder(char friction);
 
 		//Recibe danio de un arma o una explosion
-		void receive_weapon_damage(int damage, const b2Vec2& epicenter);
+		void receiveWeaponDamage(int damage, const b2Vec2 &epicenter);
 
 		//Devuelve true si el gusano esta en movimiento
 		bool isActive() override;

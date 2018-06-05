@@ -60,13 +60,13 @@ void DataSender::sendBackgroundImage(const std::string& image){
 	this->notifyAll();
 }
 
-void DataSender::send_start_game(){
+void DataSender::sendStartGame(){
 	Buffer data = ServerProtocol::sendStartGame();
 	this->sendBuffer(data);
 	this->notifyAll();
 }
 
-void DataSender::send_players_id(){
+void DataSender::sendPlayersId(){
 	Buffer length = ServerProtocol::sendLengthBuffer(this->players.size());
 	this->sendBuffer(length);
 	for (auto it = this->players.begin(); it != this->players.end(); ++it){
@@ -96,20 +96,20 @@ void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
     this->notifyAll();
 }
 
-void DataSender::send_start_turn(int worm_id, int player_id, float wind){
-	Buffer data = ServerProtocol::send_start_turn(worm_id, player_id, wind);
+void DataSender::sendStartTurn(int worm_id, int player_id, float wind){
+	Buffer data = ServerProtocol::sendStartTurn(worm_id, player_id, wind);
 	this->sendBuffer(data);
 	this->notifyAll();
 }
 
-void DataSender::send_weapon_changed(const std::string& weapon){
-	Buffer data = ServerProtocol::send_weapon_changed(weapon);
+void DataSender::sendWeaponChanged(const std::string &weapon){
+	Buffer data = ServerProtocol::sendWeaponChanged(weapon);
 	this->sendBuffer(data);
 	this->notifyAll();
 }
 
 void DataSender::sendWeaponShot(const std::string& weapon){
-	Buffer data = ServerProtocol::send_weapon_shot(weapon);
+	Buffer data = ServerProtocol::sendWeaponShot(weapon);
 	this->sendBuffer(data);
 	this->notifyAll();
 }

@@ -25,7 +25,7 @@ class Girder: public PhysicalObject{
 		int getRotation();
 
 		//Devuelve true si la viga tiene friccion
-		bool has_friction();
+		bool hasFriction();
 
 		//Devuelve la rotacion normalizada
 		int getAngle();

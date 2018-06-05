@@ -36,7 +36,7 @@ const std::string ICON_PATH(IMAGES_PATH + "icon.png");
 
 //client
 
-const std::string GIRDER_PATH(IMAGES_PATH + "Girder_client/girder_");
+const std::string GIRDER_PATH(IMAGES_PATH + "Girder/girder_");
 
 const std::string BULLETS_PATH(IMAGES_PATH + "Bullets/");
 

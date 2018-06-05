@@ -2,7 +2,9 @@
 #include <Path.h>
 #include <gtkmm/adjustment.h>
 #include <gtkmm/scrolledwindow.h>
+#include <glibmm/main.h>
 #include "MapView.h"
+#include "GirderSize.h"
 
 #define BACKGROUND_QUANTITY 8
 
@@ -46,10 +48,10 @@ void MapView::initializeGirderImages(){
 
     for (int i = 0; i < 180; i = i + 10) {
         girder_3_imgs.emplace_back(
-                IMAGES_PATH + "/Girder/girder_3_" + std::to_string(i) +
+                GIRDER_PATH + "3_" + std::to_string(i) +
                 ".png");
         girder_6_imgs.push_back(
-                IMAGES_PATH + "/Girder/girder_6_" + std::to_string(i) +
+                GIRDER_PATH + "6_" + std::to_string(i) +
                 ".png");
     }
     objects_pallete.push_back(girder_3_imgs);
@@ -74,8 +76,10 @@ void MapView::add(const unsigned int &id, const double &x, const double &y,
     put(new_image, x_bound, y_bound);
     new_image.show();
     contained_objects.push_back(std::move(new_image));
-    if (angle > 0)
-        turn(id, angle, contained_objects.size()-1);
+    if (angle > 0){
+		sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &MapView::turn), id, angle, contained_objects.size()-1);
+		Glib::signal_idle().connect(my_slot);
+	}
 }
 
 void MapView::move(const int &index, const double &x, const double &y) {
@@ -87,11 +91,18 @@ void MapView::move(const int &index, const double &x, const double &y) {
     }
 }
 
-void MapView::turn(const unsigned int &id, const int &angle, const int &index) {
+bool MapView::turn(const unsigned int &id, const int &angle, const int &index) {
     if (!contained_objects.empty()) {
         Gtk::Image &image = contained_objects[index];
+        float x = child_property_x(image) + image.get_width() / 2;
+        float y = child_property_y(image) + image.get_height() / 2;
         image.set(objects_pallete[id - id / 2 - 1][angle / 10]);
+
+        int height = GirderSize::getGirderHeightPixels(id, angle);
+        int width = GirderSize::getGirderWidthPixels(id, angle);
+        Gtk::Layout::move(image, x - width / 2, y - height / 2);
     }
+    return false;
 }
 
 void MapView::erase(const int &index) {

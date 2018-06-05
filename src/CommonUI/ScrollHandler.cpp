@@ -21,6 +21,7 @@ ScrollHandler::~ScrollHandler(){}
 
 bool ScrollHandler::mouseMotionEvent(GdkEventMotion* motion_event){
 	this->last_mouse_position = Position(motion_event->x, motion_event->y);
+	this->mouse_in_window = true;
 	return true;
 }
 

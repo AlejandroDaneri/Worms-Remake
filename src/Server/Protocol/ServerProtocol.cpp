@@ -85,7 +85,7 @@ Buffer ServerProtocol::sendEndTurn(){
 	return buffer;
 }
 
-Buffer ServerProtocol::send_start_turn(int32_t current_worm_id, int32_t current_player_id, float wind){
+Buffer ServerProtocol::sendStartTurn(int32_t current_worm_id, int32_t current_player_id, float wind){
 	Buffer buffer;
 	buffer.setNext(START_TURN);
 
@@ -113,7 +113,7 @@ void ServerProtocol::receive(Game& game, DataSender& data_sender) {
 			}
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
 			std::string weapon(this->receiveStringBuffer(buffer));
-			data_sender.send_weapon_changed(weapon);
+			data_sender.sendWeaponChanged(weapon);
 			game.getCurrentWorm().changeWeapon(weapon);
 		} else if(worm_action == MOVE_SCOPE) {
             int32_t angle = this->receiveIntBuffer(buffer);
@@ -166,14 +166,14 @@ Buffer ServerProtocol::sendWeaponAmmo(const std::string& weapon_name, int ammo){
 	return buffer;
 }
 
-Buffer ServerProtocol::send_weapon_changed(const std::string& weapon){
+Buffer ServerProtocol::sendWeaponChanged(const std::string &weapon){
 	Buffer buffer;
 	buffer.setNext(CHANGE_WEAPON_ACTION);
 	ServerProtocol::sendStringBuffer(buffer, weapon);
     return buffer;
 }
 
-Buffer ServerProtocol::send_weapon_shot(const std::string& weapon){
+Buffer ServerProtocol::sendWeaponShot(const std::string &weapon){
 	Buffer buffer;
 	buffer.setNext(SHOOT_WEAPON_ACTION);
 	ServerProtocol::sendStringBuffer(buffer, weapon);

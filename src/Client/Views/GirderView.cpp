@@ -1,6 +1,5 @@
 #include "GirderView.h"
-#include "ObjectSizes.h"
-#include "Math.h"
+#include "GirderSize.h"
 
 GirderView::GirderView(WorldView& worldView, size_t size, Position pos, int rotation):
 	Viewable(worldView), size(size), rotation(rotation){
@@ -11,7 +10,9 @@ GirderView::GirderView(WorldView& worldView, size_t size, Position pos, int rota
 	path += std::to_string(rotation);
 	path += ".png";
 	this->image.set(path);
-	this->addToWorld(pos, this->getWidth(), this->getHeight());
+	float width = GirderSize::getGirderWidthMeters(size, rotation);
+	float height = GirderSize::getGirderHeightMeters(size, rotation);
+	this->addToWorld(pos, width, height);
 }
 
 GirderView::~GirderView(){}
@@ -23,18 +24,3 @@ Gtk::Widget& GirderView::getWidget(){
 	return this->image;
 }
 
-float GirderView::getHeight(){
-	int angle = this->rotation;
-	if (angle > 90){
-		angle = 180 - angle;
-	}
-	return Math::sinDegrees(angle) * this->size + Math::cosDegrees(angle) * girder_height;
-}
-
-float GirderView::getWidth(){
-	int angle = this->rotation;
-	if (angle > 90){
-		angle = 180 - angle;
-	}
-	return Math::cosDegrees(angle) * this->size + Math::sinDegrees(angle) * girder_height;
-}

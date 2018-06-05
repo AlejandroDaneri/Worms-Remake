@@ -18,7 +18,6 @@ class Wind{
 
 		//Actualiza la velocidad del viento
 		void update();
-
 };
 
 

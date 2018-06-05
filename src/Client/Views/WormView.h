@@ -99,7 +99,7 @@ class WormView: public Viewable {
 		void batHit();
 
 		/* Resetea el focus del gusano */
-		void reset();
+		void beginTurn();
 };
 
 
