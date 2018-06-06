@@ -18,7 +18,7 @@ Buffer Protocol::receiveBuffer() {
 	this->socket.receive(&len, sizeof (uint32_t));
 	len = ntohl(len);
 
-	Buffer buffer;
+	Buffer buffer(len);
 	this->socket.receive(buffer.getPointer(), len);
 	return std::move(buffer);
 }
@@ -95,4 +95,18 @@ unsigned char Protocol::receiveChar(){
 	unsigned char c;
 	this->socket.receive(&c, sizeof(unsigned char));
 	return c;
+}
+
+Buffer Protocol::sendFile(File& file){
+	size_t file_size = file.size();
+    Buffer buffer(file_size + 1);
+    file.read_buffer(buffer.getPointer(), file_size);
+    buffer.incrementOffset(file_size);
+    buffer.setNext('\0');
+    return buffer;
+}
+
+std::string Protocol::receiveImage(){
+	Buffer buffer = std::move(this->receiveBuffer());
+	return std::string(buffer.getPointer());
 }

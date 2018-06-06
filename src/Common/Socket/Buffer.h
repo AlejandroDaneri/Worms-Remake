@@ -3,27 +3,30 @@
 
 #include <cstddef>
 
+#define MAX_BUF_LEN 200
+
 /* Clase que representa un buffer de almacenamiento de datos */
 class Buffer{
 	private:
 		char* buffer;
 		size_t offset;
+		size_t max_size;
 
 	public:
 		/* Constructor */
-		Buffer();
+		Buffer(size_t max_size = MAX_BUF_LEN);
 
 		/* Destructor */
 		~Buffer();
 
 		/* Constructor por copia */
-        Buffer(const Buffer& other);
+		Buffer(const Buffer& other);
 
-        /* Operador = por copia */
-        Buffer& operator=(const Buffer& other) = delete;
+		/* Operador = por copia */
+		Buffer& operator=(const Buffer& other) = delete;
 
-        /* Constructor por movimiento */
-        Buffer(Buffer&& other);
+		/* Constructor por movimiento */
+		Buffer(Buffer&& other);
 
 		/* Agrega el valor al buffer */
 		void setNext(char value);

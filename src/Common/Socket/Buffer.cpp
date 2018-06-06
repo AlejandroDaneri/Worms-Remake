@@ -1,8 +1,8 @@
 #include "Buffer.h"
 
-#define MAX_BUF_LEN 200
 
-Buffer::Buffer(): buffer(new char[MAX_BUF_LEN]), offset(0){}
+Buffer::Buffer(size_t max_size): buffer(new char[max_size]),
+	offset(0), max_size(max_size){}
 
 Buffer::~Buffer(){
 	if (this->buffer){
@@ -10,14 +10,16 @@ Buffer::~Buffer(){
 	}
 }
 
-Buffer::Buffer(const Buffer& other): buffer(new char[MAX_BUF_LEN]){
-	for (size_t i = 0; i < MAX_BUF_LEN; i++){
+Buffer::Buffer(const Buffer& other): buffer(new char[other.max_size]){
+	for (size_t i = 0; i < other.max_size; i++){
 		this->buffer[i] = other.buffer[i];
 	}
 	this->offset = other.offset;
+	this->max_size = other.max_size;
 }
 
-Buffer::Buffer(Buffer&& other): buffer(other.buffer), offset(other.offset){
+Buffer::Buffer(Buffer&& other): buffer(other.buffer),
+	offset(other.offset), max_size(other.max_size){
 	other.buffer = NULL;
 }
 
