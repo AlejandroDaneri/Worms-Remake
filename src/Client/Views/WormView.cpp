@@ -48,7 +48,7 @@ void WormView::changeWeapon(const std::string& weapon) {
 
 void WormView::setNewImage(char dir, bool colliding, bool is_current_worm, bool has_shot){
 	if (is_current_worm){
-		if (!this->is_moving && !has_shot){
+		if (!this->is_moving && !has_shot && colliding){
 			this->weaponAnimation.setWeaponImage(dir);
 		} else if (colliding){
 			this->walkingAnimation.setMovementImage(dir);

@@ -9,7 +9,7 @@
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(0), 
+	dir(1), parameters(parameters), max_height(0), friction(0), 
 	movement_allowed(false), angle(0){
 		this->changeWeapon(DEFAULT_WEAPON);
 	}
@@ -109,7 +109,7 @@ void Worm::shoot(int angle, int power, int time){
 		x_add *= Math::cosDegrees(this->angle);
 		y_add *= Math::sinDegrees(this->angle);
 	} else {
-		float factor = (this->getCurrentWeapon() == BAT_NAME ? 0.3 : 0.7);
+		float factor = (this->getCurrentWeapon() == BAT_NAME ? 0.2 : 0.7);
 		x_add *= Math::cosDegrees(angle) * factor;
 		y_add *= Math::sinDegrees(angle) * factor;
 	}
@@ -145,35 +145,30 @@ void Worm::collideWithSomething(CollisionData *other){
 		if (this->max_height >= min_height){
 			this->reduceLife(std::min((int) this->max_height - min_height, parameters.getWormMaxHeightDamage()));
 		}
-		this->colliding_with_girder++;
 		this->max_height = 0;
 		Girder* girder = (Girder*)other->getObject();
-		this->angle = girder->getAngle();
 		if (girder->hasFriction()){
 			this->friction++;
 			this->movement_allowed = false;
+			this->angle = girder->getAngle();
 		}
 	}
 }
 
 void Worm::endCollissionGirder(char has_friction){
-	this->colliding_with_girder--;
 	this->friction -= has_friction;
 	if (this->friction <= 0){
 		this->friction = 0;
 		this->body->SetGravityScale(1);
-	}
-	if(this->colliding_with_girder == 0){
 		this->angle = 0;
 	}
 }
 
 bool Worm::isActive(){
-	if (!this->colliding_with_girder){
+	if (!this->friction){
 		float height = this->body->GetPosition().y;
 		this->max_height = std::max(this->max_height, height);
-	}
-	if (this->friction && !this->movement_allowed){
+	} else if (!this->movement_allowed){
 		this->body->SetGravityScale(0);
 		this->body->SetLinearVelocity(b2Vec2(0, 0));
 	}
