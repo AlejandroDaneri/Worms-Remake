@@ -15,6 +15,7 @@ class Worm: public PhysicalObject{
 		float max_height;
 		int colliding_with_girder;
 		int friction;
+		bool movement_allowed;
 		int angle;
 
 	protected:

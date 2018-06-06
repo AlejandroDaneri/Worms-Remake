@@ -9,7 +9,8 @@
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(0), angle(0){
+	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(0), 
+	movement_allowed(false), angle(0){
 		this->changeWeapon(DEFAULT_WEAPON);
 	}
 
@@ -45,7 +46,7 @@ char Worm::getDir() const{
 }
 
 bool Worm::isColliding() const{
-	return this->colliding_with_girder > 0;
+	return this->friction > 0;
 }
 
 const std::string& Worm::getCurrentWeapon() const{
@@ -65,7 +66,7 @@ void Worm::reduceLife(int damage){
 }
 
 bool Worm::move(char action){
-	if (!this->colliding_with_girder){
+	if (!this->friction){
 		return false;
 	}
 	if (action == MOVE_RIGHT){
@@ -78,7 +79,7 @@ bool Worm::move(char action){
 		this->world.setLinearVelocity(*this, velocity);
 	} else {
 	
-		this->friction = 0;
+		this->movement_allowed = true;
 		if (action == JUMP){
 			b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
 			velocity.x *= this->dir;
@@ -129,7 +130,7 @@ void Worm::receiveWeaponDamage(int damage, const b2Vec2 &epicenter){
 	b2Vec2 direction = this->body->GetPosition() - epicenter;
 	direction.Normalize();
 	this->body->SetGravityScale(1);
-	this->friction = 0;
+	this->movement_allowed = true;
 	this->body->SetLinearVelocity(damage * parameters.getWormExplosionVelocity() * direction);
 }
 
@@ -150,6 +151,7 @@ void Worm::collideWithSomething(CollisionData *other){
 		this->angle = girder->getAngle();
 		if (girder->hasFriction()){
 			this->friction++;
+			this->movement_allowed = false;
 		}
 	}
 }
@@ -171,9 +173,12 @@ bool Worm::isActive(){
 		float height = this->body->GetPosition().y;
 		this->max_height = std::max(this->max_height, height);
 	}
-	if (this->friction){
+	if (this->friction && !this->movement_allowed){
 		this->body->SetGravityScale(0);
 		this->body->SetLinearVelocity(b2Vec2(0, 0));
+	}
+	if (!this->body->IsAwake()){
+		this->movement_allowed = false;
 	}
 	return PhysicalObject::isActive();
 }
