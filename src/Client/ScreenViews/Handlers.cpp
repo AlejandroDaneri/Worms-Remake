@@ -30,6 +30,9 @@ void Handlers::enableAll(){
 	this->has_shoot = false;
 
 	this->player.getProtocol().updateScope(DEFAULT_ANGLE);
+	
+	this->world.getWindow().get_parent()->get_parent()->set_can_focus(true);
+	this->world.getWindow().get_parent()->get_parent()->grab_focus();
 
 	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this,
 																									   &Handlers::keyPressHandler));
