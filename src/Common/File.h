@@ -16,6 +16,9 @@ class File{
 		std::fstream file;
 
 	public:
+		//Crea un archivo vacio
+		File();
+		
 		//Crea el archivo, sino se puede lanza excepcion
 		File(std::string name, file_mode mode);
 
@@ -43,6 +46,8 @@ class File{
 
 		//Constructor por movimiento
 		File(File&& other);
+
+		File& operator=(File&& other);
 
 		//Pasaje por copia
 		File(const File& other) = delete;

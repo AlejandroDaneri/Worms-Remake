@@ -3,6 +3,8 @@
 
 #define FILE_ERROR "Error al abrir el archivo"
 
+File::File(){}
+
 File::File(std::string name, file_mode mode):
 	file(name, mode){
 		if (!this->file.is_open()){
@@ -43,3 +45,10 @@ bool File::eof() const{
 }
 
 File::File(File&& other):file(std::move(other.file)){}
+
+File& File::operator=(File&& other){
+	if (this != &other){
+		this->file = std::move(other.file);
+	}
+	return *this;
+}
