@@ -2,11 +2,13 @@
 #include "ServerFatalError.h"
 #include <glibmm/main.h>
 
+#define PADDING 10
+
 ScreenView::ScreenView(Gtk::Window& window, Player& player, WeaponList& weapons) :
-	left_view(false, 12), window(window), weapons_view(weapons, player) {
+	left_view(false, 30), window(window), weapons_view(weapons, player) {
 	this->left_view.pack_start(this->wind_view.getWindow(), Gtk::PACK_SHRINK);
 	this->left_view.pack_start(this->players.getWindow(), Gtk::PACK_SHRINK);
-	this->world_box.pack_start(this->left_view, Gtk::PACK_SHRINK);
+	this->world_box.pack_start(this->left_view, Gtk::PACK_SHRINK, PADDING);
 	this->world_box.pack_start(this->world.getContainer());
 	this->world_box.pack_end(this->weapons_view.getWindow(), Gtk::PACK_SHRINK);
 

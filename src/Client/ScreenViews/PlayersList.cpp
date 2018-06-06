@@ -1,7 +1,7 @@
 #include "PlayersList.h"
 #include <glibmm/main.h>
 
-PlayersList::PlayersList(): container(false, 10){
+PlayersList::PlayersList(): container(false, 20){
 	this->title.set_use_markup(true);
 	this->title.set_markup("<span><b><u>Jugadores</u></b></span>");
 	this->container.pack_start(this->title, Gtk::PACK_SHRINK);

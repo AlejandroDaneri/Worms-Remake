@@ -15,7 +15,8 @@ WormLifeView::WormLifeView(WormLifeView&& other):
 	label(std::move(other.label)), color(std::move(other.color)){}
 
 void WormLifeView::updateLife(int life){
-	this->label.set_markup(begining + this->color + middle + std::to_string(life) + ending);
+	this->label.override_background_color(Gdk::RGBA(this->color));
+	this->label.set_markup(begining + "white" + middle + std::to_string(life) + ending);
 }
 		
 Gtk::Widget& WormLifeView::getWidget(){
