@@ -42,3 +42,7 @@ void Buffer::incrementOffset(size_t value){
 size_t Buffer::getSize() const{
 	return this->offset;
 }
+
+size_t Buffer::getMaxSize() const{
+	return this->max_size;
+}

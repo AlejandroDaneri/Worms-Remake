@@ -6,6 +6,7 @@
 #include <map>
 #include "b2Math.h"
 #include "yaml.h"
+#include "File.h"
 
 // Clase que lee los archivos de configuracion 
 // y devuelve los parametros obtenidos
@@ -22,7 +23,7 @@ class GameParameters{
 
 		std::vector<b2Vec2> worms;
 		std::vector<GirderParams> girders;
-		std::string background_image;
+		File background_image;
 
 	public:
 		//Inicializa todos los parametros necesarios para la partida
@@ -67,7 +68,7 @@ class GameParameters{
 		int getWorldSleepAfterStep();
 		float getWorldTimeStep();
 
-		const std::string& getBackgroundImage();
+		File& getBackgroundImage();
 };
 
 class GameParameters::GirderParams{

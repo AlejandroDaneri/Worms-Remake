@@ -1,5 +1,6 @@
 #include "GameParameters.h"
 #include "ConfigFields.h"
+#include "Path.h"
 #include <algorithm>
 #include <random>
 
@@ -49,7 +50,8 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 		this->girders.push_back(GirderParams((*it)[0], (*it)[1], (*it)[2], (*it)[3]));
 	}
 
-	this->background_image = config_editor[BACKGROUND_IMAGE].as<std::string>();
+	std::string background = BACKGROUND_PATH + config_editor[BACKGROUND_IMAGE].as<std::string>();
+	this->background_image = std::move(File(background, FILE_READ_MODE));
 }
 
 GameParameters::~GameParameters(){}
@@ -170,7 +172,7 @@ float GameParameters::getWorldTimeStep(){
 	return this->float_parameters[WORLD_TIME_STEP];
 }
 
-const std::string& GameParameters::getBackgroundImage(){
+File& GameParameters::getBackgroundImage(){
 	return this->background_image;
 }
 

@@ -42,6 +42,9 @@ class Buffer{
 
 		/* Devuelve el tamaño del buffer */
 		size_t getSize() const;
+
+		/* Devuelve el maximo tamanio del bufffer */
+		size_t getMaxSize() const;
 };
 
 #endif

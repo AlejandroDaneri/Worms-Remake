@@ -9,6 +9,7 @@
 #include <string>
 #include "Position.h"
 #include "Water.h"
+#include "Buffer.h"
 
 class Player;
 
@@ -23,7 +24,7 @@ class WorldView{
 		std::vector<Gtk::Image> background_images;
 		Water water;
 
-		bool setBackgroundImageCallBack(std::string image);
+		bool setBackgroundImageCallBack(Buffer image);
 
 	public:
 		/* Constructor */
@@ -33,7 +34,7 @@ class WorldView{
 		~WorldView();
 
 		/* Setea la imagen de fondo */
-		void setBackgroundImage(const std::string& image);
+		void setBackgroundImage(const Buffer& image);
 
 		/* Mueve el elemento pasado a la posicion especificada */
 		void moveElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus = false);

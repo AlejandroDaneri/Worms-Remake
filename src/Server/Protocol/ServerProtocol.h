@@ -38,9 +38,6 @@ class ServerProtocol : public Protocol{
 		//Carga la informacion de nuevo turno en el buffer
 		static Buffer sendStartTurn(int32_t current_worm_id, int32_t current_player_id, float wind);
 
-		//Carga la informacion de la imagen de fondo en el buffer
-		static Buffer sendBackgroundImage(const std::string& image);
-
 		//Carga la informacion de un nuevo jugador en el buffer
 		static Buffer sendPlayerId(const Player& player);
 

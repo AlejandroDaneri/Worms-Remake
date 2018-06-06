@@ -1,6 +1,7 @@
 #include "WorldView.h"
 #include <gtkmm/adjustment.h>
 #include <glibmm/main.h>
+#include <giomm/memoryinputstream.h>
 #include "ViewPositionTransformer.h"
 #include "Player.h"
 #include "Math.h"
@@ -64,22 +65,24 @@ void WorldView::setFocus(Gtk::Widget& element){
 	this->window.get_vadjustment()->set_value(element.get_allocation().get_y() - this->window.get_vadjustment()->get_page_size() / 2);
 }
 
-void WorldView::setBackgroundImage(const std::string& image){
+void WorldView::setBackgroundImage(const Buffer& image){
 	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &WorldView::setBackgroundImageCallBack), image);
     Glib::signal_idle().connect(my_slot);
 }
 
-bool WorldView::setBackgroundImageCallBack(std::string image){
-	image.insert(0, BACKGROUND_PATH);
+bool WorldView::setBackgroundImageCallBack(Buffer image){
+	//image.insert(0, BACKGROUND_PATH);
 	auto screen = this->container.get_screen();
 	size_t screen_width = screen->get_width();
 	size_t screen_height = screen->get_height();
-	Gtk::Image aux(image);
-	size_t img_width = aux.get_pixbuf()->get_width();
-	size_t img_height = aux.get_pixbuf()->get_height();
+	auto pixbuf = Gio::MemoryInputStream::create();
+	pixbuf->add_data(image.getPointer(), image.getMaxSize());
+	auto aux = Gdk::Pixbuf::create_from_stream (pixbuf);
+	size_t img_width = aux->get_width();
+	size_t img_height = aux->get_height();
 	for (size_t x = 0; x < screen_width; x += img_width) {
 		for (size_t y = 0; y < screen_height; y += img_height) {
-			Gtk::Image background_image(image);
+			Gtk::Image background_image(aux);
 			background_image.show();
 			this->background.put(background_image, x, y);
 			this->background_images.push_back(std::move(background_image));

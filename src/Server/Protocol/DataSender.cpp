@@ -54,8 +54,8 @@ void DataSender::run(){
 	}
 }
 
-void DataSender::sendBackgroundImage(const std::string& image){
-	Buffer data = ServerProtocol::sendBackgroundImage(image);
+void DataSender::sendBackgroundImage(File& image){
+	Buffer data = ServerProtocol::sendFile(image);
 	this->sendBuffer(data);
 	this->notifyAll();
 }

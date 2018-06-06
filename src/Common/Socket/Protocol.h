@@ -105,7 +105,7 @@ class Protocol {
 		static Buffer sendFile(File& file);
 
 		/* Recibe una imagen */
-		std::string receiveImage();
+		Buffer receiveImage();
 };
 
 #endif

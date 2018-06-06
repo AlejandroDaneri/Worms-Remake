@@ -106,7 +106,7 @@ Buffer Protocol::sendFile(File& file){
     return buffer;
 }
 
-std::string Protocol::receiveImage(){
+Buffer Protocol::receiveImage(){
 	Buffer buffer = std::move(this->receiveBuffer());
-	return std::string(buffer.getPointer());
+	return buffer;
 }

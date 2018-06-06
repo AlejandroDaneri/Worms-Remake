@@ -31,7 +31,7 @@ class DataSender: public Thread{
 		void run() override;
 
 		//Envia la imagen de fondo
-		void sendBackgroundImage(const std::string& image);
+		void sendBackgroundImage(File& image);
 
 		//Envia los datos de los jugadores
 		void sendPlayersId();
