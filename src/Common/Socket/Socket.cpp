@@ -5,12 +5,12 @@
 #define SERVER 0
 #define CLIENT 1
 
-Socket::Socket(Socket::Client client){
+Socket::Socket(Socket::Client client) : fd(-1) {
 	Addrinfo addrinfo(client.getHost(), client.getService(), 0);
 	*this = addrinfo.connectOrBind(CLIENT);
 }
 
-Socket::Socket(Socket::Server server){
+Socket::Socket(Socket::Server server) : fd(-1) {
 	char* host = NULL; //ANY
 	int flag = AI_PASSIVE;
 	Addrinfo addrinfo(host, server.getService(), flag);
@@ -24,6 +24,22 @@ Socket::Socket(Socket::Server server){
 }
 
 Socket::Socket(int fd): fd(fd){}
+
+Socket::~Socket(){
+	this->stop();
+}
+
+Socket::Socket(Socket&& other): fd(other.fd){
+	other.fd = -1;
+}
+
+Socket& Socket::operator=(Socket&& other){
+	if (this != &other) {
+		this->fd = other.fd;
+		other.fd = -1;
+	}
+	return *this;
+}
 
 int Socket::sendData(const void *data, size_t size){
 	size_t total_send = 0;
@@ -75,20 +91,6 @@ void Socket::stop(){
 		close(this->fd);
 		this->fd = -1;
 	}
-}
-
-Socket::~Socket(){
-	this->stop();
-}
-
-Socket::Socket(Socket&& other): fd(other.fd){
-	other.fd = -1;
-}
-
-Socket& Socket::operator=(Socket&& other){
-	this->fd = other.fd;
-	other.fd = -1;
-	return *this;
 }
 
 Socket::Addrinfo::Addrinfo(const char* host, const char* service, int flag){

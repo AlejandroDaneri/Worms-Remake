@@ -32,9 +32,11 @@ void ViewsList::removeWorm(int id){
 void ViewsList::removeWeapon(int id){
 	auto it = this->weapons.find(id);
 	if (it != this->weapons.end()) {
-		this->musicPlayer.playExplosionSound(it->second.getName());
-		ExplosionView explosion(std::move(it->second));
-		this->animation.addAndStart(std::move(explosion));
+		if(it->second.getName() != BAT_NAME) {
+			this->musicPlayer.playExplosionSound(it->second.getName());
+			ExplosionView explosion(std::move(it->second));
+			this->animation.addAndStart(std::move(explosion));
+		}
 		this->weapons.erase(it);
 
 		if (this->weapon_focused == id){
