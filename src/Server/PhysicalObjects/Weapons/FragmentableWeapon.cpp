@@ -16,8 +16,7 @@ void FragmentableWeapon::explode(){
 		b2Vec2 center = this->body->GetPosition() + 0.3 * b2Vec2(Math::cosDegrees(fragment_angle),
 														   Math::sinDegrees(fragment_angle));
 		((Fragment *) fragment.get())->setShootPosition(center);
-		int time_to_explode = this->time_to_explode == -1 ? -1 : 1;
-		((Fragment*)fragment.get())->shoot(fragment_angle, time_to_explode);
+		((Fragment*)fragment.get())->shoot(fragment_angle);
 		this->world.addWeaponFragment(fragment);
 	}
 	Weapon::explode();

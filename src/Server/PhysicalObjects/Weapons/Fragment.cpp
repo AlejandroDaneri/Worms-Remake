@@ -13,6 +13,6 @@ b2Vec2 Fragment::getShootPosition(){
 	return this->shoot_position;
 }
 
-void Fragment::shoot(int angle, int time){
-	Weapon::shoot(1, angle, -1, time, -1);
+void Fragment::shoot(int angle){
+	Weapon::shoot(1, angle, -1, -1, -1);
 }

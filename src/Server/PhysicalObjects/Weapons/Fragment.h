@@ -15,7 +15,7 @@ class Fragment: public Weapon{
 		void setShootPosition(b2Vec2 pos);
 		b2Vec2 getShootPosition();
 
-		void shoot(int angle, int time);
+		void shoot(int angle);
 
 };
 

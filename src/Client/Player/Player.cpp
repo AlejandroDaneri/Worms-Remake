@@ -81,7 +81,7 @@ void Player::shoot(int angle, int power, int time) {
 		time = -1;
 	}
 	if (!this->weapons.getCurrentWeapon().hasScope()) {
-		angle = MAX_WEAPON_ANGLE * 5;
+		angle = MAX_WEAPON_ANGLE * 8;
 	}
     this->protocol.sendWeaponShoot(angle, power, time);
 	this->view_list.removeScopeVisibility();
