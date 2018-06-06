@@ -73,13 +73,11 @@ void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float p
 	if (it == this->weapons.end()){
 		//Weapon no existe
 		BulletView weapon(this->world, weapon_name, pos);
-		weapon.setFocus(true);
-		auto it = this->weapons.find(this->weapon_focused);
-		if (it != this->weapons.end()){
-			it->second.setFocus(false);
+		if (this->weapon_focused < 0){
+			weapon.setFocus(true);
+			this->weapon_focused = id;
+			this->removeWormFocus();
 		}
-		this->weapon_focused = id;
-		this->removeWormFocus();
 		this->weapons.insert(std::make_pair(id, std::move(weapon)));
 	} else {
 		//Weapon existe
