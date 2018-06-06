@@ -5,6 +5,8 @@
 #include <gdkmm/pixbuf.h>
 #include <queue>
 
+/* Clase que se encarga de actualizar la imagen del worm al
+ * moverse obteniendo una animacion del worm caminando */
 class WalkingAnimation {
 	private:
 		std::queue<Glib::RefPtr<Gdk::Pixbuf>> walk_queue;
@@ -13,15 +15,28 @@ class WalkingAnimation {
 		char dir;
 
 	public:
+		/* Constructor*/
 		WalkingAnimation(Gtk::Image* worm_image);
+
+		/* Destructor */
 		~WalkingAnimation();
+
+		/* Constructor por movimiento */
 		WalkingAnimation(WalkingAnimation&& other);
 
+
+		/* Actualiza la imagen del worm por la siguiente
+		 * imagen del worm caminando */
 		void setMovementImage(char new_dir);
+
+		/* Setea la imagen del worm por la imagen actual del
+		 * worm caminando */
 		void setStaticImage();
 
+		/* Devuelve la direccion del worm */
 		char getDir() const;
 
+		/* Actualiza el puntero de la imagen del worm */
 		void updateWormImage(Gtk::Image* worm_image);
 };
 
