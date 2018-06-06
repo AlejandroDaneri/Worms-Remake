@@ -13,10 +13,11 @@ void FragmentableWeapon::explode(){
 	for (float fragment_angle = 0; fragment_angle < 360; fragment_angle+= (360 / this->fragments)){
 		physical_object_ptr fragment = factory.getWeapon(this->getName() + FRAGMENT);
 
-		b2Vec2 center = this->body->GetPosition() + b2Vec2(Math::cosDegrees(fragment_angle),
+		b2Vec2 center = this->body->GetPosition() + 0.3 * b2Vec2(Math::cosDegrees(fragment_angle),
 														   Math::sinDegrees(fragment_angle));
 		((Fragment *) fragment.get())->setShootPosition(center);
-		((Fragment*)fragment.get())->shoot(fragment_angle, this->time_to_explode);
+		int time_to_explode = this->time_to_explode == -1 ? -1 : 1;
+		((Fragment*)fragment.get())->shoot(fragment_angle, time_to_explode);
 		this->world.addWeaponFragment(fragment);
 	}
 	Weapon::explode();
