@@ -18,6 +18,9 @@ class Worm: public PhysicalObject{
 		bool movement_allowed;
 		int angle;
 
+		bool has_shot;
+		bool damage_received;
+
 	protected:
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
 		void createFixtures() override;
@@ -61,6 +64,15 @@ class Worm: public PhysicalObject{
 
 		//Devuelve true si el gusano esta en movimiento
 		bool isActive() override;
+
+		//Devuelve true si el gusano disparo
+		bool hasShot() const;
+
+		//Devuelve true si el gusano recibio danio
+		bool damageReceived() const;
+
+		//Empieza el turno del gusano
+		void beginTurn();
 };
 
 #endif

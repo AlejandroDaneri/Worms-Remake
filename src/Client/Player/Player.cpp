@@ -35,21 +35,19 @@ void Player::startTurn(int worm_id, int player_id, float wind){
 }
 
 void Player::endTurn() {
+	this->turn.stop();
 	this->screen.getTurnLabel().endTurn();
-    this->handlers.disableAll();
 	this->view_list.removeScopeVisibility();
-    this->protocol.sendEndTurn();
 }
 
 void Player::endGame(const std::string& winner){
 	this->data_receiver.stop();
-	this->handlers.disableAll();
 	this->screen.getTurnLabel().setWinner(winner, this->name == winner);
     this->view_list.setVictory();
 }
 
 void Player::endTurnEarly(){
-	this->turn.stop();
+	//this->turn.stop();
 }
 
 void Player::shootWeapon() {
@@ -60,9 +58,7 @@ void Player::shootWeapon() {
 void Player::changeWeapon(std::string weapon) {
 	this->musicPlayer.playSelectWeaponSound();
 	this->weapons.changeWeapon(weapon);
-    if (this->handlers.isEnabled()){
-    	this->protocol.sendChangeWeapon(weapon);
-    }
+    this->protocol.sendChangeWeapon(weapon);
 }
 
 void Player::shoot(Position position) {

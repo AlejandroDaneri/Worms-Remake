@@ -2,12 +2,16 @@
 #define __SERVERTURN_H__
 
 #include "Player.h"
+#include "PlayerDataReceiver.h"
+#include "DataSender.h"
 #include <vector>
 #include <string>
+#include <memory>
 
 class Turn{
 	private:
 		std::vector<Player> players;
+		std::vector<std::unique_ptr<PlayerDataReceiver>> receivers;
 		std::string winner;
 		size_t current;
 
@@ -32,8 +36,14 @@ class Turn{
 		//Devuelve el jugador actual
 		Player& getCurrentPlayer();
 
+		//Realiza la configuracion inicial
+		void startGame(DataSender& data_sender);
+
 		//Empieza un nuevo turno, cambiando el jugador actual
 		void beginTurn();
+
+		//Termina el turno del jugador actual
+		void endTurn();
 
 		//Agrega un gusano al proximo jugador
 		void addWorm(World& world, GameParameters& parameters, b2Vec2 position, int id);

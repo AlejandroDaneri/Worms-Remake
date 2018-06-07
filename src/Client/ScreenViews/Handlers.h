@@ -23,7 +23,6 @@ class Handlers{
 		bool has_shoot;
 		int current_angle;
 		int weapons_time;
-		bool enabled;
 
 		WeaponPowerAccum power_accumulator;
 
@@ -49,28 +48,14 @@ class Handlers{
 		   al utilizar el mouse */
 		bool onButtonPressEvent(GdkEventButton *event);
 
-		/* Handler inactivo de las teclas. Indica que no se debe
-		   realizar ninguna accion al producirse un evento */
-		bool inactiveKeyHandler(GdkEventKey *key_event);
-
-		/* Handler inactivo del mouse. Indica que no se debe
-		   realizar ninguna accion al producirse un evento */
-		bool inactiveButtonHandler(GdkEventButton *event);
-
 		/* Habilita todos los handlers */
 		void enableAll();
-
-		/* Deshabilita todos los handlers */
-		void disableAll();
 
 		/* Realiza el shoot del player */
 		void powerAccumStopped(int power);
 
 		/* Devuelve el angulo actual del scope */
 		int getCurrentAngle() const;
-
-		/* Devuelve true si estan habilitados los handlers */
-		bool isEnabled();
 };
 
 #endif

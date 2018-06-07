@@ -96,43 +96,6 @@ Buffer ServerProtocol::sendStartTurn(int32_t current_worm_id, int32_t current_pl
     return buffer;
 }
 
-void ServerProtocol::receive(Game& game, DataSender& data_sender) {
-
-	Buffer buffer = std::move(this->receiveBuffer());
-
-	char action = buffer.getNext();
-
-	if (action == END_TURN) {
-		game.endTurn();
-	} else if (action == ACTION) {
-		char worm_action = buffer.getNext();
-		if (worm_action == MOVE_ACTION){
-			char move = buffer.getNext();
-			if (game.getCurrentWorm().move(move)){
-				data_sender.sendMoveAction(move);
-			}
-		} else if (worm_action == CHANGE_WEAPON_ACTION) {
-			std::string weapon(this->receiveStringBuffer(buffer));
-			data_sender.sendWeaponChanged(weapon);
-			game.getCurrentWorm().changeWeapon(weapon);
-		} else if(worm_action == MOVE_SCOPE) {
-            int32_t angle = this->receiveIntBuffer(buffer);
-			data_sender.sendUpdateScope(angle);
-		} else if (worm_action == SHOOT_WEAPON) {
-			int angle = this->receiveIntBuffer(buffer);
-			int power = this->receiveIntBuffer(buffer);
-			int time = this->receiveIntBuffer(buffer);
-			data_sender.sendWeaponShot(game.getCurrentWorm().getCurrentWeapon());
-			game.getCurrentWorm().shoot(angle, power, time);
-		} else if(worm_action == SHOOT_SELF_DIRECTED) {
-			int pos_x = this->receiveIntBuffer(buffer) / UNIT_TO_SEND;
-			int pos_y = this->receiveIntBuffer(buffer) / UNIT_TO_SEND;
-			data_sender.sendWeaponShot(game.getCurrentWorm().getCurrentWeapon());
-			game.getCurrentWorm().shoot(b2Vec2(pos_x, pos_y));
-		}
-	}
-}
-
 Buffer ServerProtocol::sendPlayerId(const Player& player){
 	Buffer buffer;
 	ServerProtocol::sendIntBuffer(buffer, player.getId());

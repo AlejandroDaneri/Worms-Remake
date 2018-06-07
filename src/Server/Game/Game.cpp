@@ -51,15 +51,23 @@ void Game::run(){
 		int player_id = this->turn.getCurrentPlayer().getId();
 		this->data_sender->sendStartTurn(worm_id, player_id, this->world.getWind());
 
-		while (this->player_turn_active){
-			try{
-				this->turn.getCurrentPlayer().getProtocol().receive(*this, *this->data_sender);
-			} catch (const SocketException& e){
-				this->player_turn_active = false;
-				this->turn.getCurrentPlayer().disconnect();
+		size_t current_turn_time = 0;
+		size_t max_turn_time = 60 * 1000;
+		bool time_reduced = false;
+		while(current_turn_time < max_turn_time){
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			current_turn_time += 100;
+			Worm& current_worm = this->turn.getCurrentPlayer().getCurrentWorm();
+			if (current_worm.damageReceived()){
+				current_turn_time = max_turn_time;
+			}else if (!time_reduced && current_worm.hasShot()){
+				current_turn_time = max_turn_time - 3 * 1000;
+				time_reduced = true;
 			}
 		}
-
+		
+		this->turn.endTurn();
+		this->data_sender->sendEndTurn();
 		this->waitToWorld();
 		this->world.update();
 	}
@@ -72,6 +80,7 @@ void Game::run(){
 
 void Game::configure(){
 	this->data_sender.reset(new DataSender(this->world, this->turn.getPlayers(), this->parameters));
+	this->turn.startGame(*this->data_sender);
 
 	this->data_sender->sendStartGame();
 	this->data_sender->sendBackgroundImage(this->parameters.getBackgroundImage());

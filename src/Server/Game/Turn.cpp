@@ -2,7 +2,12 @@
 
 Turn::Turn(): current(0){}
 
-Turn::~Turn(){}
+Turn::~Turn(){
+	for (auto it = this->receivers.begin(); it != this->receivers.end(); ++it){
+		(*it)->stop();
+		(*it)->join();
+	}
+}
 
 bool Turn::addPlayer(Player& player){
 	if (!this->playerCanJoin(player.getName())){
@@ -31,11 +36,24 @@ Player& Turn::getCurrentPlayer(){
 	return this->players.at(this->current);
 }
 
+void Turn::startGame(DataSender& data_sender){
+	for (auto it = this->players.begin(); it != this->players.end(); ++it){
+		std::unique_ptr<PlayerDataReceiver> receiver(new PlayerDataReceiver(*it, data_sender));
+		receiver->start();
+		this->receivers.push_back(std::move(receiver));
+	}
+}
+
 void Turn::beginTurn(){
 	do {
 		this->advanceCurrent();
 	} while (this->getCurrentPlayer().isDead());
 	this->getCurrentPlayer().beginTurn();
+	this->receivers[this->current]->beginTurn();
+}
+
+void Turn::endTurn(){
+	this->receivers[this->current]->endTurn();
 }
 
 std::vector<Player>& Turn::getPlayers(){

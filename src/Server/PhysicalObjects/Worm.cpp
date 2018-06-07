@@ -11,7 +11,7 @@
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
 	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(0), 
-	movement_allowed(false), angle(0){
+	movement_allowed(false), angle(0), has_shot(false), damage_received(false){
 		this->changeWeapon(DEFAULT_WEAPON);
 	}
 
@@ -69,6 +69,7 @@ void Worm::addLife(int life){
 
 void Worm::reduceLife(int damage){
 	this->life -= damage;
+	this->damage_received = true;
 	this->data_updated = true;
 	if (this->life <= 0){
 		this->life = 0;
@@ -130,10 +131,12 @@ void Worm::shoot(int angle, int power, int time){
 
 	((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time, shooter_id);
 	this->world.addObject(this->weapon, pos);
+	this->has_shot = true;
 }
 
 void Worm::shoot(b2Vec2 pos){
 	((Weapon*)this->weapon.get())->shoot(*this, pos);
+	this->has_shot = true;
 }
 
 void Worm::receiveWeaponDamage(int damage, const b2Vec2 &epicenter){
@@ -189,4 +192,17 @@ bool Worm::isActive(){
 		this->movement_allowed = false;
 	}
 	return PhysicalObject::isActive();
+}
+
+bool Worm::hasShot() const{
+	return this->has_shot;
+}
+
+bool Worm::damageReceived() const{
+	return this->damage_received || this->is_dead;
+}
+
+void Worm::beginTurn(){
+	this->has_shot = false;
+	this->damage_received = false;
 }

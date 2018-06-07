@@ -6,9 +6,7 @@
 #include "PhysicalObject.h"
 #include <mutex>
 
-class Game;
 class Player;
-class DataSender;
 
 class ServerProtocol : public Protocol{
 	private:
@@ -28,9 +26,6 @@ class ServerProtocol : public Protocol{
 
 		//Carga la informacion de un objeto muerto en el buffer
 		static Buffer sendDeadObject(physical_object_ptr& object);
-
-		//Recibe datos de un cliente
-		void receive(Game& game, DataSender& data_sender);
 
 		//Carga la informacion de comienzo de juego
 		static Buffer sendStartGame();

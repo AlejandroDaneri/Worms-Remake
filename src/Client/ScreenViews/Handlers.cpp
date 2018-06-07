@@ -19,7 +19,6 @@ Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons, Wo
 		this->has_shoot = false;
 		this->current_angle = DEFAULT_ANGLE;
 		this->weapons_time = WEAPONS_DEFAULT_TIME;
-		this->enabled = false;
 	}
 
 Handlers::~Handlers() {}
@@ -39,17 +38,6 @@ void Handlers::enableAll(){
 	window->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::keyPressHandler));
 	window->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::keyReleaseHandler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::onButtonPressEvent));
-
-	this->enabled = true;
-}
-
-void Handlers::disableAll() {
-	Gtk::Container* window = this->world.getWindow().get_parent()->get_parent();
-	window->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::inactiveKeyHandler));
-	window->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::inactiveKeyHandler));
-	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::inactiveButtonHandler));
-
-	this->enabled = false;
 }
 
 void Handlers::powerAccumStopped(int power){
@@ -146,18 +134,6 @@ bool Handlers::onButtonPressEvent(GdkEventButton *event) {
 	return true;
 }
 
-bool Handlers::inactiveKeyHandler(GdkEventKey *key_event) {
-	return true;
-}
-
-bool Handlers::inactiveButtonHandler(GdkEventButton *event) {
-	return true;
-}
-
 int Handlers::getCurrentAngle() const{
 	return this->current_angle;
-}
-
-bool Handlers::isEnabled(){
-	return this->enabled;
 }

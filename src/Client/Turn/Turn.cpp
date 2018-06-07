@@ -12,15 +12,16 @@ Turn::Turn(Player& player, TurnLabel& time_label):
 Turn::~Turn() {}
 
 bool Turn::startCallBack() {
-	this->time_label.setTime(this->actual_time);
 	if (this->actual_time <= LIMIT_TIME){
 		this->player.playTickTime();
 	}
-	if (this->actual_time == 0) {
-		this->player.endTurn();
-	}
+
 	this->actual_time--;
-	return this->actual_time >= 0;
+	if (this->actual_time < 0){
+		return false;
+	}
+	this->time_label.setTime(this->actual_time);
+	return true;
 }
 
 void Turn::start() {
@@ -35,6 +36,5 @@ void Turn::reduceTime() {
 void Turn::stop() {
 	if (this->my_connection.connected()) {
 		this->my_connection.disconnect();
-		this->player.endTurn();
 	}
 }

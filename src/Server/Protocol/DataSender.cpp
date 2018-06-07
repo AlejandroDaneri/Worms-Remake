@@ -135,6 +135,12 @@ void DataSender::sendEndGame(const std::string& winner){
 	this->notifyAll();
 }
 
+void DataSender::sendEndTurn(){
+	Buffer data = this->players[0].getProtocol().sendEndTurn();
+	this->sendBuffer(data);
+	this->notifyAll();
+}
+
 bool DataSender::isActive(){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	return this->active;

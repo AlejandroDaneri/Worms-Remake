@@ -60,6 +60,9 @@ class DataSender: public Thread{
 		//Envia la senial de que inicia un nuevo turno
 		void sendStartTurn(int worm_id, int player_id, float wind);
 
+		//Envia la senial de terminar turno
+		void sendEndTurn();
+
 		//Envia la senial de que el juego termino
 		void sendEndGame(const std::string& winner);
 
