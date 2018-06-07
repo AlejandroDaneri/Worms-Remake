@@ -56,6 +56,8 @@ class Weapon: public PhysicalObject{
 
 		int getShooterId() const;
 
+		void removeShooterId();
+
 };
 
 #endif

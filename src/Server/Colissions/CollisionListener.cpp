@@ -16,8 +16,22 @@ void CollisionListener::BeginContact(b2Contact* contact){
 	}
 
 	if (dataA->getType() == TYPE_WEAPON){
+		if (dataB->getType() == TYPE_WORM){
+			int shooter_id = ((Weapon*)dataA->getObject())->getShooterId();
+			int worm_id = dataB->getObject()->getId();
+			if (shooter_id == worm_id){
+				return;
+			}
+		}
 		dataA->getObject()->collideWithSomething(dataB);
 	} else if (dataB->getType() == TYPE_WEAPON){
+		if (dataA->getType() == TYPE_WORM){
+			int shooter_id = ((Weapon*)dataB->getObject())->getShooterId();
+			int worm_id = dataA->getObject()->getId();
+			if (shooter_id == worm_id){
+				return;
+			}
+		}
 		dataB->getObject()->collideWithSomething(dataA);
 	}
 
@@ -42,6 +56,13 @@ void CollisionListener::EndContact(b2Contact* contact){
 		bool friction = ((Girder *) dataA->getObject())->hasFriction();
 		((Worm *) dataB->getObject())->endCollissionGirder(friction);
 	}
+
+	if (dataA->getType() == TYPE_WEAPON){
+		((Weapon*)dataA->getObject())->removeShooterId();
+	}
+	if (dataB->getType() == TYPE_WEAPON){
+		((Weapon*)dataB->getObject())->removeShooterId();
+	}
 }
 
 bool CollisionListener::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB){
@@ -53,16 +74,6 @@ bool CollisionListener::ShouldCollide(b2Fixture* fixtureA, b2Fixture* fixtureB){
 	}
 	if (dataA->getType() == TYPE_WEAPON && dataB->getType() == TYPE_WEAPON){
 		return false;
-	}
-	if (dataA->getType() == TYPE_WEAPON && dataB->getType() == TYPE_WORM){
-		int shooter_id = ((Weapon*)dataA->getObject())->getShooterId();
-		int worm_id = dataB->getObject()->getId();
-		return shooter_id != worm_id;
-	}
-	if (dataB->getType() == TYPE_WEAPON && dataA->getType() == TYPE_WORM){
-		int shooter_id = ((Weapon*)dataB->getObject())->getShooterId();
-		int worm_id = dataA->getObject()->getId();
-		return shooter_id != worm_id;
 	}
 	return true;
 }

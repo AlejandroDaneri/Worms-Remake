@@ -101,3 +101,7 @@ void Weapon::collideWithSomething(CollisionData *other){
 int Weapon::getShooterId() const{
 	return this->shooter_id;
 }
+
+void Weapon::removeShooterId(){
+	this->shooter_id = -1;
+}
