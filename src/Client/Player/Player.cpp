@@ -46,10 +46,6 @@ void Player::endGame(const std::string& winner){
     this->view_list.setVictory();
 }
 
-void Player::endTurnEarly(){
-	//this->turn.stop();
-}
-
 void Player::shootWeapon() {
 	this->turn.reduceTime();
     this->weapons.getCurrentWeapon().shoot();
