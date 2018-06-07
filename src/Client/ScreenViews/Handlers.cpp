@@ -30,24 +30,23 @@ void Handlers::enableAll(){
 	this->has_shoot = false;
 
 	this->player.getProtocol().updateScope(DEFAULT_ANGLE);
-	
-	this->world.getWindow().get_parent()->get_parent()->set_can_focus(true);
-	this->world.getWindow().get_parent()->get_parent()->grab_focus();
 
-	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this,
-																									   &Handlers::keyPressHandler));
-	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this,
-																										 &Handlers::keyReleaseHandler));
+	Gtk::Container* window = this->world.getWindow().get_parent()->get_parent();
+	
+	window->set_can_focus(true);
+	window->grab_focus();
+
+	window->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::keyPressHandler));
+	window->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::keyReleaseHandler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::onButtonPressEvent));
 
 	this->enabled = true;
 }
 
 void Handlers::disableAll() {
-	this->world.getWindow().get_parent()->get_parent()->signal_key_press_event().connect(sigc::mem_fun(*this,
-																									   &Handlers::inactiveKeyHandler));
-	this->world.getWindow().get_parent()->get_parent()->signal_key_release_event().connect(sigc::mem_fun(*this,
-																										 &Handlers::inactiveKeyHandler));
+	Gtk::Container* window = this->world.getWindow().get_parent()->get_parent();
+	window->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::inactiveKeyHandler));
+	window->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::inactiveKeyHandler));
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::inactiveButtonHandler));
 
 	this->enabled = false;
