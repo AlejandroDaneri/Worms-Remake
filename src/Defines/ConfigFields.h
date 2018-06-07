@@ -15,6 +15,9 @@ const std::string WORLD_SLEEP_AFTER_STEP("world_sleep_after_step");
 
 const std::string WORLD_TIME_STEP("world_time_step");
 
+const std::string TURN_TIME("turn_time");
+
+const std::string TIME_AFTER_SHOOT("time_after_shoot");
 
 const std::string WORMS_LIFE_TO_ADD("worms_life_to_add");
 

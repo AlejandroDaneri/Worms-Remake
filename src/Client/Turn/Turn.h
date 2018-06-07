@@ -12,6 +12,8 @@ class Turn {
 		Player& player;
 		TurnLabel& time_label;
 		sigc::connection my_connection;
+		int max_time;
+		int reduction_time;
 
 		/* Callback de start */
 		bool startCallBack();
@@ -33,6 +35,9 @@ class Turn {
 
 		/* Detiene el contador y finaliza el turno */
 		void stop();
+
+		/* Setea los tiempos */
+		void setTime(int time, int reduction_time);
 };
 
 #endif

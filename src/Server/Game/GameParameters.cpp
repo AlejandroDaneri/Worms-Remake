@@ -16,6 +16,8 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 	this->float_parameters[GAME_WAITING_WORLD_SLEEP] = config[GAME_WAITING_WORLD_SLEEP].as<float>();
 	this->float_parameters[WORLD_SLEEP_AFTER_STEP] = config[WORLD_SLEEP_AFTER_STEP].as<float>();
 	this->float_parameters[WORLD_TIME_STEP] = config[WORLD_TIME_STEP].as<float>();
+	this->float_parameters[TURN_TIME] = config[TURN_TIME].as<float>();
+	this->float_parameters[TIME_AFTER_SHOOT] = config[TIME_AFTER_SHOOT].as<float>();
 
 	this->float_parameters[WORMS_LIFE] = config_editor[WORMS_LIFE].as<float>();
 	this->float_parameters[WORMS_LIFE_TO_ADD] = config[WORMS_LIFE_TO_ADD].as<float>();
@@ -170,6 +172,14 @@ int GameParameters::getWorldSleepAfterStep(){
 
 float GameParameters::getWorldTimeStep(){
 	return this->float_parameters[WORLD_TIME_STEP];
+}
+
+int GameParameters::getTurnTime(){
+	return this->float_parameters[TURN_TIME];
+}
+
+int GameParameters::getTimeAfterShoot(){
+	return this->float_parameters[TIME_AFTER_SHOOT];
 }
 
 File& GameParameters::getBackgroundImage(){

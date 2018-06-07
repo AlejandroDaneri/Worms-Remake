@@ -66,6 +66,12 @@ void DataSender::sendStartGame(){
 	this->notifyAll();
 }
 
+void DataSender::sendTurnData(int turn_time, int time_after_shoot){
+	Buffer data = ServerProtocol::sendTurnData(turn_time, time_after_shoot);
+	this->sendBuffer(data);
+	this->notifyAll();
+}
+
 void DataSender::sendPlayersId(){
 	Buffer length = ServerProtocol::sendLengthBuffer(this->players.size());
 	this->sendBuffer(length);

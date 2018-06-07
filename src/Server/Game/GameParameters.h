@@ -68,6 +68,9 @@ class GameParameters{
 		int getWorldSleepAfterStep();
 		float getWorldTimeStep();
 
+		int getTurnTime();
+		int getTimeAfterShoot();
+
 		File& getBackgroundImage();
 };
 

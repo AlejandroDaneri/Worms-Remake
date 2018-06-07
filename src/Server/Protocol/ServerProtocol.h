@@ -31,7 +31,10 @@ class ServerProtocol : public Protocol{
 		static Buffer sendStartGame();
 
 		//Carga la informacion de nuevo turno en el buffer
-		static Buffer sendStartTurn(int32_t current_worm_id, int32_t current_player_id, float wind);
+		static Buffer sendStartTurn(int current_worm_id, int current_player_id, float wind);
+
+		//Carga la informacion del turno en el buffer
+		static Buffer sendTurnData(int turn_time, int time_after_shoot);
 
 		//Carga la informacion de un nuevo jugador en el buffer
 		static Buffer sendPlayerId(const Player& player);

@@ -5,6 +5,9 @@ game_waiting_world_sleep: 80  #milliseconds
 world_sleep_after_step: 50  #milliseconds
 world_time_step: 0.05
 
+turn_time: 60 #seconds
+time_after_shoot: 3 #seconds
+
 worms_life_to_add: 25
 worm_velocity: 1.2
 worm_explosion_velocity: 0.5  #proportion of damage received

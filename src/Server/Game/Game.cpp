@@ -2,6 +2,7 @@
 #include "Girder.h"
 #include "WeaponFactory.h"
 
+#define TURN_STEP 100 //milliseconds
 
 Game::Game(size_t players, const std::string& config_file, const std::string& map):
 	players(players), parameters(config_file, map), world(this->parameters){
@@ -52,16 +53,16 @@ void Game::run(){
 		this->data_sender->sendStartTurn(worm_id, player_id, this->world.getWind());
 
 		size_t current_turn_time = 0;
-		size_t max_turn_time = 60 * 1000;
+		size_t max_turn_time = this->parameters.getTurnTime() * 1000;
 		bool time_reduced = false;
 		while(current_turn_time < max_turn_time){
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
-			current_turn_time += 100;
+			std::this_thread::sleep_for(std::chrono::milliseconds(TURN_STEP));
+			current_turn_time += TURN_STEP;
 			Worm& current_worm = this->turn.getCurrentPlayer().getCurrentWorm();
 			if (current_worm.damageReceived()){
 				current_turn_time = max_turn_time;
 			}else if (!time_reduced && current_worm.hasShot()){
-				current_turn_time = max_turn_time - 3 * 1000;
+				current_turn_time = max_turn_time - this->parameters.getTimeAfterShoot() * 1000;
 				time_reduced = true;
 			}
 		}
@@ -84,6 +85,7 @@ void Game::configure(){
 
 	this->data_sender->sendStartGame();
 	this->data_sender->sendBackgroundImage(this->parameters.getBackgroundImage());
+	this->data_sender->sendTurnData(this->parameters.getTurnTime(), this->parameters.getTimeAfterShoot());
 	this->data_sender->sendPlayersId();
 
 	//Asignacion de gusanos

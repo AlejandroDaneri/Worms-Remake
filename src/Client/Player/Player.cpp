@@ -99,3 +99,7 @@ ClientProtocol& Player::getProtocol(){
 MusicPlayer& Player::getMusicPlayer() {
     return this->musicPlayer;
 }
+
+Turn& Player::getTurn(){
+	return this->turn;
+}

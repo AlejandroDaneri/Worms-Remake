@@ -75,6 +75,9 @@ class Player {
 
 		/* Devuelve el music player */
 		MusicPlayer& getMusicPlayer();
+
+		/* Devuelve el turno */
+		Turn& getTurn();
 };
 
 #endif

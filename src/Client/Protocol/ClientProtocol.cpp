@@ -73,6 +73,13 @@ void ClientProtocol::receiveBackgroundImage(WorldView& world){
 	world.setBackgroundImage(buffer);
 }
 
+void ClientProtocol::receiveTurnData(Turn& turn){
+	Buffer buffer = std::move(this->receiveBuffer());
+	int max_time = this->receiveIntBuffer(buffer);
+	int time_after_shoot = this->receiveIntBuffer(buffer);
+	turn.setTime(max_time, time_after_shoot);
+}
+
 void ClientProtocol::receivePlayers(PlayersList& players_list){
 	Buffer buffer = std::move(this->receiveBuffer());
 	int quantity = this->receiveIntBuffer(buffer);

@@ -33,6 +33,9 @@ class DataSender: public Thread{
 		//Envia la imagen de fondo
 		void sendBackgroundImage(File& image);
 
+		//Envia los datos del turno
+		void sendTurnData(int turn_time, int time_after_shoot);
+
 		//Envia los datos de los jugadores
 		void sendPlayersId();
 

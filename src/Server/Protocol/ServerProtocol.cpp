@@ -85,15 +85,20 @@ Buffer ServerProtocol::sendEndTurn(){
 	return buffer;
 }
 
-Buffer ServerProtocol::sendStartTurn(int32_t current_worm_id, int32_t current_player_id, float wind){
+Buffer ServerProtocol::sendStartTurn(int current_worm_id, int current_player_id, float wind){
 	Buffer buffer;
 	buffer.setNext(START_TURN);
-
 	ServerProtocol::sendIntBuffer(buffer, current_worm_id);
 	ServerProtocol::sendIntBuffer(buffer, current_player_id);
 	ServerProtocol::sendIntBuffer(buffer, wind * UNIT_TO_SEND);
-
     return buffer;
+}
+
+Buffer ServerProtocol::sendTurnData(int turn_time, int time_after_shoot){
+	Buffer buffer;
+	ServerProtocol::sendIntBuffer(buffer, turn_time);
+	ServerProtocol::sendIntBuffer(buffer, time_after_shoot);
+	return buffer;
 }
 
 Buffer ServerProtocol::sendPlayerId(const Player& player){

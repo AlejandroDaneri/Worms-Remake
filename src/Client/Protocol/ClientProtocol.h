@@ -6,6 +6,7 @@
 #include "Position.h"
 #include "ViewsList.h"
 #include "PlayersList.h"
+#include "Turn.h"
 #include <gtkmm/window.h>
 
 class Player;
@@ -53,6 +54,9 @@ class ClientProtocol: public Protocol {
 
 		/* Recibe y setea la imagen de fondo */
 		void receiveBackgroundImage(WorldView& world);
+
+		/* Recibe los datos del turno */
+		void receiveTurnData(Turn& turn);
 
 		/* Recibe los jugadores de la partida junto con su
 		 * id y su nombre */
