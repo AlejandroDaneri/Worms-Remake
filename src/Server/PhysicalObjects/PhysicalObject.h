@@ -19,6 +19,7 @@ class PhysicalObject{
 		const std::string& type;
 		b2Vec2 last_position;
 		bool last_position_sent;
+		bool data_updated;
 		CollisionData collision_data;
 
 		virtual void createFixtures() = 0;

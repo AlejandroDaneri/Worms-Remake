@@ -69,6 +69,7 @@ void Worm::addLife(int life){
 
 void Worm::reduceLife(int damage){
 	this->life -= damage;
+	this->data_updated = true;
 	if (this->life <= 0){
 		this->life = 0;
 		this->is_dead = true;
