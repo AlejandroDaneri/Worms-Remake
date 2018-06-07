@@ -47,6 +47,9 @@ void ClientHandler::createGame(){
 	}
 
 	std::string map = this->client.getProtocol().receiveString();
+	if (map.empty()){
+		return;
+	}
 	std::string game_name = this->client.getProtocol().receiveString();
 	int max_players = this->client.getProtocol().receiveLength();
 
@@ -74,6 +77,9 @@ void ClientHandler::joinGame(){
 	}
 
 	std::string game_name = this->client.getProtocol().receiveString();
+	if (game_name.empty()){
+		return;
+	}
 
 	bool result = this->games.addPlayer(game_name, this->client);
 

@@ -12,7 +12,9 @@ SelectableListMenu::SelectableListMenu(Gtk::Window& window, MenuView& first_menu
 SelectableListMenu::~SelectableListMenu() {}
 
 void SelectableListMenu::turnBackButtonPressed() {
-	//////////////////////////////////////////IMPLEMENTAR
+	std::string string;
+	this->protocol.sendString(string);
+	this->showErrorAndRestart(string);
 }
 
 void SelectableListMenu::configure(int quantity) {
