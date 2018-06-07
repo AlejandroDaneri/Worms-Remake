@@ -9,6 +9,7 @@
 #include "TurnLabel.h"
 #include "PlayersList.h"
 #include "WindView.h"
+#include "VictoryWindow.h"
 
 /* Clase que se encarga de almacenar los contenedores principales
  * de la vista y mostrar su contenido */
@@ -24,6 +25,8 @@ class ScreenView {
 		TurnLabel turn_label;
 		PlayersList players;
 		WindView wind_view;
+
+		VictoryWindow victory_view;
 
 		/* CallBacks */
 		bool showCallBack();
@@ -56,6 +59,8 @@ class ScreenView {
 
 		/* Devuelve el wind view */
 		WindView& getWindView();
+
+		void setWinner(std::string&& victory_msg);
 };
 
 #endif

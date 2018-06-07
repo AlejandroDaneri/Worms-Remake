@@ -43,7 +43,8 @@ void Player::endTurn() {
 
 void Player::endGame(const std::string& winner){
 	this->data_receiver.stop();
-	this->screen.getTurnLabel().setWinner(winner, this->name == winner);
+	std::string msg = this->screen.getTurnLabel().setWinner(winner, this->name == winner);
+	this->screen.setWinner(std::move(msg));
     this->view_list.setVictory();
 }
 

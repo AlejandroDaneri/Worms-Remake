@@ -6,7 +6,8 @@
 #define SPACING 30
 
 ScreenView::ScreenView(Gtk::Window& window, Player& player, WeaponList& weapons) :
-	left_view(false, SPACING), window(window), weapons_view(weapons, player) {
+	left_view(false, SPACING), window(window), weapons_view(weapons, player),
+	victory_view(this->window) {
 	this->left_view.pack_start(this->wind_view.getWindow(), Gtk::PACK_SHRINK);
 	this->left_view.pack_start(this->players.getWindow(), Gtk::PACK_SHRINK);
 	this->world_box.pack_start(this->left_view, Gtk::PACK_SHRINK, PADDING);
@@ -60,4 +61,9 @@ PlayersList& ScreenView::getPlayersView(){
 
 WindView& ScreenView::getWindView(){
 	return this->wind_view;
+}
+
+void ScreenView::setWinner(std::string&& victory_msg) {
+	this->victory_view.setWinner(std::move(victory_msg));
+	this->victory_view.show_all();
 }
