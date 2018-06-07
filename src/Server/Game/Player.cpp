@@ -26,7 +26,7 @@ void Player::beginTurn(){
 }
 
 void Player::addWorm(World& world, GameParameters& parameters, const b2Vec2& position, int id){
-	physical_object_ptr worm(new Worm(world, parameters, id, this->id));
+	physical_object_ptr worm(new Worm(world, parameters, id, this->id, this->weapons));
 	this->worms.add(worm);
 	world.addObject(worm, position);
 }
@@ -58,4 +58,12 @@ bool Player::isConnected() const{
 void Player::disconnect(){
 	this->connected = false;
 	this->worms.kill();
+}
+
+void Player::setWeaponsAmmo(const std::map<std::string, unsigned int>& ammo){
+	this->weapons.updateAmmo(ammo);
+}
+
+void Player::changeWeapon(const std::string& weapon){
+	this->weapons.changeWeapon(weapon);
 }

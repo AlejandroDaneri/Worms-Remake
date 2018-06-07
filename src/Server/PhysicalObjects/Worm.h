@@ -4,6 +4,7 @@
 #include "PhysicalObject.h"
 #include "GameParameters.h"
 #include "Weapon.h"
+#include "WeaponList.h"
 
 class Worm: public PhysicalObject{	
 	private:
@@ -11,7 +12,7 @@ class Worm: public PhysicalObject{
 		int life;
 		char dir;
 		GameParameters& parameters;
-		physical_object_ptr weapon;
+		WeaponList& weapons;
 		float max_height;
 		int colliding_with_girder;
 		int friction;
@@ -26,7 +27,7 @@ class Worm: public PhysicalObject{
 		void createFixtures() override;
 
 	public:
-		Worm(World& world, GameParameters& parameters, int id, int player_id);
+		Worm(World& world, GameParameters& parameters, int id, int player_id, WeaponList& weapons);
 		~Worm();
 
 		int getPlayerId() const;
@@ -43,9 +44,6 @@ class Worm: public PhysicalObject{
 
 		//Ejecuta una accion de movimiento del gusano
 		bool move(char action);
-
-		//Cambia el arma del gusano
-		void changeWeapon(const std::string& weapon);
 
 		//Dispara un arma no teledirigida
 		void shoot(int angle, int power, int time);

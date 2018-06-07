@@ -6,6 +6,7 @@
 #include "Worm.h"
 #include "World.h"
 #include "GameParameters.h"
+#include "WeaponList.h"
 #include <string>
 
 class Player{
@@ -13,6 +14,7 @@ class Player{
 		ServerProtocol protocol;
 		std::string name;
 		WormsList worms;
+		WeaponList weapons;
 		int id;
 		bool connected;
 
@@ -48,6 +50,12 @@ class Player{
 
 		//Desconecta al jugador
 		void disconnect();
+
+		//Setea la municion de las armas
+		void setWeaponsAmmo(const std::map<std::string, unsigned int>& ammo);
+
+		//Cambia el arma actual del jugador
+		void changeWeapon(const std::string& weapon);
 
 		void setName(const std::string& name);
 

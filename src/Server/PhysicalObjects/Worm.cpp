@@ -8,12 +8,10 @@
 #include "Math.h"
 #include <algorithm>
 
-Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
+Worm::Worm(World& world, GameParameters& parameters, int id, int player_id, WeaponList& weapons):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(0), 
-	movement_allowed(false), angle(0), has_shot(false), damage_received(false){
-		this->changeWeapon(DEFAULT_WEAPON);
-	}
+	dir(1), parameters(parameters), weapons(weapons), max_height(0), colliding_with_girder(0), friction(0), 
+	movement_allowed(false), angle(0), has_shot(false), damage_received(false){}
 
 Worm::~Worm(){}
 
@@ -60,6 +58,7 @@ bool Worm::isColliding() const{
 }
 
 const std::string& Worm::getCurrentWeapon() const{
+	physical_object_ptr weapon = this->weapons.getCurrentWeapon(this->world, this->parameters);
 	return ((Weapon*)weapon.get())->getName();
 }
 
@@ -105,13 +104,10 @@ bool Worm::move(char action){
 	return true;
 }
 
-void Worm::changeWeapon(const std::string& weapon){
-	this->weapon.reset();
-	WeaponFactory factory(this->world, this->parameters);
-	this->weapon = factory.getWeapon(weapon);
-}
-
 void Worm::shoot(int angle, int power, int time){
+	if (!this->weapons.shoot()){
+		return;
+	}
 	b2Vec2 pos = this->getPosition();
 	int shooter_id = this->id;
 	float x_add = (worm_size * this->dir);;
@@ -129,13 +125,17 @@ void Worm::shoot(int angle, int power, int time){
 	pos.x += x_add;
 	pos.y += y_add;
 
-	((Weapon*)this->weapon.get())->shoot(this->dir, angle, power, time, shooter_id);
-	this->world.addObject(this->weapon, pos);
+	physical_object_ptr weapon = this->weapons.getCurrentWeapon(this->world, this->parameters);
+	((Weapon*)weapon.get())->shoot(this->dir, angle, power, time, shooter_id);
+	this->world.addObject(weapon, pos);
 	this->has_shot = true;
 }
 
 void Worm::shoot(b2Vec2 pos){
-	((Weapon*)this->weapon.get())->shoot(*this, pos);
+	if (!this->weapons.shoot()){
+		return;
+	}
+	((Weapon*)this->weapons.getCurrentWeapon(this->world, this->parameters).get())->shoot(*this, pos);
 	this->has_shot = true;
 }
 

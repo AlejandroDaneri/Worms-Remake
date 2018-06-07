@@ -111,12 +111,12 @@ void Game::configure(){
 	this->data_sender->sendGirders();
 
 	//Municion de las armas
-	std::map<std::string, int>& ammo = this->parameters.getWeaponsAmmo();
+	std::map<std::string, unsigned int>& ammo = this->parameters.getWeaponsAmmo();
 	this->data_sender->sendWeaponsAmmo(ammo);
-}
-
-Worm& Game::getCurrentWorm(){
-	return this->turn.getCurrentPlayer().getCurrentWorm();
+	auto& player_list = this->turn.getPlayers();
+	for (auto it = player_list.begin(); it != player_list.end(); ++it){
+		it->setWeaponsAmmo(ammo);
+	}
 }
 
 void Game::endTurn(){

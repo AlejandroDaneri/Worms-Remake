@@ -84,7 +84,7 @@ void DataSender::sendGirders(){
     this->notifyAll();
 }
 
-void DataSender::sendWeaponsAmmo(std::map<std::string, int>& weapons){
+void DataSender::sendWeaponsAmmo(std::map<std::string, unsigned int>& weapons){
 	Buffer length = ServerProtocol::sendLengthBuffer(weapons.size());
 	this->sendBuffer(length);
 	for (auto it = weapons.begin(); it != weapons.end(); ++it){

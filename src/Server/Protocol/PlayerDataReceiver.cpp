@@ -42,7 +42,7 @@ void PlayerDataReceiver::analizeReceivedData(Buffer& buffer){
 		} else if (worm_action == CHANGE_WEAPON_ACTION) {
 			std::string weapon(ServerProtocol::receiveStringBuffer(buffer));
 			this->data_sender.sendWeaponChanged(weapon);
-			this->player.getCurrentWorm().changeWeapon(weapon);
+			this->player.changeWeapon(weapon);
 		} else if(worm_action == MOVE_SCOPE) {
             int32_t angle = ServerProtocol::receiveIntBuffer(buffer);
 			this->data_sender.sendUpdateScope(angle);

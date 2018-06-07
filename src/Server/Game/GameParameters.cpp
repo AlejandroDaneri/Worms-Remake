@@ -38,7 +38,7 @@ GameParameters::GameParameters(const std::string& config_file, const std::string
 	this->float_parameters[WORLD_MAX_HEIGHT] = 99999;
 
 	this->weapon_radius = config[WEAPON_RADIUS].as<std::map<std::string, int>>();
-	this->weapon_ammo = config_editor[WEAPON_AMMO].as<std::map<std::string, int>>();
+	this->weapon_ammo = config_editor[WEAPON_AMMO].as<std::map<std::string, unsigned int>>();
 	this->weapon_damage = config[WEAPON_DAMAGE].as<std::map<std::string, int>>();
 	this->weapon_fragments = config[WEAPON_FRAGMENTS].as<std::map<std::string, int>>();
 
@@ -78,7 +78,7 @@ std::vector<GirderParams>& GameParameters::getGirders(){
 	return this->girders;
 }
 
-std::map<std::string, int>& GameParameters::getWeaponsAmmo(){
+std::map<std::string, unsigned int>& GameParameters::getWeaponsAmmo(){
 	return this->weapon_ammo;
 }
 

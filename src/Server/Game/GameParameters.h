@@ -17,7 +17,7 @@ class GameParameters{
 	private:
 		std::map<std::string, float> float_parameters;
 		std::map<std::string, int> weapon_radius;
-		std::map<std::string, int> weapon_ammo;
+		std::map<std::string, unsigned int> weapon_ammo;
 		std::map<std::string, int> weapon_damage;
 		std::map<std::string, int> weapon_fragments;
 
@@ -35,7 +35,7 @@ class GameParameters{
 
 		std::vector<b2Vec2>& getWorms();
 		std::vector<GirderParams>& getGirders();
-		std::map<std::string, int>& getWeaponsAmmo();
+		std::map<std::string, unsigned int>& getWeaponsAmmo();
 
 
 		float getWormVelocity();

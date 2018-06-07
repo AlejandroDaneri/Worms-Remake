@@ -47,9 +47,6 @@ class Game: public Thread{
 		/* Comienza la partida */
 		void run() override;
 
-		/* Devuelve el worm actual */
-		Worm& getCurrentWorm();
-
 		/* Finaliza el turno */
 		void endTurn();
 };

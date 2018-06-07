@@ -43,7 +43,7 @@ class DataSender: public Thread{
 		void sendGirders();
 
 		//Envia las municiones de las armas
-		void sendWeaponsAmmo(std::map<std::string, int>& weapons);
+		void sendWeaponsAmmo(std::map<std::string, unsigned int>& weapons);
 
 		//Envia que el jugador cambio de arma
 		void sendWeaponChanged(const std::string &weapon);
