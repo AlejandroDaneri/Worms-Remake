@@ -71,9 +71,6 @@ class DataSender: public Thread{
 
 		//Devuelve true si sigue enviando datos
 		bool isActive();
-
-		//Chequea que haya jugadores conectados
-		void checkPlayers();
 };
 
 

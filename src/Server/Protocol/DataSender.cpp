@@ -42,15 +42,7 @@ void DataSender::run(){
 			++it;
 		}
 
-		if (!this->active){
-			//Chequeo que no se hayan desconectado
-			Buffer empty_data;
-			empty_data.setNext(NO_SEND_DATA);
-			this->sendBuffer(empty_data);
-		}
-
 		this->notifyAll();
-		this->checkPlayers();
 	}
 }
 
@@ -165,19 +157,5 @@ void DataSender::notifyAll(){
 		if (this->players[i].isConnected()){
 			this->players_data_senders[i]->notify();
 		}
-	}
-}
-
-void DataSender::checkPlayers(){
-	size_t players_connected = 0;
-	for (size_t i = 0; i < this->players.size(); i++){
-		if (this->players[i].isConnected()){
-			players_connected++;
-		}
-	}
-	if (players_connected <= 1 && this->players.size() > 1){ //////////////////////////////Eliminar playersize>1 por ahora que hay un solo jugador
-		Buffer data = this->players[0].getProtocol().sendEndTurn();
-		this->sendBuffer(data);
-		this->notifyAll();
 	}
 }

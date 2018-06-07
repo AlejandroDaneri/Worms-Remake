@@ -15,6 +15,7 @@ Player::Player(ClientProtocol protocol, const std::string& name, Gtk::Window& wi
 
 Player::~Player() {
 	this->data_receiver.stop();
+	this->protocol.stop();
 	this->data_receiver.join();
 }
 

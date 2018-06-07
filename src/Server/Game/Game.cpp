@@ -59,7 +59,7 @@ void Game::run(){
 			std::this_thread::sleep_for(std::chrono::milliseconds(TURN_STEP));
 			current_turn_time += TURN_STEP;
 			Worm& current_worm = this->turn.getCurrentPlayer().getCurrentWorm();
-			if (current_worm.damageReceived()){
+			if (current_worm.damageReceived() || this->turn.gameEnded(this->world.getMutex())){
 				current_turn_time = max_turn_time;
 			}else if (!time_reduced && current_worm.hasShot()){
 				current_turn_time = max_turn_time - this->parameters.getTimeAfterShoot() * 1000;
