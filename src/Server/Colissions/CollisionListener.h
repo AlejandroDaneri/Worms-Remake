@@ -8,8 +8,6 @@
 #include <list>
 
 class CollisionListener: public b2ContactListener, public b2ContactFilter{
-	private:
-		std::list<b2Contact*> contacts_disabled;
 	public:
 		CollisionListener();
 		~CollisionListener();

@@ -71,7 +71,6 @@ void WorldView::setBackgroundImage(const Buffer& image){
 }
 
 bool WorldView::setBackgroundImageCallBack(Buffer image){
-	//image.insert(0, BACKGROUND_PATH);
 	auto screen = this->container.get_screen();
 	size_t screen_width = screen->get_width();
 	size_t screen_height = screen->get_height();

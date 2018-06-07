@@ -13,6 +13,7 @@ class Worm: public PhysicalObject{
 		GameParameters& parameters;
 		physical_object_ptr weapon;
 		float max_height;
+		int colliding_with_girder;
 		int friction;
 		bool movement_allowed;
 		int angle;

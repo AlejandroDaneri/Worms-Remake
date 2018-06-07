@@ -1,5 +1,6 @@
 #include "Worm.h"
 #include "b2CircleShape.h"
+#include "b2PolygonShape.h"
 #include "b2Fixture.h"
 #include "Protocol.h"
 #include "WeaponFactory.h"
@@ -9,7 +10,7 @@
 
 Worm::Worm(World& world, GameParameters& parameters, int id, int player_id):
 	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), max_height(0), friction(0), 
+	dir(1), parameters(parameters), max_height(0), colliding_with_girder(0), friction(0), 
 	movement_allowed(false), angle(0){
 		this->changeWeapon(DEFAULT_WEAPON);
 	}
@@ -26,11 +27,20 @@ void Worm::createFixtures(){
 	circleShape.m_p.Set(0, 0);
 	circleShape.m_radius = worm_size / 2; 
 		  
-	b2FixtureDef boxFixtureDef;
-	boxFixtureDef.shape = &circleShape;
-	boxFixtureDef.density = 10;
-	this->body->CreateFixture(&boxFixtureDef);
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &circleShape;
+	fixtureDef.density = 10;
+	this->body->CreateFixture(&fixtureDef);
 	this->body->SetFixedRotation(true);
+
+	//Sensor para colisiones
+	b2PolygonShape sensorShape;
+	sensorShape.SetAsBox(worm_size * 0.5 * 0.7, worm_size / 5, b2Vec2(0, -1 * worm_size / 2), 0); 
+		  
+	b2FixtureDef sensorFixtureDef;
+	sensorFixtureDef.shape = &sensorShape;
+	sensorFixtureDef.isSensor = true;
+	this->body->CreateFixture(&sensorFixtureDef);
 }
 
 int Worm::getPlayerId() const{
@@ -46,7 +56,7 @@ char Worm::getDir() const{
 }
 
 bool Worm::isColliding() const{
-	return this->friction > 0;
+	return this->colliding_with_girder;
 }
 
 const std::string& Worm::getCurrentWeapon() const{
@@ -146,6 +156,7 @@ void Worm::collideWithSomething(CollisionData *other){
 			this->reduceLife(std::min((int) this->max_height - min_height, parameters.getWormMaxHeightDamage()));
 		}
 		this->max_height = 0;
+		this->colliding_with_girder ++;
 		Girder* girder = (Girder*)other->getObject();
 		if (girder->hasFriction()){
 			this->friction++;
@@ -157,6 +168,7 @@ void Worm::collideWithSomething(CollisionData *other){
 
 void Worm::endCollissionGirder(char has_friction){
 	this->friction -= has_friction;
+	this->colliding_with_girder --;
 	if (this->friction <= 0){
 		this->friction = 0;
 		this->body->SetGravityScale(1);
@@ -165,10 +177,10 @@ void Worm::endCollissionGirder(char has_friction){
 }
 
 bool Worm::isActive(){
-	if (!this->friction){
+	if (!this->colliding_with_girder){
 		float height = this->body->GetPosition().y;
 		this->max_height = std::max(this->max_height, height);
-	} else if (!this->movement_allowed){
+	} else if (this->friction && !this->movement_allowed){
 		this->body->SetGravityScale(0);
 		this->body->SetLinearVelocity(b2Vec2(0, 0));
 	}

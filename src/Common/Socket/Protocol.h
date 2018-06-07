@@ -103,9 +103,6 @@ class Protocol {
 		/* Envia el archivo,
 		Post: el archivo no se modifica */
 		static Buffer sendFile(File& file);
-
-		/* Recibe una imagen */
-		Buffer receiveImage();
 };
 
 #endif

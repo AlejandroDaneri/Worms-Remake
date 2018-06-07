@@ -21,31 +21,12 @@ void CollisionListener::BeginContact(b2Contact* contact){
 		dataB->getObject()->collideWithSomething(dataA);
 	}
 
-	b2WorldManifold manifold;
-	contact->GetWorldManifold(&manifold);
-	b2Vec2 collision_point = manifold.points[0];
-
-	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_GIRDER){
-		Worm* worm = (Worm*)dataA->getObject();
-		if (worm->getPosition().y < collision_point.y){
-			//gusano colisiona por abajo de la viga
-			this->contacts_disabled.push_back(contact);
-			return;
-		}
-	}
-
-	if (dataB->getType() == TYPE_WORM && dataA->getType() == TYPE_GIRDER){
-		Worm* worm = (Worm*)dataB->getObject();
-		if (worm->getPosition().y < collision_point.y){
-			//gusano colisiona por abajo de la viga
-			this->contacts_disabled.push_back(contact);
-			return;
-		}
-	}
-
-	if (dataA->getType() == TYPE_WORM){
+	if (dataA->getType() == TYPE_WORM && contact->GetFixtureA()->IsSensor() && 
+			(dataB->getType() == TYPE_GIRDER || dataB->getType() == TYPE_BORDER)){
 		dataA->getObject()->collideWithSomething(dataB);
-	} else if (dataB->getType() == TYPE_WORM){
+		
+	} else if (dataB->getType() == TYPE_WORM && contact->GetFixtureB()->IsSensor() && 
+			(dataA->getType() == TYPE_GIRDER || dataA->getType() == TYPE_BORDER)){
 		dataB->getObject()->collideWithSomething(dataA);
 	}
 }
@@ -54,17 +35,10 @@ void CollisionListener::EndContact(b2Contact* contact){
 	CollisionData* dataA = (CollisionData*)contact->GetFixtureA()->GetBody()->GetUserData();
 	CollisionData* dataB = (CollisionData*)contact->GetFixtureB()->GetBody()->GetUserData();
 
-	for (auto it = this->contacts_disabled.begin(); it != this->contacts_disabled.end(); ++it){
-		if (*it == contact){
-			this->contacts_disabled.erase(it);
-			return;
-		}
-	}
-
-	if (dataA->getType() == TYPE_WORM && dataB->getType() == TYPE_GIRDER){
+	if (dataA->getType() == TYPE_WORM && contact->GetFixtureA()->IsSensor() && dataB->getType() == TYPE_GIRDER){
 		bool friction = ((Girder *) dataB->getObject())->hasFriction();
 		((Worm *) dataA->getObject())->endCollissionGirder(friction);
-	} else if (dataB->getType() == TYPE_WORM && dataA->getType() == TYPE_GIRDER){
+	} else if (dataB->getType() == TYPE_WORM && contact->GetFixtureB()->IsSensor() && dataA->getType() == TYPE_GIRDER){
 		bool friction = ((Girder *) dataA->getObject())->hasFriction();
 		((Worm *) dataB->getObject())->endCollissionGirder(friction);
 	}

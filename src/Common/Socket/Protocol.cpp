@@ -105,8 +105,3 @@ Buffer Protocol::sendFile(File& file){
     buffer.setNext('\0');
     return buffer;
 }
-
-Buffer Protocol::receiveImage(){
-	Buffer buffer = std::move(this->receiveBuffer());
-	return buffer;
-}
