@@ -31,7 +31,7 @@ b2Body* PhysicalObject::getBody(){
 }
 
 bool PhysicalObject::isMoving(){
-	if (!this->body){
+	if (!this->body || this->is_dead){
 		return false;
 	}
 	b2Vec2 pos = this->body->GetPosition();

@@ -56,7 +56,7 @@ char Worm::getDir() const{
 }
 
 bool Worm::isColliding() const{
-	return this->colliding_with_girder;
+	return this->colliding_with_girder && !this->movement_allowed;
 }
 
 const std::string& Worm::getCurrentWeapon() const{
