@@ -1,29 +1,21 @@
 #include "CreateGameMenu.h"
-#include <gtkmm/builder.h>
-#include <glibmm/main.h>
 #include "Path.h"
 #include "GamePlayers.h"
-#include "ButtonBuilder.h"
+
+const std::string PATH = GLADE_PATH + "client_CreateGameMenu.glade";
 
 CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity):
-	SelectableListMenu(window, first_menu, protocol, std::move(name)){
+	SelectableListMenu(window, first_menu, protocol, std::move(name), PATH){
 
-	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_CreateGameMenu.glade");
-
-	builder->get_widget("error", this->error);
-	builder->get_widget("game_name", this->game_name);
-	builder->get_widget("players_number", this->players_number);
-	builder->get_widget("games", this->games);
-	builder->get_widget("quit_game", this->quit_game);
+	this->builder->get_widget("game_name", this->game_name);
+	this->builder->get_widget("players_number", this->players_number);
+	this->builder->get_widget("games", this->games);
 
 	this->configure(quantity);
 
-	ButtonBuilder::buildButton(quit_game);
-
-	builder->get_widget("create_game_menu", this->menu);
+	this->builder->get_widget("create_game_menu", this->menu);
 
 	this->addMenu();
-	this->quit_game->signal_clicked().connect(sigc::mem_fun(*this, &CreateGameMenu::quitButtonPressed));
 }
 
 CreateGameMenu::~CreateGameMenu(){}

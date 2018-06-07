@@ -1,9 +1,7 @@
 #ifndef __GAMEMENU__
 #define __GAMEMENU__
 
-#include <gtkmm/button.h>
 #include <gtkmm/entry.h>
-#include <gtkmm/window.h>
 #include <string>
 #include <memory>
 #include "ClientProtocol.h"

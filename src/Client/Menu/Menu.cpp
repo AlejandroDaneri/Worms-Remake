@@ -1,0 +1,29 @@
+#include "Menu.h"
+#include "Path.h"
+#include "ButtonBuilder.h"
+
+Menu::Menu(const std::string& path, Gtk::Window& window) : window(window) {
+	this->builder = Gtk::Builder::create_from_file(path);
+
+	this->builder->get_widget("error", this->error);
+
+	this->builder->get_widget("quit_game", this->quit);
+
+	ButtonBuilder::buildButton(this->quit);
+
+	this->builder->get_widget("title", this->title);
+	Glib::RefPtr<Gdk::Pixbuf> aux = Gdk::Pixbuf::create_from_file(TITLE_MENU_IMAGE);
+	this->title->set(aux);
+
+	this->builder->get_widget("background", this->background);
+	aux = Gdk::Pixbuf::create_from_file(BACKGROUND_MENU_IMAGE);
+	this->background->set(aux);
+
+	this->quit->signal_clicked().connect(sigc::mem_fun(*this, &Menu::quitButtonPressed));
+}
+
+Menu::~Menu() {}
+
+void Menu::quitButtonPressed() {
+	this->window.close();
+}

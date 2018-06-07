@@ -1,29 +1,21 @@
 #ifndef __MENUVIEW_H__
 #define __MENUVIEW_H__
 
-#include <gtkmm/hvbox.h>
-#include <gtkmm/label.h>
-#include <gtkmm/window.h>
-#include <gtkmm/overlay.h>
-#include <gtkmm/image.h>
+#include <gtkmm/container.h>
 #include <memory>
 #include "ClientProtocol.h"
+#include "Menu.h"
 
-class MenuView{
+class MenuView : public Menu {
 	private:
 		/* Muestra un mensaje de error */
 		void showError(const std::string& error);
 
 	protected:
-		Gtk::Window& window;
 		ClientProtocol& protocol;
-		Gtk::Label* error;
 		std::unique_ptr<MenuView> next_menu;
 		MenuView& main_menu;
 		Gtk::Container* menu;
-
-		Gtk::Overlay menu_container;
-		Gtk::Image background;
 
 		/* Muestra un mensaje de error y cierra la aplicacion*/
 		void showFatalError();
@@ -34,12 +26,9 @@ class MenuView{
 		/* Agrega el menu al world y el world al window */
 		void addMenu();
 
-		/* Handler del boton de salir */
-		void quitButtonPressed();
-
 	public:
 		/* Constructor */
-		MenuView(Gtk::Window& window, MenuView& main_menu, ClientProtocol& protocol);
+		MenuView(Gtk::Window& window, MenuView& main_menu, ClientProtocol& protocol, const std::string& path);
 
 		/* Destructor */
 		virtual ~MenuView();

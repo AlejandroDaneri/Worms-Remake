@@ -1,11 +1,21 @@
 #include "SelectableListMenu.h"
+#include "ButtonBuilder.h"
 
-SelectableListMenu::SelectableListMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name):
-	MenuView(window, first_menu, protocol), player_name(std::move(name)){}
+SelectableListMenu::SelectableListMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, const std::string& path):
+	MenuView(window, first_menu, protocol, path), player_name(std::move(name)) {
 
-SelectableListMenu::~SelectableListMenu(){}
+	this->builder->get_widget("turn_back", this->turn_back);
+	ButtonBuilder::buildButton(this->turn_back);
+	this->turn_back->signal_clicked().connect(sigc::mem_fun(*this, &SelectableListMenu::turnBackButtonPressed));
+}
 
-void SelectableListMenu::configure(int quantity){
+SelectableListMenu::~SelectableListMenu() {}
+
+void SelectableListMenu::turnBackButtonPressed() {
+	//////////////////////////////////////////IMPLEMENTAR
+}
+
+void SelectableListMenu::configure(int quantity) {
 	try{
 		for (int i = 0; i < quantity; i++){
 			std::string field = this->protocol.receiveString();
@@ -15,29 +25,28 @@ void SelectableListMenu::configure(int quantity){
         this->showFatalError();
 	}
 
-	for (auto it = this->fields.begin(); it != this->fields.end(); ++it){
+	for (auto it = this->fields.begin(); it != this->fields.end(); ++it) {
 		this->games->pack_start(it->getContainer());
 	}
 	this->games->show();
 }
 
-void SelectableListMenu::addField(const std::string& field_name){
+void SelectableListMenu::addField(const std::string& field_name) {
 	GameMenuField field(field_name);
 	this->fields.push_back(std::move(field));
-	this->fields.back().getButton().signal_clicked().connect(sigc::bind<Glib::ustring>(sigc::mem_fun(*this,
-                                                                                                   &SelectableListMenu::selectButtonPressed), field_name));
+	this->fields.back().getButton().signal_clicked().connect(sigc::bind<Glib::ustring>(sigc::mem_fun(*this, &SelectableListMenu::selectButtonPressed), field_name));
 }
 
-bool SelectableListMenu::createPlayer(){
-	try{
+bool SelectableListMenu::createPlayer() {
+	try {
 		this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name, this->window));
-	} catch (const std::exception& e){
+	} catch (const std::exception& e) {
         this->showFatalError();
 	}
 	return false;
 }
 
-void SelectableListMenu::waitToPlayers(){
+void SelectableListMenu::waitToPlayers() {
 	this->window.remove();
 	this->window.add(this->waiting_label.getWidget());
 	this->window.show_all();

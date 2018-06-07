@@ -1,7 +1,6 @@
 #ifndef __CREATEGAMEMENU__
 #define __CREATEGAMEMENU__
 
-#include <gtkmm/button.h>
 #include <gtkmm/entry.h>
 #include <gtkmm/spinbutton.h>
 #include "SelectableListMenu.h"
@@ -12,7 +11,6 @@ class CreateGameMenu: public SelectableListMenu{
 	private:
 		Gtk::Entry* game_name;
 		Gtk::SpinButton* players_number;
-		Gtk::Button* quit_game;
 
 		/* Handler del boton de seleccion */
 		void selectButtonPressed(Glib::ustring map_name) override;

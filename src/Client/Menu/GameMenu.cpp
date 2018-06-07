@@ -1,34 +1,30 @@
 #include "GameMenu.h"
-#include <gtkmm/builder.h>
 #include "Path.h"
 #include "CreateGameMenu.h"
 #include "JoinGameMenu.h"
 #include "ButtonBuilder.h"
 
+const std::string PATH = GLADE_PATH + "client_GameMenu.glade";
+
 GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol):
-	MenuView(window, *this, protocol){
-	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "client_GameMenu.glade");
+	MenuView(window, *this, protocol, PATH){
 
-	builder->get_widget("error", this->error);
-	builder->get_widget("player_name", this->player_name);
+	this->builder->get_widget("player_name", this->player_name);
 
-	builder->get_widget("game_menu", this->menu);
+	this->builder->get_widget("game_menu", this->menu);
 
 	this->addMenu();
 
-	Gtk::Button *create_game, *join_game, *quit_game;
+	Gtk::Button *create_game, *join_game;
 
-	builder->get_widget("create_game", create_game);
-	builder->get_widget("join_game", join_game);
-	builder->get_widget("quit_game", quit_game);
+	this->builder->get_widget("create_game", create_game);
+	this->builder->get_widget("join_game", join_game);
 
 	ButtonBuilder::buildButton(create_game);
 	ButtonBuilder::buildButton(join_game);
-	ButtonBuilder::buildButton(quit_game);
 
 	create_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::createButtonPressed));
 	join_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::joinButtonPressed));
-	quit_game->signal_clicked().connect(sigc::mem_fun(*this, &GameMenu::quitButtonPressed));
 }
 
 GameMenu::~GameMenu(){}
