@@ -13,8 +13,6 @@ class VictoryWindow {
 		Gtk::Button* return_menu;
 		Gtk::Button* quit;
 		Gtk::Label* victory_msg;
-		std::string winner_msg;
-		bool made_choice;
 
 		void returnMenuButtonPressed();
 
@@ -25,9 +23,7 @@ class VictoryWindow {
 
 		~VictoryWindow();
 
-		void setWinner(std::string&& message);
-
-		void show_all();
+		void setWinner(const std::string& winner, bool i_win);
 };
 
 

@@ -66,7 +66,7 @@ void Worm::addLife(int life){
 	this->life += life;
 }
 
-void Worm::reduceLife(int damage){
+void Worm::reduceLife(size_t damage){
 	this->life -= damage;
 	this->damage_received = true;
 	this->data_updated = true;
@@ -157,7 +157,7 @@ void Worm::collideWithSomething(CollisionData *other){
 		this->max_height -= current_height;
 		
 		if (this->max_height >= min_height){
-			this->reduceLife(std::min((int) this->max_height - min_height, parameters.getWormMaxHeightDamage()));
+			this->reduceLife(std::min((int) this->max_height - min_height + 1, parameters.getWormMaxHeightDamage()));
 		}
 		this->max_height = 0;
 		this->colliding_with_girder ++;

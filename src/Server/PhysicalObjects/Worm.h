@@ -40,7 +40,7 @@ class Worm: public PhysicalObject{
 		void addLife(int life);
 
 		//Reduce la vida del gusano
-		void reduceLife(int damage);
+		void reduceLife(size_t damage);
 
 		//Ejecuta una accion de movimiento del gusano
 		bool move(char action);

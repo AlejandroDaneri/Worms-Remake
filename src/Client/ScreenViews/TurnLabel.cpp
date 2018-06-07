@@ -32,18 +32,8 @@ void TurnLabel::setTime(int time) {
 	this->time.set_markup(begining + std::to_string(time) + ending);
 }
 
-std::string TurnLabel::setWinner(const std::string& winner, bool i_win){
+void TurnLabel::setEndGame(){
 	this->message.set_markup(begining + "Termino el juego" + ending);
-	std::string winner_message;
-	if (winner.empty()){
-		winner_message = "Empate";
-	} else if (i_win) {
-		winner_message = "GANASTE!!!!";
-	} else {
-		winner_message = "Perdiste. El ganador fue: " + winner;
-	}
-	this->time.set_markup(begining + winner_message + ending);
-	return winner_message;
 }
 		
 Gtk::Container& TurnLabel::getWindow() {

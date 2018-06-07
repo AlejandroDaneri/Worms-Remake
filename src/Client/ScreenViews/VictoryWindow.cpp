@@ -4,7 +4,7 @@
 #include <iostream>
 
 VictoryWindow::VictoryWindow(Gtk::Window& window) :
-	window(window), made_choice(false) {
+	window(window) {
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "victory_window.glade");
 
 	builder->get_widget("Menu", this->my_window);
@@ -32,12 +32,15 @@ void VictoryWindow::quitButtonPressed() {
 	this->window.close();
 }
 
-void VictoryWindow::setWinner(std::string&& message) {
-	this->winner_msg = message;
-	this->victory_msg->set_text(this->winner_msg);
-}
-
-void VictoryWindow::show_all() {
+void VictoryWindow::setWinner(const std::string& winner, bool i_win) {
+	std::string winner_message;
+	if (winner.empty()){
+		winner_message = "Empate";
+	} else if (i_win) {
+		winner_message = "GANASTE!!!!";
+	} else {
+		winner_message = "Perdiste. El ganador fue: " + winner;
+	}
+	this->victory_msg->set_text(winner_message);
 	this->my_window->show_all();
-
 }

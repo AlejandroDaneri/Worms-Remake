@@ -60,7 +60,8 @@ class ScreenView {
 		/* Devuelve el wind view */
 		WindView& getWindView();
 
-		void setWinner(std::string&& victory_msg);
+		/* Muestra una ventana con el ganador */
+		void setWinner(const std::string& winner, bool i_win);
 };
 
 #endif

@@ -31,7 +31,7 @@ class TurnLabel{
 		void endTurn();
 
 		/* Cambia el label mostrando al ganador */
-		std::string setWinner(const std::string& winner, bool i_win);
+		void setEndGame();
 
 		/* Cambia el label de tiempo al tiempo pasado por parametro */
 		void setTime(int time);

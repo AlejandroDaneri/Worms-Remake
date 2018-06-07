@@ -13,8 +13,12 @@ SelectableListMenu::~SelectableListMenu() {}
 
 void SelectableListMenu::turnBackButtonPressed() {
 	std::string string;
-	this->protocol.sendString(string);
-	this->showErrorAndRestart(string);
+	try{
+		this->protocol.sendString(string);
+		this->showErrorAndRestart(string);
+	} catch (const std::exception& e){
+		this->showFatalError();
+	}
 }
 
 void SelectableListMenu::configure(int quantity) {

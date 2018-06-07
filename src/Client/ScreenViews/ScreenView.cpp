@@ -63,7 +63,6 @@ WindView& ScreenView::getWindView(){
 	return this->wind_view;
 }
 
-void ScreenView::setWinner(std::string&& victory_msg) {
-	this->victory_view.setWinner(std::move(victory_msg));
-	this->victory_view.show_all();
+void ScreenView::setWinner(const std::string& winner, bool i_win) {
+	this->victory_view.setWinner(winner, i_win);
 }
