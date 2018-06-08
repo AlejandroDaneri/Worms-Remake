@@ -1,8 +1,10 @@
 #include "GamesList.h"
 #include "Path.h"
+#include "Server.h"
 #include <iostream>
 
-GamesList::GamesList(std::mutex& mutex_cout): mutex_cout(mutex_cout){}
+GamesList::GamesList(Server& server, std::mutex& mutex_cout):
+	server(server), mutex_cout(mutex_cout){}
 
 GamesList::~GamesList(){
 	for (auto it = this->games.begin(); it != this->games.end(); ++it){
@@ -20,7 +22,7 @@ bool GamesList::addGame(const std::string& game_name, const std::string& map, in
 	}
 
 	try{
-		std::unique_ptr<Game> game(new Game(max_players, SERVER_CONFIG_FILE, MAPS_PATH + map));
+		std::unique_ptr<Game> game(new Game(max_players, SERVER_CONFIG_FILE, MAPS_PATH + map, this->server));
 		this->games[game_name] = std::move(game);
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
 		std::cout << "[INFO] Nueva partida creada: " << game_name << std::endl;

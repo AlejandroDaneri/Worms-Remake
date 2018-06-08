@@ -100,5 +100,8 @@ bool Turn::gameEnded(std::mutex& mutex){
 }
 
 const std::string& Turn::getWinner(){
+	for (auto it = this->receivers.begin(); it != this->receivers.end(); ++it){
+		(*it)->stop();
+	}
 	return this->winner;
 }

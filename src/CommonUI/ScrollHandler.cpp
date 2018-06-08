@@ -14,7 +14,7 @@ ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window): window(window), last_
 
 	this->window.signal_enter_notify_event().connect(sigc::mem_fun(*this, &ScrollHandler::mouseEntered));
 	this->window.signal_leave_notify_event().connect(sigc::mem_fun(*this, &ScrollHandler::mouseLeft));
-	Glib::signal_timeout().connect(sigc::mem_fun(*this, &ScrollHandler::scroll), 50);
+	this->my_connection = Glib::signal_timeout().connect(sigc::mem_fun(*this, &ScrollHandler::scroll), 50);
 }
 
 ScrollHandler::~ScrollHandler(){}
@@ -65,4 +65,10 @@ bool ScrollHandler::scroll(){
 	}
 
 	return true;
+}
+
+void ScrollHandler::stop(){
+	if (this->my_connection.connected()) {
+		this->my_connection.disconnect();
+	}
 }

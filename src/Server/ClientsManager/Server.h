@@ -15,6 +15,7 @@ class Server: public Thread{
 		std::list<std::unique_ptr<Thread>> clients;
 		GamesList games_list;
 		std::mutex& mutex_cout;
+		std::mutex mutex;
 
 		/* Elimina los clientes que terminaron su comunicacion
 		 * de la lista */
@@ -32,6 +33,9 @@ class Server: public Thread{
 
 		/* Avisa al server que debe dejar de ejecutarse */
 		void stop();
+
+		/*Agrega un nuevo cliente ya conectado */
+		void addConnectedClient(ServerProtocol&& protocol);
 };
 
 #endif

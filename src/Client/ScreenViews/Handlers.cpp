@@ -137,3 +137,7 @@ bool Handlers::onButtonPressEvent(GdkEventButton *event) {
 int Handlers::getCurrentAngle() const{
 	return this->current_angle;
 }
+
+void Handlers::stop(){
+	this->scroll_handler.stop();
+}

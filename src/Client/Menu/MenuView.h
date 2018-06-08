@@ -12,8 +12,8 @@ class MenuView : public Menu {
 		void showError(const std::string& error);
 
 	protected:
-		ClientProtocol& protocol;
 		std::unique_ptr<MenuView> next_menu;
+		ClientProtocol& protocol;
 		MenuView& main_menu;
 		Gtk::Container* menu;
 
@@ -23,15 +23,15 @@ class MenuView : public Menu {
 		/* Muestra un mensaje de error y reinicia */
 		void showErrorAndRestart(const std::string& error);
 
-		/* Agrega el menu al world y el world al window */
-		void addMenu();
-
 	public:
 		/* Constructor */
 		MenuView(Gtk::Window& window, MenuView& main_menu, ClientProtocol& protocol, const std::string& path);
 
 		/* Destructor */
 		virtual ~MenuView();
+
+		/* Agrega el menu al container y el container al window */
+		void addMenu();
 };
 
 #endif

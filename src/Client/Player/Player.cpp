@@ -1,9 +1,9 @@
 #include "Player.h"
 #include "WeaponNames.h"
 
-Player::Player(ClientProtocol protocol, const std::string& name, Gtk::Window& window):
-	protocol(std::move(protocol)), name(name),
-	screen(window, *this, this->weapons),
+Player::Player(ClientProtocol& protocol, const std::string& name, Gtk::Window& window, MenuView& main_menu):
+	protocol(protocol), name(name),
+	screen(window, main_menu, *this, this->weapons),
     turn(*this, this->screen.getTurnLabel()),
 	view_list(this->screen.getWorld(), *this, this->screen.getPlayersView(), musicPlayer),
 	data_receiver(*this),
@@ -15,7 +15,6 @@ Player::Player(ClientProtocol protocol, const std::string& name, Gtk::Window& wi
 
 Player::~Player() {
 	this->data_receiver.stop();
-	this->protocol.stop();
 	this->data_receiver.join();
 }
 
@@ -45,6 +44,8 @@ void Player::endGame(const std::string& winner){
 	this->data_receiver.stop();
 	this->screen.getTurnLabel().setEndGame();
 	this->view_list.setVictory();
+	this->protocol.sendEndGame();
+	this->handlers.stop();
 	this->screen.setWinner(winner, this->name == winner);
 }
 

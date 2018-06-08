@@ -4,6 +4,7 @@
 #include <gtkmm/hvbox.h>
 #include <gtkmm/label.h>
 #include <gtkmm/window.h>
+#include "MenuView.h"
 #include "WorldView.h"
 #include "WeaponView.h"
 #include "TurnLabel.h"
@@ -34,7 +35,7 @@ class ScreenView {
 
 	public:
 		/* Constructor */
-		ScreenView(Gtk::Window& window, Player& player, WeaponList& weapons);
+		ScreenView(Gtk::Window& window, MenuView& main_menu, Player& player, WeaponList& weapons);
 
 		/* Destructor */
 		~ScreenView();

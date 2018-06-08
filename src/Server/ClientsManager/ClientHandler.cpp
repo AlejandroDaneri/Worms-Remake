@@ -2,8 +2,8 @@
 #include "MapsList.h"
 #include <iostream>
 
-ClientHandler::ClientHandler(Socket&& client, GamesList& games, std::mutex& mutex_cout):
-	client(std::move(ServerProtocol(std::move(client)))), games(games),
+ClientHandler::ClientHandler(ServerProtocol&& client, GamesList& games, std::mutex& mutex_cout):
+	client(std::move(client)), games(games),
 	connected(false), mutex_cout(mutex_cout){}
 
 ClientHandler::~ClientHandler(){}

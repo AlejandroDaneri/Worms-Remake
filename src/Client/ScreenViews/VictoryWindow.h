@@ -5,6 +5,7 @@
 #include <gtkmm/button.h>
 #include <gtkmm/label.h>
 #include <string>
+#include "MenuView.h"
 
 class VictoryWindow {
 	private:
@@ -13,13 +14,14 @@ class VictoryWindow {
 		Gtk::Button* return_menu;
 		Gtk::Button* quit;
 		Gtk::Label* victory_msg;
+		MenuView& main_menu;
 
 		void returnMenuButtonPressed();
 
 		void quitButtonPressed();
 
 	public:
-		VictoryWindow(Gtk::Window& window);
+		VictoryWindow(Gtk::Window& window, MenuView& main_menu);
 
 		~VictoryWindow();
 

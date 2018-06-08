@@ -6,15 +6,16 @@
 DataReceiver::DataReceiver(Player& player): 
 	player(player), protocol(player.getProtocol()){}
 
-DataReceiver::~DataReceiver(){
-	this->protocol.stop();
-}
+DataReceiver::~DataReceiver(){}
 
 void DataReceiver::run(){
 	try{
 		this->initialConfig();
 		while(this->running){
 			Buffer data = this->protocol.receiveBuffer();
+			if (*data.getPointer() == END_GAME){
+				this->stop();
+			}
 			sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &DataReceiver::analizeReceivedData), data);
 			Glib::signal_idle().connect(my_slot);
 		}

@@ -10,15 +10,18 @@
 
 typedef std::vector<std::string> games_list_t;
 
+class Server;
+
 class GamesList{
 	private:
+		Server& server;
 		std::unordered_map<std::string, std::unique_ptr<Game>> games;
 		std::mutex mutex;
 		std::mutex& mutex_cout;
 
 	public:
         /* Constructor */
-		GamesList(std::mutex& mutex_cout);
+		GamesList(Server& server, std::mutex& mutex_cout);
 
 		/* Destructor */
 		~GamesList();

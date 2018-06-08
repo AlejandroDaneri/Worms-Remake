@@ -17,12 +17,16 @@ class WeaponList{
 
 		~WeaponList();
 
+		//Actualiza la municion de las armas
 		void updateAmmo(const std::map<std::string, unsigned int>& ammo);
 
+		//Devuelve si puede disparar el arma, y disminuye la municion
 		bool shoot();
 
+		//Devuelve el arma actual
 		physical_object_ptr getCurrentWeapon(World& world, GameParameters& parameters);
 
+		//Cambia el arma actual
 		void changeWeapon(const std::string& weapon);
 };
 

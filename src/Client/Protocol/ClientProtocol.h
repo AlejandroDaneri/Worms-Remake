@@ -46,8 +46,8 @@ class ClientProtocol: public Protocol {
 		/* Envia un mesaje que indica el cambio del angulo del scope */
 		void updateScope(int angle);
 
-		/* Envia un mensaje de finalizacion de turno */
-		void sendEndTurn();
+		/* Envia un mensaje de finalizacion de juego */
+		void sendEndGame();
 
 		/* Recibe el comienzo del juego */
 		void receiveStartGame();

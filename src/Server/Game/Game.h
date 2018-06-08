@@ -12,10 +12,12 @@
 #include "DataSender.h"
 
 class Player;
+class Server;
 
 class Game: public Thread{
 	private:
 		size_t players;
+		Server& server;
 		GameParameters parameters;
 		World world;
 		Turn turn;
@@ -30,7 +32,7 @@ class Game: public Thread{
 
 	public:
         /* Constructor */
-		Game(size_t players, const std::string& config_file, const std::string& map);
+		Game(size_t players, const std::string& config_file, const std::string& map, Server& server);
 
 		/* Destructor */
 		~Game();

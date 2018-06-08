@@ -58,9 +58,9 @@ void ClientProtocol::updateScope(int angle) {
     this->sendBuffer(buffer);
 }
 
-void ClientProtocol::sendEndTurn(){
+void ClientProtocol::sendEndGame(){
 	Buffer buffer;
-	buffer.setNext(END_TURN);
+	buffer.setNext(END_GAME);
     this->sendBuffer(buffer);
 }
 

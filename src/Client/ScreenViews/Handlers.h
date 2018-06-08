@@ -56,6 +56,9 @@ class Handlers{
 
 		/* Devuelve el angulo actual del scope */
 		int getCurrentAngle() const;
+
+		/* Detiene los handlers */
+		void stop();
 };
 
 #endif

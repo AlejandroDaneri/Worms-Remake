@@ -3,8 +3,8 @@
 #include "Path.h"
 #include <iostream>
 
-VictoryWindow::VictoryWindow(Gtk::Window& window) :
-	window(window) {
+VictoryWindow::VictoryWindow(Gtk::Window& window, MenuView& main_menu) :
+	window(window), main_menu(main_menu) {
 	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "victory_window.glade");
 
 	builder->get_widget("Menu", this->my_window);
@@ -22,9 +22,9 @@ VictoryWindow::VictoryWindow(Gtk::Window& window) :
 VictoryWindow::~VictoryWindow() {}
 
 void VictoryWindow::returnMenuButtonPressed() {
-	//this->made_choice = true;
-	std::cout << "Vuelvo al menu principal" << std::endl;
 	this->my_window->close();
+	this->window.remove();
+	this->main_menu.addMenu();
 }
 
 void VictoryWindow::quitButtonPressed() {

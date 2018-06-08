@@ -1,11 +1,12 @@
 #include "Game.h"
 #include "Girder.h"
 #include "WeaponFactory.h"
+#include "Server.h"
 
 #define TURN_STEP 100 //milliseconds
 
-Game::Game(size_t players, const std::string& config_file, const std::string& map):
-	players(players), parameters(config_file, map), world(this->parameters){
+Game::Game(size_t players, const std::string& config_file, const std::string& map, Server& server):
+	players(players), server(server), parameters(config_file, map), world(this->parameters){
 		this->running = true;
 	}
 
@@ -76,6 +77,13 @@ void Game::run(){
 	this->data_sender->sendEndGame(this->turn.getWinner());
 	this->world.stop();
 	this->data_sender->stop();
+	this->data_sender->join();
+	auto& player_list = this->turn.getPlayers();
+	for (auto it = player_list.begin(); it != player_list.end(); ++it){
+		if (it->isConnected()){
+			this->server.addConnectedClient(std::move(it->getProtocol()));
+		}
+	}
 	this->running = false;
 }
 

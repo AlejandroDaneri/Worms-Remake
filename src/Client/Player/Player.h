@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <gtkmm/window.h>
+#include "MenuView.h"
 #include "ClientProtocol.h"
 #include "Turn.h"
 #include "Weapon.h"
@@ -16,7 +17,7 @@
 
 class Player {
 	private:
-		ClientProtocol protocol;
+		ClientProtocol& protocol;
 		std::string name;
 		WeaponList weapons;
 		ScreenView screen;
@@ -31,7 +32,7 @@ class Player {
 
 	public:
 		/* Constructor */
-		Player(ClientProtocol protocol, const std::string& name, Gtk::Window& window);
+		Player(ClientProtocol& protocol, const std::string& name, Gtk::Window& window, MenuView& main_menu);
 		
 		/* Destructor */
 		~Player();

@@ -45,7 +45,7 @@ void SelectableListMenu::addField(const std::string& field_name) {
 
 bool SelectableListMenu::createPlayer() {
 	try {
-		this->player = std::unique_ptr<Player>(new Player(std::move(this->protocol), this->player_name, this->window));
+		this->player = std::unique_ptr<Player>(new Player(this->protocol, this->player_name, this->window, this->main_menu));
 	} catch (const std::exception& e) {
         this->showFatalError();
 	}

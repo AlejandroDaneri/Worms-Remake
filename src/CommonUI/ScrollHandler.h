@@ -10,6 +10,7 @@ class ScrollHandler{
 		Gtk::ScrolledWindow& window;
 		Position last_mouse_position;
 		bool mouse_in_window;
+		sigc::connection my_connection;
 
 		bool mouseMotionEvent(GdkEventMotion* motion_event);
 		bool mouseEntered(GdkEventCrossing* crossing_event);
@@ -21,6 +22,8 @@ class ScrollHandler{
 		ScrollHandler(Gtk::ScrolledWindow& window);
 
 		~ScrollHandler();
+
+		void stop();
 
 };
 
