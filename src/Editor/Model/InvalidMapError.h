@@ -5,6 +5,7 @@
 
 #include <exception>
 
+// Clase que se encarga de lanzar una excepcion cuando el mapa a guardar es invalido
 class InvalidMapError : public std::exception{
 private:
     const char* message;

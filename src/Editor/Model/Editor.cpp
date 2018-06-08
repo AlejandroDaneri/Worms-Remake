@@ -4,7 +4,7 @@
 Editor::Editor(BaseObjectType *cobject,
                const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Window(cobject),
-          weps_list_controller(builder) {
+          usables_controller(builder) {
 
     maximize();
     builder->get_widget("map_window", map_window);
@@ -14,7 +14,7 @@ Editor::Editor(BaseObjectType *cobject,
 
     builder->get_widget_derived("filebox", filebox);
     std::shared_ptr<FileBoxController> filebox_controller(
-            new FileBoxController(weps_list_controller, map_controller,builder));
+            new FileBoxController(usables_controller, map_controller,builder));
     filebox->bindController(filebox_controller);
 
     show_all_children();

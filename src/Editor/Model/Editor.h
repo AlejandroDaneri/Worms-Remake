@@ -12,11 +12,10 @@
 #include "FileBoxController.h"
 #include "FileBoxView.h"
 
-
 class Editor : public Gtk::Window {
     Gtk::ScrolledWindow *map_window;
     Map map_model;
-    UsablesController weps_list_controller;
+    UsablesController usables_controller;
     FileBoxView *filebox;
 
 public:

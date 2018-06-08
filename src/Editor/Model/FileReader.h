@@ -8,6 +8,7 @@
 #include <WeaponNames.h>
 #include <ConfigFields.h>
 
+// Clase que se encarga de manejar la carga de un mapa
 class FileReader{
 private:
     std::fstream file;
@@ -16,7 +17,7 @@ public:
 
 	explicit FileReader(const std::string &filename);
 
-
+	// Carga todos los componentes de un mapa desde un archivo YAML
     void read(std::vector<std::vector<double>> &worms,
               std::vector<std::vector<double>> &girders,
               std::vector<int> &weps_ammo,
