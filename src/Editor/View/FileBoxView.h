@@ -10,6 +10,7 @@
 
 class FileBoxController;
 
+// Clase que se encarga de manipular la zona de archivos
 class FileBoxView : public Gtk::Grid {
 private:
     Gtk::Button *save;
@@ -20,6 +21,7 @@ public:
     FileBoxView(BaseObjectType *cobject,
                 const Glib::RefPtr<Gtk::Builder> &builder);
 
+    // Enlaza el controlador a la vista
     void bindController(std::shared_ptr<FileBoxController> controller);
 };
 

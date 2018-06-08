@@ -11,6 +11,7 @@
 
 class MapController;
 
+// Clase que se encarga de manipular la vista del mapa
 class MapView : public Gtk::Layout {
 private:
     std::vector<Gtk::Image> contained_objects;
@@ -23,42 +24,59 @@ private:
 
     int actual_background_index;
 
+    // Inicializa el vector de imagenes de los worms
     void initializeWormsImages();
 
+    // Inicializa el vector de imagenes de las vigas
     void initializeGirderImages();
 
+    // Establece el fondo actual del mapa
     void setBackground(const std::string &name);
 
+    // Inicializa el vector de imagenes de fondos
     void initializeBackground();
 
+    // Establece la posicion actual del mapa a mostrar
     void setInitialPosition();
 
+    // Dibuja nuevamente el contenido del mapa
     void redrawMap();
 
 public:
     MapView(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
 
+    // Se ejecuta al clickear el mapa
     bool onButtonClicked(GdkEventButton *button_event);
 
+    // Borra el objeto en la posición indicada
     void erase(const int &index);
 
+    // Elimina todo el contenido del mapa
     void clean();
 
+    // Enlaza el controlador a la vista
     void bindController(MapController *map_controller);
 
+    // Agregar un nuevo objeto al mapa, en la posicion (x,y)
     void add(const unsigned int &id, const double &x, const double &y,
              const int &angle = 0);
 
+    // Gira el objeto seleccionado
     bool turn(const unsigned int &id, const int &angle, const int &index);
 
+    // Cambia el fondo actual
     void changeBackground();
 
+    // Selecciona el objeto en la posición (x,y)
     int select(const double &x, const double &y);
 
+    // Mueve el objeto seleccionado a la posicón (x.y)
     void move(const int& index, const double &x, const double &y);
 
+    // Obtiene el nombre del fondo actual
     const std::string getBackgroundName() const;
 
+    // Establece el fondo especificado por su nombre
     void loadBackground(const std::string &name);
 
 };
