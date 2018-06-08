@@ -5,10 +5,11 @@
 #include "MapView.h"
 #include "Map.h"
 #include "ToolBoxView.h"
-
 class MapView;
 class ToolBoxView;
 
+// Clase que se encarga de comunicar la vista con el modelo, y a su vez, se
+// comunica con el resto del programa
 class MapController {
     Map model;
     MapView *view;
