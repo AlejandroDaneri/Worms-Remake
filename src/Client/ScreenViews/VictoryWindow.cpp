@@ -45,5 +45,7 @@ void VictoryWindow::setWinner(const std::string& winner, bool i_win) {
 		winner_message = "Perdiste. El ganador fue: " + winner;
 	}
 	this->victory_msg->set_text(winner_message);
+	this->my_window->set_modal(true);
+	this->my_window->set_deletable(false);
 	this->my_window->show_all();
 }
