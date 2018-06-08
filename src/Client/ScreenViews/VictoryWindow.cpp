@@ -9,6 +9,9 @@ VictoryWindow::VictoryWindow(Gtk::Window& window, MenuView& main_menu) :
 
 	builder->get_widget("Menu", this->my_window);
 
+	this->my_window->set_title(CLIENT_WINDOW_NAME);
+	this->my_window->set_icon_from_file(ICON_PATH);
+
 	builder->get_widget("victory_msg", victory_msg);
 
 	builder->get_widget("Return_menu", this->return_menu);
