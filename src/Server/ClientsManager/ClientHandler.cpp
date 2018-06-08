@@ -21,6 +21,7 @@ void ClientHandler::run(){
 			}
 		}
 		
+	} catch(const SocketException& e){
 	} catch(const std::exception& e){
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
 		std::cout << "[ERROR] Error con un cliente: " << e.what() << std::endl;

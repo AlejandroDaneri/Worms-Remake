@@ -36,6 +36,7 @@ void GameMenu::createButtonPressed(){
 		if (quantity == 0){
 			this->showErrorAndRestart("No hay mapas para crear una partida");
 		} else {
+			this->error->set_label("");
 			this->next_menu = std::unique_ptr<MenuView>(new CreateGameMenu(this->window, *this, this->protocol, std::move(name), quantity));
 		}
 	}
@@ -48,6 +49,7 @@ void GameMenu::joinButtonPressed(){
 		if (quantity == 0){
 			this->showErrorAndRestart("No hay partidas disponibles");
 		} else {
+			this->error->set_label("");
 			this->next_menu = std::unique_ptr<MenuView>(new JoinGameMenu(this->window, *this, this->protocol, std::move(name), quantity));
 		}
 	}
