@@ -2,9 +2,11 @@
 #ifndef WORMS_MAPCONTROLLER_H
 #define WORMS_MAPCONTROLLER_H
 
+#include <gtkmm/filechooserdialog.h>
 #include "MapView.h"
 #include "Map.h"
 #include "ToolBoxView.h"
+
 class MapView;
 class ToolBoxView;
 
@@ -17,6 +19,7 @@ class MapController {
     unsigned int item_id_to_add;
     unsigned int actual_mode;
     int index_object_selected;
+    Gtk::FileChooserDialog* background_dialog;
 
     void turn(const int &rotation);
 public:

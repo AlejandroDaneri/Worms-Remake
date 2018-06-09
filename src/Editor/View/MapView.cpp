@@ -6,19 +6,19 @@
 #include "MapView.h"
 #include "GirderSize.h"
 
-#define BACKGROUND_QUANTITY 9
+const std::string DEFAULT_BACKGROUND("default_background.jpg");
 
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),
-          scroll_handler(*(Gtk::ScrolledWindow*)this->get_parent()), actual_background_index(0) {
+          scroll_handler(*(Gtk::ScrolledWindow*)this->get_parent()){
 
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
             sigc::mem_fun(*this, &MapView::onButtonClicked));
 
     setInitialPosition();
-    initializeBackground();
+    changeBackground(BACKGROUND_PATH + DEFAULT_BACKGROUND, DEFAULT_BACKGROUND);
     initializeWormsImages();
     initializeGirderImages();
 }
@@ -35,24 +35,15 @@ void MapView::setInitialPosition() {
     ((Gtk::ScrolledWindow*) get_parent())->get_vadjustment()->set_value(height);
 }
 
-void MapView::initializeBackground() {
-    for (size_t i = 0; i < BACKGROUND_QUANTITY; i++){
-		bg_paths.emplace_back(BACKGROUND_PATH + "background" + std::to_string(i) + ".jpg");
-	}
-    setBackground(bg_paths[actual_background_index]);
-}
-
 void MapView::initializeGirderImages(){
     std::vector<std::string> girder_3_imgs;
     std::vector<std::string> girder_6_imgs;
 
     for (int i = 0; i < 180; i = i + 10) {
         girder_3_imgs.emplace_back(
-                GIRDER_PATH + "3_" + std::to_string(i) +
-                ".png");
+                GIRDER_PATH + "3_" + std::to_string(i) + ".png");
         girder_6_imgs.push_back(
-                GIRDER_PATH + "6_" + std::to_string(i) +
-                ".png");
+                GIRDER_PATH + "6_" + std::to_string(i) + ".png");
     }
     objects_pallete.push_back(girder_3_imgs);
     objects_pallete.push_back(girder_6_imgs);
@@ -120,26 +111,21 @@ void MapView::bindController(MapController *map_controller) {
     this->controller = map_controller;
 }
 
-void MapView::changeBackground() {
-    background.clear();
-    actual_background_index = (actual_background_index + 1) % bg_paths.size();
-    setBackground(bg_paths[actual_background_index]);
-}
-
-void MapView::setBackground(const std::string &name) {
-    Gtk::Image bg(name);
+void MapView::changeBackground(const std::string &path, const std::string &name) {
+    Gtk::Image bg(path);
     int img_width = bg.get_pixbuf()->get_width();
     int img_height = bg.get_pixbuf()->get_height();
     guint window_width, window_height;
     this->get_size(window_width, window_height);
     for (size_t x = 0; x < window_width; x += img_width) {
         for (size_t y = 0; y < window_height; y += img_height) {
-            Gtk::Image image(name);
+            Gtk::Image image(path);
             image.show();
             put(image, x, y);
             background.push_back(std::move(image));
         }
     }
+    this->background_name = name;
     redrawMap();
 }
 
@@ -164,13 +150,11 @@ int MapView::select(const double &x, const double &y) {
 }
 
 const std::string MapView::getBackgroundName() const {
-    return "background"+std::to_string(actual_background_index)+".jpg";
+    return this->background_name;
 }
 
 void MapView::loadBackground(const std::string &name) {
     background.clear();
-    setBackground(BACKGROUND_PATH+name);
-    const char &number = *(name.end() - 5);
-    actual_background_index=atoi(&number);
+    changeBackground(BACKGROUND_PATH + name, name);
 }
 

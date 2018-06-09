@@ -17,24 +17,17 @@ private:
     std::vector<Gtk::Image> contained_objects;
     std::vector<std::vector<std::string>> objects_pallete;
     MapController *controller;
-    std::vector<std::string> bg_paths;
     std::vector<Gtk::Image> background;
+    std::string background_name;
     Water water;
     ScrollHandler scroll_handler;
 
-    int actual_background_index;
 
     // Inicializa el vector de imagenes de los worms
     void initializeWormsImages();
 
     // Inicializa el vector de imagenes de las vigas
     void initializeGirderImages();
-
-    // Establece el fondo actual del mapa
-    void setBackground(const std::string &name);
-
-    // Inicializa el vector de imagenes de fondos
-    void initializeBackground();
 
     // Establece la posicion actual del mapa a mostrar
     void setInitialPosition();
@@ -65,7 +58,7 @@ public:
     bool turn(const unsigned int &id, const int &angle, const int &index);
 
     // Cambia el fondo actual
-    void changeBackground();
+    void changeBackground(const std::string &path, const std::string &name);
 
     // Selecciona el objeto en la posición (x,y)
     int select(const double &x, const double &y);

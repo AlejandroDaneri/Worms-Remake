@@ -3,6 +3,7 @@
 #include <ViewPositionTransformer.h>
 #include "MapController.h"
 #include "InvalidMapError.h"
+#include "Path.h"
 
 #define ADD_MODE_ID 0
 #define MOVE_CMD_ID 1
@@ -18,6 +19,10 @@ MapController::MapController(Map model,
     builder->get_widget_derived("toolbox", toolBox);
     view->bindController(this);
     toolBox->bindController(this);
+
+    builder->get_widget("background_dialog",background_dialog);
+    background_dialog->add_button("Cancelar", Gtk::RESPONSE_CANCEL);
+    background_dialog->add_button("Abrir", Gtk::RESPONSE_OK);
 }
 
 void MapController::addModeSignal(const unsigned int &id) {
@@ -135,7 +140,14 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
 }
 
 void MapController::changeBackgroundSignal() const {
-    this->view->changeBackground();
+    this->background_dialog->set_current_folder(BACKGROUND_PATH);
+    int result = this->background_dialog->run();
+    if (result==Gtk::RESPONSE_OK) {
+        std::string path = this->background_dialog->get_filename();
+        std::string filename = this->background_dialog->get_current_name();
+        this->view->changeBackground(path, filename);     
+    }
+    this->background_dialog->hide();
 }
 
 const std::string MapController::getBackgroundName() const{
