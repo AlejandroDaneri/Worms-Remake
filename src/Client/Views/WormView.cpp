@@ -11,7 +11,7 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos, int p
 	walkingAnimation(&this->image), weaponAnimation(DEFAULT_WEAPON, &this->image) {
 		this->worm.attach(this->label.getWidget(), 0, 0, 1, 1);
 		this->worm.attach(this->image, 0, 1, 1, 1);
-		this->walkingAnimation.setStaticImage();
+		this->walkingAnimation.setStaticImage(DIR_RIGHT);
 		this->addToWorld(pos, worm_size, worm_size + 0.5);
 }
 
@@ -47,15 +47,14 @@ void WormView::changeWeapon(const std::string& weapon) {
 }
 
 void WormView::setNewImage(char dir, bool colliding, bool is_current_worm, bool has_shot){
+	this->walkingAnimation.setStaticImage(dir);
 	if (is_current_worm){
 		if (!this->is_moving && !has_shot && colliding){
 			this->weaponAnimation.setWeaponImage(dir);
 		} else if (colliding){
 			this->walkingAnimation.setMovementImage(dir);
 		}
-		return;
 	}
-	this->walkingAnimation.setStaticImage();
 }
 
 Gtk::Widget& WormView::getWidget(){
@@ -93,5 +92,5 @@ void WormView::weaponShoot(const std::string& weapon) {
 void WormView::resetFocus(){
 	this->is_moving = false;
 	this->setFocus(false);
-	this->walkingAnimation.setStaticImage();
+	this->walkingAnimation.setStaticImage(this->getDir());
 }

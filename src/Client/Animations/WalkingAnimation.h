@@ -31,7 +31,7 @@ class WalkingAnimation {
 
 		/* Setea la imagen del worm por la imagen actual del
 		 * worm caminando */
-		void setStaticImage();
+		void setStaticImage(char new_dir);
 
 		/* Devuelve la direccion del worm */
 		char getDir() const;
