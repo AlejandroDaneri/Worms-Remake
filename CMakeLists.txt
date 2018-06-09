@@ -7,11 +7,9 @@ endif(PATH)
 
 configure_file(${PROJECT_SOURCE_DIR}/src/Editor/editor.glade ${PROJECT_SOURCE_DIR}/resources/Glade/editor.glade)
 
-message("[INFO] Librerias necesarias: \n")
-message("-Gtkmm version 3.0:")
-message("sudo apt-get install libgtkmm-3.0-dev\n")
-message("-SDL version 2:")
-message("sudo apt-get install libsdl2-mixer-dev\n")
+message("\n[INFO] Librerias necesarias:")
+message("-Gtkmm version 3.0")
+message("-SDL version 2\n")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
