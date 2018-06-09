@@ -144,8 +144,7 @@ void MapController::changeBackgroundSignal() const {
     int result = this->background_dialog->run();
     if (result==Gtk::RESPONSE_OK) {
         std::string path = this->background_dialog->get_filename();
-        std::string filename = this->background_dialog->get_current_name();
-        this->view->changeBackground(path, filename);     
+        this->view->changeBackground(path);     
     }
     this->background_dialog->hide();
 }

@@ -18,7 +18,6 @@ private:
     std::vector<std::vector<std::string>> objects_pallete;
     MapController *controller;
     std::vector<Gtk::Image> background;
-    std::string background_name;
     Water water;
     ScrollHandler scroll_handler;
 
@@ -58,7 +57,7 @@ public:
     bool turn(const unsigned int &id, const int &angle, const int &index);
 
     // Cambia el fondo actual
-    void changeBackground(const std::string &path, const std::string &name);
+    void changeBackground(const std::string &path);
 
     // Selecciona el objeto en la posición (x,y)
     int select(const double &x, const double &y);

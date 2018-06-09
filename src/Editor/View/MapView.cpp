@@ -18,7 +18,7 @@ MapView::MapView(BaseObjectType *cobject,
             sigc::mem_fun(*this, &MapView::onButtonClicked));
 
     setInitialPosition();
-    changeBackground(BACKGROUND_PATH + DEFAULT_BACKGROUND, DEFAULT_BACKGROUND);
+    changeBackground(BACKGROUND_PATH + DEFAULT_BACKGROUND);
     initializeWormsImages();
     initializeGirderImages();
 }
@@ -111,7 +111,7 @@ void MapView::bindController(MapController *map_controller) {
     this->controller = map_controller;
 }
 
-void MapView::changeBackground(const std::string &path, const std::string &name) {
+void MapView::changeBackground(const std::string &path) {
     background.clear();
     Gtk::Image bg(path);
     int img_width = bg.get_pixbuf()->get_width();
@@ -126,7 +126,6 @@ void MapView::changeBackground(const std::string &path, const std::string &name)
             background.push_back(std::move(image));
         }
     }
-    this->background_name = name;
     redrawMap();
 }
 
@@ -155,6 +154,6 @@ Glib::RefPtr<const Gdk::Pixbuf> MapView::getBackground() const{
 }
 
 void MapView::loadBackground(const std::string &name) {
-    changeBackground(BACKGROUND_PATH + name, name);
+    changeBackground(BACKGROUND_PATH + name);
 }
 
