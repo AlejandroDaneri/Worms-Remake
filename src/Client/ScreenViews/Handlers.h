@@ -23,6 +23,7 @@ class Handlers{
 		bool has_shoot;
 		int current_angle;
 		int weapons_time;
+		bool enabled;
 
 		WeaponPowerAccum power_accumulator;
 
@@ -50,6 +51,12 @@ class Handlers{
 
 		/* Habilita todos los handlers */
 		void enableAll();
+		
+		/* Deshabilita todos los handlers */
+		void disableAll();
+		
+		/* Devuelve true si los handlers estan habilitados */
+		bool isEnabled() const;
 
 		/* Realiza el shoot del player */
 		void powerAccumStopped(int power);

@@ -19,6 +19,7 @@ Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons, Wo
 		this->has_shoot = false;
 		this->current_angle = DEFAULT_ANGLE;
 		this->weapons_time = WEAPONS_DEFAULT_TIME;
+		this->enabled = false;
 	}
 
 Handlers::~Handlers() {}
@@ -27,6 +28,7 @@ void Handlers::enableAll(){
 	this->weapons_time = WEAPONS_DEFAULT_TIME;
 	this->current_angle = DEFAULT_ANGLE;
 	this->has_shoot = false;
+	this->enabled = true;
 
 	this->player.getProtocol().updateScope(DEFAULT_ANGLE);
 
@@ -40,11 +42,23 @@ void Handlers::enableAll(){
 	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::onButtonPressEvent));
 }
 
+void Handlers::disableAll(){
+	this->enabled = false;
+}
+		
+bool Handlers::isEnabled() const{
+	return this->enabled;
+}
+
 void Handlers::powerAccumStopped(int power){
 	this->player.shoot(this->current_angle, power, this->weapons_time);
 }
 
 bool Handlers::keyPressHandler(GdkEventKey *key_event) {
+	if (!this->enabled){
+		return true;
+	}
+	
 	if (key_event->keyval == GDK_KEY_Left) {
 		this->player.getProtocol().sendMoveAction(MOVE_LEFT);
 	} else if (key_event->keyval == GDK_KEY_Right) {
@@ -92,6 +106,10 @@ bool Handlers::keyPressHandler(GdkEventKey *key_event) {
 }
 
 bool Handlers::keyReleaseHandler(GdkEventKey *key_event) {
+	if (!this->enabled){
+		return true;
+	}
+	
 	if (key_event->type == GDK_KEY_RELEASE) {
 		if (key_event->keyval == SPACE) {
 			if (this->weapons.getCurrentWeapon().isSelfDirected()) {
@@ -111,6 +129,10 @@ bool Handlers::keyReleaseHandler(GdkEventKey *key_event) {
 }
 
 bool Handlers::onButtonPressEvent(GdkEventButton *event) {
+	if (!this->enabled){
+		return true;
+	}
+	
 	if (!this->weapons.getCurrentWeapon().isSelfDirected()) {
 		return true;
 	}

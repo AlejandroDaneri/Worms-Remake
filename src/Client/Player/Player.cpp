@@ -57,7 +57,9 @@ void Player::shootWeapon() {
 void Player::changeWeapon(std::string weapon) {
 	this->musicPlayer.playSelectWeaponSound();
 	this->weapons.changeWeapon(weapon);
-    this->protocol.sendChangeWeapon(weapon);
+	if (this->handlers.isEnabled()){
+		this->protocol.sendChangeWeapon(weapon);
+	}
 }
 
 void Player::shoot(Position position) {
