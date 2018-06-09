@@ -14,9 +14,10 @@ void ClientHandler::run(){
 			char action = this->client.getProtocol().receiveChar();
 			std::string player_name = this->client.getProtocol().receiveString();
 			this->client.setName(player_name);
-			if (action == CREATE_GAME_ACTION){
+			this->games.checkGames();
+			if (action == CREATE_GAME_ACTION) {
 				this->createGame();
-			} else if (action == JOIN_GAME_ACTION){
+			} else if (action == JOIN_GAME_ACTION) {
 				this->joinGame();
 			}
 		}
@@ -53,6 +54,8 @@ void ClientHandler::createGame(){
 	}
 	std::string game_name = this->client.getProtocol().receiveString();
 	int max_players = this->client.getProtocol().receiveLength();
+
+	this->games.checkGames();
 
 	bool result = this->games.addGame(game_name, map, max_players, this->client);
 	if (!result){
