@@ -77,7 +77,7 @@ void Worm::reduceLife(size_t damage){
 }
 
 bool Worm::move(char action){
-	if (!this->friction){
+	if (!this->colliding_with_girder){
 		return false;
 	}
 	if (action == MOVE_RIGHT){

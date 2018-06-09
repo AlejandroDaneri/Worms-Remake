@@ -26,11 +26,11 @@ void WalkingAnimation::setMovementImage(char new_dir) {
 		this->walk_queue.push(std::move(this->walk_queue.front()));
 		this->walk_queue.pop();
 	}
-	this->dir = new_dir;
-	this->setStaticImage();
+	this->setStaticImage(new_dir);
 }
 
-void WalkingAnimation::setStaticImage() {
+void WalkingAnimation::setStaticImage(char new_dir) {
+	this->dir = new_dir;
 	this->worm_image->set(Gdk::Pixbuf::create_subpixbuf(this->walk_queue.back(), WORM_IMAGE_WIDTH + this->dir * WORM_IMAGE_WIDTH, 0, WORM_IMAGE_WIDTH, WORM_IMAGE_WIDTH));
 }
 
