@@ -14,7 +14,6 @@ void ClientHandler::run(){
 			char action = this->client.getProtocol().receiveChar();
 			std::string player_name = this->client.getProtocol().receiveString();
 			this->client.setName(player_name);
-			this->games.checkGames();
 			if (action == CREATE_GAME_ACTION) {
 				this->createGame();
 			} else if (action == JOIN_GAME_ACTION) {

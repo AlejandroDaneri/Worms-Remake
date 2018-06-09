@@ -50,9 +50,9 @@ const std::string VICTORY_ANIMATION(ANIMATIONS_PATH + "Victory.gif");
 
 const std::string EXPLOSION_ANIMATION(ANIMATIONS_PATH + "Explosion.png");
 
-const std::string TITLE_MENU_IMAGE(BACKGROUND_PATH + "Game_title.png");
+const std::string TITLE_MENU_IMAGE(IMAGES_PATH + "Game_title.png");
 
-const std::string BACKGROUND_MENU_IMAGE(BACKGROUND_PATH + "Background_worm.png");
+const std::string BACKGROUND_MENU_IMAGE(IMAGES_PATH + "Background_worm.png");
 
 const std::string BAT_HIT_ANIMATION(ANIMATIONS_PATH + "Bat_hit.png");
 
