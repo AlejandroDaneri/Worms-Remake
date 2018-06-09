@@ -30,7 +30,7 @@ void FileBoxController::onSaveClicked() const {
         std::vector<std::vector<double>> worms;
         std::vector<std::vector<double>> girders;
         map_controller->getObjects(worms, girders);
-        std::string background= map_controller->getBackgroundName();
+        Glib::RefPtr<const Gdk::Pixbuf> background = map_controller->getBackground();
 
         std::vector<int> weapons_ammo;
         unsigned int life;
@@ -40,11 +40,17 @@ void FileBoxController::onSaveClicked() const {
         save_dialog->set_current_name(map_name->get_text());
         int result = save_dialog->run();
         if (result==Gtk::RESPONSE_OK){
-            std::string filename = save_dialog->get_filename();
-            map_name->set_label(save_dialog->get_current_name());
-            FileWriter file(filename);
+            std::string path = save_dialog->get_filename();
+            std::string filename = save_dialog->get_current_name();
+            map_name->set_label(filename);
+
+            size_t extension = filename.rfind(".");
+            std::string background_name = filename.substr(0, extension) + ".png";
+            background->save(BACKGROUND_PATH + background_name, "png");
+
+            FileWriter file(path);
             file.save(weapons_ammo, worms,
-                      girders, life,background);
+                      girders, life, background_name);
         }
         save_dialog->hide();
 

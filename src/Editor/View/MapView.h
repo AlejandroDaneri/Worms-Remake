@@ -67,7 +67,7 @@ public:
     void move(const int& index, const double &x, const double &y);
 
     // Obtiene el nombre del fondo actual
-    std::string getBackgroundName() const;
+    Glib::RefPtr<const Gdk::Pixbuf> getBackground() const;
 
     // Establece el fondo especificado por su nombre
     void loadBackground(const std::string &name);

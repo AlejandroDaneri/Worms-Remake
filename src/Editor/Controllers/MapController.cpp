@@ -150,8 +150,8 @@ void MapController::changeBackgroundSignal() const {
     this->background_dialog->hide();
 }
 
-const std::string MapController::getBackgroundName() const{
-    return view->getBackgroundName();
+Glib::RefPtr<const Gdk::Pixbuf> MapController::getBackground() const{
+    return view->getBackground();
 }
 
 void MapController::loadBackground(const std::string &background)  {

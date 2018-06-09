@@ -150,12 +150,8 @@ int MapView::select(const double &x, const double &y) {
     return -1;
 }
 
-std::string MapView::getBackgroundName() const {
-    size_t extension = this->background_name.rfind(".");
-    std::string name = this->background_name.substr(0, extension) + ".png";
-    auto pixbuf = this->background[0].get_pixbuf();
-    pixbuf->save(BACKGROUND_PATH + name, "png");
-    return name;
+Glib::RefPtr<const Gdk::Pixbuf> MapView::getBackground() const{
+    return this->background[0].get_pixbuf();
 }
 
 void MapView::loadBackground(const std::string &name) {

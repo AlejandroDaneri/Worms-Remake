@@ -49,7 +49,7 @@ public:
 
     void changeModeSignal();
 
-    const std::string getBackgroundName() const;
+    Glib::RefPtr<const Gdk::Pixbuf> getBackground() const;
 
     void loadBackground(const std::string &background);
 };
