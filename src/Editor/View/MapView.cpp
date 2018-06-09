@@ -6,7 +6,7 @@
 #include "MapView.h"
 #include "GirderSize.h"
 
-#define BACKGROUND_QUANTITY 8
+#define BACKGROUND_QUANTITY 9
 
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
