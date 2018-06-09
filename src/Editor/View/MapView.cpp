@@ -6,7 +6,7 @@
 #include "MapView.h"
 #include "GirderSize.h"
 
-const std::string DEFAULT_BACKGROUND("default_background.jpg");
+const std::string DEFAULT_BACKGROUND("default_background.png");
 
 MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
