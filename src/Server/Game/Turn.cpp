@@ -93,10 +93,7 @@ bool Turn::gameEnded(std::mutex& mutex){
 			this->winner = it->getName();
 		}
 	}
-	///////////////////////////////////////////////return players_alive <= 1;
-	if (this->players.size() == 1){
-	return players_alive == 0;
-	}else{return players_alive<=1;}////por ahora con un solo jugador
+	return players_alive <= 1;
 }
 
 const std::string& Turn::getWinner(){

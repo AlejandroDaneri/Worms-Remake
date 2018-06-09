@@ -1,14 +1,14 @@
 #include <string>
 #include "File.h"
 
-#define FILE_ERROR "Error al abrir el archivo"
+const std::string FILE_ERROR("Error al abrir el archivo: ");
 
 File::File(){}
 
 File::File(std::string name, file_mode mode):
 	file(name, mode){
 		if (!this->file.is_open()){
-			throw std::runtime_error(FILE_ERROR);
+			throw std::runtime_error(FILE_ERROR + name);
 		}
 	}
 

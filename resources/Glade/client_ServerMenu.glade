@@ -2,12 +2,8 @@
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
-  <object class="GtkEntryBuffer" id="entrybuffer1">
-    <property name="text" translatable="yes">localhost</property>
-  </object>
-  <object class="GtkEntryBuffer" id="entrybuffer2">
-    <property name="text" translatable="yes">7777</property>
-  </object>
+  <object class="GtkEntryBuffer" id="entrybuffer1"/>
+  <object class="GtkEntryBuffer" id="entrybuffer2"/>
   <object class="GtkScrolledWindow" id="server_menu">
     <property name="visible">True</property>
     <property name="can_focus">True</property>
@@ -115,7 +111,6 @@
                                     <property name="max_length">200</property>
                                     <property name="width_chars">50</property>
                                     <property name="max_width_chars">50</property>
-                                    <property name="text" translatable="yes">localhost</property>
                                     <property name="xalign">0.05000000074505806</property>
                                   </object>
                                   <packing>
@@ -172,7 +167,6 @@
                                     <property name="max_length">100</property>
                                     <property name="width_chars">50</property>
                                     <property name="max_width_chars">50</property>
-                                    <property name="text" translatable="yes">7777</property>
                                     <property name="xalign">0.070000000298023224</property>
                                   </object>
                                   <packing>

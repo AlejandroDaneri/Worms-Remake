@@ -1,4 +1,4 @@
-background_image: background0.jpg
+background_image: default_background.png
 worms_life: 150
 weapon_ammo:
   Bazooka: -1

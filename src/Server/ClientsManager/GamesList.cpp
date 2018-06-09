@@ -39,12 +39,6 @@ bool GamesList::addGame(const std::string& game_name, const std::string& map, in
 		std::cout << "[INFO] El jugador '" << player_name << "' se unio a la partida '" << game_name << "'" << std::endl;
 	}
 
-
-
-	if (this->games[game_name]->isFull()){
-		this->games[game_name]->start();
-	}//////////////////////////////////////////////por ahora, mientras se permita un player
-
 	return result;
 }
 
