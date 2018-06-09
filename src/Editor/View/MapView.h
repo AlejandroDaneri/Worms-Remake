@@ -67,7 +67,7 @@ public:
     void move(const int& index, const double &x, const double &y);
 
     // Obtiene el nombre del fondo actual
-    const std::string getBackgroundName() const;
+    std::string getBackgroundName() const;
 
     // Establece el fondo especificado por su nombre
     void loadBackground(const std::string &name);
