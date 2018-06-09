@@ -80,6 +80,7 @@ bool Worm::move(char action){
 	if (!this->colliding_with_girder){
 		return false;
 	}
+	this->movement_allowed = false;
 	if (action == MOVE_RIGHT){
 		this->dir = action;
 		b2Vec2 velocity(parameters.getWormVelocity(), 0);
@@ -187,6 +188,7 @@ bool Worm::isActive(){
 	} else if (this->friction && !this->movement_allowed){
 		this->body->SetGravityScale(0);
 		this->body->SetLinearVelocity(b2Vec2(0, 0));
+		this->movement_allowed = false;
 	}
 	if (!this->body->IsAwake()){
 		this->movement_allowed = false;
