@@ -64,7 +64,7 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="margin_bottom">3</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/clockwise_arrow.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/clockwise_arrow.png</property>
   </object>
   <object class="GtkImage" id="counterclockwise_arrow">
     <property name="width_request">10</property>
@@ -72,7 +72,7 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="margin_bottom">3</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/counter_clockwise_arrow.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/counter_clockwise_arrow.png</property>
   </object>
   <object class="GtkFileFilter" id="filefilter1">
     <patterns>
@@ -89,87 +89,87 @@
   <object class="GtkImage" id="img_add_grd_3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Girder/girder_3_new.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Girder/girder_3_new.png</property>
   </object>
   <object class="GtkImage" id="img_add_grd_6">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Girder/girder_6_new.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Girder/girder_6_new.png</property>
   </object>
   <object class="GtkImage" id="img_back">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/back.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/back.png</property>
   </object>
   <object class="GtkImage" id="img_bg">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/change_bg_orig.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/change_bg_orig.png</property>
   </object>
   <object class="GtkImage" id="img_mode">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/select.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/select.png</property>
   </object>
   <object class="GtkImage" id="img_new">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/new_file.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/new_file.png</property>
   </object>
   <object class="GtkImage" id="img_worm">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/right_worm.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/right_worm.png</property>
   </object>
   <object class="GtkImage" id="inf1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkImage" id="inf10">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkImage" id="inf2">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkImage" id="inf3">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkImage" id="inf4">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkImage" id="inf5">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkImage" id="inf6">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkImage" id="inf7">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkImage" id="inf8">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkImage" id="inf9">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/inf.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/inf.png</property>
   </object>
   <object class="GtkAdjustment" id="life_adj">
     <property name="lower">1</property>
@@ -181,27 +181,27 @@
   <object class="GtkImage" id="load">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/load_icon.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/load_icon.png</property>
   </object>
   <object class="GtkImage" id="move_arrow">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/move_arrows.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/move_arrows.png</property>
   </object>
   <object class="GtkImage" id="restart">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/restart.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/restart.png</property>
   </object>
   <object class="GtkImage" id="save">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/save_icon.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/save_icon.png</property>
   </object>
   <object class="GtkImage" id="undo">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/delete.png</property>
+    <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/delete.png</property>
   </object>
   <object class="GtkWindow" id="main_window">
     <property name="height_request">500</property>
@@ -626,7 +626,7 @@
                             <property name="halign">center</property>
                             <property name="valign">baseline</property>
                             <property name="margin_left">12</property>
-                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/editor_toolbox/worm_life.png</property>
+                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/editor_toolbox/worm_life.png</property>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -719,7 +719,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/Bazooka.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/Bazooka.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -786,7 +786,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/Mortar.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/Mortar.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -850,7 +850,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/GreenGrenade.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/GreenGrenade.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -914,7 +914,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/RedGrenade.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/RedGrenade.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -977,7 +977,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/Banana.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/Banana.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1040,7 +1040,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/AirAttack.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/AirAttack.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1103,7 +1103,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/Bat.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/Bat.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1167,7 +1167,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/Teleportation.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/Teleportation.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1231,7 +1231,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/Dynamite.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/Dynamite.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1294,7 +1294,7 @@
                                             <property name="can_focus">False</property>
                                             <property name="halign">center</property>
                                             <property name="valign">baseline</property>
-                                            <property name="pixbuf">/home/mati/Desktop/Worms/resources/Images/Weapons_icons/HolyGrenade.png</property>
+                                            <property name="pixbuf">/home/agustin/Escritorio/worms/juego/resources/Images/Weapons_icons/HolyGrenade.png</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
