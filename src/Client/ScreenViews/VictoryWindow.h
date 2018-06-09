@@ -7,8 +7,6 @@
 #include <string>
 #include "MenuView.h"
 
-class Player;
-
 class VictoryWindow {
 	private:
 		Gtk::Window* my_window;
@@ -17,7 +15,6 @@ class VictoryWindow {
 		Gtk::Button* quit;
 		Gtk::Label* victory_msg;
 		MenuView& main_menu;
-		Player& player;
 		bool was_closed;
 
 		bool on_delete_event(GdkEventAny* any_event);
@@ -27,7 +24,7 @@ class VictoryWindow {
 		void quitButtonPressed();
 
 	public:
-		VictoryWindow(Gtk::Window& window, MenuView& main_menu, Player& player);
+		VictoryWindow(Gtk::Window& window, MenuView& main_menu);
 
 		~VictoryWindow();
 
