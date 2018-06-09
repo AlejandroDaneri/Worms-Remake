@@ -77,7 +77,7 @@ void Worm::reduceLife(size_t damage){
 }
 
 bool Worm::move(char action){
-	if (!this->colliding_with_girder){
+	if (!this->colliding_with_girder || this->movement_allowed){
 		return false;
 	}
 	this->movement_allowed = false;
@@ -188,10 +188,11 @@ bool Worm::isActive(){
 	} else if (this->friction && !this->movement_allowed){
 		this->body->SetGravityScale(0);
 		this->body->SetLinearVelocity(b2Vec2(0, 0));
-		this->movement_allowed = false;
 	}
 	if (!this->body->IsAwake()){
 		this->movement_allowed = false;
+	} else if (!this->friction){
+		this->movement_allowed = true;
 	}
 	return PhysicalObject::isActive();
 }
