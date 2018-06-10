@@ -1,9 +1,12 @@
 
 #include "FileReader.h"
+#include <map>
+#include <string>
+#include <vector>
 
-FileReader::FileReader(const std::string &filename)
-        : file(filename, std::fstream::in),
-          filename(filename) {}
+FileReader::FileReader(const std::string &filename):
+    file(filename, std::fstream::in),
+    filename(filename) {}
 
 void FileReader::read(std::vector<std::vector<double>> &worms,
                       std::vector<std::vector<double>> &girders,
@@ -15,8 +18,8 @@ void FileReader::read(std::vector<std::vector<double>> &worms,
 
     worms_life = config[WORMS_LIFE].as<unsigned int>();
 
-    std::map<std::string, int> ammo = config[WEAPON_AMMO].as<std::map<std::string,
-            int>>();
+    std::map<std::string, int> ammo =
+                    config[WEAPON_AMMO].as<std::map<std::string, int>>();
 
     weps_ammo.push_back(ammo[BAZOOKA_NAME]);
     weps_ammo.push_back(ammo[MORTAR_NAME]);

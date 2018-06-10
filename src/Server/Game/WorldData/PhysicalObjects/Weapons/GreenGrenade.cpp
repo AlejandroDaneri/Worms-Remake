@@ -1,7 +1,10 @@
 #include "GreenGrenade.h"
+#include <string>
 
 GreenGrenade::GreenGrenade(World& world, GameParameters& parameters):
-	Weapon(world, parameters, parameters.getWeaponDamage(GREEN_GRENADE_NAME), parameters.getWeaponRadius(GREEN_GRENADE_NAME)){}
+	Weapon(world, parameters,
+		parameters.getWeaponDamage(GREEN_GRENADE_NAME),
+		parameters.getWeaponRadius(GREEN_GRENADE_NAME)){}
 		
 GreenGrenade::~GreenGrenade(){}
 

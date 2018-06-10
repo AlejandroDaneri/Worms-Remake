@@ -3,6 +3,7 @@
 
 #include "World.h"
 #include "GameParameters.h"
+#include <string>
 
 class WeaponFactory{
 	private:
@@ -15,7 +16,6 @@ class WeaponFactory{
 
 		//Devuelve el arma pedida
 		physical_object_ptr getWeapon(const std::string& name);
-
 };
 
 #endif

@@ -1,4 +1,6 @@
 #include "Turn.h"
+#include <string>
+#include <vector>
 
 Turn::Turn(): current(0){}
 
@@ -38,7 +40,8 @@ Player& Turn::getCurrentPlayer(){
 
 void Turn::startGame(DataSender& data_sender){
 	for (auto it = this->players.begin(); it != this->players.end(); ++it){
-		std::unique_ptr<PlayerDataReceiver> receiver(new PlayerDataReceiver(*it, data_sender));
+		PlayerDataReceiver* r = new PlayerDataReceiver(*it, data_sender);
+		std::unique_ptr<PlayerDataReceiver> receiver(r);
 		receiver->start();
 		this->receivers.push_back(std::move(receiver));
 	}
@@ -67,8 +70,8 @@ void Turn::advanceCurrent(){
 	}
 }
 
-void Turn::addWorm(World& world, GameParameters& parameters, b2Vec2 position, int id){
-	this->players[this->current].addWorm(world, parameters, position, id);
+void Turn::addWorm(World& world, GameParameters& params, b2Vec2 pos, int id){
+	this->players[this->current].addWorm(world, params, pos, id);
 	this->advanceCurrent();
 }
 

@@ -1,6 +1,8 @@
 #include "WeaponList.h"
 #include "WeaponNames.h"
 #include "WeaponFactory.h"
+#include <map>
+#include <string>
 
 WeaponList::WeaponList(): current_weapon(DEFAULT_WEAPON){}
 
@@ -18,7 +20,8 @@ bool WeaponList::shoot(){
 	return true;
 }
 
-physical_object_ptr WeaponList::getCurrentWeapon(World& world, GameParameters& parameters){
+physical_object_ptr WeaponList::getCurrentWeapon(World& world,
+											GameParameters& parameters){
 	WeaponFactory factory(world, parameters);
 	return factory.getWeapon(this->current_weapon);
 }

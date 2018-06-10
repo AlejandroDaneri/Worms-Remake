@@ -42,9 +42,10 @@
 class Protocol {
 	private:
 		Socket socket;
+
 	public:
 		/* Constructor */
-		Protocol(Socket&& socket);
+		explicit Protocol(Socket&& socket);
 
 		/* Constructor por copia */
 		Protocol(Protocol&& other);

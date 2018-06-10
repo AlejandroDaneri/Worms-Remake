@@ -19,7 +19,8 @@ class RayCastWeaponExploded: public b2RayCastCallback{
 		b2Body* getClosestWorm();
 
 		//Busca al objeto mas cercano a la explosion
-		float32 ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction) override;
+		float32 ReportFixture(b2Fixture* fixture, const b2Vec2& point,
+						const b2Vec2& normal, float32 fraction) override;
 };
 
 #endif

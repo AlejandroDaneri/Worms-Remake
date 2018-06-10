@@ -61,7 +61,6 @@ class Weapon: public PhysicalObject{
 
 		//Remueve el id del tirador
 		void removeShooterId();
-
 };
 
 #endif

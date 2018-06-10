@@ -1,5 +1,6 @@
 #include "MapsList.h"
 #include "Path.h"
+#include <string>
 
 maps_list_t MapsList::getAllMaps(){
 	maps_list_t maps_list;

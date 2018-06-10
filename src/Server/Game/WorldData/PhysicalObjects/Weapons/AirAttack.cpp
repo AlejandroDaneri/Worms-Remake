@@ -1,9 +1,11 @@
 #include "AirAttack.h"
 #include "WeaponFactory.h"
 #include "Worm.h"
+#include <string>
 
 AirAttack::AirAttack(World& world, GameParameters& parameters):
-	Weapon(world, parameters, 0), missiles_separation(parameters.getAirMissilesSeparation()){}
+	Weapon(world, parameters, 0),
+	missiles_separation(parameters.getAirMissilesSeparation()){}
 		
 AirAttack::~AirAttack(){}
 
@@ -11,7 +13,7 @@ const std::string& AirAttack::getName(){
 	return AIR_ATTACK_NAME;
 }
 
-void AirAttack::shoot(char dir, int angle, int power, int time, int shooter_id){}
+void AirAttack::shoot(char dir, int angle, int power, int time, int shooter){}
 
 void AirAttack::shoot(Worm& shooter, b2Vec2 pos){
 	int missiles = this->parameters.getWeaponFragments(AIR_ATTACK_NAME);

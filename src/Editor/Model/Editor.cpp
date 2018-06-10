@@ -1,11 +1,11 @@
 
 #include "Editor.h"
 
-Editor::Editor(BaseObjectType *cobject,
-               const Glib::RefPtr<Gtk::Builder> &builder)
-        : Gtk::Window(cobject),
-          usables_controller(builder) {
+typedef const Glib::RefPtr<Gtk::Builder> Builder;
 
+Editor::Editor(BaseObjectType *cobject, Builder &builder):
+        Gtk::Window(cobject),
+        usables_controller(builder) {
     maximize();
     builder->get_widget("map_window", map_window);
 

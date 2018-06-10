@@ -5,6 +5,7 @@
 #include "GameParameters.h"
 #include "Weapon.h"
 #include "WeaponList.h"
+#include <string>
 
 class Worm: public PhysicalObject{	
 	private:
@@ -27,7 +28,8 @@ class Worm: public PhysicalObject{
 		void createFixtures() override;
 
 	public:
-		Worm(World& world, GameParameters& parameters, int id, int player_id, WeaponList& weapons);
+		Worm(World& world, GameParameters& parameters,
+					int id, int player_id, WeaponList& weapons);
 		~Worm();
 
 		//Devuelve el id del jugador

@@ -1,9 +1,12 @@
 #include "PhysicalObject.h"
 #include "World.h"
+#include <string>
 
 PhysicalObject::PhysicalObject(World& world, int id, const std::string& type):
-	world(world), body(NULL), is_dead(false), id(id), type(type), last_position(-1, -1),
-	last_position_sent(false), data_updated(false), collision_data(type, this){}
+	world(world), body(NULL), is_dead(false), id(id),
+	type(type), last_position(-1, -1),
+	last_position_sent(false), data_updated(false),
+	collision_data(type, this){}
 
 PhysicalObject::~PhysicalObject(){}
 
@@ -35,8 +38,10 @@ bool PhysicalObject::isMoving(){
 		return false;
 	}
 	b2Vec2 pos = this->body->GetPosition();
-	bool moved_x = (int)(pos.x * UNIT_TO_SEND) != (int)(this->last_position.x * UNIT_TO_SEND);
-	bool moved_y = (int)(pos.y * UNIT_TO_SEND) != (int)(this->last_position.y * UNIT_TO_SEND);
+	int last_x = this->last_position.x * UNIT_TO_SEND;
+	int last_y = this->last_position.y * UNIT_TO_SEND;
+	bool moved_x = (int)(pos.x * UNIT_TO_SEND) != last_x;
+	bool moved_y = (int)(pos.y * UNIT_TO_SEND) != last_y;
 	this->last_position = pos;
 	bool moved = moved_x || moved_y;
 	if (moved || this->data_updated){

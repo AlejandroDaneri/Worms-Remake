@@ -99,15 +99,15 @@ void ToolBoxView::changeMode() {
     worm->set_sensitive(!mode->get_active());
     girder_3m->set_sensitive(!mode->get_active());
     girder_6m->set_sensitive(!mode->get_active());
-    if(!mode->get_active()){
+    if (!mode->get_active()){
         disableMovingItems();
     }
     map_controller->changeModeSignal();
-
 }
 
 void ToolBoxView::leaveConsistent() {
-    if (!worm->get_active() && !girder_6m->get_active() && !girder_3m->get_active()){
+    if (!worm->get_active() && !girder_6m->get_active() &&
+                                            !girder_3m->get_active()){
         processing=true;
         worm->set_active(true);
         map_controller->addModeSignal(WORM_BUTTON_ID);

@@ -3,6 +3,8 @@
 #define WORMS_MAPCONTROLLER_H
 
 #include <gtkmm/filechooserdialog.h>
+#include <string>
+#include <vector>
 #include "MapView.h"
 #include "Map.h"
 #include "ToolBoxView.h"
@@ -22,6 +24,7 @@ class MapController {
     Gtk::FileChooserDialog* background_dialog;
 
     void turn(const int &rotation);
+    
 public:
 	/* Constructor */
     MapController(Map model, const Glib::RefPtr<Gtk::Builder> &builder);

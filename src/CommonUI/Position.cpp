@@ -8,7 +8,8 @@ Position::Position(float x, float y): x(x), y(y){}
 Position::~Position(){}
 
 bool Position::operator==(const Position& other){
-	return (int)(this->x * FACTOR) == (int)(other.x * FACTOR) && (int)(this->y * FACTOR) == (int)(other.y * FACTOR);
+	return (int)(this->x * FACTOR) == (int)(other.x * FACTOR) &&
+					(int)(this->y * FACTOR) == (int)(other.y * FACTOR);
 }
 
 float Position::getX() const{

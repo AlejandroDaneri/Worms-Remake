@@ -29,7 +29,6 @@ class Girder: public PhysicalObject{
 
 		//Devuelve la rotacion normalizada
 		int getAngle();
-
 };
 
 #endif

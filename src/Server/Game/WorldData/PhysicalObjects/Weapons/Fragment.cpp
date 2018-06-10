@@ -1,7 +1,7 @@
 #include "Fragment.h"
 
-Fragment::Fragment(World& world, GameParameters& parameters, int damage, int radius):
-	Weapon(world, parameters, damage, radius){}
+Fragment::Fragment(World& world, GameParameters& params, int dam, int radius):
+	Weapon(world, params, dam, radius){}
 		
 Fragment::~Fragment(){}
 

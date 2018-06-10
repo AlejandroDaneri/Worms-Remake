@@ -25,8 +25,9 @@ void WeaponView::onCheckboxClicked() {
     ammo_selector->set_sensitive(!infinite->get_active());
     if (infinite->get_active()) {
         controller->updateAmmo(-1);
-    } else
+    } else {
         controller->updateAmmo(ammo_selector->get_value());
+    }
 }
 
 void WeaponView::resetAmmo() {
@@ -52,5 +53,4 @@ void WeaponView::setAmmo(const int &ammo) {
         ammo_selector->set_sensitive(true);
         ammo_selector->set_value(ammo);
     }
-
 }

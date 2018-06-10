@@ -23,7 +23,8 @@ void WormsList::add(physical_object_ptr worm){
 	this->list.push_back(worm);
 }
 
-WormsList::WormsList(WormsList&& other): list(std::move(other.list)), current(other.current){}
+WormsList::WormsList(WormsList&& other):
+	list(std::move(other.list)), current(other.current){}
 
 void WormsList::distribute(size_t max, int life_to_add){
 	if (this->list.size() < max){

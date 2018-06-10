@@ -1,4 +1,6 @@
 #include "Player.h"
+#include <map>
+#include <string>
 
 Player::Player(ServerProtocol&& protocol): protocol(std::move(protocol)),
 	id(-1), connected(true){}
@@ -25,8 +27,9 @@ void Player::beginTurn(){
 	this->worms.beginTurn();
 }
 
-void Player::addWorm(World& world, GameParameters& parameters, const b2Vec2& position, int id){
-	physical_object_ptr worm(new Worm(world, parameters, id, this->id, this->weapons));
+void Player::addWorm(World& world,
+					GameParameters& params, const b2Vec2& position, int id){
+	physical_object_ptr worm(new Worm(world, params, id, this->id, this->weapons));
 	this->worms.add(worm);
 	world.addObject(worm, position);
 }

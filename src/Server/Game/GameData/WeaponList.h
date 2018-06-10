@@ -24,7 +24,7 @@ class WeaponList{
 		bool shoot();
 
 		//Devuelve el arma actual
-		physical_object_ptr getCurrentWeapon(World& world, GameParameters& parameters);
+		physical_object_ptr getCurrentWeapon(World& world, GameParameters& params);
 
 		//Cambia el arma actual
 		void changeWeapon(const std::string& weapon);

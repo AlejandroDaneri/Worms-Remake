@@ -1,7 +1,9 @@
 #include "Bat.h"
+#include <string>
 
 Bat::Bat(World& world, GameParameters& parameters):
-	Weapon(world, parameters, parameters.getWeaponDamage(BAT_NAME), parameters.getWeaponRadius(BAT_NAME)){}
+	Weapon(world, parameters, parameters.getWeaponDamage(BAT_NAME),
+		parameters.getWeaponRadius(BAT_NAME)){}
 		
 Bat::~Bat(){}
 

@@ -3,6 +3,8 @@
 #include <gtkmm/adjustment.h>
 #include <gtkmm/scrolledwindow.h>
 #include <glibmm/main.h>
+#include <vector>
+#include <string>
 #include "MapView.h"
 #include "GirderSize.h"
 
@@ -12,7 +14,6 @@ MapView::MapView(BaseObjectType *cobject,
                  const Glib::RefPtr<Gtk::Builder> &builder)
         : Gtk::Layout(cobject),
           scroll_handler(*(Gtk::ScrolledWindow*)this->get_parent()){
-
     add_events(Gdk::BUTTON_PRESS_MASK);
     signal_button_press_event().connect(
             sigc::mem_fun(*this, &MapView::onButtonClicked));
@@ -29,10 +30,10 @@ bool MapView::onButtonClicked(GdkEventButton *button_event) {
 }
 
 void MapView::setInitialPosition() {
-    guint width, height;
-    get_size(width, height);
-    ((Gtk::ScrolledWindow*) get_parent())->get_hadjustment()->set_value(width / 2);
-    ((Gtk::ScrolledWindow*) get_parent())->get_vadjustment()->set_value(height);
+    guint w, h;
+    get_size(w, h);
+    ((Gtk::ScrolledWindow*) get_parent())->get_hadjustment()->set_value(w / 2);
+    ((Gtk::ScrolledWindow*) get_parent())->get_vadjustment()->set_value(h);
 }
 
 void MapView::initializeGirderImages(){
@@ -68,7 +69,8 @@ void MapView::add(const unsigned int &id, const double &x, const double &y,
     new_image.show();
     contained_objects.push_back(std::move(new_image));
     if (angle > 0){
-		sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &MapView::turn), id, angle, contained_objects.size()-1);
+		sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(
+            *this, &MapView::turn), id, angle, contained_objects.size() - 1);
 		Glib::signal_idle().connect(my_slot);
 	}
 }
@@ -130,7 +132,7 @@ void MapView::changeBackground(const std::string &path) {
 }
 
 void MapView::redrawMap() {
-    for(Gtk::Image &object : contained_objects){
+    for (Gtk::Image &object : contained_objects){
         const Gtk::Allocation &alloc = object.get_allocation();
         remove(object);
         put(object,alloc.get_x(),alloc.get_y());

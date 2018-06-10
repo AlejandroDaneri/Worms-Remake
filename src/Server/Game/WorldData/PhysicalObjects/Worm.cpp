@@ -7,10 +7,14 @@
 #include "Girder.h"
 #include "Math.h"
 #include <algorithm>
+#include <string>
 
-Worm::Worm(World& world, GameParameters& parameters, int id, int player_id, WeaponList& weapons):
-	PhysicalObject(world, id, TYPE_WORM), player_id(player_id), life(parameters.getWormLife()), 
-	dir(1), parameters(parameters), weapons(weapons), max_height(0), colliding_with_girder(0), friction(0), 
+Worm::Worm(World& world, GameParameters& parameters,
+							int id, int player_id, WeaponList& weapons):
+	PhysicalObject(world, id, TYPE_WORM), player_id(player_id),
+	life(parameters.getWormLife()), 
+	dir(1), parameters(parameters), weapons(weapons), max_height(0),
+	colliding_with_girder(0), friction(0), 
 	movement_allowed(false), angle(0), has_shot(false), damage_received(false){}
 
 Worm::~Worm(){}
@@ -33,7 +37,8 @@ void Worm::createFixtures(){
 
 	//Sensor para colisiones
 	b2PolygonShape sensorShape;
-	sensorShape.SetAsBox(worm_size * 0.5 * 0.7, worm_size / 5, b2Vec2(0, -1 * worm_size / 2), 0); 
+	sensorShape.SetAsBox(worm_size * 0.5 * 0.7, worm_size / 5,
+									b2Vec2(0, -1 * worm_size / 2), 0); 
 		  
 	b2FixtureDef sensorFixtureDef;
 	sensorFixtureDef.shape = &sensorShape;
@@ -58,7 +63,7 @@ bool Worm::isColliding() const{
 }
 
 const std::string& Worm::getCurrentWeapon() const{
-	physical_object_ptr weapon = this->weapons.getCurrentWeapon(this->world, this->parameters);
+	physical_object_ptr weapon = weapons.getCurrentWeapon(world, parameters);
 	return ((Weapon*)weapon.get())->getName();
 }
 
@@ -90,14 +95,15 @@ bool Worm::move(char action){
 		b2Vec2 velocity(-1 * parameters.getWormVelocity(), 0);
 		this->world.setLinearVelocity(*this, velocity);
 	} else {
-	
 		this->movement_allowed = true;
 		if (action == JUMP){
-			b2Vec2 velocity(parameters.getWormJumpVelocity(), parameters.getWormJumpHeight());
+			b2Vec2 velocity(parameters.getWormJumpVelocity(),
+										parameters.getWormJumpHeight());
 			velocity.x *= this->dir;
 			this->world.setLinearVelocity(*this, velocity);
 		} else if (action == ROLLBACK){
-			b2Vec2 velocity(parameters.getWormRollbackVelocity(), parameters.getWormRollbackHeight());
+			b2Vec2 velocity(parameters.getWormRollbackVelocity(),
+										parameters.getWormRollbackHeight());
 			velocity.x *= -1 * this->dir;
 			this->world.setLinearVelocity(*this, velocity);
 		}
@@ -126,7 +132,7 @@ void Worm::shoot(int angle, int power, int time){
 	pos.x += x_add;
 	pos.y += y_add;
 
-	physical_object_ptr weapon = this->weapons.getCurrentWeapon(this->world, this->parameters);
+	physical_object_ptr weapon = weapons.getCurrentWeapon(world, parameters);
 	((Weapon*)weapon.get())->shoot(this->dir, angle, power, time, shooter_id);
 	this->world.addObject(weapon, pos);
 	this->has_shot = true;
@@ -136,7 +142,8 @@ void Worm::shoot(b2Vec2 pos){
 	if (!this->weapons.shoot()){
 		return;
 	}
-	((Weapon*)this->weapons.getCurrentWeapon(this->world, this->parameters).get())->shoot(*this, pos);
+	physical_object_ptr weapon = weapons.getCurrentWeapon(world, parameters);
+	((Weapon*)weapon.get())->shoot(*this, pos);
 	this->has_shot = true;
 }
 
@@ -146,19 +153,21 @@ void Worm::receiveWeaponDamage(int damage, const b2Vec2 &epicenter){
 	direction.Normalize();
 	this->body->SetGravityScale(1);
 	this->movement_allowed = true;
-	this->body->SetLinearVelocity(damage * parameters.getWormExplosionVelocity() * direction);
+	this->body->SetLinearVelocity(
+					damage * parameters.getWormExplosionVelocity() * direction);
 }
 
 void Worm::collideWithSomething(CollisionData *other){
 	if (other->getType() == TYPE_BORDER){
 		this->kill();
-	} else if(other->getType() == TYPE_GIRDER){
+	} else if (other->getType() == TYPE_GIRDER){
 		int min_height = parameters.getWormHeightToDamage();
 		float current_height = this->body->GetPosition().y;
 		this->max_height -= current_height;
 		
 		if (this->max_height >= min_height){
-			this->reduceLife(std::min((int) this->max_height - min_height + 1, parameters.getWormMaxHeightDamage()));
+			this->reduceLife(std::min((int) this->max_height - min_height + 1,
+												parameters.getWormMaxHeightDamage()));
 		}
 		this->max_height = 0;
 		this->colliding_with_girder ++;

@@ -1,7 +1,10 @@
 #include "MortarFragment.h"
+#include <string>
 
 MortarFragment::MortarFragment(World& world, GameParameters& parameters):
-	Fragment(world, parameters, parameters.getWeaponDamage(MORTAR_FRAGMENTS_NAME), parameters.getWeaponRadius(MORTAR_FRAGMENTS_NAME)){}
+	Fragment(world, parameters,
+		parameters.getWeaponDamage(MORTAR_FRAGMENTS_NAME),
+		parameters.getWeaponRadius(MORTAR_FRAGMENTS_NAME)){}
 		
 MortarFragment::~MortarFragment(){}
 

@@ -2,6 +2,7 @@
 #define __SERVERBAT_H__
 
 #include "Weapon.h"
+#include <string>
 
 class Bat: public Weapon{		
 	public:

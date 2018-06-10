@@ -2,10 +2,10 @@
 #define __SERVERMORTAR_H__
 
 #include "FragmentableWeapon.h"
+#include <string>
 
 class Mortar: public FragmentableWeapon{
 	public:
-
 		Mortar(World& world, GameParameters& parameters);
 		~Mortar();
 

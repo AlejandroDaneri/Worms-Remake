@@ -12,19 +12,18 @@ class ViewPositionTransformer{
 
 	public:
 		/* Constructor */
-		ViewPositionTransformer(Gtk::Layout& layout);
+		explicit ViewPositionTransformer(Gtk::Layout& layout);
 
 		/* Destructor */
 		~ViewPositionTransformer();
-
 
 		/* Dada una posicion en metros, devuelve una posicion en
 		 * pixeles que representa una posicion de la pantalla*/
 		Position transformToScreen(const Position& position);
 
 		/* Dada una posicion en metros, la transforma en una posicion
-		 * para la pantalla y la desplaza */
-		Position transformToScreenAndMove(const Position& position, float width, float height);
+		 * para la pantalla y la desplaza segun su ancho y alto */
+		Position transformToScreenAndMove(const Position& pos, float w, float h);
 
 		/* Dada una posicion en pixeles, devuelve una posicion en metros */
 		Position transformToPosition(const Position& position);

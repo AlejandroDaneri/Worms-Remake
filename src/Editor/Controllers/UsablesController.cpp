@@ -1,13 +1,12 @@
 
 #include "UsablesController.h"
 #include "InvalidMapError.h"
+#include <vector>
 
-UsablesController::UsablesController(
-        const Glib::RefPtr<Gtk::Builder> &builder) {
+UsablesController::UsablesController(const Glib::RefPtr<Gtk::Builder> &builder){
     builder->get_widget("btn_reset", reset_button);
-    reset_button->signal_clicked().connect(
-            sigc::mem_fun(*this,
-                          &UsablesController::onResetSignal));
+    reset_button->signal_clicked().connect(sigc::mem_fun(
+            *this, &UsablesController::onResetSignal));
 
     builder->get_widget_derived("life", life_spinner);
 
@@ -20,8 +19,7 @@ UsablesController::UsablesController(
         weapons.push_back(weapon);
 
         std::shared_ptr<WeaponController> weapon_controller(
-                new WeaponController(weapon_view,
-                                     weapon));
+                new WeaponController(weapon_view, weapon));
         wep_controllers.push_back(std::move(weapon_controller));
         weapons_view.push_back(weapon_view);
     }
@@ -29,7 +27,7 @@ UsablesController::UsablesController(
 
 void UsablesController::onResetSignal() {
     life_spinner->reset();
-    for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
+    for (auto &actual_controller : wep_controllers){
         actual_controller->resetAmmo();
     }
 }
@@ -37,7 +35,7 @@ void UsablesController::onResetSignal() {
 void UsablesController::getWeaponsAndLife(std::vector<int> &weps_ammo,
                                           unsigned int &life) const {
     life = life_spinner->get_value();
-    for (const std::shared_ptr<WeaponController> &actual_controller:wep_controllers) {
+    for (auto &actual_controller : wep_controllers) {
         weps_ammo.push_back(actual_controller->getAmmo());
     }
     if (!isValidWeaponSet(weps_ammo)){
@@ -59,7 +57,7 @@ void UsablesController::loadWeapons(std::vector<int> &weps_ammo,
 bool
 UsablesController::isValidWeaponSet(std::vector<int> &ammo_vector) const {
     for (int actual_ammo : ammo_vector) {
-        if(actual_ammo !=0)
+        if (actual_ammo != 0)
             return true;
     }
     return false;

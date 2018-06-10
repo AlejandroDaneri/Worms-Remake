@@ -20,8 +20,6 @@ class Editor : public Gtk::Window {
 
 public:
     Editor(BaseObjectType *cobject, const Glib::RefPtr<Gtk::Builder> &builder);
-
 };
-
 
 #endif //WORMS_EDITOR_H

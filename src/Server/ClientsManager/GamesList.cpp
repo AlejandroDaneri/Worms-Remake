@@ -2,6 +2,7 @@
 #include "Path.h"
 #include "Server.h"
 #include <iostream>
+#include <string>
 
 GamesList::GamesList(Server& server, std::mutex& mutex_cout):
 	server(server), mutex_cout(mutex_cout){}
@@ -14,29 +15,32 @@ GamesList::~GamesList(){
 	}
 }
 
-bool GamesList::addGame(const std::string& game_name, const std::string& map, int max_players, Player& player){
+bool GamesList::addGame(string& name, string& map, int max, Player& player){
 	std::lock_guard<std::mutex> lock(this->mutex);
-	auto it = this->games.find(game_name);
+	auto it = this->games.find(name);
 	if (it != this->games.end()){
 		return false;
 	}
 
 	try{
-		std::unique_ptr<Game> game(new Game(max_players, SERVER_CONFIG_FILE, MAPS_PATH + map, this->server));
-		this->games[game_name] = std::move(game);
+		Game* g = new Game(max, SERVER_CONFIG_FILE, MAPS_PATH + map, this->server);
+		std::unique_ptr<Game> game(g);
+		this->games[name] = std::move(game);
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
-		std::cout << "[INFO] Nueva partida creada: " << game_name << std::endl;
-	} catch (const std::exception& e){
+		std::cout << "[INFO] Nueva partida creada: " << name << std::endl;
+	} catch(const std::exception& e){
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
-		std::cout << "[ERROR] Error al crear partida: " << game_name << "-> " << e.what() << std::endl;
+		std::cout << "[ERROR] Error al crear partida: " << name;
+		std::cout << "-> " << e.what() << std::endl;
 		return false;
 	}
 
 	std::string player_name = player.getName();
-	bool result = this->games[game_name]->addPlayer(player);
+	bool result = this->games[name]->addPlayer(player);
 	if (result){
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
-		std::cout << "[INFO] El jugador '" << player_name << "' se unio a la partida '" << game_name << "'" << std::endl;
+		std::cout << "[INFO] El jugador '" << player_name;
+		std::cout << "' se unio a la partida '" <<  name << "'" << std::endl;
 	}
 
 	return result;
@@ -60,7 +64,8 @@ bool GamesList::addPlayer(const std::string& game_name, Player& player){
 	bool result = this->games[game_name]->addPlayer(player);
 	if (result){
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
-		std::cout << "[INFO] El jugador '" << player_name << "' se unio a la partida '" << game_name << "'" << std::endl;
+		std::cout << "[INFO] El jugador '" << player_name;
+		std::cout << "' se unio a la partida '" << game_name << "'" << std::endl;
 	}
 	if (this->games[game_name]->isFull()){
 		std::lock_guard<std::mutex> lock(this->mutex_cout);

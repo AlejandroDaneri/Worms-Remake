@@ -19,6 +19,8 @@ class GamesList{
 		std::mutex mutex;
 		std::mutex& mutex_cout;
 
+		typedef const std::string string;
+
 	public:
         /* Constructor */
 		GamesList(Server& server, std::mutex& mutex_cout);
@@ -27,7 +29,7 @@ class GamesList{
 		~GamesList();
 
 		/* Agrega una patida nueva a la lista */
-		bool addGame(const std::string& game_name, const std::string& map, int max_players, Player& player);
+		bool addGame(string& game_name, string& map, int max_players, Player& player);
 
 		/* Devuelve una lista con las partidas a las cuales se puede
 		 * unir el jugador */

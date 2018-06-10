@@ -22,7 +22,6 @@ class Position{
 
 		/* Devuelve el valor en Y de la posicion */
         float getY() const;
-
 };
 
 #endif

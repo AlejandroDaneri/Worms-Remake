@@ -1,5 +1,7 @@
 
 #include <Path.h>
+#include <string>
+#include <vector>
 #include "FileBoxController.h"
 #include "FileWriter.h"
 #include "FileReader.h"
@@ -22,7 +24,6 @@ FileBoxController::FileBoxController(UsablesController &wep_controller,
     builder->get_widget("open_dialog",open_dialog);
     open_dialog->add_button("Cancelar", Gtk::RESPONSE_CANCEL);
     open_dialog->add_button("Abrir", Gtk::RESPONSE_OK);
-
 }
 
 void FileBoxController::onSaveClicked() const {
@@ -30,7 +31,7 @@ void FileBoxController::onSaveClicked() const {
         std::vector<std::vector<double>> worms;
         std::vector<std::vector<double>> girders;
         map_controller->getObjects(worms, girders);
-        Glib::RefPtr<const Gdk::Pixbuf> background = map_controller->getBackground();
+        auto background = map_controller->getBackground();
 
         std::vector<int> weapons_ammo;
         unsigned int life;
@@ -45,15 +46,13 @@ void FileBoxController::onSaveClicked() const {
             map_name->set_label(filename);
 
             size_t extension = filename.rfind(".");
-            std::string background_name = filename.substr(0, extension) + ".png";
-            background->save(BACKGROUND_PATH + background_name, "png");
+            std::string bg_name = filename.substr(0, extension) + ".png";
+            background->save(BACKGROUND_PATH + bg_name, "png");
 
             FileWriter file(path);
-            file.save(weapons_ammo, worms,
-                      girders, life, background_name);
+            file.save(weapons_ammo, worms, girders, life, bg_name);
         }
         save_dialog->hide();
-
     } catch(const InvalidMapError &error){
         error.what();
     }

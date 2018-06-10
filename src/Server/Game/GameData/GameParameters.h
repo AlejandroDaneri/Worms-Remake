@@ -15,7 +15,7 @@ class GameParameters{
 		class GirderParams;
 
 	private:
-		std::map<std::string, float> float_parameters;
+		std::map<std::string, float> params;
 		std::map<std::string, int> weapon_radius;
 		std::map<std::string, unsigned int> weapon_ammo;
 		std::map<std::string, int> weapon_damage;
@@ -27,7 +27,7 @@ class GameParameters{
 
 	public:
 		//Inicializa todos los parametros necesarios para la partida
-		GameParameters(const std::string& config_file, const std::string& config_editor_file);
+		GameParameters(const std::string& config, const std::string& editor_file);
 		~GameParameters();
 
 		//Devuelve la vida del worm
@@ -35,7 +35,6 @@ class GameParameters{
 
 		//Devuelve la vida a agregar de los worms
 		int getWormsLifeToAdd();
-
 
 		//Devuelve los worms del mapa
 		std::vector<b2Vec2>& getWorms();
@@ -45,7 +44,6 @@ class GameParameters{
 
 		//Devuelve la municion de las armas
 		std::map<std::string, unsigned int>& getWeaponsAmmo();
-
 
 		//Devuelve la velocidad del worm
 		float getWormVelocity();
@@ -76,7 +74,6 @@ class GameParameters{
 		//Devuelve la velocidad del arma
 		float getWeaponsVelocity();
 
-
 		//Devuelve el daño del arma
 		int getWeaponDamage(const std::string& weapon);
 
@@ -85,7 +82,6 @@ class GameParameters{
 
 		//Devuelve la cantidad de fragmentos del arma
 		int getWeaponFragments(const std::string& weapon);
-
 
 		//Devuelve la velocidad minima del viento
 		float getWindMinVelocity();
@@ -99,7 +95,6 @@ class GameParameters{
 		//Devuelve la separacion de los misiles aereos
 		float getAirMissilesSeparation();
 
-
 		//Devuelve la rotacion maxima para la cual
 		//el gusano no desliza
 		int getMaxGirderRotationToFriction();
@@ -109,7 +104,6 @@ class GameParameters{
 
 		//Devuelve la altura maxima
 		int getMaxHeight();
-
 
 		//Devuelve el tiempo de sleep del DataSender
 		int getDataSenderSleep();
@@ -123,13 +117,11 @@ class GameParameters{
 		//Devuelve el time step del World
 		float getWorldTimeStep();
 
-
 		//Devuelve el tiempo del turno
 		int getTurnTime();
 
 		//Devuelve el tiempo adicional luego de un disparo
 		int getTimeAfterShoot();
-
 
 		//Devuelve la imagen de fondo
 		File& getBackgroundImage();

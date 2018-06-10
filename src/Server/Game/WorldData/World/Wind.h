@@ -10,7 +10,7 @@ class Wind{
 		float velocity;
 
 	public:
-		Wind(GameParameters& parameters);
+		explicit Wind(GameParameters& parameters);
 		~Wind();
 
 		//Devuelve la velocidad del viento

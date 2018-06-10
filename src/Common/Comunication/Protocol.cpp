@@ -1,5 +1,6 @@
 #include "Protocol.h"
 #include <cstring>
+#include <string>
 
 Protocol::Protocol(Socket&& socket) : socket(std::move(socket)){}
 
@@ -15,7 +16,7 @@ void Protocol::sendBuffer(Buffer &buffer) {
 
 Buffer Protocol::receiveBuffer() {
 	uint32_t len;
-	this->socket.receive(&len, sizeof (uint32_t));
+	this->socket.receive(&len, sizeof(uint32_t));
 	len = ntohl(len);
 
 	Buffer buffer(len);

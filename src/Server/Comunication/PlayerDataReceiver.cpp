@@ -1,7 +1,8 @@
 #include "PlayerDataReceiver.h"
+#include <string>
 
-PlayerDataReceiver::PlayerDataReceiver(Player& player, DataSender& data_sender):
-	player(player), data_sender(data_sender), is_my_turn(false){}
+PlayerDataReceiver::PlayerDataReceiver(Player& player, DataSender& sender):
+	player(player), data_sender(sender), is_my_turn(false){}
 
 PlayerDataReceiver::~PlayerDataReceiver(){}
 
@@ -14,7 +15,7 @@ void PlayerDataReceiver::run(){
 				this->analizeReceivedData(data);
 			}
 		}
-	} catch (const std::exception& e){
+	} catch(const std::exception& e){
 		this->player.disconnect();
 	}
 }
@@ -43,19 +44,21 @@ void PlayerDataReceiver::analizeReceivedData(Buffer& buffer){
 			std::string weapon(ServerProtocol::receiveStringBuffer(buffer));
 			this->data_sender.sendWeaponChanged(weapon);
 			this->player.changeWeapon(weapon);
-		} else if(worm_action == MOVE_SCOPE) {
+		} else if (worm_action == MOVE_SCOPE) {
             int32_t angle = ServerProtocol::receiveIntBuffer(buffer);
 			this->data_sender.sendUpdateScope(angle);
 		} else if (worm_action == SHOOT_WEAPON) {
 			int angle = ServerProtocol::receiveIntBuffer(buffer);
 			int power = ServerProtocol::receiveIntBuffer(buffer);
 			int time = ServerProtocol::receiveIntBuffer(buffer);
-			this->data_sender.sendWeaponShot(this->player.getCurrentWorm().getCurrentWeapon());
+			const std::string& weapon = this->player.getCurrentWorm().getCurrentWeapon();
+			this->data_sender.sendWeaponShot(weapon);
 			this->player.getCurrentWorm().shoot(angle, power, time);
-		} else if(worm_action == SHOOT_SELF_DIRECTED) {
+		} else if (worm_action == SHOOT_SELF_DIRECTED) {
 			int pos_x = ServerProtocol::receiveIntBuffer(buffer) / UNIT_TO_SEND;
 			int pos_y = ServerProtocol::receiveIntBuffer(buffer) / UNIT_TO_SEND;
-			this->data_sender.sendWeaponShot(this->player.getCurrentWorm().getCurrentWeapon());
+			const std::string& weapon = this->player.getCurrentWorm().getCurrentWeapon();
+			this->data_sender.sendWeaponShot(weapon);
 			this->player.getCurrentWorm().shoot(b2Vec2(pos_x, pos_y));
 		}
 	}

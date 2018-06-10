@@ -1,5 +1,6 @@
 #include "CollisionData.h"
 #include "PhysicalObject.h"
+#include <string>
 
 CollisionData::CollisionData(std::string type, PhysicalObject* object):
 	type(type), object(object){}

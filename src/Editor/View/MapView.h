@@ -5,6 +5,8 @@
 #include <gtkmm/builder.h>
 #include <gtkmm/layout.h>
 #include <gtkmm/image.h>
+#include <string>
+#include <vector>
 #include "MapController.h"
 #include "Water.h"
 #include "ScrollHandler.h"
@@ -70,7 +72,6 @@ public:
 
     // Establece el fondo especificado por su nombre
     void loadBackground(const std::string &name);
-
 };
 
 #endif //WORMS_MAP_H

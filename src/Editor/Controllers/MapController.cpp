@@ -1,6 +1,8 @@
 
 #include <gtkmm/messagedialog.h>
 #include <ViewPositionTransformer.h>
+#include <vector>
+#include <string>
 #include "MapController.h"
 #include "InvalidMapError.h"
 #include "Path.h"
@@ -9,12 +11,11 @@
 #define MOVE_CMD_ID 1
 #define SELECT_MODE_ID 2
 
+typedef const Glib::RefPtr<Gtk::Builder> Builder;
 
-MapController::MapController(Map model,
-                             const Glib::RefPtr<Gtk::Builder> &builder)
-        : model(std::move(model)), item_id_to_add(1),
-          actual_mode(ADD_MODE_ID)
-{
+MapController::MapController(Map model, Builder &builder):
+        model(std::move(model)), item_id_to_add(1),
+        actual_mode(ADD_MODE_ID){
     builder->get_widget_derived("map", view);
     builder->get_widget_derived("toolbox", toolBox);
     view->bindController(this);
@@ -71,9 +72,9 @@ void MapController::turnCWSignal()  {
 void MapController::mapClickedSignal(GdkEventButton *event_button) {
     if (actual_mode == MOVE_CMD_ID) {
         this->model.move(index_object_selected, event_button->x,
-                         event_button->y);
+                        event_button->y);
         this->view->move(index_object_selected, event_button->x,
-                         event_button->y);
+                        event_button->y);
         actual_mode = SELECT_MODE_ID;
     } else if (actual_mode == SELECT_MODE_ID) {
         this->index_object_selected = view->select(event_button->x,
@@ -85,7 +86,8 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
             toolBox->disableMovingItems();
             toolBox->hideSelected();
         }
-        actual_mode = SELECT_MODE_ID; //cambio de estado del toolbox llama a add mode
+        //cambio de estado del toolbox llama a add mode
+        actual_mode = SELECT_MODE_ID;
     } else {
         this->model.add(item_id_to_add, event_button->x, event_button->y);
         this->view->add(item_id_to_add, event_button->x, event_button->y);
@@ -93,7 +95,7 @@ void MapController::mapClickedSignal(GdkEventButton *event_button) {
 }
 
 void MapController::getObjects(std::vector<std::vector<double>> &worms,
-                               std::vector<std::vector<double>> &girders) const {
+                            std::vector<std::vector<double>> &girders) const{
     model.getObjects(worms, girders);
     if (worms.empty()){
         throw InvalidMapError("El mapa actual no contiene worms");

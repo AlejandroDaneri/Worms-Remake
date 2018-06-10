@@ -10,6 +10,7 @@
 #include "Worm.h"
 #include "World.h"
 #include "DataSender.h"
+#include <string>
 
 class Player;
 class Server;
@@ -30,9 +31,11 @@ class Game: public Thread{
 		/* Espera a que los objetos dejen de moverse */
 		void waitToWorld();
 
+		typedef const std::string string;
+
 	public:
         /* Constructor */
-		Game(size_t players, const std::string& config_file, const std::string& map, Server& server);
+		Game(size_t players, string& config_file, string& map, Server& server);
 
 		/* Destructor */
 		~Game();

@@ -3,9 +3,9 @@
 #include "b2Fixture.h"
 #include "Math.h"
 
-Girder::Girder(World& world, GameParameters& parameters, size_t size, int rotation):
-	PhysicalObject(world, 0, TYPE_GIRDER), size(size), rotation(rotation),
-	max_rotation_to_friction(parameters.getMaxGirderRotationToFriction()){}
+Girder::Girder(World& world, GameParameters& params, size_t size, int angle):
+	PhysicalObject(world, 0, TYPE_GIRDER), size(size), rotation(angle),
+	max_rotation_to_friction(params.getMaxGirderRotationToFriction()){}
 
 Girder::~Girder(){}
 
@@ -16,7 +16,8 @@ void Girder::getBodyDef(b2BodyDef& body_def, const b2Vec2& pos){
 
 void Girder::createFixtures(){
 	b2PolygonShape boxShape;
-	boxShape.SetAsBox(this->size / 2.0, girder_height / 2, b2Vec2(0, 0), Math::degreesToRadians(this->rotation));
+	boxShape.SetAsBox(this->size / 2.0, girder_height / 2,
+			b2Vec2(0, 0), Math::degreesToRadians(this->rotation));
 
 	b2FixtureDef boxFixtureDef;
 	boxFixtureDef.shape = &boxShape;
@@ -33,7 +34,8 @@ int Girder::getRotation(){
 }
 
 bool Girder::hasFriction(){
-	return this->getAngle() < this->max_rotation_to_friction || this->getAngle() == 90;
+	int angle = this->getAngle();
+	return angle < this->max_rotation_to_friction || angle == 90;
 }
 
 int Girder::getAngle(){

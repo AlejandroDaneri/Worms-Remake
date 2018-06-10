@@ -8,6 +8,7 @@
 #include "GameParameters.h"
 #include "WeaponList.h"
 #include <string>
+#include <map>
 
 class Player{
 	private:
@@ -19,7 +20,7 @@ class Player{
 		bool connected;
 
 	public:
-		Player(ServerProtocol&& protocol);
+		explicit Player(ServerProtocol&& protocol);
 
 		Player(Player&& other);
 
@@ -38,7 +39,7 @@ class Player{
 		void beginTurn();
 
 		//Agrega un nuevo gusano al jugador
-		void addWorm(World& world, GameParameters& parameters, const b2Vec2& position, int id);
+		void addWorm(World& world, GameParameters& param, const b2Vec2& pos, int id);
 
 		//Agrega vida a los gusanos del jugador 
 		//en caso de que tenga menos gusanos que otros jugadores
@@ -67,7 +68,6 @@ class Player{
 
 		//Devuelve el protocolo del jugador
 		ServerProtocol& getProtocol();
-
 };
 
 #endif

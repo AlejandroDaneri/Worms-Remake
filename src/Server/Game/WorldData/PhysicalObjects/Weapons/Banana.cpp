@@ -1,9 +1,12 @@
 #include "Banana.h"
 #include "b2Fixture.h"
 #include "b2CircleShape.h"
+#include <string>
 
 Banana::Banana(World& world, GameParameters& parameters):
-	Weapon(world, parameters, parameters.getWeaponDamage(BANANA_NAME), parameters.getWeaponRadius(BANANA_NAME)){}
+	Weapon(world, parameters,
+		parameters.getWeaponDamage(BANANA_NAME),
+		parameters.getWeaponRadius(BANANA_NAME)){}
 		
 Banana::~Banana(){}
 

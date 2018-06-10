@@ -5,16 +5,23 @@
 #define SPACE_TO_SCROLL 20
 #define SCROLL_INCREMENT 25
 
-ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window): window(window), last_mouse_position(SPACE_TO_SCROLL * 2, SPACE_TO_SCROLL * 2), mouse_in_window(false){
+ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window):
+		window(window),
+		last_mouse_position(SPACE_TO_SCROLL * 2, SPACE_TO_SCROLL * 2),
+		mouse_in_window(false){
 	this->window.add_events(Gdk::POINTER_MOTION_MASK);
 	this->window.add_events(Gdk::ENTER_NOTIFY_MASK);
 	this->window.add_events(Gdk::ENTER_NOTIFY_MASK);
-	this->window.signal_motion_notify_event().connect(sigc::mem_fun(*this, &ScrollHandler::mouseMotionEvent));
+	this->window.signal_motion_notify_event().connect(
+											sigc::mem_fun(*this, &ScrollHandler::mouseMotionEvent));
 	this->window.set_policy(Gtk::POLICY_NEVER, Gtk::POLICY_NEVER);
 
-	this->window.signal_enter_notify_event().connect(sigc::mem_fun(*this, &ScrollHandler::mouseEntered));
-	this->window.signal_leave_notify_event().connect(sigc::mem_fun(*this, &ScrollHandler::mouseLeft));
-	this->my_connection = Glib::signal_timeout().connect(sigc::mem_fun(*this, &ScrollHandler::scroll), 50);
+	this->window.signal_enter_notify_event().connect(
+											sigc::mem_fun(*this, &ScrollHandler::mouseEntered));
+	this->window.signal_leave_notify_event().connect(
+											sigc::mem_fun(*this, &ScrollHandler::mouseLeft));
+	this->my_connection = Glib::signal_timeout().connect(
+											sigc::mem_fun(*this, &ScrollHandler::scroll), 50);
 }
 
 ScrollHandler::~ScrollHandler(){}
@@ -46,22 +53,26 @@ bool ScrollHandler::scroll(){
 
 	if (last_mouse_position.getX() < SPACE_TO_SCROLL){
 		//Scroll a la izquierda
-		this->window.get_hadjustment()->set_value(this->window.get_hadjustment()->get_value() - SCROLL_INCREMENT);
+		this->window.get_hadjustment()->set_value(
+						this->window.get_hadjustment()->get_value() - SCROLL_INCREMENT);
 	}
 
 	if (last_mouse_position.getX() > window_width - SPACE_TO_SCROLL){
 		//Scroll a la derecha
-		this->window.get_hadjustment()->set_value(this->window.get_hadjustment()->get_value() + SCROLL_INCREMENT);
+		this->window.get_hadjustment()->set_value(
+						this->window.get_hadjustment()->get_value() + SCROLL_INCREMENT);
 	}
 
 	if (last_mouse_position.getY() < SPACE_TO_SCROLL){
 		//Scroll arriba
-		this->window.get_vadjustment()->set_value(this->window.get_vadjustment()->get_value() - SCROLL_INCREMENT);
+		this->window.get_vadjustment()->set_value(
+						this->window.get_vadjustment()->get_value() - SCROLL_INCREMENT);
 	}
 
 	if (last_mouse_position.getY() > window_height - SPACE_TO_SCROLL){
 		//Scroll abajo
-		this->window.get_vadjustment()->set_value(this->window.get_vadjustment()->get_value() + SCROLL_INCREMENT);
+		this->window.get_vadjustment()->set_value(
+						this->window.get_vadjustment()->get_value() + SCROLL_INCREMENT);
 	}
 
 	return true;

@@ -3,16 +3,18 @@
 #include "BottomBorder.h"
 #include "b2WorldCallbacks.h"
 #include "Fragment.h"
+#include <list>
 
-World::World(GameParameters& parameters): world(b2Vec2(0, parameters.getGravity())),
+World::World(GameParameters& parameters):
+	world(b2Vec2(0, parameters.getGravity())),
 	wind(parameters), is_active(true),
-	sleep_time(parameters.getWorldSleepAfterStep()), time_step(parameters.getWorldTimeStep()){
-
-	this->world.SetAllowSleeping(true);
-	this->world.SetContinuousPhysics(true);
-	this->world.SetContactListener(&this->collision_listener);
-	this->world.SetContactFilter(&this->collision_listener);
-	this->initialize();
+	sleep_time(parameters.getWorldSleepAfterStep()),
+	time_step(parameters.getWorldTimeStep()){
+		this->world.SetAllowSleeping(true);
+		this->world.SetContinuousPhysics(true);
+		this->world.SetContactListener(&this->collision_listener);
+		this->world.SetContactFilter(&this->collision_listener);
+		this->initialize();
 }
 		
 World::~World(){}
@@ -47,8 +49,8 @@ void World::run(){
 
 void World::addAllFragments(){
 	std::lock_guard<std::mutex> lock(this->mutex);
-
-	for (auto it = this->fragments_to_add.begin(); it != this->fragments_to_add.end(); it++){
+	auto it = this->fragments_to_add.begin();
+	for (; it != this->fragments_to_add.end(); it++){
 		b2BodyDef body_def;
 		b2Vec2 pos = ((Fragment *) it->get())->getShootPosition();
 		(*it)->getBodyDef(body_def, pos);
@@ -118,7 +120,8 @@ void World::setLinearVelocity(PhysicalObject& object, b2Vec2& velocity){
 	}
 }
 
-b2Body* World::getClosestObject(RayCastWeaponExploded* callback, b2Vec2 center, b2Vec2 end){
+b2Body* World::getClosestObject(RayCastWeaponExploded* callback,
+											b2Vec2 center, b2Vec2 end){
 	this->world.RayCast(callback, center, end);
 	return callback->getClosestWorm();
 }

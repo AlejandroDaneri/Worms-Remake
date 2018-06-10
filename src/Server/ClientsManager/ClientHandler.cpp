@@ -1,8 +1,10 @@
 #include "ClientHandler.h"
 #include "MapsList.h"
 #include <iostream>
+#include <string>
 
-ClientHandler::ClientHandler(ServerProtocol&& client, GamesList& games, std::mutex& mutex_cout):
+ClientHandler::ClientHandler(ServerProtocol&& client, 
+								GamesList& games, std::mutex& mutex_cout):
 	client(std::move(client)), games(games),
 	connected(false), mutex_cout(mutex_cout){}
 
@@ -20,7 +22,6 @@ void ClientHandler::run(){
 				this->joinGame();
 			}
 		}
-		
 	} catch(const SocketException& e){
 	} catch(const std::exception& e){
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
@@ -62,7 +63,6 @@ void ClientHandler::createGame(){
 	} else {
 		this->connected = true;
 	}
-
 }
 
 void ClientHandler::joinGame(){

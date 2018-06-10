@@ -46,7 +46,7 @@ class Turn{
 		void endTurn();
 
 		//Agrega un gusano al proximo jugador
-		void addWorm(World& world, GameParameters& parameters, b2Vec2 position, int id);
+		void addWorm(World& world, GameParameters& params, b2Vec2 pos, int id);
 
 		//Agrega vida a los jugadores con menos gusanos
 		void distributeWorms(size_t size, int life_to_add);
@@ -56,7 +56,6 @@ class Turn{
 
 		//Devuelve el nombre del jugador ganador
 		const std::string& getWinner();
-
 };
 
 #endif

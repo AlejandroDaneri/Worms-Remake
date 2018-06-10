@@ -11,17 +11,17 @@ int main() {
     Glib::RefPtr<Gtk::Application> app = Gtk::Application::create();
     Glib::RefPtr<Gtk::Builder> refBuilder = Gtk::Builder::create();
     try {
-        refBuilder->add_from_file(GLADE_PATH+"editor.glade");
+        refBuilder->add_from_file(GLADE_PATH + "editor.glade");
     }
-    catch (const Glib::FileError &ex) {
+    catch(const Glib::FileError &ex) {
         std::cerr << "FileError: " << ex.what() << std::endl;
         return 1;
     }
-    catch (const Glib::MarkupError &ex) {
+    catch(const Glib::MarkupError &ex) {
         std::cerr << "MarkupError: " << ex.what() << std::endl;
         return 1;
     }
-    catch (const Gtk::BuilderError &ex) {
+    catch(const Gtk::BuilderError &ex) {
         std::cerr << "BuilderError: " << ex.what() << std::endl;
         return 1;
     }

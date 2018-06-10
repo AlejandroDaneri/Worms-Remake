@@ -1,15 +1,17 @@
 
 
 #include "FileWriter.h"
+#include <string>
+#include <vector>
 
-FileWriter::FileWriter(const std::string &filename)
-        : file(filename, std::fstream::out | std::ios_base::trunc) {}
+FileWriter::FileWriter(const std::string &filename):
+    file(filename, std::fstream::out | std::ios_base::trunc) {}
 
 
 void FileWriter::save(std::vector<int> weapons,
-                      const std::vector<std::vector<double>> &worms,
-                      const std::vector<std::vector<double>> &girders,
-                      const unsigned int &worm_life, const std::string& background) {
+                const std::vector<std::vector<double>> &worms,
+                const std::vector<std::vector<double>> &girders,
+                const unsigned int &worm_life, const std::string& background) {
     YAML::Emitter out;
 
     out << YAML::BeginMap;

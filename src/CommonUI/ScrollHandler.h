@@ -26,7 +26,7 @@ class ScrollHandler{
 
 	public:
 		/* Constructor */
-		ScrollHandler(Gtk::ScrolledWindow& window);
+		explicit ScrollHandler(Gtk::ScrolledWindow& window);
 
 		/* Destructor */
 		~ScrollHandler();

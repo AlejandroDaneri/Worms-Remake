@@ -23,7 +23,7 @@ class ClientHandler: public Thread{
 
 	public:
 		/* Constructor */
-		ClientHandler(ServerProtocol&& client, GamesList& games, std::mutex& mutex_cout);
+		ClientHandler(ServerProtocol&& cli, GamesList& games, std::mutex& mtx_cout);
 
 		/* Destructor */
 		~ClientHandler();

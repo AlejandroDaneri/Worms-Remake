@@ -7,10 +7,12 @@
 
 int Weapon::weapon_id = 1;
 
-Weapon::Weapon(World& world, GameParameters& parameters, int damage, int radius): 
-	PhysicalObject(world, Weapon::weapon_id++, TYPE_WEAPON), parameters(parameters), 
+Weapon::Weapon(World& world, GameParameters& params, int damage, int radius): 
+	PhysicalObject(world, Weapon::weapon_id++, TYPE_WEAPON),
+	parameters(params), 
 	damage(damage), radius(radius), 
-	waiting_to_explode(false), time_to_explode(-1), angle(MAX_WEAPON_ANGLE + 1), power(-1),
+	waiting_to_explode(false), time_to_explode(-1),
+	angle(MAX_WEAPON_ANGLE + 1), power(-1),
 	shooter_id(-1), explode_time(world, *this){}
 
 Weapon::~Weapon(){
@@ -57,7 +59,8 @@ void Weapon::setInitialVelocity(){
 		if (this->power != -1){
 			 velocity *= this->power / 1000;
 		}
-		b2Vec2 linear_velocity(velocity * Math::cosDegrees(this->angle), velocity * Math::sinDegrees(this->angle));
+		b2Vec2 linear_velocity(velocity * Math::cosDegrees(this->angle),
+									velocity * Math::sinDegrees(this->angle));
 		this->body->SetLinearVelocity(linear_velocity);
 	}
 	this->waiting_to_explode = true;
@@ -78,12 +81,16 @@ void Weapon::explode(){
 }
 
 void Weapon::attackWormExplosion(const b2Vec2& center, int angle){
-	b2Vec2 end = center + this->radius * b2Vec2(Math::cosDegrees(angle), Math::sinDegrees(angle));
-	b2Body* closest_body = this->world.getClosestObject(&this->explosion, center, end);
-	if (closest_body){
-		Worm* worm = (Worm*)((CollisionData*)closest_body->GetUserData())->getObject();
+	b2Vec2 end = center + this->radius *
+							b2Vec2(Math::cosDegrees(angle), Math::sinDegrees(angle));
+	b2Body* closest = this->world.getClosestObject(&explosion, center, end);
+	if (closest){
+		Worm* worm = (Worm*)((CollisionData*)closest->GetUserData())->getObject();
 		float distance = b2Distance(center, worm->getPosition());
-		int worm_damage = this->damage * (1 - distance / (2 * this->radius)); //Justo en el borde hace la mitad de danio
+
+		//Justo en el borde hace la mitad de danio
+		int worm_damage = this->damage * (1 - distance / (2 * this->radius));
+
 		worm->receiveWeaponDamage(worm_damage, center);
 	}
 }

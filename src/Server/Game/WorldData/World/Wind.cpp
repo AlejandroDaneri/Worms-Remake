@@ -15,10 +15,10 @@ float Wind::getVelocity() const{
 
 void Wind::update(){
 	std::mt19937 rng;
-    rng.seed(std::random_device()());
-    std::uniform_real_distribution<float> distribution(this->min_velocity, this->max_velocity);
+	rng.seed(std::random_device()());
+	std::uniform_real_distribution<float> dist(min_velocity, max_velocity);
 	std::uniform_int_distribution<int> direction(-1, 1); //Acepto velocidad 0
 
-	this->velocity = distribution(rng);
+	this->velocity = dist(rng);
 	this->velocity *= direction(rng);
 }

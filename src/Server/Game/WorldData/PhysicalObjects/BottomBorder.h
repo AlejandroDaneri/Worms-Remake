@@ -2,6 +2,7 @@
 #define __BOTTOMBORDER_H__
 
 #include "PhysicalObject.h"
+#include <string>
 
 //Determina el borde inferior del mundo
 class BottomBorder: public PhysicalObject{
@@ -13,9 +14,8 @@ class BottomBorder: public PhysicalObject{
 		void createFixtures() override;
 
 	public:
-		BottomBorder(World& world);
+		explicit BottomBorder(World& world);
 		~BottomBorder();
-
 };
 
 #endif

@@ -14,7 +14,7 @@ class Buffer{
 
 	public:
 		/* Constructor */
-		Buffer(size_t max_size = MAX_BUF_LEN);
+		explicit Buffer(size_t max_size = MAX_BUF_LEN);
 
 		/* Destructor */
 		~Buffer();

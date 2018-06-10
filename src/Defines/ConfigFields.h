@@ -9,7 +9,7 @@ const std::string SERVER_PORT("port");
 
 const std::string DATA_SENDER_SLEEP("data_sender_sleep");
 
-const std::string GAME_WAITING_WORLD_SLEEP("game_waiting_world_sleep");
+const std::string GAME_WAIT_WORLD_SLEEP("game_waiting_world_sleep");
 
 const std::string WORLD_SLEEP_AFTER_STEP("world_sleep_after_step");
 
@@ -53,7 +53,7 @@ const std::string WORM_HEIGHT_TO_DAMAGE("worm_height_to_damage");
 
 const std::string WORM_MAX_HEIGHT_DAMAGE("worm_max_height_damage");
 
-const std::string MAX_GIRDER_ROTATION_FRICTION("max_girder_rotation_friction");
+const std::string GIRDER_ANGLE_FRICTION("max_girder_rotation_friction");
 
 const std::string WORLD_MAX_HEIGHT("world_max_height");
 

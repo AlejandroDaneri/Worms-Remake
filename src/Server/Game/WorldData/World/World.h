@@ -39,7 +39,7 @@ class World: public Thread{
 		void addAllFragments();
 
 	public:
-		World(GameParameters& parameters);
+		explicit World(GameParameters& parameters);
 		~World();
 
 		void run() override;
@@ -66,7 +66,8 @@ class World: public Thread{
 		float getWind() const;
 
 		//Devuelve el objeto mas cercano entre al centro en la direccion end - center
-		b2Body* getClosestObject(RayCastWeaponExploded* callback, b2Vec2 center, b2Vec2 end);
+		b2Body* getClosestObject(RayCastWeaponExploded* callback,
+										b2Vec2 center, b2Vec2 end);
 
 		//Devuelve la lista de objetos
 		std::list<physical_object_ptr>& getObjectsList();

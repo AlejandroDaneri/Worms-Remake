@@ -7,7 +7,8 @@
 #define MAX_CLIENT_WAIT 100
 
 Server::Server(const std::string& service, std::mutex& mutex_cout): 
-	socket(Socket::Server(service.c_str(), MAX_CLIENT_WAIT)), games_list(*this, mutex_cout), mutex_cout(mutex_cout){}
+	socket(Socket::Server(service.c_str(), MAX_CLIENT_WAIT)),
+	games_list(*this, mutex_cout), mutex_cout(mutex_cout){}
 
 Server::~Server(){
 	for (auto it = this->clients.begin(); it != this->clients.end(); ++it){
@@ -59,7 +60,8 @@ void Server::check(){
 
 void Server::addConnectedClient(ServerProtocol&& protocol){
 	std::lock_guard<std::mutex> lock(this->mutex);
-	std::unique_ptr<Thread> t(new ClientHandler(std::move(protocol), this->games_list, this->mutex_cout));
-	t->start();
-	this->clients.push_back(std::move(t));
+	Thread* t = new ClientHandler(std::move(protocol), games_list, mutex_cout);
+	std::unique_ptr<Thread> th(t);
+	th->start();
+	this->clients.push_back(std::move(th));
 }

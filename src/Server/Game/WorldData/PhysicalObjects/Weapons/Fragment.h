@@ -8,7 +8,6 @@ class Fragment: public Weapon{
 		b2Vec2 shoot_position;
 
 	public:
-
 		Fragment(World& world, GameParameters& parameters, int damage, int radius);
 		~Fragment();
 
@@ -16,7 +15,6 @@ class Fragment: public Weapon{
 		b2Vec2 getShootPosition();
 
 		void shoot(int angle);
-
 };
 
 #endif

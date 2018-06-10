@@ -7,14 +7,16 @@
 #include <yaml.h>
 #include <WeaponNames.h>
 #include <ConfigFields.h>
+#include <string>
+#include <vector>
 
 // Clase que se encarga de manejar la carga de un mapa
 class FileReader{
 private:
     std::fstream file;
 	std::string filename;
-public:
 
+public:
 	explicit FileReader(const std::string &filename);
 
 	// Carga todos los componentes de un mapa desde un archivo YAML

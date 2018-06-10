@@ -21,9 +21,11 @@ b2Body* RayCastWeaponExploded::getClosestWorm(){
 	return closest_worm;
 }
 
-float32 RayCastWeaponExploded::ReportFixture(b2Fixture* fixture, const b2Vec2& point, const b2Vec2& normal, float32 fraction){
+float32 RayCastWeaponExploded::ReportFixture(b2Fixture* fixture,
+						const b2Vec2& point, const b2Vec2& normal, float32 fraction){
 	b2Body* closest_body = fixture->GetBody();
-	for (auto it = this->affected_worms.begin(); it != this->affected_worms.end(); ++it){
+	auto it = this->affected_worms.begin();
+	for (; it != this->affected_worms.end(); ++it){
 		if (*it == closest_body){
 			return -1;
 		}

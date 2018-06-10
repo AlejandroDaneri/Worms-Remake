@@ -1,5 +1,5 @@
 
-#include <yaml.h>
+#include <vector>
 #include "Map.h"
 
 void Map::erase(const int &index) {
@@ -12,7 +12,8 @@ void Map::clean() {
 }
 
 void
-Map::add(const unsigned int &id, const double &x, const double &y, const int &angle) {
+Map::add(const unsigned int &id, const double &x,
+                        const double &y, const int &angle) {
     MapObject new_object(x, y, angle);
     contained_objects.emplace_back(std::make_pair(id, new_object));
 }
@@ -22,7 +23,8 @@ void Map::move(const int &index, const double &x,const double &y) {
     object.updatePosition(x, y);
 }
 
-const int Map::turn(const unsigned int &index, unsigned int &id, const int &rotation) {
+const int Map::turn(const unsigned int &index,
+                            unsigned int &id, const int &rotation) {
     MapObject &object = contained_objects[index].second;
     id = contained_objects[index].first;
     return object.turn(rotation);
@@ -54,8 +56,5 @@ void Map::getObjects(std::vector<std::vector<double>> &worms,
 }
 
 const int Map::getItemID(const int &index) const{
-    return contained_objects[index].first ;
+    return contained_objects[index].first;
 }
-
-
-

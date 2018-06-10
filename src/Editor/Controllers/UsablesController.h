@@ -5,6 +5,7 @@
 
 #include <gtkmm/button.h>
 #include <gtkmm/spinbutton.h>
+#include <vector>
 #include "Weapon.h"
 #include "WeaponView.h"
 #include "LifeView.h"
@@ -21,6 +22,7 @@ private:
 
     // Indica si el set actual de armas es valido (alguno con municion positiva)
     bool isValidWeaponSet(std::vector<int> &ammo_vector) const;
+
 public:
     explicit UsablesController(
             const Glib::RefPtr<Gtk::Builder> &builder);
@@ -29,14 +31,11 @@ public:
     void onResetSignal();
 
     // Obtiene a los valores actuales de las armas y la vida
-    void getWeaponsAndLife(std::vector<int> &weps_ammo, unsigned int &life) const;
+    void getWeaponsAndLife(std::vector<int> &ammo, unsigned int &life) const;
 
     // Establece los valores de las armas y la vida
     void
     loadWeapons(std::vector<int> &weps_ammo, const unsigned int &life) const;
-
-
 };
-
 
 #endif //WORMS_WEAPONSLISTCONTROLLER_H

@@ -2,11 +2,17 @@
 #include "Girder.h"
 #include "WeaponFactory.h"
 #include "Server.h"
+#include <map>
+#include <string>
+#include <vector>
 
 #define TURN_STEP 100 //milliseconds
 
-Game::Game(size_t players, const std::string& config_file, const std::string& map, Server& server):
-	players(players), server(server), parameters(config_file, map), world(this->parameters){
+Game::Game(size_t players, const std::string& config_file,
+					const std::string& map, Server& server):
+	players(players), server(server),
+	parameters(config_file, map),
+	world(this->parameters){
 		this->running = true;
 	}
 
@@ -60,10 +66,10 @@ void Game::run(){
 			std::this_thread::sleep_for(std::chrono::milliseconds(TURN_STEP));
 			current_turn_time += TURN_STEP;
 			Worm& current_worm = this->turn.getCurrentPlayer().getCurrentWorm();
-			if (current_worm.damageReceived() || this->turn.gameEnded(this->world.getMutex())){
+			if (current_worm.damageReceived() || this->turn.gameEnded(world.getMutex())){
 				current_turn_time = max_turn_time;
 			}else if (!time_reduced && current_worm.hasShot()){
-				current_turn_time = max_turn_time - this->parameters.getTimeAfterShoot() * 1000;
+				current_turn_time = max_turn_time - parameters.getTimeAfterShoot() * 1000;
 				time_reduced = true;
 			}
 		}
@@ -88,12 +94,15 @@ void Game::run(){
 }
 
 void Game::configure(){
-	this->data_sender.reset(new DataSender(this->world, this->turn.getPlayers(), this->parameters));
+	DataSender* s = new DataSender(world, turn.getPlayers(), parameters);
+	this->data_sender.reset(s);
 	this->turn.startGame(*this->data_sender);
 
 	this->data_sender->sendStartGame();
 	this->data_sender->sendBackgroundImage(this->parameters.getBackgroundImage());
-	this->data_sender->sendTurnData(this->parameters.getTurnTime(), this->parameters.getTimeAfterShoot());
+	int turn_time = this->parameters.getTurnTime();
+	int time_after_shoot = this->parameters.getTimeAfterShoot();
+	this->data_sender->sendTurnData(turn_time, time_after_shoot);
 	this->data_sender->sendPlayersId();
 
 	//Asignacion de gusanos
@@ -106,13 +115,14 @@ void Game::configure(){
 
 	//Creacion de vigas
 	int max_height = 0;
-	std::vector<GirderParams>& girders_list = this->parameters.getGirders();
-	size = girders_list.size();
+	std::vector<GirderParams>& list = this->parameters.getGirders();
+	size = list.size();
 	for (size_t i = 0; i < size; i++){
-		physical_object_ptr girder(new Girder(this->world, this->parameters, girders_list[i].len, girders_list[i].rotation));
-		this->world.addObject(girder, b2Vec2(girders_list[i].pos_x, girders_list[i].pos_y));
-		if (girders_list[i].pos_y > max_height){
-			max_height = girders_list[i].pos_y;
+		Girder* g = new Girder(world, parameters, list[i].len, list[i].rotation);
+		physical_object_ptr girder(g);
+		this->world.addObject(girder, b2Vec2(list[i].pos_x, list[i].pos_y));
+		if (list[i].pos_y > max_height){
+			max_height = list[i].pos_y;
 		}
 	}
 	this->parameters.setMaxHeight(max_height);
@@ -133,6 +143,7 @@ void Game::endTurn(){
 
 void Game::waitToWorld(){
 	while (this->world.isActive() || this->data_sender->isActive()){
-		std::this_thread::sleep_for(std::chrono::milliseconds(this->parameters.getGameWaitingWorldSleep()));
+		int sleep = this->parameters.getGameWaitingWorldSleep();
+		std::this_thread::sleep_for(std::chrono::milliseconds(sleep));
 	}
 }

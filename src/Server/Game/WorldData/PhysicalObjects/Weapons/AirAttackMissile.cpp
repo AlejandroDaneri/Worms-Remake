@@ -1,7 +1,10 @@
 #include "AirAttackMissile.h"
+#include <string>
 
 AirAttackMissile::AirAttackMissile(World& world, GameParameters& parameters):
-	Weapon(world, parameters, parameters.getWeaponDamage(AIR_ATTACK_MISSILE_NAME), parameters.getWeaponRadius(AIR_ATTACK_MISSILE_NAME)){}
+	Weapon(world, parameters,
+		parameters.getWeaponDamage(AIR_ATTACK_MISSILE_NAME),
+		parameters.getWeaponRadius(AIR_ATTACK_MISSILE_NAME)){}
 		
 AirAttackMissile::~AirAttackMissile(){}
 

@@ -7,11 +7,14 @@
 #include <yaml.h>
 #include <WeaponNames.h>
 #include <ConfigFields.h>
+#include <vector>
+#include <string>
 
 // Clase que se encarga de manejar el guardado de un mapa
 class FileWriter{
 private:
 	std::fstream file;
+
 public:
     explicit FileWriter(const std::string &filename);
 
@@ -22,6 +25,5 @@ public:
          const std::vector<std::vector<double>> &girders,
          const unsigned int &worm_life, const std::string& background);
 };
-
 
 #endif //WORMS_FILEWRITER_H
