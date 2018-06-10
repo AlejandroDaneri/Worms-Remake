@@ -5,7 +5,7 @@
 
 void ButtonBuilder::buildButton(Gtk::Button* button) {
 	std::string text = button->get_label();
-	Gtk::Label* label = (Gtk::Label*)button->get_child();
+	Gtk::Label* label = (Gtk::Label*) button->get_child();
 	label->set_markup("<b>" + text + "</b>");
 	label->override_color(Gdk::RGBA("black"));
 }

@@ -4,16 +4,16 @@
 #include "MeleeWeapon.h"
 
 /* Clase que representa al arma Bat de baseball */
-class Bat: public MeleeWeapon {
-	public:
-		/* Constructor */
-		Bat(int ammo);
+class Bat : public MeleeWeapon {
+public:
+	/* Constructor */
+	explicit Bat(int ammo);
 
-		/* Destructor */
-		~Bat();
+	/* Destructor */
+	~Bat();
 
-		/* Constructor por movimiento */
-		Bat(Bat&& other);
+	/* Constructor por movimiento */
+	Bat(Bat&& other);
 };
 
 #endif

@@ -1,4 +1,5 @@
 #include "ExplosionViewList.h"
+#include <list>
 
 ExplosionViewList::ExplosionViewList() {}
 

@@ -8,24 +8,24 @@
 
 /* Clase que se encarga de mostrar y actualizar
  * la informacion del viento */
-class WindView{
-	private:
-		Gtk::VBox container;
-		Gtk::Label velocity;
-		Gtk::Image direction;
-		
-	public:
-		/* Constructor */
-		WindView();
+class WindView {
+private:
+	Gtk::VBox container;
+	Gtk::Label velocity;
+	Gtk::Image direction;
 
-		/* Destructor */
-		~WindView();
-		
-		/* Actualiza la vista del viento */
-		void update(float wind);
+public:
+	/* Constructor */
+	WindView();
 
-		/* Devuelve el contenedor del viento */
-		Gtk::VBox& getWindow();
+	/* Destructor */
+	~WindView();
+
+	/* Actualiza la vista del viento */
+	void update(float wind);
+
+	/* Devuelve el contenedor del viento */
+	Gtk::VBox& getWindow();
 };
 
 #endif

@@ -6,27 +6,28 @@
 
 class Player;
 
-/* Clase que se encarga de recibir los mensajes enviados por el servidor */
-class DataReceiver: public Thread{
-	private:
-		Player& player;
-		ClientProtocol& protocol;
+/* Clase que se encarga de recibir los mensajes
+ * enviados por el servidor */
+class DataReceiver : public Thread {
+private:
+	Player& player;
+	ClientProtocol& protocol;
 
-		/* Recibe los datos de la configuracion inicial */
-		void initialConfig();
+	/* Recibe los datos de la configuracion inicial */
+	void initialConfig();
 
-		/* Analiza los datos recibidos */
-		bool analizeReceivedData(Buffer buffer);
+	/* Analiza los datos recibidos */
+	bool analizeReceivedData(Buffer buffer);
 
-	public:
-		/* Constructor */
-		DataReceiver(Player& player);
+public:
+	/* Constructor */
+	explicit DataReceiver(Player& player);
 
-		/* Destructor */
-		~DataReceiver();
+	/* Destructor */
+	~DataReceiver();
 
-		/* Comienza a recibir mensajes del protocolo */
-		void run() override;
+	/* Comienza a recibir mensajes del protocolo */
+	void run() override;
 };
 
 

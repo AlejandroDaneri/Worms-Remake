@@ -13,18 +13,19 @@ const char ASCII_5 = 53;
 const int MAX_TIME = 3000;
 const int ANGLE_STEP = 6;
 
-Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons, WorldView& world):
-	player(player), view_list(view_list), weapons(weapons), world(world),
-	scroll_handler(world.getWindow()), power_accumulator(*this, MAX_TIME){
-		this->has_shoot = false;
-		this->current_angle = DEFAULT_ANGLE;
-		this->weapons_time = WEAPONS_DEFAULT_TIME;
-		this->enabled = false;
-	}
+Handlers::Handlers(Player& player, ViewsList& view_list, WeaponList& weapons,
+				   WorldView& world) :
+		player(player), view_list(view_list), weapons(weapons), world(world),
+		scroll_handler(world.getWindow()), power_accumulator(*this, MAX_TIME) {
+	this->has_shoot = false;
+	this->current_angle = DEFAULT_ANGLE;
+	this->weapons_time = WEAPONS_DEFAULT_TIME;
+	this->enabled = false;
+}
 
 Handlers::~Handlers() {}
 
-void Handlers::enableAll(){
+void Handlers::enableAll() {
 	this->weapons_time = WEAPONS_DEFAULT_TIME;
 	this->current_angle = DEFAULT_ANGLE;
 	this->has_shoot = false;
@@ -33,32 +34,35 @@ void Handlers::enableAll(){
 	this->player.getProtocol().updateScope(DEFAULT_ANGLE);
 
 	Gtk::Container* window = this->world.getWindow().get_parent()->get_parent();
-	
+
 	window->set_can_focus(true);
 	window->grab_focus();
 
-	window->signal_key_press_event().connect(sigc::mem_fun(*this, &Handlers::keyPressHandler));
-	window->signal_key_release_event().connect(sigc::mem_fun(*this, &Handlers::keyReleaseHandler));
-	this->world.getWindow().signal_button_press_event().connect(sigc::mem_fun(*this, &Handlers::onButtonPressEvent));
+	window->signal_key_press_event().connect(
+			sigc::mem_fun(*this, &Handlers::keyPressHandler));
+	window->signal_key_release_event().connect(
+			sigc::mem_fun(*this, &Handlers::keyReleaseHandler));
+	this->world.getWindow().signal_button_press_event().connect(
+			sigc::mem_fun(*this, &Handlers::onButtonPressEvent));
 }
 
-void Handlers::disableAll(){
+void Handlers::disableAll() {
 	this->enabled = false;
 }
-		
-bool Handlers::isEnabled() const{
+
+bool Handlers::isEnabled() const {
 	return this->enabled;
 }
 
-void Handlers::powerAccumStopped(int power){
+void Handlers::powerAccumStopped(int power) {
 	this->player.shoot(this->current_angle, power, this->weapons_time);
 }
 
-bool Handlers::keyPressHandler(GdkEventKey *key_event) {
-	if (!this->enabled){
+bool Handlers::keyPressHandler(GdkEventKey* key_event) {
+	if (!this->enabled) {
 		return true;
 	}
-	
+
 	if (key_event->keyval == GDK_KEY_Left) {
 		this->player.getProtocol().sendMoveAction(MOVE_LEFT);
 	} else if (key_event->keyval == GDK_KEY_Right) {
@@ -105,11 +109,11 @@ bool Handlers::keyPressHandler(GdkEventKey *key_event) {
 	return true;
 }
 
-bool Handlers::keyReleaseHandler(GdkEventKey *key_event) {
-	if (!this->enabled){
+bool Handlers::keyReleaseHandler(GdkEventKey* key_event) {
+	if (!this->enabled) {
 		return true;
 	}
-	
+
 	if (key_event->type == GDK_KEY_RELEASE) {
 		if (key_event->keyval == SPACE) {
 			if (this->weapons.getCurrentWeapon().isSelfDirected()) {
@@ -128,11 +132,11 @@ bool Handlers::keyReleaseHandler(GdkEventKey *key_event) {
 	return true;
 }
 
-bool Handlers::onButtonPressEvent(GdkEventButton *event) {
-	if (!this->enabled){
+bool Handlers::onButtonPressEvent(GdkEventButton* event) {
+	if (!this->enabled) {
 		return true;
 	}
-	
+
 	if (!this->weapons.getCurrentWeapon().isSelfDirected()) {
 		return true;
 	}
@@ -149,17 +153,18 @@ bool Handlers::onButtonPressEvent(GdkEventButton *event) {
 		x += this->world.getWindow().get_hadjustment()->get_value();
 		y += this->world.getWindow().get_vadjustment()->get_value();
 		Position position(x, y);
-		Position newPosition = ViewPositionTransformer(this->world.getLayout()).transformToPosition(position);
+		Position newPosition = ViewPositionTransformer(
+				this->world.getLayout()).transformToPosition(position);
 		this->has_shoot = true;
 		this->player.shoot(newPosition);
 	}
 	return true;
 }
 
-int Handlers::getCurrentAngle() const{
+int Handlers::getCurrentAngle() const {
 	return this->current_angle;
 }
 
-void Handlers::stop(){
+void Handlers::stop() {
 	this->scroll_handler.stop();
 }

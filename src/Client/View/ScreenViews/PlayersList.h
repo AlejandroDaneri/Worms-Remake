@@ -9,37 +9,37 @@
 
 /* Clase que se encarga de almacenar los nombres y las vidas
  * de todos los jugadores */
-class PlayersList{
-	private:
-		std::map<int, std::string> players;
-		std::map<int, PlayerLifeLabel> labels;
-		Gtk::VBox container;
-		Gtk::Label title;
+class PlayersList {
+private:
+	std::map<int, std::string> players;
+	std::map<int, PlayerLifeLabel> labels;
+	Gtk::VBox container;
+	Gtk::Label title;
 
-		bool addPLayerCallBack(int id, std::string name);
+	bool addPLayerCallBack(int id, std::string name);
 
-	public:
-		/* Constructor */
-		PlayersList();
+public:
+	/* Constructor */
+	PlayersList();
 
-		/* Destructor */
-		~PlayersList();
+	/* Destructor */
+	~PlayersList();
 
-		/* Agrega al jugador a la lista de jugadores y agrega su
-		 * informacion a la vista */
-		void addPlayer(int id, const std::string& name);
+	/* Agrega al jugador a la lista de jugadores y agrega su
+	 * informacion a la vista */
+	void addPlayer(int id, const std::string& name);
 
-		/* Devuelve el nombre del jugador */
-		const std::string& getPlayer(int id) const;
+	/* Devuelve el nombre del jugador */
+	const std::string& getPlayer(int id) const;
 
-		/* Devuelve el contenedor de los jugadores */
-		Gtk::Container& getWindow();
+	/* Devuelve el contenedor de los jugadores */
+	Gtk::Container& getWindow();
 
-		/* Agrega la informacion de la vida del jugador a la vista */
-		void addPlayerLife(int player_id, int life);
+	/* Agrega la informacion de la vida del jugador a la vista */
+	void addPlayerLife(int player_id, int life);
 
-		/* Reduce la vida del jugador y actualiza la vista */
-		void reducePlayerLife(int player_id, int life);
+	/* Reduce la vida del jugador y actualiza la vista */
+	void reducePlayerLife(int player_id, int life);
 };
 
 #endif

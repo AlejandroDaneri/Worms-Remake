@@ -4,19 +4,19 @@
 #include <exception>
 #include <string>
 
-class MusicPlayerException: public std::exception{
-	private:
-		std::string msg;
+class MusicPlayerException : public std::exception {
+private:
+	std::string msg;
 
-	public:
-		//Crea la excepcion
-		explicit MusicPlayerException(std::string msg);
+public:
+	//Crea la excepcion
+	explicit MusicPlayerException(std::string msg);
 
-		//Destruye la excepcion
-		virtual ~MusicPlayerException();
+	//Destruye la excepcion
+	virtual ~MusicPlayerException();
 
-		//Devuelve el mensaje de error
-		virtual const char* what() const noexcept;
+	//Devuelve el mensaje de error
+	virtual const char* what() const noexcept;
 };
 
 #endif

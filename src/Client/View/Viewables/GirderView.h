@@ -7,24 +7,24 @@
 #include "Viewable.h"
 
 /* Clase que se encaga de controlar la vista de las vigas */
-class GirderView: public Viewable{
-	private:
-		Gtk::Image image;
-		int size;
-		int rotation;
+class GirderView : public Viewable {
+private:
+	Gtk::Image image;
+	int size;
+	int rotation;
 
-	public:
-		/* Constructor */
-		GirderView(WorldView& worldView, size_t size, Position pos, int rotation);
+public:
+	/* Constructor */
+	GirderView(WorldView& worldView, size_t size, Position pos, int rotation);
 
-		/* Destructor */
-		~GirderView();
+	/* Destructor */
+	~GirderView();
 
-		/* Constructor por movimiento */
-		GirderView(GirderView&& other);
+	/* Constructor por movimiento */
+	GirderView(GirderView&& other);
 
-		/* Devuelve el contenedor de la viga */
-		Gtk::Widget& getWidget() override;
+	/* Devuelve el contenedor de la viga */
+	Gtk::Widget& getWidget() override;
 };
 
 

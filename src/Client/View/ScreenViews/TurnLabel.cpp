@@ -32,10 +32,10 @@ void TurnLabel::setTime(int time) {
 	this->time.set_markup(begining + std::to_string(time) + ending);
 }
 
-void TurnLabel::setEndGame(){
+void TurnLabel::setEndGame() {
 	this->message.set_markup(begining + "Termino el juego" + ending);
 }
-		
+
 Gtk::Container& TurnLabel::getWindow() {
 	return this->label;
 }

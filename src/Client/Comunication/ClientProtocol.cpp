@@ -5,100 +5,103 @@
 #include "ObjectSizes.h"
 #include "ServerFatalError.h"
 
-ClientProtocol::ClientProtocol(Socket&& socket, Gtk::Window& window): Protocol(std::move(socket)), window(window){}
+ClientProtocol::ClientProtocol(Socket&& socket, Gtk::Window& window) :
+		Protocol(std::move(socket)), window(window) {}
 
-ClientProtocol::ClientProtocol(ClientProtocol&& other): Protocol(std::move(other)), window(other.window) {}
+ClientProtocol::ClientProtocol(ClientProtocol&& other) :
+		Protocol(std::move(other)), window(other.window) {}
 
-ClientProtocol::~ClientProtocol(){}
+ClientProtocol::~ClientProtocol() {}
 
-void ClientProtocol::sendMoveAction(char action){
+void ClientProtocol::sendMoveAction(char action) {
 	Buffer buffer;
 	buffer.setNext(ACTION);
 	buffer.setNext(MOVE_ACTION);
 	buffer.setNext(action);
-    this->sendBuffer(buffer);
+	this->sendBuffer(buffer);
 }
 
-void ClientProtocol::sendChangeWeapon(const std::string &weapon){
+void ClientProtocol::sendChangeWeapon(const std::string& weapon) {
 	Buffer buffer;
 	buffer.setNext(ACTION);
 	buffer.setNext(CHANGE_WEAPON_ACTION);
-    this->sendStringBuffer(buffer, weapon);
-    this->sendBuffer(buffer);
+	this->sendStringBuffer(buffer, weapon);
+	this->sendBuffer(buffer);
 }
 
-void ClientProtocol::sendWeaponShoot(int32_t angle, int32_t power, int32_t time){
+void
+ClientProtocol::sendWeaponShoot(int32_t angle, int32_t power, int32_t time) {
 	Buffer buffer;
 	buffer.setNext(ACTION);
 	buffer.setNext(SHOOT_WEAPON);
-    this->sendIntBuffer(buffer, angle);
-    this->sendIntBuffer(buffer, power);
-    this->sendIntBuffer(buffer, time);
-    this->sendBuffer(buffer);
+	this->sendIntBuffer(buffer, angle);
+	this->sendIntBuffer(buffer, power);
+	this->sendIntBuffer(buffer, time);
+	this->sendBuffer(buffer);
 }
 
-void ClientProtocol::sendWeaponSelfDirectedShoot(const Position &pos) {
+void ClientProtocol::sendWeaponSelfDirectedShoot(const Position& pos) {
 	Buffer buffer;
 	buffer.setNext(ACTION);
 	buffer.setNext(SHOOT_SELF_DIRECTED);
 
-    this->sendIntBuffer(buffer, pos.getX() * UNIT_TO_SEND);
-    this->sendIntBuffer(buffer, pos.getY() * UNIT_TO_SEND);
+	this->sendIntBuffer(buffer, pos.getX() * UNIT_TO_SEND);
+	this->sendIntBuffer(buffer, pos.getY() * UNIT_TO_SEND);
 
-    this->sendBuffer(buffer);
+	this->sendBuffer(buffer);
 }
 
 void ClientProtocol::updateScope(int angle) {
-    Buffer buffer;
-    buffer.setNext(ACTION);
-    buffer.setNext(MOVE_SCOPE);
+	Buffer buffer;
+	buffer.setNext(ACTION);
+	buffer.setNext(MOVE_SCOPE);
 
-    this->sendIntBuffer(buffer, angle);
+	this->sendIntBuffer(buffer, angle);
 
-    this->sendBuffer(buffer);
+	this->sendBuffer(buffer);
 }
 
-void ClientProtocol::sendEndGame(){
+void ClientProtocol::sendEndGame() {
 	Buffer buffer;
 	buffer.setNext(END_GAME);
-    this->sendBuffer(buffer);
+	this->sendBuffer(buffer);
 }
 
-void ClientProtocol::receiveStartGame(){
+void ClientProtocol::receiveStartGame() {
 	Buffer buffer = std::move(this->receiveBuffer());
 }
 
-void ClientProtocol::receiveBackgroundImage(WorldView& world){
+void ClientProtocol::receiveBackgroundImage(WorldView& world) {
 	Buffer buffer = std::move(this->receiveBuffer());
 	world.setBackgroundImage(buffer);
 }
 
-void ClientProtocol::receiveTurnData(Turn& turn){
+void ClientProtocol::receiveTurnData(Turn& turn) {
 	Buffer buffer = std::move(this->receiveBuffer());
 	int max_time = this->receiveIntBuffer(buffer);
 	int time_after_shoot = this->receiveIntBuffer(buffer);
 	turn.setTime(max_time, time_after_shoot);
 }
 
-void ClientProtocol::receivePlayers(PlayersList& players_list){
+void ClientProtocol::receivePlayers(PlayersList& players_list) {
 	Buffer buffer = std::move(this->receiveBuffer());
 	int quantity = this->receiveIntBuffer(buffer);
 
-	for (int i = 0; i < quantity; i++){
+	for (int i = 0; i < quantity; i++) {
 		Buffer buffer = std::move(this->receiveBuffer());
 
 		int id = this->receiveIntBuffer(buffer);
 		std::string name = this->receiveStringBuffer(buffer);
-		
+
 		players_list.addPlayer(id, name);
 	}
 }
 
-void ClientProtocol::receiveGirders(ViewsList& viewsList){
+void ClientProtocol::receiveGirders(ViewsList& viewsList) {
 	Buffer buffer = std::move(this->receiveBuffer());
 	int quantity = this->receiveIntBuffer(buffer);
 
-	for (int i = 0; i < quantity; i++){
+	for (int i = 0; i < quantity; i++) {
 		Buffer buffer = std::move(this->receiveBuffer());;
 
 		int size = this->receiveIntBuffer(buffer);
@@ -109,11 +112,11 @@ void ClientProtocol::receiveGirders(ViewsList& viewsList){
 	}
 }
 
-void ClientProtocol::receiveWeaponsAmmo(WeaponList& weapon_list){
+void ClientProtocol::receiveWeaponsAmmo(WeaponList& weapon_list) {
 	Buffer buffer = std::move(this->receiveBuffer());
 	int quantity = this->receiveIntBuffer(buffer);
 
-	for (int i = 0; i < quantity; i++){
+	for (int i = 0; i < quantity; i++) {
 		Buffer buffer = std::move(this->receiveBuffer());
 
 		std::string name = this->receiveStringBuffer(buffer);
@@ -122,10 +125,10 @@ void ClientProtocol::receiveWeaponsAmmo(WeaponList& weapon_list){
 	}
 }
 
-void ClientProtocol::sendBuffer(Buffer &buffer){
-	try{
+void ClientProtocol::sendBuffer(Buffer& buffer) {
+	try {
 		Protocol::sendBuffer(buffer);
-	} catch (const std::exception& e){
+	} catch(const std::exception& e) {
 		ServerFatalError error(this->window);
 	}
 }

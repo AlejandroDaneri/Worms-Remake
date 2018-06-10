@@ -4,16 +4,16 @@
 #include "DistanceWeapon.h"
 
 /* Clase que representa al arma Banana */
-class Banana: public DistanceWeapon {
-	public:
-        /* Constructor */
-		Banana(int ammo);
+class Banana : public DistanceWeapon {
+public:
+	/* Constructor */
+	explicit Banana(int ammo);
 
-		/* Destructor */
-		~Banana();
+	/* Destructor */
+	~Banana();
 
-		/* Constructor por movimiento */
-		Banana(Banana&& other);
+	/* Constructor por movimiento */
+	Banana(Banana&& other);
 };
 
 #endif

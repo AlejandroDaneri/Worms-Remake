@@ -4,16 +4,16 @@
 #include "DistanceWeapon.h"
 
 /* Clase que representa al arma Granada verde */
-class GreenGrenade: public DistanceWeapon {
-	public:
-		/* Constructor */
-		GreenGrenade(int ammo);
+class GreenGrenade : public DistanceWeapon {
+public:
+	/* Constructor */
+	explicit GreenGrenade(int ammo);
 
-		/* Destructor */
-		~GreenGrenade();
+	/* Destructor */
+	~GreenGrenade();
 
-		/* Constructor por movimiento */
-		GreenGrenade(GreenGrenade&& other);
+	/* Constructor por movimiento */
+	GreenGrenade(GreenGrenade&& other);
 };
 
 #endif

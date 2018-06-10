@@ -3,7 +3,7 @@
 #include "ServerMenu.h"
 #include "Path.h"
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]) {
 	auto app = Gtk::Application::create(argc, argv);
 	Gtk::Window window;
 	window.maximize();

@@ -1,4 +1,5 @@
 #include "ServerMenu.h"
+#include <string>
 #include "Path.h"
 #include "ButtonBuilder.h"
 
@@ -16,36 +17,40 @@ ServerMenu::ServerMenu(Gtk::Window& window) : Menu(PATH, window) {
 	this->window.add(*this->menu);
 	this->window.show_all();
 
-	this->connect->signal_clicked().connect(sigc::mem_fun(*this, &ServerMenu::connectButtonPressed));
+	this->connect->signal_clicked().connect(
+			sigc::mem_fun(*this, &ServerMenu::connectButtonPressed));
 }
 
-ServerMenu::~ServerMenu(){
+ServerMenu::~ServerMenu() {
 	delete this->menu;
 }
 
-void ServerMenu::connectButtonPressed(){
+void ServerMenu::connectButtonPressed() {
 	std::string host(this->host->get_text());
-	if (host.empty()){
+	if (host.empty()) {
 		this->error->set_label("Debe ingresar un host");
 		return;
 	}
 
 	std::string service(this->service->get_text());
-	if (service.empty()){
+	if (service.empty()) {
 		this->error->set_label("Debe ingresar un servicio");
 		return;
 	}
 
-    this->connectToServer(host, service);
+	this->connectToServer(host, service);
 }
 
-void ServerMenu::connectToServer(const std::string &host, const std::string &service){
-	try{
+void ServerMenu::connectToServer(const std::string& host,
+								 const std::string& service) {
+	try {
 		Socket socket(Socket::Client(host.c_str(), service.c_str()));
-		this->protocol.reset(new ClientProtocol(std::move(socket), this->window));
+		this->protocol.reset(
+				new ClientProtocol(std::move(socket), this->window));
 		this->window.remove();
-		this->next_menu = std::unique_ptr<MenuView>(new GameMenu(this->window, *this->protocol));
-	} catch (const SocketException& e){
+		this->next_menu = std::unique_ptr<MenuView>(
+				new GameMenu(this->window, *this->protocol));
+	} catch(const SocketException& e) {
 		this->error->set_label("No pudo conectarse al servidor");
 	}
 }

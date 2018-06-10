@@ -7,31 +7,31 @@
 
 /* Clase que se encarga de reproducir la animacion de una explosion */
 class ExplosionView {
-	private:
-		BulletView bulletView;
-		std::vector<Glib::RefPtr<Gdk::Pixbuf>> animation_vector;
-		Glib::RefPtr<Gdk::Pixbuf> animation;
-		std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter;
+private:
+	BulletView bulletView;
+	std::vector<Glib::RefPtr<Gdk::Pixbuf>> animation_vector;
+	Glib::RefPtr<Gdk::Pixbuf> animation;
+	std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter;
 
-		/* Callback de start */
-		bool startCallBack();
+	/* Callback de start */
+	bool startCallBack();
 
-	public:
-		/* Constructor */
-		ExplosionView(BulletView&& bullet);
+public:
+	/* Constructor */
+	explicit ExplosionView(BulletView&& bullet);
 
-		/* Destructor */
-		~ExplosionView();
+	/* Destructor */
+	~ExplosionView();
 
-		/* Constructor por movimiento */
-		ExplosionView(ExplosionView&& other);
+	/* Constructor por movimiento */
+	ExplosionView(ExplosionView&& other);
 
 
-		/* Realiza la animacion de la explosion */
-		void start();
+	/* Realiza la animacion de la explosion */
+	void start();
 
-		/* Devuelve true si la animacion de la explosion finalizo */
-		bool hasFinished();
+	/* Devuelve true si la animacion de la explosion finalizo */
+	bool hasFinished();
 };
 
 

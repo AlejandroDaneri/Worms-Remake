@@ -1,10 +1,12 @@
 #include "VictoryWindow.h"
 #include <gtkmm/builder.h>
+#include <string>
 #include "Path.h"
 
 VictoryWindow::VictoryWindow(Gtk::Window& window, MenuView& main_menu) :
-	window(window), main_menu(main_menu), was_closed(true) {
-	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(GLADE_PATH + "victory_window.glade");
+		window(window), main_menu(main_menu), was_closed(true) {
+	Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file(
+			GLADE_PATH + "victory_window.glade");
 
 	builder->get_widget("Menu", this->my_window);
 
@@ -16,17 +18,20 @@ VictoryWindow::VictoryWindow(Gtk::Window& window, MenuView& main_menu) :
 	builder->get_widget("Return_menu", this->return_menu);
 	builder->get_widget("quit", this->quit);
 
-	this->return_menu->signal_clicked().connect(sigc::mem_fun(*this, &VictoryWindow::returnMenuButtonPressed));
+	this->return_menu->signal_clicked().connect(
+			sigc::mem_fun(*this, &VictoryWindow::returnMenuButtonPressed));
 
-	this->quit->signal_clicked().connect(sigc::mem_fun(*this, &VictoryWindow::quitButtonPressed));
+	this->quit->signal_clicked().connect(
+			sigc::mem_fun(*this, &VictoryWindow::quitButtonPressed));
 
-	this->my_window->signal_delete_event().connect(sigc::mem_fun(*this, &VictoryWindow::on_delete_event));
+	this->my_window->signal_delete_event().connect(
+			sigc::mem_fun(*this, &VictoryWindow::on_delete_event));
 }
 
 VictoryWindow::~VictoryWindow() {}
 
 bool VictoryWindow::on_delete_event(GdkEventAny* any_event) {
-	gtk_widget_destroy((GtkWidget*)this->my_window->gobj());
+	gtk_widget_destroy((GtkWidget*) this->my_window->gobj());
 	if (this->was_closed) {
 		// Si se apreto el botón salir o el botón de cerrar
 		this->window.close();
@@ -47,7 +52,7 @@ void VictoryWindow::quitButtonPressed() {
 
 void VictoryWindow::setWinner(const std::string& winner, bool i_win) {
 	std::string winner_message;
-	if (winner.empty()){
+	if (winner.empty()) {
 		winner_message = "Empate";
 	} else if (i_win) {
 		winner_message = "GANASTE!!!!";

@@ -11,35 +11,35 @@
  * un mensaje indicando el ganador de la partida cuando
  * esta finaliza. */
 class VictoryWindow {
-	private:
-		Gtk::Window* my_window;
-		Gtk::Window& window;
-		Gtk::Button* return_menu;
-		Gtk::Button* quit;
-		Gtk::Label* victory_msg;
-		MenuView& main_menu;
-		bool was_closed;
+private:
+	Gtk::Window* my_window;
+	Gtk::Window& window;
+	Gtk::Button* return_menu;
+	Gtk::Button* quit;
+	Gtk::Label* victory_msg;
+	MenuView& main_menu;
+	bool was_closed;
 
-		/* Handler de la ventana al cerrarse */
-		bool on_delete_event(GdkEventAny* any_event);
+	/* Handler de la ventana al cerrarse */
+	bool on_delete_event(GdkEventAny* any_event);
 
-		/* Handler del boton de retorno al menu */
-		void returnMenuButtonPressed();
+	/* Handler del boton de retorno al menu */
+	void returnMenuButtonPressed();
 
-		/* Handler del boton salir */
-		void quitButtonPressed();
+	/* Handler del boton salir */
+	void quitButtonPressed();
 
-	public:
-		/* Constructor */
-		VictoryWindow(Gtk::Window& window, MenuView& main_menu);
+public:
+	/* Constructor */
+	VictoryWindow(Gtk::Window& window, MenuView& main_menu);
 
-		/* Destructor */
-		~VictoryWindow();
+	/* Destructor */
+	~VictoryWindow();
 
 
-		/* Establece el mensaje del ganador y muestra la ventana
-		 * con este mensaje y los botones */
-		void setWinner(const std::string& winner, bool i_win);
+	/* Establece el mensaje del ganador y muestra la ventana
+	 * con este mensaje y los botones */
+	void setWinner(const std::string& winner, bool i_win);
 };
 
 

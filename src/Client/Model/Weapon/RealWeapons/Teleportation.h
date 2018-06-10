@@ -4,16 +4,16 @@
 #include "SelfDirectedWeapon.h"
 
 /* Clase que representa al arma Teletransportador */
-class Teleportation: public SelfDirectedWeapon {
-	public:
-		/* Constructor */
-		Teleportation(int ammo);
+class Teleportation : public SelfDirectedWeapon {
+public:
+	/* Constructor */
+	explicit Teleportation(int ammo);
 
-		/* Destructor */
-		~Teleportation();
+	/* Destructor */
+	~Teleportation();
 
-		/* Constructor por movimiento */
-		Teleportation(Teleportation&& other);
+	/* Constructor por movimiento */
+	Teleportation(Teleportation&& other);
 };
 
 #endif

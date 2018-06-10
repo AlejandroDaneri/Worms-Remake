@@ -9,60 +9,60 @@
 /* Clase que se enecarga de reproducir musica y efectos
  * de sonido */
 class MusicPlayer {
-	private:
-		Mix_Music* music; // Musica de fondo
-		std::map<int, Mix_Chunk*> effects;
+private:
+	Mix_Music* music; // Musica de fondo
+	std::map<int, Mix_Chunk*> effects;
 
-		/* Verifica si algunos efectos de la lista finalizaon y los
-		 * libera. Además libera el efecto que se encuentre guardado
-		 * en la lista con clave channel */
-		void check(int channel);
+	/* Verifica si algunos efectos de la lista finalizaon y los
+	 * libera. Además libera el efecto que se encuentre guardado
+	 * en la lista con clave channel */
+	void check(int channel);
 
-		/* Agrega un nuevo efecto a la lista y lo reproduce */
-		void addEffect(const std::string& audio);
+	/* Agrega un nuevo efecto a la lista y lo reproduce */
+	void addEffect(const std::string& audio);
 
-	public:
-		/* Constructor */
-		MusicPlayer();
+public:
+	/* Constructor */
+	MusicPlayer();
 
-		/* Destructor */
-		~MusicPlayer();
+	/* Destructor */
+	~MusicPlayer();
 
-		/* Reproduce la musica de fondo */
-		void playMusic();
+	/* Reproduce la musica de fondo */
+	void playMusic();
 
-		/* Reproduce el sonido de inicio de turno */
-		void playStartTurnSound();
+	/* Reproduce el sonido de inicio de turno */
+	void playStartTurnSound();
 
-		/* Reproduce el sonido de falta de tiempo */
-		void playTickSound();
+	/* Reproduce el sonido de falta de tiempo */
+	void playTickSound();
 
-		/* Reproduce el sonido de muerte de un worm */
-		void playDeathSound();
+	/* Reproduce el sonido de muerte de un worm */
+	void playDeathSound();
 
-		/* Reproduce el sonido de daño recibido */
-		void playDamageReceiveSound();
+	/* Reproduce el sonido de daño recibido */
+	void playDamageReceiveSound();
 
-		/* Reproduce el sonido de la explosion */
-		void playExplosionSound(const std::string& weapon);
+	/* Reproduce el sonido de la explosion */
+	void playExplosionSound(const std::string& weapon);
 
-		/* Reproduce el sonido de arma disparada */
-		void playWeaponShotSound(const std::string& weapon);
+	/* Reproduce el sonido de arma disparada */
+	void playWeaponShotSound(const std::string& weapon);
 
-		/* Reproduce el sonido de salto o rollback */
-		void playJumpSound(char action);
+	/* Reproduce el sonido de salto o rollback */
+	void playJumpSound(char action);
 
-		/* Reproduce el sonido de arma seleccionada */
-		void playSelectWeaponSound();
+	/* Reproduce el sonido de arma seleccionada */
+	void playSelectWeaponSound();
 
-		/* Reproduce el sonido de victoria */
-		void playVictory();
+	/* Reproduce el sonido de victoria */
+	void playVictory();
 
-		/* Reproduce el sonido de arma descargada */
-		void playNoAmmo();
+	/* Reproduce el sonido de arma descargada */
+	void playNoAmmo();
 
-		/* Detiene la reproduccion de la musica de fondo */
-		void stop();
+	/* Detiene la reproduccion de la musica de fondo */
+	void stop();
 };
 
 

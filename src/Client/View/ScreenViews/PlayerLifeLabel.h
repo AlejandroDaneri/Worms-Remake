@@ -2,37 +2,38 @@
 #define __PLAYERLIFELABEL_H__
 
 #include <gtkmm/label.h>
+#include <string>
 
 /* Clase que se encarga de controlar el indicador de vida del jugador */
-class PlayerLifeLabel{
-	private:
-		int id;
-		std::string player_name;
-		int life;
-		Gtk::Label label;
+class PlayerLifeLabel {
+private:
+	int id;
+	std::string player_name;
+	int life;
+	Gtk::Label label;
 
-		/* Actualiza la informacion del label */
-		void updateLabel();
+	/* Actualiza la informacion del label */
+	void updateLabel();
 
-	public:
-	    /* Constructor */
-		PlayerLifeLabel();
+public:
+	/* Constructor */
+	PlayerLifeLabel();
 
-		/* Destructor */
-		~PlayerLifeLabel();
+	/* Destructor */
+	~PlayerLifeLabel();
 
 
-		/* Establece el nombre del jugador */
-		void setPlayerName(int id, const std::string& player_name);
+	/* Establece el nombre del jugador */
+	void setPlayerName(int id, const std::string& player_name);
 
-		/* Agrega la vida al label */
-		void addLife(int life);
+	/* Agrega la vida al label */
+	void addLife(int life);
 
-		/* Disminuye la vida y actualiza la vista del label */
-		void reduceLife(int life);
+	/* Disminuye la vida y actualiza la vista del label */
+	void reduceLife(int life);
 
-		/* Devuelve el label del jugador */
-		Gtk::Label& getLabel();
+	/* Devuelve el label del jugador */
+	Gtk::Label& getLabel();
 };
 
 

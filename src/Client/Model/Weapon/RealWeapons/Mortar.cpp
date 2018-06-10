@@ -1,7 +1,7 @@
 #include "Mortar.h"
 #include "WeaponNames.h"
 
-Mortar::Mortar(int ammo): DistanceWeapon(MORTAR_NAME, ammo, false) {}
+Mortar::Mortar(int ammo) : DistanceWeapon(MORTAR_NAME, ammo, false) {}
 
 Mortar::~Mortar() {}
 

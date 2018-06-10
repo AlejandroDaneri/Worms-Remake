@@ -2,37 +2,40 @@
 #define __CLIENTWEAPONLIST_H__
 
 #include <map>
+#include <string>
 #include "Weapon.h"
 #include "WeaponsFactory.h"
 
 /* Clase que se encarga de almacenar las armas del juego */
 class WeaponList {
-	private:
-		typedef std::map<std::string, weapon_ptr> WeaponsList;
-		WeaponsList weapons;
-		std::string current_weapon;
+private:
+	typedef std::map<std::string, weapon_ptr> WeaponsList;
+	WeaponsList weapons;
+	std::string current_weapon;
 
-	public:
-		/* Constructor */
-		WeaponList();
+public:
+	/* Constructor */
+	WeaponList();
 
-		/* Destructor */
-		~WeaponList();
+	/* Destructor */
+	~WeaponList();
 
 
-		/* Agrega un arma a la lista */
-		void add(std::string weapon, int ammo);
+	/* Agrega un arma a la lista */
+	void add(std::string weapon, int ammo);
 
-		/* Devuelve el arma actual */
-		Weapon& getCurrentWeapon();
-		
-		/* Cambia el arma actual por la especificada */
-		void changeWeapon(std::string weapon);
+	/* Devuelve el arma actual */
+	Weapon& getCurrentWeapon();
 
-		typedef WeaponsList::iterator iterator;
-		typedef WeaponsList::const_iterator const_iterator;
-		iterator begin();
-		iterator end();
+	/* Cambia el arma actual por la especificada */
+	void changeWeapon(std::string weapon);
+
+	typedef WeaponsList::iterator iterator;
+	typedef WeaponsList::const_iterator const_iterator;
+
+	iterator begin();
+
+	iterator end();
 };
 
 

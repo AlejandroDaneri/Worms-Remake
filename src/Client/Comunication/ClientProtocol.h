@@ -8,70 +8,72 @@
 #include "PlayersList.h"
 #include "Turn.h"
 #include <gtkmm/window.h>
+#include <string>
 
 class Player;
+
 class WeaponList;
 
 /* Clase que se encarga de enviar y recibir mensajes del socket
  * con un formato determinado */
-class ClientProtocol: public Protocol {
-	private:
-		Gtk::Window& window;
+class ClientProtocol : public Protocol {
+private:
+	Gtk::Window& window;
 
-	public:
-		/* Constructor */
-		ClientProtocol(Socket&& socket, Gtk::Window& window);
+public:
+	/* Constructor */
+	ClientProtocol(Socket&& socket, Gtk::Window& window);
 
-		/* Constructor por movimiento */
-		ClientProtocol(ClientProtocol&& other);
+	/* Constructor por movimiento */
+	ClientProtocol(ClientProtocol&& other);
 
-		/* Destructor */
-		~ClientProtocol();
+	/* Destructor */
+	~ClientProtocol();
 
-		/* Envia un mensaje que indica una accion de movimiento */
-		void sendMoveAction(char action);
+	/* Envia un mensaje que indica una accion de movimiento */
+	void sendMoveAction(char action);
 
-		/* Envia un mensaje que indica una accion de cambio de arma
-		 * con el nombre del arma */
-		void sendChangeWeapon(const std::string &weapon);
+	/* Envia un mensaje que indica una accion de cambio de arma
+	 * con el nombre del arma */
+	void sendChangeWeapon(const std::string& weapon);
 
-		/* Envia un mensaje de accion de disparo, con el angulo, la potencia
-		 * y el tiempo de explosion */
-		void sendWeaponShoot(int32_t angle, int32_t power, int32_t time);
+	/* Envia un mensaje de accion de disparo, con el angulo, la potencia
+	 * y el tiempo de explosion */
+	void sendWeaponShoot(int32_t angle, int32_t power, int32_t time);
 
-		/* Envia un mensaje de accion de disparo teledirigido con
-		 * la posicion del disparo */
-		void sendWeaponSelfDirectedShoot(const Position &pos);
+	/* Envia un mensaje de accion de disparo teledirigido con
+	 * la posicion del disparo */
+	void sendWeaponSelfDirectedShoot(const Position& pos);
 
-		/* Envia un mesaje que indica el cambio del angulo del scope */
-		void updateScope(int angle);
+	/* Envia un mesaje que indica el cambio del angulo del scope */
+	void updateScope(int angle);
 
-		/* Envia un mensaje de finalizacion de juego */
-		void sendEndGame();
+	/* Envia un mensaje de finalizacion de juego */
+	void sendEndGame();
 
-		/* Recibe el comienzo del juego */
-		void receiveStartGame();
+	/* Recibe el comienzo del juego */
+	void receiveStartGame();
 
-		/* Recibe y setea la imagen de fondo */
-		void receiveBackgroundImage(WorldView& world);
+	/* Recibe y setea la imagen de fondo */
+	void receiveBackgroundImage(WorldView& world);
 
-		/* Recibe los datos del turno */
-		void receiveTurnData(Turn& turn);
+	/* Recibe los datos del turno */
+	void receiveTurnData(Turn& turn);
 
-		/* Recibe los jugadores de la partida junto con su
-		 * id y su nombre */
-		void receivePlayers(PlayersList& players_list);
+	/* Recibe los jugadores de la partida junto con su
+	 * id y su nombre */
+	void receivePlayers(PlayersList& players_list);
 
-		/* Recibe la vigas presentes en el mapa junto con su tamaño,
-		 * su posicion y su rotacion */
-		void receiveGirders(ViewsList& viewsList);
+	/* Recibe la vigas presentes en el mapa junto con su tamaño,
+	 * su posicion y su rotacion */
+	void receiveGirders(ViewsList& viewsList);
 
-		/* Recibe las armas presentes en el juego junto con
-		 * su municion */
-		void receiveWeaponsAmmo(WeaponList& weapon_list);
+	/* Recibe las armas presentes en el juego junto con
+	 * su municion */
+	void receiveWeaponsAmmo(WeaponList& weapon_list);
 
-		/* Envia el contenido del buffer */
-		void sendBuffer(Buffer &buffer) override;
+	/* Envia el contenido del buffer */
+	void sendBuffer(Buffer& buffer) override;
 };
 
 #endif

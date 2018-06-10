@@ -1,24 +1,26 @@
 #include "MenuView.h"
+#include <string>
 #include "ServerFatalError.h"
 
-MenuView::MenuView(Gtk::Window& window, MenuView& main_menu, ClientProtocol& protocol, const std::string& path):
-	Menu(path, window), protocol(protocol), main_menu(main_menu) {}
+MenuView::MenuView(Gtk::Window& window, MenuView& main_menu,
+				   ClientProtocol& protocol, const std::string& path) :
+		Menu(path, window), protocol(protocol), main_menu(main_menu) {}
 
-MenuView::~MenuView(){
+MenuView::~MenuView() {
 	delete this->menu;
 }
 
-void MenuView::showFatalError(){
+void MenuView::showFatalError() {
 	ServerFatalError error(this->window);
 }
 
-void MenuView::showErrorAndRestart(const std::string& error){
+void MenuView::showErrorAndRestart(const std::string& error) {
 	this->window.remove();
 	this->main_menu.showError(error);
 	this->window.add(*this->main_menu.menu);
 }
 
-void MenuView::showError(const std::string& error){
+void MenuView::showError(const std::string& error) {
 	this->error->set_label(error);
 }
 

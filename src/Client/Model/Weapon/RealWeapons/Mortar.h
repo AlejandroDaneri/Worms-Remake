@@ -4,16 +4,16 @@
 #include "DistanceWeapon.h"
 
 /* Clase que representa al arma Mortero */
-class Mortar: public DistanceWeapon {
-	public:
-		/* Constructor */
-		Mortar(int ammo);
+class Mortar : public DistanceWeapon {
+public:
+	/* Constructor */
+	explicit Mortar(int ammo);
 
-		/* Destructor */
-		~Mortar();
+	/* Destructor */
+	~Mortar();
 
-		/* Constructor por movimiento */
-		Mortar(Mortar&& other);
+	/* Constructor por movimiento */
+	Mortar(Mortar&& other);
 };
 
 #endif

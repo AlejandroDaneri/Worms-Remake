@@ -4,16 +4,16 @@
 #include "MeleeWeapon.h"
 
 /* Clase que representa al arma Dinamita */
-class Dynamite: public MeleeWeapon {
-	public:
-        /* Constructor */
-		Dynamite(int ammo);
+class Dynamite : public MeleeWeapon {
+public:
+	/* Constructor */
+	explicit Dynamite(int ammo);
 
-		/* Destructor */
-		~Dynamite();
+	/* Destructor */
+	~Dynamite();
 
-		/* Constructor por movimiento */
-		Dynamite(Dynamite&& other);
+	/* Constructor por movimiento */
+	Dynamite(Dynamite&& other);
 };
 
 #endif

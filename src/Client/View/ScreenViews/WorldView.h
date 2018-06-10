@@ -7,6 +7,7 @@
 #include <gtkmm/scrolledwindow.h>
 #include <gtkmm/overlay.h>
 #include <string>
+#include <vector>
 #include "Position.h"
 #include "Water.h"
 #include "Buffer.h"
@@ -15,52 +16,55 @@ class Player;
 
 /* Clase que se encarga de mostrar objetos en posiciones
  * especificas, moverlos y eliminarlos de la vista*/
-class WorldView{
-	private:
-		Gtk::Overlay container;
-		Gtk::Layout background;
-		Gtk::Layout world;
-		Gtk::ScrolledWindow window;
-		std::vector<Gtk::Image> background_images;
-		Water water;
+class WorldView {
+private:
+	Gtk::Overlay container;
+	Gtk::Layout background;
+	Gtk::Layout world;
+	Gtk::ScrolledWindow window;
+	std::vector<Gtk::Image> background_images;
+	Water water;
 
-		/* Coloca la imagen de fondo */
-		bool setBackgroundImageCallBack(Buffer image);
+	/* Coloca la imagen de fondo */
+	bool setBackgroundImageCallBack(Buffer image);
 
-	public:
-		/* Constructor */
-		WorldView();
+public:
+	/* Constructor */
+	WorldView();
 
-		/* Destructor */
-		~WorldView();
+	/* Destructor */
+	~WorldView();
 
-		/* Setea la imagen de fondo */
-		void setBackgroundImage(const Buffer& image);
+	/* Setea la imagen de fondo */
+	void setBackgroundImage(const Buffer& image);
 
-		/* Mueve el elemento pasado a la posicion especificada */
-		void moveElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus = false);
+	/* Mueve el elemento pasado a la posicion especificada */
+	void
+	moveElement(Gtk::Widget& element, const Position& position, float width,
+				float height, bool focus = false);
 
-		/* Mueve la mira a la posicion correspondiente para que tenga el angulo
-		 * especificado por parametro */
-		void moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle);
+	/* Mueve la mira a la posicion correspondiente para que tenga el angulo
+	 * especificado por parametro */
+	void moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle);
 
-		/* Remueve el elemento de la vista */
-		void removeElement(Gtk::Widget& element);
+	/* Remueve el elemento de la vista */
+	void removeElement(Gtk::Widget& element);
 
-		/* Agrega un elemento a la vista en la posicion especificada */
-		void addElement(Gtk::Widget& element, const Position& position, float width, float height, bool focus = false);
+	/* Agrega un elemento a la vista en la posicion especificada */
+	void addElement(Gtk::Widget& element, const Position& position, float width,
+					float height, bool focus = false);
 
-		/* Devuelve la vista del scrolledWindow */
-		Gtk::ScrolledWindow& getWindow();
-		
-		/* Devuelve el container */
-		Gtk::Container& getContainer();
+	/* Devuelve la vista del scrolledWindow */
+	Gtk::ScrolledWindow& getWindow();
 
-		/* Devuelve la vista del Layout */
-		Gtk::Layout& getLayout();
+	/* Devuelve el container */
+	Gtk::Container& getContainer();
 
-		/* Realiza focus en el elemento pasado */
-		void setFocus(Gtk::Widget& element);
+	/* Devuelve la vista del Layout */
+	Gtk::Layout& getLayout();
+
+	/* Realiza focus en el elemento pasado */
+	void setFocus(Gtk::Widget& element);
 };
 
 

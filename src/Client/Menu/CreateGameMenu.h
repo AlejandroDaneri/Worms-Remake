@@ -3,24 +3,26 @@
 
 #include <gtkmm/entry.h>
 #include <gtkmm/spinbutton.h>
+#include <string>
 #include "SelectableListMenu.h"
 
 /* Clase que se encarga de los pasos necesarios para que el
  * jugador cree una partida */
-class CreateGameMenu: public SelectableListMenu{
-	private:
-		Gtk::Entry* game_name;
-		Gtk::SpinButton* players_number;
+class CreateGameMenu : public SelectableListMenu {
+private:
+	Gtk::Entry* game_name;
+	Gtk::SpinButton* players_number;
 
-		/* Handler del boton de seleccion */
-		void selectButtonPressed(Glib::ustring map_name) override;
+	/* Handler del boton de seleccion */
+	void selectButtonPressed(Glib::ustring map_name) override;
 
-	public:
-        /* Constructor */
-		CreateGameMenu(Gtk::Window& window, MenuView& first_menu, ClientProtocol& protocol, std::string&& name, int quantity);
+public:
+	/* Constructor */
+	CreateGameMenu(Gtk::Window& window, MenuView& first_menu,
+				   ClientProtocol& protocol, std::string&& name, int quantity);
 
-		/* Destructor */
-		~CreateGameMenu();
+	/* Destructor */
+	~CreateGameMenu();
 };
 
 #endif

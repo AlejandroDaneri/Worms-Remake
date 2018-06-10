@@ -1,9 +1,10 @@
 #include "GameMenuField.h"
 #include <gdkmm/rgba.h>
+#include <string>
 #include "Path.h"
 #include "ButtonBuilder.h"
 
-GameMenuField::GameMenuField(const std::string& title): container(true, 20){
+GameMenuField::GameMenuField(const std::string& title) : container(true, 20) {
 	size_t extension = title.rfind(YAML_EXTENSION);
 	this->title.set_markup(title.substr(0, extension));
 	this->title.override_color(Gdk::RGBA("black"));
@@ -14,15 +15,16 @@ GameMenuField::GameMenuField(const std::string& title): container(true, 20){
 	ButtonBuilder::buildButton(&this->button);
 }
 
-GameMenuField::~GameMenuField(){}
+GameMenuField::~GameMenuField() {}
 
-GameMenuField::GameMenuField(GameMenuField&& other): title(std::move(other.title)),
-	button(std::move(other.button)), container(std::move(other.container)){}
+GameMenuField::GameMenuField(GameMenuField&& other) :
+		title(std::move(other.title)), button(std::move(other.button)),
+		container(std::move(other.container)) {}
 
-Gtk::Container& GameMenuField::getContainer(){
+Gtk::Container& GameMenuField::getContainer() {
 	return this->container;
 }
 
-Gtk::Button& GameMenuField::getButton(){
+Gtk::Button& GameMenuField::getButton() {
 	return this->button;
 }

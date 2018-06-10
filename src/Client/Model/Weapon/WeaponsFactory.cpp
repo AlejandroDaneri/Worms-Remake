@@ -1,6 +1,6 @@
 #include "WeaponsFactory.h"
 #include "WeaponNames.h"
-
+#include <string>
 #include "AirAttack.h"
 #include "Banana.h"
 #include "Bat.h"
@@ -16,9 +16,9 @@
 WeaponsFactory::WeaponsFactory() {}
 
 WeaponsFactory::~WeaponsFactory() {}
-		
+
 weapon_ptr WeaponsFactory::createWeapon(std::string weapon, int ammo) {
-	if (weapon == AIR_ATTACK_NAME)	
+	if (weapon == AIR_ATTACK_NAME)
 		return weapon_ptr(new AirAttack(ammo));
 	else if (weapon == BANANA_NAME)
 		return weapon_ptr(new Banana(ammo));

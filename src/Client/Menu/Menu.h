@@ -9,23 +9,23 @@
 #include <string>
 
 class Menu {
-	protected:
-		Gtk::Label* error;
-		Gtk::Button* quit;
-		Gtk::Window& window;
-		Gtk::Image* title;
-		Gtk::Image* background;
-		Glib::RefPtr<Gtk::Builder> builder;
+protected:
+	Gtk::Label* error;
+	Gtk::Button* quit;
+	Gtk::Window& window;
+	Gtk::Image* title;
+	Gtk::Image* background;
+	Glib::RefPtr<Gtk::Builder> builder;
 
-		/* Handler del boton de salir */
-		void quitButtonPressed();
+	/* Handler del boton de salir */
+	void quitButtonPressed();
 
-	public:
-		/* Constructor */
-		Menu(const std::string& path, Gtk::Window& window);
+public:
+	/* Constructor */
+	Menu(const std::string& path, Gtk::Window& window);
 
-		/* Destructor */
-		~Menu();
+	/* Destructor */
+	~Menu();
 };
 
 

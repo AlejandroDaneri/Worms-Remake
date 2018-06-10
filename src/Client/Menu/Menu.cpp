@@ -1,4 +1,5 @@
 #include "Menu.h"
+#include <string>
 #include "Path.h"
 #include "ButtonBuilder.h"
 
@@ -17,7 +18,8 @@ Menu::Menu(const std::string& path, Gtk::Window& window) : window(window) {
 	this->builder->get_widget("background", this->background);
 	this->background->set(BACKGROUND_MENU_IMAGE);
 
-	this->quit->signal_clicked().connect(sigc::mem_fun(*this, &Menu::quitButtonPressed));
+	this->quit->signal_clicked().connect(
+			sigc::mem_fun(*this, &Menu::quitButtonPressed));
 }
 
 Menu::~Menu() {}

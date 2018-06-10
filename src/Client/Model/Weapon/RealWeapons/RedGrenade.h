@@ -4,16 +4,16 @@
 #include "DistanceWeapon.h"
 
 /* Clase que representa al arma Granada roja */
-class RedGrenade: public DistanceWeapon {
-	public:
-		/* Constructor */
-		RedGrenade(int ammo);
+class RedGrenade : public DistanceWeapon {
+public:
+	/* Constructor */
+	explicit RedGrenade(int ammo);
 
-		/* Destructor */
-		~RedGrenade();
+	/* Destructor */
+	~RedGrenade();
 
-		/* Constructor por movimiento */
-		RedGrenade(RedGrenade&& other);
+	/* Constructor por movimiento */
+	RedGrenade(RedGrenade&& other);
 };
 
 #endif

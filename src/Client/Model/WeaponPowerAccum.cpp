@@ -5,8 +5,8 @@ const int TIME_STEP = 50;
 const int MINIMUM_POWER = 1000;
 const int POWER_STEP = 15;
 
-WeaponPowerAccum::WeaponPowerAccum(Handlers& handlers, int time) : 
-	actual_time(0), max_time(time), handlers(handlers) {}
+WeaponPowerAccum::WeaponPowerAccum(Handlers& handlers, int time) :
+		actual_time(0), max_time(time), handlers(handlers) {}
 
 WeaponPowerAccum::~WeaponPowerAccum() {}
 
@@ -24,7 +24,8 @@ bool WeaponPowerAccum::startCallBack() {
 void WeaponPowerAccum::start() {
 	this->actual_time = 0;
 	this->power = MINIMUM_POWER;
-	this->my_connection = Glib::signal_timeout().connect(sigc::mem_fun(*this, &WeaponPowerAccum::startCallBack), TIME_STEP);
+	this->my_connection = Glib::signal_timeout().connect(
+			sigc::mem_fun(*this, &WeaponPowerAccum::startCallBack), TIME_STEP);
 }
 
 void WeaponPowerAccum::stop() {

@@ -1,8 +1,9 @@
 #include "Weapon.h"
+#include <string>
 
 Weapon::Weapon(std::string name, int ammo) :
-	name(name), ammo(ammo), has_Scope(false), is_Timed(false){}
-	
+		name(name), ammo(ammo), has_Scope(false), is_Timed(false) {}
+
 Weapon::~Weapon() {}
 
 Weapon::Weapon(Weapon&& other) {
@@ -20,23 +21,23 @@ Weapon& Weapon::operator=(Weapon&& other) {
 	return *this;
 }
 
-bool Weapon::hasScope() const{
+bool Weapon::hasScope() const {
 	return this->has_Scope;
 }
 
-bool Weapon::isSelfDirected() const{
+bool Weapon::isSelfDirected() const {
 	return false;
 }
 
-bool Weapon::isTimed() const{
+bool Weapon::isTimed() const {
 	return this->is_Timed;
 }
 
-bool Weapon::hasVariablePower() const{
+bool Weapon::hasVariablePower() const {
 	return false;
 }
 
-const std::string& Weapon::getName() const{
+const std::string& Weapon::getName() const {
 	return this->name;
 }
 
@@ -45,11 +46,11 @@ void Weapon::shoot() {
 		this->ammo--;
 }
 
-bool Weapon::hasAmmo() const{
+bool Weapon::hasAmmo() const {
 	return this->ammo > 0;
 }
 
-unsigned int Weapon::getAmmo() const{
+unsigned int Weapon::getAmmo() const {
 	return this->ammo;
 }
 

@@ -1,4 +1,6 @@
 #include "MusicPlayer.h"
+#include <map>
+#include <string>
 #include "MusicPlayerException.h"
 #include "WeaponNames.h"
 #include "Protocol.h"
@@ -12,7 +14,7 @@ MusicPlayer::MusicPlayer() {
 	}
 
 	//Initialize SDL_mixer
-	if (Mix_OpenAudio( 22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
 		throw MusicPlayerException("Error al inicializar SDL mixer");
 	}
 
@@ -111,7 +113,7 @@ void MusicPlayer::stop() {
 	Mix_HaltMusic();
 }
 
-void MusicPlayer::playWeaponShotSound(const std::string& weapon){
+void MusicPlayer::playWeaponShotSound(const std::string& weapon) {
 	if (weapon == TELEPORT_NAME) {
 		this->addEffect(TELEPORT_SOUND);
 	} else if (weapon == BAT_NAME) {
@@ -128,7 +130,7 @@ void MusicPlayer::playWeaponShotSound(const std::string& weapon){
 void MusicPlayer::playJumpSound(char action) {
 	if (action == ROLLBACK) {
 		this->addEffect(ROLLBACK_SOUND);
-	} else if (action == JUMP){
+	} else if (action == JUMP) {
 		this->addEffect(JUMP_SOUND);
 	}
 }

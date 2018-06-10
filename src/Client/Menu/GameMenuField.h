@@ -6,28 +6,28 @@
 #include <gtkmm/button.h>
 #include <string>
 
-class GameMenuField{
-	private:
-		Gtk::Label title;
-		Gtk::Button button;
-		Gtk::HBox container;
+class GameMenuField {
+private:
+	Gtk::Label title;
+	Gtk::Button button;
+	Gtk::HBox container;
 
-	public:
-		/* Constructor */
-		GameMenuField(const std::string& title);
+public:
+	/* Constructor */
+	explicit GameMenuField(const std::string& title);
 
-		/* Destructor */
-		~GameMenuField();
+	/* Destructor */
+	~GameMenuField();
 
-		/* Constructor por movimiento */
-		GameMenuField(GameMenuField&& other);
+	/* Constructor por movimiento */
+	GameMenuField(GameMenuField&& other);
 
 
-		/* Devuelve el contenedor del menu */
-		Gtk::Container& getContainer();
+	/* Devuelve el contenedor del menu */
+	Gtk::Container& getContainer();
 
-		/* Devuelve el boton del menu */
-		Gtk::Button& getButton();
+	/* Devuelve el boton del menu */
+	Gtk::Button& getButton();
 };
 
 

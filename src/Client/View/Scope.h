@@ -7,28 +7,27 @@
 
 /* Clase que se encarga de controlar la imagen
  * de la mira del arma */
-class Scope{
-	private:
-		Gtk::Image scope;
-		WorldView& world;
-		int angle;
+class Scope {
+private:
+	Gtk::Image scope;
+	WorldView& world;
+	int angle;
 
-	public:
-		/* Constructor */
-		Scope(WorldView& world);
+public:
+	/* Constructor */
+	explicit Scope(WorldView& world);
 
-		/* Destructor */
-		~Scope();
+	/* Destructor */
+	~Scope();
 
-		/* Actualiza la posicion del scope */
-		void update(int angle, WormView& worm);
+	/* Actualiza la posicion del scope */
+	void update(int angle, WormView& worm);
 
-		/* Actualiza la posicion del scope */
-		void update(WormView& worm);
+	/* Actualiza la posicion del scope */
+	void update(WormView& worm);
 
-		/* Esconde el scope */
-		void hide();
-
+	/* Esconde el scope */
+	void hide();
 };
 
 #endif

@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <gtkmm/window.h>
+#include <string>
 #include "MenuView.h"
 #include "ClientProtocol.h"
 #include "Turn.h"
@@ -16,69 +17,70 @@
 #include "MusicPlayer.h"
 
 class Player {
-	private:
-		ClientProtocol& protocol;
-		std::string name;
-		WeaponList weapons;
-		ScreenView screen;
-		Turn turn;
-		ViewsList view_list;
-		DataReceiver data_receiver;
-		Handlers handlers;
-		MusicPlayer musicPlayer;
+private:
+	ClientProtocol& protocol;
+	std::string name;
+	WeaponList weapons;
+	ScreenView screen;
+	Turn turn;
+	ViewsList view_list;
+	DataReceiver data_receiver;
+	Handlers handlers;
+	MusicPlayer musicPlayer;
 
-		/* Reduce el tiempo del turno y actualiza la municion */
-		void shootWeapon();
+	/* Reduce el tiempo del turno y actualiza la municion */
+	void shootWeapon();
 
-	public:
-		/* Constructor */
-		Player(ClientProtocol& protocol, const std::string& name, Gtk::Window& window, MenuView& main_menu);
-		
-		/* Destructor */
-		~Player();
+public:
+	/* Constructor */
+	Player(ClientProtocol& protocol, const std::string& name,
+		   Gtk::Window& window, MenuView& main_menu);
+
+	/* Destructor */
+	~Player();
 
 
-		/* Comienza el turno. Si es el turno del jugador entonces,
-		   habilita los handlers, sino muestra los movimientos realizados
-		   por el otro jugador */
-		void startTurn(int worm_id, int player_id, float wind);
-		
-		/* Finaliza el turno del jugador actual */
-		void endTurn();
+	/* Comienza el turno. Si es el turno del jugador entonces,
+	   habilita los handlers, sino muestra los movimientos realizados
+	   por el otro jugador */
+	void startTurn(int worm_id, int player_id, float wind);
 
-		/* Finaliza el juego */
-		void endGame(const std::string& winner);
+	/* Finaliza el turno del jugador actual */
+	void endTurn();
 
-		/* Cambia el arma actual por la espeificada */
-		void changeWeapon(std::string weapon);
-		
-		/* Realiza el disparo del arma con el angulo, potencia 
-		   y tiempo pasados */
-		void shoot(int angle, int power, int time);
-		
-		/* Realiza el disparo del arma en la posicion pasada */
-		void shoot(Position position);
-		
-		/* Reproduce el sonido de falta de tiempo */
-		void playTickTime();
-		
-		/* Devuelve la lista de los elementos presentes en la vista */
-		ViewsList& getViewsList();
+	/* Finaliza el juego */
+	void endGame(const std::string& winner);
 
-		/* Devuelve la vista */
-		ScreenView& getScreen();
+	/* Cambia el arma actual por la espeificada */
+	void changeWeapon(std::string weapon);
 
-		/* Devuelve la lista de armas */
-		WeaponList& getWeapons();
+	/* Realiza el disparo del arma con el angulo, potencia
+	   y tiempo pasados */
+	void shoot(int angle, int power, int time);
 
-		/* Devuelve el protocolo */
-		ClientProtocol& getProtocol();
+	/* Realiza el disparo del arma en la posicion pasada */
+	void shoot(Position position);
 
-		/* Devuelve el music player */
-		MusicPlayer& getMusicPlayer();
+	/* Reproduce el sonido de falta de tiempo */
+	void playTickTime();
 
-		/* Devuelve el turno */
-		Turn& getTurn();
+	/* Devuelve la lista de los elementos presentes en la vista */
+	ViewsList& getViewsList();
+
+	/* Devuelve la vista */
+	ScreenView& getScreen();
+
+	/* Devuelve la lista de armas */
+	WeaponList& getWeapons();
+
+	/* Devuelve el protocolo */
+	ClientProtocol& getProtocol();
+
+	/* Devuelve el music player */
+	MusicPlayer& getMusicPlayer();
+
+	/* Devuelve el turno */
+	Turn& getTurn();
 };
 
 #endif

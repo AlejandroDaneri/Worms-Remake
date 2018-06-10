@@ -6,24 +6,23 @@
 
 /* Clase que se encarga de almacenar animaciones de explosiones */
 class ExplosionViewList {
-	private:
-		std::list<ExplosionView> animations;
+private:
+	std::list<ExplosionView> animations;
 
-		/* Verifica si alguna animacion de la lista finalizo y las
-		 * elimina de la lista */
-		void check();
+	/* Verifica si alguna animacion de la lista finalizo y las
+	 * elimina de la lista */
+	void check();
 
-	public:
-		/* Constructor */
-		ExplosionViewList();
+public:
+	/* Constructor */
+	ExplosionViewList();
 
-		/* Destructor */
-		~ExplosionViewList();
+	/* Destructor */
+	~ExplosionViewList();
 
 
-		/* Agrega una animacion de explosion a la lista y la reproduce */
-		void addAndStart(ExplosionView&& animation);
-
+	/* Agrega una animacion de explosion a la lista y la reproduce */
+	void addAndStart(ExplosionView&& animation);
 };
 
 

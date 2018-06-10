@@ -7,37 +7,37 @@ class Player;
 
 /* Clase que se encarga de contar el tiempo del turno */
 class Turn {
-	private:
-		int actual_time;
-		Player& player;
-		TurnLabel& time_label;
-		sigc::connection my_connection;
-		int max_time;
-		int reduction_time;
+private:
+	int actual_time;
+	Player& player;
+	TurnLabel& time_label;
+	sigc::connection my_connection;
+	int max_time;
+	int reduction_time;
 
-		/* Callback de start */
-		bool startCallBack();
+	/* Callback de start */
+	bool startCallBack();
 
-	public:
-		/* Constructor */
-		Turn(Player& player, TurnLabel& time_label);
+public:
+	/* Constructor */
+	Turn(Player& player, TurnLabel& time_label);
 
-		/* Destructor */
-		~Turn();
+	/* Destructor */
+	~Turn();
 
 
-		/* Comienza la cuenta regresiva del turno actualizando el
-		 * label que muestra el tiempo */
-		void start();
+	/* Comienza la cuenta regresiva del turno actualizando el
+	 * label que muestra el tiempo */
+	void start();
 
-		/* Reduce el tiempo restante del turno a 3 segundos */
-		void reduceTime();
+	/* Reduce el tiempo restante del turno a 3 segundos */
+	void reduceTime();
 
-		/* Detiene el contador y finaliza el turno */
-		void stop();
+	/* Detiene el contador y finaliza el turno */
+	void stop();
 
-		/* Setea los tiempos */
-		void setTime(int time, int reduction_time);
+	/* Setea los tiempos */
+	void setTime(int time, int reduction_time);
 };
 
 #endif

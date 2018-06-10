@@ -4,16 +4,16 @@
 #include "SelfDirectedWeapon.h"
 
 /* Clase que representa al arma AirStrike */
-class AirAttack: public SelfDirectedWeapon {
-	public:
-	    /* Constructor */
-		AirAttack(int ammo);
+class AirAttack : public SelfDirectedWeapon {
+public:
+	/* Constructor */
+	explicit AirAttack(int ammo);
 
-		/* Destructor */
-		~AirAttack();
+	/* Destructor */
+	~AirAttack();
 
-		/* Constructor por movimiento */
-		AirAttack(AirAttack&& other);
+	/* Constructor por movimiento */
+	AirAttack(AirAttack&& other);
 };
 
 #endif

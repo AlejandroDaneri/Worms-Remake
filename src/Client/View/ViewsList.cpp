@@ -1,24 +1,27 @@
 #include "ViewsList.h"
 #include <glibmm/main.h>
+#include <string>
 #include "ObjectSizes.h"
 #include "WeaponNames.h"
 #include "Player.h"
 
-ViewsList::ViewsList(WorldView& world, Player& player, PlayersList& players_list, MusicPlayer& musicPlayer):
-	world(world), player(player), players_list(players_list), scope(world), musicPlayer(musicPlayer) {
-
+ViewsList::ViewsList(WorldView& world, Player& player,
+					 PlayersList& players_list, MusicPlayer& musicPlayer) :
+		world(world), player(player), players_list(players_list), scope(world),
+		musicPlayer(musicPlayer) {
 	this->current_worm_id = -1;
 	this->weapon_focused = -1;
 	this->worm_focused = -1;
 }
 
-ViewsList::~ViewsList(){}
+ViewsList::~ViewsList() {}
 
 
-void ViewsList::removeWorm(int id){
+void ViewsList::removeWorm(int id) {
 	auto it = this->worms.find(id);
 	if (it != this->worms.end()) {
-		this->players_list.reducePlayerLife(it->second.getPlayerId(), it->second.getLife());
+		this->players_list.reducePlayerLife(it->second.getPlayerId(),
+											it->second.getLife());
 		it->second.removeFromWorld();
 		this->worms.erase(it);
 		this->musicPlayer.playDeathSound();
@@ -26,27 +29,28 @@ void ViewsList::removeWorm(int id){
 	}
 }
 
-void ViewsList::removeWeapon(int id){
+void ViewsList::removeWeapon(int id) {
 	auto it = this->weapons.find(id);
 	if (it != this->weapons.end()) {
-		if(it->second.getName() != BAT_NAME) {
+		if (it->second.getName() != BAT_NAME) {
 			this->musicPlayer.playExplosionSound(it->second.getName());
 			ExplosionView explosion(std::move(it->second));
 			this->animation.addAndStart(std::move(explosion));
 		}
 		this->weapons.erase(it);
 
-		if (this->weapon_focused == id){
+		if (this->weapon_focused == id) {
 			this->weapon_focused = -2;
 			this->checkMovingWorms();
 		}
 	}
 }
 
-void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, int life, char dir, bool colliding){
+void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y,
+							   int life, char dir, bool colliding) {
 	auto it = this->worms.find(id);
 	Position pos(pos_x / UNIT_TO_SEND, pos_y / UNIT_TO_SEND);
-	if (it == this->worms.end()){
+	if (it == this->worms.end()) {
 		//Worm no existe
 		WormView worm(this->world, life, dir, pos, player_id);
 		this->worms.insert(std::make_pair(id, std::move(worm)));
@@ -54,24 +58,28 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y, 
 	} else {
 		//Worm existe
 		int current_life = it->second.getLife();
-		if (current_life != life){
+		if (current_life != life) {
 			this->players_list.reducePlayerLife(player_id, current_life - life);
-			if (id == this->current_worm_id){
+			if (id == this->current_worm_id) {
 				this->musicPlayer.playDamageReceiveSound();
 			}
 		}
-		it->second.updateData(life, dir, pos, colliding, id == this->current_worm_id, this->weapon_focused != -1);
+		it->second.updateData(life, dir, pos, colliding,
+							  id == this->current_worm_id,
+							  this->weapon_focused != -1);
 		this->checkMovingWorms();
 	}
 }
 
-void ViewsList::updateWeaponData(int id, const std::string& weapon_name, float pos_x, float pos_y){
+void
+ViewsList::updateWeaponData(int id, const std::string& weapon_name, float pos_x,
+							float pos_y) {
 	auto it = this->weapons.find(id);
 	Position pos(pos_x / UNIT_TO_SEND, pos_y / UNIT_TO_SEND);
-	if (it == this->weapons.end()){
+	if (it == this->weapons.end()) {
 		//Weapon no existe
 		BulletView weapon(this->world, weapon_name, pos);
-		if (this->weapon_focused < 0){
+		if (this->weapon_focused < 0) {
 			weapon.setFocus(true);
 			this->weapon_focused = id;
 			this->removeWormFocus();
@@ -103,20 +111,22 @@ void ViewsList::removeScopeVisibility() {
 	this->scope.hide();
 }
 
-bool ViewsList::addGirderCallBack(size_t size, Position pos, int rotation){
+bool ViewsList::addGirderCallBack(size_t size, Position pos, int rotation) {
 	GirderView girder(this->world, size, pos, rotation);
 	this->girders.push_back(std::move(girder));
 	return false;
 }
 
-void ViewsList::addGirder(size_t size, float pos_x, float pos_y, int rotation){
-	sigc::slot<bool> my_slot = sigc::bind(sigc::mem_fun(*this, &ViewsList::addGirderCallBack), size, Position(pos_x, pos_y), rotation);
+void ViewsList::addGirder(size_t size, float pos_x, float pos_y, int rotation) {
+	sigc::slot<bool> my_slot = sigc::bind(
+			sigc::mem_fun(*this, &ViewsList::addGirderCallBack), size,
+			Position(pos_x, pos_y), rotation);
 	Glib::signal_idle().connect(my_slot);
 }
 
-void ViewsList::setCurrentWorm(int id){
+void ViewsList::setCurrentWorm(int id) {
 	this->removeWormFocus();
-	for (auto it = this->worms.begin(); it != this->worms.end(); ++it){
+	for (auto it = this->worms.begin(); it != this->worms.end(); ++it) {
 		it->second.resetFocus();
 	}
 	this->current_worm_id = id;
@@ -127,24 +137,24 @@ void ViewsList::setCurrentWorm(int id){
 	worm.setFocus(true);
 }
 
-void ViewsList::removeWormFocus(){
+void ViewsList::removeWormFocus() {
 	auto it = this->worms.find(this->worm_focused);
-	if (it != this->worms.end()){
+	if (it != this->worms.end()) {
 		it->second.resetFocus();
 	}
 	this->worm_focused = -1;
 }
 
-void ViewsList::checkMovingWorms(){
-	if (this->weapon_focused != -2){
+void ViewsList::checkMovingWorms() {
+	if (this->weapon_focused != -2) {
 		return;
 	}
 
 	auto it = this->worms.find(this->worm_focused);
-	if (it == this->worms.end() || !it->second.isMoving()){
+	if (it == this->worms.end() || !it->second.isMoving()) {
 		this->removeWormFocus();
-		for (auto it2 = this->worms.begin(); it2 != this->worms.end(); ++it2){
-			if (it2->second.isMoving()){
+		for (auto it2 = this->worms.begin(); it2 != this->worms.end(); ++it2) {
+			if (it2->second.isMoving()) {
 				this->worm_focused = it2->first;
 				it2->second.setFocus(true);
 				this->world.setFocus(it2->second.getWidget());
@@ -152,11 +162,10 @@ void ViewsList::checkMovingWorms(){
 			}
 		}
 	}
-
 }
 
 void ViewsList::setVictory() {
-	if (this->worms.empty()){
+	if (this->worms.empty()) {
 		return;
 	}
 	for (auto iter = this->worms.begin(); iter != this->worms.end(); iter++) {
