@@ -14,7 +14,7 @@ class GirderView: public Viewable{
 		int rotation;
 
 	public:
-	    	/* Constructor */
+		/* Constructor */
 		GirderView(WorldView& worldView, size_t size, Position pos, int rotation);
 
 		/* Destructor */

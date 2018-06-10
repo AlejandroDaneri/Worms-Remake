@@ -12,19 +12,27 @@ class ScrollHandler{
 		bool mouse_in_window;
 		sigc::connection my_connection;
 
+		/* Handler del movimiento del mouse */
 		bool mouseMotionEvent(GdkEventMotion* motion_event);
+
+		/* Handler de entrada en el area de desplazamiento */
 		bool mouseEntered(GdkEventCrossing* crossing_event);
+
+		/* Handler de salida del area de desplazamiento */
 		bool mouseLeft(GdkEventCrossing* crossing_event);
 
+		/* Realiza el desplazamiento de la pantalla */
 		bool scroll();
 
 	public:
+		/* Constructor */
 		ScrollHandler(Gtk::ScrolledWindow& window);
 
+		/* Destructor */
 		~ScrollHandler();
 
+		/* Detiene el desplazamiento */
 		void stop();
-
 };
 
 #endif

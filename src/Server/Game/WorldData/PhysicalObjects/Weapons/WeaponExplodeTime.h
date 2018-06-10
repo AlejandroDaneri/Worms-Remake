@@ -17,6 +17,7 @@ class WeaponExplodeTime: public Thread{
 		WeaponExplodeTime(World& world, Weapon& weapon);
 		~WeaponExplodeTime();
 
+		//Setea el tiempo de explosion
 		void setTime(int time);
 
 		//Cuenta el tiempo que falta para que el arma explote

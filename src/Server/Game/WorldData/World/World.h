@@ -68,9 +68,13 @@ class World: public Thread{
 		//Devuelve el objeto mas cercano entre al centro en la direccion end - center
 		b2Body* getClosestObject(RayCastWeaponExploded* callback, b2Vec2 center, b2Vec2 end);
 
+		//Devuelve la lista de objetos
 		std::list<physical_object_ptr>& getObjectsList();
+
+		//Devuelve la lista de vigas
 		std::list<physical_object_ptr>& getGirdersList();
 
+		//Devuelve el mutex
 		std::mutex& getMutex();
 };
 

@@ -48,14 +48,18 @@ class Weapon: public PhysicalObject{
 		//Explota el arma
 		virtual void explode();
 
+		//Establece la accion a realizar cuando el arma colisiona
 		virtual void collideWithSomething(CollisionData *other) override;
 
 		void getBodyDef(b2BodyDef& body_def, const b2Vec2& pos) override;
 
+		//Devuelve el nombre del arma
 		virtual const std::string& getName() = 0;
 
+		//Devuelve el id del tirador
 		int getShooterId() const;
 
+		//Remueve el id del tirador
 		void removeShooterId();
 
 };

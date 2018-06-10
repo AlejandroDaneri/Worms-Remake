@@ -8,6 +8,8 @@
 
 class WormView;
 
+/* Clase que se encarga de controlar las animaciones
+ * de las armas */
 class WeaponAnimation {
 	private:
 		std::vector<Glib::RefPtr<Gdk::Pixbuf>> scope_vector;

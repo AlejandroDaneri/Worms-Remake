@@ -10,6 +10,7 @@
 #include <list>
 #include <memory>
 
+// Clase que se encarga de enviar datos a los jugadores
 class DataSender: public Thread{
 	private:
 		std::list<physical_object_ptr>& objects;
@@ -20,6 +21,7 @@ class DataSender: public Thread{
 		bool active;
 		int sleep_time;
 
+		// Envia la informacion del buffer a todos los jugadores
 		void sendBuffer(const Buffer& buffer);
 		void notifyAll();
 

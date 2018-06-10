@@ -5,6 +5,8 @@
 #include "WorldView.h"
 #include "WormView.h"
 
+/* Clase que se encarga de controlar la imagen
+ * de la mira del arma */
 class Scope{
 	private:
 		Gtk::Image scope;

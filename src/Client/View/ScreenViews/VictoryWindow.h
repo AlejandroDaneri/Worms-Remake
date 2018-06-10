@@ -7,6 +7,9 @@
 #include <string>
 #include "MenuView.h"
 
+/* Clase que se encarga de mostrar una ventana con
+ * un mensaje indicando el ganador de la partida cuando
+ * esta finaliza. */
 class VictoryWindow {
 	private:
 		Gtk::Window* my_window;
@@ -17,17 +20,25 @@ class VictoryWindow {
 		MenuView& main_menu;
 		bool was_closed;
 
+		/* Handler de la ventana al cerrarse */
 		bool on_delete_event(GdkEventAny* any_event);
 
+		/* Handler del boton de retorno al menu */
 		void returnMenuButtonPressed();
 
+		/* Handler del boton salir */
 		void quitButtonPressed();
 
 	public:
+		/* Constructor */
 		VictoryWindow(Gtk::Window& window, MenuView& main_menu);
 
+		/* Destructor */
 		~VictoryWindow();
 
+
+		/* Establece el mensaje del ganador y muestra la ventana
+		 * con este mensaje y los botones */
 		void setWinner(const std::string& winner, bool i_win);
 };
 

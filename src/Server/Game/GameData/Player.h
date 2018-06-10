@@ -25,8 +25,10 @@ class Player{
 
 		~Player();
 
+		//Setea el id del jugador por el pasado
 		void setId(int id);
 
+		//Devuelve el id del jugador
 		int getId() const;
 
 		//Devuelve el gusano actual del jugador
@@ -57,10 +59,13 @@ class Player{
 		//Cambia el arma actual del jugador
 		void changeWeapon(const std::string& weapon);
 
+		//Setea el nombre del jugador
 		void setName(const std::string& name);
 
+		//Devuelve el nombre del jugador
 		const std::string& getName() const;
 
+		//Devuelve el protocolo del jugador
 		ServerProtocol& getProtocol();
 
 };

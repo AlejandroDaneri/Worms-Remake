@@ -24,6 +24,7 @@ class WorldView{
 		std::vector<Gtk::Image> background_images;
 		Water water;
 
+		/* Coloca la imagen de fondo */
 		bool setBackgroundImageCallBack(Buffer image);
 
 	public:

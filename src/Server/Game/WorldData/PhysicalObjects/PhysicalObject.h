@@ -56,6 +56,7 @@ class PhysicalObject{
 		//Mata al objeto
 		void kill();
 
+		//Devuelve el id del objeto
 		int getId();
 
 		//Devuelve el tipo del objeto
@@ -65,7 +66,6 @@ class PhysicalObject{
 
 		//Colisiona con otro objeto
 		virtual void collideWithSomething(CollisionData *other);
-
 };
 
 typedef std::shared_ptr<PhysicalObject> physical_object_ptr;

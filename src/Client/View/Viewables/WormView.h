@@ -31,15 +31,6 @@ class WormView: public Viewable {
 		 * condiciones en las que se encuentra este */
 		void setNewImage(char dir, bool colliding, bool is_current_worm, bool has_shot);
 
-		/* Cambia la imagen actual por la del arma actual */
-		void setWeaponImage();
-
-		/* Actualiza las imagenes de las armas */
-		void updateWeaponImage();
-
-		/* Callback */
-		bool batHitCallBack(std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator& iter, const int width);
-
 	public:
 		/* Constructor */
 		WormView(WorldView& worldView, int life, char dir, Position pos, int player_id);

@@ -16,7 +16,10 @@ class CollisionData{
 		CollisionData(std::string type, PhysicalObject* object);
 		~CollisionData();
 
+		//Devuelve el tipo del objeto fisico
 		const std::string& getType();
+
+		//Devuelve el objeto fisico
 		PhysicalObject* getObject();
 };
 

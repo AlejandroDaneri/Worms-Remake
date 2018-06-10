@@ -30,10 +30,19 @@ class Worm: public PhysicalObject{
 		Worm(World& world, GameParameters& parameters, int id, int player_id, WeaponList& weapons);
 		~Worm();
 
+		//Devuelve el id del jugador
 		int getPlayerId() const;
+
+		//Devuelve la vida del worm
 		int getLife() const;
+
+		//Devuelve la direccion del worm
 		char getDir() const;
+
+		//Devuelve true si esta colisionando
 		bool isColliding() const;
+
+		//Devuelve el arma actual
 		const std::string& getCurrentWeapon() const;
 
 		//Aumenta la vida del gusano
