@@ -9,6 +9,9 @@
 #include "PlayerDataSender.h"
 #include <list>
 #include <memory>
+#include <vector>
+#include <map>
+#include <string>
 
 // Clase que se encarga de enviar datos a los jugadores
 class DataSender: public Thread{
@@ -26,7 +29,7 @@ class DataSender: public Thread{
 		void notifyAll();
 
 	public:
-		DataSender(World& world, std::vector<Player>& players, GameParameters& parameters);
+		DataSender(World& world, std::vector<Player>& players, GameParameters& param);
 		~DataSender();
 
 		//Envia constantemente los datos de los objetos

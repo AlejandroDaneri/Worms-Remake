@@ -1,12 +1,17 @@
 #include "DataSender.h"
+#include <map>
+#include <string>
+#include <vector>
 
-DataSender::DataSender(World& world, std::vector<Player>& players, GameParameters& parameters): 
+typedef std::vector<Player> Players;
+
+DataSender::DataSender(World& world, Players& players, GameParameters& params): 
 	objects(world.getObjectsList()), girders(world.getGirdersList()), 
-	players(players), mutex(world.getMutex()), active(false), sleep_time(parameters.getDataSenderSleep()){
-
+	players(players), mutex(world.getMutex()), active(false), 
+	sleep_time(params.getDataSenderSleep()){
 		for (size_t i = 0; i < this->players.size(); i++){
-			std::unique_ptr<PlayerDataSender> sender(new PlayerDataSender(this->players[i]));
-			this->players_data_senders.push_back(std::move(sender));
+			std::unique_ptr<PlayerDataSender> s(new PlayerDataSender(this->players[i]));
+			this->players_data_senders.push_back(std::move(s));
 			this->players_data_senders[i]->start();
 		}
 	}

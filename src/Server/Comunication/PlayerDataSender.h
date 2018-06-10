@@ -17,7 +17,7 @@ class PlayerDataSender: public Thread{
 		std::queue<Buffer> queue;
 
 	public:
-		PlayerDataSender(Player& player);
+		explicit PlayerDataSender(Player& player);
 
 		~PlayerDataSender();
 
@@ -32,7 +32,6 @@ class PlayerDataSender: public Thread{
 
 		//Termina el envio de datos
 		void stop() override;
-
 };
 
 #endif

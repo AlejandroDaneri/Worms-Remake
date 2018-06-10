@@ -5,6 +5,7 @@
 #include "Protocol.h"
 #include "PhysicalObject.h"
 #include <mutex>
+#include <string>
 
 class Player;
 
@@ -17,7 +18,7 @@ class ServerProtocol : public Protocol{
 		static void send_weapon(physical_object_ptr& weapon, Buffer& buffer);
 
 	public:
-		ServerProtocol(Socket&& socket);
+		explicit ServerProtocol(Socket&& socket);
 		ServerProtocol(ServerProtocol&& other);
 		~ServerProtocol();
 
@@ -31,7 +32,7 @@ class ServerProtocol : public Protocol{
 		static Buffer sendStartGame();
 
 		//Carga la informacion de nuevo turno en el buffer
-		static Buffer sendStartTurn(int current_worm_id, int current_player_id, float wind);
+		static Buffer sendStartTurn(int worm_id, int player_id, float wind);
 
 		//Carga la informacion del turno en el buffer
 		static Buffer sendTurnData(int turn_time, int time_after_shoot);

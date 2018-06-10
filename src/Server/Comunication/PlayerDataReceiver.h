@@ -33,7 +33,6 @@ class PlayerDataReceiver: public Thread{
 
 		/* Termina el turno */
 		void endTurn();
-
 };
 
 #endif

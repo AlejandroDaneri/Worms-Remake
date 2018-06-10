@@ -9,7 +9,8 @@
 
 ServerProtocol::ServerProtocol(Socket&& socket): Protocol(std::move(socket)){}
 
-ServerProtocol::ServerProtocol(ServerProtocol&& other): Protocol(std::move(other)) {}
+ServerProtocol::ServerProtocol(ServerProtocol&& other):
+	Protocol(std::move(other)) {}
 
 ServerProtocol::~ServerProtocol(){}
 
@@ -85,11 +86,11 @@ Buffer ServerProtocol::sendEndTurn(){
 	return buffer;
 }
 
-Buffer ServerProtocol::sendStartTurn(int current_worm_id, int current_player_id, float wind){
+Buffer ServerProtocol::sendStartTurn(int worm_id, int player_id, float wind){
 	Buffer buffer;
 	buffer.setNext(START_TURN);
-	ServerProtocol::sendIntBuffer(buffer, current_worm_id);
-	ServerProtocol::sendIntBuffer(buffer, current_player_id);
+	ServerProtocol::sendIntBuffer(buffer, worm_id);
+	ServerProtocol::sendIntBuffer(buffer, player_id);
 	ServerProtocol::sendIntBuffer(buffer, wind * UNIT_TO_SEND);
     return buffer;
 }

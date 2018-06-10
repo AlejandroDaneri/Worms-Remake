@@ -3,6 +3,7 @@
 #include "ConfigFields.h"
 #include "Path.h"
 #include <iostream>
+#include <string>
 #include <mutex>
 
 #define EXIT_CHAR 'q'
