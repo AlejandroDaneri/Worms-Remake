@@ -11,7 +11,7 @@ maps_list_t MapsList::getAllMaps(){
 		std::move(maps_list);
 	}
 
-	while((entry = readdir(dir))){  // NOLINT (el error que dice esta deprecated)
+	while((entry = readdir(dir))){  // NOLINT (La solucion que propone esta deprecated)
 		std::string file(entry->d_name);
 		if (file.rfind(YAML_EXTENSION) != std::string::npos){
 			maps_list.push_back(file);
