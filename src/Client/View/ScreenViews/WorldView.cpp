@@ -37,8 +37,8 @@ void WorldView::moveScope(Gtk::Widget& scope, Gtk::Widget& worm, int angle) {
 	float pos_y = this->world.child_property_y(worm).get_value();
 	pos_x += 50 * Math::cosDegrees(angle);
 	pos_y -= 50 * Math::sinDegrees(angle);
-	pos_x -= worm.get_width() /
-			 2; // Para que quede referenciado a la mitad de la imagen
+	// Para que quede referenciado a la mitad de la imagen
+	pos_x -= worm.get_width() / 2;
 	this->world.move(scope, pos_x, pos_y);
 }
 
@@ -67,11 +67,9 @@ Gtk::Layout& WorldView::getLayout() {
 
 void WorldView::setFocus(Gtk::Widget& element) {
 	this->window.get_hadjustment()->set_value(element.get_allocation().get_x() -
-											  this->window.get_hadjustment()->get_page_size() /
-											  2);
+						this->window.get_hadjustment()->get_page_size() / 2);
 	this->window.get_vadjustment()->set_value(element.get_allocation().get_y() -
-											  this->window.get_vadjustment()->get_page_size() /
-											  2);
+						this->window.get_vadjustment()->get_page_size() / 2);
 }
 
 void WorldView::setBackgroundImage(const Buffer& image) {

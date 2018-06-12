@@ -13,10 +13,9 @@ BulletView::BulletView(WorldView& worldView, std::string weapon, Position pos) :
 
 BulletView::~BulletView() {}
 
-BulletView::BulletView(BulletView&& other) : Viewable(std::move(other)),
-											 image(std::move(other.image)),
-											 weapon_name(std::move(
-													 other.weapon_name)) {}
+BulletView::BulletView(BulletView&& other) :
+		Viewable(std::move(other)), image(std::move(other.image)),
+		weapon_name(std::move(other.weapon_name)) {}
 
 void BulletView::updateData(const Position& new_pos) {
 	this->move(new_pos, weapon_size, weapon_size);
@@ -29,4 +28,3 @@ Gtk::Widget& BulletView::getWidget() {
 std::string BulletView::getName() {
 	return this->weapon_name;
 }
-

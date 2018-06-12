@@ -75,8 +75,7 @@ bool DataReceiver::analizeReceivedData(Buffer buffer) {
 			char dir = buffer.getNext();
 			bool colliding = buffer.getNext();
 			this->player.getViewsList().updateWormData(id, player_id, pos_x,
-													   pos_y, life, dir,
-													   colliding);
+												pos_y, life, dir, colliding);
 			this->player.getViewsList().removeScopeVisibility();
 		} else if (type == WEAPON_TYPE) {
 			std::string weapon(Protocol::receiveStringBuffer(buffer));

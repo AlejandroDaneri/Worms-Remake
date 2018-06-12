@@ -8,7 +8,7 @@
 const std::string PATH = GLADE_PATH + "client_GameMenu.glade";
 
 GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol) :
-		MenuView(window, *this, protocol, PATH) {
+									MenuView(window, *this, protocol, PATH) {
 	this->builder->get_widget("player_name", this->player_name);
 
 	this->builder->get_widget("game_menu", this->menu);

@@ -64,8 +64,7 @@ bool WeaponAnimation::batHitCallBack(
 	return true;
 }
 
-void
-WeaponAnimation::weaponShootAnimation(const std::string& weapon, char dir) {
+void WeaponAnimation::weaponShootAnimation(const std::string& weapon, char dir){
 	if (weapon != BAT_NAME) {
 		return;
 	}
@@ -77,8 +76,7 @@ WeaponAnimation::weaponShootAnimation(const std::string& weapon, char dir) {
 	for (int i = 0; i < height / WORM_IMAGE_WIDTH; i++) {
 		this->scope_vector.push_back(
 				Gdk::Pixbuf::create_subpixbuf(scope_image, pos_x,
-											  i * WORM_IMAGE_WIDTH, width,
-											  WORM_IMAGE_WIDTH));
+								i * WORM_IMAGE_WIDTH, width, WORM_IMAGE_WIDTH));
 	}
 	std::vector<Glib::RefPtr<Gdk::Pixbuf>>::iterator iter;
 	iter = this->scope_vector.begin();

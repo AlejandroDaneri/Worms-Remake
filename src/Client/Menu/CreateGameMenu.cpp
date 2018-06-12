@@ -6,8 +6,7 @@
 const std::string PATH = GLADE_PATH + "client_CreateGameMenu.glade";
 
 CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu,
-							   ClientProtocol& protocol, std::string&& name,
-							   int quantity) :
+				ClientProtocol& protocol, std::string&& name, int quantity) :
 	SelectableListMenu(window, first_menu, protocol, std::move(name), PATH) {
 	this->builder->get_widget("game_name", this->game_name);
 	this->builder->get_widget("players_number", this->players_number);

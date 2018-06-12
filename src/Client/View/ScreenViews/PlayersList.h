@@ -16,7 +16,7 @@ private:
 	Gtk::VBox container;
 	Gtk::Label title;
 
-	bool addPLayerCallBack(int id, std::string name);
+	bool addPlayerCallBack(int id, std::string name);
 
 public:
 	/* Constructor */

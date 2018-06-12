@@ -20,17 +20,12 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos,
 WormView::~WormView() {}
 
 WormView::WormView(WormView&& other) : Viewable(std::move(other)),
-									   player_id(other.player_id),
-									   life(other.life),
-									   is_moving(other.is_moving),
-									   last_position(other.last_position),
-									   label(std::move(other.label)),
-									   image(std::move(other.image)),
-									   worm(std::move(other.worm)),
-									   walkingAnimation(std::move(
-											   other.walkingAnimation)),
-									   weaponAnimation(std::move(
-											   other.weaponAnimation)) {
+		player_id(other.player_id), life(other.life),
+		is_moving(other.is_moving), last_position(other.last_position),
+		label(std::move(other.label)), image(std::move(other.image)),
+		worm(std::move(other.worm)),
+		walkingAnimation(std::move(other.walkingAnimation)),
+		weaponAnimation(std::move(other.weaponAnimation)) {
 	this->weaponAnimation.updateWormImage(&this->image);
 	this->walkingAnimation.updateWormImage(&this->image);
 }

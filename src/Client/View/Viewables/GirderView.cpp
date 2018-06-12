@@ -19,9 +19,8 @@ GirderView::GirderView(WorldView& worldView, size_t size, Position pos,
 GirderView::~GirderView() {}
 
 GirderView::GirderView(GirderView&& other) : Viewable(std::move(other)),
-											 image(std::move(other.image)),
-											 size(other.size),
-											 rotation(other.rotation) {}
+		image(std::move(other.image)), size(other.size),
+		rotation(other.rotation) {}
 
 Gtk::Widget& GirderView::getWidget() {
 	return this->image;

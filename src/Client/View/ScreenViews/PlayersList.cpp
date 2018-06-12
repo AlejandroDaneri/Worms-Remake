@@ -14,11 +14,11 @@ PlayersList::~PlayersList() {}
 
 void PlayersList::addPlayer(int id, const std::string& name) {
 	sigc::slot<bool> my_slot = sigc::bind(
-			sigc::mem_fun(*this, &PlayersList::addPLayerCallBack), id, name);
+			sigc::mem_fun(*this, &PlayersList::addPlayerCallBack), id, name);
 	Glib::signal_idle().connect(my_slot);
 }
 
-bool PlayersList::addPLayerCallBack(int id, std::string name) {
+bool PlayersList::addPlayerCallBack(int id, std::string name) {
 	this->players[id] = name;
 	this->labels[id].setPlayerName(id, name);
 	this->container.pack_start(this->labels[id].getLabel(), Gtk::PACK_SHRINK);
