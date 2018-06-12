@@ -65,6 +65,8 @@ public:
 
     // Sale del modo "Seleccion"
     void closeSelectionMode();
+
+    void hideRotatingButtons();
 };
 
 

@@ -119,6 +119,7 @@ void ToolBoxView::showSelected(int id) {
         case WORM_BUTTON_ID:
             selected->set(IMAGES_PATH+"/right_worm.png");
             selected->show();
+            hideRotatingButtons();
             break;
         case GIRDER_3_BUTTON_ID:
             selected->set(IMAGES_PATH+"Girder/girder_3_selected.png");
@@ -142,5 +143,10 @@ void ToolBoxView::closeSelectionMode() {
     disableMovingItems();
     hideSelected();
     mode->set_active(false);
+}
+
+void ToolBoxView::hideRotatingButtons() {
+    turncw->set_sensitive(false);
+    turnccw->set_sensitive(false);
 }
 
