@@ -36,6 +36,7 @@ void MapController::eraseSignal() {
     view->erase(index_object_selected);
     toolBox->hideSelected();
     toolBox->disableMovingItems();
+    actual_mode = SELECT_MODE_ID;
 }
 
 void MapController::newMapSignal() {
