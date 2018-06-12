@@ -11,6 +11,7 @@ class ScrollHandler{
 		Position last_mouse_position;
 		bool mouse_in_window;
 		sigc::connection my_connection;
+		int current_time;
 
 		/* Handler del movimiento del mouse */
 		bool mouseMotionEvent(GdkEventMotion* motion_event);
