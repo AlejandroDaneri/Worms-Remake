@@ -36,6 +36,9 @@ private:
     // Deja en un estado consistente la zona "Agregar"
     void leaveConsistent();
 
+    // Deshabilita los botones de rotacion
+    void hideRotatingButtons();
+
 public:
     ToolBoxView(BaseObjectType *cobject,
                 const Glib::RefPtr<Gtk::Builder> &builder);
@@ -66,7 +69,7 @@ public:
     // Sale del modo "Seleccion"
     void closeSelectionMode();
 
-    void hideRotatingButtons();
+
 };
 
 
