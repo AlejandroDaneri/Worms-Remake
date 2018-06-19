@@ -6,7 +6,7 @@
 #define SCROLL_INCREMENT 25
 #define TIMEOUT 50
 #define WAIT_TO_SCROLL TIMEOUT * 10
-#define NO_SCROLL_POSITION Position(SPACE_TO_SCROLL * 2, SPACE_TO_SCROLL * 2)
+const Position NO_SCROLL_POSITION(SPACE_TO_SCROLL * 2, SPACE_TO_SCROLL * 2);
 
 ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window):
 		window(window),
