@@ -107,6 +107,7 @@ void MapView::erase(const int &index) {
 
 void MapView::clean() {
     contained_objects.clear();
+    this->setInitialPosition();
 }
 
 void MapView::bindController(MapController *map_controller) {

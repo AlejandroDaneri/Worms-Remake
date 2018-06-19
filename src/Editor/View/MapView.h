@@ -30,9 +30,6 @@ private:
     // Inicializa el vector de imagenes de las vigas
     void initializeGirderImages();
 
-    // Establece la posicion actual del mapa a mostrar
-    void setInitialPosition();
-
     // Dibuja nuevamente el contenido del mapa
     void redrawMap();
 
@@ -50,6 +47,9 @@ public:
 
     // Enlaza el controlador a la vista
     void bindController(MapController *map_controller);
+    
+    // Establece la posicion inicial del mapa a mostrar
+    void setInitialPosition();
 
     // Agregar un nuevo objeto al mapa, en la posicion (x,y)
     void add(const unsigned int &id, const double &x, const double &y,

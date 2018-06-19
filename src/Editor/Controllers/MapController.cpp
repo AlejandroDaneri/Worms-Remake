@@ -124,14 +124,6 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
                                 std::vector<std::vector<double>> &girders) {
     newMapSignal();
     ViewPositionTransformer transformer(*view);
-    for (std::vector<double> &worm:worms) {
-        Position position(worm[0],worm[1]);
-        Position new_pos = transformer.transformToScreen(position);
-        worm[0] = new_pos.getX();
-        worm[1] = new_pos.getY();
-        this->model.add(1, worm[0], worm[1]);
-        this->view->add(1, worm[0], worm[1]);
-    }
     for (std::vector<double> &girder:girders) {
         Position position(girder[1],girder[2]);
         Position new_pos = transformer.transformToScreen(position);
@@ -140,6 +132,15 @@ void MapController::loadObjects(std::vector<std::vector<double>> &worms,
         this->model.add(girder[0], girder[1], girder[2], girder[3]);
         this->view->add(girder[0], girder[1], girder[2], girder[3]);
     }
+    for (std::vector<double> &worm:worms) {
+        Position position(worm[0],worm[1]);
+        Position new_pos = transformer.transformToScreen(position);
+        worm[0] = new_pos.getX();
+        worm[1] = new_pos.getY();
+        this->model.add(1, worm[0], worm[1]);
+        this->view->add(1, worm[0], worm[1]);
+    }
+    this->view->setInitialPosition();
 }
 
 void MapController::changeBackgroundSignal() const {
