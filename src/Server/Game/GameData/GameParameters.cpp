@@ -58,10 +58,13 @@ GameParameters::GameParameters(const std::string& config_file,
 	for (auto it = girders_file.begin(); it != girders_file.end(); ++it){
 		this->girders.push_back(GirderParams((*it)[0], (*it)[1], (*it)[2], (*it)[3]));
 	}
-
-	std::string background = 
-		BACKGROUND_PATH + config_editor[BACKGROUND_IMAGE].as<std::string>();
-	this->background_image = std::move(File(background, FILE_READ_MODE));
+		
+	std::vector<int> bg = config_editor[BACKGROUND_IMAGE].as<std::vector<int>>();
+    Buffer buffer(bg.size());
+    for (auto it = bg.begin(); it != bg.end(); ++it){
+		buffer.setNext(*it);
+	}
+	this->background_image = std::move(buffer);
 }
 
 GameParameters::~GameParameters(){}
@@ -159,7 +162,7 @@ int GameParameters::getMaxGirderRotationToFriction(){
 }
 
 void GameParameters::setMaxHeight(int height){
-	this->params[WORLD_MAX_HEIGHT] = height + 15;
+	this->params[WORLD_MAX_HEIGHT] = height + 10;
 }
 
 int GameParameters::getMaxHeight(){
@@ -190,7 +193,7 @@ int GameParameters::getTimeAfterShoot(){
 	return this->params[TIME_AFTER_SHOOT];
 }
 
-File& GameParameters::getBackgroundImage(){
+Buffer& GameParameters::getBackgroundImage(){
 	return this->background_image;
 }
 

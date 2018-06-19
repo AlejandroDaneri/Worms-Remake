@@ -51,9 +51,8 @@ void DataSender::run(){
 	}
 }
 
-void DataSender::sendBackgroundImage(File& image){
-	Buffer data = ServerProtocol::sendFile(image);
-	this->sendBuffer(data);
+void DataSender::sendBackgroundImage(Buffer& image){
+	this->sendBuffer(image);
 	this->notifyAll();
 }
 

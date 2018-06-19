@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "ServerProtocol.h"
 #include "PlayerDataSender.h"
+#include "Buffer.h"
 #include <list>
 #include <memory>
 #include <vector>
@@ -36,7 +37,7 @@ class DataSender: public Thread{
 		void run() override;
 
 		//Envia la imagen de fondo
-		void sendBackgroundImage(File& image);
+		void sendBackgroundImage(Buffer& image);
 
 		//Envia los datos del turno
 		void sendTurnData(int turn_time, int time_after_shoot);

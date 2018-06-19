@@ -2,6 +2,7 @@
 #include <Path.h>
 #include <string>
 #include <vector>
+#include <gtkmm/image.h>
 #include "FileBoxController.h"
 #include "FileWriter.h"
 #include "FileReader.h"
@@ -45,12 +46,8 @@ void FileBoxController::onSaveClicked() const {
             std::string filename = save_dialog->get_current_name();
             map_name->set_label(filename);
 
-            size_t extension = filename.rfind(".");
-            std::string bg_name = filename.substr(0, extension) + ".png";
-            background->save(BACKGROUND_PATH + bg_name, "png");
-
             FileWriter file(path);
-            file.save(weapons_ammo, worms, girders, life, bg_name);
+            file.save(weapons_ammo, worms, girders, life, background);
         }
         save_dialog->hide();
     } catch(const InvalidMapError &error){
@@ -69,7 +66,7 @@ void FileBoxController::onLoadClicked() const {
         std::vector<std::vector<double>> girders;
         std::vector<int> weps_ammo;
         unsigned int life;
-        std::string background;
+        Glib::RefPtr<Gdk::Pixbuf> background;
 
         FileReader file(filename);
         file.read(worms, girders,

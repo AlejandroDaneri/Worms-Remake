@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <giomm/memoryinputstream.h>
+#include "Buffer.h"
 
 FileReader::FileReader(const std::string &filename):
     file(filename, std::fstream::in),
@@ -11,10 +13,9 @@ FileReader::FileReader(const std::string &filename):
 void FileReader::read(std::vector<std::vector<double>> &worms,
                       std::vector<std::vector<double>> &girders,
                       std::vector<int> &weps_ammo,
-                      unsigned int &worms_life, std::string& background) {
+                      unsigned int &worms_life,
+                      Glib::RefPtr<Gdk::Pixbuf> &background) {
     YAML::Node config = YAML::LoadFile(filename);
-
-    background = config[BACKGROUND_IMAGE].as<std::string>();
 
     worms_life = config[WORMS_LIFE].as<unsigned int>();
 
@@ -35,4 +36,14 @@ void FileReader::read(std::vector<std::vector<double>> &worms,
     worms = config[WORMS_DATA].as<std::vector<std::vector<double>>>();
 
     girders = config[GIRDERS_DATA].as<std::vector<std::vector<double>>>();
+    
+    std::vector<int> bg = config[BACKGROUND_IMAGE].as<std::vector<int>>();
+    Buffer buffer(bg.size());
+    for (auto it = bg.begin(); it != bg.end(); ++it){
+		buffer.setNext(*it);
+	}
+	
+	auto stream = Gio::MemoryInputStream::create();
+	stream->add_data(buffer.getPointer(), buffer.getMaxSize());
+	background = Gdk::Pixbuf::create_from_stream(stream);
 }

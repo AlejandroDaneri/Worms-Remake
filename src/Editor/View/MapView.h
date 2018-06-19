@@ -70,8 +70,8 @@ public:
     // Obtiene el nombre del fondo actual
     Glib::RefPtr<const Gdk::Pixbuf> getBackground() const;
 
-    // Establece el fondo especificado por su nombre
-    void loadBackground(const std::string &name);
+    // Establece el fondo especificado
+    void loadBackground(Glib::RefPtr<Gdk::Pixbuf> pixbuf);
 };
 
 #endif //WORMS_MAP_H

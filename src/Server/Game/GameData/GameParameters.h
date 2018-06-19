@@ -6,7 +6,7 @@
 #include <map>
 #include "b2Math.h"
 #include "yaml.h"
-#include "File.h"
+#include "Buffer.h"
 
 // Clase que lee los archivos de configuracion 
 // y devuelve los parametros obtenidos
@@ -23,7 +23,7 @@ class GameParameters{
 
 		std::vector<b2Vec2> worms;
 		std::vector<GirderParams> girders;
-		File background_image;
+		Buffer background_image;
 
 	public:
 		//Inicializa todos los parametros necesarios para la partida
@@ -124,7 +124,7 @@ class GameParameters{
 		int getTimeAfterShoot();
 
 		//Devuelve la imagen de fondo
-		File& getBackgroundImage();
+		Buffer& getBackgroundImage();
 };
 
 class GameParameters::GirderParams{

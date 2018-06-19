@@ -6,7 +6,7 @@ Buffer::Buffer(size_t max_size): buffer(new char[max_size]),
 
 Buffer::~Buffer(){
 	if (this->buffer){
-		delete[] buffer;
+		delete[] this->buffer;
 	}
 }
 
@@ -21,6 +21,17 @@ Buffer::Buffer(const Buffer& other): buffer(new char[other.max_size]){
 Buffer::Buffer(Buffer&& other): buffer(other.buffer),
 	offset(other.offset), max_size(other.max_size){
 	other.buffer = NULL;
+}
+
+Buffer& Buffer::operator=(Buffer&& other){
+	if (this->buffer){
+		delete[] this->buffer;
+	}
+	this->buffer = other.buffer;
+	other.buffer = NULL;
+	this->offset = other.offset;
+	this->max_size = other.max_size;
+	return *this;
 }
 
 void Buffer::setNext(char value){

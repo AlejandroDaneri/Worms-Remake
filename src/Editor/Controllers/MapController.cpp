@@ -156,6 +156,6 @@ Glib::RefPtr<const Gdk::Pixbuf> MapController::getBackground() const{
     return view->getBackground();
 }
 
-void MapController::loadBackground(const std::string &background)  {
+void MapController::loadBackground(Glib::RefPtr<Gdk::Pixbuf> &background)  {
     view->loadBackground(background);
 }

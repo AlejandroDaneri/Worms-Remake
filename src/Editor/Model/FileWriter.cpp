@@ -11,13 +11,11 @@ FileWriter::FileWriter(const std::string &filename):
 void FileWriter::save(std::vector<int> weapons,
                 const std::vector<std::vector<double>> &worms,
                 const std::vector<std::vector<double>> &girders,
-                const unsigned int &worm_life, const std::string& background) {
+                const unsigned int &worm_life,
+                Glib::RefPtr<const Gdk::Pixbuf>& background) {
     YAML::Emitter out;
 
     out << YAML::BeginMap;
-
-    out << YAML::Key << BACKGROUND_IMAGE;
-    out << YAML::Value << background;
 
     out << YAML::Key << WORMS_LIFE;
     out << YAML::Value << worm_life;
@@ -54,7 +52,19 @@ void FileWriter::save(std::vector<int> weapons,
 
     out << YAML::Key << GIRDERS_DATA;
     out << girders;
-
+    
+    out << YAML::Key << BACKGROUND_IMAGE;
+    out << YAML::Value << YAML::Flow << YAML::BeginSeq;
+    
+    char* image;
+    gsize size;
+    background->save_to_buffer(image, size);
+    
+    for (size_t i = 0; i < size; i++){
+		out << (int)image[i];
+	}
+	
+	out << YAML::EndSeq;
     out << YAML::EndMap;
 
     file << out.c_str();

@@ -9,6 +9,7 @@
 #include <ConfigFields.h>
 #include <string>
 #include <vector>
+#include <gtkmm/image.h>
 
 // Clase que se encarga de manejar la carga de un mapa
 class FileReader{
@@ -23,7 +24,7 @@ public:
     void read(std::vector<std::vector<double>> &worms,
               std::vector<std::vector<double>> &girders,
               std::vector<int> &weps_ammo,
-              unsigned int &worm_life, std::string& background);
+              unsigned int &worm_life, Glib::RefPtr<Gdk::Pixbuf> &background);
 };
 
 

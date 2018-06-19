@@ -4,7 +4,6 @@
 #include <string>
 #include "Buffer.h"
 #include "Socket.h"
-#include "File.h"
 
 #define MAX_STRING_SIZE 200
 
@@ -97,10 +96,6 @@ class Protocol {
 
 		/* Recibe un string */
 		std::string receiveString();
-
-		/* Envia el archivo,
-		Post: el archivo no se modifica */
-		static Buffer sendFile(File& file);
 };
 
 #endif

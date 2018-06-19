@@ -114,21 +114,8 @@ void MapView::bindController(MapController *map_controller) {
 }
 
 void MapView::changeBackground(const std::string &path) {
-    background.clear();
     Gtk::Image bg(path);
-    int img_width = bg.get_pixbuf()->get_width();
-    int img_height = bg.get_pixbuf()->get_height();
-    guint window_width, window_height;
-    this->get_size(window_width, window_height);
-    for (size_t x = 0; x < window_width; x += img_width) {
-        for (size_t y = 0; y < window_height; y += img_height) {
-            Gtk::Image image(path);
-            image.show();
-            put(image, x, y);
-            background.push_back(std::move(image));
-        }
-    }
-    redrawMap();
+    loadBackground(bg.get_pixbuf());
 }
 
 void MapView::redrawMap() {
@@ -155,7 +142,20 @@ Glib::RefPtr<const Gdk::Pixbuf> MapView::getBackground() const{
     return this->background[0].get_pixbuf();
 }
 
-void MapView::loadBackground(const std::string &name) {
-    changeBackground(BACKGROUND_PATH + name);
+void MapView::loadBackground(Glib::RefPtr<Gdk::Pixbuf> pixbuf) {
+	background.clear();
+    int img_width = pixbuf->get_width();
+    int img_height = pixbuf->get_height();
+    guint window_width, window_height;
+    this->get_size(window_width, window_height);
+    for (size_t x = 0; x < window_width; x += img_width) {
+        for (size_t y = 0; y < window_height; y += img_height) {
+            Gtk::Image image(pixbuf);
+            image.show();
+            put(image, x, y);
+            background.push_back(std::move(image));
+        }
+    }
+    redrawMap();
 }
 

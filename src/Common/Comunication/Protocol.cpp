@@ -98,11 +98,3 @@ unsigned char Protocol::receiveChar(){
 	return c;
 }
 
-Buffer Protocol::sendFile(File& file){
-	size_t file_size = file.size();
-    Buffer buffer(file_size + 1);
-    file.read_buffer(buffer.getPointer(), file_size);
-    buffer.incrementOffset(file_size);
-    buffer.setNext('\0');
-    return buffer;
-}

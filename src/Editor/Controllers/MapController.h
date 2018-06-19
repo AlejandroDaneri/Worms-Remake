@@ -69,7 +69,7 @@ public:
     Glib::RefPtr<const Gdk::Pixbuf> getBackground() const;
 
 	/* Carga la imagen de fondo */
-    void loadBackground(const std::string &background);
+    void loadBackground(Glib::RefPtr<Gdk::Pixbuf> &background);
 };
 
 

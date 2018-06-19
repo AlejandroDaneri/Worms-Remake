@@ -27,6 +27,9 @@ class Buffer{
 
 		/* Constructor por movimiento */
 		Buffer(Buffer&& other);
+		
+		/* Operador = por movimiento */
+		Buffer& operator=(Buffer&& other);
 
 		/* Agrega el valor al buffer */
 		void setNext(char value);
