@@ -6,10 +6,11 @@
 #define SCROLL_INCREMENT 25
 #define TIMEOUT 50
 #define WAIT_TO_SCROLL TIMEOUT * 10
+#define NO_SCROLL_POSITION Position(SPACE_TO_SCROLL * 2, SPACE_TO_SCROLL * 2)
 
 ScrollHandler::ScrollHandler(Gtk::ScrolledWindow& window):
 		window(window),
-		last_mouse_position(SPACE_TO_SCROLL * 2, SPACE_TO_SCROLL * 2),
+		last_mouse_position(NO_SCROLL_POSITION),
 		mouse_in_window(false){
 	this->current_time = 0;
 	this->window.add_events(Gdk::POINTER_MOTION_MASK);
@@ -38,6 +39,7 @@ bool ScrollHandler::mouseMotionEvent(GdkEventMotion* motion_event){
 bool ScrollHandler::mouseEntered(GdkEventCrossing* crossing_event){
 	this->mouse_in_window = true;
 	this->current_time = 0;
+	this->last_mouse_position = NO_SCROLL_POSITION;
 	return true;
 }
 
