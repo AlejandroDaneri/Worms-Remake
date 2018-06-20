@@ -28,16 +28,16 @@ WormsList::WormsList(WormsList&& other):
 
 void WormsList::distribute(size_t max, int life_to_add){
 	if (this->list.size() < max){
-		for (auto it = this->list.begin(); it != this->list.end(); ++it){
-			Worm* worm = (Worm*)it->get();
+		for (physical_object_ptr& worm_ptr: this->list){
+			Worm* worm = (Worm*)worm_ptr.get();
 			worm->addLife(life_to_add);
 		}
 	}
 }
 
 bool WormsList::isEmpty(){
-	for (auto it = this->list.begin(); it != this->list.end(); ++it){
-		if (!(*it)->isDead()){
+	for (physical_object_ptr& worm: this->list){
+		if (!worm->isDead()){
 			return false;
 		}
 	}
@@ -45,9 +45,9 @@ bool WormsList::isEmpty(){
 }
 
 void WormsList::kill(){
-	for (auto it = this->list.begin(); it != this->list.end(); ++it){
-		if (!(*it)->isDead()){
-			(*it)->kill();
+	for (physical_object_ptr& worm: this->list){
+		if (!worm->isDead()){
+			worm->kill();
 		}
 	}
 }

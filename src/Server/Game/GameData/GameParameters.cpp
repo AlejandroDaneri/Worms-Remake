@@ -50,19 +50,19 @@ GameParameters::GameParameters(const std::string& config_file,
 	weapon_fragments = config[WEAPON_FRAGMENTS].as<std::map<std::string, int>>();
 
 	worms_vector worms_file = config_editor[WORMS_DATA].as<worms_vector>();
-	for (auto it = worms_file.begin(); it != worms_file.end(); ++it){
-		this->worms.push_back(b2Vec2((*it)[0], (*it)[1]));
+	for (std::vector<float>& worm: worms_file){
+		this->worms.push_back(b2Vec2(worm[0], worm[1]));
 	}
 
 	girders_vector girders_file = config_editor[GIRDERS_DATA].as<girders_vector>();
-	for (auto it = girders_file.begin(); it != girders_file.end(); ++it){
-		this->girders.push_back(GirderParams((*it)[0], (*it)[1], (*it)[2], (*it)[3]));
+	for (std::vector<float>& girder: girders_file){
+		this->girders.push_back(GirderParams(girder[0], girder[1], girder[2], girder[3]));
 	}
 		
 	std::vector<int> bg = config_editor[BACKGROUND_IMAGE].as<std::vector<int>>();
     Buffer buffer(bg.size());
-    for (auto it = bg.begin(); it != bg.end(); ++it){
-		buffer.setNext(*it);
+    for (int byte: bg){
+		buffer.setNext(byte);
 	}
 	this->background_image = std::move(buffer);
 }

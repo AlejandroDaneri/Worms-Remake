@@ -5,9 +5,9 @@
 Turn::Turn(): current(0){}
 
 Turn::~Turn(){
-	for (auto it = this->receivers.begin(); it != this->receivers.end(); ++it){
-		(*it)->stop();
-		(*it)->join();
+	for (std::unique_ptr<PlayerDataReceiver>& receiver: this->receivers){
+		receiver->stop();
+		receiver->join();
 	}
 }
 
@@ -22,8 +22,8 @@ bool Turn::addPlayer(Player& player){
 }
 
 bool Turn::playerCanJoin(const std::string& player_name){
-	for (auto it = this->players.begin(); it != this->players.end(); ++it){
-		if (it->getName() == player_name){
+	for (Player& player: this->players){
+		if (player.getName() == player_name){
 			return false;
 		}
 	}
@@ -39,8 +39,8 @@ Player& Turn::getCurrentPlayer(){
 }
 
 void Turn::startGame(DataSender& data_sender){
-	for (auto it = this->players.begin(); it != this->players.end(); ++it){
-		PlayerDataReceiver* r = new PlayerDataReceiver(*it, data_sender);
+	for (Player& player: this->players){
+		PlayerDataReceiver* r = new PlayerDataReceiver(player, data_sender);
 		std::unique_ptr<PlayerDataReceiver> receiver(r);
 		receiver->start();
 		this->receivers.push_back(std::move(receiver));
@@ -81,8 +81,8 @@ void Turn::distributeWorms(size_t size, int life_to_add){
 		quantity += 1;
 	}
 
-	for (auto it = this->players.begin(); it != this->players.end(); ++it){
-		it->distributeWorms(quantity, life_to_add);
+	for (Player& player: this->players){
+		player.distributeWorms(quantity, life_to_add);
 	}
 }
 
@@ -90,18 +90,18 @@ bool Turn::gameEnded(std::mutex& mutex){
 	std::lock_guard<std::mutex> lock(mutex);
 	this->winner.clear();
 	size_t players_alive = 0;
-	for (auto it = this->players.begin(); it != this->players.end(); ++it){
-		if (!it->isDead()){
+	for (Player& player: this->players){
+		if (!player.isDead()){
 			players_alive++;
-			this->winner = it->getName();
+			this->winner = player.getName();
 		}
 	}
 	return players_alive <= 1;
 }
 
 const std::string& Turn::getWinner(){
-	for (auto it = this->receivers.begin(); it != this->receivers.end(); ++it){
-		(*it)->stop();
+	for (std::unique_ptr<PlayerDataReceiver>& receiver: this->receivers){
+		receiver->stop();
 	}
 	return this->winner;
 }

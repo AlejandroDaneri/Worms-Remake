@@ -33,13 +33,13 @@ void World::run(){
 		this->world.Step(this->time_step, velocityIterations, positionIterations);
 
 		this->is_active = false;
-		for (auto it = this->objects.begin(); it != this->objects.end(); it++){
-			if ((*it)->isDead()){
-				this->removeObject(*it);
-			} else if ((*it)->isActive()){
+		for (physical_object_ptr& object: this->objects){
+			if (object->isDead()){
+				this->removeObject(object);
+			} else if (object->isActive()){
 				this->is_active = true;
-				b2Body* body = (*it)->getBody();
-				if (body && (*it)->isWindAffected()){
+				b2Body* body = object->getBody();
+				if (body && object->isWindAffected()){
 					body->ApplyForceToCenter(b2Vec2(this->wind.getVelocity(), 0), false);
 				}
 			}
@@ -49,12 +49,11 @@ void World::run(){
 
 void World::addAllFragments(){
 	std::lock_guard<std::mutex> lock(this->mutex);
-	auto it = this->fragments_to_add.begin();
-	for (; it != this->fragments_to_add.end(); it++){
+	for (physical_object_ptr& fragment: this->fragments_to_add){
 		b2BodyDef body_def;
-		b2Vec2 pos = ((Fragment *) it->get())->getShootPosition();
-		(*it)->getBodyDef(body_def, pos);
-		this->initializeObject(*it, &body_def);
+		b2Vec2 pos = ((Fragment *) fragment.get())->getShootPosition();
+		fragment->getBodyDef(body_def, pos);
+		this->initializeObject(fragment, &body_def);
 	}
 	this->fragments_to_add.clear();
 }

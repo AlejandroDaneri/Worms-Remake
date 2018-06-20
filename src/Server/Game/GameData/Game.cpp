@@ -84,10 +84,9 @@ void Game::run(){
 	this->world.stop();
 	this->data_sender->stop();
 	this->data_sender->join();
-	auto& player_list = this->turn.getPlayers();
-	for (auto it = player_list.begin(); it != player_list.end(); ++it){
-		if (it->isConnected()){
-			this->server.addConnectedClient(std::move(it->getProtocol()));
+	for (Player& player: this->turn.getPlayers()){
+		if (player.isConnected()){
+			this->server.addConnectedClient(std::move(player.getProtocol()));
 		}
 	}
 	this->running = false;
@@ -131,9 +130,8 @@ void Game::configure(){
 	//Municion de las armas
 	std::map<std::string, unsigned int>& ammo = this->parameters.getWeaponsAmmo();
 	this->data_sender->sendWeaponsAmmo(ammo);
-	auto& player_list = this->turn.getPlayers();
-	for (auto it = player_list.begin(); it != player_list.end(); ++it){
-		it->setWeaponsAmmo(ammo);
+	for (Player& player: this->turn.getPlayers()){
+		player.setWeaponsAmmo(ammo);
 	}
 }
 

@@ -28,7 +28,7 @@ void DataSender::run(){
 		std::this_thread::sleep_for(std::chrono::milliseconds(this->sleep_time));
 		std::lock_guard<std::mutex> lock(this->mutex);
 		this->active = false;
-		auto it = this->objects.begin();
+		std::list<physical_object_ptr>::iterator it = this->objects.begin();
 
 		while(it != this->objects.end()){
 			if ((*it)->isDead() && !(*it)->getBody()){
@@ -71,8 +71,8 @@ void DataSender::sendTurnData(int turn_time, int time_after_shoot){
 void DataSender::sendPlayersId(){
 	Buffer length = ServerProtocol::sendLengthBuffer(this->players.size());
 	this->sendBuffer(length);
-	for (auto it = this->players.begin(); it != this->players.end(); ++it){
-		Buffer data = ServerProtocol::sendPlayerId(*it);
+	for (Player& player: this->players){
+		Buffer data = ServerProtocol::sendPlayerId(player);
 		this->sendBuffer(data);
 	}
     this->notifyAll();
@@ -81,8 +81,8 @@ void DataSender::sendPlayersId(){
 void DataSender::sendGirders(){
 	Buffer length = ServerProtocol::sendLengthBuffer(this->girders.size());
 	this->sendBuffer(length);
-	for (auto it = this->girders.begin(); it != this->girders.end(); ++it){
-		Buffer data = ServerProtocol::sendGirder(*it);
+	for (physical_object_ptr& girder: this->girders){
+		Buffer data = ServerProtocol::sendGirder(girder);
 		this->sendBuffer(data);
 	}
     this->notifyAll();
@@ -91,7 +91,8 @@ void DataSender::sendGirders(){
 void DataSender::sendWeaponsAmmo(std::map<std::string, unsigned int>& weapons){
 	Buffer length = ServerProtocol::sendLengthBuffer(weapons.size());
 	this->sendBuffer(length);
-	for (auto it = weapons.begin(); it != weapons.end(); ++it){
+	std::map<std::string, unsigned int>::iterator it;
+	for (it = weapons.begin(); it != weapons.end(); ++it){
 		Buffer data = ServerProtocol::sendWeaponAmmo(it->first, it->second);
 		this->sendBuffer(data);
 	}

@@ -4,11 +4,13 @@
 #include <iostream>
 #include <string>
 
+typedef std::unordered_map<std::string, std::unique_ptr<Game>>::iterator games_it;
+
 GamesList::GamesList(Server& server, std::mutex& mutex_cout):
 	server(server), mutex_cout(mutex_cout){}
 
 GamesList::~GamesList(){
-	for (auto it = this->games.begin(); it != this->games.end(); ++it){
+	for (games_it it = this->games.begin(); it != this->games.end(); ++it){
 		it->second->join();
 		std::lock_guard<std::mutex> lock(this->mutex_cout);
 		std::cout << "[INFO] Partida terminada: " << it->first << std::endl;
@@ -50,7 +52,7 @@ games_list_t GamesList::getJoinableGames(const std::string& player_name){
 	std::lock_guard<std::mutex> lock(this->mutex);
 	games_list_t joinables;
 
-	for (auto it = this->games.begin(); it != this->games.end(); ++it){
+	for (games_it it = this->games.begin(); it != this->games.end(); ++it){
 		if (it->second->playerCanJoin(player_name)){
 			joinables.push_back(it->first);
 		}

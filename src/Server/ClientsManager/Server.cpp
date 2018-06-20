@@ -11,9 +11,9 @@ Server::Server(const std::string& service, std::mutex& mutex_cout):
 	games_list(*this, mutex_cout), mutex_cout(mutex_cout){}
 
 Server::~Server(){
-	for (auto it = this->clients.begin(); it != this->clients.end(); ++it){
-		(*it)->stop();
-		(*it)->join();
+	for (std::unique_ptr<Thread>& client: this->clients){
+		client->stop();
+		client->join();
 	}
 }
 
