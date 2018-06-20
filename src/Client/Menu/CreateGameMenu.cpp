@@ -16,7 +16,7 @@ CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu,
 
 	this->builder->get_widget("create_game_menu", this->menu);
 
-	this->addMenu(true);
+	this->addMenu();
 }
 
 CreateGameMenu::~CreateGameMenu() {}

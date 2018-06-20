@@ -13,7 +13,7 @@ GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol) :
 
 	this->builder->get_widget("game_menu", this->menu);
 
-	this->addMenu(true);
+	this->addMenu();
 
 	Gtk::Button* create_game, * join_game;
 

@@ -43,7 +43,7 @@ void VictoryWindow::returnMenuButtonPressed() {
 	this->was_closed = false;
 	this->my_window->close();
 	this->window.remove();
-	this->main_menu.addMenu(true);
+	this->main_menu.addMenu();
 }
 
 void VictoryWindow::quitButtonPressed() {

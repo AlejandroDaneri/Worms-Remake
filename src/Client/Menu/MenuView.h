@@ -29,7 +29,7 @@ public:
 	virtual ~MenuView();
 
 	/* Agrega el menu al container y el container al window */
-	void addMenu(bool hide_error);
+	void addMenu();
 };
 
 #endif

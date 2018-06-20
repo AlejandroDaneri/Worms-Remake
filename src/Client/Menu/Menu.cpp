@@ -43,10 +43,10 @@ void Menu::hideWarningBox() {
 }
 
 void Menu::showError(const std::string& error) {
-	if (error == "") {
+	if (error.empty()) {
 		this->hideWarningBox();
-		return;
+	} else {
+		this->error->set_label(error);
+		this->warning_box->show_all();
 	}
-	this->error->set_label(error);
-	this->warning_box->show_all();
 }

@@ -20,10 +20,8 @@ void MenuView::showErrorAndRestart(const std::string& error) {
 	this->window.add(*this->main_menu.menu);
 }
 
-void MenuView::addMenu(bool hide_error) {
+void MenuView::addMenu() {
 	this->window.add(*this->menu);
 	this->window.show_all();
-	if (hide_error) {
-		this->hideWarningBox();
-	}
+	this->hideWarningBox();
 }
