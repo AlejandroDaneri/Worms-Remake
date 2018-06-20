@@ -4,11 +4,13 @@ Trabajo practico final para la materia Taller de Programacion I, Facultad de Ing
 
 ## Instalacion:
 
-cmake -DPATH=<path> .. && make install
+En la carpeta build ejecutar alguno de estos comandos:
 
-cmake -DCMAKE_INSTALL_PREFIX=<path> .. && make install
+- cmake -DPATH=<path> .. && make install
+
+- cmake -DCMAKE_INSTALL_PREFIX=<path> .. && make install
   
-cmake .. && make install
+- cmake .. && make install
 
 
 ## Video del juego:
