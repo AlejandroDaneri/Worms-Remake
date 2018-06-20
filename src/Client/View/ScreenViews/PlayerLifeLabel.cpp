@@ -3,11 +3,14 @@
 #include "GamePlayers.h"
 
 const std::string begining("<span color='");
-const std::string middle("'>");
-const std::string ending("</span>");
+const std::string middle("'><b> ");
+const std::string ending("</b></span>");
 
 PlayerLifeLabel::PlayerLifeLabel() : id(0), player_name(""), life(0) {
-	this->label.set_use_markup(true);
+	this->info_label.set_use_markup(true);
+	this->id_label.set_use_markup(true);
+	this->container.pack_start(this->id_label, Gtk::PACK_SHRINK);
+	this->container.pack_start(this->info_label, Gtk::PACK_SHRINK);
 }
 
 PlayerLifeLabel::~PlayerLifeLabel() {}
@@ -28,13 +31,16 @@ void PlayerLifeLabel::reduceLife(int life) {
 	this->updateLabel();
 }
 
-Gtk::Label& PlayerLifeLabel::getLabel() {
-	return this->label;
+Gtk::HBox& PlayerLifeLabel::getContainer() {
+	return this->container;
 }
 
 void PlayerLifeLabel::updateLabel() {
-	std::string message = begining + colors[this->id] + middle;
-	message += std::to_string(this->id) + "- " + this->player_name;
+	std::string id_message = begining + "white" + middle;
+	id_message += std::to_string(this->id) + " " + ending;
+	this->id_label.set_markup(id_message);
+	this->id_label.override_background_color(Gdk::RGBA(colors[this->id]));
+	std::string message = begining + "black" + middle + this->player_name;
 	message += ": " + std::to_string(this->life) + ending;
-	this->label.set_markup(message);
+	this->info_label.set_markup(message);
 }

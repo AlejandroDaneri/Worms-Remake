@@ -21,7 +21,7 @@ void PlayersList::addPlayer(int id, const std::string& name) {
 bool PlayersList::addPlayerCallBack(int id, std::string name) {
 	this->players[id] = name;
 	this->labels[id].setPlayerName(id, name);
-	this->container.pack_start(this->labels[id].getLabel(), Gtk::PACK_SHRINK);
+	this->container.pack_start(this->labels[id].getContainer(), Gtk::PACK_SHRINK);
 	return false;
 }
 

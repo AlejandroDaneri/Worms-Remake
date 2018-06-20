@@ -16,6 +16,8 @@ const std::string RESOURCES(std::string(ROOT_PATH) + "/resources/");
 
 const std::string IMAGES_PATH(RESOURCES + "Images/");
 
+const std::string MENU_PATH(IMAGES_PATH + "Menu/");
+
 const std::string SOUNDS_PATH(RESOURCES + "Sounds/");
 
 const std::string GLADE_PATH(RESOURCES + "Glade/");
@@ -50,11 +52,19 @@ const std::string VICTORY_ANIMATION(ANIMATIONS_PATH + "Victory.gif");
 
 const std::string EXPLOSION_ANIMATION(ANIMATIONS_PATH + "Explosion.png");
 
-const std::string TITLE_MENU_IMAGE(IMAGES_PATH + "Game_title.png");
+const std::string TITLE_MENU_IMAGE(MENU_PATH + "Game_title.png");
 
-const std::string BACKGROUND_MENU_IMAGE(IMAGES_PATH + "Background_worm.png");
+const std::string BACKGROUND_MENU_IMAGE(MENU_PATH + "Background_worm.png");
 
 const std::string BAT_HIT_ANIMATION(ANIMATIONS_PATH + "Bat_hit.png");
+
+const std::string WINNER_IMAGE(MENU_PATH + "Winner.png");
+
+const std::string LOSER_IMAGE(MENU_PATH + "Loser.png");
+
+const std::string TIE_IMAGE(MENU_PATH + "Tie.png");
+
+const std::string WARNING_IMAGE(MENU_PATH + "Warning.png");
 
 //server
 
