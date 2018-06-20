@@ -18,7 +18,7 @@ ViewsList::~ViewsList() {}
 
 
 void ViewsList::removeWorm(int id) {
-	auto it = this->worms.find(id);
+	std::unordered_map<int, WormView>::iterator it = this->worms.find(id);
 	if (it != this->worms.end()) {
 		this->players_list.reducePlayerLife(it->second.getPlayerId(),
 											it->second.getLife());
@@ -30,7 +30,7 @@ void ViewsList::removeWorm(int id) {
 }
 
 void ViewsList::removeWeapon(int id) {
-	auto it = this->weapons.find(id);
+	std::unordered_map<int, BulletView>::iterator it = this->weapons.find(id);
 	if (it != this->weapons.end()) {
 		if (it->second.getName() != BAT_NAME) {
 			this->musicPlayer.playExplosionSound(it->second.getName());
@@ -48,7 +48,7 @@ void ViewsList::removeWeapon(int id) {
 
 void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y,
 							   int life, char dir, bool colliding) {
-	auto it = this->worms.find(id);
+	std::unordered_map<int, WormView>::iterator it = this->worms.find(id);
 	Position pos(pos_x / UNIT_TO_SEND, pos_y / UNIT_TO_SEND);
 	if (it == this->worms.end()) {
 		//Worm no existe
@@ -74,7 +74,7 @@ void ViewsList::updateWormData(int id, int player_id, float pos_x, float pos_y,
 void
 ViewsList::updateWeaponData(int id, const std::string& weapon_name, float pos_x,
 							float pos_y) {
-	auto it = this->weapons.find(id);
+	std::unordered_map<int, BulletView>::iterator it = this->weapons.find(id);
 	Position pos(pos_x / UNIT_TO_SEND, pos_y / UNIT_TO_SEND);
 	if (it == this->weapons.end()) {
 		//Weapon no existe
@@ -92,7 +92,7 @@ ViewsList::updateWeaponData(int id, const std::string& weapon_name, float pos_x,
 }
 
 void ViewsList::changeWeapon(const std::string& weapon_name) {
-	auto it = this->worms.find(this->current_worm_id);
+	std::unordered_map<int, WormView>::iterator it = this->worms.find(this->current_worm_id);
 	it->second.changeWeapon(weapon_name);
 	if (WeaponsFactory().createWeapon(weapon_name, 1)->hasScope()) {
 		this->scope.update(it->second);
@@ -100,7 +100,7 @@ void ViewsList::changeWeapon(const std::string& weapon_name) {
 }
 
 void ViewsList::updateScope(int angle) {
-	auto it = this->worms.find(this->current_worm_id);
+	std::unordered_map<int, WormView>::iterator it = this->worms.find(this->current_worm_id);
 	if (it == this->worms.end()) {
 		return;
 	}
@@ -126,7 +126,8 @@ void ViewsList::addGirder(size_t size, float pos_x, float pos_y, int rotation) {
 
 void ViewsList::setCurrentWorm(int id) {
 	this->removeWormFocus();
-	for (auto it = this->worms.begin(); it != this->worms.end(); ++it) {
+	std::unordered_map<int, WormView>::iterator it;
+	for (it = this->worms.begin(); it != this->worms.end(); ++it) {
 		it->second.resetFocus();
 	}
 	this->current_worm_id = id;
@@ -138,7 +139,7 @@ void ViewsList::setCurrentWorm(int id) {
 }
 
 void ViewsList::removeWormFocus() {
-	auto it = this->worms.find(this->worm_focused);
+	std::unordered_map<int, WormView>::iterator it = this->worms.find(this->worm_focused);
 	if (it != this->worms.end()) {
 		it->second.resetFocus();
 	}
@@ -150,7 +151,7 @@ void ViewsList::checkMovingWorms() {
 		return;
 	}
 
-	auto it = this->worms.find(this->worm_focused);
+	std::unordered_map<int, WormView>::iterator it = this->worms.find(this->worm_focused);
 	if (it == this->worms.end() || !it->second.isMoving()) {
 		this->removeWormFocus();
 		for (auto it2 = this->worms.begin(); it2 != this->worms.end(); ++it2) {
@@ -168,7 +169,8 @@ void ViewsList::setVictory() {
 	if (this->worms.empty()) {
 		return;
 	}
-	for (auto iter = this->worms.begin(); iter != this->worms.end(); iter++) {
+	std::unordered_map<int, WormView>::iterator iter;
+	for (iter = this->worms.begin(); iter != this->worms.end(); iter++) {
 		this->musicPlayer.playVictory();
 		iter->second.setVictory();
 		this->world.setFocus(iter->second.getWidget());
