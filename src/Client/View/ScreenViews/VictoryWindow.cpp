@@ -2,6 +2,11 @@
 #include <gtkmm/builder.h>
 #include <string>
 #include "Path.h"
+#include "ButtonBuilder.h"
+
+const std::string begining("<span color='black'");
+const std::string medium(" font_family=\"monospace\" size='large'><b>");
+const std::string end("</b></span>");
 
 VictoryWindow::VictoryWindow(Gtk::Window& window, MenuView& main_menu) :
 		window(window), main_menu(main_menu), was_closed(true) {
@@ -14,9 +19,17 @@ VictoryWindow::VictoryWindow(Gtk::Window& window, MenuView& main_menu) :
 	this->my_window->set_icon_from_file(ICON_PATH);
 
 	builder->get_widget("victory_msg", victory_msg);
+	this->victory_msg->set_use_markup(true);
+	builder->get_widget("winner", winner);
+	this->winner->set_use_markup(true);
+
+	builder->get_widget("image", this->image);
 
 	builder->get_widget("Return_menu", this->return_menu);
 	builder->get_widget("quit", this->quit);
+
+	ButtonBuilder::buildButton(this->quit);
+	ButtonBuilder::buildButton(this->return_menu);
 
 	this->return_menu->signal_clicked().connect(
 			sigc::mem_fun(*this, &VictoryWindow::returnMenuButtonPressed));
@@ -51,15 +64,23 @@ void VictoryWindow::quitButtonPressed() {
 }
 
 void VictoryWindow::setWinner(const std::string& winner, bool i_win) {
-	std::string winner_message;
+	std::string victory_message = begining + medium;
+	std::string winner_message = begining + medium;
 	if (winner.empty()) {
-		winner_message = "Empate";
+		victory_message += "Empate";
+		this->image->set(TIE_IMAGE);
 	} else if (i_win) {
-		winner_message = "GANASTE!!!!";
+		victory_message += "GANASTE!!!!";
+		this->image->set(WINNER_IMAGE);
 	} else {
-		winner_message = "Perdiste. El ganador fue: " + winner;
+		victory_message += "Perdiste";
+		winner_message +=  "El ganador fue: " + winner;
+		this->image->set(LOSER_IMAGE);
 	}
-	this->victory_msg->set_text(winner_message);
+	victory_message += end;
+	winner_message += end;
+	this->victory_msg->set_markup(victory_message);
+	this->winner->set_markup(winner_message);
 	this->my_window->set_modal(true);
 	this->my_window->show_all();
 }

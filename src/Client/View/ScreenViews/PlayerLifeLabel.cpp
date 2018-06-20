@@ -3,7 +3,7 @@
 #include "GamePlayers.h"
 
 const std::string begining("<span color='");
-const std::string middle("'><b> ");
+const std::string middle("' font_family=\"monospace\"><b> ");
 const std::string ending("</b></span>");
 
 PlayerLifeLabel::PlayerLifeLabel() : id(0), player_name(""), life(0) {

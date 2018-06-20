@@ -4,6 +4,7 @@
 #include <gtkmm/window.h>
 #include <gtkmm/button.h>
 #include <gtkmm/label.h>
+#include <gtkmm/image.h>
 #include <string>
 #include "MenuView.h"
 
@@ -17,6 +18,8 @@ private:
 	Gtk::Button* return_menu;
 	Gtk::Button* quit;
 	Gtk::Label* victory_msg;
+	Gtk::Label* winner;
+	Gtk::Image* image;
 	MenuView& main_menu;
 	bool was_closed;
 
