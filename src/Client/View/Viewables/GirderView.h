@@ -25,6 +25,12 @@ public:
 
 	/* Devuelve el contenedor de la viga */
 	Gtk::Widget& getWidget() override;
+
+	/* Devuelve el ancho de la viga */
+	float getWidth() const override;
+
+	/* Devuelve el alto de la viga */
+	float getHeight() const override;
 };
 
 

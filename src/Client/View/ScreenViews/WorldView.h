@@ -8,6 +8,7 @@
 #include <gtkmm/overlay.h>
 #include <string>
 #include <vector>
+#include "Viewable.h"
 #include "Position.h"
 #include "Water.h"
 #include "Buffer.h"
@@ -39,9 +40,7 @@ public:
 	void setBackgroundImage(const Buffer& image);
 
 	/* Mueve el elemento pasado a la posicion especificada */
-	void
-	moveElement(Gtk::Widget& element, const Position& position, float width,
-				float height, bool focus = false);
+	void moveElement(Viewable& element, const Position& position);
 
 	/* Mueve la mira a la posicion correspondiente para que tenga el angulo
 	 * especificado por parametro */
@@ -51,8 +50,7 @@ public:
 	void removeElement(Gtk::Widget& element);
 
 	/* Agrega un elemento a la vista en la posicion especificada */
-	void addElement(Gtk::Widget& element, const Position& position, float width,
-					float height, bool focus = false);
+	void addElement(Viewable& element, const Position& position);
 
 	/* Devuelve la vista del scrolledWindow */
 	Gtk::ScrolledWindow& getWindow();

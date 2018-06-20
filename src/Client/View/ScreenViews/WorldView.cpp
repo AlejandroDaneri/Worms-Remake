@@ -22,13 +22,15 @@ WorldView::WorldView() {
 
 WorldView::~WorldView() {}
 
-void WorldView::moveElement(Gtk::Widget& element, const Position& position,
-							float width, float height, bool focus) {
+void WorldView::moveElement(Viewable& element, const Position& position) {
+	float width = element.getWidth();
+	float height = element.getHeight();
+	Gtk::Widget& widget = element.getWidget();
 	Position newPosition = ViewPositionTransformer(
 			this->world).transformToScreenAndMove(position, width, height);
-	this->world.move(element, newPosition.getX(), newPosition.getY());
-	if (focus) {
-		this->setFocus(element);
+	this->world.move(widget, newPosition.getX(), newPosition.getY());
+	if (element.hasFocus()) {
+		this->setFocus(widget);
 	}
 }
 
@@ -46,14 +48,16 @@ void WorldView::removeElement(Gtk::Widget& element) {
 	this->world.remove(element);
 }
 
-void WorldView::addElement(Gtk::Widget& element, const Position& position,
-						   float width, float height, bool focus) {
+void WorldView::addElement(Viewable& element, const Position& position) {
+	float width = element.getWidth();
+	float height = element.getHeight();
+	Gtk::Widget& widget = element.getWidget();
 	Position newPosition = ViewPositionTransformer(
 			this->world).transformToScreenAndMove(position, width, height);
-	this->world.put(element, newPosition.getX(), newPosition.getY());
-	element.show_all();
-	if (focus) {
-		this->setFocus(element);
+	this->world.put(widget, newPosition.getX(), newPosition.getY());
+	widget.show_all();
+	if (element.hasFocus()) {
+		this->setFocus(widget);
 	}
 }
 

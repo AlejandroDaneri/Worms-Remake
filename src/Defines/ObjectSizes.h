@@ -13,6 +13,8 @@ const float weapon_size = 0.25;
 
 const float girder_height = 0.4;
 
+const float scope_size = 1;
+
 const int WORM_IMAGE_WIDTH = 30;
 
 // map size

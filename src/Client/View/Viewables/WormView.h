@@ -70,6 +70,12 @@ public:
 	/* Devuelve el contenedor donde se encuentra la vista del worm */
 	Gtk::Widget& getWidget() override;
 
+	/* Devuelve el ancho del worm */
+	float getWidth() const override;
+
+	/* Devuelve el alto del worm */
+	float getHeight() const override;
+
 	/* Devuelve la imagen que contiene al worm */
 	Gtk::Image& getImage();
 

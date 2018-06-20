@@ -2,15 +2,14 @@
 #define __SCOPE_H__
 
 #include <gtkmm/image.h>
-#include "WorldView.h"
+#include "Viewable.h"
 #include "WormView.h"
 
 /* Clase que se encarga de controlar la imagen
  * de la mira del arma */
-class Scope {
+class Scope : public Viewable {
 private:
 	Gtk::Image scope;
-	WorldView& world;
 	int angle;
 
 public:
@@ -28,6 +27,15 @@ public:
 
 	/* Esconde el scope */
 	void hide();
+
+	/* Devuelve el contenedor del scope */
+	Gtk::Widget& getWidget() override;
+
+	/* Devuelve el ancho del scope */
+	float getWidth() const override;
+
+	/* Devuelve el alto del scope */
+	float getHeight() const override;
 };
 
 #endif

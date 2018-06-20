@@ -8,7 +8,7 @@ BulletView::BulletView(WorldView& worldView, std::string weapon, Position pos) :
 	path += this->weapon_name;
 	path += ".png";
 	this->image.set(path);
-	this->addToWorld(pos, weapon_size, weapon_size);
+	this->addToWorld(pos);
 }
 
 BulletView::~BulletView() {}
@@ -18,11 +18,19 @@ BulletView::BulletView(BulletView&& other) :
 		weapon_name(std::move(other.weapon_name)) {}
 
 void BulletView::updateData(const Position& new_pos) {
-	this->move(new_pos, weapon_size, weapon_size);
+	this->move(new_pos);
 }
 
 Gtk::Widget& BulletView::getWidget() {
 	return this->image;
+}
+
+float BulletView::getWidth() const {
+	return weapon_size;
+}
+
+float BulletView::getHeight() const {
+	return weapon_size;
 }
 
 std::string BulletView::getName() {

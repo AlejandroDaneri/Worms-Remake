@@ -11,9 +11,7 @@ GirderView::GirderView(WorldView& worldView, size_t size, Position pos,
 	path += std::to_string(rotation);
 	path += ".png";
 	this->image.set(path);
-	float width = GirderSize::getGirderWidthMeters(size, rotation);
-	float height = GirderSize::getGirderHeightMeters(size, rotation);
-	this->addToWorld(pos, width, height);
+	this->addToWorld(pos);
 }
 
 GirderView::~GirderView() {}
@@ -24,4 +22,12 @@ GirderView::GirderView(GirderView&& other) : Viewable(std::move(other)),
 
 Gtk::Widget& GirderView::getWidget() {
 	return this->image;
+}
+
+float GirderView::getWidth() const {
+	return GirderSize::getGirderWidthMeters(this->size, this->rotation);
+}
+
+float GirderView::getHeight() const {
+	return GirderSize::getGirderHeightMeters(this->size, this->rotation);
 }

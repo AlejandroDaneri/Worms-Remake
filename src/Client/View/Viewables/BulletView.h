@@ -28,6 +28,12 @@ public:
 	/* Devuelve el contenedor de la bala */
 	Gtk::Widget& getWidget() override;
 
+	/* Devuelve el ancho de la bala */
+	float getWidth() const override;
+
+	/* Devuelve el alto de la bala */
+	float getHeight() const override;
+
 	/* Devuelve el nombre del arma de la bala */
 	std::string getName();
 };

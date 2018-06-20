@@ -14,7 +14,7 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos,
 	this->worm.attach(this->label.getWidget(), 0, 0, 1, 1);
 	this->worm.attach(this->image, 0, 1, 1, 1);
 	this->walkingAnimation.setStaticImage(DIR_RIGHT);
-	this->addToWorld(pos, worm_size, worm_size + 0.5);
+	this->addToWorld(pos);
 }
 
 WormView::~WormView() {}
@@ -39,7 +39,7 @@ void WormView::updateData(int new_life, char new_dir, const Position& new_pos,
 	this->is_moving = !(this->last_position == new_pos);
 	this->last_position = new_pos;
 	this->setNewImage(new_dir, colliding, is_current_worm, has_shot);
-	this->move(new_pos, worm_size, worm_size + 0.5);
+	this->move(new_pos);
 }
 
 void WormView::updateScope(int angle) {
@@ -64,6 +64,14 @@ void WormView::setNewImage(char dir, bool colliding, bool is_current_worm,
 
 Gtk::Widget& WormView::getWidget() {
 	return this->worm;
+}
+
+float WormView::getWidth() const {
+	return worm_size;
+}
+
+float WormView::getHeight() const {
+	return worm_size + 0.5;
 }
 
 Gtk::Image& WormView::getImage() {
