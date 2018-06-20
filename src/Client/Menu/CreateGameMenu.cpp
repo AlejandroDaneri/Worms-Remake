@@ -16,7 +16,7 @@ CreateGameMenu::CreateGameMenu(Gtk::Window& window, MenuView& first_menu,
 
 	this->builder->get_widget("create_game_menu", this->menu);
 
-	this->addMenu();
+	this->addMenu(true);
 }
 
 CreateGameMenu::~CreateGameMenu() {}
@@ -24,7 +24,7 @@ CreateGameMenu::~CreateGameMenu() {}
 void CreateGameMenu::selectButtonPressed(Glib::ustring map_name) {
 	std::string name(this->game_name->get_text());
 	if (name.empty()) {
-		this->error->set_label("Debe ingresar el nombre de la partida");
+		this->showError("Debe ingresar el nombre de la partida");
 		return;
 	}
 
@@ -33,7 +33,7 @@ void CreateGameMenu::selectButtonPressed(Glib::ustring map_name) {
 		std::string message("El numero de jugadores debe estar entre ");
 		message += std::to_string(min_players) + std::string(" y ");
 		message += std::to_string(max_players);
-		this->error->set_label(message);
+		this->showError(message);
 		return;
 	}
 

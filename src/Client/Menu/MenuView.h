@@ -8,10 +8,6 @@
 #include "Menu.h"
 
 class MenuView : public Menu {
-private:
-	/* Muestra un mensaje de error */
-	void showError(const std::string& error);
-
 protected:
 	std::unique_ptr<MenuView> next_menu;
 	ClientProtocol& protocol;
@@ -33,7 +29,7 @@ public:
 	virtual ~MenuView();
 
 	/* Agrega el menu al container y el container al window */
-	void addMenu();
+	void addMenu(bool hide_error);
 };
 
 #endif

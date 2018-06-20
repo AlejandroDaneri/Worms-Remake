@@ -17,6 +17,8 @@ ServerMenu::ServerMenu(Gtk::Window& window) : Menu(PATH, window) {
 	this->window.add(*this->menu);
 	this->window.show_all();
 
+	this->hideWarningBox();
+
 	this->connect->signal_clicked().connect(
 			sigc::mem_fun(*this, &ServerMenu::connectButtonPressed));
 }
@@ -28,13 +30,13 @@ ServerMenu::~ServerMenu() {
 void ServerMenu::connectButtonPressed() {
 	std::string host(this->host->get_text());
 	if (host.empty()) {
-		this->error->set_label("Debe ingresar un host");
+		this->showError("Debe ingresar un host");
 		return;
 	}
 
 	std::string service(this->service->get_text());
 	if (service.empty()) {
-		this->error->set_label("Debe ingresar un servicio");
+		this->showError("Debe ingresar un servicio");
 		return;
 	}
 
@@ -51,6 +53,6 @@ void ServerMenu::connectToServer(const std::string& host,
 		this->next_menu = std::unique_ptr<MenuView>(
 				new GameMenu(this->window, *this->protocol));
 	} catch(const SocketException& e) {
-		this->error->set_label("No pudo conectarse al servidor");
+		this->showError("No pudo conectarse al servidor");
 	}
 }

@@ -13,7 +13,7 @@ GameMenu::GameMenu(Gtk::Window& window, ClientProtocol& protocol) :
 
 	this->builder->get_widget("game_menu", this->menu);
 
-	this->addMenu();
+	this->addMenu(true);
 
 	Gtk::Button* create_game, * join_game;
 
@@ -38,7 +38,7 @@ void GameMenu::createButtonPressed() {
 		if (quantity == 0) {
 			this->showErrorAndRestart("No hay mapas para crear una partida");
 		} else {
-			this->error->set_label("");
+			this->hideWarningBox();
 			this->next_menu = std::unique_ptr<MenuView>(
 					new CreateGameMenu(this->window, *this, this->protocol,
 									   std::move(name), quantity));
@@ -53,7 +53,7 @@ void GameMenu::joinButtonPressed() {
 		if (quantity == 0) {
 			this->showErrorAndRestart("No hay partidas disponibles");
 		} else {
-			this->error->set_label("");
+			this->hideWarningBox();
 			this->next_menu = std::unique_ptr<MenuView>(
 					new JoinGameMenu(this->window, *this, this->protocol,
 									 std::move(name), quantity));
@@ -64,7 +64,7 @@ void GameMenu::joinButtonPressed() {
 bool GameMenu::selectAction(char action) {
 	std::string name(this->player_name->get_text());
 	if (name.empty()) {
-		this->error->set_label("Debe ingresar su nombre");
+		this->showError("Debe ingresar su nombre");
 		return false;
 	}
 	try {

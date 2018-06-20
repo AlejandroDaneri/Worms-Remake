@@ -6,6 +6,7 @@
 #include <gtkmm/window.h>
 #include <gtkmm/image.h>
 #include <gtkmm/builder.h>
+#include <gtkmm/box.h>
 #include <string>
 
 class Menu {
@@ -15,10 +16,19 @@ protected:
 	Gtk::Window& window;
 	Gtk::Image* title;
 	Gtk::Image* background;
+	Gtk::Image* warning1;
+	Gtk::Image* warning2;
+	Gtk::Box* warning_box;
 	Glib::RefPtr<Gtk::Builder> builder;
 
 	/* Handler del boton de salir */
 	void quitButtonPressed();
+
+	/* Muestra un mensaje de error */
+	void showError(const std::string& error);
+
+	/* Oculta el mensaje de error */
+	void hideWarningBox();
 
 public:
 	/* Constructor */

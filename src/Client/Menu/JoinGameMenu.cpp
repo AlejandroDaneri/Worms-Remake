@@ -14,7 +14,7 @@ JoinGameMenu::JoinGameMenu(Gtk::Window& window, MenuView& first_menu,
 
 	this->builder->get_widget("join_game_menu", this->menu);
 
-	this->addMenu();
+	this->addMenu(true);
 }
 
 JoinGameMenu::~JoinGameMenu() {}
