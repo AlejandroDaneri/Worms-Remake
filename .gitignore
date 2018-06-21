@@ -11,3 +11,4 @@ Build
 .idea
 cmake-build-debug
 *.glade~
+resources/Glade/editor.glade
