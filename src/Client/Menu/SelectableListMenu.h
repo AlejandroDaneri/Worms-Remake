@@ -16,7 +16,7 @@ class SelectableListMenu : public MenuView {
 protected:
 	Gtk::Box* games;
 	std::string player_name;
-	WaitingRoom waiting_label;
+	WaitingRoom waiting_room;
 	std::vector<GameMenuField> fields;
 	std::unique_ptr<Player> player;
 	Gtk::Button* turn_back;
