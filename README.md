@@ -6,9 +6,9 @@ Trabajo practico final para la materia Taller de Programacion I, Facultad de Ing
 
 En la carpeta build ejecutar alguno de estos comandos:
 
-- cmake -DPATH=<path> .. && make install
+- cmake -DPATH=< path > .. && make install
 
-- cmake -DCMAKE_INSTALL_PREFIX=<path> .. && make install
+- cmake -DCMAKE_INSTALL_PREFIX=< path > .. && make install
   
 - cmake .. && make install
 
