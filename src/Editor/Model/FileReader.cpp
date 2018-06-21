@@ -37,10 +37,11 @@ void FileReader::read(std::vector<std::vector<double>> &worms,
 
     girders = config[GIRDERS_DATA].as<std::vector<std::vector<double>>>();
     
-    std::vector<int> bg = config[BACKGROUND_IMAGE].as<std::vector<int>>();
-    Buffer buffer(bg.size());
-    for (auto it = bg.begin(); it != bg.end(); ++it){
-		buffer.setNext(*it);
+    std::vector<int> backgrounds =
+            config[BACKGROUND_IMAGE].as<std::vector<int>>();
+    Buffer buffer(backgrounds.size());
+    for (const int &actual : backgrounds) {
+		buffer.setNext(actual);
 	}
 	
 	auto stream = Gio::MemoryInputStream::create();
