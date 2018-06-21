@@ -1,5 +1,5 @@
-#ifndef __WAITINGLABEL_H__
-#define __WAITINGLABEL_H__
+#ifndef __WAITINGROOM_H__
+#define __WAITINGROOM_H__
 
 #include <gtkmm/label.h>
 #include <gtkmm/image.h>
