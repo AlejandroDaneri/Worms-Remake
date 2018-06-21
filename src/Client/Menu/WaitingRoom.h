@@ -6,7 +6,7 @@
 #include <gtkmm/hvbox.h>
 
 /* Label de que indica la espera a otros jugadores */
-class WaitingLabel {
+class WaitingRoom {
 private:
 	Gtk::VBox container;
 	Gtk::Label label;
@@ -14,10 +14,10 @@ private:
 
 public:
 	/* Constructor */
-	WaitingLabel();
+	WaitingRoom();
 
 	/* Destructor */
-	~WaitingLabel();
+	~WaitingRoom();
 
 	/* Devuelve el contenedor del mensaje */
 	Gtk::Widget& getWidget();

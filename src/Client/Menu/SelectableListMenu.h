@@ -8,7 +8,7 @@
 #include <vector>
 #include "ClientProtocol.h"
 #include "MenuView.h"
-#include "WaitingLabel.h"
+#include "WaitingRoom.h"
 #include "Player.h"
 #include "GameMenuField.h"
 
@@ -16,7 +16,7 @@ class SelectableListMenu : public MenuView {
 protected:
 	Gtk::Box* games;
 	std::string player_name;
-	WaitingLabel waiting_label;
+	WaitingRoom waiting_label;
 	std::vector<GameMenuField> fields;
 	std::unique_ptr<Player> player;
 	Gtk::Button* turn_back;

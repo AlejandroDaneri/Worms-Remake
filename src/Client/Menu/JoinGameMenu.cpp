@@ -1,7 +1,7 @@
 #include "JoinGameMenu.h"
 #include <string>
 #include "Path.h"
-#include "WaitingLabel.h"
+#include "WaitingRoom.h"
 
 const std::string PATH = GLADE_PATH + "client_JoinGameMenu.glade";
 

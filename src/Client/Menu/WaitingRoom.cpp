@@ -1,4 +1,4 @@
-#include "WaitingLabel.h"
+#include "WaitingRoom.h"
 #include "Path.h"
 #include <string>
 
@@ -7,7 +7,7 @@ const std::string ending("</span>");
 
 #define SPACING 30
 
-WaitingLabel::WaitingLabel(): container(true, SPACING){
+WaitingRoom::WaitingRoom(): container(true, SPACING){
 	this->label.set_use_markup(true);
 	this->label.set_markup(begining + "Esperando jugadores..." + ending);
 	this->image.set(BACKGROUND_MENU_IMAGE);
@@ -17,8 +17,8 @@ WaitingLabel::WaitingLabel(): container(true, SPACING){
 	this->container.set_valign(Gtk::ALIGN_CENTER);
 }
 
-WaitingLabel::~WaitingLabel() {}
+WaitingRoom::~WaitingRoom() {}
 
-Gtk::Widget& WaitingLabel::getWidget() {
+Gtk::Widget& WaitingRoom::getWidget() {
 	return this->container;
 }
