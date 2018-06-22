@@ -16,5 +16,3 @@ En la carpeta build ejecutar alguno de estos comandos:
 ## Video del juego:
 
 https://youtu.be/U0JjvJFN_Xw
-
-https://youtu.be/1qo4Wd8GaMk
