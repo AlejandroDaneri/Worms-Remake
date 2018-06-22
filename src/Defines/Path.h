@@ -56,6 +56,8 @@ const std::string TITLE_MENU_IMAGE(MENU_PATH + "Game_title.png");
 
 const std::string BACKGROUND_MENU_IMAGE(MENU_PATH + "Background_worm.png");
 
+const std::string WAITING_ROOM_IMAGE(MENU_PATH + "Waiting_room.png");
+
 const std::string BAT_HIT_ANIMATION(ANIMATIONS_PATH + "Bat_hit.png");
 
 const std::string WINNER_IMAGE(MENU_PATH + "Winner.png");

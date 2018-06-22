@@ -10,7 +10,7 @@ const std::string ending("</span>");
 WaitingRoom::WaitingRoom(): container(true, SPACING){
 	this->label.set_use_markup(true);
 	this->label.set_markup(begining + "Esperando jugadores..." + ending);
-	this->image.set(BACKGROUND_MENU_IMAGE);
+	this->image.set(WAITING_ROOM_IMAGE);
 	this->container.pack_start(this->image, Gtk::PACK_SHRINK);
 	this->container.pack_start(this->label, Gtk::PACK_SHRINK);
 	this->container.set_halign(Gtk::ALIGN_CENTER);
