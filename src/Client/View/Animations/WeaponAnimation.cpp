@@ -15,7 +15,11 @@ WeaponAnimation::WeaponAnimation(const std::string& weapon,
 	this->updateWeaponImage(weapon);
 }
 
-WeaponAnimation::~WeaponAnimation() {}
+WeaponAnimation::~WeaponAnimation() {
+	if (this->my_connection.connected()) {
+		this->my_connection.disconnect();
+	}
+}
 
 WeaponAnimation::WeaponAnimation(WeaponAnimation&& other) :
 		scope_vector(std::move(other.scope_vector)),
@@ -93,10 +97,4 @@ void WeaponAnimation::changeAngle(int angle, char dir) {
 
 void WeaponAnimation::updateWormImage(Gtk::Image* worm_image) {
 	this->worm_image = worm_image;
-}
-
-void WeaponAnimation::stopShootAnimation() {
-	if (this->my_connection.connected()) {
-		this->my_connection.disconnect();
-	}
 }

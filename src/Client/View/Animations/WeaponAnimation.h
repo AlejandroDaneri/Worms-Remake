@@ -53,8 +53,6 @@ public:
 
 	/* Actualiza el puntero de la imagen del worm */
 	void updateWormImage(Gtk::Image* worm_image);
-
-	void stopShootAnimation();
 };
 
 
