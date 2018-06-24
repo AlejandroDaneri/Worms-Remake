@@ -17,7 +17,9 @@ WormView::WormView(WorldView& worldView, int life, char dir, Position pos,
 	this->addToWorld(pos);
 }
 
-WormView::~WormView() {}
+WormView::~WormView() {
+	this->weaponAnimation.stopShootAnimation();
+}
 
 WormView::WormView(WormView&& other) : Viewable(std::move(other)),
 		player_id(other.player_id), life(other.life),

@@ -83,7 +83,7 @@ void WeaponAnimation::weaponShootAnimation(const std::string& weapon, char dir){
 	sigc::slot<bool> my_slot = sigc::bind(
 			sigc::mem_fun(*this, &WeaponAnimation::batHitCallBack), iter, width,
 			dir);
-	Glib::signal_timeout().connect(my_slot, 12);
+	this->my_connection = Glib::signal_timeout().connect(my_slot, 12);
 }
 
 void WeaponAnimation::changeAngle(int angle, char dir) {
@@ -93,4 +93,10 @@ void WeaponAnimation::changeAngle(int angle, char dir) {
 
 void WeaponAnimation::updateWormImage(Gtk::Image* worm_image) {
 	this->worm_image = worm_image;
+}
+
+void WeaponAnimation::stopShootAnimation() {
+	if (this->my_connection.connected()) {
+		this->my_connection.disconnect();
+	}
 }

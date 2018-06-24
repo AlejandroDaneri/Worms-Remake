@@ -16,6 +16,7 @@ private:
 	Glib::RefPtr<Gdk::Pixbuf> scope_image;
 	Gtk::Image* worm_image;
 	int angle;
+	sigc::connection my_connection;
 
 	/* Actualiza las imagenes por las imagenes del arma nueva */
 	void updateWeaponImage(const std::string& weapon);
@@ -52,6 +53,8 @@ public:
 
 	/* Actualiza el puntero de la imagen del worm */
 	void updateWormImage(Gtk::Image* worm_image);
+
+	void stopShootAnimation();
 };
 
 
