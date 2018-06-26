@@ -53,6 +53,9 @@ public:
 
 	/* Actualiza el puntero de la imagen del worm */
 	void updateWormImage(Gtk::Image* worm_image);
+
+	/* Detiene la animacion del disparo del arma */
+	void stopWeaponShootAnimation();
 };
 
 

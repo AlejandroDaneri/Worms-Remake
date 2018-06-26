@@ -16,9 +16,7 @@ WeaponAnimation::WeaponAnimation(const std::string& weapon,
 }
 
 WeaponAnimation::~WeaponAnimation() {
-	if (this->my_connection.connected()) {
-		this->my_connection.disconnect();
-	}
+	this->stopWeaponShootAnimation();
 }
 
 WeaponAnimation::WeaponAnimation(WeaponAnimation&& other) :
@@ -42,6 +40,7 @@ void WeaponAnimation::updateWeaponImage(const std::string& weapon) {
 }
 
 void WeaponAnimation::changeWeapon(const std::string& weapon, char dir) {
+	this->stopWeaponShootAnimation();
 	this->updateWeaponImage(weapon);
 	this->setWeaponImage(dir);
 }
@@ -97,4 +96,10 @@ void WeaponAnimation::changeAngle(int angle, char dir) {
 
 void WeaponAnimation::updateWormImage(Gtk::Image* worm_image) {
 	this->worm_image = worm_image;
+}
+
+void WeaponAnimation::stopWeaponShootAnimation() {
+	if (this->my_connection.connected()) {
+		this->my_connection.disconnect();
+	}
 }
