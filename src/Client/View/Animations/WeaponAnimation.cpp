@@ -101,5 +101,6 @@ void WeaponAnimation::updateWormImage(Gtk::Image* worm_image) {
 void WeaponAnimation::stopWeaponShootAnimation() {
 	if (this->my_connection.connected()) {
 		this->my_connection.disconnect();
+		this->updateWeaponImage(BAT_NAME);
 	}
 }

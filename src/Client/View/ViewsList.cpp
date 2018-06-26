@@ -100,6 +100,9 @@ void ViewsList::changeWeapon(const std::string& weapon_name) {
 }
 
 void ViewsList::updateScope(int angle) {
+	if (this->weapon_focused == -2) {
+		return;
+	}
 	std::unordered_map<int, WormView>::iterator it = this->worms.find(this->current_worm_id);
 	if (it == this->worms.end()) {
 		return;
@@ -179,4 +182,7 @@ void ViewsList::setVictory() {
 
 void ViewsList::shoot(const std::string& weapon) {
 	this->worms.at(this->current_worm_id).weaponShoot(weapon);
+	if (this->weapon_focused == -1) {
+		this->weapon_focused = -2;
+	}
 }
