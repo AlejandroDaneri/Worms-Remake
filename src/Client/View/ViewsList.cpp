@@ -5,13 +5,16 @@
 #include "WeaponNames.h"
 #include "Player.h"
 
+#define NO_FOCUS -1
+#define WEAPON_SHOT_AND_EXPLODED -2
+
 ViewsList::ViewsList(WorldView& world, Player& player,
 					 PlayersList& players_list, MusicPlayer& musicPlayer) :
 		world(world), player(player), players_list(players_list), scope(world),
 		musicPlayer(musicPlayer) {
 	this->current_worm_id = -1;
-	this->weapon_focused = -1;
-	this->worm_focused = -1;
+	this->weapon_focused = NO_FOCUS;
+	this->worm_focused = NO_FOCUS;
 }
 
 ViewsList::~ViewsList() {}
@@ -40,7 +43,7 @@ void ViewsList::removeWeapon(int id) {
 		this->weapons.erase(it);
 
 		if (this->weapon_focused == id) {
-			this->weapon_focused = -2;
+			this->weapon_focused = WEAPON_SHOT_AND_EXPLODED;
 			this->checkMovingWorms();
 		}
 	}
@@ -100,7 +103,8 @@ void ViewsList::changeWeapon(const std::string& weapon_name) {
 }
 
 void ViewsList::updateScope(int angle) {
-	if (this->weapon_focused == -2) {
+	if (this->weapon_focused != NO_FOCUS) {
+		this->removeScopeVisibility();
 		return;
 	}
 	std::unordered_map<int, WormView>::iterator it = this->worms.find(this->current_worm_id);
@@ -135,7 +139,7 @@ void ViewsList::setCurrentWorm(int id) {
 	}
 	this->current_worm_id = id;
 	this->worm_focused = id;
-	this->weapon_focused = -1;
+	this->weapon_focused = NO_FOCUS;
 	WormView& worm = this->worms.at(id);
 	this->world.setFocus(worm.getWidget());
 	worm.setFocus(true);
@@ -146,11 +150,11 @@ void ViewsList::removeWormFocus() {
 	if (it != this->worms.end()) {
 		it->second.resetFocus();
 	}
-	this->worm_focused = -1;
+	this->worm_focused = NO_FOCUS;
 }
 
 void ViewsList::checkMovingWorms() {
-	if (this->weapon_focused != -2) {
+	if (this->weapon_focused != WEAPON_SHOT_AND_EXPLODED) {
 		return;
 	}
 
@@ -182,7 +186,7 @@ void ViewsList::setVictory() {
 
 void ViewsList::shoot(const std::string& weapon) {
 	this->worms.at(this->current_worm_id).weaponShoot(weapon);
-	if (this->weapon_focused == -1) {
-		this->weapon_focused = -2;
+	if (this->weapon_focused == NO_FOCUS) {
+		this->weapon_focused = WEAPON_SHOT_AND_EXPLODED;
 	}
 }
